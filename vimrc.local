@@ -5,3 +5,6 @@ filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
 filetype plugin indent on
 syntax on
+
+" Don't highlight tabs in Go files
+autocmd BufRead,BufNewFile *.go setlocal nolist
