@@ -1,1 +1,7 @@
-autocmd BufRead,BufNewFile *.go set filetype=go
+" Use all vim plugins from Go standard library
+" https://code.google.com/p/go/source/browse/misc/vim/readme.txt
+filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
+filetype plugin indent on
+syntax on

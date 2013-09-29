@@ -35,7 +35,10 @@ What's in it?
 
 * [gocode](https://github.com/nsf/gocode), an autocompletion daemon for the Go
   programming language.
-* Syntax highlighting for Go.
+* Syntax highlighting plugin for Go.
+* Compiler plugin for Go.
+* Indentation plugin for Go.
+* Documentation plugin for Go.
 
 [git](http://git-scm.com/) configuration:
 
