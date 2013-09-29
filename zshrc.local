@@ -1,0 +1,9 @@
+# load rbenv
+eval "$(rbenv init -)"
+
+# recommended by brew doctor
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
+# http://golang.org/doc/code.html#GOPATH
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
