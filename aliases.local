@@ -1,2 +1,5 @@
 # todo
 alias todo="vim ~/Dropbox/todo"
+
+# irc
+alias irc="tmux attach -t irc"
