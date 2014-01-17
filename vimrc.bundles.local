@@ -1,2 +1,3 @@
 Bundle 'Blackrush/vim-gocode'
 Bundle 'mattn/emmet-vim'
+Bundle 'derekwyatt/vim-scala'
