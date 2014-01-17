@@ -8,3 +8,7 @@ syntax on
 
 " Don't highlight tabs in Go files
 autocmd BufRead,BufNewFile *.go setlocal nolist
+
+" Enable Emmet just for HTML/CSS
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
