@@ -9,6 +9,13 @@ syntax on
 " Don't highlight tabs in Go files
 autocmd BufRead,BufNewFile *.go setlocal nolist
 
+" Bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
+
 " Enable Emmet just for HTML/CSS
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
