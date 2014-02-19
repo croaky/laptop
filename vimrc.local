@@ -16,9 +16,9 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
-" Enable Emmet just for HTML/CSS
+" Enable Emmet just for HTML/CSS/ERB
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,css,eruby EmmetInstall
 
 " Highlight words to avoid in tech writing
 " =======================================
