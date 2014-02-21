@@ -18,7 +18,7 @@ nnoremap \ :Ag<SPACE>
 
 " Enable Emmet just for HTML/CSS/ERB
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,eruby EmmetInstall
+autocmd FileType html,css,eruby,eco EmmetInstall
 
 " Highlight words to avoid in tech writing
 " =======================================
