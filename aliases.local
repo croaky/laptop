@@ -1,5 +1,13 @@
 # todo
 alias todo="vim ~/Dropbox/todo"
 
+open_irc_session_in_tmux() {
+  if tmux list-sessions | grep -Fq irc; then
+    tmux attach -t irc
+  else
+    tmux new -s irc
+  fi
+}
+
 # irc
-alias irc="tmux attach -t irc"
+alias irc="open_irc_session_in_tmux"
