@@ -1,0 +1,4 @@
+#irc
+new -s SessionName -n WindowName Command
+neww -n camper_van van
+neww -n weechat chat
