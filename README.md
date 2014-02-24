@@ -43,6 +43,11 @@ What's in it?
 * Compiler plugin for Go.
 * Indentation plugin for Go.
 * Documentation plugin for Go.
+* [Emmet.vim](https://github.com/mattn/emmet-vim) for expanding CSS selectors
+  into HTML when writing markup
+* Syntax highlighting for Scala.
+* [vim-mkdir](https://github.com/pbrisbin/vim-mkdir) for automatically creating
+  non-existing directories before writing the buffer.
 
 [git](http://git-scm.com/) configuration:
 
