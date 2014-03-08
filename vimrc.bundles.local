@@ -1,5 +1,6 @@
 Bundle 'Blackrush/vim-gocode'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'mattn/emmet-vim'
+Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'nicholaides/words-to-avoid.vim'
 Bundle 'pbrisbin/vim-mkdir'
