@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Homebrew-cask
+brew tap phinze/homebrew-cask
+brew install brew-cask
+
+# Native apps
+# brew cask install alfred
+# brew cask install bartender
+# brew cask install dropbox
+# brew cask install google-chrome
+# brew cask install iterm2
+# brew cask install kindle
+brew cask install licecap
+# brew cask install macvim
+# brew cask install rdio
+# brew cask install sizeup
+#
+# brew cask alfred link
