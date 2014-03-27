@@ -19,3 +19,6 @@ nnoremap \ :Ag<SPACE>
 " Enable Emmet just for HTML/CSS/ERB
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,eruby,eco EmmetInstall
+
+" Bind Leader g to run current Go file
+au FileType go map <Leader>g :!clear && go run %<CR>
