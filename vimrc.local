@@ -9,6 +9,12 @@ syntax on
 " Don't highlight tabs in Go files
 autocmd BufRead,BufNewFile *.go setlocal nolist
 
+" Bind Leader g to run current Go file
+au FileType go map <Leader>g :!clear && go run %<CR>
+
+" Tab completion for Go pulls from packages
+autocmd FileType go inoremap <Tab> <C-x><C-o>
+
 " Bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
@@ -19,6 +25,3 @@ nnoremap \ :Ag<SPACE>
 " Enable Emmet just for HTML/CSS/ERB
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,eruby,eco EmmetInstall
-
-" Bind Leader g to run current Go file
-au FileType go map <Leader>g :!clear && go run %<CR>
