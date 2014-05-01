@@ -12,8 +12,8 @@ autocmd BufRead,BufNewFile *.go setlocal nolist
 " Bind Leader g to run current Go file
 au FileType go map <Leader>g :!clear && go run %<CR>
 
-" Bind Leader t to run current Go test file
-au FileType go map <Leader>t :!clear && go test %<CR>
+" Bind Leader t to run current Go test suite
+au FileType go map <Leader>t :!clear && go test<CR>
 
 " Tab completion for Go pulls from packages
 autocmd FileType go inoremap <Tab> <C-x><C-o>
