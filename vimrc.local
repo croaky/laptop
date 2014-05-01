@@ -18,6 +18,9 @@ au FileType go map <Leader>t :!clear && go test %<CR>
 " Tab completion for Go pulls from packages
 autocmd FileType go inoremap <Tab> <C-x><C-o>
 
+" Run gofmt upon save of Go files
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
 " Bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
