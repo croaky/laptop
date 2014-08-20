@@ -11,7 +11,7 @@ export PATH=$PATH:$GOROOT/bin
 # Node
 export PATH=$PATH:/usr/local/lib/node_modules
 source $(brew --prefix nvm)/nvm.sh
-nvm use 0.10.28
+nvm use 0.10.30
 
 # Increase ulimit for Gulp
 ulimit -n 10240
