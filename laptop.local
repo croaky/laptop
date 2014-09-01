@@ -2,7 +2,7 @@
 
 # Homebrew-cask
 brew tap phinze/homebrew-cask
-brew install brew-cask
+brew_install_or_upgrade 'brew-cask'
 
 # Native apps
 brew cask install alfred
