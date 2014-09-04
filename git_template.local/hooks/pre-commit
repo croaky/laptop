@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# pre-commit hook which verifies that changes are formatted w/ gofmt and pass
+# go vet.
+
+# find all changed go files
+gofiles=$(git diff --cached --name-only --diff-filter=ACM | grep '.go$')
+[ -z "$gofiles" ] && exit 0
+
+function checkfmt() {
+  unformatted=$(gofmt -l $gofiles)
+  [ -z "$unformatted" ] && return 0
+
+  echo >&2 "Go files must be formatted with gofmt. Please run:"
+  for fn in $unformatted; do
+    echo >&2 "  gofmt -w $PWD/$fn"
+  done
+
+  return 1
+}
+
+function checkvet() {
+  unvetted=$(go vet ./... 2>&1)
+  [ -z "$unvetted" ] && return 0
+
+  echo >&2 "Go files must be vetted. Check these problems:"
+  IFS=$'\n'
+  for line in $unvetted; do
+    echo >&2 "  $line"
+  done
+  unset IFS
+
+  return 1
+}
+
+checkfmt || fail=yes
+checkvet || fail=yes
+
+[ -z "$fail" ] || exit 1
+
+exit 0

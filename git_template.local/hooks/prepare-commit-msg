@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# hook to add go lint warnings to commit messages
+
+case "$2,$3" in
+  ,) ;;
+  commit,) ;;
+
+  *)
+    exit 0 ;;
+esac
+
+gofiles=$(git diff --cached --name-only --diff-filter=ACM | grep '.go$')
+[ -z "$gofiles" ] && exit 0
+
+unlinted=$(golint $gofiles 2>&1 | sed 's/^/# /')
+[ -z "$unlinted" ] && exit 0
+
+sed -i "1i\\\n\n# Go files should be linted. Consider these warnings:\n$unlinted" "$1"
