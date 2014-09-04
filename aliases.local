@@ -1,5 +1,5 @@
 # todo
-alias todo="vim ~/Dropbox/todo"
+alias todo="vim ~/Dropbox\ \(Personal\)/todo"
 
 open_irc_session_in_tmux() {
   if tmux list-sessions | grep -Fq irc; then
