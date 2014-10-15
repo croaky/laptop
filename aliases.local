@@ -11,3 +11,6 @@ open_irc_session_in_tmux() {
 
 # irc
 alias irc="open_irc_session_in_tmux"
+
+# postgres
+alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid && launchctl unload homebrew.mxcl.postgresql.plist && launchctl load -w homebrew.mxcl.postgresql.plist"
