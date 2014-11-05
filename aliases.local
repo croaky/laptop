@@ -9,8 +9,14 @@ open_irc_session_in_tmux() {
   fi
 }
 
-# irc
+# IRC
 alias irc="open_irc_session_in_tmux"
 
-# postgres
+# Postgres
 alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid && launchctl unload homebrew.mxcl.postgresql.plist && launchctl load -w homebrew.mxcl.postgresql.plist"
+
+# GPG
+alias gpg="gpg2"
+
+# Ruby
+aliase upgrade-ruby-build="brew uninstall ruby-build && brew install --HEAD ruby-build"
