@@ -15,3 +15,5 @@ nvm use 0.10.30
 
 # Increase ulimit for Gulp
 ulimit -n 10240
+
+export PATH="$HOME/.bin:$PATH"
