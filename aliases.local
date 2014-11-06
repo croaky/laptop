@@ -19,4 +19,4 @@ alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid && launchctl u
 alias gpg="gpg2"
 
 # Ruby
-alias upgrade-ruby-build="cd ~/.rbenv/plugins/ruby-build && git pull && cd -"
+alias install-missing-ruby="cd ~/.rbenv/plugins/ruby-build && git pull && cd - && rbenv install"
