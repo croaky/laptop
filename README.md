@@ -14,7 +14,7 @@ Set zsh as your login shell.
 
 Install [rcm](https://github.com/mike-burns/rcm).
 
-    brew tap mike-burns/rcm
+    brew tap thoughtbot/formulae
     brew install rcm
 
 Install
