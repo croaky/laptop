@@ -17,3 +17,8 @@ nvm use 0.10.30
 ulimit -n 10240
 
 export PATH="$HOME/.bin:$PATH"
+
+export PATH="$PATH:/usr/local/lib/node_modules"
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh --no-rehash)"
