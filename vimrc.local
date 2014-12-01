@@ -1,17 +1,25 @@
-" Golang setup
-" http://obahua.com/setup-vim-for-go-development/
-syntax enable
-filetype plugin on
-set number
-
 " Don't highlight tabs in Go files
-autocmd BufRead,BufNewFile *.go setlocal nolist
+autocmd BufRead,BufNewFile *.go setlocal nolist ft=go
 
-" Bind Leader g to run current Go file
-au FileType go map <Leader>g :!clear && go run %<CR>
+" Disable fmt on autosave
+let g:go_fmt_autosave = 0
+
+" Bind Leader r to run current Go file
+au FileType go nmap <Leader>r <Plug>(go-run)
 
 " Bind Leader t to run current Go test suite
-au FileType go map <Leader>t :!clear && go test<CR>
+au FileType go nmap <Leader>t <Plug>(go-test)
+
+" Bind Leader s to list interfaces for the type under cursor
+au FileType go nmap <Leader>s <Plug>(go-implements)
+
+" Bind Leader i to list type info for the type under cursor
+au FileType go nmap <Leader>i <Plug>(go-implements)
+
+" Syntax highlight Functions, Methods, and Structs
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
 
 " Bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -26,32 +34,3 @@ autocmd FileType html,css,eruby,eco EmmetInstall
 
 " Configure Syntastic
 let g:syntastic_html_checkers = []
-
-" Go tagbar
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }

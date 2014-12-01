@@ -1,0 +1,5 @@
+mkdir -p ~/go/src/github.com/croaky
+mkdir -p ~/go/src/github.com/thoughtbot
+mkdir -p ~/dev
+ln -s ~/go/src/github.com/croaky ~/dev/croaky
+ln -s ~/go/src/github.com/thoughtbot ~/dev/thoughtbot
