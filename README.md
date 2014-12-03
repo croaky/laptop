@@ -37,15 +37,14 @@ What's in it?
 
 [vim](http://www.vim.org/) configuration:
 
-* [gocode](https://github.com/nsf/gocode), an autocompletion daemon for the Go
-  programming language.
-* Syntax highlighting plugin for Go.
-* Compiler plugin for Go.
-* Indentation plugin for Go.
-* Documentation plugin for Go.
+* [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) for
+  tab completion.
+* [vim-go](https://github.com/fatih/vim-go) for
+  syntax highlighting, documentation, and more for Go.
 * [Emmet.vim](https://github.com/mattn/emmet-vim) for expanding CSS selectors
   into HTML when writing markup
-* Syntax highlighting for Scala.
+* [words-to-avoid](https://github.com/nicholaides/words-to-avoid.vim) for
+  highlighting weasel words in my Markdown writing.
 
 [git](http://git-scm.com/) configuration:
 
@@ -54,5 +53,13 @@ What's in it?
 
 [zsh](http://zsh.sourceforge.net/FAQ/zshfaq01.html) configuration and aliases:
 
-* `todo` to edit my todo file, located at `~/Dropbox/todo`.
-* Specify location of [Go workspace](http://golang.org/doc/code.html#GOPATH).
+* `todo` to edit my plain text todo file, located in Dropbox.
+* `restart-postgres` alias to restart Homebrew'd Postgres.
+* `gpg` alias for `gpg2`.
+* `install-missing-ruby` alias to upgrade Homebrew'd `ruby-build` and install
+  Ruby implicitly from `.ruby_version` file in current directory.
+* Add [Go workspace][go] to `PATH`.
+* Add [Node modules][nvm] to `PATH`.
+
+[go]: http://golang.org/doc/code.html#GOPATH
+[nvm]: https://github.com/creationix/nvm#manual-install
