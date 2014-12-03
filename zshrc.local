@@ -1,23 +1,16 @@
-# recommended by brew doctor
+# PATH recommended by brew doctor
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH="$HOME/bin:$PATH"
 
-# http://golang.org/doc/code.html#GOPATH
+# Scripts from thoughtbot/dotfiles
+export PATH="$HOME/.bin:$PATH"
+
+# Go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GOROOT=`go env GOROOT`
 export PATH=$PATH:$GOROOT/bin
 
 # Node
-export PATH=$PATH:/usr/local/lib/node_modules
-source $(brew --prefix nvm)/nvm.sh
-nvm use 0.10.30
-
-# Increase ulimit for Gulp
-ulimit -n 10240
-
-export PATH="$HOME/.bin:$PATH"
-
 export PATH="$PATH:/usr/local/lib/node_modules"
 
 export PATH="$HOME/.rbenv/bin:$PATH"
