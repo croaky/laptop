@@ -12,6 +12,5 @@ export PATH=$PATH:$GOROOT/bin
 
 # Node
 export PATH="$PATH:/usr/local/lib/node_modules"
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh --no-rehash)"
+source $(brew --prefix nvm)/nvm.sh
+nvm use 0.10 > /dev/null
