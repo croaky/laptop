@@ -3,12 +3,8 @@
 # pre-commit hook which verifies that changes are formatted w/ gofmt and pass
 # go vet.
 
-# find all changed go files
-gofiles=$(git diff --cached --name-only --diff-filter=ACM | grep '.go$')
-[ -z "$gofiles" ] && exit 0
-
 function checkfmt() {
-  unformatted=$(gofmt -l $gofiles)
+  unformatted=$(gofmt -l $*)
   [ -z "$unformatted" ] && return 0
 
   echo >&2 "Go files must be formatted with gofmt. Please run:"
@@ -20,7 +16,15 @@ function checkfmt() {
 }
 
 function checkvet() {
-  unvetted=$(go vet ./... 2>&1)
+  # build grep regex filter from gofiles
+  for f in $*; do
+    [ -z "$filter" ] && filter=$f || filter="$filter\|$f"
+  done
+
+  # go vet does not support checking individual files across packages; so
+  # instead we vet all files, and ignore errors for files not included in this
+  # change-set.
+  unvetted=$(go vet ./... 2>&1 | grep "^\($filter\)")
   [ -z "$unvetted" ] && return 0
 
   echo >&2 "Go files must be vetted. Check these problems:"
@@ -33,9 +37,11 @@ function checkvet() {
   return 1
 }
 
-checkfmt || fail=yes
-checkvet || fail=yes
+# find all changed go files
+gofiles=$(git diff --cached --name-only --diff-filter=ACM | grep '.go$')
+[ -z "$gofiles" ] && exit 0
+
+checkfmt $gofiles || fail=yes
+checkvet $gofiles || fail=yes
 
 [ -z "$fail" ] || exit 1
-
-exit 0
