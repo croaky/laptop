@@ -1,16 +1,5 @@
-# todo
+# Todo
 alias todo="vim ~/Dropbox\ \(Personal\)/todo"
-
-open_irc_session_in_tmux() {
-  if tmux list-sessions | grep -Fq irc; then
-    tmux attach -t irc
-  else
-    tmux new -s irc
-  fi
-}
-
-# IRC
-alias irc="open_irc_session_in_tmux"
 
 # Postgres
 alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid && launchctl unload homebrew.mxcl.postgresql.plist && launchctl load -w homebrew.mxcl.postgresql.plist"
