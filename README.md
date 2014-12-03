@@ -2,13 +2,14 @@ croaky dotfiles
 ===============
 
 I use [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles) and
-croaky/dotfiles together using the `*.local` convention described in
-thoughtbot/dotfiles.
+croaky/dotfiles together using [the `*.local` convention][dot-local].
+
+[dot-local]: http://robots.thoughtbot.com/manage-team-and-personal-dotfiles-together-with-rcm
 
 Requirements
 ------------
 
-Set zsh as your login shell.
+Set zsh as my login shell.
 
     chsh -s /bin/zsh
 
@@ -20,7 +21,7 @@ Install [rcm](https://github.com/mike-burns/rcm).
 Install
 -------
 
-Clone onto your laptop:
+Clone onto my laptop:
 
     git clone git://github.com/croaky/dotfiles.git
 
@@ -28,9 +29,9 @@ Install:
 
     env RCRC=$HOME/croaky/dotfiles/rcrc rcup
 
-This will create symlinks for config files in your home directory.
+This will create symlinks for config files in my home directory.
 
-You can safely run `rcup` multiple times to update.
+I can safely run `rcup` multiple times to update.
 
 What's in it?
 -------------
