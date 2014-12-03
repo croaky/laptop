@@ -8,4 +8,4 @@ alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid && launchctl u
 alias gpg="gpg2"
 
 # Ruby
-alias install-missing-ruby="git pull -C ~/.rbenv/plugins/ruby-build && rbenv install"
+alias install-missing-ruby="brew upgrade ruby-build &>/dev/null; rbenv install"
