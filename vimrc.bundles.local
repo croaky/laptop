@@ -1,6 +1,5 @@
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
-Plugin 'majutsushi/tagbar'
 Plugin 'mattn/emmet-vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nicholaides/words-to-avoid.vim'
