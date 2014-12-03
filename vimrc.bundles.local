@@ -1,3 +1,4 @@
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
 Plugin 'mattn/emmet-vim'
