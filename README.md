@@ -26,7 +26,7 @@ Clone onto your laptop:
 
 Install:
 
-    rcup -d dotfiles -x README.md
+    env RCRC=$HOME/croaky/dotfiles/rcrc rcup
 
 This will create symlinks for config files in your home directory.
 
