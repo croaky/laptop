@@ -1,3 +1,4 @@
+brew install go
 brew_install_or_upgrade 'watch'
 gem_install_or_update 'suspenders'
 gem_install_or_update 'parity'
