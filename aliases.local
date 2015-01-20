@@ -12,3 +12,6 @@ alias install-missing-ruby="brew update && brew upgrade ruby-build && rbenv inst
 
 # Git
 alias me="git branch -r | ag dc"
+
+# DNS
+alias flush-cache="sudo discoveryutil mdnsflushcache; sudo discoveryutil udnsflushcaches"
