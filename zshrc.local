@@ -11,8 +11,3 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GOROOT="$(go env GOROOT)"
 export PATH=$PATH:$GOROOT/bin
-
-# Node
-export PATH="$PATH:/usr/local/lib/node_modules"
-source "$(brew --prefix nvm)/nvm.sh"
-nvm use 0.10 > /dev/null
