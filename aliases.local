@@ -15,6 +15,7 @@ alias tail-log="rm log/development.log && touch log/development.log && tail -f l
 
 # Git
 alias me="git branch -r | ag dc"
+alias galen='g ca --author="Dan Croak and Galen Frechette <dan+galen@thoughtbot.com>"'
 
 # DNS
 alias flush-cache="sudo discoveryutil mdnsflushcache; sudo discoveryutil udnsflushcaches"
