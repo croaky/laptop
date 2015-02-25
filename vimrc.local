@@ -34,3 +34,6 @@ autocmd FileType html,css,eruby,eco EmmetInstall
 
 " Configure Syntastic
 let g:syntastic_html_checkers = []
+
+" Align GitHub-flavored Markdown tables
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>

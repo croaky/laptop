@@ -1,4 +1,5 @@
 Plugin 'fatih/vim-go'
+Plugin 'junegunn/vim-easy-align'
 Plugin 'mattn/emmet-vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nicholaides/words-to-avoid.vim'
