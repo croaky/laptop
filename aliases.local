@@ -10,9 +10,6 @@ alias gpg="gpg2"
 # Ruby
 alias install-missing-ruby="brew update && brew upgrade ruby-build && rbenv install"
 
-# Rails
-alias tail-log="rm log/development.log && touch log/development.log && tail -f log/development.log"
-
 # Git
 alias me="git branch -r | ag dc"
 alias galen='g ca --author="Dan Croak and Galen Frechette <dan+galen@thoughtbot.com>"'
