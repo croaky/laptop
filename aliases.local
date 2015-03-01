@@ -1,18 +1,21 @@
-# Todo
-alias todo="vim ~/Dropbox\ \(Personal\)/todo"
-
-# Postgres
-alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid; launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
-
-# GPG
-alias gpg="gpg2"
-
-# Ruby
-alias install-missing-ruby="brew update && brew upgrade ruby-build && rbenv install"
+# DNS
+alias flush-cache="sudo discoveryutil mdnsflushcache; sudo discoveryutil udnsflushcaches"
 
 # Git
 alias me="git branch -r | ag dc"
 alias galen='g ca --author="Dan Croak and Galen Frechette <dan+galen@thoughtbot.com>"'
 
-# DNS
-alias flush-cache="sudo discoveryutil mdnsflushcache; sudo discoveryutil udnsflushcaches"
+# Go
+alias gfa="go fmt . ./..."
+
+# GPG
+alias gpg="gpg2"
+
+# Postgres
+alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid; launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+
+# Ruby
+alias install-missing-ruby="brew update && brew upgrade ruby-build && rbenv install"
+
+# Todo
+alias todo="vim ~/Dropbox\ \(Personal\)/todo"
