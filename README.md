@@ -38,6 +38,7 @@ What's in it?
 
 [vim](http://www.vim.org/) configuration:
 
+* [GitHub color scheme](https://github.com/croaky/vim-colors-github)
 * [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) for
   tab completion.
 * [vim-go](https://github.com/fatih/vim-go) for
