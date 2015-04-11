@@ -1,4 +1,4 @@
-Plugin 'croaky/vim-colors-github'
+Plugin 'acarapetis/vim-colors-github'
 Plugin 'fatih/vim-go'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'mattn/emmet-vim'
