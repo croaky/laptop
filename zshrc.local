@@ -1,11 +1,5 @@
 #!/usr/bin/env zsh
 
-# PATH recommended by brew doctor
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-
-# Scripts from thoughtbot/dotfiles
-export PATH="$HOME/.bin:$PATH"
-
 # Go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
