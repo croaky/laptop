@@ -8,3 +8,9 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GOROOT="$(go env GOROOT)"
 export PATH=$PATH:$GOROOT/bin
+
+# Shell commands
+export PATH="$HOME/.bin:$PATH"
+
+# Ruby
+eval "$(rbenv init - --no-rehash zsh)"
