@@ -17,5 +17,14 @@ alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid; launchctl unl
 # Ruby
 alias install-missing-ruby="brew update && brew upgrade ruby-build && rbenv install"
 
+# Rails
+alias migrate="rake db:migrate db:rollback && rake db:migrate"
+alias m="migrate"
+
 # Todo
 alias todo="vim ~/Dropbox\ \(Personal\)/todo"
+
+# Unix
+alias ...='../..'
+alias mkdir='mkdir -p'
+alias v='$VISUAL'
