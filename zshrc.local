@@ -14,3 +14,6 @@ export PATH="$HOME/.bin:$PATH"
 
 # Ruby
 eval "$(rbenv init - --no-rehash zsh)"
+
+# Docker
+$(boot2docker shellinit 2> /dev/null)
