@@ -42,3 +42,7 @@ au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 colorscheme github
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
+
+" Allow project-specific `vimrc`s:
+" http://andrew.stwrt.ca/posts/project-specific-vimrc/
+set exrc
