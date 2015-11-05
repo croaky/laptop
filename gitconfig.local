@@ -10,4 +10,4 @@
   colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
 [user]
   name = Dan Croak
-  email = dan@thoughtbot.com
+  email = dan@statusok.com
