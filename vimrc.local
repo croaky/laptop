@@ -1,3 +1,6 @@
+" Don't highlight tabs in Go files
+autocmd BufRead,BufNewFile *.go setlocal nolist ft=go
+
 " Bind Leader r to run current Go file
 au FileType go nmap <Leader>r <Plug>(go-run)
 
