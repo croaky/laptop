@@ -1,16 +1,13 @@
 #!/usr/bin/env zsh
 
 # Most common directories
-export CDPATH=$CDPATH:$HOME/dev/croaky:$HOME/dev/thoughtbot
+export CDPATH="$CDPATH:$HOME/dev/croaky:$HOME/dev/thoughtbot"
 
 # Go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export GOROOT="$(go env GOROOT)"
-export PATH=$PATH:$GOROOT/bin
+export GOPATH="$HOME"
 
 # Shell commands
-export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.bin:$HOME/bin:$PATH"
 
 # Ruby
 eval "$(rbenv init - --no-rehash zsh)"

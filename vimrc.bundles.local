@@ -1,5 +1,4 @@
 Plug 'acarapetis/vim-colors-github'
-Plug 'fatih/vim-go'
 Plug 'junegunn/vim-easy-align'
 Plug 'mattn/emmet-vim'
 Plug 'mustache/vim-mustache-handlebars'

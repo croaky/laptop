@@ -1,9 +1,3 @@
-" Don't highlight tabs in Go files
-autocmd BufRead,BufNewFile *.go setlocal nolist ft=go
-
-" Automatically import packages on file save
-let g:go_fmt_command = "goimports"
-
 " Bind Leader r to run current Go file
 au FileType go nmap <Leader>r <Plug>(go-run)
 
