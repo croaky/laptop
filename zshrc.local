@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Most common directories
-export CDPATH="$CDPATH:$HOME/dev/croaky:$HOME/dev/thoughtbot"
+export CDPATH="$CDPATH:$HOME/src/github.com"
 
 # Go
 export GOPATH="$HOME"
