@@ -7,10 +7,7 @@ export CDPATH="$CDPATH:$HOME/src/github.com"
 export GOPATH="$HOME"
 
 # Shell commands
-export PATH="$HOME/.bin:$HOME/bin:$PATH"
-
-# Ruby
-eval "$(rbenv init - --no-rehash zsh)"
+export PATH="$HOME/bin:$PATH"
 
 # Docker
 eval "$(boot2docker shellinit 2> /dev/null)"
