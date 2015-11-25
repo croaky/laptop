@@ -14,4 +14,4 @@ brew_install_or_upgrade 'watch'
 
 gem_install_or_update 'suspenders'
 
-brew services start boot2docker
+brew_launchctl_restart 'boot2docker'
