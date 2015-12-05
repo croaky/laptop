@@ -1,4 +1,5 @@
 Plug 'acarapetis/vim-colors-github'
+Plug 'avdgaag/vim-phoenix'
 Plug 'elixir-lang/vim-elixir'
 Plug 'junegunn/vim-easy-align'
 Plug 'mattn/emmet-vim'
