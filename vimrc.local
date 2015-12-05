@@ -29,8 +29,11 @@ nnoremap \ :Ag<SPACE>
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,eruby,eco EmmetInstall
 
-" Configure Syntastic
-let g:syntastic_html_checkers = []
+" Run Neomake linters when saving buffer
+let g:neomake_ruby_rubocop_maker = {
+\ 'args': ['--config ~/src/github.com/thoughtbot/hound/config/style_guides/ruby.yml'],
+\ }
+autocmd! BufWritePost * Neomake
 
 " Align GitHub-flavored Markdown tables
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>

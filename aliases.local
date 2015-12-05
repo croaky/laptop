@@ -27,4 +27,4 @@ alias todo="vim ~/Dropbox\ \(Personal\)/todo"
 # Unix
 alias ...='../..'
 alias mkdir='mkdir -p'
-alias v='$VISUAL'
+alias v='nvim'
