@@ -35,6 +35,9 @@ nnoremap \ :Ag<SPACE>
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,eruby,eco EmmetInstall
 
+" Be able to copy with a mouse in Neovim, and paste elsewhere in OS X
+set mouse=
+
 " Run Neomake linters when saving buffer
 let g:neomake_ruby_rubocop_maker = {
 \ 'args': ['--config ~/src/github.com/thoughtbot/hound/config/style_guides/ruby.yml'],
