@@ -1,8 +1,9 @@
 Plug 'acarapetis/vim-colors-github'
 Plug 'avdgaag/vim-phoenix'
 Plug 'benekastah/neomake'
+Plug 'dsawardekar/ember.vim'
 Plug 'elixir-lang/vim-elixir'
-Plug 'fatih/vim-go', { 'branch': 'nvim' }
+Plug 'fatih/vim-go'
 Plug 'junegunn/vim-easy-align'
 Plug 'mattn/emmet-vim'
 Plug 'mustache/vim-mustache-handlebars'
