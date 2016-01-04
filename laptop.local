@@ -6,5 +6,3 @@ brew install ngrok
 brew install parity
 brew install shellcheck
 brew install watch
-
-gem_install_or_update 'suspenders'
