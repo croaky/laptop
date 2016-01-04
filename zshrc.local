@@ -13,4 +13,4 @@ export PATH="$HOME/.bin:$HOME/bin:$PATH"
 eval "$(rbenv init - --no-rehash zsh)"
 
 # Docker
-eval "$(boot2docker shellinit 2> /dev/null)"
+eval "$(docker-machine env default)"

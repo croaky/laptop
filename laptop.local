@@ -1,8 +1,5 @@
 #!/bin/sh
 
-brew_install_or_upgrade 'boot2docker'
-brew_install_or_upgrade 'docker'
-brew_install_or_upgrade 'docker-compose'
 brew install go
 brew install ngrok
 brew install parity
@@ -10,5 +7,3 @@ brew install shellcheck
 brew install watch
 
 gem_install_or_update 'suspenders'
-
-brew_launchctl_restart 'boot2docker'
