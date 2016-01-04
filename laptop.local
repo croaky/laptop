@@ -1,5 +1,6 @@
 #!/bin/sh
 
+brew install dockertoolbox
 brew install go
 brew install ngrok
 brew install parity
