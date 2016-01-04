@@ -1,16 +1,13 @@
 #!/bin/sh
 
-brew tap 'homebrew/services'
-brew tap 'thoughtbot/formulae'
-
 brew_install_or_upgrade 'boot2docker'
 brew_install_or_upgrade 'docker'
 brew_install_or_upgrade 'docker-compose'
-brew_install_or_upgrade 'go'
-brew_install_or_upgrade 'ngrok'
-brew_install_or_upgrade 'parity'
-brew_install_or_upgrade 'shellcheck'
-brew_install_or_upgrade 'watch'
+brew install go
+brew install ngrok
+brew install parity
+brew install shellcheck
+brew install watch
 
 gem_install_or_update 'suspenders'
 
