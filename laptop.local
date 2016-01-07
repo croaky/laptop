@@ -7,5 +7,7 @@ brew install parity
 brew install shellcheck
 brew install watch
 
-docker-machine create --driver virtualbox default
-docker-machine start default
+if ! docker-machine ls | grep -Fq "default"; then
+  docker-machine create --driver virtualbox default
+  docker-machine start default
+fi
