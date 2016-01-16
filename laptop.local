@@ -11,3 +11,8 @@ if ! docker-machine ls | grep -Fq "default"; then
   docker-machine create --driver virtualbox default
   docker-machine start default
 fi
+
+if [ -r "$HOME/.rcrc" ]; then
+  fancy_echo "Updating dotfiles ..."
+  rcup
+fi
