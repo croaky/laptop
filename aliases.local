@@ -3,7 +3,7 @@ alias flush-cache="sudo discoveryutil mdnsflushcache; sudo discoveryutil udnsflu
 
 # Git
 alias me="git branch -r | ag dc"
-alias galen='g ca --author="Dan Croak and Galen Frechette <dan+galen@thoughtbot.com>"'
+alias gabe='g commit --amend --author="Dan Croak and Gabe Berke-Williams <dan+gabe@thoughtbot.com>"'
 
 # Go
 alias gfa="go fmt . ./..."
