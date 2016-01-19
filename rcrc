@@ -1,2 +1,2 @@
+DOTFILES_DIRS="$HOME/src/github.com/croaky/dotfiles $HOME/src/github.com/thoughtbot/dotfiles"
 EXCLUDES="README.md LICENSE"
-DOTFILES_DIRS="$HOME/croaky/dotfiles $HOME/thoughtbot/dotfiles"
