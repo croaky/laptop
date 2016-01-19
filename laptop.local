@@ -1,11 +1,17 @@
 #!/bin/sh
 
+brew upgrade
+
 brew install Caskroom/cask/dockertoolbox
 brew install go
 brew install ngrok
 brew install parity
 brew install shellcheck
 brew install watch
+
+fancy_echo "Cleaning up old Homebrew formulae ..."
+brew cleanup
+brew cask cleanup
 
 if ! docker-machine ls | grep -Fq "default"; then
   docker-machine create --driver virtualbox default
