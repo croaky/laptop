@@ -1,22 +1,27 @@
 #!/bin/sh
 
+fancy_echo "Upgrading Homebrew formulae ..."
 brew upgrade
 
-brew install Caskroom/cask/dockertoolbox
+fancy_echo "Updating programming languages ..."
 brew install go
+
+fancy_echo "Updating Unix tools ..."
 brew install ngrok
-brew install parity
 brew install shellcheck
 brew install watch
 
-fancy_echo "Cleaning up old Homebrew formulae ..."
-brew cleanup
-brew cask cleanup
+fancy_echo "Updating Docker ..."
+brew install Caskroom/cask/dockertoolbox
 
 if ! docker-machine ls | grep -Fq "default"; then
   docker-machine create --driver virtualbox default
   docker-machine start default
 fi
+
+fancy_echo "Cleaning up old Homebrew formulae ..."
+brew cleanup
+brew cask cleanup
 
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
