@@ -14,8 +14,19 @@ brew install watch
 fancy_echo "Updating Docker ..."
 brew install Caskroom/cask/dockertoolbox
 
-if ! docker-machine ls | grep -Fq "default"; then
+default_docker_machine() {
+  docker-machine ls | grep -Fq "default"
+}
+
+default_docker_machine_running() {
+  default_docker_machine | grep -Fq "Running"
+}
+
+if ! default_docker_machine; then
   docker-machine create --driver virtualbox default
+fi
+
+if ! default_docker_machine_running; then
   docker-machine start default
 fi
 
