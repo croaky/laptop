@@ -3,32 +3,13 @@
 fancy_echo "Upgrading Homebrew formulae ..."
 brew upgrade
 
-fancy_echo "Updating programming languages ..."
-brew install go
-
-fancy_echo "Updating Unix tools ..."
-brew install ngrok
-brew install shellcheck
-brew install watch
-
-fancy_echo "Updating Docker ..."
-brew install Caskroom/cask/dockertoolbox
-
-default_docker_machine() {
-  docker-machine ls | grep -Fq "default"
-}
-
-default_docker_machine_running() {
-  default_docker_machine | grep -Fq "Running"
-}
-
-if ! default_docker_machine; then
-  docker-machine create --driver virtualbox default
-fi
-
-if ! default_docker_machine_running; then
-  docker-machine start default
-fi
+brew bundle --file=- <<EOF
+brew "go"
+brew "homebrew/binary/ngrok2"
+brew "neovim/neovim/neovim"
+brew "shellcheck"
+brew "watch"
+EOF
 
 fancy_echo "Cleaning up old Homebrew formulae ..."
 brew cleanup
