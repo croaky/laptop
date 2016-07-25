@@ -51,3 +51,6 @@ highlight Folded  guibg=#0A0A0A guifg=#9090D0
 " Allow project-specific `vimrc`s:
 " http://andrew.stwrt.ca/posts/project-specific-vimrc/
 set exrc
+
+" Fold YAML files
+au FileType yaml setlocal foldmethod=indent
