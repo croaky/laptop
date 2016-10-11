@@ -10,8 +10,5 @@ export PATH="$HOME/bin:$PATH"
 # Ruby
 # eval "$(rbenv init - --no-rehash)"
 
-# Docker
-eval "$(docker-machine env default)"
-
 # thoughtbot/laptop
 export PATH="$HOME/.bin:$PATH"
