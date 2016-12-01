@@ -17,7 +17,7 @@ au FileType go nmap <Leader>re <Plug>(go-rename)
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 
 " Open Go definition in a vertical split
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>d <Plug>(go-def-vertical)
 
 " List interfaces for the type under cursor
 au FileType go nmap <Leader>i <Plug>(go-implements)
