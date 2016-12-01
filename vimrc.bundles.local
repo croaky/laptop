@@ -1,3 +1,4 @@
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'acarapetis/vim-colors-github'
 Plug 'avdgaag/vim-phoenix'
 Plug 'benekastah/neomake'
