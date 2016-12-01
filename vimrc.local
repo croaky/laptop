@@ -13,6 +13,9 @@ au FileType go nmap <Leader>s <Plug>(go-test-func)
 " Rename the identifier under cursor
 au FileType go nmap <Leader>re <Plug>(go-rename)
 
+" Toggle test coverage
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+
 " Open Go definition in a vertical split
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 
