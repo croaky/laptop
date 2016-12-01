@@ -27,6 +27,9 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
+" Alias :GoAlternate to :A
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+
 " Bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
