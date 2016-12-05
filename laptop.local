@@ -5,10 +5,11 @@ brew upgrade
 
 brew bundle --file=- <<EOF
 brew "go"
-brew "homebrew/binary/ngrok2"
 brew "neovim/neovim/neovim"
 brew "shellcheck"
 brew "watch"
+
+cask "ngrok"
 EOF
 
 fancy_echo "Cleaning up old Homebrew formulae ..."
