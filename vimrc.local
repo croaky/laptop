@@ -38,8 +38,12 @@ autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 let g:go_auto_type_info = 1
 set updatetime=100
 
+" Syntax highlight additional Go tokens
+let g:go_auto_sameids = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 
 " Alias :GoAlternate to :A
