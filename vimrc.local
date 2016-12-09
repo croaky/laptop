@@ -33,6 +33,11 @@ function! s:build_go_files()
 endfunction
 
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
+" Display accepted and returned types for function under cursor
+let g:go_auto_type_info = 1
+set updatetime=100
+
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
