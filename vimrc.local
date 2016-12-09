@@ -22,7 +22,17 @@ au FileType go nmap <Leader>d <Plug>(go-def-vertical)
 " List interfaces for the type under cursor
 au FileType go nmap <Leader>i <Plug>(go-implements)
 
-" Syntax highlight Functions, Methods, and Structs
+" Run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
