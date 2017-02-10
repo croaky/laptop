@@ -79,3 +79,6 @@ set exrc
 
 " Fold YAML files
 au FileType yaml setlocal foldmethod=indent
+
+" Exclude certain ShellCheck violations
+let g:syntastic_sh_shellcheck_args="-e SC2039"
