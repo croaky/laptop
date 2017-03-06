@@ -10,5 +10,10 @@ export PATH="$HOME/bin:$PATH"
 # Ruby
 # eval "$(rbenv init - --no-rehash)"
 
+# NeoVim
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+export GIT_EDITOR="$VISUAL"
+
 # thoughtbot/laptop
 export PATH="$HOME/.bin:$PATH"
