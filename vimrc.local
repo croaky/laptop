@@ -71,6 +71,10 @@ autocmd! BufWritePost * Neomake
 " Align GitHub-flavored Markdown tables
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
+" Format Markdown files on save
+let g:markdownfmt_command = 'markdownfmt'
+let g:markdownfmt_autosave = 0
+
 " Color scheme
 colorscheme github
 highlight NonText guibg=#060606
