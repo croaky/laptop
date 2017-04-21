@@ -1,5 +1,5 @@
 # DNS
-alias flush-cache="sudo discoveryutil mdnsflushcache; sudo discoveryutil udnsflushcaches"
+alias flush-cache="sudo killall -HUP mDNSResponder"
 
 # Git
 alias me="git branch -r | ag dc"
