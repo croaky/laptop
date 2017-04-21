@@ -6,6 +6,8 @@ export CDPATH="$CDPATH:$HOME/src/github.com"
 # Go
 export GOPATH="$HOME"
 export PATH="$HOME/bin:$PATH"
+export GOROOT="$(go env GOROOT)"
+export PATH=$PATH:$GOROOT/bin
 
 # Ruby
 # eval "$(rbenv init - --no-rehash)"
