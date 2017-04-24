@@ -6,7 +6,6 @@ brew upgrade
 brew bundle --file=- <<EOF
 brew "delve"
 brew "go"
-brew "neovim/neovim/neovim"
 brew "shellcheck"
 brew "watch"
 
