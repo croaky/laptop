@@ -41,8 +41,6 @@ What's in it?
 * [GitHub color scheme](https://github.com/croaky/vim-colors-github)
 * [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) for
   tab completion.
-* [vim-go](https://github.com/fatih/vim-go) for
-  syntax highlighting, documentation, and more for Go.
 * [Emmet.vim](https://github.com/mattn/emmet-vim) for expanding CSS selectors
   into HTML when writing markup
 * [words-to-avoid](https://github.com/nicholaides/words-to-avoid.vim) for

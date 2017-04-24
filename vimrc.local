@@ -42,9 +42,6 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 
-" Automatically import packages
-let g:go_fmt_command = "goimports"
-
 " Alias :GoAlternate to :A
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 
