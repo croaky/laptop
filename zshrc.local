@@ -12,5 +12,8 @@ export PATH=$PATH:$GOROOT/bin
 # Ruby
 # eval "$(rbenv init - --no-rehash)"
 
+# JavaScript
+export PATH="$PATH:`yarn global bin`"
+
 # thoughtbot/laptop
 export PATH="$HOME/.bin:$PATH"
