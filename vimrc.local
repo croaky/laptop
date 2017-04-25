@@ -73,3 +73,9 @@ au FileType yaml setlocal foldmethod=indent
 
 " Exclude certain ShellCheck violations
 let g:syntastic_sh_shellcheck_args="-e SC2039"
+
+" JavaScript
+let g:javascript_plugin_flow = 1
+let g:jsx_ext_required = 0
+
+autocmd BufWritePre *.js Neoformat prettier

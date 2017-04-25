@@ -16,6 +16,9 @@ fancy_echo "Cleaning up old Homebrew formulae ..."
 brew cleanup
 brew cask cleanup
 
+fancy_echo "Install Prettier for JavaScript code formatting ..."
+yarn global add prettier
+
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
   rcup

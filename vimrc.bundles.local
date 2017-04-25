@@ -8,3 +8,6 @@ Plug 'moorereason/vim-markdownfmt'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'nicholaides/words-to-avoid.vim'
 Plug 'rizzatti/dash.vim'
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'sbdchd/neoformat'
