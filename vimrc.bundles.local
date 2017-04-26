@@ -1,9 +1,10 @@
 Plug 'acarapetis/vim-colors-github'
-Plug 'avdgaag/vim-phoenix', { 'for': 'elixir' }
+Plug 'avdgaag/vim-phoenix'
+Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mattn/emmet-vim'
-Plug 'moorereason/vim-markdownfmt', { 'for': 'markdown' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'nicholaides/words-to-avoid.vim', { 'for': 'markdown' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'moorereason/vim-markdownfmt'
+Plug 'mxw/vim-jsx'
+Plug 'nicholaides/words-to-avoid.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'sbdchd/neoformat'
