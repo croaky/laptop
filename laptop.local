@@ -22,5 +22,4 @@ yarn global add prettier
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
   rcup
-  reset
 fi
