@@ -9,6 +9,7 @@ brew "shellcheck"
 brew "watch"
 
 cask "ngrok"
+cask "react-native-debugger"
 EOF
 
 fancy_echo "Cleaning up old Homebrew formulae ..."
@@ -20,6 +21,9 @@ yarn global add prettier
 
 fancy_echo "Install Markdown for auto Markdown formatting on file save ..."
 yarn global add remark-cli
+
+fancy_echo "Install React Native CLI ..."
+npm i -g react-native-cli
 
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
