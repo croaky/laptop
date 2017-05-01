@@ -71,8 +71,8 @@ set exrc
 " Fold YAML files
 au FileType yaml setlocal foldmethod=indent
 
-" Exclude certain ShellCheck violations
-let g:syntastic_sh_shellcheck_args="-e SC2039"
+" Run ALE linters only on save
+let g:ale_lint_on_text_changed = 'never'
 
 " JavaScript
 let g:javascript_plugin_flow = 1

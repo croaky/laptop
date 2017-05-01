@@ -1,3 +1,5 @@
+UnPlug 'syntastic'
+
 Plug 'acarapetis/vim-colors-github'
 Plug 'avdgaag/vim-phoenix'
 Plug 'cohama/lexima.vim'
@@ -8,3 +10,4 @@ Plug 'mxw/vim-jsx'
 Plug 'nicholaides/words-to-avoid.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'sbdchd/neoformat'
+Plug 'w0rp/ale'
