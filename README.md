@@ -1,65 +1,85 @@
-croaky dotfiles
-===============
+# Dotfiles
 
-I use [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles) and
-croaky/dotfiles together using [the `*.local` convention][dot-local].
+I use [thoughtbot/dotfiles][thoughtbot] and croaky/dotfiles
+together using [the .local convention][dot-local].
 
-[dot-local]: http://robots.thoughtbot.com/manage-team-and-personal-dotfiles-together-with-rcm
+[thoughtbot]: https://github.com/thoughtbot/dotfiles
+[dot-local]: https://blog.statusok.com/combine-team-and-personal-dotfiles-with-rcm
 
-Requirements
-------------
+## Requirements
 
 Set zsh as my login shell.
 
-    chsh -s /bin/zsh
+```
+chsh -s /bin/zsh
+```
 
-Install [rcm](https://github.com/mike-burns/rcm).
+Install [rcm].
 
-    brew tap thoughtbot/formulae
-    brew install rcm
+[rcm]: https://github.com/thoughtbot/rcm
 
-Install
--------
+```
+brew tap thoughtbot/formulae
+brew install rcm
+```
+
+## Install
 
 Clone onto my laptop:
 
-    git clone git://github.com/croaky/dotfiles.git
+```
+git clone git://github.com/croaky/dotfiles.git
+```
 
 Install:
 
-    env RCRC=$HOME/croaky/dotfiles/rcrc rcup
+```
+env RCRC=$HOME/croaky/dotfiles/rcrc rcup
+```
 
 This will create symlinks for config files in my home directory.
 
 I can safely run `rcup` multiple times to update.
 
-What's in it?
--------------
+## Vim config
 
-[vim](http://www.vim.org/) configuration:
+* [ale] for linting on file save
+* [neoformat] for automatically formatting on file save:
+  JavaScript with [Prettier],
+  Markdown with [Remark]
+* [vim-colors-github] for GitHub color scheme
+* [vim-easy-align] for [aligning Markdown tables][align]
+* [vim-javascript] for JavaScript syntax highlighting
+* [vim-jsx] for JSX syntax highlighting
+* [vim-phoenix] for navigating Elixir Phoenix projects
+* [words-to-avoid.vim] for highlighting weasel words in Markdown
 
-* [GitHub color scheme](https://github.com/croaky/vim-colors-github)
-* [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) for
-  tab completion.
-* [Emmet.vim](https://github.com/mattn/emmet-vim) for expanding CSS selectors
-  into HTML when writing markup
-* [words-to-avoid](https://github.com/nicholaides/words-to-avoid.vim) for
-  highlighting weasel words in my Markdown writing.
+[align]: https://blog.statusok.com/align-markdown-tables-with-vim
+[Prettier]: https://github.com/prettier/prettier
+[Remark]: https://github.com/wooorm/remark
+[ale]: https://github.com/w0rp/ale
+[neoformat]: https://github.com/sbdchd/neoformat
+[vim-colors-github]: https://github.com/acarapetis/vim-colors-github
+[vim-easy-align]: https://github.com/junegunn/vim-easy-align
+[vim-javascript]: https://github.com/pangloss/vim-javascript
+[vim-jsx]: https://github.com/mxw/vim-jsx
+[vim-phoenix]: https://github.com/avdgaag/vim-phoenix
+[words-to-avoid.vim]: https://github.com/nicholaides/words-to-avoid.vim
 
-[git](http://git-scm.com/) configuration:
+## Git config and aliases
 
 * `l` alias for tight, colored, log output.
 * My name and email.
 
-[zsh](http://zsh.sourceforge.net/FAQ/zshfaq01.html) configuration and aliases:
+## Z shell config and aliases
 
-* `todo` to edit my plain text todo file, located in Dropbox.
-* `restart-postgres` alias to restart Homebrew'd Postgres.
-* `gpg` alias for `gpg2`.
+* `todo` to edit my plain text todo file, located in Dropbox
+* `restart-postgres` alias to restart Homebrew'd Postgres
+* `gpg` alias for `gpg2`
 * `install-missing-ruby` alias to upgrade Homebrew'd `ruby-build` and install
-  Ruby implicitly from `.ruby_version` file in current directory.
-* Add [Go workspace][go] to `PATH`.
-* Add [Node modules][nvm] to `PATH`.
+  Ruby implicitly from `.ruby_version` file in current directory
+* Add [Go workspace][go] to `PATH`
+* Add [Yarn binaries][yarn] to `PATH`
 
 [go]: http://golang.org/doc/code.html#GOPATH
-[nvm]: https://github.com/creationix/nvm#manual-install
+[yarn]: https://yarnpkg.com/en/docs/install

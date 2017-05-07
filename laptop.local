@@ -15,8 +15,11 @@ fancy_echo "Cleaning up old Homebrew formulae ..."
 brew cleanup
 brew cask cleanup
 
-fancy_echo "Install Prettier for JavaScript code formatting ..."
+fancy_echo "Install Prettier for auto JavaScript formatting on file save ..."
 yarn global add prettier
+
+fancy_echo "Install Markdown for auto Markdown formatting on file save ..."
+yarn global add remark-cli
 
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
