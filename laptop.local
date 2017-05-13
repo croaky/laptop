@@ -9,7 +9,10 @@ brew "shellcheck"
 brew "watch"
 
 cask "ngrok"
+
+# React Native
 cask "react-native-debugger"
+cask "expo-xde"
 EOF
 
 fancy_echo "Cleaning up old Homebrew formulae ..."
