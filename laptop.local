@@ -8,11 +8,10 @@ brew "go"
 brew "shellcheck"
 brew "watch"
 
-cask "ngrok"
-
-# React Native
-cask "react-native-debugger"
 cask "expo-xde"
+cask "ngrok"
+cask "react-native-debugger"
+cask "visual-studio-code"
 EOF
 
 fancy_echo "Cleaning up old Homebrew formulae ..."
@@ -27,6 +26,16 @@ npm install -g react-native-cli
 
 fancy_echo "Install GraphCool CLI ..."
 npm install -g graphcool
+
+fancy_echo "Set up extensions for VS Code ..."
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension donjayamanne.githistory
+code --install-extension esbenp.prettier-vscode
+code --install-extension formulahendry.auto-close-tag
+code --install-extension lukehoban.Go
+code --install-extension rebornix.Ruby
+code --install-extension vscodevim.vim
+code --install-extension vsmobile.vscode-react-native
 
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
