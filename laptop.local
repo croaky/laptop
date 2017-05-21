@@ -26,7 +26,10 @@ fancy_echo "Install Markdown for auto Markdown formatting on file save ..."
 yarn global add remark-cli
 
 fancy_echo "Install React Native CLI ..."
-npm i -g react-native-cli
+npm install -g react-native-cli
+
+fancy_echo "Install GraphCool CLI ..."
+npm install -g graphcool
 
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
