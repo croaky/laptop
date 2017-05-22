@@ -1,0 +1,36 @@
+[alias]
+  l = log --pretty=colored
+  aa = add --all
+  ap = add --patch
+  ci = commit -v
+  co = checkout
+  st = status
+[color]
+  ui = auto
+[commit]
+  template = ~/.gitmessage
+[core]
+  excludesfile = ~/.gitignore
+  autocrlf = input
+[diff]
+  tool = vimdiff
+[fetch]
+  prune = true
+[include]
+  path = ~/.gitconfig.local
+[init]
+  templatedir = ~/.git_template
+[merge]
+  ff = only
+  tool = vimdiff
+[mergetool "vimdiff"]
+  cmd = vimdiff -f $LOCAL $MERGED $REMOTE
+[pretty]
+  colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
+[push]
+  default = current
+[rebase]
+  autosquash = true
+[user]
+  name = Dan Croak
+  email = dan@statusok.com

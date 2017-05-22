@@ -1,3 +1,12 @@
+# Unix
+alias ...='../..'
+alias e="$EDITOR"
+alias mkdir="mkdir -p"
+alias v='vim'
+
+# Pretty print the path
+alias path='echo $PATH | tr -s ":" "\n"'
+
 # DNS
 alias flush-cache="sudo killall -HUP mDNSResponder"
 
@@ -13,17 +22,9 @@ alias gpg="gpg2"
 # Postgres
 alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid; launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
-# Ruby
+# Ruby, Rails
+alias b="bundle"
 alias install-missing-ruby="brew update && brew upgrade ruby-build && rbenv install"
-
-# Rails
-alias migrate="rake db:migrate db:rollback && rake db:migrate"
+alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias m="migrate"
-
-# Todo
-alias todo="vim ~/Dropbox\ \(Personal\)/todo"
-
-# Unix
-alias ...='../..'
-alias mkdir='mkdir -p'
-alias v='vim'
+alias s="rspec"

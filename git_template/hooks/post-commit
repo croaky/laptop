@@ -45,3 +45,5 @@ checkfmt $gofiles || fail=yes
 checkvet $gofiles || fail=yes
 
 [ -z "$fail" ] || exit 1
+
+.git/hooks/ctags >/dev/null 2>&1 &

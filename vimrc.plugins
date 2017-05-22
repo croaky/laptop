@@ -1,0 +1,31 @@
+if &compatible
+  set nocompatible
+end
+
+call plug#begin('~/.vim/plugged')
+
+" Define plugins via GitHub repos
+Plug 'acarapetis/vim-colors-github'
+Plug 'avdgaag/vim-phoenix'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'fatih/vim-go'
+Plug 'janko-m/vim-test'
+Plug 'junegunn/vim-easy-align'
+Plug 'mxw/vim-jsx'
+Plug 'nicholaides/words-to-avoid.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'sbdchd/neoformat'
+Plug 'slim-template/vim-slim'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+Plug 'vim-scripts/tComment'
+Plug 'w0rp/ale'
+
+call plug#end()

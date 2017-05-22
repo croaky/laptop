@@ -36,9 +36,6 @@ if [ ! -f "$HOME/.zshrc" ]; then
   touch "$HOME/.zshrc"
 fi
 
-# shellcheck disable=SC2016
-append_to_zshrc 'export PATH="$HOME/.bin:$PATH"'
-
 if [ -d "$HOMEBREW_PREFIX" ]; then
   if ! [ -r "$HOMEBREW_PREFIX" ]; then
     sudo chown -R "$LOGNAME:admin" /usr/local
@@ -161,8 +158,6 @@ find_latest_ruby() {
 }
 
 ruby_version="$(find_latest_ruby)"
-# shellcheck disable=SC2016
-append_to_zshrc 'eval "$(rbenv init - --no-rehash)"' 1
 eval "$(rbenv init -)"
 
 if ! rbenv versions | grep -Fq "$ruby_version"; then
@@ -205,4 +200,6 @@ code --install-extension vsmobile.vscode-react-native
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
   rcup
+else
+  env RCRC="$HOME/src/github.com/croaky/dotfiles/rcrc rcup"
 fi

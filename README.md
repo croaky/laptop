@@ -23,9 +23,14 @@ Execute the script:
 sh mac 2>&1 | tee ~/laptop.log
 ```
 
-This will create symlinks for config files in my home directory.
-I can safely run it multiple times to update.
+This will install or update programs listed in `mac`
+and then use [rcm]'s `rcup` command
+to create symlinks of the config files in this repo
+to the `~/` (`$HOME`) directory.
 
+[rcm]: https://github.com/thoughtbot/rcm
+
+The script is safe to run multiple times to update.
 Read through `~/laptop.log` to debug.
 
 ## What it sets up
@@ -36,6 +41,40 @@ macOS tools:
 
 [Homebrew]: http://brew.sh/
 
+[tmux](http://robots.thoughtbot.com/a-tmux-crash-course)
+configuration:
+
+* Improve color resolution.
+* Remove administrative debris (session name, hostname, time) in status bar.
+* Set prefix to `Ctrl+s`
+* Soften status bar color from harsh green to light gray.
+
+[git](http://git-scm.com/) configuration:
+
+* Adds a `create-branch` alias to create feature branches.
+* Adds a `delete-branch` alias to delete feature branches.
+* Adds a `merge-branch` alias to merge feature branches into master.
+* Adds an `up` alias to fetch and rebase `origin/master` into the feature
+  branch. Use `git up -i` for interactive rebases.
+* Adds `post-{checkout,commit,merge}` hooks to re-index your ctags.
+* Adds `pre-commit` and `prepare-commit-msg` stubs that delegate to your local
+  config.
+
+[Ruby](https://www.ruby-lang.org/en/) configuration:
+
+* Add trusted binstubs to the `PATH`.
+* Load rbenv into the shell, adding shims onto our `PATH`.
+
+Shell aliases and scripts:
+
+* `b` for `bundle`.
+* `g` with no arguments is `git status` and with arguments acts like `git`.
+* `migrate` for `rake db:migrate && rake db:rollback && rake db:migrate`.
+* `mcd` to make a directory and change into it.
+* `replace foo bar **/*.rb` to find and replace within a given list of files.
+* `tat` to attach to tmux session named the same as the current directory.
+* `v` for `$VISUAL`.
+
 Unix tools:
 
 * [Exuberant Ctags] for indexing files for vim tab completion
@@ -45,7 +84,7 @@ Unix tools:
 * [The Silver Searcher] for finding things in files
 * [Tmux] for saving project state and switching between projects
 * [Watchman] for watching for filesystem events
-* [Zsh] as your shell
+* [Zsh] as the shell
 
 [Exuberant Ctags]: http://ctags.sourceforge.net/
 [Git]: https://git-scm.com/
@@ -106,19 +145,32 @@ Databases:
 [Postgres]: http://www.postgresql.org/
 [Redis]: http://redis.io/
 
-Vim config:
+Vim config in `vimrc`:
+
+* Map `<Leader>ct` to re-index [Exuberant Ctags]
+* Set `<Leader>` to a single space.
+* Switch between the last two files with space-space
+* Syntax highlighting for Markdown, HTML, JavaScript, Ruby, Go, Elixir, more.
+* Use [The Silver Searcher] instead of Grep
+
+Vim plugins in `vimrc.plugins`:
 
 * [ale] for linting on file save
-* [neoformat] for automatically formatting on file save:
-  JavaScript with [Prettier]
+* [ctrlp] for fuzzy file/buffer/tag finding
+* [neoformat] for auto-formatting JavaScript files with [Prettier] on save
 * [vim-colors-github] for GitHub color scheme
 * [vim-easy-align] for [aligning Markdown tables][align]
 * [vim-javascript] for JavaScript syntax highlighting
 * [vim-jsx] for JSX syntax highlighting
+* [vim-mkdir] to create non-existing directories before writing the buffer
 * [vim-phoenix] for navigating Elixir Phoenix projects
+* [vim-plug] to manage plugins
+* [vim-rails] for navigation in Rails apps
+* [vim-test] for running focused tests
 * [words-to-avoid.vim] for highlighting weasel words in Markdown
 
 [align]: https://blog.statusok.com/align-markdown-tables-with-vim
+[ctrlp]: https://github.com/kien/ctrlp.vim
 [Prettier]: https://github.com/prettier/prettier
 [ale]: https://github.com/w0rp/ale
 [neoformat]: https://github.com/sbdchd/neoformat
@@ -126,7 +178,11 @@ Vim config:
 [vim-easy-align]: https://github.com/junegunn/vim-easy-align
 [vim-javascript]: https://github.com/pangloss/vim-javascript
 [vim-jsx]: https://github.com/mxw/vim-jsx
+[vim-mkdir]: https://github.com/pbrisbin/vim-mkdir
 [vim-phoenix]: https://github.com/avdgaag/vim-phoenix
+[vim-plug]: https://github.com/junegunn/vim-plug
+[vim-rails]: https://github.com/tpope/vim-rails
+[vim-test]: https://github.com/janko-m/vim-test
 [words-to-avoid.vim]: https://github.com/nicholaides/words-to-avoid.vim
 
 Git config and aliases:
@@ -146,3 +202,31 @@ Z shell config and aliases:
 
 [go]: http://golang.org/doc/code.html#GOPATH
 [yarn]: https://yarnpkg.com/en/docs/install
+
+## Zsh config
+
+The `zsh/configs` directory has two special subdirectories:
+`pre` for files that must be loaded first
+`post` for files that must be loaded last.
+
+Setting a key binding can happen in `zsh/configs/keys`:
+
+```
+# Grep anywhere with ^G
+bindkey -s '^G' ' | grep '
+```
+
+Some changes, like `chpwd`, must happen in `zsh/configs/post/chpwd`:
+
+```
+# Show the entries in a directory whenever you cd in
+function chpwd {
+  ls
+}
+```
+
+## Vim config
+
+Similar to the Zsh config,
+Vim automatically loads all files in the `vim/plugin` directory.
+This does not have the same `pre` or `post` subdirectory support as Zsh.
