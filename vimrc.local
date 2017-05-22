@@ -55,10 +55,6 @@ autocmd FileType html,css,eruby,eco EmmetInstall
 " Align GitHub-flavored Markdown tables
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
-" Format Markdown files on save
-let g:markdownfmt_command = 'markdownfmt'
-let g:markdownfmt_autosave = 0
-
 " Color scheme
 colorscheme github
 highlight NonText guibg=#060606
@@ -71,11 +67,10 @@ set exrc
 " Fold YAML files
 au FileType yaml setlocal foldmethod=indent
 
-" Run ALE linters only on save
-let g:ale_lint_on_text_changed = 'never'
-
 " JavaScript
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
 
+" Auto-format and lint on save, not on text changed
 autocmd BufWritePre *.js Neoformat prettier
+let g:ale_lint_on_text_changed = 'never'

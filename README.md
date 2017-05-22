@@ -45,8 +45,7 @@ I can safely run `rcup` multiple times to update.
 
 * [ale] for linting on file save
 * [neoformat] for automatically formatting on file save:
-  JavaScript with [Prettier],
-  Markdown with [Remark]
+  JavaScript with [Prettier]
 * [vim-colors-github] for GitHub color scheme
 * [vim-easy-align] for [aligning Markdown tables][align]
 * [vim-javascript] for JavaScript syntax highlighting
@@ -56,7 +55,6 @@ I can safely run `rcup` multiple times to update.
 
 [align]: https://blog.statusok.com/align-markdown-tables-with-vim
 [Prettier]: https://github.com/prettier/prettier
-[Remark]: https://github.com/wooorm/remark
 [ale]: https://github.com/w0rp/ale
 [neoformat]: https://github.com/sbdchd/neoformat
 [vim-colors-github]: https://github.com/acarapetis/vim-colors-github

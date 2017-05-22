@@ -27,7 +27,7 @@ function clone() {
 # eval "$(rbenv init - --no-rehash)"
 
 # JavaScript
-export PATH="$PATH:`yarn global bin`"
+export PATH="$(yarn global bin):$PATH"
 
 # thoughtbot/laptop
 export PATH="$HOME/.bin:$PATH"
