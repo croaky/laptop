@@ -73,5 +73,8 @@ function clone() {
 # JavaScript
 export PATH="$(yarn global bin):$PATH"
 
+# Homebrew, recommended by brew doctor
+export PATH="/usr/local/bin:$PATH"
+
 # Matches Laptop `mac` script
 export PATH="$HOME/.bin:$PATH"
