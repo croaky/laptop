@@ -22,9 +22,6 @@ brew cask cleanup
 fancy_echo "Install Prettier for auto JavaScript formatting on file save ..."
 yarn global add prettier
 
-fancy_echo "Install Markdown for auto Markdown formatting on file save ..."
-yarn global add remark-cli
-
 fancy_echo "Install React Native CLI ..."
 npm install -g react-native-cli
 

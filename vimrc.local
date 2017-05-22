@@ -48,7 +48,7 @@ autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 " Bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-" Enable Emmet just for HTML/CSS/ERB
+" Enable Emmet for HTML/CSS/ERB
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,eruby,eco EmmetInstall
 
