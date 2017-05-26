@@ -152,8 +152,11 @@ set exrc
 " Fold YAML files
 au FileType yaml setlocal foldmethod=indent
 
-" Auto-format and lint on save, not on text changed
-let g:ale_lint_on_text_changed = 'never'
+" Auto-format and lint on save
+augroup fmt
+  autocmd!
+  autocmd BufWritePre *.js Neoformat prettier
+augroup END
 
 " Exclude JavaScript files in :Rtags via rails.vim due to warnings when parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
