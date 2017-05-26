@@ -137,10 +137,6 @@ set diffopt+=vertical
 " Bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-" Enable Emmet for HTML/CSS/ERB
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,eruby EmmetInstall
-
 " Align GitHub-flavored Markdown tables
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
