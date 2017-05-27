@@ -154,11 +154,10 @@ brew cask cleanup
 fancy_echo "Install Prettier for auto JavaScript formatting on file save ..."
 yarn global add prettier
 
-fancy_echo "Install React Native CLI ..."
-npm install -g react-native-cli
-
-fancy_echo "Install GraphCool CLI ..."
-npm install -g graphcool
+fancy_echo "Install CLIs for React Native and GraphQL ..."
+npm install react-native-cli --global
+npm install exp --global
+npm install graphcool --global
 
 fancy_echo "Set up extensions for VS Code ..."
 code --install-extension dbaeumer.vscode-eslint
