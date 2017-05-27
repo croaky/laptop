@@ -155,7 +155,6 @@ Vim config in `vimrc`:
 
 Vim plugins in `vimrc.plugins`:
 
-* [ale] for linting on file save
 * [ctrlp] for fuzzy file/buffer/tag finding
 * [neoformat] for auto-formatting JavaScript files with [Prettier] on save
 * [vim-colors-github] for GitHub color scheme
@@ -169,10 +168,9 @@ Vim plugins in `vimrc.plugins`:
 * [vim-test] for running focused tests
 * [words-to-avoid.vim] for highlighting weasel words in Markdown
 
+[Prettier]: https://github.com/prettier/prettier
 [align]: https://blog.statusok.com/align-markdown-tables-with-vim
 [ctrlp]: https://github.com/kien/ctrlp.vim
-[Prettier]: https://github.com/prettier/prettier
-[ale]: https://github.com/w0rp/ale
 [neoformat]: https://github.com/sbdchd/neoformat
 [vim-colors-github]: https://github.com/acarapetis/vim-colors-github
 [vim-easy-align]: https://github.com/junegunn/vim-easy-align
