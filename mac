@@ -142,7 +142,7 @@ brew cleanup
 brew cask cleanup
 
 fancy_echo "Install Prettier for auto JavaScript formatting on file save ..."
-yarn global add prettier
+npm install prettier --global
 
 fancy_echo "Install CLIs for React Native and GraphQL ..."
 npm install react-native-cli --global
