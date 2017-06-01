@@ -106,10 +106,6 @@ brew "ruby-build"
 brew "yarn"
 brew "go"
 
-# React Native for mobile development
-cask "expo-xde"
-cask "react-native-debugger"
-
 # Databases
 brew "postgres", restart_service: true
 brew "redis", restart_service: true
