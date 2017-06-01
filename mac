@@ -109,7 +109,6 @@ brew "go"
 # React Native for mobile development
 cask "expo-xde"
 cask "react-native-debugger"
-cask "visual-studio-code"
 
 # Databases
 brew "postgres", restart_service: true
@@ -153,16 +152,6 @@ fancy_echo "Install CLIs for React Native and GraphQL ..."
 npm install react-native-cli --global
 npm install exp --global
 npm install graphcool --global
-
-fancy_echo "Set up extensions for VS Code ..."
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension donjayamanne.githistory
-code --install-extension esbenp.prettier-vscode
-code --install-extension formulahendry.auto-close-tag
-code --install-extension lukehoban.Go
-code --install-extension rebornix.Ruby
-code --install-extension vscodevim.vim
-code --install-extension vsmobile.vscode-react-native
 
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
