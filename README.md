@@ -45,6 +45,8 @@ Programming languages, package managers, and configuration:
 
 * Latest [Ruby] programming language version
 * Latest [Go] programming language version
+* [Expo XDE] for managing React Native development
+  without XCode or Android Studio
 * [Bundler] for managing Ruby libraries
 * [Node.js] and [NPM], for running apps and installing JavaScript packages
 * [Rbenv] for managing versions of Ruby
@@ -60,6 +62,7 @@ Programming languages, package managers, and configuration:
 [Ruby]: https://www.ruby-lang.org/en/
 [Go]: http://golang.org/
 [Yarn]: https://yarnpkg.com/en/
+[Expo XDE]: https://docs.expo.io/versions/v18.0.0/index.html
 
 Databases:
 
