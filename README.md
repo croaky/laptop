@@ -41,16 +41,39 @@ macOS tools:
 
 [Homebrew]: http://brew.sh/
 
-[tmux](http://robots.thoughtbot.com/a-tmux-crash-course)
-configuration:
+Programming languages, package managers, and configuration:
 
-* Improve color resolution.
-* Remove administrative debris (session name, hostname, time) in status bar.
-* Set prefix to `Ctrl+s`
-* Soften status bar color from harsh green to light gray.
+* Latest [Ruby] programming language version
+* Latest [Go] programming language version
+* [Bundler] for managing Ruby libraries
+* [Node.js] and [NPM], for running apps and installing JavaScript packages
+* [Rbenv] for managing versions of Ruby
+* [Ruby Build] for installing Rubies
+* [Yarn] for managing JavaScript packages
 
-[git](http://git-scm.com/) configuration:
+[Bundler]: http://bundler.io/
+[ImageMagick]: http://www.imagemagick.org/
+[Node.js]: http://nodejs.org/
+[NPM]: https://www.npmjs.org/
+[Rbenv]: https://github.com/sstephenson/rbenv
+[Ruby Build]: https://github.com/sstephenson/ruby-build
+[Ruby]: https://www.ruby-lang.org/en/
+[Go]: http://golang.org/
+[Yarn]: https://yarnpkg.com/en/
 
+Databases:
+
+* [Postgres] for storing relational data
+* [Redis] for storing key-value data
+
+[Postgres]: http://www.postgresql.org/
+[Redis]: http://redis.io/
+
+[Git](http://git-scm.com/) configuration and GitHub tools:
+
+* [Hub] for interacting with the GitHub API
+* `l` alias for tight, colored, log output.
+* My name and email.
 * Adds a `create-branch` alias to create feature branches.
 * Adds a `delete-branch` alias to delete feature branches.
 * Adds a `merge-branch` alias to merge feature branches into master.
@@ -59,6 +82,8 @@ configuration:
 * Adds `post-{checkout,commit,merge}` hooks to re-index your ctags.
 * Adds `pre-commit` and `prepare-commit-msg` stubs that delegate to your local
   config.
+
+[Hub]: http://hub.github.com/
 
 [Ruby](https://www.ruby-lang.org/en/) configuration:
 
@@ -95,18 +120,20 @@ Unix tools:
 [Watchman]: https://facebook.github.io/watchman/
 [Zsh]: http://www.zsh.org/
 
+[tmux](http://robots.thoughtbot.com/a-tmux-crash-course)
+configuration:
+
+* Improve color resolution.
+* Remove administrative debris (session name, hostname, time) in status bar.
+* Set prefix to `Ctrl+s`
+* Soften status bar color from harsh green to light gray.
+
 Heroku tools:
 
 * [Heroku Toolbelt] and [Parity] for interacting with the Heroku API
 
 [Heroku Toolbelt]: https://toolbelt.heroku.com/
 [Parity]: https://github.com/thoughtbot/parity
-
-GitHub tools:
-
-* [Hub] for interacting with the GitHub API
-
-[Hub]: http://hub.github.com/
 
 Image tools:
 
@@ -118,32 +145,6 @@ Testing tools:
 
 [Qt 5]: http://qt-project.org/
 [Capybara Webkit]: https://github.com/thoughtbot/capybara-webkit
-
-Programming languages, package managers, and configuration:
-
-* [Bundler] for managing Ruby libraries
-* [Node.js] and [NPM], for running apps and installing JavaScript packages
-* [Rbenv] for managing versions of Ruby
-* [Ruby Build] for installing Rubies
-* [Ruby] stable for writing general-purpose code
-* [Yarn] for managing JavaScript packages
-
-[Bundler]: http://bundler.io/
-[ImageMagick]: http://www.imagemagick.org/
-[Node.js]: http://nodejs.org/
-[NPM]: https://www.npmjs.org/
-[Rbenv]: https://github.com/sstephenson/rbenv
-[Ruby Build]: https://github.com/sstephenson/ruby-build
-[Ruby]: https://www.ruby-lang.org/en/
-[Yarn]: https://yarnpkg.com/en/
-
-Databases:
-
-* [Postgres] for storing relational data
-* [Redis] for storing key-value data
-
-[Postgres]: http://www.postgresql.org/
-[Redis]: http://redis.io/
 
 Vim config in `vimrc`:
 
@@ -183,11 +184,6 @@ Vim plugins in `vimrc.plugins`:
 [vim-test]: https://github.com/janko-m/vim-test
 [words-to-avoid.vim]: https://github.com/nicholaides/words-to-avoid.vim
 
-Git config and aliases:
-
-* `l` alias for tight, colored, log output.
-* My name and email.
-
 Z shell config and aliases:
 
 * `todo` to edit my plain text todo file, located in Dropbox
@@ -195,10 +191,10 @@ Z shell config and aliases:
 * `gpg` alias for `gpg2`
 * `install-missing-ruby` alias to upgrade Homebrew'd `ruby-build` and install
   Ruby implicitly from `.ruby_version` file in current directory
-* Add [Go workspace][go] to `PATH`
+* Add [Go workspace][gopath] to `PATH`
 * Add [Yarn binaries][yarn] to `PATH`
 
-[go]: http://golang.org/doc/code.html#GOPATH
+[gopath]: http://golang.org/doc/code.html#GOPATH
 [yarn]: https://yarnpkg.com/en/docs/install
 
 ## Zsh config
