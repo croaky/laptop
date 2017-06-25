@@ -152,7 +152,7 @@ set exrc
 " Fold YAML files
 au FileType yaml setlocal foldmethod=indent
 
-" Auto-format and lint on save
+" Auto-format on save
 augroup fmt
   autocmd!
   autocmd BufWritePre *.js,*.jsx Neoformat prettier

@@ -96,6 +96,7 @@ brew "hub"
 brew "imagemagick"
 
 # Testing
+brew "chromedriver", restart_service: true
 brew "qt@5.5"
 
 # Programming languages and package managers
