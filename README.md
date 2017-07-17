@@ -10,17 +10,29 @@ Tested on macOS Sierra (10.12).
 
 ## Install
 
-Clone onto my laptop:
+Clone onto laptop:
 
 ```
 git clone git@github.com:croaky/dotfiles.git
 cd dotfiles
 ```
 
-Execute the script:
+Review the script (avoid running scripts you haven't read!):
+
+```sh
+less mac
+```
+
+Execute the downloaded script:
 
 ```sh
 sh mac 2>&1 | tee ~/laptop.log
+```
+
+Optionally, review the log:
+
+```sh
+less ~/laptop.log
 ```
 
 This will install or update programs listed in `mac`
@@ -31,7 +43,6 @@ to the `~/` (`$HOME`) directory.
 [rcm]: https://github.com/thoughtbot/rcm
 
 The script is safe to run multiple times to update.
-Read through `~/laptop.log` to debug.
 
 ## What it sets up
 
