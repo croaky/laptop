@@ -44,21 +44,6 @@ _load_settings "$HOME/.zsh/configs"
 # Load aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-# Most common directories
-export CDPATH="$CDPATH:$HOME/src/github.com"
-
-# Homebrew, recommended by brew doctor
-export PATH="/usr/local/bin:$PATH"
-
-# Ruby
-eval "$(rbenv init - --no-rehash)"
-
-# Go
-export GOPATH="$HOME"
-export PATH="$HOME/bin:$PATH"
-export GOROOT="$(go env GOROOT)"
-export PATH=$PATH:$GOROOT/bin
-
 # Clone a Git repo into Go-compatible directory structure.
 # clone https://github.com/statusok/eng
 function clone() {
@@ -72,9 +57,3 @@ function clone() {
   git clone "git@$host:$user/$repo".git
   cd "$repo"
 }
-
-# JavaScript
-export PATH="$(yarn global bin):$PATH"
-
-# Matches Laptop `mac` script
-export PATH="$HOME/.bin:$PATH"
