@@ -96,7 +96,7 @@ brew "hub"
 brew "imagemagick"
 
 # Testing
-brew "chromedriver", restart_service: true
+brew "chromedriver", restart_service: :changed
 
 # Programming languages and package managers
 brew "libyaml" # should come after openssl
@@ -107,8 +107,8 @@ brew "yarn"
 brew "go"
 
 # Databases
-brew "postgres", restart_service: true
-brew "redis", restart_service: true
+brew "postgres", restart_service: :changed
+brew "redis", restart_service: :changed
 EOF
 
 fancy_echo "Set up Expo tools for React Native ..."
