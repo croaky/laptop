@@ -97,7 +97,6 @@ brew "imagemagick"
 
 # Testing
 brew "chromedriver", restart_service: true
-brew "qt@5.5"
 
 # Programming languages and package managers
 brew "libyaml" # should come after openssl
@@ -111,10 +110,6 @@ brew "go"
 brew "postgres", restart_service: true
 brew "redis", restart_service: true
 EOF
-
-fancy_echo "Symlink qmake binary to /usr/local/bin for Capybara Webkit..."
-brew unlink qt@5.5
-brew link --force qt@5.5
 
 fancy_echo "Set up Expo tools for React Native ..."
 rm -rf /Applications/Expo\ XDE.app
