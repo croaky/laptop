@@ -144,9 +144,9 @@ configuration:
 
 Heroku tools:
 
-* [Heroku Toolbelt] and [Parity] for interacting with the Heroku API
+* [Heroku CLI] and [Parity] for interacting with the Heroku API
 
-[Heroku Toolbelt]: https://toolbelt.heroku.com/
+[Heroku CLI]: https://devcenter.heroku.com/articles/heroku-cli
 [Parity]: https://github.com/thoughtbot/parity
 
 Image tools:

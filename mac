@@ -86,7 +86,7 @@ brew "zsh"
 cask "ngrok"
 
 # Heroku
-brew "heroku-toolbelt"
+brew "heroku"
 brew "parity"
 
 # GitHub
@@ -133,6 +133,10 @@ gem update --system
 gem_install_or_update 'bundler'
 number_of_cores=$(sysctl -n hw.ncpu)
 bundle config --global jobs $((number_of_cores - 1))
+
+fancy_echo "Update Heroku binary..."
+brew unlink heroku
+brew link --force heroku
 
 fancy_echo "Upgrading Homebrew formulae ..."
 brew upgrade
