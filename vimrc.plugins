@@ -6,9 +6,7 @@ call plug#begin('~/.vim/plugged')
 
 " Define plugins via GitHub repos
 Plug 'acarapetis/vim-colors-github'
-Plug 'avdgaag/vim-phoenix'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
