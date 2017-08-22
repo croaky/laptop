@@ -149,10 +149,8 @@ brew cask cleanup
 fancy_echo "Install Prettier for auto JavaScript formatting on file save ..."
 npm install prettier --global
 
-fancy_echo "Install CLIs for React Native and GraphQL ..."
-npm install react-native-cli --global
+fancy_echo "Install CLIs for React Native ..."
 npm install exp --global
-npm install graphcool --global
 
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
