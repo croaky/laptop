@@ -3,14 +3,18 @@ export CDPATH="$CDPATH:$HOME/src/github.com"
 
 # Append Go tools
 export GOROOT="$(go env GOROOT)"
-export PATH="$PATH:$GOROOT/bin"
+PATH="$PATH:$GOROOT/bin"
 
 # Prepend Go binaries
 export GOPATH="$HOME"
-export PATH="$HOME/bin:$PATH"
+PATH="$GOPATH/bin:$PATH"
 
 # Prepend JavaScript binaries
-export PATH="$(yarn global bin):$PATH"
+PATH="$(yarn global bin):$PATH"
+
+# Prepend Chain binary
+export CHAIN="$GOPATH/src/github.com/chain/chain"
+PATH="$CHAIN/bin:$PATH"
 
 # Prepend rbenv binary
 PATH="$HOME/.rbenv/bin:$PATH"
@@ -21,7 +25,7 @@ PATH="$HOME/.bin:$PATH"
 # Prepend Homebrew binaries
 PATH="/usr/local/bin:$PATH"
 
-# mkdir .git/safe in the root of repositories you trust
+# mkdir .git/safe in trusted project to add binstubs
 PATH=".git/safe/../../bin:$PATH"
 
 # Initialize rbenv
