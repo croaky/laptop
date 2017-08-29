@@ -116,6 +116,17 @@ fancy_echo "Set up Expo tools for React Native ..."
 rm -rf /Applications/Expo\ XDE.app
 brew cask install --force expo-xde
 
+fancy_echo "Update Heroku binary..."
+brew unlink heroku
+brew link --force heroku
+
+fancy_echo "Upgrading Homebrew formulae ..."
+brew upgrade
+
+fancy_echo "Cleaning up old Homebrew formulae ..."
+brew cleanup
+brew cask cleanup
+
 fancy_echo "Configuring Ruby ..."
 find_latest_ruby() {
   rbenv install -l | grep -v - | tail -1 | sed -e 's/^ *//'
@@ -134,17 +145,6 @@ gem update --system
 gem_install_or_update 'bundler'
 number_of_cores=$(sysctl -n hw.ncpu)
 bundle config --global jobs $((number_of_cores - 1))
-
-fancy_echo "Update Heroku binary..."
-brew unlink heroku
-brew link --force heroku
-
-fancy_echo "Upgrading Homebrew formulae ..."
-brew upgrade
-
-fancy_echo "Cleaning up old Homebrew formulae ..."
-brew cleanup
-brew cask cleanup
 
 fancy_echo "Install Prettier for auto JavaScript formatting on file save ..."
 npm install prettier --global
