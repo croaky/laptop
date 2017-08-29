@@ -110,6 +110,9 @@ brew "go"
 # Databases
 brew "postgres", restart_service: :changed
 brew "redis", restart_service: :changed
+
+# Data interchange
+brew "protobuf"
 EOF
 
 fancy_echo "Set up Expo tools for React Native ..."
@@ -151,6 +154,9 @@ npm install prettier --global
 
 fancy_echo "Install CLIs for React Native ..."
 npm install exp --global
+
+fancy_echo "Install Protobuf protocol compiler plugin for Go ..."
+go get -u github.com/golang/protobuf/protoc-gen-go
 
 if [ -r "$HOME/.rcrc" ]; then
   fancy_echo "Updating dotfiles ..."
