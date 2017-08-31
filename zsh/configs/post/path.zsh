@@ -1,20 +1,18 @@
 # Change into most common directories
 export CDPATH="$CDPATH:$HOME/src/github.com"
 
-# Append Go tools
-export GOROOT="$(go env GOROOT)"
-PATH="$PATH:$GOROOT/bin"
-
-# Prepend Go binaries
+# Prepend Go binaries, `brew info go`
 export GOPATH="$HOME"
+export GOROOT="/usr/local/opt/go/libexec"
 PATH="$GOPATH/bin:$PATH"
+PATH="$GOROOT/bin:$PATH"
+
+# Prepend Chain binary
+export CHAIN="$GOPATH/src/chain"
+PATH="$CHAIN/bin:$PATH"
 
 # Prepend JavaScript binaries
 PATH="$(yarn global bin):$PATH"
-
-# Prepend Chain binary
-export CHAIN="$GOPATH/src/github.com/chain/chain"
-PATH="$CHAIN/bin:$PATH"
 
 # Prepend rbenv binary
 PATH="$HOME/.rbenv/bin:$PATH"
