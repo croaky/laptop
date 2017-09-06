@@ -23,12 +23,12 @@ PATH="$HOME/.bin:$PATH"
 # Prepend Homebrew binaries
 PATH="/usr/local/bin:$PATH"
 
-# mkdir .git/safe in trusted project to add binstubs
-PATH=".git/safe/../../bin:$PATH"
-
 # Initialize rbenv
 if command -v rbenv >/dev/null; then
   eval "$(rbenv init - --no-rehash)"
 fi
+
+# mkdir .git/safe in trusted project to add binstubs
+PATH=".git/safe/../../bin:$PATH"
 
 export -U PATH
