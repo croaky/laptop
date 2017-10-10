@@ -12,6 +12,8 @@
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
+[credential]
+  helper = osxkeychain
 [diff]
   tool = vimdiff
 [fetch]
