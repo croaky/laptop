@@ -1,4 +1,7 @@
 let g:go_fmt_command = "goimports"
+let g:go_fmt_options = {
+      \ "goimports": "-local chain",
+      \ }
 
 setlocal listchars=tab:\ \ ,trail:·,nbsp:·
 setlocal noexpandtab
