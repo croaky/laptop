@@ -127,6 +127,7 @@ if [ -d "$HOME/.rbenv" ]; then
 
   if [ -d "$HOME/.rbenv/versions" ]; then
     mv "$HOME/.rbenv/versions" "$HOME/.asdf/installs/ruby/"
+    asdf reshim ruby
   fi
 
   if brew list | grep -Fq rbenv; then
