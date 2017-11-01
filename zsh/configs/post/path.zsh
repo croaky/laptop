@@ -20,6 +20,11 @@ PATH="$HOME/.bin:$PATH"
 # Prepend Homebrew binaries
 PATH="/usr/local/bin:$PATH"
 
+# Prepend programming language binaries via ASDF shims
+if [ -d "$HOME/.asdf" ]; then
+  source $HOME/.asdf/asdf.sh
+fi
+
 # mkdir .git/safe in trusted project to add binstubs
 PATH=".git/safe/../../bin:$PATH"
 

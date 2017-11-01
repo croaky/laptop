@@ -57,5 +57,3 @@ function clone() {
   git clone "git@$host:$user/$repo".git
   cd "$repo"
 }
-
-source $HOME/.asdf/asdf.sh
