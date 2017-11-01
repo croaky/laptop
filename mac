@@ -7,13 +7,6 @@ set -e
 
 HOMEBREW_PREFIX="/usr/local"
 
-fancy_echo() {
-  local fmt="$1"; shift
-
-  # shellcheck disable=SC2059
-  printf "\n$fmt\n" "$@"
-}
-
 if [ -d "$HOMEBREW_PREFIX" ]; then
   if ! [ -r "$HOMEBREW_PREFIX" ]; then
     sudo chown -R "$LOGNAME:admin" /usr/local
@@ -28,9 +21,9 @@ update_shell() {
   local shell_path;
   shell_path="$(which zsh)"
 
-  fancy_echo "Changing your shell to zsh ..."
+  printf "\nChanging your shell to zsh ...\n"
   if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
-    fancy_echo "Adding '$shell_path' to /etc/shells"
+    printf "\nAdding '$shell_path' to /etc/shells\n"
     sudo sh -c "echo $shell_path >> /etc/shells"
   fi
   chsh -s "$shell_path"
@@ -48,14 +41,14 @@ case "$SHELL" in
 esac
 
 if ! command -v brew >/dev/null; then
-  fancy_echo "Installing Homebrew ..."
+  printf "\nInstalling Homebrew ...\n"
     curl -fsS \
       'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 
     export PATH="/usr/local/bin:$PATH"
 fi
 
-fancy_echo "Updating Homebrew formulae ..."
+printf "\nUpdating Homebrew formulae ...\n"
 brew update
 brew bundle --file=- <<EOF
 tap "thoughtbot/formulae"
@@ -104,22 +97,23 @@ brew "redis", restart_service: :changed
 brew "protobuf"
 EOF
 
-fancy_echo "Set up Expo tools for React Native ..."
-rm -rf /Applications/Expo\ XDE.app
-brew cask install --force expo-xde
+if [ ! -d "/Applications/Expo XDE.app" ]; then
+  printf "\nSet up Expo tools for React Native ...\n"
+  brew cask install --force expo-xde
+fi
 
-fancy_echo "Update Heroku binary..."
+printf "\nUpdate Heroku binary...\n"
 brew unlink heroku
 brew link --force heroku
 
-fancy_echo "Upgrading Homebrew formulae ..."
+printf "\nUpgrading Homebrew formulae ...\n"
 brew upgrade
 
-fancy_echo "Cleaning up old Homebrew formulae ..."
+printf "Cleaning up old Homebrew formulae ...\n"
 brew cleanup
 brew cask cleanup
 
-fancy_echo "Installing ASDF version manager..."
+printf "\nInstalling ASDF version manager ...\n"
 if [ ! -d "$HOME/.asdf" ]; then
   git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch v0.4.0
 fi
@@ -129,7 +123,7 @@ if [ ! -d "$HOME/.asdf/installs" ]; then
 fi
 
 if [ -d "$HOME/.rbenv" ]; then
-  fancy_echo "Migrating rbenv to ASDF..."
+  printf "\nMigrating rbenv to ASDF...\n"
 
   if [ -d "$HOME/.rbenv/versions" ]; then
     mv "$HOME/.rbenv/versions" "$HOME/.asdf/installs/ruby/"
@@ -165,24 +159,24 @@ asdf_install() {
   fi
 }
 
-fancy_echo "Installing Ruby versions..."
+printf "\nInstalling Ruby versions ...\n"
 asdf_plugin_add "ruby"
 asdf_install "ruby" "2.4.2"
 
-fancy_echo "Upgrade NPM ..."
+printf "\nUpgrade NPM ...\n"
 npm install npm --global
 
-fancy_echo "Install Prettier for auto JavaScript formatting on file save ..."
+printf "\nInstall Prettier for auto JavaScript formatting on file save ...\n"
 npm install prettier --global
 
-fancy_echo "Install CLIs for React Native ..."
+printf "\nInstall CLIs for React Native ...\n"
 npm install exp --global
 
-fancy_echo "Install Protobuf protocol compiler plugin for Go ..."
+printf "\nInstall Protobuf protocol compiler plugin for Go ...\n"
 go get -u github.com/golang/protobuf/protoc-gen-go
 
 if [ -r "$HOME/.rcrc" ]; then
-  fancy_echo "Updating dotfiles ..."
+  printf "\nUpdating dotfiles ...\n"
   rcup
 else
   env RCRC="$HOME/src/github.com/croaky/dotfiles/rcrc rcup"
