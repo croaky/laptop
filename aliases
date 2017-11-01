@@ -24,7 +24,6 @@ alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid; launchctl unl
 
 # Ruby, Rails
 alias b="bundle"
-alias install-missing-ruby="brew update && brew upgrade ruby-build && rbenv install"
 alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias m="migrate"
 alias s="rspec"

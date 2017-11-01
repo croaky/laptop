@@ -100,7 +100,7 @@ Databases:
 [Ruby](https://www.ruby-lang.org/en/) configuration:
 
 * Add trusted binstubs to the `PATH`.
-* Load rbenv into the shell, adding shims onto our `PATH`.
+* Load ASDF into the shell, adding shims onto our `PATH`.
 
 Shell aliases and scripts:
 
@@ -168,7 +168,6 @@ Vim plugins in `vimrc.plugins`:
 * [vim-javascript] for JavaScript syntax highlighting
 * [vim-jsx] for JSX syntax highlighting
 * [vim-mkdir] to create non-existing directories before writing the buffer
-* [vim-phoenix] for navigating Elixir Phoenix projects
 * [vim-plug] to manage plugins
 * [vim-rails] for navigation in Rails apps
 * [vim-test] for running focused tests
@@ -183,7 +182,6 @@ Vim plugins in `vimrc.plugins`:
 [vim-javascript]: https://github.com/pangloss/vim-javascript
 [vim-jsx]: https://github.com/mxw/vim-jsx
 [vim-mkdir]: https://github.com/pbrisbin/vim-mkdir
-[vim-phoenix]: https://github.com/avdgaag/vim-phoenix
 [vim-plug]: https://github.com/junegunn/vim-plug
 [vim-rails]: https://github.com/tpope/vim-rails
 [vim-test]: https://github.com/janko-m/vim-test
@@ -194,8 +192,6 @@ Z shell config and aliases:
 * `todo` to edit my plain text todo file, located in Dropbox
 * `restart-postgres` alias to restart Homebrew'd Postgres
 * `gpg` alias for `gpg2`
-* `install-missing-ruby` alias to upgrade Homebrew'd `ruby-build` and install
-  Ruby implicitly from `.ruby_version` file in current directory
 * Add [Go workspace][gopath] to `PATH`
 * Add [Yarn binaries][yarn] to `PATH`
 
