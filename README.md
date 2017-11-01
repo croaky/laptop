@@ -54,22 +54,20 @@ macOS tools:
 
 Programming languages, package managers, and configuration:
 
+* [ASDF] for managing programming language versions
 * Latest [Ruby] programming language version
 * Latest [Go] programming language version
 * [Expo XDE] for managing React Native development
   without XCode or Android Studio
 * [Bundler] for managing Ruby libraries
 * [Node.js] and [NPM], for running apps and installing JavaScript packages
-* [Rbenv] for managing versions of Ruby
-* [Ruby Build] for installing Rubies
 * [Yarn] for managing JavaScript packages
 
+[ASDF]: https://github.com/asdf-vm/asdf
 [Bundler]: http://bundler.io/
 [ImageMagick]: http://www.imagemagick.org/
 [Node.js]: http://nodejs.org/
 [NPM]: https://www.npmjs.org/
-[Rbenv]: https://github.com/sstephenson/rbenv
-[Ruby Build]: https://github.com/sstephenson/ruby-build
 [Ruby]: https://www.ruby-lang.org/en/
 [Go]: http://golang.org/
 [Yarn]: https://yarnpkg.com/en/
