@@ -89,7 +89,7 @@ brew "yarn"
 brew "go"
 
 # Databases
-brew "postgres", restart_service: :changed
+brew "postgresql@9.6", restart_service: :changed
 brew "redis", restart_service: :changed
 
 # Data interchange
