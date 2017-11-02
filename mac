@@ -118,30 +118,7 @@ if [ ! -d "$HOME/.asdf" ]; then
   git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch v0.4.0
 fi
 
-if [ ! -d "$HOME/.asdf/installs" ]; then
-  mkdir ~/.asdf/installs/
-fi
-
-if [ -d "$HOME/.rbenv" ]; then
-  printf "\nMigrating rbenv to ASDF...\n"
-
-  if [ -d "$HOME/.rbenv/versions" ]; then
-    mv "$HOME/.rbenv/versions" "$HOME/.asdf/installs/ruby/"
-    asdf reshim ruby
-  fi
-
-  if brew list | grep -Fq rbenv; then
-    brew uninstall rbenv
-  fi
-
-  if brew list | grep -Fq ruby-build; then
-    brew uninstall ruby-build
-  fi
-
-  rm -rf "$HOME/.rbenv"
-fi
-
-source "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/asdf.sh"
 
 asdf_plugin_add() {
   local name="$1"
@@ -156,7 +133,7 @@ asdf_install() {
   local version="$2"
 
   if ! asdf list "$language" | grep -Fq "$version"; then
-    asdf install "$language" "$version"
+    asdf install "$@"
   fi
 }
 
