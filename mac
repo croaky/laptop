@@ -85,7 +85,6 @@ brew "chromedriver", restart_service: :changed
 
 # Programming languages and package managers
 brew "libyaml" # should come after openssl
-brew "node"
 brew "yarn"
 brew "go"
 
@@ -133,7 +132,8 @@ asdf_install() {
   local version="$2"
 
   if ! asdf list "$language" | grep -Fq "$version"; then
-    asdf install "$@"
+    asdf install "$language" "$version"
+    asdf global "$language" "$version"
   fi
 }
 
@@ -141,8 +141,10 @@ printf "\nInstalling Ruby versions ...\n"
 asdf_plugin_add "ruby"
 asdf_install "ruby" "2.4.2"
 
-printf "\nUpgrade NPM ...\n"
-npm install npm --global
+printf "\nInstalling Node ...\n"
+asdf_plugin_add "nodejs"
+export NODEJS_CHECK_SIGNATURES=no
+asdf_install "nodejs" "8.2.1"
 
 printf "\nInstall Prettier for auto JavaScript formatting on file save ...\n"
 npm install prettier --global
