@@ -144,7 +144,7 @@ asdf_install "ruby" "2.4.2"
 printf "\nInstalling Node ...\n"
 asdf_plugin_add "nodejs"
 export NODEJS_CHECK_SIGNATURES=no
-asdf_install "nodejs" "8.2.1"
+asdf_install "nodejs" "8.9.0"
 
 printf "\nInstall Prettier for auto JavaScript formatting on file save ...\n"
 npm install prettier --global
