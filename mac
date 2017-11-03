@@ -137,7 +137,7 @@ asdf_install() {
   fi
 }
 
-printf "\nInstalling Ruby versions ...\n"
+printf "\nInstalling Ruby ...\n"
 asdf_plugin_add "ruby"
 asdf_install "ruby" "2.4.2"
 
@@ -146,15 +146,18 @@ asdf_plugin_add "nodejs"
 export NODEJS_CHECK_SIGNATURES=no
 asdf_install "nodejs" "8.9.0"
 
-printf "\nInstalling Python versions ...\n"
-asdf_plugin_add "python"
-asdf_install "python" "3.6.3"
-
 printf "\nInstall Prettier for auto JavaScript formatting on file save ...\n"
 npm install prettier --global
 
 printf "\nInstall CLIs for React Native ...\n"
 npm install exp --global
+
+printf "\nInstalling Python ...\n"
+asdf_plugin_add "python"
+asdf_install "python" "3.6.3"
+
+printf "\nInstalling Amazon CLI ...\n"
+pip install awscli
 
 printf "\nInstall Protobuf protocol compiler plugin for Go ...\n"
 go get -u github.com/golang/protobuf/protoc-gen-go
