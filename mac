@@ -146,6 +146,10 @@ asdf_plugin_add "nodejs"
 export NODEJS_CHECK_SIGNATURES=no
 asdf_install "nodejs" "8.9.0"
 
+printf "\nInstalling Python versions ...\n"
+asdf_plugin_add "python"
+asdf_install "python" "3.6.3"
+
 printf "\nInstall Prettier for auto JavaScript formatting on file save ...\n"
 npm install prettier --global
 
