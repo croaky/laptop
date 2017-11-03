@@ -158,6 +158,7 @@ asdf_install "python" "3.6.3"
 
 printf "\nInstalling Amazon CLI ...\n"
 pip install awscli
+asdf reshim python
 
 printf "\nInstall Protobuf protocol compiler plugin for Go ...\n"
 go get -u github.com/golang/protobuf/protoc-gen-go
