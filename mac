@@ -58,6 +58,7 @@ tap "universal-ctags/universal-ctags"
 # Unix
 brew "universal-ctags", args: ["HEAD"]
 brew "git"
+brew "jq"
 brew "openssl"
 brew "rcm"
 brew "reattach-to-user-namespace"
