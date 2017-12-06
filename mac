@@ -78,6 +78,10 @@ brew "parity"
 # GitHub
 brew "hub"
 
+# AWS
+brew "awscli"
+cask "aws-vault"
+
 # Image manipulation
 brew "imagemagick"
 
@@ -152,14 +156,6 @@ npm install prettier --global
 
 printf "\nInstall CLIs for React Native ...\n"
 npm install exp --global
-
-printf "\nInstalling Python ...\n"
-asdf_plugin_add "python"
-asdf_install "python" "3.6.3"
-
-printf "\nInstalling Amazon CLI ...\n"
-pip install awscli
-asdf reshim python
 
 printf "\nInstall Protobuf protocol compiler plugin for Go ...\n"
 go get -u github.com/golang/protobuf/protoc-gen-go
