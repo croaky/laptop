@@ -90,7 +90,6 @@ brew "chromedriver", restart_service: :changed
 
 # Programming languages and package managers
 brew "libyaml" # should come after openssl
-brew "yarn"
 brew "go"
 
 # Databases
@@ -149,13 +148,18 @@ asdf_install "ruby" "2.4.2"
 printf "\nInstalling Node ...\n"
 asdf_plugin_add "nodejs"
 export NODEJS_CHECK_SIGNATURES=no
-asdf_install "nodejs" "8.9.0"
+asdf_install "nodejs" "9.3.0"
 
-printf "\nInstall Prettier for auto JavaScript formatting on file save ...\n"
-npm install prettier --global
+printf "\nInstalling Yarn ...\n"
+npm install yarn --global
+asdf reshim nodejs
 
-printf "\nInstall CLIs for React Native ...\n"
-npm install exp --global
+printf "\nInstalling Expo, Prettier, TSLint, TypeScript, Yarn ...\n"
+yarn global add exp
+yarn global add prettier
+yarn global add tslint-config-prettier
+yarn global add typescript
+asdf reshim nodejs
 
 printf "\nInstall Protobuf protocol compiler plugin for Go ...\n"
 go get -u github.com/golang/protobuf/protoc-gen-go

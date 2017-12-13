@@ -11,9 +11,6 @@ PATH="$GOROOT/bin:$PATH"
 export CHAIN="$GOPATH/src/chain"
 PATH="$CHAIN/bin:$PATH"
 
-# Prepend JavaScript binaries
-PATH="$(yarn global bin):$PATH"
-
 # Prepend dotfiles binaries
 PATH="$HOME/.bin:$PATH"
 
@@ -24,6 +21,9 @@ PATH="/usr/local/bin:$PATH"
 if [ -d "$HOME/.asdf" ]; then
   source $HOME/.asdf/asdf.sh
 fi
+
+# Prepend JavaScript binaries
+PATH="$(yarn global bin):$PATH"
 
 # mkdir .git/safe in trusted project to add binstubs
 PATH=".git/safe/../../bin:$PATH"

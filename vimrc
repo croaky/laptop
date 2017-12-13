@@ -167,7 +167,7 @@ au FileType yaml setlocal foldmethod=indent
 " Auto-format on save
 augroup fmt
   autocmd!
-  autocmd BufWritePre *.js,*.jsx Neoformat prettier
+  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx Neoformat prettier
 augroup END
 
 " Exclude JavaScript files in :Rtags via rails.vim due to warnings when parsing
