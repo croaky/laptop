@@ -168,6 +168,7 @@ au FileType yaml setlocal foldmethod=indent
 augroup fmt
   autocmd!
   autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx Neoformat prettier
+  autocmd BufWritePre *.rb Neoformat rubocop
 augroup END
 
 " Exclude JavaScript files in :Rtags via rails.vim due to warnings when parsing
