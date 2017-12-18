@@ -84,7 +84,8 @@ Databases:
 [Git](http://git-scm.com/) configuration and GitHub tools:
 
 * [Hub] for interacting with the GitHub API
-* `l` alias for tight, colored, log output.
+* `l`, `lt`, `la`, `lta` alias for tight, colored, log output.
+  `t` means `time`, `a` means `author`.
 * My name and email.
 * Adds a `create-branch` alias to create feature branches.
 * Adds a `delete-branch` alias to delete feature branches.

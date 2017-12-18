@@ -1,5 +1,8 @@
 [alias]
-  l = log --pretty=colored
+  l = log --pretty=basic
+  lt = log --pretty=time
+  la = log --pretty=author
+  lta = log --pretty=timeauthor
   aa = add --all
   ap = add --patch
   ci = commit -v
@@ -30,7 +33,10 @@
 [mergetool "vimdiff"]
   cmd = vimdiff -f $LOCAL $MERGED $REMOTE
 [pretty]
-  colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
+  basic = format:%Cred%h%Creset %s%Creset
+  time = format:%Cred%h%Creset %s %Cgreen(%cr)%Creset
+  author = format:%Cred%h%Creset %s %C(bold blue)%an%Creset
+  timeauthor = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
 [push]
   default = current
 [rebase]
