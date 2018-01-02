@@ -65,7 +65,7 @@ brew "reattach-to-user-namespace"
 brew "shellcheck"
 brew "the_silver_searcher"
 brew "tmux"
-brew "vim"
+brew "vim", args: ["without-ruby"]
 brew "watch"
 brew "watchman"
 brew "zsh"
