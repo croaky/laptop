@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script can be safefuly run multiple times on the same machine.
 
@@ -70,7 +70,6 @@ brew "universal-ctags", args: ["HEAD"]
 brew "git"
 brew "jq"
 brew "openssl"
-brew "rcm"
 brew "reattach-to-user-namespace"
 brew "shellcheck"
 brew "the_silver_searcher"
@@ -122,9 +121,65 @@ brew link --force heroku
 printf "\nUpgrading Homebrew formulae ...\n"
 brew upgrade
 
-printf "Cleaning up old Homebrew formulae ...\n"
+printf "\nCleaning up old Homebrew formulae ...\n"
 brew cleanup
 brew cask cleanup
+
+echo "Symlinking dotfiles ..."
+echosymlink() {
+  echo "$2 -> $1"
+  ln -sf "$1" "$2"
+}
+
+# CLIs for $PATH
+for f in bin/*; do
+  echo "$HOME/$f -> $PWD/$f"
+  ln -sf "$PWD/$f" "$HOME/$f"
+done
+
+# Vim
+echosymlink "$PWD/editor/vimrc" "$HOME/.vimrc"
+
+mkdir -p "$HOME/.vim/ftdetect"
+mkdir -p "$HOME/.vim/ftplugin"
+cd editor/vim || exit 1
+for f in {ftdetect,ftplugin}/*; do
+  echosymlink "$PWD/$f" "$HOME/.vim/$f"
+done
+cd ../.. || exit 1
+
+# Ruby
+mkdir -p "$HOME/.bundle"
+echosymlink "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
+echosymlink "$PWD/ruby/gemrc" "$HOME/.gemrc"
+echosymlink "$PWD/ruby/rspec" "$HOME/.rspec"
+
+# Search
+cd search || exit 1
+for f in *; do
+  echosymlink "$PWD/$f" "$HOME/.$f"
+done
+
+# Shell
+cd ../shell || exit 1
+for f in *; do
+  echosymlink "$PWD/$f" "$HOME/.$f"
+done
+
+# Version manager (ASDF)
+cd ../versions || exit 1
+for f in *; do
+  echosymlink "$PWD/$f" "$HOME/.$f"
+done
+
+echo "Updating Vim plugins ..."
+if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
+  vim -u "$HOME/.vimrc" +PlugUpgrade +qa
+else
+  curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
 printf "\nInstalling ASDF version manager ...\n"
 if [ ! -d "$HOME/.asdf" ]; then
@@ -173,20 +228,3 @@ asdf reshim nodejs
 
 printf "\nInstall Protobuf protocol compiler plugin for Go ...\n"
 go get -u github.com/golang/protobuf/protoc-gen-go
-
-# rcup from https://github.com/thoughtbot/rcm
-rcup -d editor
-rcup -d git
-rcup -d ruby
-rcup -d search
-rcup -d shell
-rcup -d sql
-rcup -d versions
-
-if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
-  vim -E -s +PlugUpgrade +qa
-else
-  curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
-vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
