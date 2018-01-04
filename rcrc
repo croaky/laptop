@@ -1,2 +1,0 @@
-DOTFILES_DIRS="$HOME/src/github.com/croaky/dotfiles"
-EXCLUDES=".travis.yml mac README.md"

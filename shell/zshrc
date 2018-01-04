@@ -1,0 +1,139 @@
+#!/usr/bin/env zsh
+
+# Aliases
+alias b="bundle"
+alias flush-cache="sudo killall -HUP mDNSResponder"
+alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
+alias mkdir="mkdir -p"
+alias path='echo $PATH | tr -s ":" "\n"'
+alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid; launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias s="rspec"
+alias v='vim'
+
+# Change file extensions recursively in current directory
+# change-extension erb haml
+function change-extension() {
+  foreach f (**/*.$1)
+    mv $f $f:r.$2
+  end
+}
+
+# Clone a Git repo into Go-compatible directory structure.
+# clone https://github.com/statusok/eng
+function clone() {
+  host=$(echo "$1" | cut -d / -f 3)
+  user=$(echo "$1" | cut -d / -f 4)
+  repo=$(echo "$1" | cut -d / -f 5)
+
+  cd "$GOPATH/src/$host"
+  mkdir -p "$user"
+  cd "$user"
+  git clone "git@$host:$user/$repo".git
+  cd "$repo"
+}
+
+# Load .env file into shell session for environment variables
+function envup() {
+  if [ -f .env ]; then
+    export $(cat .env)
+  else
+    echo 'No .env file found' 1>&2
+    return 1
+  fi
+}
+
+# g is a shortcut for git
+function g() {
+  if [[ $# -gt 0 ]]; then
+    git "$@"
+  else
+    git status
+  fi
+}
+
+# Color
+autoload -U colors
+colors
+export CLICOLOR=1
+
+# Editor
+export VISUAL=vim
+export EDITOR=$VISUAL
+
+# History
+setopt hist_ignore_all_dups inc_append_history
+HISTFILE=~/.zhistory
+HISTSIZE=4096
+SAVEHIST=4096
+
+# Keybindings
+stty -ixon
+bindkey -v
+bindkey "^F" vi-cmd-mode
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^K" kill-line
+bindkey "^R" history-incremental-search-backward
+bindkey "^P" history-search-backward
+bindkey "^Y" accept-and-hold
+bindkey "^N" insert-last-word
+bindkey "^Q" push-line-or-edit
+
+# cd movements from zshkit
+setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
+DIRSTACKSIZE=5
+
+# Enable extended globbing
+setopt extendedglob
+
+# Allow [ or ] wherever you want
+unsetopt nomatch
+
+# Prompt
+function git_prompt_info() {
+  current_branch=$(git current-branch 2> /dev/null)
+  if [[ -n $current_branch ]]; then
+    echo " %{$fg_bold[green]%}$current_branch%{$reset_color%}"
+  fi
+}
+setopt promptsubst
+
+if ! env | grep -q '^PS1='; then
+  PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
+fi
+
+# Completion
+autoload -U compinit
+compinit
+
+# Change into most common directories
+export CDPATH="$CDPATH:$HOME/src/github.com"
+
+# Prepend Go binaries, `brew info go`
+export GOPATH="$HOME"
+export GOROOT="/usr/local/opt/go/libexec"
+PATH="$GOPATH/bin:$PATH"
+PATH="$GOROOT/bin:$PATH"
+
+# Prepend Chain binary
+export CHAIN="$GOPATH/src/chain"
+PATH="$CHAIN/bin:$PATH"
+
+# Prepend dotfiles binaries
+PATH="$HOME/.bin:$PATH"
+
+# Prepend Homebrew binaries
+PATH="/usr/local/bin:$PATH"
+
+# Prepend programming language binaries via ASDF shims
+if [ -d "$HOME/.asdf" ]; then
+  source $HOME/.asdf/asdf.sh
+fi
+
+# Prepend JavaScript binaries
+PATH="$(yarn global bin):$PATH"
+
+# mkdir .git/safe in trusted project to add binstubs
+PATH=".git/safe/../../bin:$PATH"
+
+export -U PATH

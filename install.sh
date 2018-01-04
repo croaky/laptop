@@ -1,5 +1,15 @@
 #!/bin/sh
 
+# This script can be safefuly run multiple times on the same machine.
+
+# It installs, upgrades, or skips packages
+# based on what is already installed on the machine.
+
+# It then creates symlinks of the config files in this repo
+# to the `~/` (`$HOME`) directory.
+
+# Tested on macOS High Sierra (10.13).
+
 # shellcheck disable=SC2154
 trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
@@ -164,9 +174,19 @@ asdf reshim nodejs
 printf "\nInstall Protobuf protocol compiler plugin for Go ...\n"
 go get -u github.com/golang/protobuf/protoc-gen-go
 
-if [ -r "$HOME/.rcrc" ]; then
-  printf "\nUpdating dotfiles ...\n"
-  rcup
+# rcup from https://github.com/thoughtbot/rcm
+rcup -d editor
+rcup -d git
+rcup -d ruby
+rcup -d search
+rcup -d shell
+rcup -d sql
+rcup -d versions
+
+if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
+  vim -E -s +PlugUpgrade +qa
 else
-  env RCRC="$HOME/src/github.com/croaky/dotfiles/rcrc rcup"
+  curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
+vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
