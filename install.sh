@@ -11,7 +11,7 @@
 # Tested on macOS High Sierra (10.13).
 
 # shellcheck disable=SC2154
-trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
+trap 'ret=$?; test $ret -ne 0 && echo "failed" >&2; exit $ret' EXIT
 
 set -e
 
@@ -31,9 +31,9 @@ update_shell() {
   local shell_path;
   shell_path="$(which zsh)"
 
-  printf "\nChanging your shell to zsh ...\n"
+  echo "Changing your shell to zsh..."
   if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
-    printf "\nAdding '$shell_path' to /etc/shells\n"
+    echo "Adding '$shell_path' to /etc/shells"
     sudo sh -c "echo $shell_path >> /etc/shells"
   fi
   chsh -s "$shell_path"
@@ -51,14 +51,14 @@ case "$SHELL" in
 esac
 
 if ! command -v brew >/dev/null; then
-  printf "\nInstalling Homebrew ...\n"
+  echo "Installing Homebrew..."
     curl -fsS \
       'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 
     export PATH="/usr/local/bin:$PATH"
 fi
 
-printf "\nUpdating Homebrew formulae ...\n"
+echo "Updating Homebrew formulae..."
 brew update
 brew bundle --file=- <<EOF
 tap "thoughtbot/formulae"
@@ -110,22 +110,22 @@ brew "protobuf"
 EOF
 
 if [ ! -d "/Applications/Expo XDE.app" ]; then
-  printf "\nSet up Expo tools for React Native ...\n"
+  echo "Set up Expo tools for React Native..."
   brew cask install --force expo-xde
 fi
 
-printf "\nUpdate Heroku binary...\n"
+echo "Update Heroku binary..."
 brew unlink heroku
 brew link --force heroku
 
-printf "\nUpgrading Homebrew formulae ...\n"
+echo "Upgrading Homebrew formulae..."
 brew upgrade
 
-printf "\nCleaning up old Homebrew formulae ...\n"
+echo "Cleaning up old Homebrew formulae..."
 brew cleanup
 brew cask cleanup
 
-echo "Symlinking dotfiles ..."
+echo "Symlinking dotfiles..."
 echosymlink() {
   echo "$2 -> $1"
   ln -sf "$1" "$2"
@@ -172,7 +172,7 @@ for f in *; do
   echosymlink "$PWD/$f" "$HOME/.$f"
 done
 
-echo "Updating Vim plugins ..."
+echo "Updating Vim plugins..."
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
   vim -u "$HOME/.vimrc" +PlugUpgrade +qa
 else
@@ -181,11 +181,12 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
-printf "\nInstalling ASDF version manager ...\n"
+echo "Installing ASDF version manager..."
 if [ ! -d "$HOME/.asdf" ]; then
   git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch v0.4.0
 fi
 
+# shellcheck source=/dev/null
 . "$HOME/.asdf/asdf.sh"
 
 asdf_plugin_add() {
@@ -206,25 +207,25 @@ asdf_install() {
   fi
 }
 
-printf "\nInstalling Ruby ...\n"
+echo "Installing Ruby..."
 asdf_plugin_add "ruby"
 asdf_install "ruby" "2.4.2"
 
-printf "\nInstalling Node ...\n"
+echo "Installing Node..."
 asdf_plugin_add "nodejs"
 export NODEJS_CHECK_SIGNATURES=no
 asdf_install "nodejs" "9.3.0"
 
-printf "\nInstalling Yarn ...\n"
+echo "Installing Yarn..."
 npm install yarn --global
 asdf reshim nodejs
 
-printf "\nInstalling Expo, Prettier, TSLint, TypeScript, Yarn ...\n"
+echo "Installing Expo, Prettier, TSLint, TypeScript, Yarn..."
 yarn global add exp
 yarn global add prettier
 yarn global add tslint-config-prettier
 yarn global add typescript
 asdf reshim nodejs
 
-printf "\nInstall Protobuf protocol compiler plugin for Go ...\n"
+echo "Install Protobuf protocol compiler plugin for Go..."
 go get -u github.com/golang/protobuf/protoc-gen-go
