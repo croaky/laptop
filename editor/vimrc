@@ -24,6 +24,7 @@ end
 
 call plug#begin('~/.vim/plugged')
   " Define plugins via GitHub repos
+  Plug 'AndrewRadev/splitjoin.vim'
   Plug 'acarapetis/vim-colors-github'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
