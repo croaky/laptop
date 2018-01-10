@@ -18,7 +18,6 @@
 [credential]
   helper = osxkeychain
 [diff]
-  colorMoved = zebra
   tool = vimdiff
 [fetch]
   prune = true
