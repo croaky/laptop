@@ -106,6 +106,10 @@ fi
 autoload -U compinit
 compinit
 
+if [ -f ~/.zsh/completions/exercism.zsh ]; then
+  . ~/.zsh/completions/exercism.zsh
+fi
+
 # Change into most common directories
 export CDPATH="$CDPATH:$HOME/src/github.com"
 

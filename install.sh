@@ -168,13 +168,16 @@ for f in *; do
 done
 
 # Shell
-cd ../shell || exit 1
-for f in *; do
-  echosymlink "$PWD/$f" "$HOME/.$f"
-done
+cd .. || exit 1
+mkdir -p "$HOME/.zsh/completions"
+echosymlink "$PWD/shell/completions/ezercism.zsh" "$HOME/.zsh/completions/exercism.zsh"
+echosymlink "$PWD/shell/curlrc" "$HOME/.curlrc"
+echosymlink "$PWD/shell/hushlogin" "$HOME/.hushlogin"
+echosymlink "$PWD/shell/zshenv" "$HOME/.zshenv"
+echosymlink "$PWD/shell/zshrc" "$HOME/.zshrc"
 
 # Version manager (ASDF)
-cd ../versions || exit 1
+cd versions || exit 1
 for f in *; do
   echosymlink "$PWD/$f" "$HOME/.$f"
 done
@@ -188,8 +191,8 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
-echo "Installing ASDF version manager..."
 if [ ! -d "$HOME/.asdf" ]; then
+  echo "Installing ASDF version manager..."
   git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch v0.4.0
 fi
 
