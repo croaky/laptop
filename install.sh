@@ -137,7 +137,7 @@ for f in bin/*; do
   ln -sf "$PWD/$f" "$HOME/$f"
 done
 
-# Vim
+# Editor
 echosymlink "$PWD/editor/vimrc" "$HOME/.vimrc"
 
 mkdir -p "$HOME/.vim/ftdetect"
@@ -147,6 +147,13 @@ for f in {ftdetect,ftplugin}/*; do
   echosymlink "$PWD/$f" "$HOME/.vim/$f"
 done
 cd ../.. || exit 1
+
+# JavaScript
+cd javascript || exit 1
+for f in *; do
+  echosymlink "$PWD/$f" "$HOME/.$f"
+done
+cd .. || exit 1
 
 # Ruby
 mkdir -p "$HOME/.bundle"
