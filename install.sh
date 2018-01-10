@@ -191,9 +191,15 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
-if [ ! -d "$HOME/.asdf" ]; then
+if [ -d "$HOME/.asdf" ]; then
+  echo "Upgrading ASDF version manager..."
+  (
+    cd "$HOME/.asdf"
+    git pull origin master
+  )
+else
   echo "Installing ASDF version manager..."
-  git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch v0.4.0
+  git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
 fi
 
 # shellcheck source=/dev/null
