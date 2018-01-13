@@ -207,9 +207,10 @@ fi
 
 asdf_plugin_add() {
   local name="$1"
+  local source="$2"
 
   if ! asdf plugin-list | grep -Fq "$name"; then
-    asdf plugin-add "$name"
+    asdf plugin-add "$name" "$source"
   fi
 }
 
@@ -224,18 +225,18 @@ asdf_install() {
 }
 
 echo "Installing Ruby..."
-asdf_plugin_add "ruby"
+asdf_plugin_add "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf_install "ruby" "2.4.2"
 
 echo "Installing Node..."
-asdf_plugin_add "nodejs"
+asdf_plugin_add "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
 asdf_install "nodejs" "9.3.0"
 
 echo "Installing Java and Maven..."
-asdf_plugin_add "java"
+asdf_plugin_add "java" "https://github.com/skotchpine/asdf-java"
 asdf_install "java" "8.151"
-asdf_plugin_add "maven"
+asdf_plugin_add "maven" "https://github.com/skotchpine/asdf-maven"
 asdf_install "maven" "3.3.9"
 
 echo "Installing Yarn..."
