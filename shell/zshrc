@@ -51,6 +51,16 @@ function g() {
   fi
 }
 
+# Create feature branch with conventional name: user/feature
+function c() {
+  if [[ $# -gt 0 ]]; then
+    branch="$(whoami)/$1"
+    git create-branch $branch
+  else
+    echo 'provide a name for the feature' && exit 1
+  fi
+}
+
 # Color
 autoload -U colors
 colors
