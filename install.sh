@@ -232,6 +232,12 @@ asdf_plugin_add "nodejs"
 export NODEJS_CHECK_SIGNATURES=no
 asdf_install "nodejs" "9.3.0"
 
+echo "Installing Java and Maven..."
+asdf_plugin_add "java"
+asdf_install "java" "8.151"
+asdf_plugin_add "maven"
+asdf_install "maven" "3.3.9"
+
 echo "Installing Yarn..."
 npm install yarn --global
 asdf reshim nodejs
