@@ -100,6 +100,7 @@ brew "chromedriver", restart_service: :changed
 # Programming languages and package managers
 brew "libyaml" # should come after openssl
 brew "go"
+brew "yarn"
 
 # Databases
 brew "postgresql", restart_service: :changed
@@ -231,24 +232,13 @@ asdf_install "ruby" "2.4.2"
 echo "Installing Node..."
 asdf_plugin_add "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
-asdf_install "nodejs" "9.3.0"
+asdf_install "nodejs" "8.9.0"
 
 echo "Installing Java and Maven..."
 asdf_plugin_add "java" "https://github.com/skotchpine/asdf-java"
 asdf_install "java" "8.151"
 asdf_plugin_add "maven" "https://github.com/skotchpine/asdf-maven"
 asdf_install "maven" "3.3.9"
-
-echo "Installing Yarn..."
-npm install yarn --global
-asdf reshim nodejs
-
-echo "Installing Expo, Prettier, TSLint, TypeScript, Yarn..."
-yarn global add exp
-yarn global add prettier
-yarn global add tslint-config-prettier
-yarn global add typescript
-asdf reshim nodejs
 
 echo "Install Protobuf protocol compiler plugin for Go..."
 go get -u github.com/golang/protobuf/protoc-gen-go
