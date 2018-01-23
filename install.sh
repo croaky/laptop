@@ -236,7 +236,7 @@ asdf_install "nodejs" "8.9.0"
 
 echo "Installing Java and Maven..."
 asdf_plugin_add "java" "https://github.com/skotchpine/asdf-java"
-asdf_install "java" "8.151"
+asdf_install "java" "8.161"
 asdf_plugin_add "maven" "https://github.com/skotchpine/asdf-maven"
 asdf_install "maven" "3.3.9"
 
