@@ -195,6 +195,7 @@ asdf_plugin_add() {
 asdf_install() {
   local language="$1"
   local version="$2"
+  asdf plugin-update "$language"
 
   if ! asdf list "$language" | grep -Fq "$version"; then
     asdf install "$language" "$version"
