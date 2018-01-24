@@ -10,10 +10,7 @@
 
 # Tested on macOS High Sierra (10.13).
 
-# shellcheck disable=SC2154
-trap 'ret=$?; test $ret -ne 0 && echo "failed" >&2; exit $ret' EXIT
-
-set -e
+set -ex
 
 HOMEBREW_PREFIX="/usr/local"
 
@@ -31,9 +28,7 @@ update_shell() {
   local shell_path;
   shell_path="$(which zsh)"
 
-  echo "Changing your shell to zsh..."
   if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
-    echo "Adding '$shell_path' to /etc/shells"
     sudo sh -c "echo $shell_path >> /etc/shells"
   fi
   chsh -s "$shell_path"
@@ -51,14 +46,12 @@ case "$SHELL" in
 esac
 
 if ! command -v brew >/dev/null; then
-  echo "Installing Homebrew..."
     curl -fsS \
       'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 
     export PATH="/usr/local/bin:$PATH"
 fi
 
-echo "Updating Homebrew formulae..."
 brew update
 brew bundle --file=- <<EOF
 tap "thoughtbot/formulae"
@@ -111,79 +104,65 @@ brew "protobuf"
 EOF
 
 if [ ! -d "/Applications/Expo XDE.app" ]; then
-  echo "Set up Expo tools for React Native..."
   brew cask install --force expo-xde
 fi
 
-echo "Update Heroku binary..."
 brew unlink heroku
 brew link --force heroku
-
-echo "Upgrading Homebrew formulae..."
 brew upgrade
-
-echo "Cleaning up old Homebrew formulae..."
 brew cleanup
 brew cask cleanup
 
-echo "Symlinking dotfiles..."
-echosymlink() {
-  echo "$2 -> $1"
-  ln -sf "$1" "$2"
-}
-
 # CLIs for $PATH
 for f in bin/*; do
-  echo "$HOME/$f -> $PWD/$f"
   ln -sf "$PWD/$f" "$HOME/$f"
 done
 
 # Editor
-echosymlink "$PWD/editor/vimrc" "$HOME/.vimrc"
+ln -sf "$PWD/editor/vimrc" "$HOME/.vimrc"
 
 mkdir -p "$HOME/.vim/ftdetect"
 mkdir -p "$HOME/.vim/ftplugin"
 cd editor/vim || exit 1
 for f in {ftdetect,ftplugin}/*; do
-  echosymlink "$PWD/$f" "$HOME/.vim/$f"
+  ln -sf "$PWD/$f" "$HOME/.vim/$f"
 done
 cd ../.. || exit 1
 
 # JavaScript
 cd javascript || exit 1
 for f in *; do
-  echosymlink "$PWD/$f" "$HOME/.$f"
+  ln -sf "$PWD/$f" "$HOME/.$f"
 done
 cd .. || exit 1
 
 # Ruby
 mkdir -p "$HOME/.bundle"
-echosymlink "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
-echosymlink "$PWD/ruby/gemrc" "$HOME/.gemrc"
-echosymlink "$PWD/ruby/rspec" "$HOME/.rspec"
+ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
+ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
+ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
 
 # Search
 cd search || exit 1
 for f in *; do
-  echosymlink "$PWD/$f" "$HOME/.$f"
+  ln -sf "$PWD/$f" "$HOME/.$f"
 done
 
 # Shell
 cd .. || exit 1
 mkdir -p "$HOME/.zsh/completions"
-echosymlink "$PWD/shell/completions/ezercism.zsh" "$HOME/.zsh/completions/exercism.zsh"
-echosymlink "$PWD/shell/curlrc" "$HOME/.curlrc"
-echosymlink "$PWD/shell/hushlogin" "$HOME/.hushlogin"
-echosymlink "$PWD/shell/zshenv" "$HOME/.zshenv"
-echosymlink "$PWD/shell/zshrc" "$HOME/.zshrc"
+ln -sf "$PWD/shell/completions/exercism.zsh" "$HOME/.zsh/completions/exercism.zsh"
+ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
+ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
+ln -sf "$PWD/shell/zshenv" "$HOME/.zshenv"
+ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
 # Version manager (ASDF)
 cd versions || exit 1
 for f in *; do
-  echosymlink "$PWD/$f" "$HOME/.$f"
+  ln -sf "$PWD/$f" "$HOME/.$f"
 done
 
-echo "Updating Vim plugins..."
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
   vim -u "$HOME/.vimrc" +PlugUpgrade +qa
 else
@@ -193,13 +172,11 @@ fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
 if [ -d "$HOME/.asdf" ]; then
-  echo "Upgrading ASDF version manager..."
   (
     cd "$HOME/.asdf"
     git pull origin master
   )
 else
-  echo "Installing ASDF version manager..."
   git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
 fi
 
@@ -225,20 +202,16 @@ asdf_install() {
   fi
 }
 
-echo "Installing Ruby..."
 asdf_plugin_add "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf_install "ruby" "2.4.2"
 
-echo "Installing Node..."
 asdf_plugin_add "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
 asdf_install "nodejs" "8.9.0"
 
-echo "Installing Java and Maven..."
 asdf_plugin_add "java" "https://github.com/skotchpine/asdf-java"
 asdf_install "java" "8.161"
 asdf_plugin_add "maven" "https://github.com/skotchpine/asdf-maven"
 asdf_install "maven" "3.3.9"
 
-echo "Install Protobuf protocol compiler plugin for Go..."
 go get -u github.com/golang/protobuf/protoc-gen-go
