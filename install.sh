@@ -58,54 +58,35 @@ tap "thoughtbot/formulae"
 tap "homebrew/services"
 tap "universal-ctags/universal-ctags"
 
-# Unix
-brew "universal-ctags", args: ["HEAD"]
+brew "awscli"
+brew "chromedriver", restart_service: :changed
 brew "git"
+brew "go"
+brew "heroku"
+brew "hub"
+brew "imagemagick"
 brew "jq"
+brew "libyaml"
 brew "openssl"
+brew "parity"
+brew "postgresql", restart_service: :changed
+brew "protobuf"
 brew "reattach-to-user-namespace"
+brew "redis", restart_service: :changed
 brew "shellcheck"
 brew "the_silver_searcher"
 brew "tmux"
+brew "universal-ctags", args: ["HEAD"]
 brew "vim", args: ["without-ruby"]
 brew "watch"
 brew "watchman"
-brew "zsh"
-cask "ngrok"
-
-# Heroku
-brew "heroku"
-brew "parity"
-
-# GitHub
-brew "hub"
-
-# AWS
-brew "awscli"
-cask "aws-vault"
-
-# Image manipulation
-brew "imagemagick"
-
-# Testing
-brew "chromedriver", restart_service: :changed
-
-# Programming languages and package managers
-brew "libyaml" # should come after openssl
-brew "go"
 brew "yarn"
+brew "zsh"
 
-# Databases
-brew "postgresql", restart_service: :changed
-brew "redis", restart_service: :changed
-
-# Data interchange
-brew "protobuf"
+cask "aws-vault"
+cask "expo-xde"
+cask "ngrok"
 EOF
-
-if [ ! -d "/Applications/Expo XDE.app" ]; then
-  brew cask install --force expo-xde
-fi
 
 brew unlink heroku
 brew link --force heroku
@@ -113,12 +94,10 @@ brew upgrade
 brew cleanup
 brew cask cleanup
 
-# CLIs for $PATH
 for f in bin/*; do
   ln -sf "$PWD/$f" "$HOME/$f"
 done
 
-# Editor
 ln -sf "$PWD/editor/vimrc" "$HOME/.vimrc"
 
 mkdir -p "$HOME/.vim/ftdetect"
@@ -129,26 +108,22 @@ for f in {ftdetect,ftplugin}/*; do
 done
 cd ../.. || exit 1
 
-# JavaScript
 cd javascript || exit 1
 for f in *; do
   ln -sf "$PWD/$f" "$HOME/.$f"
 done
 cd .. || exit 1
 
-# Ruby
 mkdir -p "$HOME/.bundle"
 ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
 ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
 ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
 
-# Search
 cd search || exit 1
 for f in *; do
   ln -sf "$PWD/$f" "$HOME/.$f"
 done
 
-# Shell
 cd .. || exit 1
 mkdir -p "$HOME/.zsh/completions"
 ln -sf "$PWD/shell/completions/exercism.zsh" "$HOME/.zsh/completions/exercism.zsh"
@@ -157,7 +132,6 @@ ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
 ln -sf "$PWD/shell/zshenv" "$HOME/.zshenv"
 ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
-# Version manager (ASDF)
 cd versions || exit 1
 for f in *; do
   ln -sf "$PWD/$f" "$HOME/.$f"
