@@ -17,7 +17,6 @@ if &compatible
 end
 
 call plug#begin('~/.vim/plugged')
-  " Define plugins via GitHub repos
   Plug 'AndrewRadev/splitjoin.vim'
   Plug 'acarapetis/vim-colors-github'
   Plug 'ctrlpvim/ctrlp.vim'
@@ -40,8 +39,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-scripts/tComment'
   Plug 'w0rp/ale'
 call plug#end()
-
-filetype plugin indent on
 
 augroup vimrcEx
   autocmd!
@@ -208,3 +205,4 @@ nmap <Leader>ct :call ReindexCtags()<CR>
 
 " https://pbs.twimg.com/media/BwLLk8PCQAIfleK.jpg
 syntax off
+set autoindent
