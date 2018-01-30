@@ -88,8 +88,6 @@ cask "expo-xde"
 cask "ngrok"
 EOF
 
-brew unlink heroku
-brew link --force heroku
 brew upgrade
 brew cleanup
 brew cask cleanup
