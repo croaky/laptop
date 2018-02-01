@@ -128,9 +128,10 @@ export GOPATH="$HOME"
 export GOROOT="/usr/local/opt/go/libexec"
 PATH="$GOROOT/bin:$PATH"
 
-# Prepend Chain binary
+# Prepend Chain scripts
 export CHAIN="$GOPATH/src/chain"
 PATH="$CHAIN/bin:$PATH"
+PATH="$CHAIN/infra/bin:$PATH"
 
 # Prepend dotfiles (and Go) binaries
 PATH="$HOME/bin:$PATH"
