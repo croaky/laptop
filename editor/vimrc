@@ -150,11 +150,6 @@ set diffopt+=vertical
 " Bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-" Color scheme
-colorscheme github
-highlight NonText guibg=#060606
-highlight Folded  guibg=#0A0A0A guifg=#9090D0
-
 " Allow project-specific `vimrc`s:
 " http://andrew.stwrt.ca/posts/project-specific-vimrc/
 set exrc
@@ -182,6 +177,8 @@ endfunction
 
 nmap <Leader>ct :call ReindexCtags()<CR>
 
-" https://pbs.twimg.com/media/BwLLk8PCQAIfleK.jpg
+colorscheme github
+highlight NonText guibg=#060606
+highlight Folded  guibg=#0A0A0A guifg=#9090D0
 syntax off
 set autoindent
