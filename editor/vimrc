@@ -70,11 +70,8 @@ set shiftwidth=2
 set shiftround
 set expandtab
 
-" Display extra whitespace
+" Highlight extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
-
-" Don't highlight tabs in Go files
-autocmd BufRead,BufNewFile *.go setlocal nolist ft=go
 
 " Use one space, not two, after punctuation.
 set nojoinspaces
@@ -173,9 +170,6 @@ highlight Folded  guibg=#0A0A0A guifg=#9090D0
 " Allow project-specific `vimrc`s:
 " http://andrew.stwrt.ca/posts/project-specific-vimrc/
 set exrc
-
-" Fold YAML files
-au FileType yaml setlocal foldmethod=indent
 
 " Auto-format on save
 augroup fmt

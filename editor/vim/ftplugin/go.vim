@@ -6,6 +6,9 @@ let g:go_fmt_options = {
 setlocal listchars=tab:\ \ ,trail:·,nbsp:·
 setlocal noexpandtab
 
+" Don't highlight tabs as extra whitespace
+setlocal nolist
+
 compiler go
 
 " Run current file
