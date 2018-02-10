@@ -2,8 +2,8 @@
 
 Set the `OK` environment variable:
 
-```sh
-export OK=$HOME/src/ok
+```
+export OK="$HOME/src/statusok"
 ```
 
 Clone onto laptop:
@@ -15,7 +15,7 @@ cd $OK
 
 Review, then run, the install script:
 
-```sh
+```
 vim install.sh
 ./install.sh
 ```

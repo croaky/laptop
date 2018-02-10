@@ -130,7 +130,7 @@ PATH="$GOROOT/bin:$PATH"
 
 # Set environment variables for monorepos
 export CHAIN="$GOPATH/src/chain"
-export OK="$HOME/src/ok"
+export OK="$HOME/src/statusok"
 
 # Prepend Chain scripts
 PATH="$CHAIN/bin:$PATH"
