@@ -94,6 +94,10 @@ brew cask cleanup
 
 (
   cd dotfiles
+
+  ln -sf "$PWD/asdf/asdfrc" "$HOME/.asdfrc"
+  ln -sf "$PWD/asdf/default-gems" "$HOME/.default-gems"
+
   ln -sf "$PWD/editor/vimrc" "$HOME/.vimrc"
 
   mkdir -p "$HOME/.vim/ftdetect"
@@ -106,24 +110,15 @@ brew cask cleanup
     done
   )
 
-  (
-    cd javascript
-    for f in *; do
-      ln -sf "$PWD/$f" "$HOME/.$f"
-    done
-  )
+  ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
 
   mkdir -p "$HOME/.bundle"
   ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
   ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
 
-  (
-    cd search
-    for f in *; do
-      ln -sf "$PWD/$f" "$HOME/.$f"
-    done
-  )
+  ln -sf "$PWD/search/agignore" "$HOME/.agignore"
+  ln -sf "$PWD/search/ctags" "$HOME/.ctags"
 
   mkdir -p "$HOME/.zsh/completions"
   ln -sf "$PWD/shell/completions/exercism.zsh" "$HOME/.zsh/completions/exercism.zsh"
@@ -133,12 +128,7 @@ brew cask cleanup
   ln -sf "$PWD/shell/zshenv" "$HOME/.zshenv"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
-  (
-    cd versions
-    for f in *; do
-      ln -sf "$PWD/$f" "$HOME/.$f"
-    done
-  )
+  ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
 )
 
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
