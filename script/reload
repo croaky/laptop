@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+set -e
+cd "$GOPATH/src/github.com/statusok/eng"
+./bin/embed
+go install -v ./...
+cd "$OLDPWD"
+eng local

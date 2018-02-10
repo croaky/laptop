@@ -1,0 +1,391 @@
+{
+  "articles": [
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "published": "2017-06-24",
+      "id": "laptop-setup-and-vim-configuration-for-react-native"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "published": "2017-03-23",
+      "id": "fix-highest-priority-issues-with-go"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "published": "2017-03-21",
+      "id": "redirect-apex-domain-to-www"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "redirects": [
+        "/load-test-with-vegeta"
+      ],
+      "published": "2017-02-25",
+      "id": "load-testing"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/align-github-flavored-markdown-tables-in-vim",
+      "id": "align-markdown-tables-with-vim",
+      "published": "2016-06-15",
+      "updated": "2018-01-29"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/how-to-reduce-a-large-heroku-compiled-slug-size",
+      "published": "2016-06-13",
+      "id": "reduce-a-large-heroku-compiled-slug-size"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/opt-in-project-specific-vim-spell-checking-and-word-completion",
+      "published": "2015-12-01",
+      "id": "avoid-team-wide-spelling-mistakes-with-vim"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/create-a-retention-curve-with-mixpanel-and-google-sheets",
+      "published": "2015-07-01",
+      "id": "create-a-retention-curve-with-mixpanel-and-google-sheets"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/optimizing-full-text-search-with-postgres-tsvector-columns-and-triggers",
+      "published": "2015-06-25",
+      "id": "optimize-postgres-full-text-search-with-tsvector-columns-and-triggers"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "redirects": [
+        "/post/send-your-apps-heroku-routing-errors-to-slack-with-papertrail-alerts/"
+      ],
+      "published": "2015-04-21",
+      "id": "heroku-routing-errors-slack-papertrail"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/how-to-process-twitter-lead-cards-with-formkeep",
+      "published": "2015-03-23",
+      "id": "process-twitter-lead-cards-with-formkeep"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/a-closer-look-at-test-spies",
+      "published": "2015-03-19",
+      "id": "test-spies-vs-mocks"
+    },
+    {
+      "author_ids": [
+        "croaky",
+        "frechg"
+      ],
+      "canonical": "https://robots.thoughtbot.com/north-star-metric",
+      "published": "2014-12-25",
+      "id": "north-star-metric"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/dns-cdn-origin",
+      "published": "2014-08-08",
+      "id": "dns-cdn-origin"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/tmux-only-for-long-running-processes",
+      "published": "2014-07-17",
+      "id": "tmux-only-for-long-running-processes"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/laptop-setup-for-an-awesome-development-environment",
+      "published": "2014-06-18",
+      "id": "laptop-setup-script"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/ssl-for-rails-with-heroku-and-dnsimple",
+      "published": "2014-05-21",
+      "id": "enforce-ssl-with-heroku-and-dnsimple"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/manage-team-and-personal-dotfiles-together-with-rcm",
+      "published": "2014-03-16",
+      "id": "combine-team-and-personal-dotfiles-with-rcm"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/using-polymorphism-to-make-a-better-activity-feed-in-rails",
+      "published": "2013-12-02",
+      "id": "polymorphic-activity-feed-with-rails"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/caching-api-requests",
+      "published": "2013-11-29",
+      "id": "cache-api-requests"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/faster-grepping-in-vim",
+      "redirects": [
+        "/search-faster-in-vim"
+      ],
+      "published": "2013-11-27",
+      "id": "fast-search-with-vim"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/vim-spell-checking",
+      "published": "2013-11-19",
+      "id": "vim-spell-checking"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/how-to-create-postgres-indexes-concurrently-in",
+      "published": "2013-07-30",
+      "id": "create-postgres-indexes-concurrently"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/running-specs-from-vim",
+      "published": "2013-08-05",
+      "id": "run-specs-with-vim"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/wrap-existing-text-at-80-characters-in-vim",
+      "published": "2013-04-07",
+      "id": "wrap-existing-text-at-80-characters-with-vim"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/sort-lines-alphabetically-in-vim",
+      "published": "2013-02-01",
+      "id": "sort-lines-alphabetically-with-vim"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/bin-setup",
+      "published": "2013-01-25",
+      "id": "bin-setup"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/delivering-all-email-from-staging-to-a-group-email",
+      "published": "2013-01-18",
+      "id": "intercept-email-from-staging"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/faster-tests-sign-in-through-the-back-door",
+      "published": "2012-12-14",
+      "id": "fast-integration-tests-with-clearance-backdoor"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/four-phase-test",
+      "published": "2012-09-28",
+      "id": "four-phase-test"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/global-gitignore",
+      "published": "2012-03-04",
+      "id": "global-gitignore"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "published": "2011-12-26",
+      "id": "implement-decorators-with-ruby"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/internship-or-apprenticeship",
+      "published": "2011-12-14",
+      "id": "internship-or-apprenticeship"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/how-to-back-up-a-heroku-production-database-to-staging",
+      "published": "2011-08-18",
+      "id": "back-up-and-restore-heroku-postgres-databases"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/keeping-a-github-fork-updated",
+      "published": "2011-05-02",
+      "id": "keep-a-github-fork-updated"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/feature-branch-code-reviews",
+      "published": "2011-01-19",
+      "id": "feature-branch-code-reviews"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/rubys-pessimistic-operator",
+      "published": "2010-12-29",
+      "id": "rubys-pessimistic-operator"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/love-hate-tmux",
+      "published": "2010-12-10",
+      "id": "tmux-faq"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/mygem-configure-block",
+      "published": "2010-01-20",
+      "id": "configuration-block-pattern-with-ruby"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/testing-failure",
+      "published": "2009-09-06",
+      "id": "test-http-errors-with-ruby"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/analysis-paralysis-access-control",
+      "published": "2009-08-12",
+      "id": "authorization-with-rails-associations"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/mystery-guest",
+      "published": "2009-07-28",
+      "id": "mystery-guest"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/clearance-rails-authentication-with-email-and-password",
+      "published": "2009-02-09",
+      "id": "rails-authentication-with-clearance"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/suspenders",
+      "published": "2008-10-21",
+      "id": "new-rails-projects-with-suspenders"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/ruby-wrapper-for-twitter-search-api",
+      "published": "2008-09-09",
+      "id": "twitter-search"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/shhh-your-test-unit-backtraces-are-too-noisy",
+      "published": "2007-12-03",
+      "id": "quiet-backtrace-for-test-unit"
+    }
+  ],
+  "authors": [
+    {
+      "id": "croaky",
+      "name": "Dan Croak",
+      "url": "https://twitter.com/croaky"
+    },
+    {
+      "id": "frechg",
+      "name": "Galen Frechette",
+      "url": "http://galen.io"
+    }
+  ],
+  "name": "Status OK blog",
+  "url": "https://www.statusok.com"
+}
