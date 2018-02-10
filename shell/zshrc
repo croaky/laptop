@@ -140,9 +140,8 @@ PATH="$HOME/bin:$PATH"
 PATH="/usr/local/bin:$PATH"
 
 # Prepend programming language binaries via ASDF shims
-if [ -d "$HOME/.asdf" ]; then
-  source $HOME/.asdf/asdf.sh
-fi
+PATH="$HOME/.asdf/bin:$PATH"
+PATH="$HOME/.asdf/shims:$PATH"
 
 # mkdir .git/safe in trusted project to add binstubs
 PATH=".git/safe/../../bin:$PATH"
