@@ -5,7 +5,7 @@
 # It installs, upgrades, or skips packages
 # based on what is already installed on the machine.
 
-# It then creates symlinks of the config files in this repo
+# It creates symlinks of the dotfiles in this repo
 # to the `~/` (`$HOME`) directory.
 
 # Tested on macOS High Sierra (10.13).
@@ -92,48 +92,54 @@ brew upgrade
 brew cleanup
 brew cask cleanup
 
-for f in bin/*; do
-  ln -sf "$PWD/$f" "$HOME/$f"
-done
+(
+  cd dotfiles
+  ln -sf "$PWD/editor/vimrc" "$HOME/.vimrc"
 
-ln -sf "$PWD/editor/vimrc" "$HOME/.vimrc"
+  mkdir -p "$HOME/.vim/ftdetect"
+  mkdir -p "$HOME/.vim/ftplugin"
 
-mkdir -p "$HOME/.vim/ftdetect"
-mkdir -p "$HOME/.vim/ftplugin"
-cd editor/vim || exit 1
-for f in {ftdetect,ftplugin}/*; do
-  ln -sf "$PWD/$f" "$HOME/.vim/$f"
-done
-cd ../.. || exit 1
+  (
+    cd editor/vim
+    for f in {ftdetect,ftplugin}/*; do
+      ln -sf "$PWD/$f" "$HOME/.vim/$f"
+    done
+  )
 
-cd javascript || exit 1
-for f in *; do
-  ln -sf "$PWD/$f" "$HOME/.$f"
-done
-cd .. || exit 1
+  (
+    cd javascript
+    for f in *; do
+      ln -sf "$PWD/$f" "$HOME/.$f"
+    done
+  )
 
-mkdir -p "$HOME/.bundle"
-ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
-ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
-ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
+  mkdir -p "$HOME/.bundle"
+  ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
+  ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
+  ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
 
-cd search || exit 1
-for f in *; do
-  ln -sf "$PWD/$f" "$HOME/.$f"
-done
+  (
+    cd search
+    for f in *; do
+      ln -sf "$PWD/$f" "$HOME/.$f"
+    done
+  )
 
-cd .. || exit 1
-mkdir -p "$HOME/.zsh/completions"
-ln -sf "$PWD/shell/completions/exercism.zsh" "$HOME/.zsh/completions/exercism.zsh"
-ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
-ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
-ln -sf "$PWD/shell/zshenv" "$HOME/.zshenv"
-ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
+  mkdir -p "$HOME/.zsh/completions"
+  ln -sf "$PWD/shell/completions/exercism.zsh" "$HOME/.zsh/completions/exercism.zsh"
 
-cd versions || exit 1
-for f in *; do
-  ln -sf "$PWD/$f" "$HOME/.$f"
-done
+  ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
+  ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
+  ln -sf "$PWD/shell/zshenv" "$HOME/.zshenv"
+  ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
+
+  (
+    cd versions
+    for f in *; do
+      ln -sf "$PWD/$f" "$HOME/.$f"
+    done
+  )
+)
 
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
   vim -u "$HOME/.vimrc" +PlugUpgrade +qa

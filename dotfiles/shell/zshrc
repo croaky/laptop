@@ -130,13 +130,16 @@ PATH="$GOROOT/bin:$PATH"
 
 # Set environment variables for monorepos
 export CHAIN="$GOPATH/src/chain"
-export OK="$HOME/src/github.com/statusok/statusok.com"
+export OK="$HOME/src/github.com/statusok/statusok"
 
 # Prepend Chain scripts
 PATH="$CHAIN/bin:$PATH"
 PATH="$CHAIN/infra/bin:$PATH"
 
-# Prepend dotfiles (and Go) binaries
+# Prepend Status OK scripts
+PATH="$OK/bin:$PATH"
+
+# Prepend Go binaries
 PATH="$HOME/bin:$PATH"
 
 # Prepend Homebrew binaries
