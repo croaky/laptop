@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+# Run this script anytime pkg/eng/templates/* are updated.
+
+set -e
+
+go get -t -d -v ./...
+(
+  cd eng
+  rice embed-go
+)

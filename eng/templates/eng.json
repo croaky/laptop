@@ -1,0 +1,13 @@
+{
+  "authors": [
+    {{- range .Authors }}
+    {
+      "id": "{{.ID}}",
+      "name": "{{.Name}}",
+      "url": "{{.URL}}"
+    }
+    {{- end }}
+  ],
+  "name": "{{.Name}}",
+  "url": "{{.URL}}"
+}

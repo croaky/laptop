@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.Name}}</title>
+  <link rel="alternate" href="feed.atom" type="application/atom+xml" />
+  {{template "style" .}}
+  {{template "favicon" .}}
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="/">
+        {{.Name}}
+      </a>
+    </nav>
+
+    <main>
+      {{- range .Articles }}
+        <div class="index-article">
+          <a href="{{.ID}}" class="index-article__link">
+            {{.Title}}
+          </a>
+
+          <div class="index-article__byline">
+            <time datetime="{{.Published}}" class="index-article__published-on">
+              {{.PublishedOn}}
+            </time>
+          </div>
+        </div>
+      {{- end }}
+    <main>
+  </div>
+</body>
+</html>
