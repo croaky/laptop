@@ -2,11 +2,11 @@
 
 # Run this script to generate a Netlify-compatible binary.
 
-set -e
+set -ex
 
 go get -t -d -v github.com/mitchellh/gox
 (
   cd cmd/eng
   gox -osarch="linux/amd64"
-  mv eng_linux_amd64 "$OK/vendor/eng"
+  mv eng_linux_amd64 "$OK/blog"
 )
