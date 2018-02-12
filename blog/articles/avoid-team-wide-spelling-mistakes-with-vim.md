@@ -80,7 +80,7 @@ add the word to the custom [spell file]:
 
 [spell file]: http://vimdoc.sourceforge.net/htmldoc/spell.html#spell-mkspell
 
-![](project-specific-spelling.gif)
+![](images/project-specific-spelling.gif)
 
 Add a phrase (words with whitespace between them) to the spell file
 by selecting characters in Visual mode and then typing `zg`.
@@ -90,14 +90,14 @@ by selecting characters in Visual mode and then typing `zg`.
 When the cursor is over a misspelled word,
 get suggestions for the word with `z=`:
 
-![](word-suggestions.gif)
+![](images/word-suggestions.gif)
 
 ## Tab completion
 
 The words in the spell file will show up in tab completion
 because `.vimrc` is configured with `set complete+=kspell`:
 
-![](tab-completion.gif)
+![](images/tab-completion.gif)
 
 ## Shared spell file
 
