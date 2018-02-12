@@ -2,7 +2,7 @@
 
 You want a table in your GitHub document:
 
-![Activation funnel](https://images.thoughtbot.com/blog-vellum-image-uploads/0UQhtp2VQcOTClHCr5bY_activation-funnel-table.png)
+![Activation funnel](images/github-markdown-table.png)
 
 [GitHub-Flavored Markdown][gh] supports formatting data as a table:
 
@@ -43,4 +43,4 @@ a mnemonic when looking at the `|`s of the table.
 
 Here's how it looks:
 
-![Visual select, leader, backslash](https://images.thoughtbot.com/blog-vellum-image-uploads/37NTLDaRKW3msnk4QmcA_align-markdown-table-in-vim.gif)
+![Visual select, leader, backslash](images/align-markdown-table-in-vim.gif)

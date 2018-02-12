@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"path"
 	"strings"
 	"time"
 
@@ -151,14 +152,17 @@ func (s *Site) writeConfig() {
 func (s *Site) handler(w http.ResponseWriter, r *http.Request) {
 	s.loadConfig(nil)
 	fmt.Println("[eng] " + r.Method + " " + r.URL.Path)
-
-	switch r.URL.Path {
-	case "/":
+	switch {
+	case r.URL.Path == "/":
 		indexToHTML(w, s)
-	case "/feed.atom":
+	case r.URL.Path == "/feed.atom":
 		indexToAtom(w, s)
-	case "/favicon.ico":
+	case r.URL.Path == "/favicon.ico":
 		// no-op
+	case strings.HasPrefix(r.URL.Path, "/images/"):
+		_, filename := path.Split(r.URL.Path)
+		image := s.RootDir + "/public/images/" + filename
+		http.ServeFile(w, r, image)
 	default:
 		article := s.findArticle(r.URL.Path[1:])
 		article.Serve(w, s)
@@ -202,7 +206,7 @@ func (s *Site) createArticlesDir() error {
 }
 
 func (s *Site) createPublicDir() error {
-	return os.MkdirAll(s.RootDir+"/public/assets", os.ModePerm)
+	return os.Mkdir(s.RootDir+"/public", os.ModePerm)
 }
 
 func (s *Site) createRedirects() error {
