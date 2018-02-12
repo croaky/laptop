@@ -8,6 +8,7 @@ ideal for software engineering blogs.
 1. Local preview server
 1. Responsive, high-performance theme
 1. Atom feed
+1. Images
 
 [Example](https://www.statusok.com)
 
@@ -107,6 +108,10 @@ Configure site in `eng.json`:
   "url": "https://www.statusok.com"
 }
 ```
+
+Add images to the `public/images` directory.
+Refer to them in articles via relative path (`![](images/example.png)`).
+Commit them to version control.
 
 ## Publish
 
