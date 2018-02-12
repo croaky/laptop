@@ -43,12 +43,15 @@ We'll also need to set the following configuration:
 config.serve_static_assets = true
 ```
 
-In this setup, we'll then see something like the following in our logs:
+In this setup,
+we'll see many lines like the following in our development logs:
 
-![no asset host](https://images.thoughtbot.com/dns-cdn-origin/no-asset-host.png)
+```
+Started GET "/assets/application.js" for 127.0.0.1 at 2013-10-11 10:50:13 -0700
+Started GET "/assets/application.css" for 127.0.0.1 at 2013-10-11 10:50:13 -0700
+```
 
-That screenshot is from development mode but the same effect will occur in
-production:
+The same effect will occur in production:
 
 * all the application's requests to static assets will go through the [Heroku
   routing mesh][mesh],

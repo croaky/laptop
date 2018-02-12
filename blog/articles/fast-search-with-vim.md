@@ -43,7 +43,7 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 It looks like this when we hit `K` with our cursor over `SubscriptionMailer`
 in the [Upcase](https://thoughtbot.com/upcase/join) repo:
 
-![''](https://images.thoughtbot.com/faster-grepping-in-vim/quickfix-under-cursor.png)
+![''](images/quickfix-under-cursor.png)
 
 Cursor over each search result, hit `Enter`, and the file will be opened.
 
@@ -77,4 +77,4 @@ Standard `ag` arguments may be passed in at this point:
 
 Hitting `Enter` results in:
 
-![''](https://images.thoughtbot.com/faster-grepping-in-vim/quickfix-custom-command.png)
+![''](images/quickfix-custom-command.png)

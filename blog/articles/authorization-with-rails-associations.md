@@ -1,7 +1,6 @@
 # Authorization with Rails Associations
 
-The following describes an approach to Ruby on Rails authorization that
-uses the domain model's association to do the work.
+Authorize Ruby on Rails requests through the domain model's associations.
 
 Routes:
 
@@ -66,7 +65,7 @@ Rails returns a 404 when `ActiveRecord::RecordNotFound` is raised.
 This error will be raised in our access control scheme because
 there is no record of the `current_user` having a relationship to this brand.
 
-Lets get to green:
+Make the tests pass:
 
 ```ruby
 class OffersController < ApplicationController

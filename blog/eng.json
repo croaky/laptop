@@ -86,14 +86,6 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/how-to-process-twitter-lead-cards-with-formkeep",
-      "published": "2015-03-23",
-      "id": "process-twitter-lead-cards-with-formkeep"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "canonical": "https://robots.thoughtbot.com/a-closer-look-at-test-spies",
       "published": "2015-03-19",
       "id": "test-spies-vs-mocks"

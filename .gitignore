@@ -1,2 +1,2 @@
-blog/public
+blog/public/*
 !blog/public/images

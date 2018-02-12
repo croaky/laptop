@@ -52,7 +52,7 @@ of that North Star event.
 
 We'll see a chart that looks something like this:
 
-![](https://images.thoughtbot.com/growth/retention-report.png)
+![](images/retention-report.png)
 
 Click the "CSV" download button in the bottom right.
 Go to [Google Sheets](https://docs.google.com/spreadsheets/u/0/).
@@ -63,7 +63,7 @@ Select "Replace spreadsheet".
 
 We now have a table that looks like this:
 
-![](https://images.thoughtbot.com/growth/retention-curve-table.png)
+![](images/retention-curve-table.png)
 
 Select all the data.
 Click "Insert > Chart".
@@ -74,7 +74,7 @@ Click "Customization" to edit the title.
 
 We now have a chart that looks like this:
 
-![](https://images.thoughtbot.com/growth/retention-curve-ready.png)
+![](images/retention-curve-ready.png)
 
 We could stop there if we wanted,
 but there's one small information design improvement we can make.
@@ -85,7 +85,7 @@ making the oldest time series the lightest shade.
 In this case, we'll choose the lightest shade of blue,
 named "light cornflower blue 3" (obvi):
 
-![](https://images.thoughtbot.com/growth/retention-curve-series.png)
+![](images/retention-curve-series.png)
 
 The goal of this shading to create a relationship between the series.
 Darker is more recent ("fresh paint")
@@ -93,7 +93,7 @@ and lighter is older ("faded").
 
 Here's our final result:
 
-![](https://images.thoughtbot.com/growth/retention-curve-final.png)
+![](images/retention-curve-final.png)
 
 ## Analyzing FormKeep's curves
 
@@ -121,7 +121,7 @@ Let's compare the retention curves of another real product,
 our online training community for programmers,
 using green lines instead of blue lines, for giggles:
 
-![](https://images.thoughtbot.com/growth/upcase-retention-curve.png)
+![](images/upcase-retention-curve.png)
 
 The initial drop-off in usage is shallower than FormKeep's.
 Where FormKeep's cohorts are closer to 10% active in weeks one and two,
@@ -154,11 +154,11 @@ Click "+ Segment" in Mixpanel
 and choose an important property to segment by,
 such as user acquisition channel:
 
-![](https://images.thoughtbot.com/growth/mixpanel-segment.png)
+![](images/mixpanel-segment.png)
 
 The results:
 
-![](https://images.thoughtbot.com/growth/mixpanel-utm-source-segment.png)
+![](images/mixpanel-utm-source-segment.png)
 
 ## Curves are cool
 
@@ -166,5 +166,3 @@ I find this way of visualizing cohort reports easier to understand
 than the tabular form.
 It's a bit of manual work right now but perhaps Mixpanel, Apple, and others
 will begin offering a retention curve representation in the future.
-
-Happy retaining!

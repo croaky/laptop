@@ -23,7 +23,7 @@ We can also specify the language:
 
 Here's a screenshot of what I see as I edit this blog post:
 
-![''](https://images.thoughtbot.com/vim-spell-check.png)
+![''](images/vim-spell-check.png)
 
 The highlighted words are considered misspellings.
 

@@ -226,7 +226,7 @@ such as averaging the growth rate:
 
 ![Hound's growth Google Spreadsheet chart][chart]
 
-[chart]: https://images.thoughtbot.com/north-star-metric/hound-growth-chart.png
+[chart]: images/hound-growth-chart.png
 
 The new versus retained teams bottom chart
 is generated
@@ -276,7 +276,7 @@ Compare the Hound chart to another product's chart:
 
 ![Anonymous growth chart][anon]
 
-[anon]: https://images.thoughtbot.com/north-star-metric/anonymous-growth-chart.png
+[anon]: images/anonymous-growth-chart.png
 
 In this example,
 the data is telling us
@@ -297,7 +297,7 @@ people are getting blocked.
 
 Here's Hound's activation funnel in Mixpanel:
 
-![Hound's Mixpanel funnel](https://thoughtbot-images.s3.amazonaws.com/north-star-metric/hound-funnel.png)
+![Hound's Mixpanel funnel](images/hound-funnel.png)
 
 While both steps could be improved,
 it seems more likely that
