@@ -154,13 +154,6 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " http://andrew.stwrt.ca/posts/project-specific-vimrc/
 set exrc
 
-" Auto-format on save
-augroup fmt
-  autocmd!
-  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx Neoformat prettier
-  autocmd BufWritePre *.rb Neoformat rubocop
-augroup END
-
 " Exclude JavaScript files in :Rtags via rails.vim due to warnings when parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
