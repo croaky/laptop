@@ -1,0 +1,3 @@
+#!/bin/sh
+
+aws-vault exec prod -- "$CHAIN/infra/bin/chdeploy" "$@"
