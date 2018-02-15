@@ -125,7 +125,7 @@ export CDPATH="$CDPATH:$HOME/src/github.com"
 
 # Prepend Go binaries, `brew info go`
 export GOPATH="$HOME"
-export GOROOT="/usr/local/opt/go/libexec"
+export GOROOT="$HOME/.asdf/installs/go/1.9.3/go"
 PATH="$GOROOT/bin:$PATH"
 
 # Set environment variables for monorepos

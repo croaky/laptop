@@ -61,7 +61,6 @@ tap "universal-ctags/universal-ctags"
 brew "awscli"
 brew "chromedriver", restart_service: :changed
 brew "git"
-brew "go"
 brew "heroku"
 brew "hub"
 brew "imagemagick"
@@ -177,6 +176,9 @@ asdf_install "ruby" "2.4.2"
 asdf_plugin_add "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
 asdf_install "nodejs" "8.9.0"
+
+asdf_plugin_add "go" "https://github.com/kennyp/asdf-golang"
+asdf_install "go" "1.9.3"
 
 asdf_plugin_add "java" "https://github.com/skotchpine/asdf-java"
 asdf_install "java" "8.161"
