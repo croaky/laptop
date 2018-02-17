@@ -137,13 +137,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" Set spellfile to location that is guaranteed to exist, can be symlinked to
-" Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
-set spellfile=$HOME/.vim-spell-en.utf-8.add
-
-" Autocomplete with dictionary words when spell check is on
-set complete+=kspell
-
 " Always use vertical diffs
 set diffopt+=vertical
 
