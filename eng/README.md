@@ -105,6 +105,7 @@ Configure site in `eng.json`:
     }
   ],
   "name": "Status OK blog",
+  "source_url": "https://github.com/statusok/statusok/tree/master/blog",
   "url": "https://www.statusok.com"
 }
 ```

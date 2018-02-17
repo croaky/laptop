@@ -42,6 +42,9 @@
         </div>
       </header>
       {{.Body}}
+      {{- if .Site.SourceURL }}
+        <a href="{{.Site.SourceURL}}/articles/{{.ID}}.md">Edit this article</a>
+      {{- end }}
     </article>
   </div>
 </body>

@@ -16,11 +16,12 @@ import (
 
 // Site is an Eng project
 type Site struct {
-	Articles []Article `json:"articles"`
-	Authors  []Author  `json:"authors"`
-	Name     string    `json:"name"`
-	RootDir  string    `json:"-"`
-	URL      string    `json:"url"`
+	Articles  []Article `json:"articles"`
+	Authors   []Author  `json:"authors"`
+	Name      string    `json:"name"`
+	RootDir   string    `json:"-"`
+	SourceURL string    `json:"source_url,omitempty"`
+	URL       string    `json:"url"`
 }
 
 // NewSite constructs a new site from root directory
