@@ -141,6 +141,6 @@ Open a [GitHub Issue][issues] for help.
 See [CONTRIBUTING.md][contrib] for instructions on contributing.
 See [LICENSE] for the license.
 
-[issues]: https://github.com/statusok/eng/issues
+[issues]: https://github.com/statusok/statusok/issues
 [contrib]: CONTRIBUTING.md
-[LICENSE]: LICENSE
+[LICENSE]: ../LICENSE
