@@ -134,7 +134,6 @@ export OK="$HOME/src/statusok"
 
 # Prepend Chain scripts
 PATH="$CHAIN/bin:$PATH"
-PATH="$CHAIN/infra/bin:$PATH"
 
 # Prepend Status OK scripts
 PATH="$OK/bin:$PATH"
