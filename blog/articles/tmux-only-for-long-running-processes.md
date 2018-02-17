@@ -47,7 +47,7 @@ After only running one command inside tmux, detach immediately:
 `Ctrl+b` is the default [tmux prefix]. Many people change it to be `Ctrl+a` to
 match the API provided by GNU Screen, another popular terminal multiplexer.
 
-[tmux prefix]: https://blog.statusok.com/tmux-faq
+[tmux prefix]: tmux-faq
 
 ## Perform ad-hoc tasks
 
@@ -68,7 +68,7 @@ second and focus us immediately on the task at hand.
 A majority of our work is done from within a text editor,
 such as [searching with Vim][search]:
 
-[search]: https://blog.statusok.com/fast-search-with-vim
+[search]: fast-search-with-vim
 
 ```bash
 \ string-i-am-searching-for
@@ -76,7 +76,7 @@ such as [searching with Vim][search]:
 
 Or, [running specs with Vim][specs]
 
-[specs]: https://blog.statusok.com/run-specs-with-vim
+[specs]: run-specs-with-vim
 
 ```bash
 <Leader> s

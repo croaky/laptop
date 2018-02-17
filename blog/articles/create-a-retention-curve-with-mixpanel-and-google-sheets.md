@@ -9,7 +9,7 @@ where "non-trivial new user growth" and "meaningful use"
 typically mean something different per-product,
 defined by a [North Star metric][north].
 
-[north]: https://blog.statusok.com/north-star-metric
+[north]: north-star-metric
 
 Retention, though, can be measured in a pretty standard way across products.
 Many designers, software engineers, and product managers

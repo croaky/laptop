@@ -18,7 +18,7 @@ vegeta
 Perform a load test:
 
 ```
-echo "GET https://blog.statusok.com/" | \
+echo "GET https://www.statusok.com/" | \
   vegeta attack -duration=5s | \
   vegeta report
 ```
@@ -47,7 +47,7 @@ npm install --save dygraphs
 Change the flags on the `report` subcommand for graph output:
 
 ```
-echo "GET https://blog.statusok.com/" | \
+echo "GET https://www.statusok.com/" | \
   vegeta attack -duration=5s | \
   vegeta report -reporter=plot -output=report.html
 open report.html

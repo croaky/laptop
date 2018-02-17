@@ -100,4 +100,4 @@ well-tested settings that we've evolved since 2011.
 Our dotfiles use the same `~/*.local` convention as the Laptop script in order
 to [manage team and personal dotfiles together with rcm][rcm].
 
-[rcm]: https://blog.statusok.com/combine-team-and-personal-dotfiles-with-rcm
+[rcm]: combine-team-and-personal-dotfiles-with-rcm

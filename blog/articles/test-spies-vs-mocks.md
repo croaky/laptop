@@ -53,7 +53,7 @@ This style helps keep the [Four-Phase Test] in order,
 emphasized by the newlines separating
 the setup, exercise, and verification phases.
 
-[Four-Phase Test]: https://blog.statusok.com/four-phase-test
+[Four-Phase Test]: four-phase-test
 
 The [system under test] looks like this:
 
