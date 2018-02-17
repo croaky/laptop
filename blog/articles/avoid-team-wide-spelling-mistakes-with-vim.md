@@ -1,31 +1,19 @@
 # Avoid Team-Wide Spelling Mistakes with Vim
 
 If you and your teammates use Vim,
-you can use these techniques for avoiding spelling mistakes.
+these techniques can help avoid spelling mistakes.
 
 ## Machine-wide
 
 Set up [Vim spell-checking and word completion][spelling]
-on your machine's `~/.vimrc`:
+on your machine's `~/.vim/ftplugin/gitcommit.vim`:
 
-[spelling]: https://blog.statusok.com/vim-spell-checking
+[spelling]: vim-spell-checking
 
 ```vim
-autocmd BufRead,BufNewFile *.md set filetype=markdown
-
-" Spell-check Markdown files
-autocmd FileType markdown setlocal spell
-
-" Spell-check Git messages
-autocmd FileType gitcommit setlocal spell
-
-" Set spellfile to location that is guaranteed to exist,
-" can be symlinked to Dropbox or kept in Git
-" and managed outside of thoughtbot/dotfiles using rcm.
-set spellfile=$HOME/.vim-spell-en.utf-8.add
-
-" Autocomplete with dictionary words when spell check is on
-set complete+=kspell
+setlocal complete+=kspell
+setlocal spell
+setlocal spellfile=$HOME/.vim-spell-en.utf-8.add " any dir outside project repo
 ```
 
 ## Project-specific
@@ -38,40 +26,21 @@ by setting the following in their `~/.vimrc` file:
 set exrc
 ```
 
-Then, add the [project-specific `.vimrc` file][vimrc] to the Git repo:
-
-[vimrc]: http://andrew.stwrt.ca/posts/project-specific-vimrc/
+Then, add the project-specific `.vimrc` file to the Git repo:
 
 ```vim
-set spelllang=en_us
-set spellfile=en.utf-8.add
-
-" Disable unsafe commands.
 " http://andrew.stwrt.ca/posts/project-specific-vimrc/
 set secure
+set spellfile=en.utf-8.add
+set spelllang=en_us
 ```
 
 This is merged with the machine-wide settings.
 
-Alternatively, we could include all necessary options
-inside the project-specific file to provide coverage for
-teammates who don't have machine-wide settings:
-
-```vim
-set spell
-set spelllang=en_us
-set spellfile=en.utf-8.add
-set complete+=kspell
-
-" Disable unsafe commands.
-" http://andrew.stwrt.ca/posts/project-specific-vimrc/
-set secure
-```
-
 ## Spell-checking
 
-Edit a project file
-and Vim will highlight misspelled words.
+When reviewing a Git commit in Vim with `git commit -v`,
+Vim will highlight misspelled words.
 
 Move to the next misspelled word with `]s`
 (or move backwards with `[s`)
