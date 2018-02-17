@@ -321,9 +321,9 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/analysis-paralysis-access-control",
+      "id": "authorization-with-rails-associations",
       "published": "2009-08-12",
-      "id": "authorization-with-rails-associations"
+      "updated": "2018-02-16"
     },
     {
       "author_ids": [
