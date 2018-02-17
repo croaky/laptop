@@ -135,14 +135,6 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/manage-team-and-personal-dotfiles-together-with-rcm",
-      "published": "2014-03-16",
-      "id": "combine-team-and-personal-dotfiles-with-rcm"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "canonical": "https://robots.thoughtbot.com/using-polymorphism-to-make-a-better-activity-feed-in-rails",
       "published": "2013-12-02",
       "id": "polymorphic-activity-feed-with-rails"
