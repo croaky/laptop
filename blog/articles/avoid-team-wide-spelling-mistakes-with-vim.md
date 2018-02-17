@@ -110,10 +110,3 @@ In that case, run:
 (make changes to the spell file)
 :mkspell! %
 ```
-
-## Conclusion
-
-Add a `.vimrc` and shared spell file to your project
-to build up a team-wide dictionary of shared terms,
-help identify and correct misspellings,
-and tab complete correctly-spelled words.
