@@ -143,9 +143,9 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/caching-api-requests",
       "published": "2013-11-29",
-      "id": "cache-api-requests"
+      "id": "cache-api-requests",
+      "updated": "2018-02-18"
     },
     {
       "author_ids": [
