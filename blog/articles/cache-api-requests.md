@@ -55,11 +55,21 @@ class RemoteService
     end
   end
 end
-```
 
-Database migration:
+class ApiRequest < ApplicationRecord
+  validates :hashed_url, presence: true, uniqueness: true
 
-```ruby
+  def self.find(url)
+    hashed_url = Digest::MD5.hexdigest(url)
+    find_or_initialize_by(hashed_url: hashed_url)
+  end
+
+  def cached?(expired_at)
+    return false if new_record?
+    expired_at < updated_at
+  end
+end
+
 class CreateApiRequests < ActiveRecord::Migration
   def change
     create_table :api_requests do |t|
@@ -82,23 +92,4 @@ using [Postgres' JSONB column][jsonb].
 The index improves performance of future lookups
 and enforces uniqueness of the URL.
 
-`ApiRequest` model:
-
-```ruby
-class ApiRequest < ApplicationRecord
-  validates :hashed_url, presence: true, uniqueness: true
-
-  def self.find(url)
-    hashed_url = Digest::MD5.hexdigest(url)
-    find_or_initialize_by(hashed_url: hashed_url)
-  end
-
-  def cached?(expired_at)
-    return false if new_record?
-    expired_at < updated_at
-  end
-end
-```
-
-The URL is hashed in case credentials such as API keys
-are accidentally included in query params.
+The URL is hashed in case sensitive data is included in query params.
