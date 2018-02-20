@@ -1,21 +1,19 @@
 # Configuration Block Pattern with Ruby
 
-We recently enhanced [Clearance](http://github.com/thoughtbot/clearance) with a
-configuration block that could be used in `config/initializers/clearance.rb`.
-
-I liked the way [Airbrake](http://airbrake.io) did it
-and wanted to implement the same pattern:
+Imagine using a third-party library in your Ruby program
+and configuring it like this:
 
 ```ruby
-Airbrake.configure do |config|
+Service.configure do |config|
   config.api_key = "your_key_here"
+  config.from = "team@example.com"
 end
 ```
 
-Here's the implementation:
+How might it be implemented?
 
 ```ruby
-module Clearance
+module Service
   class << self
     attr_accessor :configuration
   end
@@ -26,38 +24,25 @@ module Clearance
   end
 
   class Configuration
-    attr_accessor :mailer_sender
+    attr_accessor :api_key
 
     def initialize
-      @mailer_sender = "donotreply@example.com"
+      @from = "default@example.com"
     end
   end
 end
 ```
 
-The `configure` class method stores a `Configuration` object inside the
-`Clearance` module.
+The `configure` class method
+stores a `Configuration` object
+in the `Service` module.
 
-Anything set from the `configure` block is an `attr_accessor` on the
-`Configuration` class.
-
-So now `config/initializers/clearance.rb` is possible:
-
-```ruby
-Clearance.configure do |config|
-  config.mailer_sender = "hello@example.com"
-end
-```
+Anything set from the `configure` block
+is an `attr_accessor` on the `Configuration` class.
 
 Each configuration setting can be accessed like this:
 
 ```ruby
-Clearance.configuration.mailer_sender
-```
-
-In the library's tests,
-set configuration attributes without worrying about undefining constants:
-
-```ruby
-Clearance.configuration.mailer_sender = "updated@example.com"
+Service.configuration.api_key
+Service.configuration.api_key = 'new-key'
 ```
