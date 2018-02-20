@@ -42,10 +42,13 @@
         </div>
       </header>
       {{.Body}}
+    </article>
+
+    <footer>
       {{- if .Site.SourceURL }}
         <a href="{{.Site.SourceURL}}/articles/{{.ID}}.md">Edit this article</a>
       {{- end }}
-    </article>
+    </footer>
   </div>
 </body>
 </html>
