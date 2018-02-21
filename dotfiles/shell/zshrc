@@ -123,10 +123,8 @@ fi
 # Change into most common directories
 export CDPATH="$CDPATH:$HOME/src/github.com"
 
-# Prepend Go binaries, `brew info go`
+# Set GOPATH `go help gopath`
 export GOPATH="$HOME"
-export GOROOT="$HOME/.asdf/installs/go/1.9.3/go"
-PATH="$GOROOT/bin:$PATH"
 
 # Set environment variables for monorepos
 export CHAIN="$GOPATH/src/chain"
@@ -139,7 +137,7 @@ PATH="$CHAIN/bin:$PATH"
 PATH="$OK/bin:$PATH"
 
 # Prepend Go binaries
-PATH="$HOME/bin:$PATH"
+PATH="$GOPATH/bin:$PATH"
 
 # Prepend Homebrew binaries
 PATH="/usr/local/bin:$PATH"
