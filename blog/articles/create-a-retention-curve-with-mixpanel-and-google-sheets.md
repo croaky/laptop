@@ -23,7 +23,7 @@ We'll use real data from
 product that provides form endpoints for folks working on static sites
 who don't want to fight with trying to style iframes or JavaScript embeds.
 
-## Setting up the Curve
+## Setting up the curve
 
 Sign into Mixpanel.
 Click "Retention" in the left sidebar.

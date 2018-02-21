@@ -2,7 +2,7 @@
 
 By default,
 Postgres `CREATE INDEX` locks writes (but not reads) to a table.
-That can result in unacceptable downtime during a production deploy.
+That can be unacceptable during a production deploy.
 On a large table, indexing can take hours.
 
 Postgres has a [`CONCURRENTLY` option for `CREATE INDEX`][con]
