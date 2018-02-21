@@ -150,39 +150,32 @@ fi
 # shellcheck source=/dev/null
 . "$HOME/.asdf/asdf.sh"
 
-asdf_plugin_add() {
-  local name="$1"
-  local source="$2"
-
-  if ! asdf plugin-list | grep -Fq "$name"; then
-    asdf plugin-add "$name" "$source"
+asdf_plugin_update() {
+  if ! asdf plugin-list | grep -Fq "$1"; then
+    asdf plugin-add "$1" "$2"
   fi
+
+  asdf plugin-update "$1"
 }
 
-asdf_install() {
-  local language="$1"
-  local version="$2"
-  asdf plugin-update "$language"
+asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
+asdf install ruby 2.4.2
+asdf global ruby 2.4.2
 
-  if ! asdf list "$language" | grep -Fq "$version"; then
-    asdf install "$language" "$version"
-    asdf global "$language" "$version"
-  fi
-}
-
-asdf_plugin_add "ruby" "https://github.com/asdf-vm/asdf-ruby"
-asdf_install "ruby" "2.4.2"
-
-asdf_plugin_add "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
+asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
-asdf_install "nodejs" "8.9.0"
+asdf install nodejs 8.9.0
+asdf global nodejs 8.9.0
 
-asdf_plugin_add "go" "https://github.com/kennyp/asdf-golang"
-asdf_install "go" "1.9.3"
+asdf_plugin_update "go" "https://github.com/kennyp/asdf-golang"
+asdf install go 1.10
+asdf install go 1.9.3
+asdf global go 1.9.3
 
-asdf_plugin_add "java" "https://github.com/skotchpine/asdf-java"
-asdf_install "java" "8.161"
-asdf_plugin_add "maven" "https://github.com/skotchpine/asdf-maven"
-asdf_install "maven" "3.3.9"
+asdf_plugin_update "java" "https://github.com/skotchpine/asdf-java"
+asdf install java 8.161
+asdf global java 8.161
 
-go get -u github.com/golang/protobuf/protoc-gen-go
+asdf_plugin_update "maven" "https://github.com/skotchpine/asdf-maven"
+asdf install maven 3.3.9
+asdf global maven 3.3.9
