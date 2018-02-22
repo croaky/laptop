@@ -1,0 +1,31 @@
+#!/bin/bash
+# Add or update a Go dependency from import path `x` to `$PWD/vendor`.
+# https://golang.org/cmd/go/#hdr-Vendor_Directories
+
+set -eo pipefail
+
+if [ "$#" -ne 1 ]; then
+  echo "vendor a/go/package/import/path"
+  exit 1
+fi
+
+if [ -d "$PWD/vendor/$1" ]; then
+  COMMIT_MESSAGE="vendor: update $1"
+  rm -rf "$PWD/vendor/$1"
+else
+  COMMIT_MESSAGE="vendor: add $1"
+  mkdir -p "$PWD/vendor/$1"
+fi
+
+cd "$GOPATH/src/$1"
+git status | grep "working tree clean" > /dev/null
+UPSTREAM_SHA=$(git rev-parse HEAD)
+cd - > /dev/null
+
+cp -r $(go list -f {{.Dir}} $1) "$PWD/vendor/$1"
+rm -rf "$PWD/vendor/$1/.git"
+
+echo "Suggested commit message:"
+echo ""
+echo "$COMMIT_MESSAGE"
+echo "Upstream SHA $UPSTREAM_SHA"
