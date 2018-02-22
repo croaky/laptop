@@ -1,0 +1,32 @@
+#page-container {
+  padding: 0 14px 15px;
+}
+#timeline {
+  float: none;
+  margin: 0 auto;
+}
+.permalink-tweet .content,
+.stream-item .content,
+.top-timeline-tweetbox .timeline-tweet-box .t1-form {
+  margin-left: 0 !important;
+}
+.permalink .inline-reply-tweetbox {
+  padding: 15px 40px 15px !important;
+}
+.ProfileCanopy,
+.ProfileHeading,
+.ProfileSidebar,
+.ThreadedConversation-tweet:after,
+.ThreadedConversation-tweet:before,
+.avatar,
+.context,
+.conversation-module>li:after,
+.conversation-module>li:before,
+.dashboard-left,
+.dashboard-right,
+.mini-avatar-with-thread,
+.stream-item-footer,
+.topbar,
+.tweet-stats-container {
+  display: none !important;
+}
