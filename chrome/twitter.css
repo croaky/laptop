@@ -22,9 +22,15 @@ body,
 .permalink .inline-reply-tweetbox {
   padding: 15px 40px 15px !important;
 }
+#timeline .stream-item-footer,
 .ProfileCanopy,
 .ProfileHeading,
 .ProfileSidebar,
+.ProfileTweet-action--dm,
+.ProfileTweet-action--reply,
+.ProfileTweet-action--retweet,
+.ProfileTweet-actionCountForPresentation,
+.ProfileTweet-actionCountList,
 .ThreadedConversation-tweet:after,
 .ThreadedConversation-tweet:before,
 .Trends,
@@ -36,7 +42,6 @@ body,
 .dashboard-right,
 .mini-avatar-with-thread,
 .permalink-footer,
-.stream-item-footer,
 .topbar,
 .tweet-stats-container {
   display: none !important;
