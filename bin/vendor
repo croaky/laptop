@@ -17,10 +17,11 @@ else
   mkdir -p "$PWD/vendor/$1"
 fi
 
-cd "$GOPATH/src/$1"
-git status | grep "working tree clean" > /dev/null
-UPSTREAM_SHA=$(git rev-parse HEAD)
-cd - > /dev/null
+UPSTREAM_SHA=$(
+  cd "$GOPATH/src/$1"
+  git status | grep "working tree clean" > /dev/null
+  git rev-parse HEAD
+)
 
 cp -r $(go list -f {{.Dir}} $1) "$PWD/vendor/$1"
 rm -rf "$PWD/vendor/$1/.git"
