@@ -1,3 +1,7 @@
+body,
+.home-tweet-box {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
 #page-container {
   padding: 0 14px 15px;
 }
@@ -10,6 +14,11 @@
 .top-timeline-tweetbox .timeline-tweet-box .t1-form {
   margin-left: 0 !important;
 }
+.stream-item,
+.top-timeline-tweetbox .timeline-tweet-box,
+.tweet {
+  border: none !important;
+}
 .permalink .inline-reply-tweetbox {
   padding: 15px 40px 15px !important;
 }
@@ -18,6 +27,7 @@
 .ProfileSidebar,
 .ThreadedConversation-tweet:after,
 .ThreadedConversation-tweet:before,
+.Trends,
 .avatar,
 .context,
 .conversation-module>li:after,
@@ -25,6 +35,7 @@
 .dashboard-left,
 .dashboard-right,
 .mini-avatar-with-thread,
+.permalink-footer,
 .stream-item-footer,
 .topbar,
 .tweet-stats-container {
