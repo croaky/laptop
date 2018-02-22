@@ -26,7 +26,4 @@ UPSTREAM_SHA=$(
 cp -r $(go list -f {{.Dir}} $1) "$PWD/vendor/$1"
 rm -rf "$PWD/vendor/$1/.git"
 
-echo "Suggested commit message:"
-echo ""
-echo "$COMMIT_MESSAGE"
-echo "Upstream SHA $UPSTREAM_SHA"
+printf "%s\\n\\nUpstream SHA %s\\n" "$COMMIT_MESSAGE" "$UPSTREAM_SHA"
