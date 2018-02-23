@@ -13,4 +13,4 @@ Browse to and "Select" this directory.
 
 Edit `$OK/chrome/manifest.json` and
 `$OK/chrome/*.css` files.
-Click "Reload" in [Chrome Extensions][ext] after changes.
+Click "Reload" for the extension in `chrome://extensions` after changes.
