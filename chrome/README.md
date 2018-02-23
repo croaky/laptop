@@ -5,7 +5,7 @@ to add user styles to public websites.
 
 ## Install
 
-Go to [Chrome Extensions][ext].
+Go to [Chrome Extensions](chrome://extensions).
 Click "Developer mode > Load unpacked extensions...".
 Browse to and "Select" this directory.
 
@@ -14,5 +14,3 @@ Browse to and "Select" this directory.
 Edit `$OK/chrome/manifest.json` and
 `$OK/chrome/*.css` files.
 Click "Reload" in [Chrome Extensions][ext] after changes.
-
-[ext]: chrome://extensions
