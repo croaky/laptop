@@ -5,7 +5,7 @@
 set -eo pipefail
 
 if [ "$#" -ne 1 ]; then
-  echo "vendor a/go/package/import/path"
+  echo >&2 "vendor a/go/package/import/path"
   exit 1
 fi
 
