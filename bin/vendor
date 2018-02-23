@@ -17,13 +17,15 @@ else
   mkdir -p "$PWD/vendor/$1"
 fi
 
+PACKAGE=$(go list -f {{.Dir}} $1)
+
 UPSTREAM_SHA=$(
-  cd "$GOPATH/src/$1"
+  cd "$PACKAGE"
   git status | grep "working tree clean" > /dev/null
   git rev-parse HEAD
 )
 
-cp -r $(go list -f {{.Dir}} $1) "$PWD/vendor/$1"
+cp -r "$PACKAGE" "$PWD/vendor/$1"
 rm -rf "$PWD/vendor/$1/.git"
 
 printf "%s\\n\\nUpstream SHA %s\\n" "$COMMIT_MESSAGE" "$UPSTREAM_SHA"
