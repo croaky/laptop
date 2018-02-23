@@ -127,14 +127,14 @@ export CDPATH="$CDPATH:$HOME/src/github.com"
 export GOPATH="$HOME"
 
 # Set environment variables for monorepos
-export CHAIN="$GOPATH/src/chain"
 export OK="$HOME/src/statusok"
-
-# Prepend Chain scripts
-PATH="$CHAIN/bin:$PATH"
+export CHAIN="$GOPATH/src/chain"
 
 # Prepend Status OK scripts
 PATH="$OK/bin:$PATH"
+
+# Prepend Chain scripts
+PATH="$CHAIN/bin:$PATH"
 
 # Prepend Go binaries
 PATH="$GOPATH/bin:$PATH"
