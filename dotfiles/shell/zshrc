@@ -128,7 +128,7 @@ export OK="$HOME/src/statusok"
 export CHAIN="$GOPATH/src/chain"
 
 # Change into most common directories
-export CDPATH="$CHAIN:$OK:$GOPATH/src/github.com"
+export CDPATH="$CDPATH:$CHAIN:$OK:$GOPATH/src/github.com"
 
 # Prepend Status OK scripts
 PATH="$OK/bin:$PATH"
