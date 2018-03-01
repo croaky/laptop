@@ -57,7 +57,7 @@ function c() {
     branch="$(whoami)/$1"
     git create-branch $branch
   else
-    echo 'provide a name for the feature' && exit 1
+    echo 'usage: c feature-name'
   fi
 }
 
