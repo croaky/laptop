@@ -109,8 +109,6 @@ brew cask cleanup
     done
   )
 
-  ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
-
   mkdir -p "$HOME/.bundle"
   ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
   ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
