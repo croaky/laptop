@@ -3,3 +3,6 @@ augroup fmt
   autocmd!
   autocmd BufWritePre * Neoformat rubocop
 augroup END
+
+" Run current file
+nmap <Leader>r :!clear && bundle exec ruby %<CR>
