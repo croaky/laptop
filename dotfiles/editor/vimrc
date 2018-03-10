@@ -143,7 +143,6 @@ endfunction
 nmap <Leader>ct :call ReindexCtags()<CR>
 
 " Colors
-syntax off
 colorscheme github
 
 " Highlights
