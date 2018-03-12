@@ -114,7 +114,7 @@ brew cask cleanup
   ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
 
-  ln -sf "$PWD/search/agignore" "$HOME/.agignore"
+  ln -sf "$PWD/search/ignore" "$HOME/.agignore"
   ln -sf "$PWD/search/ctags" "$HOME/.ctags"
 
   mkdir -p "$HOME/.zsh/completions"
