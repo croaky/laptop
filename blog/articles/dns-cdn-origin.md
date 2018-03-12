@@ -30,12 +30,12 @@ If a `CNAME` record for a domain name points to a Rails app on Heroku:
 www.example.com -> example.herokuapp.com
 ```
 
-Each HTTP request for a static asset (CSS, JS, img, font file):
+Each HTTP request for a static asset:
 
-* is received by the [Heroku routing mesh][mesh]
-* picked up by a web dynos
-* passed to one of the [Puma workers][puma] on the dyno
-* routed by Rails to the asset
+* is received by the [Heroku routing mesh][mesh] (platform load balancer)
+* picked up by a web dyno (host)
+* passed to one of the [Puma workers][puma] (web server process) on the dyno
+* routed by Rails to the asset (CSS, JS, img, font file)
 
 [mesh]: https://devcenter.heroku.com/articles/http-routing
 [puma]: https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
