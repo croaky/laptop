@@ -187,7 +187,8 @@ The CDN will cache the page for the duration specified,
 protecting the origin from unnecessary requests
 and serving the HTML from the CDN's edge servers.
 
-To cache entire HTML pages site-wide, one approach is [Rack] middleware:
+To cache entire HTML pages site-wide,
+one approach is [Rack](https://rack.github.io/) middleware:
 
 ```ruby
 module Rack
