@@ -4,7 +4,8 @@
 
 set -e
 
-go get -t -d -v ./...
+go get github.com/GeertJohan/go.rice
+go get github.com/GeertJohan/go.rice/rice
 (
   cd eng
   rice embed-go

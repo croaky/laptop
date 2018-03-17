@@ -4,7 +4,7 @@
 
 set -ex
 
-go get -t -d -v github.com/mitchellh/gox
+go get github.com/mitchellh/gox
 (
   cd cmd/eng
   gox -osarch="linux/amd64"
