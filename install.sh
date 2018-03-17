@@ -158,7 +158,8 @@ asdf_plugin_update() {
 
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf install ruby 2.4.2
-asdf global ruby 2.4.2
+asdf install ruby 2.5.0
+asdf global ruby 2.5.0
 
 asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
