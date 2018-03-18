@@ -101,13 +101,24 @@ brew cask cleanup
 
   mkdir -p "$HOME/.vim/ftdetect"
   mkdir -p "$HOME/.vim/ftplugin"
-
   (
     cd editor/vim
     for f in {ftdetect,ftplugin}/*; do
       ln -sf "$PWD/$f" "$HOME/.vim/$f"
     done
   )
+
+  mkdir -p "$HOME/.git_template/hooks"
+  (
+    cd git/git_template
+    for f in hooks/*; do
+      ln -sf "$PWD/$f" "$HOME/.git_template/$f"
+    done
+  )
+
+  ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
+  ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
+  ln -sf "$PWD/git/gitmessage" "$HOME/.gitmessage"
 
   mkdir -p "$HOME/.bundle"
   ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
