@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+gem install bundler --conservative
+bundle check || bundle install
+
+rake db:create
+rake db:migrate
+
+if [ -z "$CI" ]; then
+  heroku git:remote --app "dog-cat-classifier" --remote "production" --ssh-git
+fi

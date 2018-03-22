@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+# Export environment variables
+sed 's/^/export /' < .env
+
+# Upload training data to IBM Watson, get back new classifier ID
+curl -i --user "$WATSON_USERNAME":"$WATSON_PASSWORD" \
+  -F training_data=@db/training.csv \
+  -F training_metadata="{\"language\":\"en\",\"name\":\"DogCatClassifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"

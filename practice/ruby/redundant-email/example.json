@@ -1,0 +1,8 @@
+{
+  "body": "<h1>Your Invoice</h1><p>$10</p>",
+  "from": "support@example.com",
+  "from_name": "Service",
+  "subject": "Invoice from Service",
+  "to": "dan@example.com",
+  "to_name": "Dan Croak"
+}

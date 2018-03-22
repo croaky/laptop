@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+gem install bundler --conservative
+bundle check || bundle install
+
+if [ -z "$CI" ]; then
+  gem install parity --conservative
+  heroku git:remote --app "redundant-email" --remote "production" --ssh-git
+fi

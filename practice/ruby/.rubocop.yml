@@ -1,0 +1,51 @@
+AllCops:
+  TargetRubyVersion: 2.4
+Layout/DotPosition:
+  EnforcedStyle: leading
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Lint/AssignmentInCondition:
+  AllowSafeAssignment: false
+Metrics/AbcSize:
+  Max: 50
+Metrics/BlockLength:
+  Max: 500
+Metrics/CyclomaticComplexity:
+  Max: 25
+Metrics/MethodLength:
+  Max: 50
+Naming/PredicateName:
+  NamePrefixBlacklist:
+    - have_
+    - is_
+Style/BlockDelimiters:
+  Enabled: false
+Style/ConditionalAssignment:
+  EnforcedStyle: assign_inside_condition
+Style/Documentation:
+  Enabled: false
+Style/FormatStringToken:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/SpecialGlobalVars:
+  Enabled: false
+Style/StderrPuts:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: true
+  EnforcedStyle: brackets
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+Style/WordArray:
+  Enabled: true
+  EnforcedStyle: brackets
