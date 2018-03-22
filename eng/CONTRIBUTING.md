@@ -23,8 +23,8 @@ go test -v -race ./...
 Create a binary for Netlify:
 
 ```
-./script/embed
-./script/netlify
+./bin/embed
+./bin/netlify
 ```
 
 Make your change with new passing tests.
