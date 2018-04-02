@@ -4,6 +4,56 @@
       "author_ids": [
         "croaky"
       ],
+      "published": "2014-08-08",
+      "id": "dns-cdn-origin",
+      "updated": "2018-03-11"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "published": "2010-01-20",
+      "id": "configuration-block-pattern-with-ruby",
+      "updated": "2018-02-19"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "published": "2013-11-29",
+      "id": "cache-api-requests",
+      "updated": "2018-02-18"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/bin-setup",
+      "published": "2013-01-25",
+      "id": "bin-setup",
+      "updated": "2018-02-17"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "id": "authorization-with-rails-associations",
+      "published": "2009-08-12",
+      "updated": "2018-02-16"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/align-github-flavored-markdown-tables-in-vim",
+      "id": "align-markdown-tables-with-vim",
+      "published": "2016-06-15",
+      "updated": "2018-01-29"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "published": "2017-06-24",
       "id": "laptop-setup-and-vim-configuration-for-react-native"
     },
@@ -30,15 +80,6 @@
       ],
       "published": "2017-02-25",
       "id": "load-testing"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/align-github-flavored-markdown-tables-in-vim",
-      "id": "align-markdown-tables-with-vim",
-      "published": "2016-06-15",
-      "updated": "2018-01-29"
     },
     {
       "author_ids": [
@@ -103,14 +144,6 @@
       "author_ids": [
         "croaky"
       ],
-      "published": "2014-08-08",
-      "id": "dns-cdn-origin",
-      "updated": "2018-03-11"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "canonical": "https://robots.thoughtbot.com/tmux-only-for-long-running-processes",
       "published": "2014-07-17",
       "id": "tmux-only-for-long-running-processes"
@@ -138,14 +171,6 @@
       "canonical": "https://robots.thoughtbot.com/using-polymorphism-to-make-a-better-activity-feed-in-rails",
       "published": "2013-12-02",
       "id": "polymorphic-activity-feed-with-rails"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "published": "2013-11-29",
-      "id": "cache-api-requests",
-      "updated": "2018-02-18"
     },
     {
       "author_ids": [
@@ -197,15 +222,6 @@
       "canonical": "https://robots.thoughtbot.com/sort-lines-alphabetically-in-vim",
       "published": "2013-02-01",
       "id": "sort-lines-alphabetically-with-vim"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/bin-setup",
-      "published": "2013-01-25",
-      "id": "bin-setup",
-      "updated": "2018-02-17"
     },
     {
       "author_ids": [
@@ -298,25 +314,9 @@
       "author_ids": [
         "croaky"
       ],
-      "published": "2010-01-20",
-      "id": "configuration-block-pattern-with-ruby",
-      "updated": "2018-02-19"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "canonical": "https://robots.thoughtbot.com/testing-failure",
       "published": "2009-09-06",
       "id": "test-http-errors-with-ruby"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "id": "authorization-with-rails-associations",
-      "published": "2009-08-12",
-      "updated": "2018-02-16"
     },
     {
       "author_ids": [
