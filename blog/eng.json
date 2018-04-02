@@ -341,14 +341,6 @@
       "canonical": "https://robots.thoughtbot.com/suspenders",
       "published": "2008-10-21",
       "id": "new-rails-projects-with-suspenders"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/ruby-wrapper-for-twitter-search-api",
-      "published": "2008-09-09",
-      "id": "twitter-search"
     }
   ],
   "authors": [
