@@ -31,13 +31,8 @@
             </div>
           {{- end }}
 
-          <time datetime="{{.Published}}" class="lede__published-on">
-            {{.PublishedOn}}
-
-            {{- if .Updated }}
-              <span class="meta-updated">updated</span>
-              {{.UpdatedOn}}
-            {{- end }}
+          <time datetime="{{.LastUpdated}}" class="lede__published-on">
+            {{.LastUpdatedIn}}
           </time>
         </div>
       </header>

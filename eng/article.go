@@ -73,22 +73,21 @@ func (a *Article) Authors() []Author {
 	return authors
 }
 
-// PublishedOn formats Published as January 2, 2006
-func (a *Article) PublishedOn() string {
-	t, err := time.Parse("2006-01-02", a.Published)
-	if err != nil {
-		return ""
+// LastUpdated is Updated if present, otherwise Published
+func (a *Article) LastUpdated() string {
+	if a.Updated != "" {
+		return a.Updated
 	}
-	return t.Format("January 2, 2006")
+	return a.Published
 }
 
-// UpdatedOn formats Updated as January 2, 2006
-func (a *Article) UpdatedOn() string {
-	t, err := time.Parse("2006-01-02", a.Updated)
+// LastUpdatedIn formats Updated as January 2, 2006
+func (a *Article) LastUpdatedIn() string {
+	t, err := time.Parse("2006-01-02", a.LastUpdated())
 	if err != nil {
 		return ""
 	}
-	return t.Format("January 2, 2006")
+	return t.Format("2006 January")
 }
 
 func (a *Article) srcPath() string {
