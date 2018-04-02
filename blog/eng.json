@@ -349,14 +349,6 @@
       "canonical": "https://robots.thoughtbot.com/ruby-wrapper-for-twitter-search-api",
       "published": "2008-09-09",
       "id": "twitter-search"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/shhh-your-test-unit-backtraces-are-too-noisy",
-      "published": "2007-12-03",
-      "id": "quiet-backtrace-for-test-unit"
     }
   ],
   "authors": [
