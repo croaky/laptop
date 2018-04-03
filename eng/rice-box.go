@@ -35,24 +35,24 @@ func init() {
 	}
 	file7 := &embedded.EmbeddedFile{
 		Filename:    "index.html",
-		FileModTime: time.Unix(1522726967, 0),
+		FileModTime: time.Unix(1522727082, 0),
 		Content:     string("<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>{{.Name}}</title>\n  <link rel=\"alternate\" href=\"feed.atom\" type=\"application/atom+xml\" />\n  {{template \"style\" .}}\n  {{template \"favicon\" .}}\n</head>\n<body>\n  <div class=\"container\">\n    <nav>\n      {{.Name}}\n\n      {{- if .Tags }}\n        <div class=\"tags\">\n          {{- range $tag, $count := .Tags }}\n            <a href=\"/tags/{{$tag}}\">{{$tag}}</a>&nbsp;\n          {{- end }}\n        </div>\n      {{- end }}\n    </nav>\n\n    <main>\n      {{- range .Articles }}\n        <div class=\"index-article\">\n          <a href=\"/{{.ID}}\" class=\"index-article__link\">\n            {{.Title}}\n          </a>\n\n          <div class=\"index-article__byline\">\n            <time datetime=\"{{.LastUpdated}}\" class=\"index-article__published-on\">\n              {{.LastUpdatedIn}}\n            </time>\n          </div>\n        </div>\n      {{- end }}\n    <main>\n  </div>\n</body>\n</html>\n"),
 	}
 	file8 := &embedded.EmbeddedFile{
 		Filename:    "style.html",
-		FileModTime: time.Unix(1522726656, 0),
-		Content:     string("{{ define \"style\" -}}\n<style>\n  body {\n    color: #3c3c3c;\n    font-family: -apple-system, BlinkMacSystemFont, \"Avenir Next\", \"Avenir\", \"Segoe UI\", \"Lucida Grande\", \"Helvetica Neue\", \"Helvetica\", \"Fira Sans\", \"Roboto\", \"Noto\", \"Droid Sans\", \"Cantarell\", \"Oxygen\", \"Ubuntu\", \"Franklin Gothic Medium\", \"Century Gothic\", \"Liberation Sans\", sans-serif;\n    font-size: 16px;\n    line-height: 26px;\n    -webkit-font-smoothing: antialiased;\n  }\n\n  a,\n  a:visited,\n  a:hover,\n  .index-article__link:hover {\n    border-bottom-color: #da393f;\n    border-bottom-style: solid;\n    border-bottom-width: 1px;\n    color: #3c3c3c;\n    text-decoration: none;\n    text-decoration-skip: ink;\n  }\n\n  a:hover {\n    color: #da393f;\n  }\n\n  .container {\n    margin: 1rem;\n    max-width: 700px;\n  }\n\n  img {\n    max-width: 100%;\n  }\n\n  article,\n  main {\n    margin: 2rem 0;\n  }\n\n  h2 {\n    margin: 2.5rem 0 1.5rem;\n  }\n\n  p,\n  ul {\n    margin: 1.5rem 0;\n  }\n\n  li {\n    margin: 0.5rem 0;\n  }\n\n  .tags {\n    margin: 1.5rem 0 0.5rem 0;\n  }\n\n  .index-article {\n    margin: 1rem 0;\n  }\n\n  .index-article__link {\n    border-bottom: none;\n    font-size: 18px;\n    font-weight: bold;\n    line-height: 22px;\n    margin: 0;\n  }\n\n  .index-article__link:hover {\n    color: #3c3c3c;\n  }\n\n  .lede {\n    margin: 50px 0;\n  }\n\n  .lede__headline {\n    font-size: 32px;\n    line-height: 38px;\n    margin: 0;\n  }\n\n  .lede__byline {\n    line-height: 22px;\n    margin: 5px 0;\n  }\n\n  .lede__author a,\n  .lede__author a:visited {\n    font-weight: bold;\n    text-decoration: none;\n  }\n\n  pre {\n    background-color: #f7f7f7;\n    border-radius: 3px;\n    line-height: 1.5;\n    overflow-x: scroll;\n    padding: 10px;\n    word-wrap: normal;\n  }\n\n  code {\n    background-color: #f7f7f7;\n    font-family: \"SFMono-Regular\",Consolas,\"Liberation Mono\",Menlo,monospace;\n    font-size: 88%;\n    word-wrap: break-word;\n  }\n\n  :not(pre)>code {\n    margin: 0 0.05em;\n    padding: 3px 5px;\n  }\n\n  footer {\n    margin: 50px 0;\n  }\n</style>\n{{- end }}\n"),
+		FileModTime: time.Unix(1522727444, 0),
+		Content:     string("{{ define \"style\" -}}\n<style>\n  body {\n    color: #3c3c3c;\n    font-family: -apple-system, BlinkMacSystemFont, \"Avenir Next\", \"Avenir\", \"Segoe UI\", \"Lucida Grande\", \"Helvetica Neue\", \"Helvetica\", \"Fira Sans\", \"Roboto\", \"Noto\", \"Droid Sans\", \"Cantarell\", \"Oxygen\", \"Ubuntu\", \"Franklin Gothic Medium\", \"Century Gothic\", \"Liberation Sans\", sans-serif;\n    font-size: 16px;\n    line-height: 26px;\n    -webkit-font-smoothing: antialiased;\n  }\n\n  a,\n  a:visited,\n  a:hover,\n  .index-article__link:hover {\n    border-bottom-color: #da393f;\n    border-bottom-style: solid;\n    border-bottom-width: 1px;\n    color: #3c3c3c;\n    text-decoration: none;\n    text-decoration-skip: ink;\n  }\n\n  a:hover {\n    color: #da393f;\n  }\n\n  .container {\n    margin: 1.5rem 1rem;\n    max-width: 700px;\n  }\n\n  @media all and (max-width: 575px) {\n    .container {\n      margin: 1rem 0;\n    }\n  }\n\n  img {\n    max-width: 100%;\n  }\n\n  article,\n  main {\n    margin: 2rem 0;\n  }\n\n  h2 {\n    margin: 2.5rem 0 1.5rem;\n  }\n\n  p,\n  ul {\n    margin: 1.5rem 0;\n  }\n\n  li {\n    margin: 0.5rem 0;\n  }\n\n  .tags {\n    margin: 1.5rem 0 0.5rem 0;\n  }\n\n  .index-article {\n    margin: 1rem 0;\n  }\n\n  .index-article__link {\n    border-bottom: none;\n    font-size: 18px;\n    font-weight: bold;\n    line-height: 22px;\n    margin: 0;\n  }\n\n  .index-article__link:hover {\n    color: #3c3c3c;\n  }\n\n  .lede {\n    margin: 50px 0;\n  }\n\n  .lede__headline {\n    font-size: 32px;\n    line-height: 38px;\n    margin: 0;\n  }\n\n  .lede__byline {\n    line-height: 22px;\n    margin: 5px 0;\n  }\n\n  .lede__author a,\n  .lede__author a:visited {\n    font-weight: bold;\n    text-decoration: none;\n  }\n\n  pre {\n    background-color: #f7f7f7;\n    border-radius: 3px;\n    line-height: 1.5;\n    overflow-x: scroll;\n    padding: 10px;\n    word-wrap: normal;\n  }\n\n  code {\n    background-color: #f7f7f7;\n    font-family: \"SFMono-Regular\",Consolas,\"Liberation Mono\",Menlo,monospace;\n    font-size: 88%;\n    word-wrap: break-word;\n  }\n\n  :not(pre)>code {\n    margin: 0 0.05em;\n    padding: 3px 5px;\n  }\n\n  footer {\n    margin: 50px 0;\n  }\n</style>\n{{- end }}\n"),
 	}
 	file9 := &embedded.EmbeddedFile{
 		Filename:    "tag.html",
-		FileModTime: time.Unix(1522726656, 0),
+		FileModTime: time.Unix(1522727082, 0),
 		Content:     string("<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>{{.Name}}</title>\n  <link rel=\"alternate\" href=\"feed.atom\" type=\"application/atom+xml\" />\n  {{template \"style\" .}}\n  {{template \"favicon\" .}}\n</head>\n<body>\n  <div class=\"container\">\n    <nav>\n      <a href=\"/\">\n        {{.Site.Name}} &larr;\n      </a>\n    </nav>\n\n    <article>\n      <header class=\"lede\">\n        <h1 class=\"lede__headline\">{{.Name}}</h1>\n      </header>\n    </article>\n\n    <main>\n      {{- range .Articles }}\n        <div class=\"index-article\">\n          <a href=\"/{{.ID}}\" class=\"index-article__link\">\n            {{.Title}}\n          </a>\n\n          <div class=\"index-article__byline\">\n            <time datetime=\"{{.LastUpdated}}\" class=\"index-article__published-on\">\n              {{.LastUpdatedIn}}\n            </time>\n          </div>\n        </div>\n      {{- end }}\n    <main>\n  </div>\n</body>\n</html>\n"),
 	}
 
 	// define dirs
 	dir1 := &embedded.EmbeddedDir{
 		Filename:   "",
-		DirModTime: time.Unix(1522726656, 0),
+		DirModTime: time.Unix(1522727082, 0),
 		ChildFiles: []*embedded.EmbeddedFile{
 			file2, // "README.md"
 			file3, // "_redirects"
@@ -72,7 +72,7 @@ func init() {
 	// register embeddedBox
 	embedded.RegisterEmbeddedBox(`templates`, &embedded.EmbeddedBox{
 		Name: `templates`,
-		Time: time.Unix(1522726656, 0),
+		Time: time.Unix(1522727082, 0),
 		Dirs: map[string]*embedded.EmbeddedDir{
 			"": dir1,
 		},
