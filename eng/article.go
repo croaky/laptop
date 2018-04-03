@@ -16,10 +16,11 @@ import (
 type Article struct {
 	AuthorIDs []string `json:"author_ids"`
 	Canonical string   `json:"canonical,omitempty"`
-	Redirects []string `json:"redirects,omitempty"`
-	Published string   `json:"published"`
-	Updated   string   `json:"updated"`
 	ID        string   `json:"id"`
+	Published string   `json:"published"`
+	Redirects []string `json:"redirects,omitempty"`
+	Tags      []string `json:"tags,omitempty"`
+	Updated   string   `json:"updated"`
 	Site      *Site    `json:"-"`
 }
 

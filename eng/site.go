@@ -102,7 +102,6 @@ func (s *Site) InitArticle(slug string) error {
 		return err
 	}
 	f.Sync()
-
 	s.loadConfig(nil)
 	a := Article{
 		AuthorIDs: []string{NewAuthorID()},
@@ -113,6 +112,22 @@ func (s *Site) InitArticle(slug string) error {
 	s.writeConfig()
 
 	return nil
+}
+
+// Tags is a collection of site tags and their counts
+func (s *Site) Tags() map[string]int {
+	tt := make(map[string]int)
+	for _, a := range s.Articles {
+		for _, t := range a.Tags {
+			if i, ok := tt[t]; ok {
+				tt[t] = i + 1
+			} else {
+				tt[t] = 1
+			}
+		}
+	}
+
+	return tt
 }
 
 func (s *Site) loadConfig(port *string) {
@@ -160,6 +175,10 @@ func (s *Site) handler(w http.ResponseWriter, r *http.Request) {
 		indexToAtom(w, s)
 	case r.URL.Path == "/favicon.ico":
 		// no-op
+	case strings.HasPrefix(r.URL.Path, "/tags/"):
+		_, name := path.Split(r.URL.Path)
+		tag := Tag{Name: name, Site: s}
+		tagIndexToHTML(w, &tag)
 	case strings.HasPrefix(r.URL.Path, "/images/"):
 		_, filename := path.Split(r.URL.Path)
 		image := s.RootDir + "/public/images/" + filename

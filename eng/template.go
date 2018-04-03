@@ -22,6 +22,12 @@ func indexToHTML(w io.Writer, s *Site) {
 	printError(err)
 }
 
+func tagIndexToHTML(w io.Writer, tag *Tag) {
+	t := parseHTMLTemplates("tag.html", "style.html", "favicon.html")
+	err := t.Execute(w, tag)
+	printError(err)
+}
+
 func parseHTMLTemplates(filenames ...string) *template.Template {
 	var names bytes.Buffer
 	var content bytes.Buffer

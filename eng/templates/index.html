@@ -12,15 +12,21 @@
 <body>
   <div class="container">
     <nav>
-      <a href="/">
-        {{.Name}}
-      </a>
+      {{.Name}}
+
+      {{- if .Tags }}
+        <div class="tags">
+          {{- range $tag, $count := .Tags }}
+            <a href="/tags/{{$tag}}">{{$tag}}</a>&nbsp;
+          {{- end }}
+        </div>
+      {{- end }}
     </nav>
 
     <main>
       {{- range .Articles }}
         <div class="index-article">
-          <a href="{{.ID}}" class="index-article__link">
+          <a href="/{{.ID}}" class="index-article__link">
             {{.Title}}
           </a>
 

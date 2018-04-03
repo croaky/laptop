@@ -6,6 +6,9 @@
       ],
       "published": "2014-08-08",
       "id": "dns-cdn-origin",
+      "tags": [
+        "infra"
+      ],
       "updated": "2018-03-11"
     },
     {
@@ -14,6 +17,9 @@
       ],
       "published": "2010-01-20",
       "id": "configuration-block-pattern-with-ruby",
+      "tags": [
+        "ruby"
+      ],
       "updated": "2018-02-19"
     },
     {
@@ -22,6 +28,9 @@
       ],
       "published": "2013-11-29",
       "id": "cache-api-requests",
+      "tags": [
+        "ruby"
+      ],
       "updated": "2018-02-18"
     },
     {
@@ -39,6 +48,9 @@
       ],
       "id": "authorization-with-rails-associations",
       "published": "2009-08-12",
+      "tags": [
+        "ruby"
+      ],
       "updated": "2018-02-16"
     },
     {
@@ -48,38 +60,55 @@
       "canonical": "https://robots.thoughtbot.com/align-github-flavored-markdown-tables-in-vim",
       "id": "align-markdown-tables-with-vim",
       "published": "2016-06-15",
+      "tags": [
+        "vim"
+      ],
       "updated": "2018-01-29"
     },
     {
       "author_ids": [
         "croaky"
       ],
+      "id": "laptop-setup-and-vim-configuration-for-react-native",
       "published": "2017-06-24",
-      "id": "laptop-setup-and-vim-configuration-for-react-native"
+      "tags": [
+        "react",
+        "vim"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
+      "id": "fix-highest-priority-issues-with-go",
       "published": "2017-03-23",
-      "id": "fix-highest-priority-issues-with-go"
+      "tags": [
+        "go"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
+      "id": "redirect-apex-domain-to-www",
       "published": "2017-03-21",
-      "id": "redirect-apex-domain-to-www"
+      "tags": [
+        "infra"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
+      "id": "load-testing",
+      "published": "2017-02-25",
       "redirects": [
         "/load-test-with-vegeta"
       ],
-      "published": "2017-02-25",
-      "id": "load-testing"
+      "tags": [
+        "infra",
+        "test"
+      ]
     },
     {
       "author_ids": [
@@ -87,49 +116,68 @@
       ],
       "canonical": "https://robots.thoughtbot.com/how-to-reduce-a-large-heroku-compiled-slug-size",
       "published": "2016-06-13",
-      "id": "reduce-a-large-heroku-compiled-slug-size"
+      "id": "reduce-a-large-heroku-compiled-slug-size",
+      "tags": [
+        "infra"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/opt-in-project-specific-vim-spell-checking-and-word-completion",
+      "id": "avoid-team-wide-spelling-mistakes-with-vim",
       "published": "2015-12-01",
-      "id": "avoid-team-wide-spelling-mistakes-with-vim"
+      "tags": [
+        "vim"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/create-a-retention-curve-with-mixpanel-and-google-sheets",
+      "id": "create-a-retention-curve-with-mixpanel-and-google-sheets",
       "published": "2015-07-01",
-      "id": "create-a-retention-curve-with-mixpanel-and-google-sheets"
+      "tags": [
+        "growth"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/optimizing-full-text-search-with-postgres-tsvector-columns-and-triggers",
+      "id": "optimize-postgres-full-text-search-with-tsvector-columns-and-triggers",
       "published": "2015-06-25",
-      "id": "optimize-postgres-full-text-search-with-tsvector-columns-and-triggers"
+      "tags": [
+        "postgres"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
+      "id": "heroku-routing-errors-slack-papertrail",
+      "published": "2015-04-21",
       "redirects": [
         "/post/send-your-apps-heroku-routing-errors-to-slack-with-papertrail-alerts/"
       ],
-      "published": "2015-04-21",
-      "id": "heroku-routing-errors-slack-papertrail"
+      "tags": [
+        "infra"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/a-closer-look-at-test-spies",
+      "id": "test-spies-vs-mocks",
       "published": "2015-03-19",
-      "id": "test-spies-vs-mocks"
+      "tags": [
+        "ruby",
+        "test"
+      ]
     },
     {
       "author_ids": [
@@ -137,16 +185,22 @@
         "frechg"
       ],
       "canonical": "https://robots.thoughtbot.com/north-star-metric",
+      "id": "north-star-metric",
       "published": "2014-12-25",
-      "id": "north-star-metric"
+      "tags": [
+        "growth"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/tmux-only-for-long-running-processes",
+      "id": "tmux-only-for-long-running-processes",
       "published": "2014-07-17",
-      "id": "tmux-only-for-long-running-processes"
+      "tags": [
+        "unix"
+      ]
     },
     {
       "author_ids": [
@@ -154,50 +208,68 @@
       ],
       "canonical": "https://robots.thoughtbot.com/laptop-setup-for-an-awesome-development-environment",
       "published": "2014-06-18",
-      "id": "laptop-setup-script"
+      "id": "laptop-setup-script",
+      "tags": [
+        "unix"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/ssl-for-rails-with-heroku-and-dnsimple",
+      "id": "enforce-ssl-with-heroku-and-dnsimple",
       "published": "2014-05-21",
-      "id": "enforce-ssl-with-heroku-and-dnsimple"
+      "tags": [
+        "infra"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/using-polymorphism-to-make-a-better-activity-feed-in-rails",
+      "id": "polymorphic-activity-feed-with-rails",
       "published": "2013-12-02",
-      "id": "polymorphic-activity-feed-with-rails"
+      "tags": [
+        "ruby"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/faster-grepping-in-vim",
+      "published": "2013-11-27",
+      "id": "fast-search-with-vim",
       "redirects": [
         "/search-faster-in-vim"
       ],
-      "published": "2013-11-27",
-      "id": "fast-search-with-vim"
+      "tags": [
+        "vim"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/vim-spell-checking",
+      "id": "vim-spell-checking",
       "published": "2013-11-19",
-      "id": "vim-spell-checking"
+      "tags": [
+        "vim"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/how-to-create-postgres-indexes-concurrently-in",
+      "id": "create-postgres-indexes-concurrently",
       "published": "2013-07-30",
-      "id": "create-postgres-indexes-concurrently"
+      "tags": [
+        "postgres"
+      ]
     },
     {
       "author_ids": [
@@ -205,142 +277,197 @@
       ],
       "canonical": "https://robots.thoughtbot.com/running-specs-from-vim",
       "published": "2013-08-05",
-      "id": "run-specs-with-vim"
+      "id": "run-specs-with-vim",
+      "tags": [
+        "test",
+        "vim"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/wrap-existing-text-at-80-characters-in-vim",
+      "id": "wrap-existing-text-at-80-characters-with-vim",
       "published": "2013-04-07",
-      "id": "wrap-existing-text-at-80-characters-with-vim"
+      "tags": [
+        "vim"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/sort-lines-alphabetically-in-vim",
+      "id": "sort-lines-alphabetically-with-vim",
       "published": "2013-02-01",
-      "id": "sort-lines-alphabetically-with-vim"
+      "tags": [
+        "vim"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/delivering-all-email-from-staging-to-a-group-email",
+      "id": "intercept-email-from-staging",
       "published": "2013-01-18",
-      "id": "intercept-email-from-staging"
+      "tags": [
+        "infra"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/faster-tests-sign-in-through-the-back-door",
+      "id": "fast-integration-tests-with-clearance-backdoor",
       "published": "2012-12-14",
-      "id": "fast-integration-tests-with-clearance-backdoor"
+      "tags": [
+        "ruby",
+        "test"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/four-phase-test",
+      "id": "four-phase-test",
       "published": "2012-09-28",
-      "id": "four-phase-test"
+      "tags": [
+        "test"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/global-gitignore",
+      "id": "global-gitignore",
       "published": "2012-03-04",
-      "id": "global-gitignore"
+      "tags": [
+        "git"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
+      "id": "implement-decorators-with-ruby",
       "published": "2011-12-26",
-      "id": "implement-decorators-with-ruby"
+      "tags": [
+        "test"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/internship-or-apprenticeship",
-      "published": "2011-12-14",
-      "id": "internship-or-apprenticeship"
+      "id": "internship-or-apprenticeship",
+      "published": "2011-12-14"
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/how-to-back-up-a-heroku-production-database-to-staging",
+      "id": "back-up-and-restore-heroku-postgres-databases",
       "published": "2011-08-18",
-      "id": "back-up-and-restore-heroku-postgres-databases"
+      "tags": [
+        "infra",
+        "postgres"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/keeping-a-github-fork-updated",
+      "id": "keep-a-github-fork-updated",
       "published": "2011-05-02",
-      "id": "keep-a-github-fork-updated"
+      "tags": [
+        "git"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/feature-branch-code-reviews",
+      "id": "feature-branch-code-reviews",
       "published": "2011-01-19",
-      "id": "feature-branch-code-reviews"
+      "tags": [
+        "git"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/rubys-pessimistic-operator",
+      "id": "rubys-pessimistic-operator",
       "published": "2010-12-29",
-      "id": "rubys-pessimistic-operator"
+      "tags": [
+        "ruby"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/love-hate-tmux",
+      "id": "tmux-faq",
       "published": "2010-12-10",
-      "id": "tmux-faq"
+      "tags": [
+        "unix"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/testing-failure",
+      "id": "test-http-errors-with-ruby",
       "published": "2009-09-06",
-      "id": "test-http-errors-with-ruby"
+      "tags": [
+        "ruby",
+        "test"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/mystery-guest",
+      "id": "mystery-guest",
       "published": "2009-07-28",
-      "id": "mystery-guest"
+      "tags": [
+        "test"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/clearance-rails-authentication-with-email-and-password",
+      "id": "rails-authentication-with-clearance",
       "published": "2009-02-09",
-      "id": "rails-authentication-with-clearance"
+      "tags": [
+        "ruby"
+      ]
     },
     {
       "author_ids": [
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/suspenders",
+      "id": "new-rails-projects-with-suspenders",
       "published": "2008-10-21",
-      "id": "new-rails-projects-with-suspenders"
+      "tags": [
+        "ruby"
+      ]
     }
   ],
   "authors": [
