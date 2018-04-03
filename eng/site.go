@@ -58,7 +58,7 @@ func Init(name string) error {
 func (s *Site) Build() {
 	s.loadConfig(nil)
 
-	err := s.createPublicDir()
+	err := s.createPublicDirs()
 	printError(err)
 
 	f, err := os.Create("public/index.html")
@@ -75,8 +75,13 @@ func (s *Site) Build() {
 		indexToAtom(f, s)
 	}
 
-	for _, article := range s.Articles {
-		article.Build(s)
+	for _, a := range s.Articles {
+		a.Build(s)
+	}
+
+	for t := range s.Tags() {
+		tag := Tag{Name: t, Site: s}
+		tag.Build()
 	}
 
 	s.createRedirects()
@@ -225,8 +230,8 @@ func (s *Site) createArticlesDir() error {
 	return os.Mkdir(s.articlesDir(), os.ModePerm)
 }
 
-func (s *Site) createPublicDir() error {
-	return os.Mkdir(s.RootDir+"/public", os.ModePerm)
+func (s *Site) createPublicDirs() error {
+	return os.MkdirAll(s.RootDir+"/public/tags", os.ModePerm)
 }
 
 func (s *Site) createRedirects() error {
