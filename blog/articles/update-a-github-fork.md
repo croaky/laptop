@@ -1,4 +1,4 @@
-# Keep a GitHub Fork Updated
+# Update a GitHub Fork
 
 A typical flow when contributing to open source software on GitHub is:
 

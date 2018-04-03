@@ -1,4 +1,4 @@
-# Fast Search with Vim
+# Fast Search in Vim
 
 We often search our projects for specific text within Vim like so:
 

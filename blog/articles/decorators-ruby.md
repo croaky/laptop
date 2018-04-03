@@ -1,4 +1,4 @@
-# Implement Decorators with Ruby
+# Decorators
 
 A decorator is a design pattern.
 Its intent, as described in [Design Patterns] by the Gang of Four is:

@@ -1,4 +1,4 @@
-# Send Heroku App Routing Errors to Slack with Papertrail Alerts
+# Alerts for Heroku Routing Errors
 
 Most errors in a web application can be sent to a third-party service
 such as Airbrake, Honeybadger, or New Relic

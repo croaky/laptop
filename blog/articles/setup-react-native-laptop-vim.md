@@ -1,4 +1,4 @@
-# Laptop Setup and Vim Configuration for React Native
+# Setup for React Native
 
 React Native is a fast and efficient way to build iOS and Android apps.
 
@@ -9,33 +9,18 @@ React Native is a fast and efficient way to build iOS and Android apps.
 * Use existing text editor.
 * The compiled apps are native and performant.
 
-Even so, React Native has many parts to be learned, some optional.
-Reducing the early decisions to make can help build momentum and confidence.
 This article describes a MacOS laptop setup and Vim configuration
-for React Native to help folks get to working software faster.
-
-## Follow these decisions
-
-Yes, from the beginning:
+for React Native with:
 
 * ES6
+* ESLint
 * Expo
 * JSX
+* Jest
 * Prettier
 * React Navigation
-
-Soon, very soon:
-
-* Jest
-
-Not now, maybe later:
-
 * Redux
-* Flow or TypeScript
-
-Not necessary:
-
-* ESLint
+* TypeScript
 
 ## Install dependencies
 

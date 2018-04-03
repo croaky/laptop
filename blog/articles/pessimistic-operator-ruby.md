@@ -1,4 +1,4 @@
-# Ruby's Pessimistic Operator
+# Pessimistic Operator
 
 Ruby's pessimistic operator `~>` appears in `Gemfile`s:
 

@@ -1,4 +1,4 @@
-# Align Markdown Tables with Vim
+# Align Markdown Tables
 
 You want a table in your GitHub document:
 

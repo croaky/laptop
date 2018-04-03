@@ -1,4 +1,4 @@
-# Global .gitignore
+# ~/.gitignore
 
 Set a `.gitignore` file to apply across all projects on a local machine with:
 

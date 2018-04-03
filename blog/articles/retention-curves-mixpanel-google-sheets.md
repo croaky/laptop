@@ -1,4 +1,4 @@
-# Create a Retention Curve with Mixpanel and Google Sheets
+# Retention Curves with Mixpanel and Google Sheets
 
 Product retention is often measured using cohort reports with tools such as
 Amplitude, Google Analytics, iTunes Connect Analytics, or Mixpanel.

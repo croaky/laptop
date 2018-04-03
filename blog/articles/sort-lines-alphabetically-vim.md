@@ -1,4 +1,4 @@
-# Sort Lines Alphabetically with Vim
+# Sort Lines Alphabetically
 
 You are working in Vim.
 You come across this code:

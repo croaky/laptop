@@ -1,4 +1,4 @@
-# Test HTTP Errors with Ruby
+# Test HTTP Errors
 
 A common pattern in apps is handling failure by
 notifying an error-catching service such as [Airbrake].

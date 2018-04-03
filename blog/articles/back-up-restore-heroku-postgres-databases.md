@@ -1,4 +1,4 @@
-# Back Up and Restore Heroku Postgres Databases
+# Back Up and Restore Heroku Databases
 
 Configure staging and production Git remotes to
 point to Heroku applications:

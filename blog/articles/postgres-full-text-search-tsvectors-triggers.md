@@ -1,4 +1,4 @@
-# Optimize Postgres Full Text Search with tsvector Columns and Triggers
+# Full Text Search with tsvectors and Triggers
 
 Postgres full-text search is awesome
 but without tuning, searching large columns can be slow.

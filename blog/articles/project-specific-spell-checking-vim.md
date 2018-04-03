@@ -1,4 +1,4 @@
-# Avoid Team-Wide Spelling Mistakes with Vim
+# Project-Specific Spell Checking
 
 If you and your teammates use Vim,
 these techniques can help avoid spelling mistakes.

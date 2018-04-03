@@ -1,7 +1,7 @@
-# Fix Highest Priority Issues with Go
+# Go Meta Linter
 
 Pipe [linter] output to a [static analysis tool][used]
-to identify highest priority issues in a Go program.
+to find issues in a Go program.
 
 [linter]: https://github.com/alecthomas/gometalinter
 [used]: https://github.com/sqs/used

@@ -1,4 +1,4 @@
-# Run Specs with Vim
+# Run Tests in Vim
 
 Test driven development thrives on a tight feedback loop
 but switching from the editor to the shell

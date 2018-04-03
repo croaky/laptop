@@ -1,4 +1,4 @@
-# Polymorphic Activity Feed with Rails
+# Polymorphic Activity Feed
 
 You won't find "polymorphic partials" in Rails' API documentation but the
 general programming technique of [polymorphism][poly] can be applied to Rails

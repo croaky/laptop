@@ -1,4 +1,4 @@
-# Create Postgres Indexes Concurrently
+# Create Indexes Concurrently
 
 By default,
 Postgres' `CREATE INDEX` locks writes (but not reads) to a table.
