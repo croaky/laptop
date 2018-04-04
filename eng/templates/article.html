@@ -31,14 +31,22 @@
             </div>
           {{- end }}
 
-          <time datetime="{{.Published}}" class="lede__published-on">
+          <time datetime="{{.LastUpdated}}" class="index-article__published-on">
             {{.PublishedOn}}
 
             {{- if .Updated }}
-              <span class="meta-updated">last updated</span>
+              <span class="meta-updated">updated</span>
               {{.UpdatedOn}}
             {{- end }}
           </time>
+
+          {{- if .Tags }}
+            <div class="tags">
+              {{- range $tag := .Tags }}
+                <a href="/tags/{{$tag}}">{{$tag}}</a>&nbsp;
+              {{- end }}
+            </div>
+          {{- end }}
         </div>
       </header>
       {{.Body}}
