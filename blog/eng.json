@@ -410,14 +410,6 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/internship-or-apprenticeship",
-      "id": "internship-or-apprenticeship",
-      "published": "2011-12-14"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "canonical": "https://robots.thoughtbot.com/how-to-back-up-a-heroku-production-database-to-staging",
       "id": "back-up-restore-heroku-postgres-databases",
       "published": "2011-08-18",
