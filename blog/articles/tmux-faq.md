@@ -1,4 +1,4 @@
-# Tmux Frequently Asked Questions
+# Tmux FAQ
 
 Getting started with tmux, these are the questions I've had.
 
@@ -14,8 +14,9 @@ tmux -u
 
 ## Can I make the environment look good?
 
-Yes. We have these lines in `tmux.conf` in
-[thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):
+Yes. See these lines in `tmux.conf` of [statusok/dotfiles][c].
+
+[c]: https://github.com/statusok/statusok/blob/master/dotfiles/shell/tmux.conf
 
 ```
 # improve colors
