@@ -299,7 +299,8 @@
       "id": "create-postgres-indexes-concurrently",
       "published": "2013-07-30",
       "tags": [
-        "postgres"
+        "postgres",
+        "ruby"
       ]
     },
     {
@@ -353,7 +354,8 @@
       "id": "intercept-email-from-staging",
       "published": "2013-01-18",
       "tags": [
-        "infra"
+        "infra",
+        "ruby"
       ]
     },
     {
@@ -494,6 +496,7 @@
       "id": "mystery-guest",
       "published": "2009-07-28",
       "tags": [
+        "ruby",
         "test"
       ]
     },
