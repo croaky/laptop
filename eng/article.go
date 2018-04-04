@@ -82,13 +82,31 @@ func (a *Article) LastUpdated() string {
 	return a.Published
 }
 
-// LastUpdatedIn formats Updated as January 2, 2006
+// LastUpdatedIn formats LastUpdated as 2006 January
 func (a *Article) LastUpdatedIn() string {
 	t, err := time.Parse("2006-01-02", a.LastUpdated())
 	if err != nil {
 		return ""
 	}
 	return t.Format("2006 January")
+}
+
+// PublishedOn formats Published as January 2, 2006
+func (a *Article) PublishedOn() string {
+	t, err := time.Parse("2006-01-02", a.Published)
+	if err != nil {
+		return ""
+	}
+	return t.Format("January 2, 2006")
+}
+
+// UpdatedOn formats Updated as January 2, 2006
+func (a *Article) UpdatedOn() string {
+	t, err := time.Parse("2006-01-02", a.Updated)
+	if err != nil {
+		return ""
+	}
+	return t.Format("January 2, 2006")
 }
 
 func (a *Article) srcPath() string {
