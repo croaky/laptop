@@ -20,7 +20,7 @@ type Article struct {
 	Published string   `json:"published"`
 	Redirects []string `json:"redirects,omitempty"`
 	Tags      []string `json:"tags,omitempty"`
-	Updated   string   `json:"updated"`
+	Updated   string   `json:"updated,omitempty"`
 	Site      *Site    `json:"-"`
 }
 
