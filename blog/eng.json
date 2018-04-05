@@ -42,8 +42,11 @@
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/bin-setup",
-      "published": "2013-01-25",
       "id": "bin-setup",
+      "published": "2013-01-25",
+      "tags": [
+        "setup"
+      ],
       "updated": "2018-02-17"
     },
     {
@@ -85,8 +88,8 @@
         "/laptop-setup-and-vim-configuration-for-react-native"
       ],
       "tags": [
-        "laptop",
         "react",
+        "setup",
         "vim"
       ]
     },
@@ -237,7 +240,7 @@
       "published": "2014-06-18",
       "id": "laptop-setup-script",
       "tags": [
-        "laptop",
+        "setup",
         "unix"
       ]
     },
@@ -393,7 +396,8 @@
         "/global-gitignore"
       ],
       "tags": [
-        "git"
+        "git",
+        "setup"
       ]
     },
     {
@@ -520,7 +524,8 @@
       "id": "new-rails-projects-with-suspenders",
       "published": "2008-10-21",
       "tags": [
-        "ruby"
+        "ruby",
+        "setup"
       ]
     }
   ],
