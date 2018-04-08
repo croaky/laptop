@@ -125,16 +125,16 @@ export GOPATH="$HOME"
 
 # Set environment variables for monorepos
 export OK="$HOME/src/statusok"
-export CHAIN="$GOPATH/src/chain"
+export CHAIN="$HOME/src/chain"
+export ROOSTER="$HOME/src/roosterfantasy"
 
 # Change into most common directories
-export CDPATH="$CDPATH:$CHAIN:$OK:$GOPATH/src/github.com"
+export CDPATH="$CDPATH:$CHAIN:$OK:$ROOSTER:$GOPATH/src/github.com"
 
-# Prepend Status OK scripts
+# Prepend monorepo scripts
 PATH="$OK/bin:$PATH"
-
-# Prepend Chain scripts
 PATH="$CHAIN/bin:$PATH"
+PATH="$ROOSTER/bin:$PATH"
 
 # Prepend Go binaries
 PATH="$GOPATH/bin:$PATH"
