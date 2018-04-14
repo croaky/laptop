@@ -133,6 +133,8 @@ brew cask cleanup
 
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
+  mkdir -p "$HOME/.ssh"
+  ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
   ln -sf "$PWD/shell/zshenv" "$HOME/.zshenv"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
