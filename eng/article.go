@@ -91,18 +91,9 @@ func (a *Article) LastUpdatedIn() string {
 	return t.Format("2006 January")
 }
 
-// PublishedOn formats Published as January 2, 2006
-func (a *Article) PublishedOn() string {
-	t, err := time.Parse("2006-01-02", a.Published)
-	if err != nil {
-		return ""
-	}
-	return t.Format("January 2, 2006")
-}
-
-// UpdatedOn formats Updated as January 2, 2006
-func (a *Article) UpdatedOn() string {
-	t, err := time.Parse("2006-01-02", a.Updated)
+// LastUpdatedOn formats Updated as January 2, 2006
+func (a *Article) LastUpdatedOn() string {
+	t, err := time.Parse("2006-01-02", a.LastUpdated())
 	if err != nil {
 		return ""
 	}
