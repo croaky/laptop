@@ -120,9 +120,6 @@ brew cask cleanup
   ln -sf "$PWD/search/ignore" "$HOME/.agignore"
   ln -sf "$PWD/search/ctags" "$HOME/.ctags"
 
-  mkdir -p "$HOME/.zsh/completions"
-  ln -sf "$PWD/shell/completions/exercism.zsh" "$HOME/.zsh/completions/exercism.zsh"
-
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
   mkdir -p "$HOME/.ssh"
