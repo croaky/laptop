@@ -1,10 +1,11 @@
 # Alerts for Heroku Routing Errors
 
 Most errors in a web application can be sent to a third-party service
-such as Airbrake, Honeybadger, or New Relic
+such as [Sentry](https://sentry.io/),
 with its errors grouped by type and by deploy.
 
-An important class of errors
+On Heroku,
+an important class of errors
 never reach these services
 because they don't occur in the application's processes,
 they occur in the routing layer.
@@ -35,18 +36,16 @@ reliably includes the text `status=503` in the logs for these errors.
 
 ## Papertrail
 
-[Papertrail] is a logger with a good Heroku add-on.
+[Papertrail] is a logger with a Heroku add-on.
 
 [Papertrail]: https://devcenter.heroku.com/articles/papertrail
 
-Add and open it from your app with [Parity]:
+Add and open it:
 
 ```bash
-production addons:add papertrail
-production addons:open papertrail
+heroku addons:add papertrail
+heroku addons:open papertrail
 ```
-
-[Parity]: https://github.com/thoughtbot/parity
 
 * Search for `status=503` and click "Save Search".
 * Give it a name and click "Save & Setup an Alert".
