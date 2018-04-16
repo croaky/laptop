@@ -1,20 +1,21 @@
 # Fast Search in Vim
 
-We often search our projects for specific text within Vim like so:
+Projects can be searched for specific text within Vim:
 
 ```
 :grep sometext
 ```
 
-How can we `grep` faster?
+Can we `grep` faster?
 
 ## Override to use The Silver Searcher
 
-`grep` is a built-in command of Vim. By default, it will use our system's
-`grep` command. We can overwrite it to use [The Silver
-Searcher](https://github.com/ggreer/the_silver_searcher)'s `ag` command instead
-by putting this in [our
-`~/.vimrc`](https://github.com/thoughtbot/dotfiles/blob/master/vimrc):
+`grep` is a built-in command of Vim.
+By default, it will use the system's `grep` command.
+We can overwrite it to use
+[The Silver Searcher](https://github.com/ggreer/the_silver_searcher)'s
+`ag` command by putting this in
+[our `~/.vimrc`](https://github.com/statusok/statusok/blob/master/dotfiles/editor/vimrc):
 
 ```vim
 " The Silver Searcher
@@ -32,16 +33,15 @@ endif
 
 ## Search for the word under the cursor
 
-This searches for the text under the cursor and shows the results in a
-"quickfix" window:
+This searches for the text under the cursor
+and shows the results in a "quickfix" window:
 
-```
+```vim
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 ```
 
-It looks like this when we hit `K` with our cursor over `SubscriptionMailer`
-in the [Upcase](https://thoughtbot.com/upcase/join) repo:
+It looks like this when `K` is typed with the cursor over `SubscriptionMailer`:
 
 ![''](images/quickfix-under-cursor.png)
 
@@ -49,21 +49,21 @@ Cursor over each search result, hit `Enter`, and the file will be opened.
 
 ## Using `ag` arguments
 
-This defines a new command `Ag` to search for the provided text and open a
-"quickfix" window:
+This defines a new command `Ag` to search for the provided text
+and open a "quickfix" window:
 
 ```vim
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 ```
 
-We can map it to any character, such as `\`:
+Map it to any character, such as `\`:
 
 ```vim
 nnoremap \ :Ag<SPACE>
 ```
 
-When `\` is pressed, Vim waits for our input:
+When `\` is pressed, Vim waits for input:
 
 ```vim
 :Ag

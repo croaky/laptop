@@ -1,7 +1,5 @@
 # Feature Branch Code Reviews
 
-Updated February 2017.
-
 Put your face on the [Trello] card in the top of the "Next Up" column
 that represents a feature.
 Move the card to the "In Progress" column.
@@ -27,19 +25,13 @@ Push the feature to a branch:
 git push
 ```
 
-Open a pull request using [Hub]:
+Open a pull request.
 
-[Hub]: https://hub.github.com/
-
-```
-hub pr
-```
-
-A GitHub hook starts a [CircleCI] build.
-A GitHub webhook posts the pull request to the team [Slack] channel.
+A GitHub webhook starts a [CI] build.
+Another GitHub webhook posts the pull request to a team [Slack] channel.
 Move the Trello card to the "Code Review" column.
 
-[CircleCI]: https://circleci.com
+[CI]: https://www.martinfowler.com/articles/continuousIntegration.html
 [Slack]: https://slack.com
 
 A teammate clicks the link in the Slack channel.
@@ -69,28 +61,13 @@ Push to master:
 git push master
 ```
 
-CI runs again.
-Deploy to staging:
-
-```
-./bin/deploy staging
-```
-
-This is a project-dependent script wrapping commands.
-For a Ruby on Rails app, it might look like this:
-
-```
-heroku pg:backups capture --remote staging
-git push staging
-heroku run rake db:migrate --remote staging
-heroku restart --remote staging
-```
+Deploy to staging.
 
 Move the Trello card to the "Testing on Staging" column.
 Write acceptance criteria on the card.
 Ask a product owner for acceptance.
 
-## What's to like about feature branch code reviews
+## Benefits
 
 Test-Driven Development moves code failure earlier in the development process.
 It's better to have a failing test on a development machine than in production.
@@ -104,5 +81,3 @@ Code reviews right before code goes into master offer similar benefits:
 * Feedback from this style of code review is far more likely to be applied.
 * No one forgets context ("Why did we write this?") since it's fresh in the
   author's mind.
-
-Give it a shot!
