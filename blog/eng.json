@@ -4,6 +4,18 @@
       "author_ids": [
         "croaky"
       ],
+      "id": "laptop-setup-script",
+      "published": "2014-06-18",
+      "tags": [
+        "setup",
+        "unix"
+      ],
+      "updated": "2018-04-15"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "published": "2014-08-08",
       "id": "dns-cdn-origin",
       "tags": [
@@ -229,18 +241,6 @@
       "id": "tmux-only-for-long-running-processes",
       "published": "2014-07-17",
       "tags": [
-        "unix"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/laptop-setup-for-an-awesome-development-environment",
-      "published": "2014-06-18",
-      "id": "laptop-setup-script",
-      "tags": [
-        "setup",
         "unix"
       ]
     },

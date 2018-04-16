@@ -1,14 +1,10 @@
 #!/bin/bash
 
-# This script can be safefuly run multiple times on the same machine.
-
-# It installs, upgrades, or skips packages
-# based on what is already installed on the machine.
-
-# It creates symlinks of the dotfiles in this repo
-# to the `~/` (`$HOME`) directory.
-
-# Tested on macOS High Sierra (10.13).
+# This script can be run safely multiple times.
+# It's tested on macOS High Sierra (10.13). It:
+# - installs, upgrades, or skips system packages
+# - creates or updates symlinks from `$OK/dotfiles` to `$HOME`
+# - installs or updates programming languages such as Ruby, Node, and Go
 
 set -ex
 
@@ -46,10 +42,9 @@ case "$SHELL" in
 esac
 
 if ! command -v brew >/dev/null; then
-    curl -fsS \
-      'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
-
-    export PATH="/usr/local/bin:$PATH"
+  curl -fsS \
+    'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+  export PATH="/usr/local/bin:$PATH"
 fi
 
 brew update
@@ -59,7 +54,6 @@ tap "homebrew/services"
 tap "universal-ctags/universal-ctags"
 
 brew "awscli"
-brew "chromedriver", restart_service: :changed
 brew "git"
 brew "heroku"
 brew "hub"
@@ -67,9 +61,7 @@ brew "imagemagick"
 brew "jq"
 brew "libyaml"
 brew "openssl"
-brew "parity"
 brew "postgresql", restart_service: :changed
-brew "protobuf"
 brew "reattach-to-user-namespace"
 brew "redis", restart_service: :changed
 brew "shellcheck"
@@ -158,9 +150,6 @@ if [ -d "$HOME/.asdf" ]; then
 else
   git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
 fi
-
-# shellcheck source=/dev/null
-. "$HOME/.asdf/asdf.sh"
 
 asdf_plugin_update() {
   if ! asdf plugin-list | grep -Fq "$1"; then

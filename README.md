@@ -1,6 +1,6 @@
 # Status OK
 
-Set the `OK` environment variable:
+Set the `OK` environment variable to a directory of your choice:
 
 ```
 export OK="$HOME/src/statusok"
@@ -13,9 +13,9 @@ git clone https://github.com/statusok/statusok.git $OK
 cd $OK
 ```
 
-Review, then run, the install script:
+Review, then run, the script:
 
 ```
-vim install.sh
-./install.sh
+less laptop.sh
+./laptop.sh
 ```
