@@ -29,16 +29,12 @@ My::Application.configure do
     user_name: ENV.fetch("SENDGRID_USERNAME")
   }
 end
-```
 
-In `config/environments/staging.rb`:
-
-```ruby
-require_relative "production"
-
-Mail.register_interceptor(
-  RecipientInterceptor.new(ENV.fetch("EMAIL_RECIPIENTS"))
-)
+if ENV.has_key?("EMAIL_RECIPIENTS")
+  Mail.register_interceptor(
+    RecipientInterceptor.new(ENV.fetch("EMAIL_RECIPIENTS"))
+  )
+end
 ```
 
 Use the `EMAIL_RECIPIENTS` environment variable
@@ -47,5 +43,5 @@ to update the list of email addresses that should receive staging emails.
 For example:
 
 ```
-heroku config:add EMAIL_RECIPIENTS="staging@example.com" --remote staging
+heroku config:add EMAIL_RECIPIENTS="staging@example.com"
 ```
