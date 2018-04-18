@@ -7,13 +7,13 @@ Compound elements are named and manipulated as units, creating abstractions.
 
 Prefix notation prefixes operands, no ambiguity, always leftmost element.
 
-```
+```lisp
 (+ 25 4 12)
 ```
 
 Combinations are nested.
 
-```
+```lisp
 (+ (* 3 5) (- 10 6))
 ```
 
@@ -21,7 +21,7 @@ Combinations are nested.
 
 Interpreter associates value `2` with name `size`:
 
-```
+```lisp
 define size 2
 ```
 
@@ -45,7 +45,7 @@ To evaluate combinations, interpreter itself follows a procedure:
 Important points about processes: first step means first perform eval process on
 each element of the combination. Thus, eval rule is recursive in nature.
 
-```
+```lisp
 (* (+ 2 (* 4 6))
    (+ 3 5 7))
 ```
@@ -76,7 +76,7 @@ associated eval rule, consistitute the syntax of the programming language.
 
 Procedure definitions:
 
-```
+```lisp
 (define (square x) (* x x))
 ```
 
@@ -86,7 +86,7 @@ name `x`, same as a pronoun in natural language.
 
 The general form of proc definition is:
 
-```
+```lisp
 (define (<name> <formal parameters>) <body>)
 ```
 
@@ -96,7 +96,7 @@ arguments of proc. `body` is an expression that yields value of proc application
 when formal params are replaced by args to which proc is applied. `name` and
 `params` are grouped within parens in definition same as during call to proc.
 
-```
+```lisp
 (square 21)
 (square (+ 2 5))
 (square (square 3))
@@ -105,7 +105,7 @@ when formal params are replaced by args to which proc is applied. `name` and
 
 A compound proc using a compound proc:
 
-```
+```lisp
 (define (sum-of-squares x y)
   (+ (square x) (square y)))
 (sum-of-squares 3 4)
@@ -143,7 +143,7 @@ Lisp uses applicative-order.
 
 Case analysis:
 
-```
+```lisp
 (define (abs x)
   (cond ((> x 0) x)
         ((= x 0) 0)
@@ -170,7 +170,7 @@ The `abs` proc uses primitive predicates `>`, `<`, and `=`.
 
 Another way to write `abs`:
 
-```
+```lisp
 (define (abs x)
  (if (< x 0)
  (- x)
@@ -182,13 +182,13 @@ are precisely two cases in the case analysis.
 
 The general form of an if expression is:
 
-```
+```lisp
 (if <predicate> <consequent> <alternative>)
 ```
 
 Logical composition operations:
 
-```
+```lisp
 (and <e 1 > ... <e n >)
 (or <e 1 > ... <e n >)
 (not <e>)
@@ -207,7 +207,7 @@ given guess `y` for the square root of a number `x`,
 get a better guess (one closer to the actual square root)
 by averaging `y` with `x / y`.
 
-```
+```lisp
 (define (sqrt x)
   (sqrt-iter 1.0 x))
 
