@@ -35,8 +35,8 @@ This memory is called the global environment.
 
 ## 1.1.3 Evaluating Combinations
 
-A goal of chapter is to think procedurally.
-To evaluated combations, interpreter itself follows a procedure:
+A goal of this chapter is to think procedurally.
+To evaluate combinations, interpreter itself follows a procedure:
 
 1. Evaluate subexpressions of combination
 2. Apply procedure that is the value of the leftmost subexpression (operator)
@@ -196,3 +196,33 @@ Logical composition operations:
 
 `and` and `or` are special forms, not procs, because subexpressions are not
 necessarily all evaluated. `not` is an ordinary proc.
+
+## 1.1.7 Square Roots by Newton's Method
+
+Mathematical functions describe properties of things (declarative knowledge).
+Computer procedures describe how to do things (imperative knowledge).
+
+Square roots can be computed with Newton's method of successive approximations:
+given guess `y` for the square root of a number `x`,
+get a better guess (one closer to the actual square root)
+by averaging `y` with `x / y`.
+
+```
+(define (sqrt x)
+  (sqrt-iter 1.0 x))
+
+(define (sqrt-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x)
+                 x)))
+
+(define (good-enough? guess x)
+  (< (abs (- (square guess) x)) 0.001))
+
+(define (improve guess x)
+  (average guess (/ x guess)))
+
+(define (average x y)
+  (/ (+ x y) 2))
+```
