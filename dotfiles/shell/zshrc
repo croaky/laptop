@@ -9,14 +9,6 @@ alias path='echo $PATH | tr -s ":" "\n"'
 alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid; launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias v='vim'
 
-# Change file extensions recursively in current directory
-# change-extension erb haml
-function change-extension() {
-  foreach f (**/*.$1)
-    mv $f $f:r.$2
-  end
-}
-
 # Clone a Git repo into Go-compatible directory structure.
 # clone https://github.com/statusok/eng
 function clone() {
@@ -24,17 +16,17 @@ function clone() {
   user=$(echo "$1" | cut -d / -f 4)
   repo=$(echo "$1" | cut -d / -f 5)
 
-  cd "$GOPATH/src/$host"
+  cd "$GOPATH/src/$host" || exit
   mkdir -p "$user"
-  cd "$user"
+  cd "$user" || exit
   git clone "git@$host:$user/$repo".git
-  cd "$repo"
+  cd "$repo" || exit
 }
 
 # Load .env file into shell session for environment variables
 function envup() {
   if [ -f .env ]; then
-    export $(cat .env)
+    export "$(cat .env)"
   else
     echo 'No .env file found' 1>&2
     return 1
@@ -54,7 +46,7 @@ function g() {
 function c() {
   if [[ $# -gt 0 ]]; then
     branch="$(whoami)/$1"
-    git create-branch $branch
+    git create-branch "$branch"
   else
     echo 'usage: c feature-name'
   fi
