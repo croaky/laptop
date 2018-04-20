@@ -52,11 +52,6 @@ function c() {
   fi
 }
 
-# Color
-autoload -U colors
-colors
-export CLICOLOR=1
-
 # Editor
 export VISUAL=vim
 export EDITOR=$VISUAL
@@ -67,17 +62,10 @@ HISTFILE=~/.zhistory
 HISTSIZE=4096
 SAVEHIST=4096
 
-# Keybindings
-stty -ixon
-bindkey -v
-bindkey "^R" history-incremental-search-backward
-
-# cd movements from zshkit
-setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
-DIRSTACKSIZE=5
-
-# Enable extended globbing
-setopt extendedglob
+# Color
+autoload -U colors
+colors
+export CLICOLOR=1
 
 # Prompt
 function git_prompt_info() {
@@ -89,7 +77,7 @@ function git_prompt_info() {
 setopt promptsubst
 
 if ! env | grep -q '^PS1='; then
-  PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
+  PS1='%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
 fi
 
 # Completion
