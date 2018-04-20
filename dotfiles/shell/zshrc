@@ -7,7 +7,6 @@ alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias mkdir="mkdir -p"
 alias path='echo $PATH | tr -s ":" "\n"'
 alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid; launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
-alias s="rspec"
 alias v='vim'
 
 # Change file extensions recursively in current directory
@@ -79,15 +78,7 @@ SAVEHIST=4096
 # Keybindings
 stty -ixon
 bindkey -v
-bindkey "^F" vi-cmd-mode
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
-bindkey "^K" kill-line
 bindkey "^R" history-incremental-search-backward
-bindkey "^P" history-search-backward
-bindkey "^Y" accept-and-hold
-bindkey "^N" insert-last-word
-bindkey "^Q" push-line-or-edit
 
 # cd movements from zshkit
 setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
@@ -95,9 +86,6 @@ DIRSTACKSIZE=5
 
 # Enable extended globbing
 setopt extendedglob
-
-# Allow [ or ] wherever you want
-unsetopt nomatch
 
 # Prompt
 function git_prompt_info() {
@@ -115,10 +103,6 @@ fi
 # Completion
 autoload -U compinit
 compinit
-
-if [ -f ~/.zsh/completions/exercism.zsh ]; then
-  . ~/.zsh/completions/exercism.zsh
-fi
 
 # Set GOPATH `go help gopath`
 export GOPATH="$HOME"
