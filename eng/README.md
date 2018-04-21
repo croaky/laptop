@@ -37,10 +37,11 @@ Explore generated files:
 
 ```
 example-site
-├── README.md
 ├── articles
 ├── public
       └── images
+├── .gitignore
+├── README.md
 ├── eng.json
 ```
 

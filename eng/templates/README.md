@@ -1,9 +1,9 @@
 # {{.Name}}
 
-A static site.
+A static blog.
 
 ## Workflow
 
 See [documentation][docs].
 
-[docs]: https://github.com/statusok/eng
+[docs]: https://github.com/statusok/statusok/tree/master/eng

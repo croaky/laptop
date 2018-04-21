@@ -51,6 +51,12 @@ func Init(name string) error {
 	err = s.createArticlesDir()
 	printError(err)
 
+	err = s.createImagesDir()
+	printError(err)
+
+	err = s.createGitIgnoreFile()
+	printError(err)
+
 	return nil
 }
 
@@ -228,6 +234,14 @@ func (s *Site) createREADME() error {
 
 func (s *Site) createArticlesDir() error {
 	return os.Mkdir(s.articlesDir(), os.ModePerm)
+}
+
+func (s *Site) createImagesDir() error {
+	return os.MkdirAll(s.RootDir+"/public/images", os.ModePerm)
+}
+
+func (s *Site) createGitIgnoreFile() error {
+	return s.executeTemplate(".gitignore", s)
 }
 
 func (s *Site) createPublicDirs() error {
