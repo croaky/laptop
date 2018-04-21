@@ -1,16 +1,22 @@
 # Eng
 
-A minimal static site generator,
-ideal for software engineering blogs.
-
-1. Markdown files without front matter
-1. All configuration in `eng.json` file
-1. Local preview server
-1. Responsive, high-performance theme
-1. Atom feed
-1. Images
+A static blog generator.
 
 [Example](https://www.statusok.com)
+
+* Markdown files without front matter
+* Single `eng.json` config file
+* Single theme
+* Responsive design
+* PageSpeed Insights score of 100
+* Local preview server
+* Tags
+* Images
+* Multiple authors
+* Redirects
+* Atom feed
+* "Edit article" footer links
+* "Last updated" timestamp
 
 ## Install
 
@@ -33,6 +39,8 @@ Explore generated files:
 example-site
 ├── README.md
 ├── articles
+├── public
+      └── images
 ├── eng.json
 ```
 
@@ -72,14 +80,20 @@ articles
 
 Configure site in `eng.json`:
 
-```
+```json
 {
   "articles": [
     {
-      "author_ids": ["croaky"],
-      "id": "test-spies-vs-mocks",
-      "published": "2015-03-19",
-      "redirects": ["/a-closer-look-at-test-spies"]
+      "author_ids": [
+        "croaky"
+      ],
+      "id": "laptop-setup-script",
+      "published": "2014-06-18",
+      "tags": [
+        "setup",
+        "unix"
+      ],
+      "updated": "2018-04-15"
     },
     {
       "author_ids": [
@@ -89,7 +103,22 @@ Configure site in `eng.json`:
       "canonical": "https://robots.thoughtbot.com/north-star-metric",
       "id": "north-star-metric",
       "published": "2014-12-25",
-      "updated": "2018-01-29"
+      "tags": [
+        "growth"
+      ]
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "id": "decorators-ruby",
+      "published": "2011-12-26",
+      "redirects": [
+        "/implement-decorators-with-ruby"
+      ],
+      "tags": [
+        "ruby"
+      ]
     },
   ],
   "authors": [
@@ -110,8 +139,15 @@ Configure site in `eng.json`:
 }
 ```
 
+## Images
+
 Add images to the `public/images` directory.
-Refer to them in articles via relative path (`![](images/example.png)`).
+Refer to them in articles via relative path:
+
+```md
+![](images/example.png)
+```
+
 Commit them to version control.
 
 ## Publish
