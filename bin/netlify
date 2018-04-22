@@ -8,5 +8,5 @@ go get github.com/mitchellh/gox
 (
   cd gen
   gox -osarch="linux/amd64"
-  mv eng_linux_amd64 "$OK/blog/gen"
+  mv gen_linux_amd64 "$OK/blog/gen"
 )
