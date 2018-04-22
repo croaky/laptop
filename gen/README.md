@@ -26,29 +26,22 @@ go get github.com/statusok/statusok/gen
 
 ## Setup
 
-Initialize blog:
-
 ```
-gen init example-blog
+gen blog example-blog
 cd example-blog
 ```
 
 ## Workflow
 
-Create and edit an article:
-
 ```
-gen new article-url-slug
-$EDITOR articles/article-url-slug.md
-```
-
-Run a local server and preview in a browser at <http://localhost:2000>:
-
-```
+gen article example-article
+$EDITOR articles/example-article.md
 gen serve
 ```
 
-Configure `gen.json`:
+Preview at <http://localhost:2000>.
+
+Configure in `gen.json`:
 
 ```json
 {

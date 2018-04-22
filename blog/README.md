@@ -5,13 +5,13 @@ Blog posts on software engineering.
 ## Workflow
 
 ```
-gen local
-open http://localhost:2000
-gen new article-slug
-vim articles/article-slug.md
+gen article example-article
+$EDITOR articles/example-article.md
+gen serve
 ```
 
-Configure site in `gen.json`.
+Preview at <http://localhost:2000>.
+Configure in `gen.json`.
 See [Editorial Calendar][cal]
 and [publishing instructions][publish].
 

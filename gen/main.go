@@ -4,11 +4,11 @@ Command gen generates a static blog.
 
 Initialize blog:
 
-  gen init <blog-directory-name>
+  gen blog <blog-directory-name>
 
 Create an article:
 
-  gen new <article-url-slug>
+  gen article <article-url-slug>
 
 Run a local server:
 
@@ -32,13 +32,13 @@ func main() {
 		usage()
 	}
 	switch os.Args[1] {
-	case "init":
+	case "blog":
 		if len(os.Args) != 3 {
 			usage()
 		}
 		name := os.Args[2]
 		Init(name)
-	case "new":
+	case "article":
 		if len(os.Args) != 3 {
 			usage()
 		}
@@ -71,8 +71,8 @@ func usage() {
 }
 
 const usageString = `usage:
-  gen init <site-directory-name>
-  gen new <article-url-slug>
+  gen blog <blog-directory-name>
+  gen article <article-url-slug>
   gen serve
   gen build
 `
