@@ -50,7 +50,7 @@ example-site
 Run a local server:
 
 ```
-gen local
+gen serve
 ```
 
 Preview in a browser:

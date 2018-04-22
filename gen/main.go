@@ -27,7 +27,7 @@ func main() {
 			log.Fatal(err)
 		}
 		NewSite(dir).InitArticle(name)
-	case "local":
+	case "serve":
 		dir, err := os.Getwd()
 		if err != nil {
 			log.Fatal(err)
@@ -52,6 +52,6 @@ func usage() {
 const usageString = `usage:
   gen init <site-directory-name>
   gen new <article-url-slug>
-  gen local
+  gen serve
   gen build
 `
