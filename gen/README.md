@@ -26,53 +26,29 @@ go get github.com/statusok/statusok/gen
 
 ## Setup
 
-Initialize site:
+Initialize blog:
 
 ```
-gen init example-site
-cd example-site
-```
-
-Explore generated files:
-
-```
-example-site
-├── articles
-├── public
-      └── images
-├── .gitignore
-├── README.md
-├── gen.json
+gen init example-blog
+cd example-blog
 ```
 
 ## Workflow
 
-Run a local server:
+Create and edit an article:
+
+```
+gen new article-url-slug
+$EDITOR articles/article-url-slug.md
+```
+
+Run a local server and preview in a browser at <http://localhost:2000>:
 
 ```
 gen serve
 ```
 
-Preview in a browser:
-
-```
-open http://localhost:2000
-```
-
-Create an article:
-
-```
-gen new article-slug
-```
-
-See articles in the `articles` directory:
-
-```
-articles
-  └── article-slug.md
-```
-
-Configure site in `gen.json`:
+Configure `gen.json`:
 
 ```json
 {
@@ -146,11 +122,11 @@ Commit them to version control.
 
 ## Publish
 
-Configure [Netlify] to link to the [GitHub] repository with these settings:
+Configure [Netlify] with these settings:
 
 [Netlify]: https://www.netlify.com
-[GitHub]: https://github.com
 
+* Repository: `https://github.com/owner/repo`
 * Branch: `master`
 * Build Cmd: `go get github.com/statusok/statusok/gen && $GOPATH/bin/gen build`
 * Public folder: `public`

@@ -2,11 +2,20 @@
 
 Command gen generates a static blog.
 
-USAGE
+Initialize blog:
 
-  gen init <site-directory-name>
+  gen init <blog-directory-name>
+
+Create an article:
+
   gen new <article-url-slug>
+
+Run a local server:
+
   gen serve
+
+Build static HTML to `public/`:
+
   gen build
 
 */
