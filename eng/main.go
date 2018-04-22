@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"gopkg.in/urfave/cli.v1" // imports as package "cli"
-	"statusok/eng"
 )
 
 var port string
@@ -13,7 +12,7 @@ var port string
 func main() {
 	app := cli.NewApp()
 	app.Name = "eng"
-	app.Usage = "Generate a minimalist static site."
+	app.Usage = "Generate a static blog."
 	app.Version = "0.0.0"
 
 	app.Commands = []cli.Command{
@@ -62,7 +61,7 @@ func initCommand(c *cli.Context) error {
 		return cli.NewExitError("Usage: eng init <site-directory-name>", 1)
 	}
 
-	eng.Init(name)
+	Init(name)
 	return nil
 }
 
@@ -77,7 +76,7 @@ func localCommand(c *cli.Context) error {
 		port = "2000"
 	}
 
-	s := eng.NewSite(dir)
+	s := NewSite(dir)
 	s.Serve(port)
 	return nil
 }
@@ -96,13 +95,13 @@ func newCommand(c *cli.Context) error {
 	}
 
 	dir, _ := os.Getwd()
-	s := eng.Site{RootDir: dir}
+	s := Site{RootDir: dir}
 	s.InitArticle(name)
 	return nil
 }
 
 func buildCommand(c *cli.Context) {
 	dir, _ := os.Getwd()
-	s := eng.Site{RootDir: dir}
+	s := Site{RootDir: dir}
 	s.Build()
 }
