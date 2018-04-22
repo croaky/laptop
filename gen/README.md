@@ -159,7 +159,7 @@ Configure [Netlify] to link to the [GitHub] repository with these settings:
 [GitHub]: https://github.com
 
 * Branch: `master`
-* Build Cmd: `gen build`
+* Build Cmd: `go get github.com/statusok/statusok/gen && $GOPATH/bin/gen build`
 * Public folder: `public`
 
 To publish articles, commit to the Git repo:
