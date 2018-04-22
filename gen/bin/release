@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+# Run this script to release binaries to GitHub
+
+set -ex
+
+go get github.com/mitchellh/gox
+(
+  cd "$OK/gen"
+  gox -osarch="darwin/amd64 linux/amd64"
+)

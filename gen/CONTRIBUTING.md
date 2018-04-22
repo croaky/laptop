@@ -20,11 +20,10 @@ Test the packages:
 go test -v -race ./...
 ```
 
-Create a binary for Netlify:
+Embed templates into Go program:
 
 ```
-./bin/embed
-./bin/netlify
+$OK/gen/bin/embed
 ```
 
 Make your change with new passing tests.
