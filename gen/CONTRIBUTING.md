@@ -2,7 +2,7 @@
 
 Get a working [Go installation].
 Fork the repo.
-Clone the project into your [Go work environment] at `$GOPATH/src/statusok`.
+Clone the project into your [Go work environment].
 
   [Go installation]: http://golang.org/doc/install
   [Go work environment]: http://golang.org/doc/code.html
