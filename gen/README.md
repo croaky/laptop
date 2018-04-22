@@ -45,13 +45,6 @@ example-site
 ├── gen.json
 ```
 
-See all subcommands and flags:
-
-```
-gen help
-gen help subcommand
-```
-
 ## Workflow
 
 Run a local server:
