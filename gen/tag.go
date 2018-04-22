@@ -28,7 +28,8 @@ func (t *Tag) Build() {
 	if err != nil {
 		printError(err)
 	} else {
-		tagIndexToHTML(f, t)
+		err := tagPage.Execute(f, t)
+		printError(err)
 	}
 }
 

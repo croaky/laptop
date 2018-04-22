@@ -9,6 +9,7 @@ import (
 	"os"
 	"path"
 	"strings"
+	"text/template"
 	"time"
 
 	"github.com/gorilla/feeds"
@@ -38,25 +39,12 @@ func NewSite(name string) *Site {
 // Init initializes a site
 func Init(name string) error {
 	s := NewSite(name)
-
-	err := s.createRootDir()
-	printError(err)
-
-	err = s.createConfigFile()
-	printError(err)
-
-	err = s.createREADME()
-	printError(err)
-
-	err = s.createArticlesDir()
-	printError(err)
-
-	err = s.createImagesDir()
-	printError(err)
-
-	err = s.createGitIgnoreFile()
-	printError(err)
-
+	printError(os.Mkdir(s.RootDir, os.ModePerm))
+	printError(os.Mkdir(s.articlesDir(), os.ModePerm))
+	printError(os.MkdirAll(s.RootDir+"/public/images", os.ModePerm))
+	printError(s.createREADME())
+	printError(s.createGitIgnore())
+	printError(s.createConfigFile())
 	return nil
 }
 
@@ -64,14 +52,13 @@ func Init(name string) error {
 func (s *Site) Build() {
 	s.loadConfig(nil)
 
-	err := s.createPublicDirs()
-	printError(err)
+	printError(os.MkdirAll(s.RootDir+"/public/tags", os.ModePerm))
 
 	f, err := os.Create("public/index.html")
 	if err != nil {
 		printError(err)
 	} else {
-		indexToHTML(f, s)
+		printError(indexPage.Execute(f, s))
 	}
 
 	f, err = os.Create("public/feed.atom")
@@ -181,7 +168,7 @@ func (s *Site) handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("[gen] " + r.Method + " " + r.URL.Path)
 	switch {
 	case r.URL.Path == "/":
-		indexToHTML(w, s)
+		printError(indexPage.Execute(w, s))
 	case r.URL.Path == "/feed.atom":
 		indexToAtom(w, s)
 	case r.URL.Path == "/favicon.ico":
@@ -189,7 +176,7 @@ func (s *Site) handler(w http.ResponseWriter, r *http.Request) {
 	case strings.HasPrefix(r.URL.Path, "/tags/"):
 		_, name := path.Split(r.URL.Path)
 		tag := Tag{Name: name, Site: s}
-		tagIndexToHTML(w, &tag)
+		printError(tagPage.Execute(w, &tag))
 	case strings.HasPrefix(r.URL.Path, "/images/"):
 		_, filename := path.Split(r.URL.Path)
 		image := s.RootDir + "/public/images/" + filename
@@ -220,50 +207,81 @@ func (s *Site) findArticle(id string) Article {
 	return Article{}
 }
 
-func (s *Site) createRootDir() error {
-	return os.Mkdir(s.RootDir, os.ModePerm)
-}
-
-func (s *Site) createConfigFile() error {
-	return s.executeTemplate("gen.json", s)
-}
-
-func (s *Site) createREADME() error {
-	return s.executeTemplate("README.md", s)
-}
-
-func (s *Site) createArticlesDir() error {
-	return os.Mkdir(s.articlesDir(), os.ModePerm)
-}
-
-func (s *Site) createImagesDir() error {
-	return os.MkdirAll(s.RootDir+"/public/images", os.ModePerm)
-}
-
-func (s *Site) createGitIgnoreFile() error {
-	return s.executeTemplate(".gitignore", s)
-}
-
-func (s *Site) createPublicDirs() error {
-	return os.MkdirAll(s.RootDir+"/public/tags", os.ModePerm)
-}
-
 func (s *Site) createRedirects() error {
 	f, err := os.Create("public/_redirects")
 	printError(err)
 
-	tmpl := parseTextTemplate("_redirects")
+	tmpl := template.Must(
+		template.
+			New("redirects").
+			Parse(`{{ range $article := .Articles -}}
+{{ range .Redirects -}}
+{{ . }} /{{ $article.ID }}
+{{ end -}}
+{{ end -}}`),
+	)
 
 	return tmpl.Execute(f, s)
 }
 
-func (s *Site) executeTemplate(name string, data interface{}) error {
-	f, err := os.Create(s.RootDir + "/" + name)
+func (s *Site) createREADME() error {
+	f, err := os.Create(s.RootDir + "/README.md")
 	printError(err)
 
-	tmpl := parseTextTemplate(name)
+	tmpl := template.Must(
+		template.
+			New("readme").
+			Parse(`# {{.Name}}
 
-	return tmpl.Execute(f, data)
+A static blog.
+
+## Workflow
+
+See [documentation][docs].
+
+[docs]: https://github.com/statusok/statusok/tree/master/gen`),
+	)
+
+	return tmpl.Execute(f, s)
+}
+
+func (s *Site) createGitIgnore() error {
+	f, err := os.Create(s.RootDir + "/.gitignore")
+	printError(err)
+
+	tmpl := template.Must(
+		template.
+			New("gitignore").
+			Parse(`public/*
+!public/images`),
+	)
+
+	return tmpl.Execute(f, s)
+}
+
+func (s *Site) createConfigFile() error {
+	f, err := os.Create(s.RootDir + "/gen.json")
+	printError(err)
+
+	tmpl := template.Must(
+		template.
+			New("gen").
+			Parse(`{
+  "authors": [
+    {{- range .Authors }}
+    {
+      "id": "{{.ID}}",
+      "name": "{{.Name}}",
+      "url": "{{.URL}}"
+    }
+    {{- end }}
+  ],
+  "name": "{{.Name}}",
+  "url": "{{.URL}}"
+}`),
+	)
+
+	return tmpl.Execute(f, s)
 }
 
 func (s *Site) articlesDir() string {

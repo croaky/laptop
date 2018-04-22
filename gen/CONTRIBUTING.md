@@ -20,12 +20,6 @@ Test the packages:
 go test -v -race ./...
 ```
 
-Embed templates into Go program:
-
-```
-$OK/gen/bin/embed
-```
-
 Make your change with new passing tests.
 Push to your fork.
 Write a [good commit message][commit].

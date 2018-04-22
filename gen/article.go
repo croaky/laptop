@@ -38,7 +38,7 @@ func (a *Article) Build(s *Site) {
 		printError(err)
 	} else {
 		a.Site = s
-		templatizeArticle(f, a)
+		printError(articlePage.Execute(f, a))
 	}
 }
 
@@ -48,7 +48,7 @@ func (a *Article) Serve(w http.ResponseWriter, s *Site) {
 		fmt.Fprintf(w, "404")
 	} else {
 		a.Site = s
-		templatizeArticle(w, a)
+		printError(articlePage.Execute(w, a))
 	}
 }
 
