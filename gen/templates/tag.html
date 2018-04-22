@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.Name}}</title>
+  <link rel="alternate" href="feed.atom" type="application/atom+xml" />
+  {{template "style" .}}
+  {{template "favicon" .}}
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="/">
+        {{.Site.Name}} &larr;
+      </a>
+    </nav>
+
+    <article>
+      <header class="lede">
+        <h1 class="lede__headline">{{.Name}}</h1>
+      </header>
+    </article>
+
+    <main>
+      {{- range .Articles }}
+        <div class="index-article">
+          <a href="/{{.ID}}" class="index-article__link">
+            {{.Title}}
+          </a>
+
+          <div class="index-article__byline">
+            <time datetime="{{.LastUpdated}}" class="index-article__published-on">
+              {{.LastUpdatedIn}}
+            </time>
+          </div>
+        </div>
+      {{- end }}
+    <main>
+  </div>
+</body>
+</html>

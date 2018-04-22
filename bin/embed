@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 
-# Run this script anytime eng/templates/* are updated.
+# Run this script anytime gen/templates/* are updated.
 
 set -e
 
 go get github.com/GeertJohan/go.rice
 go get github.com/GeertJohan/go.rice/rice
 (
-  cd eng
+  cd gen
   rice embed-go
 )

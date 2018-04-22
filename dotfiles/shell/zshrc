@@ -10,7 +10,7 @@ alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid; launchctl unl
 alias v='vim'
 
 # Clone a Git repo into Go-compatible directory structure.
-# clone https://github.com/statusok/eng
+# clone https://github.com/statusok/statusok
 function clone() {
   host=$(echo "$1" | cut -d / -f 3)
   user=$(echo "$1" | cut -d / -f 4)

@@ -6,7 +6,7 @@ set -ex
 
 go get github.com/mitchellh/gox
 (
-  cd eng
+  cd gen
   gox -osarch="linux/amd64"
-  mv eng_linux_amd64 "$OK/blog/eng"
+  mv eng_linux_amd64 "$OK/blog/gen"
 )

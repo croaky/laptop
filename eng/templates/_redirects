@@ -1,5 +1,0 @@
-{{ range $article := .Articles -}}
-{{ range .Redirects -}}
-{{ . }} /{{ $article.ID }}
-{{ end -}}
-{{ end -}}

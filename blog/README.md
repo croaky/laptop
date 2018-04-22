@@ -5,15 +5,15 @@ Blog posts on software engineering.
 ## Workflow
 
 ```
-eng local
+gen local
 open http://localhost:2000
-eng new article-slug
+gen new article-slug
 vim articles/article-slug.md
 ```
 
-Configure site in `eng.json`.
+Configure site in `gen.json`.
 See [Editorial Calendar][cal]
 and [publishing instructions][publish].
 
 [cal]: https://github.com/statusok/statusok/projects/3?fullscreen=true
-[publish]: ../eng#publish
+[publish]: ../gen#publish
