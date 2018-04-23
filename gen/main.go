@@ -36,30 +36,33 @@ func main() {
 		if len(os.Args) != 3 {
 			usage()
 		}
-		name := os.Args[2]
-		Init(name)
+		Init(os.Args[2])
 	case "article":
 		if len(os.Args) != 3 {
 			usage()
 		}
-		name := os.Args[2]
 		dir, err := os.Getwd()
 		if err != nil {
 			log.Fatal(err)
 		}
-		NewBlog(dir).InitArticle(name)
+		blog := &Blog{RootDir: dir}
+		blog.loadConfig()
+		blog.InitArticle(os.Args[2])
 	case "serve":
 		dir, err := os.Getwd()
 		if err != nil {
 			log.Fatal(err)
 		}
-		NewBlog(dir).Serve("2000")
+		blog := &Blog{RootDir: dir}
+		blog.loadConfig()
+		blog.Serve("2000")
 	case "build":
 		dir, err := os.Getwd()
 		if err != nil {
 			log.Fatal(err)
 		}
-		NewBlog(dir).Build()
+		blog := &Blog{RootDir: dir}
+		blog.Build()
 	default:
 		usage()
 	}

@@ -25,34 +25,24 @@ type Blog struct {
 	URL       string    `json:"url"`
 }
 
-// NewBlog constructs a new blog from root directory
-// and gen.json config file within root directory
-func NewBlog(name string) *Blog {
-	return &Blog{
+// Init initializes a blog.
+func Init(name string) {
+	blog := &Blog{
 		Authors: []Author{NewAuthor()},
 		Name:    toTitle(name),
 		RootDir: name,
 		URL:     "https://blog.example.com",
 	}
-}
-
-// Init initializes a blog.
-func Init(name string) {
-	blog := NewBlog(name)
 	must(os.Mkdir(blog.RootDir, os.ModePerm))
 	must(os.Mkdir(blog.articlesDir(), os.ModePerm))
 	must(blog.createREADME())
 	must(blog.createGitIgnore())
 	must(blog.createConfigFile())
-	dir, err := os.Getwd()
-	must(err)
-	fmt.Println("[gen] Initialized blog at", dir+"/"+blog.RootDir)
+	fmt.Println("[gen] Created blog at", "./"+blog.RootDir)
 }
 
 // Build HTML for the blog.
 func (blog *Blog) Build() {
-	blog.loadConfig()
-
 	must(os.MkdirAll(blog.RootDir+"/public/tags", os.ModePerm))
 
 	f, err := os.Create("public/index.html")
@@ -77,7 +67,6 @@ func (blog *Blog) Build() {
 
 // Serve the blog over HTTP
 func (blog *Blog) Serve(port string) {
-	blog.loadConfig()
 	blog.URL = "http://localhost:" + port
 	fmt.Println("[gen] Serving blog at " + blog.URL)
 	http.HandleFunc("/", blog.handler)
@@ -102,6 +91,7 @@ func (blog *Blog) InitArticle(slug string) {
 	}
 	blog.Articles = append([]Article{a}, blog.Articles...)
 	blog.writeConfig()
+	fmt.Println("[gen] Created article at", "./"+a.srcPath())
 }
 
 // Tags is a collection of blog tags and their counts
@@ -122,10 +112,7 @@ func (blog *Blog) Tags() map[string]int {
 
 func (blog *Blog) loadConfig() {
 	config, err := ioutil.ReadFile(blog.RootDir + "/gen.json")
-	if err != nil {
-		fmt.Println("[gen] Warning: no gen.json config file")
-		config = []byte("{}")
-	}
+	must(err)
 	must(json.Unmarshal(config, &blog))
 }
 

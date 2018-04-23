@@ -57,8 +57,7 @@ var articlePage = template.Must(template.New("article").Parse(`<!DOCTYPE html>
 		}
 
 		h2 {
-			line-height: 26px;
-			margin: 2rem 0 1.5rem;
+			margin: 1.5rem 0 1rem;
 		}
 
 		p,
