@@ -1,6 +1,140 @@
 package main
 
-import "html/template"
+import (
+	"fmt"
+	"html/template"
+	"io"
+	"time"
+
+	"github.com/gorilla/feeds"
+)
+
+func indexAtom(w io.Writer, blog *Blog) {
+	feed := feeds.Feed{
+		Title:   blog.Name,
+		Link:    &feeds.Link{Href: blog.URL},
+		Updated: time.Now(),
+	}
+
+	for _, a := range blog.Articles {
+		published, err := time.Parse("2006-01-02", a.Published)
+
+		if err == nil {
+			item := &feeds.Item{
+				Created: published,
+				Link:    &feeds.Link{Href: blog.URL + "/" + a.ID},
+				Title:   a.Title(),
+			}
+			feed.Add(item)
+		}
+	}
+
+	result, _ := feed.ToAtom()
+	fmt.Fprintln(w, result)
+}
+
+var indexPage = template.Must(template.New("index").Parse(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.Name}}</title>
+  <link rel="alternate" href="feed.atom" type="application/atom+xml" />
+	<style>
+		body {
+			color: #3c3c3c;
+			font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+			font-size: 16px;
+			line-height: 22px;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		a,
+		a:visited,
+		a:hover,
+		.index-article__link:hover {
+			border-bottom-color: #da393f;
+			border-bottom-style: solid;
+			border-bottom-width: 1px;
+			color: #3c3c3c;
+			text-decoration: none;
+			text-decoration-skip: ink;
+		}
+
+		a:hover {
+			color: #da393f;
+		}
+
+		.container {
+			margin: 1.5rem 1rem;
+			max-width: 700px;
+		}
+
+		@media all and (max-width: 575px) {
+			.container {
+				margin: 1rem 0;
+			}
+		}
+
+		main {
+			margin: 1.5rem 0;
+		}
+
+		nav .tags {
+			margin: 1.5rem 0 0.5rem 0;
+		}
+
+		.index-article {
+			margin: 1rem 0;
+		}
+
+		.index-article__link {
+			border-bottom: none;
+			font-size: 18px;
+			font-weight: bold;
+			line-height: 22px;
+			margin: 0;
+		}
+
+		.index-article__link:hover {
+			color: #3c3c3c;
+		}
+	</style>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+  <div class="container">
+    <nav>
+      {{.Name}}
+
+      {{- if .Tags }}
+        <div class="tags">
+          {{- range $tag, $count := .Tags }}
+            <a href="/tags/{{$tag}}">{{$tag}}</a>&nbsp;
+          {{- end }}
+        </div>
+      {{- end }}
+    </nav>
+
+    <main>
+      {{- range .Articles }}
+        <div class="index-article">
+          <a href="/{{.ID}}" class="index-article__link">
+            {{.Title}}
+          </a>
+
+          <div class="index-article__byline">
+            <time datetime="{{.LastUpdated}}" class="index-article__published-on">
+              {{.LastUpdatedIn}}
+            </time>
+          </div>
+        </div>
+      {{- end }}
+    <main>
+  </div>
+</body>
+</html>`))
 
 var articlePage = template.Must(template.New("article").Parse(`<!DOCTYPE html>
 <html lang="en">
@@ -153,109 +287,6 @@ var articlePage = template.Must(template.New("article").Parse(`<!DOCTYPE html>
         <a href="{{.Blog.SourceURL}}/articles/{{.ID}}.md">Edit this article</a>
       {{- end }}
     </footer>
-  </div>
-</body>
-</html>`))
-
-var indexPage = template.Must(template.New("index").Parse(`<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{.Name}}</title>
-  <link rel="alternate" href="feed.atom" type="application/atom+xml" />
-	<style>
-		body {
-			color: #3c3c3c;
-			font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
-			font-size: 16px;
-			line-height: 22px;
-			-webkit-font-smoothing: antialiased;
-		}
-
-		a,
-		a:visited,
-		a:hover,
-		.index-article__link:hover {
-			border-bottom-color: #da393f;
-			border-bottom-style: solid;
-			border-bottom-width: 1px;
-			color: #3c3c3c;
-			text-decoration: none;
-			text-decoration-skip: ink;
-		}
-
-		a:hover {
-			color: #da393f;
-		}
-
-		.container {
-			margin: 1.5rem 1rem;
-			max-width: 700px;
-		}
-
-		@media all and (max-width: 575px) {
-			.container {
-				margin: 1rem 0;
-			}
-		}
-
-		main {
-			margin: 1.5rem 0;
-		}
-
-		nav .tags {
-			margin: 1.5rem 0 0.5rem 0;
-		}
-
-		.index-article {
-			margin: 1rem 0;
-		}
-
-		.index-article__link {
-			border-bottom: none;
-			font-size: 18px;
-			font-weight: bold;
-			line-height: 22px;
-			margin: 0;
-		}
-
-		.index-article__link:hover {
-			color: #3c3c3c;
-		}
-	</style>
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-</head>
-<body>
-  <div class="container">
-    <nav>
-      {{.Name}}
-
-      {{- if .Tags }}
-        <div class="tags">
-          {{- range $tag, $count := .Tags }}
-            <a href="/tags/{{$tag}}">{{$tag}}</a>&nbsp;
-          {{- end }}
-        </div>
-      {{- end }}
-    </nav>
-
-    <main>
-      {{- range .Articles }}
-        <div class="index-article">
-          <a href="/{{.ID}}" class="index-article__link">
-            {{.Title}}
-          </a>
-
-          <div class="index-article__byline">
-            <time datetime="{{.LastUpdated}}" class="index-article__published-on">
-              {{.LastUpdatedIn}}
-            </time>
-          </div>
-        </div>
-      {{- end }}
-    <main>
   </div>
 </body>
 </html>`))

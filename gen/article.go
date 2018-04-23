@@ -8,8 +8,6 @@ import (
 	"net/http"
 	"os"
 	"time"
-
-	"github.com/russross/blackfriday"
 )
 
 // Article contains article data
@@ -63,11 +61,9 @@ func (a *Article) Body() template.HTML {
 // Authors is a slice of Author structs
 func (a *Article) Authors() []Author {
 	authors := make([]Author, len(a.AuthorIDs))
-
 	for index, id := range a.AuthorIDs {
 		authors[index] = a.Blog.findAuthor(id)
 	}
-
 	return authors
 }
 
@@ -115,18 +111,4 @@ func (a *Article) input() []byte {
 
 func (a *Article) indexFirstLineBreak() int {
 	return bytes.Index(a.input(), []byte("\n"))
-}
-
-func renderMarkdown(input []byte) []byte {
-	htmlRenderer := blackfriday.HtmlRenderer(0, "", "")
-	extensions := 0
-	extensions |= blackfriday.EXTENSION_AUTOLINK
-	extensions |= blackfriday.EXTENSION_AUTO_HEADER_IDS
-	extensions |= blackfriday.EXTENSION_FENCED_CODE
-	extensions |= blackfriday.EXTENSION_NO_INTRA_EMPHASIS
-	extensions |= blackfriday.EXTENSION_SPACE_HEADERS
-	extensions |= blackfriday.EXTENSION_STRIKETHROUGH
-	extensions |= blackfriday.EXTENSION_TABLES
-
-	return blackfriday.Markdown(input, htmlRenderer, extensions)
 }

@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -11,8 +10,6 @@ import (
 	"strings"
 	"text/template"
 	"time"
-
-	"github.com/gorilla/feeds"
 )
 
 // Blog is a Gen project
@@ -51,7 +48,7 @@ func (blog *Blog) Build() {
 
 	f, err = os.Create("public/feed.atom")
 	must(err)
-	indexToAtom(f, blog)
+	indexAtom(f, blog)
 
 	for _, a := range blog.Articles {
 		a.Build(blog)
@@ -129,7 +126,7 @@ func (blog *Blog) handler(w http.ResponseWriter, r *http.Request) {
 	case r.URL.Path == "/":
 		must(indexPage.Execute(w, blog))
 	case r.URL.Path == "/feed.atom":
-		indexToAtom(w, blog)
+		indexAtom(w, blog)
 	case r.URL.Path == "/favicon.ico":
 		// no-op
 	case strings.HasPrefix(r.URL.Path, "/tags/"):
@@ -239,34 +236,4 @@ func (blog *Blog) createConfigFile() error {
 
 func (blog *Blog) articlesDir() string {
 	return blog.RootDir + "/articles"
-}
-
-func toTitle(s string) string {
-	noDashes := strings.Replace(s, "-", " ", -1)
-	noUnderscores := strings.Replace(noDashes, "_", " ", -1)
-	return strings.Title(noUnderscores)
-}
-
-func indexToAtom(w io.Writer, blog *Blog) {
-	feed := feeds.Feed{
-		Title:   blog.Name,
-		Link:    &feeds.Link{Href: blog.URL},
-		Updated: time.Now(),
-	}
-
-	for _, a := range blog.Articles {
-		published, err := time.Parse("2006-01-02", a.Published)
-
-		if err == nil {
-			item := &feeds.Item{
-				Created: published,
-				Link:    &feeds.Link{Href: blog.URL + "/" + a.ID},
-				Title:   a.Title(),
-			}
-			feed.Add(item)
-		}
-	}
-
-	result, _ := feed.ToAtom()
-	fmt.Fprintln(w, result)
 }
