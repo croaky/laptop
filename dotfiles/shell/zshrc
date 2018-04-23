@@ -86,6 +86,7 @@ compinit
 
 # Set GOPATH `go help gopath`
 export GOPATH="$HOME"
+export GOROOT="$HOME/.asdf/installs/go/1.9.3/go"
 
 # Set environment variables for monorepos
 export OK="$HOME/src/statusok"
