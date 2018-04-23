@@ -22,11 +22,22 @@ type Article struct {
 	Blog      *Blog    `json:"-"`
 }
 
-// NewArticle constructs a new Article
-func NewArticle(id string) *Article {
-	return &Article{
-		ID: id,
+// CreateArticle creates a new Article
+func CreateArticle(id string, blog *Blog) {
+	a := Article{
+		AuthorIDs: []string{NewAuthorID()},
+		ID:        id,
+		Published: time.Now().Format("2006-01-02"),
+		Blog:      blog,
 	}
+	blog.Articles = append([]Article{a}, blog.Articles...)
+
+	f, err := os.Create(a.Blog.articlesDir() + "/" + a.ID + ".md")
+	must(err)
+	defer f.Close()
+	_, err = f.WriteString("# " + toTitle(a.ID) + "\n\n\n")
+	must(err)
+	f.Sync()
 }
 
 // Build templatizes article to a file on disk in public/

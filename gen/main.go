@@ -23,7 +23,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 )
 
@@ -36,36 +35,35 @@ func main() {
 		if len(os.Args) != 3 {
 			usage()
 		}
-		Init(os.Args[2])
+		CreateBlog(os.Args[2])
+		fmt.Println("[gen] Created blog at ./" + os.Args[2])
 	case "article":
 		if len(os.Args) != 3 {
 			usage()
 		}
-		dir, err := os.Getwd()
-		if err != nil {
-			log.Fatal(err)
-		}
-		blog := &Blog{RootDir: dir}
-		blog.loadConfig()
-		blog.InitArticle(os.Args[2])
+		blog := currentBlog()
+		CreateArticle(os.Args[2], blog)
+		blog.writeConfig()
+		fmt.Println("[gen] Created article at ./articles/" + os.Args[2] + ".md")
 	case "serve":
-		dir, err := os.Getwd()
-		if err != nil {
-			log.Fatal(err)
-		}
-		blog := &Blog{RootDir: dir}
-		blog.loadConfig()
+		blog := currentBlog()
+		fmt.Println("[gen] Serving blog at http://localhost:2000")
 		blog.Serve("2000")
 	case "build":
-		dir, err := os.Getwd()
-		if err != nil {
-			log.Fatal(err)
-		}
-		blog := &Blog{RootDir: dir}
+		blog := currentBlog()
 		blog.Build()
+		fmt.Println("[gen] Built blog at ./public")
 	default:
 		usage()
 	}
+}
+
+func currentBlog() *Blog {
+	dir, err := os.Getwd()
+	must(err)
+	blog := &Blog{RootDir: dir}
+	blog.loadConfig()
+	return blog
 }
 
 func usage() {

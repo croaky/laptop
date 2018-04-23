@@ -9,7 +9,6 @@ import (
 	"path"
 	"strings"
 	"text/template"
-	"time"
 )
 
 // Blog is a Gen project
@@ -22,8 +21,8 @@ type Blog struct {
 	URL       string    `json:"url"`
 }
 
-// Init initializes a blog.
-func Init(name string) {
+// CreateBlog creates a blog.
+func CreateBlog(name string) {
 	blog := &Blog{
 		Authors: []Author{NewAuthor()},
 		Name:    toTitle(name),
@@ -35,7 +34,6 @@ func Init(name string) {
 	must(blog.createREADME())
 	must(blog.createGitIgnore())
 	must(blog.createConfigFile())
-	fmt.Println("[gen] Created blog at", "./"+blog.RootDir)
 }
 
 // Build HTML for the blog.
@@ -64,31 +62,8 @@ func (blog *Blog) Build() {
 
 // Serve the blog over HTTP
 func (blog *Blog) Serve(port string) {
-	blog.URL = "http://localhost:" + port
-	fmt.Println("[gen] Serving blog at " + blog.URL)
 	http.HandleFunc("/", blog.handler)
 	http.ListenAndServe(":"+port, nil)
-}
-
-// InitArticle initializes a new article
-func (blog *Blog) InitArticle(slug string) {
-	f, err := os.Create(blog.articlesDir() + "/" + slug + ".md")
-	must(err)
-	defer f.Close()
-
-	_, err = f.WriteString("# " + toTitle(slug) + "\n\n\n")
-	must(err)
-	f.Sync()
-
-	blog.loadConfig()
-	a := Article{
-		AuthorIDs: []string{NewAuthorID()},
-		ID:        slug,
-		Published: time.Now().Format("2006-01-02"),
-	}
-	blog.Articles = append([]Article{a}, blog.Articles...)
-	blog.writeConfig()
-	fmt.Println("[gen] Created article at", "./"+a.srcPath())
 }
 
 // Tags is a collection of blog tags and their counts
