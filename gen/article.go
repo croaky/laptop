@@ -21,7 +21,7 @@ type Article struct {
 	Redirects []string `json:"redirects,omitempty"`
 	Tags      []string `json:"tags,omitempty"`
 	Updated   string   `json:"updated,omitempty"`
-	Site      *Site    `json:"-"`
+	Blog      *Blog    `json:"-"`
 }
 
 // NewArticle constructs a new Article
@@ -32,19 +32,19 @@ func NewArticle(id string) *Article {
 }
 
 // Build templatizes article to a file on disk in public/
-func (a *Article) Build(s *Site) {
+func (a *Article) Build(blog *Blog) {
 	f, err := os.Create(a.publicPath())
 	must(err)
-	a.Site = s
+	a.Blog = blog
 	must(articlePage.Execute(f, a))
 }
 
 // Serve templatizes article to an HTTP respose
-func (a *Article) Serve(w http.ResponseWriter, s *Site) {
+func (a *Article) Serve(w http.ResponseWriter, blog *Blog) {
 	if a.Title() == "" {
 		fmt.Fprintf(w, "404")
 	} else {
-		a.Site = s
+		a.Blog = blog
 		must(articlePage.Execute(w, a))
 	}
 }
@@ -65,7 +65,7 @@ func (a *Article) Authors() []Author {
 	authors := make([]Author, len(a.AuthorIDs))
 
 	for index, id := range a.AuthorIDs {
-		authors[index] = a.Site.findAuthor(id)
+		authors[index] = a.Blog.findAuthor(id)
 	}
 
 	return authors

@@ -15,8 +15,8 @@ import (
 	"github.com/gorilla/feeds"
 )
 
-// Site is a Gen project
-type Site struct {
+// Blog is a Gen project
+type Blog struct {
 	Articles  []Article `json:"articles"`
 	Authors   []Author  `json:"authors"`
 	Name      string    `json:"name"`
@@ -25,10 +25,10 @@ type Site struct {
 	URL       string    `json:"url"`
 }
 
-// NewSite constructs a new site from root directory
+// NewBlog constructs a new blog from root directory
 // and gen.json config file within root directory
-func NewSite(name string) *Site {
-	return &Site{
+func NewBlog(name string) *Blog {
+	return &Blog{
 		Authors: []Author{NewAuthor()},
 		Name:    toTitle(name),
 		RootDir: name,
@@ -36,78 +36,78 @@ func NewSite(name string) *Site {
 	}
 }
 
-// Init initializes a site
+// Init initializes a blog.
 func Init(name string) {
-	s := NewSite(name)
-	must(os.Mkdir(s.RootDir, os.ModePerm))
-	must(os.Mkdir(s.articlesDir(), os.ModePerm))
-	must(s.createREADME())
-	must(s.createGitIgnore())
-	must(s.createConfigFile())
+	blog := NewBlog(name)
+	must(os.Mkdir(blog.RootDir, os.ModePerm))
+	must(os.Mkdir(blog.articlesDir(), os.ModePerm))
+	must(blog.createREADME())
+	must(blog.createGitIgnore())
+	must(blog.createConfigFile())
 	dir, err := os.Getwd()
 	must(err)
-	fmt.Println("[gen] Initialized blog at", dir+"/"+s.RootDir)
+	fmt.Println("[gen] Initialized blog at", dir+"/"+blog.RootDir)
 }
 
-// Build HTML for the site.
-func (s *Site) Build() {
-	s.loadConfig(nil)
+// Build HTML for the blog.
+func (blog *Blog) Build() {
+	blog.loadConfig()
 
-	must(os.MkdirAll(s.RootDir+"/public/tags", os.ModePerm))
+	must(os.MkdirAll(blog.RootDir+"/public/tags", os.ModePerm))
 
 	f, err := os.Create("public/index.html")
 	must(err)
-	must(indexPage.Execute(f, s))
+	must(indexPage.Execute(f, blog))
 
 	f, err = os.Create("public/feed.atom")
 	must(err)
-	indexToAtom(f, s)
+	indexToAtom(f, blog)
 
-	for _, a := range s.Articles {
-		a.Build(s)
+	for _, a := range blog.Articles {
+		a.Build(blog)
 	}
 
-	for t := range s.Tags() {
-		tag := Tag{Name: t, Site: s}
+	for t := range blog.Tags() {
+		tag := Tag{Name: t, Blog: blog}
 		tag.Build()
 	}
 
-	must(s.createRedirects())
+	must(blog.createRedirects())
 }
 
-// Serve the site over HTTP
-func (s *Site) Serve(port string) {
-	s.loadConfig(&port)
-	http.HandleFunc("/", s.handler)
-	fmt.Println("[gen] Serving blog at http://localhost:" + port)
+// Serve the blog over HTTP
+func (blog *Blog) Serve(port string) {
+	blog.loadConfig()
+	blog.URL = "http://localhost:" + port
+	fmt.Println("[gen] Serving blog at " + blog.URL)
+	http.HandleFunc("/", blog.handler)
 	http.ListenAndServe(":"+port, nil)
 }
 
 // InitArticle initializes a new article
-func (s *Site) InitArticle(slug string) error {
-	f, err := os.Create(s.articlesDir() + "/" + slug + ".md")
+func (blog *Blog) InitArticle(slug string) {
+	f, err := os.Create(blog.articlesDir() + "/" + slug + ".md")
 	must(err)
 	defer f.Close()
 
 	_, err = f.WriteString("# " + toTitle(slug) + "\n\n\n")
 	must(err)
 	f.Sync()
-	s.loadConfig(nil)
+
+	blog.loadConfig()
 	a := Article{
 		AuthorIDs: []string{NewAuthorID()},
 		ID:        slug,
 		Published: time.Now().Format("2006-01-02"),
 	}
-	s.Articles = append([]Article{a}, s.Articles...)
-	s.writeConfig()
-
-	return nil
+	blog.Articles = append([]Article{a}, blog.Articles...)
+	blog.writeConfig()
 }
 
-// Tags is a collection of site tags and their counts
-func (s *Site) Tags() map[string]int {
+// Tags is a collection of blog tags and their counts
+func (blog *Blog) Tags() map[string]int {
 	tt := make(map[string]int)
-	for _, a := range s.Articles {
+	for _, a := range blog.Articles {
 		for _, t := range a.Tags {
 			if i, ok := tt[t]; ok {
 				tt[t] = i + 1
@@ -120,76 +120,65 @@ func (s *Site) Tags() map[string]int {
 	return tt
 }
 
-func (s *Site) loadConfig(port *string) {
-	config, err := ioutil.ReadFile(s.RootDir + "/gen.json")
+func (blog *Blog) loadConfig() {
+	config, err := ioutil.ReadFile(blog.RootDir + "/gen.json")
 	if err != nil {
 		fmt.Println("[gen] Warning: no gen.json config file")
 		config = []byte("{}")
 	}
-
-	must(json.Unmarshal(config, &s))
-
-	if s.URL == "" {
-		if port == nil {
-			s.URL = "http://localhost:2000"
-		} else {
-			s.URL = "http://localhost:" + *port
-		}
-	}
+	must(json.Unmarshal(config, &blog))
 }
 
-func (s *Site) writeConfig() {
-	config, err := json.MarshalIndent(s, "", "  ")
+func (blog *Blog) writeConfig() {
+	config, err := json.MarshalIndent(blog, "", "  ")
 	must(err)
-	must(ioutil.WriteFile(s.RootDir+"/gen.json", config, 0644))
+	must(ioutil.WriteFile(blog.RootDir+"/gen.json", config, 0644))
 }
 
-func (s *Site) handler(w http.ResponseWriter, r *http.Request) {
-	s.loadConfig(nil)
+func (blog *Blog) handler(w http.ResponseWriter, r *http.Request) {
+	blog.loadConfig()
 	fmt.Println("[gen] " + r.Method + " " + r.URL.Path)
 	switch {
 	case r.URL.Path == "/":
-		must(indexPage.Execute(w, s))
+		must(indexPage.Execute(w, blog))
 	case r.URL.Path == "/feed.atom":
-		indexToAtom(w, s)
+		indexToAtom(w, blog)
 	case r.URL.Path == "/favicon.ico":
 		// no-op
 	case strings.HasPrefix(r.URL.Path, "/tags/"):
 		_, name := path.Split(r.URL.Path)
-		tag := Tag{Name: name, Site: s}
+		tag := Tag{Name: name, Blog: blog}
 		must(tagPage.Execute(w, &tag))
 	case strings.HasPrefix(r.URL.Path, "/images/"):
 		_, filename := path.Split(r.URL.Path)
-		image := s.RootDir + "/public/images/" + filename
+		image := blog.RootDir + "/public/images/" + filename
 		http.ServeFile(w, r, image)
 	default:
-		article := s.findArticle(r.URL.Path[1:])
-		article.Serve(w, s)
+		article := blog.findArticle(r.URL.Path[1:])
+		article.Serve(w, blog)
 	}
 }
 
-func (s *Site) findAuthor(id string) Author {
-	for _, a := range s.Authors {
+func (blog *Blog) findAuthor(id string) Author {
+	for _, a := range blog.Authors {
 		if a.ID == id {
 			return a
 		}
 	}
-
 	return Author{ID: id}
 }
 
-func (s *Site) findArticle(id string) Article {
-	for _, a := range s.Articles {
+func (blog *Blog) findArticle(id string) Article {
+	for _, a := range blog.Articles {
 		if a.ID == id {
 			return a
 		}
 	}
-
 	return Article{}
 }
 
-func (s *Site) createRedirects() error {
-	f, err := os.Create("public/_redirects")
+func (blog *Blog) createRedirects() error {
+	f, err := os.Create(blog.RootDir + "/public/_redirects")
 	must(err)
 
 	tmpl := template.Must(
@@ -201,12 +190,11 @@ func (s *Site) createRedirects() error {
 {{ end -}}
 {{ end -}}`),
 	)
-
-	return tmpl.Execute(f, s)
+	return tmpl.Execute(f, blog)
 }
 
-func (s *Site) createREADME() error {
-	f, err := os.Create(s.RootDir + "/README.md")
+func (blog *Blog) createREADME() error {
+	f, err := os.Create(blog.RootDir + "/README.md")
 	must(err)
 
 	tmpl := template.Must(
@@ -222,12 +210,11 @@ See [documentation][docs].
 
 [docs]: https://github.com/statusok/statusok/tree/master/gen`),
 	)
-
-	return tmpl.Execute(f, s)
+	return tmpl.Execute(f, blog)
 }
 
-func (s *Site) createGitIgnore() error {
-	f, err := os.Create(s.RootDir + "/.gitignore")
+func (blog *Blog) createGitIgnore() error {
+	f, err := os.Create(blog.RootDir + "/.gitignore")
 	must(err)
 
 	tmpl := template.Must(
@@ -236,12 +223,11 @@ func (s *Site) createGitIgnore() error {
 			Parse(`public/*
 !public/images`),
 	)
-
-	return tmpl.Execute(f, s)
+	return tmpl.Execute(f, blog)
 }
 
-func (s *Site) createConfigFile() error {
-	f, err := os.Create(s.RootDir + "/gen.json")
+func (blog *Blog) createConfigFile() error {
+	f, err := os.Create(blog.RootDir + "/gen.json")
 	must(err)
 
 	tmpl := template.Must(
@@ -261,12 +247,11 @@ func (s *Site) createConfigFile() error {
   "url": "{{.URL}}"
 }`),
 	)
-
-	return tmpl.Execute(f, s)
+	return tmpl.Execute(f, blog)
 }
 
-func (s *Site) articlesDir() string {
-	return s.RootDir + "/articles"
+func (blog *Blog) articlesDir() string {
+	return blog.RootDir + "/articles"
 }
 
 func toTitle(s string) string {
@@ -275,20 +260,20 @@ func toTitle(s string) string {
 	return strings.Title(noUnderscores)
 }
 
-func indexToAtom(w io.Writer, s *Site) {
+func indexToAtom(w io.Writer, blog *Blog) {
 	feed := feeds.Feed{
-		Title:   s.Name,
-		Link:    &feeds.Link{Href: s.URL},
+		Title:   blog.Name,
+		Link:    &feeds.Link{Href: blog.URL},
 		Updated: time.Now(),
 	}
 
-	for _, a := range s.Articles {
+	for _, a := range blog.Articles {
 		published, err := time.Parse("2006-01-02", a.Published)
 
 		if err == nil {
 			item := &feeds.Item{
 				Created: published,
-				Link:    &feeds.Link{Href: s.URL + "/" + a.ID},
+				Link:    &feeds.Link{Href: blog.URL + "/" + a.ID},
 				Title:   a.Title(),
 			}
 			feed.Add(item)

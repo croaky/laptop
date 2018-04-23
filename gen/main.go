@@ -47,19 +47,19 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		NewSite(dir).InitArticle(name)
+		NewBlog(dir).InitArticle(name)
 	case "serve":
 		dir, err := os.Getwd()
 		if err != nil {
 			log.Fatal(err)
 		}
-		NewSite(dir).Serve("2000")
+		NewBlog(dir).Serve("2000")
 	case "build":
 		dir, err := os.Getwd()
 		if err != nil {
 			log.Fatal(err)
 		}
-		NewSite(dir).Build()
+		NewBlog(dir).Build()
 	default:
 		usage()
 	}

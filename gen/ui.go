@@ -126,7 +126,7 @@ var articlePage = template.Must(template.New("article").Parse(`<!DOCTYPE html>
   <div class="container">
     <nav>
       <a href="/">
-        {{.Site.Name}} &larr;
+        {{.Blog.Name}} &larr;
       </a>
     </nav>
 
@@ -150,8 +150,8 @@ var articlePage = template.Must(template.New("article").Parse(`<!DOCTYPE html>
     </article>
 
     <footer>
-      {{- if .Site.SourceURL }}
-        <a href="{{.Site.SourceURL}}/articles/{{.ID}}.md">Edit this article</a>
+      {{- if .Blog.SourceURL }}
+        <a href="{{.Blog.SourceURL}}/articles/{{.ID}}.md">Edit this article</a>
       {{- end }}
     </footer>
   </div>
@@ -342,7 +342,7 @@ var tagPage = template.Must(template.New("tag").Parse(`<!DOCTYPE html>
   <div class="container">
     <nav>
       <a href="/">
-        {{.Site.Name}} &larr;
+        {{.Blog.Name}} &larr;
       </a>
     </nav>
 
