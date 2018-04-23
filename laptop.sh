@@ -170,9 +170,10 @@ asdf install go 1.10
 asdf install go 1.9.3
 asdf global go 1.9.3
 
-asdf_plugin_update "java" "https://github.com/skotchpine/asdf-java"
-asdf install java 8.161
-asdf global java 8.161
+asdf_plugin_update "java" "https://github.com/whaley/asdf-java"
+asdf install java 8.172
+asdf install java 10.0.1
+asdf global java 10.0.1
 
 asdf_plugin_update "maven" "https://github.com/skotchpine/asdf-maven"
 asdf install maven 3.3.9
