@@ -35,11 +35,16 @@ cd example-blog
 
 ```
 gen article example-article
-$EDITOR articles/example-article.md
-gen serve
 ```
 
-Preview at <http://localhost:2000>.
+Edit `articles/example-article.md` in your favorite editor.
+
+Preview with your favorite Markdown previewer.
+Or, preview at <http://localhost:2000> with:
+
+```
+gen serve
+```
 
 Configure in `gen.json`:
 

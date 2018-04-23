@@ -37,36 +37,31 @@ func NewSite(name string) *Site {
 }
 
 // Init initializes a site
-func Init(name string) error {
+func Init(name string) {
 	s := NewSite(name)
-	printError(os.Mkdir(s.RootDir, os.ModePerm))
-	printError(os.Mkdir(s.articlesDir(), os.ModePerm))
-	printError(os.MkdirAll(s.RootDir+"/public/images", os.ModePerm))
-	printError(s.createREADME())
-	printError(s.createGitIgnore())
-	printError(s.createConfigFile())
-	return nil
+	must(os.Mkdir(s.RootDir, os.ModePerm))
+	must(os.Mkdir(s.articlesDir(), os.ModePerm))
+	must(s.createREADME())
+	must(s.createGitIgnore())
+	must(s.createConfigFile())
+	dir, err := os.Getwd()
+	must(err)
+	fmt.Println("[gen] Initialized blog at", dir+"/"+s.RootDir)
 }
 
 // Build HTML for the site.
 func (s *Site) Build() {
 	s.loadConfig(nil)
 
-	printError(os.MkdirAll(s.RootDir+"/public/tags", os.ModePerm))
+	must(os.MkdirAll(s.RootDir+"/public/tags", os.ModePerm))
 
 	f, err := os.Create("public/index.html")
-	if err != nil {
-		printError(err)
-	} else {
-		printError(indexPage.Execute(f, s))
-	}
+	must(err)
+	must(indexPage.Execute(f, s))
 
 	f, err = os.Create("public/feed.atom")
-	if err != nil {
-		printError(err)
-	} else {
-		indexToAtom(f, s)
-	}
+	must(err)
+	indexToAtom(f, s)
 
 	for _, a := range s.Articles {
 		a.Build(s)
@@ -77,28 +72,25 @@ func (s *Site) Build() {
 		tag.Build()
 	}
 
-	s.createRedirects()
+	must(s.createRedirects())
 }
 
 // Serve the site over HTTP
 func (s *Site) Serve(port string) {
 	s.loadConfig(&port)
 	http.HandleFunc("/", s.handler)
-	fmt.Println("[gen] Serving site at http://localhost:" + port)
+	fmt.Println("[gen] Serving blog at http://localhost:" + port)
 	http.ListenAndServe(":"+port, nil)
 }
 
 // InitArticle initializes a new article
 func (s *Site) InitArticle(slug string) error {
 	f, err := os.Create(s.articlesDir() + "/" + slug + ".md")
-	printError(err)
+	must(err)
 	defer f.Close()
 
 	_, err = f.WriteString("# " + toTitle(slug) + "\n\n\n")
-	if err != nil {
-		printError(err)
-		return err
-	}
+	must(err)
 	f.Sync()
 	s.loadConfig(nil)
 	a := Article{
@@ -135,11 +127,7 @@ func (s *Site) loadConfig(port *string) {
 		config = []byte("{}")
 	}
 
-	err = json.Unmarshal(config, &s)
-	if err != nil {
-		printError(err)
-		panic(err)
-	}
+	must(json.Unmarshal(config, &s))
 
 	if s.URL == "" {
 		if port == nil {
@@ -152,15 +140,8 @@ func (s *Site) loadConfig(port *string) {
 
 func (s *Site) writeConfig() {
 	config, err := json.MarshalIndent(s, "", "  ")
-	if err != nil {
-		printError(err)
-		panic(err)
-	}
-
-	err = ioutil.WriteFile(s.RootDir+"/gen.json", config, 0644)
-	if err != nil {
-		fmt.Println("[gen] Warning: no gen.json config file")
-	}
+	must(err)
+	must(ioutil.WriteFile(s.RootDir+"/gen.json", config, 0644))
 }
 
 func (s *Site) handler(w http.ResponseWriter, r *http.Request) {
@@ -168,7 +149,7 @@ func (s *Site) handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("[gen] " + r.Method + " " + r.URL.Path)
 	switch {
 	case r.URL.Path == "/":
-		printError(indexPage.Execute(w, s))
+		must(indexPage.Execute(w, s))
 	case r.URL.Path == "/feed.atom":
 		indexToAtom(w, s)
 	case r.URL.Path == "/favicon.ico":
@@ -176,7 +157,7 @@ func (s *Site) handler(w http.ResponseWriter, r *http.Request) {
 	case strings.HasPrefix(r.URL.Path, "/tags/"):
 		_, name := path.Split(r.URL.Path)
 		tag := Tag{Name: name, Site: s}
-		printError(tagPage.Execute(w, &tag))
+		must(tagPage.Execute(w, &tag))
 	case strings.HasPrefix(r.URL.Path, "/images/"):
 		_, filename := path.Split(r.URL.Path)
 		image := s.RootDir + "/public/images/" + filename
@@ -209,7 +190,7 @@ func (s *Site) findArticle(id string) Article {
 
 func (s *Site) createRedirects() error {
 	f, err := os.Create("public/_redirects")
-	printError(err)
+	must(err)
 
 	tmpl := template.Must(
 		template.
@@ -226,7 +207,7 @@ func (s *Site) createRedirects() error {
 
 func (s *Site) createREADME() error {
 	f, err := os.Create(s.RootDir + "/README.md")
-	printError(err)
+	must(err)
 
 	tmpl := template.Must(
 		template.
@@ -247,7 +228,7 @@ See [documentation][docs].
 
 func (s *Site) createGitIgnore() error {
 	f, err := os.Create(s.RootDir + "/.gitignore")
-	printError(err)
+	must(err)
 
 	tmpl := template.Must(
 		template.
@@ -261,7 +242,7 @@ func (s *Site) createGitIgnore() error {
 
 func (s *Site) createConfigFile() error {
 	f, err := os.Create(s.RootDir + "/gen.json")
-	printError(err)
+	must(err)
 
 	tmpl := template.Must(
 		template.

@@ -34,12 +34,9 @@ func NewArticle(id string) *Article {
 // Build templatizes article to a file on disk in public/
 func (a *Article) Build(s *Site) {
 	f, err := os.Create(a.publicPath())
-	if err != nil {
-		printError(err)
-	} else {
-		a.Site = s
-		printError(articlePage.Execute(f, a))
-	}
+	must(err)
+	a.Site = s
+	must(articlePage.Execute(f, a))
 }
 
 // Serve templatizes article to an HTTP respose
@@ -48,7 +45,7 @@ func (a *Article) Serve(w http.ResponseWriter, s *Site) {
 		fmt.Fprintf(w, "404")
 	} else {
 		a.Site = s
-		printError(articlePage.Execute(w, a))
+		must(articlePage.Execute(w, a))
 	}
 }
 
@@ -111,7 +108,6 @@ func (a *Article) publicPath() string {
 func (a *Article) input() []byte {
 	input, err := ioutil.ReadFile(a.srcPath())
 	if err != nil {
-		printError(err)
 		input = []byte("")
 	}
 	return input

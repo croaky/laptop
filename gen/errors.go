@@ -1,9 +1,7 @@
 package main
 
-import "fmt"
-
-func printError(err error) {
+func must(err error) {
 	if err != nil {
-		fmt.Println("[gen] Error:", err)
+		panic(err)
 	}
 }

@@ -21,7 +21,6 @@ func NewAuthor() Author {
 // NewAuthorID constructs a new author ID
 func NewAuthorID() string {
 	u, err := user.Current()
-	printError(err)
-
+	must(err)
 	return u.Name
 }
