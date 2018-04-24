@@ -21,21 +21,6 @@ type Blog struct {
 	URL       string    `json:"url"`
 }
 
-// CreateBlog creates a blog.
-func CreateBlog(name string) {
-	blog := &Blog{
-		Authors: []Author{NewAuthor()},
-		Name:    toTitle(name),
-		RootDir: name,
-		URL:     "https://blog.example.com",
-	}
-	must(os.Mkdir(blog.RootDir, os.ModePerm))
-	must(os.Mkdir(blog.articlesDir(), os.ModePerm))
-	must(blog.createREADME())
-	must(blog.createGitIgnore())
-	must(blog.createConfigFile())
-}
-
 // Build HTML for the blog.
 func (blog *Blog) Build() {
 	must(os.MkdirAll(blog.RootDir+"/public/tags", os.ModePerm))
@@ -147,64 +132,8 @@ func (blog *Blog) createRedirects() error {
 {{ range .Redirects -}}
 {{ . }} /{{ $article.ID }}
 {{ end -}}
-{{ end -}}`),
-	)
-	return tmpl.Execute(f, blog)
-}
-
-func (blog *Blog) createREADME() error {
-	f, err := os.Create(blog.RootDir + "/README.md")
-	must(err)
-
-	tmpl := template.Must(
-		template.
-			New("readme").
-			Parse(`# {{.Name}}
-
-A static blog.
-
-## Workflow
-
-See [documentation][docs].
-
-[docs]: https://github.com/statusok/statusok/tree/master/gen`),
-	)
-	return tmpl.Execute(f, blog)
-}
-
-func (blog *Blog) createGitIgnore() error {
-	f, err := os.Create(blog.RootDir + "/.gitignore")
-	must(err)
-
-	tmpl := template.Must(
-		template.
-			New("gitignore").
-			Parse(`public/*
-!public/images`),
-	)
-	return tmpl.Execute(f, blog)
-}
-
-func (blog *Blog) createConfigFile() error {
-	f, err := os.Create(blog.RootDir + "/gen.json")
-	must(err)
-
-	tmpl := template.Must(
-		template.
-			New("gen").
-			Parse(`{
-  "authors": [
-    {{- range .Authors }}
-    {
-      "id": "{{.ID}}",
-      "name": "{{.Name}}",
-      "url": "{{.URL}}"
-    }
-    {{- end }}
-  ],
-  "name": "{{.Name}}",
-  "url": "{{.URL}}"
-}`),
+{{ end -}}
+`),
 	)
 	return tmpl.Execute(f, blog)
 }

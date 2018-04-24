@@ -21,16 +21,20 @@ A static blog generator.
 
 ## Create a blog
 
+Download the [project template](blog).
+
 ```
-go get github.com/statusok/statusok/gen
-gen blog example-blog
-cd example-blog
+curl -sL https://github.com/statusok/statusok/releases/download/v0.0.1/blog.tar.gz | tar xvz
 ```
+
+It contains a pre-compiled `gen` binary
+which requires no external dependencies on you or teammates' machines
+(no Ruby, JavaScript, etc.).
 
 ## Write
 
 ```
-gen article example-article
+./gen article example-article
 ```
 
 Edit `articles/example-article.md` in your favorite editor.
@@ -39,7 +43,7 @@ Preview with your favorite Markdown previewer.
 Or, preview at <http://localhost:2000> with:
 
 ```
-gen serve
+./gen serve
 ```
 
 Add images to the `public/images` directory.
@@ -128,7 +132,7 @@ Configure [Netlify] with these settings:
 
 * Repository: `https://github.com/example/example`
 * Branch: `master`
-* Build Cmd: `go get github.com/statusok/statusok/gen && $GOPATH/bin/gen build`
+* Build Cmd: `./gen build`
 * Public folder: `public`
 
 To publish articles, commit to the GitHub repo:

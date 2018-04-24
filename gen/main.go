@@ -2,10 +2,6 @@
 
 Command gen generates a static blog.
 
-Initialize blog:
-
-  gen blog <blog-directory-name>
-
 Create an article:
 
   gen article <article-url-slug>
@@ -30,18 +26,12 @@ func main() {
 	if len(os.Args) < 2 {
 		usage()
 	}
+	blog := currentBlog()
 	switch os.Args[1] {
-	case "blog":
-		if len(os.Args) != 3 {
-			usage()
-		}
-		CreateBlog(os.Args[2])
-		fmt.Println("[gen] Created blog at ./" + os.Args[2])
 	case "article":
 		if len(os.Args) != 3 {
 			usage()
 		}
-		blog := currentBlog()
 		CreateArticle(os.Args[2], blog)
 		blog.writeConfig()
 		fmt.Println("[gen] Created article at ./articles/" + os.Args[2] + ".md")
@@ -72,7 +62,6 @@ func usage() {
 }
 
 const usageString = `usage:
-  gen blog <blog-directory-name>
   gen article <article-url-slug>
   gen serve
   gen build
