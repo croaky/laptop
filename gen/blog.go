@@ -153,13 +153,11 @@ func (blog *Blog) createHeaders() error {
 	tmpl := template.Must(
 		template.
 			New("headers").
-			Parse(`[[headers]]
-  for = "/*"
-  [headers.values]
-    Content-Security-Policy = "default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:;"
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
+			Parse(`/*
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:;
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
 `),
 	)
 	return tmpl.Execute(f, blog)
