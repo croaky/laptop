@@ -1,5 +1,0 @@
-# Java
-
-```
-brew install gradle
-```
