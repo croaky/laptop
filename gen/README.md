@@ -40,10 +40,16 @@ Generate an article:
 ```
 
 Edit `articles/example-article.md` in your favorite editor.
-Begin with the article title.
 This is a pure
 [Markdown](https://guides.github.com/features/mastering-markdown/) file
 with no front matter.
+
+The first line of the file is the article title.
+It must be an `<h1>` tag:
+
+```md
+# Example Article
+```
 
 Preview with your favorite Markdown previewer.
 Or, preview at <http://localhost:2000> with:
@@ -59,7 +65,7 @@ Add images to the `public/images` directory.
 Refer to them in articles via relative path:
 
 ```md
-![](images/example.png)
+![alt text](images/example.png)
 ```
 
 ## Configure
@@ -102,10 +108,10 @@ Configure blog in `gen.json`:
       "updated": "2018-02-20"
     },
     {
-      "id": "article-with-redirects-from-previous-ids",
+      "id": "article-with-redirects",
       "published": "2018-02-01",
       "redirects": [
-        "/article-original",
+        "/article-original-name",
         "/article-renamed-again",
         "/this-feature-works-only-on-netlify",
       ]
