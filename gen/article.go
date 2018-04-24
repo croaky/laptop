@@ -42,6 +42,7 @@ func CreateArticle(id string, blog *Blog) {
 		blog.Authors = append([]Author{author}, blog.Authors...)
 	}
 
+	must(os.Mkdir(blog.articlesDir(), os.ModePerm))
 	f, err := os.Create(blog.articlesDir() + "/" + id + ".md")
 	must(err)
 	defer f.Close()
