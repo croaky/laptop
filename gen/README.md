@@ -1,42 +1,49 @@
 # Gen
 
-A static blog generator.
-
-[Example](https://www.statusok.com)
+A static blog generator featuring:
 
 * No external dependencies
-* Markdown files without front matter
+* Markdown files with no front matter
 * Local preview server
+* Atom feed
 * Images
 * Single config file
+* Anonymous, single author, or multiple authors
 * Tags
-* Multiple authors
 * "Last updated" timestamp
 * Redirects
-* "Edit this article" footer links
 * `rel=canonical` tags
-* Atom feed
+* "Edit this article" footer links
 * Single theme
 * Responsive design
 * PageSpeed Insights score of 100
+
+See [example blog](https://www.statusok.com).
 
 ## Create a blog
 
 Download the [project template](blog).
 
 ```
-curl -sL https://github.com/statusok/statusok/releases/download/v0.0.1/blog.tar.gz | tar xvz
+curl -sL https://github.com/statusok/statusok/releases/download/gen-v0.0.1/blog.tar.gz | tar xvz
 ```
 
 The template contains the `./gen` script.
+It has no external dependencies.
 
 ## Write
+
+Generate an article:
 
 ```
 ./gen article example-article
 ```
 
 Edit `articles/example-article.md` in your favorite editor.
+Begin with the article title.
+This is a pure
+[Markdown](https://guides.github.com/features/mastering-markdown/) file
+with no front matter.
 
 Preview with your favorite Markdown previewer.
 Or, preview at <http://localhost:2000> with:
@@ -44,6 +51,9 @@ Or, preview at <http://localhost:2000> with:
 ```
 ./gen serve
 ```
+
+See the [Atom feed](https://validator.w3.org/feed/docs/atom.html) at
+<http://localhost:2000/feed.atom>.
 
 Add images to the `public/images` directory.
 Refer to them in articles via relative path:
@@ -71,20 +81,20 @@ Configure blog in `gen.json`:
       "published": "2018-04-01"
     },
     {
-      "id": "article-with-tags",
-      "published": "2018-03-15",
-      "tags": [
-        "go",
-        "unix"
-      ]
-    },
-    {
       "author_ids": [
         "alice",
         "bob"
       ],
       "id": "article-with-multiple-authors",
-      "published": "2018-03-01"
+      "published": "2018-03-15"
+    },
+    {
+      "id": "article-with-tags",
+      "published": "2018-03-01",
+      "tags": [
+        "go",
+        "unix"
+      ]
     },
     {
       "id": "article-with-updated-date",
@@ -96,7 +106,8 @@ Configure blog in `gen.json`:
       "published": "2018-02-01",
       "redirects": [
         "/article-original",
-        "/article-renamed-again"
+        "/article-renamed-again",
+        "/this-feature-works-only-on-netlify",
       ]
     },
     {
@@ -122,6 +133,9 @@ Configure blog in `gen.json`:
   "url": "https://blog.example.com"
 }
 ```
+
+Set `source_url` to get "Edit this article" footer links
+to the article's Markdown file.
 
 ## Publish
 
