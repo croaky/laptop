@@ -24,18 +24,29 @@ type Article struct {
 
 // CreateArticle creates a new Article
 func CreateArticle(id string, blog *Blog) {
-	a := Article{
-		AuthorIDs: []string{NewAuthorID()},
+	author := NewAuthor()
+	article := Article{
+		AuthorIDs: []string{author.ID},
 		ID:        id,
 		Published: time.Now().Format("2006-01-02"),
 		Blog:      blog,
 	}
-	blog.Articles = append([]Article{a}, blog.Articles...)
+	blog.Articles = append([]Article{article}, blog.Articles...)
+	newAuthor := true
+	for _, a := range blog.Authors {
+		if a.ID == author.ID {
+			newAuthor = false
+		}
+	}
+	if newAuthor {
+		blog.Authors = append([]Author{author}, blog.Authors...)
+	}
 
-	f, err := os.Create(a.Blog.articlesDir() + "/" + a.ID + ".md")
+	f, err := os.Create(blog.articlesDir() + "/" + id + ".md")
 	must(err)
 	defer f.Close()
-	_, err = f.WriteString("# " + toTitle(a.ID) + "\n\n\n")
+
+	_, err = f.WriteString("# " + toTitle(id) + "\n\n\n")
 	must(err)
 	f.Sync()
 }

@@ -12,8 +12,8 @@ A static blog generator.
 * Multiple authors
 * "Last updated" timestamp
 * Redirects
-* "Edit article" footer links
-* `rel=canonical` URLs
+* "Edit this article" footer links
+* `rel=canonical` tags
 * Atom feed
 * Single theme
 * Responsive design
@@ -48,8 +48,6 @@ Refer to them in articles via relative path:
 ```md
 ![](images/example.png)
 ```
-
-Commit them to version control.
 
 ## Configure
 
@@ -145,10 +143,10 @@ View deploy logs in the Netlify web interface.
 
 ## Get help
 
-Open a [GitHub Issue][issues] for help.
-See [CONTRIBUTING.md][contrib] for instructions on contributing.
-See [LICENSE] for the license.
+Open a [GitHub Issue][issues].
+Read [contribution instructions][contrib]
+and [MIT License][license].
 
 [issues]: https://github.com/statusok/statusok/issues
 [contrib]: CONTRIBUTING.md
-[LICENSE]: ../LICENSE
+[license]: ../LICENSE
