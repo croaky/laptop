@@ -27,8 +27,8 @@ Download the [project template](blog).
 curl -sL https://github.com/statusok/statusok/releases/download/v0.0.1/blog.tar.gz | tar xvz
 ```
 
-It contains a pre-compiled `gen` binary
-which requires no external dependencies on you or teammates' machines
+It contains a `./gen` script
+which requires no external dependencies
 (no Ruby, JavaScript, etc.).
 
 ## Write
