@@ -4,10 +4,11 @@ A static blog generator.
 
 [Example](https://www.statusok.com)
 
+* No external dependencies
 * Markdown files without front matter
 * Local preview server
 * Images
-* Single `gen.json` config file
+* Single config file
 * Tags
 * Multiple authors
 * "Last updated" timestamp
@@ -27,9 +28,7 @@ Download the [project template](blog).
 curl -sL https://github.com/statusok/statusok/releases/download/v0.0.1/blog.tar.gz | tar xvz
 ```
 
-It contains a `./gen` script
-which requires no external dependencies
-(no Ruby, JavaScript, etc.).
+The template contains the `./gen` script.
 
 ## Write
 
