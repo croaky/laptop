@@ -43,6 +43,7 @@ func (blog *Blog) Build() {
 	}
 
 	must(blog.createRedirects())
+	must(blog.createHeaders())
 }
 
 // Serve the blog over HTTP
@@ -82,6 +83,13 @@ func (blog *Blog) writeConfig() {
 func (blog *Blog) handler(w http.ResponseWriter, r *http.Request) {
 	blog.loadConfig()
 	fmt.Println("[gen] " + r.Method + " " + r.URL.Path)
+	w.Header().Set(
+		"Content-Security-Policy",
+		"default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:;",
+	)
+	w.Header().Set("X-Content-Type-Options", "nosniff")
+	w.Header().Set("X-Frame-Options", "DENY")
+	w.Header().Set("X-XSS-Protection", "1; mode=block")
 	switch {
 	case r.URL.Path == "/":
 		must(indexPage.Execute(w, blog))
@@ -133,6 +141,25 @@ func (blog *Blog) createRedirects() error {
 {{ . }} /{{ $article.ID }}
 {{ end -}}
 {{ end -}}
+`),
+	)
+	return tmpl.Execute(f, blog)
+}
+
+func (blog *Blog) createHeaders() error {
+	f, err := os.Create(blog.RootDir + "/public/_headers")
+	must(err)
+
+	tmpl := template.Must(
+		template.
+			New("headers").
+			Parse(`[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:;"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
 `),
 	)
 	return tmpl.Execute(f, blog)

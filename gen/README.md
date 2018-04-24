@@ -22,7 +22,7 @@ See [example blog](https://www.statusok.com).
 
 ## Create a blog
 
-Download the [project template](blog).
+Download the [project template](blog):
 
 ```
 curl -sL https://github.com/statusok/statusok/releases/download/gen-v0.0.1/blog.tar.gz | tar xvz
@@ -145,9 +145,7 @@ to the article's Markdown file.
 
 ## Publish
 
-Configure [Netlify] with these settings:
-
-[Netlify]: https://www.netlify.com
+Configure [Netlify](https://www.netlify.com):
 
 * Repository: `https://github.com/example/example`
 * Branch: `master`
