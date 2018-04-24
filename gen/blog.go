@@ -85,7 +85,7 @@ func (blog *Blog) handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("[gen] " + r.Method + " " + r.URL.Path)
 	w.Header().Set(
 		"Content-Security-Policy",
-		"default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:;",
+		"default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none';",
 	)
 	w.Header().Set("X-Content-Type-Options", "nosniff")
 	w.Header().Set("X-Frame-Options", "DENY")
@@ -154,7 +154,7 @@ func (blog *Blog) createHeaders() error {
 		template.
 			New("headers").
 			Parse(`/*
-  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:;
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none';
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
