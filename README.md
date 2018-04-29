@@ -1,19 +1,14 @@
 # Status OK
 
-Set the `OK` environment variable to a directory of your choice:
-
-```
-export OK="$HOME/src/statusok"
-```
-
 Clone onto laptop:
 
 ```
+export OK="$GOPATH/src/statusok"
 git clone https://github.com/statusok/statusok.git $OK
 cd $OK
 ```
 
-Review, then run, the script:
+Review, then run, the laptop setup script:
 
 ```
 less laptop.sh
