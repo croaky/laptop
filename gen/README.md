@@ -25,7 +25,7 @@ See [example blog](https://www.statusok.com).
 Download the [project template](blog):
 
 ```
-curl -sL https://github.com/statusok/statusok/releases/download/gen-v0.0.1/blog.tar.gz | tar xvz
+curl -sL https://github.com/statusok/statusok/releases/download/gen-v0.0.2/blog.tar.gz | tar xvz
 ```
 
 The template contains the `./gen` script.
@@ -164,10 +164,12 @@ View deploy logs in the Netlify web interface.
 
 ## Get help
 
+View [releases].
 Open a [GitHub Issue][issues].
 Read [contribution instructions][contrib]
 and [MIT License][license].
 
+[releases]: https://github.com/statusok/statusok/releases
 [issues]: https://github.com/statusok/statusok/issues
 [contrib]: CONTRIBUTING.md
 [license]: ../LICENSE
