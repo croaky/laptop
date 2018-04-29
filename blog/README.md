@@ -5,9 +5,9 @@ Blog posts on software engineering.
 ## Workflow
 
 ```
-gen article example-article
+./gen article example-article
 $EDITOR articles/example-article.md
-gen serve
+./gen serve
 ```
 
 Preview at <http://localhost:2000>.
