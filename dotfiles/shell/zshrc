@@ -87,7 +87,10 @@ compinit
 
 # Set GOPATH `go help gopath`
 export GOPATH="$HOME"
-export GOROOT="$HOME/.asdf/installs/go/1.9.3/go"
+export GOROOT="$HOME/.asdf/installs/go/1.10/go"
+
+# https://github.com/golang/go/wiki/InvalidFlag
+export CGO_LDFLAGS_ALLOW='-fstack-protector'
 
 # Set environment variables for monorepos
 export OK="$HOME/src/statusok"

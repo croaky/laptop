@@ -167,8 +167,7 @@ asdf global nodejs 8.9.0
 
 asdf_plugin_update "go" "https://github.com/kennyp/asdf-golang"
 asdf install go 1.10
-asdf install go 1.9.3
-asdf global go 1.9.3
+asdf global go 1.10
 
 asdf_plugin_update "python" "https://github.com/tuvistavie/asdf-python.git"
 asdf install python 3.6.5
