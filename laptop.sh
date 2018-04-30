@@ -170,6 +170,10 @@ asdf install go 1.10
 asdf install go 1.9.3
 asdf global go 1.9.3
 
+asdf_plugin_update "python" "https://github.com/tuvistavie/asdf-python.git"
+asdf install python 3.6.5
+asdf global python 3.6.5
+
 asdf_plugin_update "java" "https://github.com/skotchpine/asdf-java"
 asdf install java 8.172
 asdf install java 10.0.1
