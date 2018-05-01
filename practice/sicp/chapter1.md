@@ -86,7 +86,7 @@ name `x`, same as a pronoun in natural language.
 
 The general form of proc definition is:
 
-```lisp
+```
 (define (<name> <formal parameters>) <body>)
 ```
 
@@ -225,4 +225,92 @@ by averaging `y` with `x / y`.
 
 (define (average x y)
   (/ (+ x y) 2))
+```
+
+`sqrt-iter` demonstrates how iteration can be accomplished
+using no special construct other than the ability to call a procedure.
+
+## 1.1.8 Procedures as Black-Box Abstractions
+
+`sqrt-iter` is recursive; the procedure is defined in terms of itself.
+
+When we define the `good-enough?` procedure in terms of `square`,
+we regard the square procedure as a "black box."
+We are not concerned with how the procedure computes its result,
+only that it computes the square.
+
+Thus, considering only the values they return,
+the following `square` procedures should be indistinguishable.
+
+```lisp
+(define (square x) (* x x))
+
+(define (square x)
+  (exp (double (log x))))
+
+(define (double x) (+ x x))
+```
+
+### Local names
+
+One detail that should not matter to the user
+is the implementer's choice of names for the procedure's formal parameters.
+
+```lisp
+(define (square x) (* x x))
+
+(define (square y) (* y y))
+```
+
+One consequence of this is that the parameter names of a procedure
+must be local to the body of the procedure.
+
+Such a name is called a bound variable.
+The procedure definition binds its formal parameters to variables.
+The bound variables have the body of the procedure as their scope.
+
+If a variable is not bound, we say that it is free.
+
+### Internal definitions and block structure
+
+The problem with our current program is that
+`sqrt` is the only procedure that is important to users.
+The other procedures (`sqrt-iter`, `good-enough?`, `improve`) create clutter.
+
+We would like to localize the subprocedures, hiding them inside `sqrt`.
+To make this possible,
+we allow a procedure to have internal definitions local to that procedure.
+This is called block structure.
+
+```lisp
+(define (sqrt x)
+  (define (good-enough? guess x)
+    (< (abs (- (square guess) x)) 0.001))
+  (define (improve guess x)
+    (average guess (/ x guess)))
+  (define (sqrt-iter guess x)
+    (if (good-enough? guess x)
+        guess
+        (sqrt-iter (improve guess x) x)))
+  (sqrt-iter 1.0 x))
+```
+
+In addition to internalizing the definitions of the auxiliary procedures,
+we can simplify them.
+Since `x` is bound in the definition of `sqrt`,
+procedures `good-enough?`, `improve`, and `sqrt-iter` are in the scope of `x`.
+Thus, we can allow `x` to be a free variable in the internal definitions.
+This is called lexical scoping.
+
+```lisp
+(define (sqrt x)
+  (define (good-enough? guess)
+    (< (abs (- (square guess) x)) 0.001))
+  (define (improve guess)
+    (average guess (/ x guess)))
+  (define (sqrt-iter guess)
+    (if (good-enough? guess)
+        guess
+        (sqrt-iter (improve guess))))
+  (sqrt-iter 1.0))
 ```
