@@ -32,10 +32,11 @@ if &compatible
 end
 
 call plug#begin('~/.vim/plugged')
+  Plug '/usr/local/opt/fzf'
   Plug 'AndrewRadev/splitjoin.vim'
-  Plug 'ctrlpvim/ctrlp.vim'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'janko-m/vim-test'
+  Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'
   Plug 'leafgarland/typescript-vim'
   Plug 'mxw/vim-jsx'
@@ -73,22 +74,15 @@ augroup vimrcEx
   autocmd InsertLeave * call ale#Lint()
 augroup END
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+" Use fzf for finding files
+nmap <C-p> :Files<CR>
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
+" Use ag for searching files
+nmap \ :Ag<SPACE>
+set grepprg=ag\ --nogroup\ --nocolor
 
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-
-  if !exists(":Ag")
-    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-    nnoremap \ :Ag<SPACE>
-  endif
-endif
+" Bind K to grep word under cursor
+nmap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Tab completion
 " will insert tab at beginning of line,
@@ -121,9 +115,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-
-" Bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Exclude JavaScript files in :Rtags via rails.vim due to warnings when parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"

@@ -54,6 +54,7 @@ tap "homebrew/services"
 tap "universal-ctags/universal-ctags"
 
 brew "awscli"
+brew "fzf"
 brew "git"
 brew "heroku"
 brew "hub"
