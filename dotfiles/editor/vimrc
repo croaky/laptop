@@ -81,7 +81,7 @@ nmap <C-p> :Files<CR>
 nmap \ :Ag<SPACE>
 set grepprg=ag\ --nogroup\ --nocolor
 
-" Bind K to grep word under cursor
+" Shift-K to search word under cursor
 nmap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Tab completion
@@ -140,62 +140,67 @@ if version > 580
   endif
 endif
 
-hi ColorColumn  ctermbg=253 cterm=NONE
-hi Comment      ctermfg=248 cterm=NONE
-hi Constant     ctermfg=30  cterm=NONE
-hi Cursor       ctermfg=231 ctermbg=238 cterm=NONE
-hi CursorColumn ctermbg=253 cterm=NONE
-hi CursorLine   ctermbg=253 cterm=NONE
-hi CursorLineNr ctermfg=250 ctermbg=253 cterm=NONE
-hi DiffAdd      ctermfg=22  ctermbg=194 cterm=NONE
-hi DiffChange   ctermbg=255 cterm=NONE
-hi DiffDelete   ctermfg=252 ctermbg=224 cterm=NONE
-hi DiffText     ctermfg=17  ctermbg=189 cterm=NONE
-hi Directory    ctermfg=88  cterm=NONE
-hi Error        ctermfg=231 ctermbg=196 cterm=NONE
-hi Folded       ctermfg=244 ctermbg=255 cterm=NONE
-hi Function     ctermfg=88  cterm=BOLD
-hi Identifier   ctermfg=31  cterm=NONE
-hi Ignore       ctermfg=244 cterm=NONE
-hi IncSearch    ctermfg=16  ctermbg=189 cterm=NONE
-hi Label        ctermfg=16  cterm=BOLD
-hi LineNr       ctermfg=250 ctermbg=255 cterm=NONE
-hi MatchParen   ctermfg=16  ctermbg=189 cterm=NONE
-hi ModeMsg      ctermfg=88  cterm=NONE
-hi MoreMsg      ctermfg=88  cterm=NONE
-hi NonText      ctermfg=244 ctermbg=255 cterm=NONE
-hi Normal       ctermfg=16  ctermbg=231 cterm=NONE
-hi Number       ctermfg=30  cterm=NONE
-hi Pmenu        ctermfg=231 ctermbg=244 cterm=BOLD
-hi PmenuSbar    ctermfg=238 ctermbg=16  cterm=NONE
-hi PmenuSel     ctermfg=16  ctermbg=189 cterm=NONE
-hi PmenuThumb   ctermfg=248 ctermbg=248 cterm=NONE
-hi PreProc      ctermfg=247 cterm=BOLD
-hi Search       ctermfg=16  ctermbg=189 cterm=NONE
-hi Special      ctermfg=28  cterm=BOLD
-hi SpecialKey   ctermfg=231 ctermbg=196 cterm=NONE
-hi Statement    ctermfg=16  cterm=BOLD
-hi StatusLine   ctermfg=238 ctermbg=250 cterm=BOLD
-hi StatusLineNC ctermfg=250 ctermbg=255 cterm=NONE
-hi StorageClass ctermfg=16  cterm=BOLD
-hi String       ctermfg=161 cterm=NONE
-hi Structure    ctermfg=16  cterm=BOLD
-hi TabLine      ctermfg=238 ctermbg=253 cterm=NONE
-hi TabLineFill  ctermfg=238 ctermbg=253 cterm=NONE
-hi TabLineSel   ctermfg=238 cterm=BOLD
-hi Title        ctermfg=203 cterm=NONE
-hi Todo         ctermfg=231 ctermbg=196 cterm=UNDERLINE
-hi Todo         ctermfg=231 ctermbg=88  cterm=BOLD
-hi Type         ctermfg=60  cterm=BOLD
-hi TypeDef      ctermfg=16  cterm=BOLD
-hi Underlined   ctermfg=16  cterm=UNDERLINE
-hi VertSplit    ctermfg=250 ctermbg=250 cterm=NONE
-hi Visual       ctermfg=231 ctermbg=61  cterm=NONE
-hi VisualNOS    ctermfg=231 ctermbg=24  cterm=NONE
-hi WarningMsg   ctermfg=203 cterm=NONE
-hi WildMenu     ctermfg=111 ctermbg=60  cterm=NONE
-hi cucumberTags ctermfg=236 ctermbg=227 cterm=BOLD
-hi htmlTagN     cterm=BOLD
-hi rubySymbol   ctermfg=89  cterm=NONE
+" Black
+hi IncSearch      ctermfg=16  ctermbg=189 cterm=NONE
+hi Label          ctermfg=16
+hi MatchParen     ctermfg=16  ctermbg=189 cterm=NONE
+hi Normal         ctermfg=16  ctermbg=231 cterm=NONE
+hi PmenuSel       ctermfg=16  ctermbg=189 cterm=NONE
+hi Search         ctermfg=16  ctermbg=189 cterm=NONE
+hi Statement      ctermfg=16
+hi StorageClass   ctermfg=16
+hi Structure      ctermfg=16
+hi TypeDef        ctermfg=16
+hi Underlined     ctermfg=16  cterm=UNDERLINE
+hi rubyDefine     ctermfg=16
+hi rubyMacro      ctermfg=16
+hi rubyValidation ctermfg=16
 
-hi link rubyStringDelimiter String
+" Light gray
+hi ColorColumn    ctermbg=250 cterm=NONE
+hi Comment        ctermfg=250 cterm=NONE
+hi Cursor         ctermfg=250 ctermbg=238 cterm=NONE
+hi CursorColumn   ctermbg=250 cterm=NONE
+hi CursorLine     ctermbg=250 cterm=NONE
+hi CursorLineNr   ctermfg=250 ctermbg=253 cterm=NONE
+hi DiffChange     ctermbg=250 cterm=NONE
+hi DiffDelete     ctermfg=250 ctermbg=224 cterm=NONE
+hi Error          ctermfg=250 ctermbg=196 cterm=NONE
+hi Folded         ctermfg=250 ctermbg=255 cterm=NONE
+hi Ignore         ctermfg=250 cterm=NONE
+hi LineNr         ctermfg=250 ctermbg=255 cterm=NONE
+hi NonText        ctermfg=250 ctermbg=255 cterm=NONE
+hi Pmenu          ctermfg=250 ctermbg=244
+hi PmenuSbar      ctermfg=250 ctermbg=16  cterm=NONE
+hi PmenuThumb     ctermfg=250 ctermbg=248 cterm=NONE
+hi PreProc        ctermfg=250
+hi SpecialKey     ctermfg=250 ctermbg=196 cterm=NONE
+hi StatusLine     ctermfg=250 ctermbg=255
+hi StatusLineNC   ctermfg=250 ctermbg=255 cterm=NONE
+hi TabLine        ctermfg=250 ctermbg=253 cterm=NONE
+hi TabLineFill    ctermfg=250 ctermbg=253 cterm=NONE
+hi TabLineSel     ctermfg=250
+hi Todo           ctermfg=250 ctermbg=88
+hi VertSplit      ctermfg=250 ctermbg=250 cterm=NONE
+hi Visual         ctermfg=250 ctermbg=61  cterm=NONE
+hi VisualNOS      ctermfg=250 ctermbg=24  cterm=NONE
+
+" Pink
+hi Directory      ctermfg=161 cterm=NONE
+hi Function       ctermfg=161
+hi ModeMsg        ctermfg=161 cterm=NONE
+hi MoreMsg        ctermfg=161 cterm=NONE
+hi String         ctermfg=161 cterm=NONE
+hi Title          ctermfg=161 cterm=NONE
+hi WarningMsg     ctermfg=161 cterm=NONE
+hi rubySymbol     ctermfg=161 cterm=NONE
+
+" Turquoise
+hi Constant       ctermfg=30  cterm=NONE
+hi DiffAdd        ctermfg=30  ctermbg=194 cterm=NONE
+hi DiffText       ctermfg=30  ctermbg=189 cterm=NONE
+hi Identifier     ctermfg=30  cterm=NONE
+hi Number         ctermfg=30  cterm=NONE
+hi Special        ctermfg=30
+hi Type           ctermfg=30
+hi WildMenu       ctermfg=30 ctermbg=60  cterm=NONE
