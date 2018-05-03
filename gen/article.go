@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -42,7 +43,12 @@ func CreateArticle(id string, blog *Blog) {
 		blog.Authors = append([]Author{author}, blog.Authors...)
 	}
 
-	must(os.Mkdir(blog.articlesDir(), os.ModePerm))
+	err := os.Mkdir(blog.articlesDir(), os.ModePerm)
+	if err != nil && !strings.Contains(err.Error(), "file exists") {
+		fmt.Println("[error] " + err.Error())
+		os.Exit(1)
+	}
+
 	f, err := os.Create(blog.articlesDir() + "/" + id + ".md")
 	must(err)
 	defer f.Close()
