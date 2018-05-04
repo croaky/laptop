@@ -21,9 +21,10 @@ func indexAtom(w io.Writer, blog *Blog) {
 
 		if err == nil {
 			item := &feeds.Item{
-				Created: published,
-				Link:    &feeds.Link{Href: blog.URL + "/" + a.ID},
-				Title:   a.Title(),
+				Created:     published,
+				Link:        &feeds.Link{Href: blog.URL + "/" + a.ID},
+				Title:       a.Title(),
+				Description: string(a.Body()),
 			}
 			feed.Add(item)
 		}
