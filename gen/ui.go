@@ -17,11 +17,11 @@ func indexAtom(w io.Writer, blog *Blog) {
 	}
 
 	for _, a := range blog.Articles {
-		published, err := time.Parse("2006-01-02", a.Published)
+		updated, err := time.Parse("2006-01-02", a.LastUpdated())
 
 		if err == nil {
 			item := &feeds.Item{
-				Created:     published,
+				Created:     updated,
 				Link:        &feeds.Link{Href: blog.URL + "/" + a.ID},
 				Title:       a.Title(),
 				Description: string(a.Body()),
