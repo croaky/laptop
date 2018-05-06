@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"html/template"
 	"io"
+	"strings"
 	"time"
 
 	"github.com/kr/jsonfeed"
@@ -19,6 +20,7 @@ func indexFeed(w io.Writer, blog *Blog) {
 	feed.Items = make([]jsonfeed.Item, len(blog.Articles))
 
 	for i, a := range blog.Articles {
+		a.Blog = blog
 		item := jsonfeed.Item{
 			ID:          blog.URL + "/" + a.ID,
 			URL:         blog.URL + "/" + a.ID,
@@ -35,6 +37,24 @@ func indexFeed(w io.Writer, blog *Blog) {
 		updated, err := time.Parse("2006-01-02", a.LastUpdated())
 		if err == nil {
 			item.DateModified = updated
+		}
+
+		authors := a.Authors()
+
+		if len(authors) == 1 {
+			item.Author = &jsonfeed.Author{
+				Name: authors[0].Name,
+				URL:  authors[0].URL,
+			}
+		}
+
+		if len(authors) > 1 {
+			var names []string
+			for _, author := range authors {
+				names = append(names, author.Name)
+			}
+			name := strings.Join(names, " and ")
+			item.Author = &jsonfeed.Author{Name: name}
 		}
 
 		feed.Items[i] = item
