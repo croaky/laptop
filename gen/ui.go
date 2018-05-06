@@ -1,37 +1,45 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
 	"html/template"
 	"io"
 	"time"
 
-	"github.com/gorilla/feeds"
+	"github.com/kr/jsonfeed"
 )
 
-func indexAtom(w io.Writer, blog *Blog) {
-	feed := feeds.Feed{
-		Title:   blog.Name,
-		Link:    &feeds.Link{Href: blog.URL},
-		Updated: time.Now(),
+func indexFeed(w io.Writer, blog *Blog) {
+	feed := jsonfeed.Feed{
+		Title:       blog.Name,
+		HomePageURL: blog.URL,
+		FeedURL:     blog.URL + "/feed.json",
 	}
 
-	for _, a := range blog.Articles {
-		updated, err := time.Parse("2006-01-02", a.LastUpdated())
+	feed.Items = make([]jsonfeed.Item, len(blog.Articles))
 
-		if err == nil {
-			item := &feeds.Item{
-				Created:     updated,
-				Link:        &feeds.Link{Href: blog.URL + "/" + a.ID},
-				Title:       a.Title(),
-				Description: string(a.Body()),
-			}
-			feed.Add(item)
+	for i, a := range blog.Articles {
+		item := jsonfeed.Item{
+			ID:          blog.URL + "/" + a.ID,
+			URL:         blog.URL + "/" + a.ID,
+			Title:       a.Title(),
+			ContentHTML: string(a.Body()),
 		}
+
+		published, err := time.Parse("2006-01-02", a.Published)
+		if err == nil {
+			item.DatePublished = published
+		}
+
+		updated, err := time.Parse("2006-01-02", a.LastUpdated())
+		if err == nil {
+			item.DateModified = updated
+		}
+
+		feed.Items[i] = item
 	}
 
-	result, _ := feed.ToAtom()
-	fmt.Fprintln(w, result)
+	must(json.NewEncoder(w).Encode(&feed))
 }
 
 var indexPage = template.Must(template.New("index").Parse(`<!DOCTYPE html>
@@ -41,7 +49,7 @@ var indexPage = template.Must(template.New("index").Parse(`<!DOCTYPE html>
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{.Name}}</title>
-  <link rel="alternate" href="feed.atom" type="application/atom+xml" />
+  <link rel="alternate" href="feed.json" type="application/json" />
 	<style>
 		body {
 			color: #3c3c3c;
@@ -144,7 +152,7 @@ var articlePage = template.Must(template.New("article").Parse(`<!DOCTYPE html>
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{.Title}}</title>
-  <link rel="alternate" href="feed.atom" type="application/atom+xml" />
+  <link rel="alternate" href="feed.json" type="application/json" />
   {{- if .Canonical }}
   <link rel="canonical" href="{{.Canonical}}">
   {{- end }}
@@ -299,7 +307,7 @@ var tagPage = template.Must(template.New("tag").Parse(`<!DOCTYPE html>
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{.Name}}</title>
-  <link rel="alternate" href="feed.atom" type="application/atom+xml" />
+  <link rel="alternate" href="feed.json" type="application/json" />
 	<style>
 		body {
 			color: #3c3c3c;

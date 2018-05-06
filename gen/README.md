@@ -5,7 +5,7 @@ A static blog generator featuring:
 * No external dependencies
 * Markdown files with no front matter
 * Local preview server
-* Atom feed
+* JSON feed
 * Images
 * Single config file
 * Anonymous, single author, or multiple authors
@@ -58,8 +58,8 @@ Or, preview at <http://localhost:2000> with:
 ./gen serve
 ```
 
-See the [Atom feed](https://validator.w3.org/feed/docs/atom.html) at
-<http://localhost:2000/feed.atom>.
+See the [JSON feed](https://jsonfeed.org/) at
+<http://localhost:2000/feed.json>.
 
 Add images to the `public/images` directory.
 Refer to them in articles via relative path:

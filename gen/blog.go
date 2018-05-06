@@ -29,9 +29,9 @@ func (blog *Blog) Build() {
 	must(err)
 	must(indexPage.Execute(f, blog))
 
-	f, err = os.Create("public/feed.atom")
+	f, err = os.Create("public/feed.json")
 	must(err)
-	indexAtom(f, blog)
+	indexFeed(f, blog)
 
 	for _, a := range blog.Articles {
 		a.Build(blog)
@@ -93,8 +93,8 @@ func (blog *Blog) handler(w http.ResponseWriter, r *http.Request) {
 	switch {
 	case r.URL.Path == "/":
 		must(indexPage.Execute(w, blog))
-	case r.URL.Path == "/feed.atom":
-		indexAtom(w, blog)
+	case r.URL.Path == "/feed.json":
+		indexFeed(w, blog)
 	case r.URL.Path == "/favicon.ico":
 		// no-op
 	case strings.HasPrefix(r.URL.Path, "/tags/"):
