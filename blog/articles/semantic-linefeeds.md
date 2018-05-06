@@ -22,6 +22,6 @@ Yet, reviewing such prose in a version control diff
 is often a pleasure
 as ideas are isolated and re-worked.
 
-See statusok.com's [blog/articles directory][dir] for examples.
+See this blog's [articles directory][dir] for examples.
 
 [dir]: https://github.com/statusok/statusok/tree/master/blog/articles
