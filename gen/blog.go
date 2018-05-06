@@ -107,6 +107,11 @@ func (blog *Blog) handler(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, image)
 	default:
 		article := blog.findArticle(r.URL.Path[1:])
+		if article.ID == "" {
+			w.WriteHeader(http.StatusNotFound)
+			fmt.Fprint(w, "not found")
+			return
+		}
 		article.Serve(w, blog)
 	}
 }
