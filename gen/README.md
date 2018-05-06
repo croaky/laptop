@@ -25,7 +25,7 @@ See [example blog](https://www.statusok.com).
 Download the [project template](blog):
 
 ```
-curl -sL https://github.com/statusok/statusok/releases/download/gen-v0.0.4/blog.tar.gz | tar xvz
+curl -sL https://github.com/statusok/statusok/releases/download/gen-v0.0.5/blog.tar.gz | tar xvz
 ```
 
 The template contains the `./gen` script.
