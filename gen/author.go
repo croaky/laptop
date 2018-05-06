@@ -11,16 +11,22 @@ type Author struct {
 
 // NewAuthor constructs a new author
 func NewAuthor() Author {
+	id, name := NewAuthorIDs()
 	return Author{
-		ID:   NewAuthorID(),
-		Name: "Your Name",
+		ID:   id,
+		Name: name,
 		URL:  "https://author.example.com",
 	}
 }
 
-// NewAuthorID constructs a new author ID
-func NewAuthorID() string {
+// NewAuthorIDs constructs a new author ID and name
+func NewAuthorIDs() (id, name string) {
 	u, err := user.Current()
 	must(err)
-	return u.Name
+	if u.Name == "" {
+		name = "Your Name"
+	} else {
+		name = u.Name
+	}
+	return u.Username, name
 }
