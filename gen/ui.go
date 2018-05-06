@@ -24,6 +24,7 @@ func indexFeed(w io.Writer, blog *Blog) {
 			URL:         blog.URL + "/" + a.ID,
 			Title:       a.Title(),
 			ContentHTML: string(a.Body()),
+			Tags:        a.Tags,
 		}
 
 		published, err := time.Parse("2006-01-02", a.Published)
