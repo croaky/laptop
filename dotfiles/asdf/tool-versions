@@ -1,4 +1,4 @@
-go 1.10
+go 1.10.2
 java 10.0.1
 maven 3.3.9
 nodejs 8.9.0

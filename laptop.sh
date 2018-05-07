@@ -157,7 +157,7 @@ asdf_plugin_update() {
 }
 
 asdf_plugin_update "go" "https://github.com/kennyp/asdf-golang"
-asdf install go 1.10
+asdf install go 1.10.2
 
 asdf_plugin_update "java" "https://github.com/skotchpine/asdf-java"
 asdf install java 8.172

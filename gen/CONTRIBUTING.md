@@ -6,7 +6,7 @@ For example, with [ASDF](https://github.com/asdf-vm/asdf):
 ```
 git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
 asdf plugin-add go https://github.com/kennyp/asdf-golang
-asdf install go 1.10
+asdf install go 1.10.2
 ```
 
 Fork the repo. Clone the project into your
