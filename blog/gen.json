@@ -4,6 +4,20 @@
       "author_ids": [
         "croaky"
       ],
+      "id": "asdf-version-manager",
+      "published": "2018-05-07",
+      "tags": [
+        "go",
+        "infra",
+        "ruby",
+        "setup",
+        "unix"
+      ]
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "id": "semantic-linefeeds",
       "published": "2018-05-03",
       "tags": [
