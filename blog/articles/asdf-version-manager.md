@@ -19,7 +19,7 @@ a single installation, configuration, and command interface.
 ## Install version manager
 
 Most work days, first thing in the morning,
-I run an idempotent [laptop setup script](laptop-setup-script)
+I run an idempotent [laptop setup script](laptop-setup-script).
 
 The script installs or updates macOS system prerequisites
 and then installs or updates ASDF:
