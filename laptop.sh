@@ -88,7 +88,7 @@ brew cask cleanup
   cd dotfiles
 
   ln -sf "$PWD/asdf/asdfrc" "$HOME/.asdfrc"
-  ln -sf "$PWD/asdf/default-gems" "$HOME/.default-gems"
+  ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"
 
   ln -sf "$PWD/editor/vimrc" "$HOME/.vimrc"
 
@@ -156,29 +156,23 @@ asdf_plugin_update() {
   asdf plugin-update "$1"
 }
 
-asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
-asdf install ruby 2.4.2
-asdf install ruby 2.5.1
-asdf global ruby 2.5.1
-
-asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
-export NODEJS_CHECK_SIGNATURES=no
-asdf install nodejs 8.9.0
-asdf global nodejs 8.9.0
-
 asdf_plugin_update "go" "https://github.com/kennyp/asdf-golang"
 asdf install go 1.10
-asdf global go 1.10
-
-asdf_plugin_update "python" "https://github.com/tuvistavie/asdf-python.git"
-asdf install python 3.6.5
-asdf global python 3.6.5
 
 asdf_plugin_update "java" "https://github.com/skotchpine/asdf-java"
 asdf install java 8.172
 asdf install java 10.0.1
-asdf global java 10.0.1
 
 asdf_plugin_update "maven" "https://github.com/skotchpine/asdf-maven"
 asdf install maven 3.3.9
-asdf global maven 3.3.9
+
+asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
+export NODEJS_CHECK_SIGNATURES=no
+asdf install nodejs 8.9.0
+
+asdf_plugin_update "python" "https://github.com/tuvistavie/asdf-python.git"
+asdf install python 3.6.5
+
+asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
+asdf install ruby 2.4.2
+asdf install ruby 2.5.1
