@@ -7,12 +7,14 @@ as a method to aim comprehension.
 * [1.2 Procedures and the Processes They Generate][1.2]
 * [1.3 Formulating Abstractions with Higher-Order Procedures][1.3]
 * [3.1 Assignment and Local State][3.1]
+* [3.2 The Environment Model of Evaluation][3.2]
 
 [ori]: https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-4.html
 [1.1]: #11-the-elements-of-programming
 [1.2]: #12-procedures-and-the-processes-they-generate
 [1.3]: #13-formulating-abstractions-with-higher-order-procedures
 [3.1]: #31-assignment-and-local-state
+[3.2]: #32-the-environment-model-of-evaluation
 
 ## 1.1 The Elements of Programming
 
@@ -922,3 +924,91 @@ which version of the var is being used.
 
 The complexity becomes worse when
 several processes execute concurrently.
+
+## 3.2 The Environment Model of Evaluation
+
+An environment is a sequence of frames.
+
+Each frame:
+
+* is a table (possibly empty) of bindings,
+  which associate variable names
+  with their corresponding values
+* contains at most one binding for a var
+* contains a pointer to its enclosing environment
+  unless the frame is global
+
+The value of a var is the value given by
+the binding of the var in the first frame in the env
+that contains a binding for that var.
+
+If no frame in the sequence specifies a binding for the var,
+the var is unbound in the env.
+
+Expressions in a programming language do not, in themselves,
+have any meaning.
+An expression acquires meaning with respect to an env
+in which it is eval'ed.
+
+Even `(+ 1 1)` depends on the symbol `+` being bound
+in the global env to a primitive addition procedure.k
+
+We will suppose there is a global env,
+consisting of a single frame,
+with no enclosing env,
+that includes values for the symbols
+associated with primitive procs.
+
+### 3.2.1 The Rules for Evaluation
+
+The spec for how the interpreter
+evals a combination remains the same as section 1.1.3:
+
+1. Evaluate subexpressions of combination
+2. Apply procedure that is the value of the leftmost subexpression (operator)
+   to the arguments that are values of other subexpressions (operands)
+
+The environment model replaces the substitution model
+in specifying what it means to apply a compound proc to args.
+
+In the env model,
+a proc is always a pair consisting of some code
+and a pointer to an env.
+
+Procs are created by eval'ing a `lambda` expression.
+This produces a proc whose code is obtained from
+the text of the `lambda` expression
+and whose env is the env in which the `lambda` was eval'ed.
+
+This proc definition is evaluated in the global env:
+
+```lisp
+(define (square x)
+  (* x x))
+```
+
+It is syntactic sugar for an underlying `lamda` expression.
+This is equivalent:
+
+```lisp
+(define square
+  (lambda (x) (* x x)))
+```
+
+It evals `(lambda (x) (* x x))` and binds `square`
+to the resulting value in its env.
+
+To apply a proc to args:
+
+* construct a frame,
+  binding the proc's params to the calling args.
+* eval the body of the proc
+  in the context of the new env constructed.
+  The new frame has as its enclosing env
+  the env part of the proc being applied
+
+Evaluating `(set! <variable> <value>)`
+finds the first frame in the env that contains a binding for the var
+and modifies that frame.
+If the var is unbound in the env,
+`set!` signals an error.
