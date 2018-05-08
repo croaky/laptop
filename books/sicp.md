@@ -35,58 +35,65 @@ Combinations are nested.
 
 ### 1.1.2 Naming and the Environment
 
-Interpreter associates value `2` with name `size`:
+The interpreter associates value `2` with name `size`:
 
 ```lisp
 define size 2
 ```
 
-`define` is simplest means of abstraction,
-allows us to refer to results of compound operations.
+`define` is the simplest means of abstraction.
+It allows us to refer to results of compound operations.
 
-Associating values with symbols and later retrieving them
-means interpreter must maintain memory to track name-object pairs.
+To associate values with symbols and later retrieve them,
+the interpreter maintains memory.
 
-This memory is called the global environment.
+This memory is called the global environment (env).
 
 ### 1.1.3 Evaluating Combinations
 
-A goal of this chapter is to think procedurally.
-To evaluate combinations, interpreter itself follows a procedure:
+Think procedurally.
+To evaluate (eval) combinations,
+the interpreter follows a procedure:
 
 1. Evaluate subexpressions of combination
 2. Apply procedure that is the value of the leftmost subexpression (operator)
    to the arguments that are values of other subexpressions (operands)
 
-Important points about processes: first step means first perform eval process on
-each element of the combination. Thus, eval rule is recursive in nature.
+Step 1 performs an evaluation process on each element of the combination.
+The eval rule is recursive.
 
 ```lisp
 (* (+ 2 (* 4 6))
    (+ 3 5 7))
 ```
 
-The eval rule is applied to four different combinations.
+In this example,
+the eval rule is applied to four different combinations.
 
 Each combination is a node with branches made of operators and operands.
 The values of the operands accumulate up the tree.
 
-When repeated application of subexpressions lead to not combinations,
-but primitive expressions such as numerals, built-in operators, or other names:
+When repeated application of subexpressions lead
+not to combinations, but primitive expressions
+such as numerals, built-in operators, or other names:
 
 * values of numerals are numbers they name
-* values of built-in operators are machine instruction sequences that carry out
-  corresponding operations
+* values of built-in operators are machine instruction sequences
+  that carry out corresponding operations
 * values of other names are objects associated with names in environment
 
 Symbols such as `+` and `*` are also included in global environment,
-associated with machine instructions that are their "values".
+associated with machine instructions that are their values.
 The environment determines the meaning of symbols in expressions.
 
-The evaluation rule does not handle definitions. `define x 3` is not a
-combination. Exceptions to general eval rule are called "special forms".
-Each special form has its own eval rule. Each kind of expression, which its
-associated eval rule, consistitute the syntax of the programming language.
+The eval rule does not handle definitions.
+`define x 3` is not a combination.
+
+Exceptions to the general eval rule are special forms.
+Each special form has its own eval rule.
+
+Each kind of expression, which its associated eval rule,
+consistitute the syntax of the programming language.
 
 ### 1.1.4 Compound Procedures
 
@@ -96,21 +103,27 @@ Procedure definitions:
 (define (square x) (* x x))
 ```
 
-A compound procedure has been named `square` representing the operation of
-multiplying something by itself. The thing to be multiplied is given a local
-name `x`, same as a pronoun in natural language.
+A compound procedure (proc) has been named `square`.
+It represents the operation of multiplying something by itself.
+The thing to be multiplied is given a local name `x`,
+the same as a pronoun in natural language.
 
-The general form of proc definition is:
+General form of proc definition:
 
 ```
 (define (<name> <formal parameters>) <body>)
 ```
 
-The `name` is a symbol to be associated with proc definition in env.
-Formal `params` are names used within body of proc to refer to corresponding
-arguments of proc. `body` is an expression that yields value of proc application
-when formal params are replaced by args to which proc is applied. `name` and
-`params` are grouped within parens in definition same as during call to proc.
+`name` is a symbol associated with a proc definition in the env.
+
+`formal parameters` (params) are names used within the body of the proc
+to refer to the corresponding arguments (args) of the proc.
+
+`name` and `formal parameters` are grouped within parentheses
+in the definition the same as during the call to proc.
+
+`body` is an expression that yields the value of proc application
+when params are replaced by args to which proc is applied.
 
 ```lisp
 (square 21)
@@ -129,29 +142,37 @@ A compound proc using a compound proc:
 
 ### 1.1.5 The Substitution Model for Procedure Application
 
-To eval a compound proc, the interpreter evals elements of the combination and
+To eval a compound proc,
+the interpreter evals elements of the combination and
 applies proc (value of operator) to args (values of operands).
 
-Assume applying primitive procs to args is built into interpreter. For compound:
-apply compound proc to args, eval body of proc with each param replaced by arg.
+Assume applying primitive procs to args is built into the interpreter.
+For compound:
+apply compound proc to args,
+then eval body of proc with each param replaced by arg.
 
-This is the substitution model for procedure application. It helps us think,
-does not describe how interpreter works. In practice, the "substitution" is
-accomplished with a local env for params.
+This is the substitution model for procedure application.
+It helps us think,
+does not describe how interpreter works.
+In practice,
+the substitution is accomplished with a local env for params.
 
 #### Applicative order versus normal order
 
-Applicative-order evaluation model:
-interpreter evals operator and operands, applies proc to args.
-Or, "eval the args and apply".
+Applicative-order eval model ("eval the args and apply"):
 
-Normal-order evaluation model:
-interpreter substitutes operand expressions for params until
-an expression is obtained containing only primitive operators, then evals.
-Or, "fully expand and then reduce".
+* interpreter evals operator and operands
+* then applies proc to args
 
-For procedure applications that can be modeled using substitution and yield
-legit values, normal-order and applicative-order produce same value.
+Normal-order evaluation model ("fully expand and then reduce"):
+
+* the interpreter substitutes operand expressions for params
+* until an expression is obtained containing only primitive operators,
+  then evals
+
+For procedure applications that can be modeled using substitution
+and yield legit values,
+normal-order and applicative-order produce the same value.
 
 Lisp uses applicative-order.
 
@@ -166,17 +187,23 @@ Case analysis:
         ((< x 0) (- x))))
 ```
 
-The general form of a conditional expression consists of the symbol `cond`
-followed by parenthesized pairs of expressions called "clauses". The first
-expression in each pair is a "predicate" -- an expression whose value is
-interpreted as true or false.
+General form of conditional expression:
 
-Conditionals are evaluated:
+```
+(cond (<predicate-1> <consequent-expression-1>)
+      (<predicate-2> <consequent-expression-2>))
+```
+
+`cond` is followed by parenthesized pairs of expressions called clauses.
+The first expression in each pair is a predicate,
+an expression whose value is interpreted as true or false.
+
+Conditionals are eval'ed:
 
 * predicate `p1` eval'ed first
 * if false, then `p2` is eval'ed
 * this continues until a predicate is found who value is true,
-  in which case interpreter returns val of corresponding "consequent expression"
+  then interpreter returns val of corresponding consequent expression
 * if no `p`s are true, val of `cond` is undefined
 
 "Predicate" also describes procs that return true or false,
@@ -193,10 +220,11 @@ Another way to write `abs`:
  x))
 ```
 
-This uses special form `if`, a restricted type of conditional used when there
-are precisely two cases in the case analysis.
+This uses the special form `if`,
+a restricted type of conditional
+used when there are two cases in the case analysis.
 
-The general form of an if expression is:
+General form of if expression:
 
 ```lisp
 (if <predicate> <consequent> <alternative>)
@@ -210,18 +238,20 @@ Logical composition operations:
 (not <e>)
 ```
 
-`and` and `or` are special forms, not procs, because subexpressions are not
-necessarily all evaluated. `not` is an ordinary proc.
+`and` and `or` are special forms, not procs,
+because subexpressions are not necessarily all evaluated.
+`not` is an ordinary proc.
 
 ### 1.1.7 Square Roots by Newton's Method
 
 Mathematical functions describe properties of things (declarative knowledge).
 Computer procedures describe how to do things (imperative knowledge).
 
-Square roots can be computed with Newton's method of successive approximations:
-given guess `y` for the square root of a number `x`,
-get a better guess (one closer to the actual square root)
-by averaging `y` with `x / y`.
+Square roots can be computed:
+
+* given guess `y` for the square root of a number `x`
+* get a better guess (one closer to the actual square root)
+  by averaging `y` with `x / y`
 
 ```lisp
 (define (sqrt x)
@@ -244,19 +274,21 @@ by averaging `y` with `x / y`.
 ```
 
 `sqrt-iter` demonstrates how iteration can be accomplished
-using no special construct other than the ability to call a procedure.
+using no special construct
+other than the ability to call a proc.
 
 ### 1.1.8 Procedures as Black-Box Abstractions
 
-`sqrt-iter` is recursive; the procedure is defined in terms of itself.
+`sqrt-iter` is recursive;
+the proc is defined in terms of itself.
 
-When we define the `good-enough?` procedure in terms of `square`,
-we regard the square procedure as a "black box."
-We are not concerned with how the procedure computes its result,
+When we define the `good-enough?` proc in terms of `square`,
+we regard the `square` proc as a black box.
+We are not concerned with how the proc computes its result,
 only that it computes the square.
 
-Thus, considering only the values they return,
-the following `square` procedures should be indistinguishable.
+Considering the values they return,
+these `square` procs are the same:
 
 ```lisp
 (define (square x) (* x x))
@@ -269,8 +301,9 @@ the following `square` procedures should be indistinguishable.
 
 #### Local names
 
-One detail that should not matter to the user
-is the implementer's choice of names for the procedure's formal parameters.
+A detail that doesn't matter to the user
+is the implementer's choice of names
+for the procs's params.
 
 ```lisp
 (define (square x) (* x x))
@@ -278,24 +311,24 @@ is the implementer's choice of names for the procedure's formal parameters.
 (define (square y) (* y y))
 ```
 
-One consequence of this is that the parameter names of a procedure
-must be local to the body of the procedure.
+One consequence of this is that the param names of a proc
+must be local to the body of the proc.
 
-Such a name is called a bound variable.
-The procedure definition binds its formal parameters to variables.
-The bound variables have the body of the procedure as their scope.
+Such a name is called a bound variable (var).
+The proc definition binds its params to vars.
+The bound variables have the body of the proc as their scope.
 
-If a variable is not bound, we say that it is free.
+If a variable is not bound, it is free.
 
 #### Internal definitions and block structure
 
-The problem with our current program is that
-`sqrt` is the only procedure that is important to users.
-The other procedures (`sqrt-iter`, `good-enough?`, `improve`) create clutter.
+`sqrt` is the only proc that is important to this program's users.
+The other procs (`sqrt-iter`, `good-enough?`, `improve`) create clutter.
 
-We would like to localize the subprocedures, hiding them inside `sqrt`.
+We want to localize the subprocedures,
+hiding them inside `sqrt`.
 To make this possible,
-we allow a procedure to have internal definitions local to that procedure.
+we allow a proc to have internal definitions local to itself.
 This is called block structure.
 
 ```lisp
@@ -311,11 +344,11 @@ This is called block structure.
   (sqrt-iter 1.0 x))
 ```
 
-In addition to internalizing the definitions of the auxiliary procedures,
+Once the definitions of the auxiliary procs have been internalized,
 we can simplify them.
 Since `x` is bound in the definition of `sqrt`,
-procedures `good-enough?`, `improve`, and `sqrt-iter` are in the scope of `x`.
-Thus, we can allow `x` to be a free variable in the internal definitions.
+procs `good-enough?`, `improve`, and `sqrt-iter` are in the scope of `x`.
+Thus, `x` can be a free var in the internal definitions.
 This is called lexical scoping.
 
 ```lisp
@@ -333,12 +366,14 @@ This is called lexical scoping.
 
 ## 1.2 Procedures and the Processes They Generate
 
-Procedures generate common shapes for processes.
-Processes consume computational resources of time and space at different rates.
+Procs generate common shapes for processes.
+Different processes
+consume computational resources of time and space
+at different rates.
 
 ### 1.2.1 Linear Recursion and Iteration
 
-This factorial procedure generates a linear recursive process:
+This factorial proc generates a linear recursive process:
 
 ```lisp
 (define (factorial n)
@@ -373,11 +408,11 @@ the interpreter keep track of the operations to be performed later on.
 
 In the computation of `n!`,
 the length of the chain of deferred multiplications,
-and hence the amount of information needed to keep track of it,
+and the amount of info needed to keep track of it,
 grows linearly with `n` (is proportional to `n`),
 like the number of steps.
 
-This factorial procedure generates a linear iterative process:
+This factorial proc generates a linear iterative process:
 
 ```lisp
 (define (factorial n)
@@ -407,7 +442,7 @@ Its shape looks like this:
 
 This process does not expand and contract.
 At each step for `n`,
-it keeps track of the current values of the variables
+it keeps track of the current values of the vars
 `product`, `counter`, and `max-count`.
 
 An iterative process has a fixed number of state variables,
@@ -416,29 +451,33 @@ as the process moves from state to state,
 and an (optional) end test
 that specifies conditions under which the process should terminate.
 
-In computing `n!`, the number of steps required grows linearly with `n`.
+In computing `n!`,
+the number of steps required grows linearly with `n`.
 
 In the iterative case,
 vars provide a complete description of the process state at any point.
 If the computation stopped between steps,
-the computation can be resumed by supplying the interpreter
-with the values of the three program variables.
+it can be resumed
+by giving the interpreter the values of the three program vars.
 
 With the recursive process,
-there is additional info maintained by the interpreter
+additional info is maintained by the interpreter
 not contained in the vars
 which indicates "where the process is"
 in negotiating the chain of deferred operations.
-The longer the chain, the more info must be maintained.
+The longer the chain,
+the more info must be maintained.
 
-A recursive process is different than a recursive procedure.
-Recursive procedures call themselves.
-Linearly recursive processes expand and contract due to deferred operations.
+A recursive process is different than a recursive proc.
+Recursive procs call themselves.
+Linearly recursive processes expand and contract
+due to deferred operations.
 
-Many programming languages interpreters
-consume an amount of memory that grows with the number of procedure calls
+Many programming languages' interpreters
+consume an amount of memory that grows with the number of proc calls
 even when the process described is iterative.
-As a consequence, these languages can describe iterative processes
+As a consequence,
+these languages can describe iterative processes
 only via special-purpose looping constructs such as
 `do`, `repeat`, `until`, `for`, and `while`.
 
@@ -448,7 +487,7 @@ is called tail-recursive.
 
 ### 1.2.2 Tree Recursion
 
-Consider this recursive procedure for computing Fibonacci numbers:
+A recursive proc for computing Fibonacci numbers:
 
 ```lisp
 (define (fib n)
@@ -461,17 +500,23 @@ Consider this recursive procedure for computing Fibonacci numbers:
 To compute `(fib 5)`, compute `(fib 4)` and `(fib 3)`.
 To compute `(fib 4)`, compute `(fib 3)` and `(fib 2)`.
 The evolved process looks like a tree.
-The branches split into two at each level (except at the bottom); this reflects
-that the `fib` procedure calls itself twice each time it is invoked.
+The branches split into two at each level (except at the bottom);
+this reflects that the `fib` proc
+calls itself twice each time it is invoked.
 
-The number of steps used by the process grows exponentially with the input.
-The space required grows linearly with the input.
+The number of steps used by the process
+grows exponentially with the input.
+The space required
+grows linearly with the input.
 
-In general, a tree-recursive process
-requires a number of steps proportional to the number of nodes in the tree
-and requires space proportional to the maximum depth of the tree.
+In general,
+a tree-recursive process
+requires a number of steps
+proportional to the number of nodes in the tree
+and requires space
+proportional to the maximum depth of the tree.
 
-Consider this linear iteration procedure for computing Fibonacci numbers:
+A linear iteration proc for computing Fibonacci numbers:
 
 ```lisp
 (define (fib n)
@@ -483,7 +528,8 @@ Consider this linear iteration procedure for computing Fibonacci numbers:
       (fib-iter (+ a b) a (- count 1))))
 ```
 
-The number of steps used by the process grows linearly with the input.
+The number of steps used by the process
+grows linearly with the input.
 
 ### 1.2.3 Orders of Growth
 
@@ -493,7 +539,7 @@ is to use the notion of order of growth
 to obtain a gross measure of the resources required by a process
 as the inputs become larger.
 
-Let `n` be a parameter that measures the size of the problem,
+Let `n` be a param that measures the size of the problem,
 and let `R(n)` be the amount of resources the process requires
 for a problem of size `n`.
 
@@ -513,11 +559,9 @@ grow as `Θ(1.618^n)` and space as `Θ(n)`.
 
 ## 1.3 Formulating Abstractions with Higher-Order Procedures
 
-Procedures that manipulate procedures are called higher-order procedures.
+Procs that manipulate procs are called higher-order procedures.
 
 ### 1.3.1 Procedures as Arguments
-
-Consider the following procedures:
 
 ```lisp
 (define (sum-integers a b)
@@ -536,18 +580,18 @@ Consider the following procedures:
       (+ (/ 1.0 (* a (+ a 2))) (pi-sum (+ a 4) b))))
 ```
 
-They share a common underlying pattern,
-differing only in the name of the procedure,
-the function of a used to compute the term to be added,
-and the function that provides the next value of a.
+These procs share a common underlying pattern,
+differing only in the name of the proc,
+the function of `a` used to compute the term to be added,
+and the function that provides the next value of `a`.
 
 The presence of such a pattern is strong evidence
 that there is a useful abstraction waiting to be brought to the surface:
 summation of a series.
 
-We could define a new procedure `sum` that takes as its arguments
+We could define a new procedure `sum` that takes as its args
 the lower and upper bounds `a` and `b`
-with the procedures `term` and `next`:
+with the procs `term` and `next`:
 
 ```lisp
 (define (sum term a next b)
@@ -557,8 +601,8 @@ with the procedures `term` and `next`:
          (sum term (next a) next b))))
 ```
 
-Now we can define the original procedures in terms of `sum`
-along with helper procedures:
+Now we can define the original procs in terms of `sum`
+along with helper procs:
 
 ```lisp
 (define (sum-integers a b)
@@ -582,14 +626,15 @@ along with helper procedures:
 ## 3.1 Assignment and Local State
 
 We need strategies to help us structure large systems
-so that they can be divided "naturally" into coherent parts
+so that they can be divided naturally into coherent parts
 that can be separately developed and maintained.
 
-One strategy concentrates on the collection of objects in the system
+One strategy concentrates on
+the collection of objects in the system
 whose behaviors may change over time.
 
-An alternative strategy concentrates on the streams of information
-that flow in the system,
+An alternative strategy concentrates on
+the streams of information that flow in the system,
 much as an electrical engineer views a signal-processing system.
 
 An object has state if its behavior is influenced by its history.
@@ -598,13 +643,13 @@ A bank account's balance depends on its history of deposits and withdrawals.
 In a system of many objects, the objects are rarely independent.
 Each may influence the state of others through interactions.
 Each object's state is characterized by local state variables.
-To model state variables by ordinary symbolic names in the programming language,
+To model vars by ordinary symbolic names in the programming language,
 the language must provide an assignment operator
 to enable us to change the value associated with a name.
 
 ### 3.1.1 Local State Variables
 
-We want a procedure `withdraw` to behave like:
+We want a proc `withdraw` to behave like:
 
 ```
 (withdraw 25)
@@ -619,11 +664,11 @@ We want a procedure `withdraw` to behave like:
 
 Observe that the expression `(withdraw 25)`,
 evaluated twice, yields different values.
-This is a new kind of behavior for a procedure.
+This is a new kind of behavior for a proc.
 
 To implement `withdraw`,
-we can use a variable `balance` to indicate the balance of and account
-and define `withdraw` as a procedure that accesses `balance`.
+we can use a var `balance` to indicate the balance of and account
+and define `withdraw` as a proc that accesses `balance`.
 
 ```lisp
 (define balance 100)
@@ -641,7 +686,7 @@ Decrementing balance is accomplished by the expression:
 (set! balance (- balance amount))
 ```
 
-This uses the `set!` special form, whose syntax is:
+This uses the `set!` special form:
 
 ```
 (set! <name> <new-value>)
@@ -665,7 +710,7 @@ and the value of the final expression `<expk>` to be returned
 as the value of the entire `begin` form.
 
 `balance` is a name defined in the global environment
-and is freely accessible to be examined or modified by any procedure.
+and is freely accessible to be examined or modified by any proc.
 It would be better if we could make `balance` internal to `withdraw`:
 
 ```lisp
@@ -678,16 +723,16 @@ It would be better if we could make `balance` internal to `withdraw`:
           "Insufficient funds"))))
 ```
 
-Combining `set!` with local variables is the general programming technique
+Combining `set!` with local vars is the general programming technique
 we will use for constructing computational objects with local state.
 
-When we first introduced procedures,
+When we first introduced procs,
 we also introduced the substitution model of evaluation (section 1.1.5)
-to provide an interpretation of what procedure application means.
+to provide an interpretation of what proc application means.
 When we introduce assignment into our language,
-substitution is no longer an adequate model of procedure application.
+substitution is no longer an adequate model of proc application.
 
-This procedure returns a bank account object with a specified initial balance:
+This proc returns a bank account object with a specified initial balance:
 
 ```lisp
 (define (make-account balance)
@@ -707,13 +752,13 @@ This procedure returns a bank account object with a specified initial balance:
   dispatch)
 ```
 
-Each call to `make-account` sets up an environment
-with a local state variable `balance`.
-Within this environment,
-procedures `deposit` and `withdraw` access `balance`
-and an additional procedure `dispatch` takes a "message" as input
-and returns one of the two local procedures.
-The `dispatch` procedure itself is returned as
+Each call to `make-account` sets up an env
+with a local var `balance`.
+Within this env,
+procs `deposit` and `withdraw` access `balance`
+and an additional proc `dispatch` takes a "message" as input
+and returns one of the two local procs.
+The `dispatch` proc itself is returned as
 the value that represents the bank-account object.
 This is a message-passing style of programming.
 
@@ -731,7 +776,7 @@ This is a message-passing style of programming.
 30
 ```
 
-Each `acc` call returns the locally defined `deposit` or `withdraw` procedure,
+Each `acc` call returns the locally defined `deposit` or `withdraw` proc,
 which is then applied to the specified `amount`.
 
 Another call to `make-account`:
