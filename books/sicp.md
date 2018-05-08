@@ -815,3 +815,110 @@ to be passed as an arg to `rand-update`.
 When we introduce assignment into our language,
 the substitution model of evaluation
 is no longer an adequate model of proc application.
+
+Programming without assignments is known as functional programming.
+
+Compare two procs,
+one that changes state
+and one that is functional:
+
+```lisp
+(define (make-simplified-withdraw balance)
+  (lambda (amount)
+    (set! balance (- balance amount))
+    balance))
+(define (make-decrementer balance)
+  (lambda (amount)
+    (- balance amount)))
+```
+
+```
+(define W (make-simplified-withdraw 25))
+(W 20)
+5
+(W 10)
+- 5
+(define D (make-decrementer 25))
+(D 20)
+5
+(D 10)
+15
+```
+
+The substitution model can be applied to `func-withdraw`
+but not `obj-withdraw` because substitution is based on
+the idea that symbols are names for values.
+Assignment introduces the idea that vars refer to a place
+where a value can be stored
+and the value stored at that place can change.
+
+#### Sameness and change
+
+Suppose we call `make-decrementer` twice
+with the same argument to create two procs:
+
+```lisp
+(define D1 (make-decrementer 25))
+(define D2 (make-decrementer 25))
+```
+
+Are `D1` and `D2` the same?
+Yes, because they have the same computational behavior;
+each is a proc that subtracts its input from 25.
+
+Contrast with:
+
+```lisp
+(define W1 (make-simplified-withdraw 25))
+(define W2 (make-simplified-withdraw 25))
+```
+
+Are `W1` and `W2` the same?
+No, because calls to `W1` and `W2` have side effects.
+
+A referentially transparent language supports the idea of
+"equals can be substituted for equals" in an expression
+without changing the value of an expression.
+
+Without referential transparency,
+it becomes difficult to formally describe
+what it means for objects to be the same.
+
+In the following model,
+two bank accounts are distinct.
+Transactions made by Peter
+will not affect Paul's account,
+and vice versa.
+
+```lisp
+(define peter-acc (make-account 100))
+(define paul-acc (make-account 100))
+```
+
+In this following model,
+Peter's account is the same thing as Peter's account.
+They effectively have a joint bank account.
+If Peter withdraws from the account,
+Paul will observe less money in the account.
+
+```lisp
+(define peter-acc (make-account 100))
+(define paul-acc peter-acc)
+```
+
+It can be confusing that the same account
+has two different names.
+To find all the places in the program that reference `peter-acc`,
+we must also look for `paul-acc`.
+
+#### Pitfalls of imperative programming
+
+Programming with many assignments is known as imperative programming.
+
+Imperative programs are susceptible to bugs
+related to the order of assignments.
+THe programmer has to carefully consider
+which version of the var is being used.
+
+The complexity becomes worse when
+several processes execute concurrently.
