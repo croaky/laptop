@@ -8,6 +8,7 @@ A static blog generator featuring:
 * JSON feed
 * Images
 * Single config file
+* Drafts
 * Anonymous, single author, or multiple authors
 * Tags
 * "Last updated" timestamp
@@ -16,7 +17,8 @@ A static blog generator featuring:
 * "Edit this article" footer links
 * Single theme
 * Responsive design
-* PageSpeed Insights score of 100
+* PageSpeed Insights performance score of 100
+* Mozilla Observatory security grade of A+
 
 See [example blog](https://www.statusok.com).
 
