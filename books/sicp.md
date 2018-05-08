@@ -662,8 +662,9 @@ We want a proc `withdraw` to behave like:
 35
 ```
 
-Observe that the expression `(withdraw 25)`,
-evaluated twice, yields different values.
+The expression `(withdraw 25)`,
+evaluated twice,
+yields different values.
 This is a new kind of behavior for a proc.
 
 To implement `withdraw`,
@@ -704,14 +705,14 @@ first decrementing balance and then returning the value of balance.
 (begin <exp1> <exp2> ... <expk>)
 ```
 
-causes the expressions `<exp1>` through `<expk>`
+`begin` causes the expressions `<exp1>` through `<expk>`
 to be evaluated in sequence
 and the value of the final expression `<expk>` to be returned
 as the value of the entire `begin` form.
 
-`balance` is a name defined in the global environment
-and is freely accessible to be examined or modified by any proc.
-It would be better if we could make `balance` internal to `withdraw`:
+`balance` is a name defined in the global env,
+free to be examined or modified by any proc.
+It would be better to make `balance` internal to `withdraw`:
 
 ```lisp
 (define new-withdraw
@@ -725,12 +726,6 @@ It would be better if we could make `balance` internal to `withdraw`:
 
 Combining `set!` with local vars is the general programming technique
 we will use for constructing computational objects with local state.
-
-When we first introduced procs,
-we also introduced the substitution model of evaluation (section 1.1.5)
-to provide an interpretation of what proc application means.
-When we introduce assignment into our language,
-substitution is no longer an adequate model of proc application.
 
 This proc returns a bank account object with a specified initial balance:
 
@@ -758,8 +753,8 @@ Within this env,
 procs `deposit` and `withdraw` access `balance`
 and an additional proc `dispatch` takes a "message" as input
 and returns one of the two local procs.
-The `dispatch` proc itself is returned as
-the value that represents the bank-account object.
+The `dispatch` proc itself is returned
+as the value that represents the bank-account object.
 This is a message-passing style of programming.
 
 `make-account` can be used as follows:
@@ -779,11 +774,44 @@ This is a message-passing style of programming.
 Each `acc` call returns the locally defined `deposit` or `withdraw` proc,
 which is then applied to the specified `amount`.
 
-Another call to `make-account`:
+Another call to `make-account`
+will produce a separate `account` object,
+which maintains its own local `balance`:
 
 ```lisp
 (define acc2 (make-account 100))
 ```
 
-will produce a separate `account` object,
-which maintains its own local `balance`.
+### 3.1.2 The Benefits of Introducing Assignment
+
+We want a proc `rand` that returns an integer chosen at random.
+
+```lisp
+(define rand
+  (let ((x random-init))
+    (lambda ()
+      (set! x (rand-update x))
+      x)))
+```
+
+Successive calls to `rand`:
+
+```
+x2 = (rand-update x1)
+x3 = (rand-update x2)
+```
+
+Should produce a sequence of numbers (`x1`, `x2`, `x3`)
+with a uniform statistical distribution.
+
+The same sequence could be generated
+by calling `rand-update` directly
+but any part of the program that used random numbers
+would then have to remember the value of `x`
+to be passed as an arg to `rand-update`.
+
+### 3.1.3 The Costs of Introducing Assignment
+
+When we introduce assignment into our language,
+the substitution model of evaluation
+is no longer an adequate model of proc application.
