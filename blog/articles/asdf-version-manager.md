@@ -2,11 +2,10 @@
 
 Programming languages release new versions.
 Development, CI, or production environments may have
-multiple versions of the same programming language
-simultaneously installed.
+multiple versions of the same language installed.
 
 A version manager program helps switch between versions
-at a machine level or project level.
+for a machine or project.
 
 Often, these programs are language-specific.
 Some examples are RVM, rbenv, and chruby for Ruby and nvm for Node.
@@ -18,11 +17,9 @@ a single installation, configuration, and command interface.
 
 ## Install version manager
 
-Most work days, first thing in the morning,
-I run an idempotent [laptop setup script](laptop-setup-script).
-
-The script installs or updates macOS system prerequisites
-and then installs or updates ASDF:
+I use a [laptop setup script](laptop-setup-script)
+to install or update macOS system prerequisites
+and then install or update ASDF:
 
 ```bash
 if [ -d "$HOME/.asdf" ]; then
