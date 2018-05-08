@@ -163,8 +163,6 @@ hi Cursor         ctermfg=250 ctermbg=238 cterm=NONE
 hi CursorColumn   ctermbg=250 cterm=NONE
 hi CursorLine     ctermbg=250 cterm=NONE
 hi CursorLineNr   ctermfg=250 ctermbg=253 cterm=NONE
-hi DiffChange     ctermbg=250 cterm=NONE
-hi DiffDelete     ctermfg=250 ctermbg=224 cterm=NONE
 hi Error          ctermfg=250 ctermbg=196 cterm=NONE
 hi Folded         ctermfg=250 ctermbg=255 cterm=NONE
 hi Ignore         ctermfg=250 cterm=NONE
@@ -184,8 +182,10 @@ hi Todo           ctermfg=250 ctermbg=88
 hi VertSplit      ctermfg=250 ctermbg=250 cterm=NONE
 hi Visual         ctermfg=250 ctermbg=61  cterm=NONE
 hi VisualNOS      ctermfg=250 ctermbg=24  cterm=NONE
+hi gitCommitDiff  ctermfg=250 cterm=NONE
 
 " Pink
+hi DiffDelete     ctermfg=161 cterm=NONE
 hi Directory      ctermfg=161 cterm=NONE
 hi Function       ctermfg=161
 hi ModeMsg        ctermfg=161 cterm=NONE
@@ -193,14 +193,15 @@ hi MoreMsg        ctermfg=161 cterm=NONE
 hi String         ctermfg=161 cterm=NONE
 hi Title          ctermfg=161 cterm=NONE
 hi WarningMsg     ctermfg=161 cterm=NONE
+hi diffRemoved    ctermfg=161 cterm=NONE
 hi rubySymbol     ctermfg=161 cterm=NONE
 
 " Turquoise
 hi Constant       ctermfg=30  cterm=NONE
 hi DiffAdd        ctermfg=30  ctermbg=194 cterm=NONE
-hi DiffText       ctermfg=30  ctermbg=189 cterm=NONE
 hi Identifier     ctermfg=30  cterm=NONE
 hi Number         ctermfg=30  cterm=NONE
 hi Special        ctermfg=30
 hi Type           ctermfg=30
 hi WildMenu       ctermfg=30 ctermbg=60  cterm=NONE
+hi diffAdded      ctermfg=30  cterm=NONE
