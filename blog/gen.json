@@ -4,6 +4,17 @@
       "author_ids": [
         "croaky"
       ],
+      "id": "email-amazon-ses-rails-ec2",
+      "published": "2018-05-09",
+      "tags": [
+        "infra",
+        "ruby"
+      ]
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "id": "asdf-version-manager",
       "published": "2018-05-07",
       "tags": [
