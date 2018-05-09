@@ -111,4 +111,28 @@ config.action_mailer.delivery_method = :aws_sdk
 Once your sending limit has been increased,
 you can deploy these changes.
 
-Happy emailing!
+## Catch errors
+
+When delivering emails,
+optionally rescue `Aws::SES::Errors::ServiceError` errors:
+
+```ruby
+class UsersController < ApplicationController
+  def create
+    @user = User.new(email: params[:user][:email])
+
+    if @user.save
+      begin
+        Mailer.email_confirmation(@user).deliver_now
+      rescue Aws::SES::Errors::ServiceError => err
+        Rails.logger.info(err.message)
+        flash.now[:alert] = t('.failure')
+        render :new
+      end
+    else
+      flash.now[:alert] = t('.failure')
+      render :new
+    end
+  end
+end
+```
