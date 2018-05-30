@@ -1,7 +1,10 @@
 # Structure and Interpretation of Computer Programs
 
-These notes were written while reading [the original SICP text][ori]
+These notes were written while reading
+[Structure and Interpretation of Computer Programs][source]
 as a method to aim comprehension.
+
+[source]: https://bit.ly/2sljBim
 
 * [1.1 The Elements of Programming][1.1]
 * [1.2 Procedures and the Processes They Generate][1.2]
@@ -9,7 +12,6 @@ as a method to aim comprehension.
 * [3.1 Assignment and Local State][3.1]
 * [3.2 The Environment Model of Evaluation][3.2]
 
-[ori]: https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-4.html
 [1.1]: #11-the-elements-of-programming
 [1.2]: #12-procedures-and-the-processes-they-generate
 [1.3]: #13-formulating-abstractions-with-higher-order-procedures
