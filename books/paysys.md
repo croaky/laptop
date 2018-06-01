@@ -154,7 +154,9 @@ Payments are used for multiple purposes:
 
 When End Party A is sending money to End Party B,
 it is considered a push payment.
-Wire transfers and ACH direct deposit of payroll are push payments.
+Wire transfers, ACH direct deposit of payroll,
+and [cryptocurrencies](https://bit.ly/2kCmZ51)
+are push payments.
 
 ```
 end party a -> bank -> payments system -> bank -> end party b
@@ -179,7 +181,7 @@ the transaction is initiated by the sender’s bank,
 which knows that its end party has the money.
 Other types of fraud are still possible.
 
-"Pull transactions depend on the payer (End Party B)
+Pull transactions depend on the payer (End Party B)
 having authorized the sender of the message to effect the transaction.
 A signed check presented to a merchant,
 or a card swipe with signature or PIN,
