@@ -49,7 +49,6 @@ fi
 
 brew update
 brew bundle --file=- <<EOF
-tap "thoughtbot/formulae"
 tap "homebrew/services"
 tap "universal-ctags/universal-ctags"
 
