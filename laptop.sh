@@ -141,7 +141,7 @@ vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 if [ -d "$HOME/.asdf" ]; then
   (
     cd "$HOME/.asdf"
-    git pull origin master
+    git reset --hard origin/master
   )
 else
   git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
