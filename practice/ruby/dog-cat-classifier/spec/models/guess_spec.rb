@@ -2,6 +2,8 @@
 
 require_relative '../../app/models/guess'
 
+ActiveRecord::Base.logger = nil
+
 RSpec.describe Guess, '.create' do
   it "SHA1 hashes user's phone number for some lightweight privacy" do
     guess = Guess.create(input: 'anything', phone_number: '+15555555555')
