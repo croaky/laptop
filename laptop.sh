@@ -117,7 +117,6 @@ brew cask cleanup
   ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
 
-  ln -sf "$PWD/search/ignore" "$HOME/.agignore"
   ln -sf "$PWD/search/ctags" "$HOME/.ctags"
 
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
