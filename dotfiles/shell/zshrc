@@ -124,4 +124,4 @@ PATH="$HOME/.asdf/shims:$PATH"
 # mkdir .git/safe in trusted project to add binstubs
 PATH=".git/safe/../../bin:$PATH"
 
-export -U PATH
+export PATH
