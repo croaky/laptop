@@ -4,6 +4,20 @@
       "author_ids": [
         "croaky"
       ],
+      "id": "gitignore",
+      "published": "2018-06-21",
+      "redirects": [
+        "/global-gitignore"
+      ],
+      "tags": [
+        "git",
+        "setup"
+      ]
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "id": "email-amazon-ses-rails-ec2",
       "published": "2018-05-09",
       "tags": [
@@ -419,21 +433,6 @@
       "published": "2012-09-28",
       "tags": [
         "test"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/global-gitignore",
-      "id": "gitignore",
-      "published": "2012-03-04",
-      "redirects": [
-        "/global-gitignore"
-      ],
-      "tags": [
-        "git",
-        "setup"
       ]
     },
     {

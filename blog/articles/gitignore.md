@@ -1,33 +1,26 @@
 # ~/.gitignore
 
-Set a `.gitignore` file to apply across all projects on a local machine with:
+Configure `~/.gitignore` for all projects on a machine.
+
+[Example](https://github.com/statusok/statusok/blob/master/dotfiles/git/gitignore):
 
 ```
-git config --global core.excludesfile ~/.gitignore
-```
-
-The contents of the [Status OK monorepo's
-gitignore](https://github.com/statusok/statusok/blob/master/dotfiles/git/gitignore)
-are:
-
-```
-!tags/
-!tmp/cache/.keep
+*.lock
+*.log
 *.pyc
 *.sw[nop]
 .DS_Store
 .bundle
-.byebug_history
-db/*.sqlite3
-log/*.log
-rerun.txt
-tags
-tmp/**/*
+node_modules
+public
+tmp
+vendor
 ```
 
-One example pattern is the line matching files with `.swp` extensions:
-It ignores temporary files created by Vim.
+Directories and files matching these patterns will be ignored for
+[Git](https://git-scm.com/docs/gitignore) commits.
 
-Those files could be ignored in each project but
-not every teammate on every project is also using Vim.
-For them, that line is unnecessary.
+They will also ignored for
+[ag](https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage)
+or [fzf](https://github.com/junegunn/fzf#respecting-gitignore)
+searches.
