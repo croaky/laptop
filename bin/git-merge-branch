@@ -2,5 +2,11 @@
 
 set -e
 
-git checkout master
+branch="master"
+
+if git branch | grep -Fq "main"; then
+  branch="main"
+fi
+
+git checkout $branch
 git merge "@{-1}"
