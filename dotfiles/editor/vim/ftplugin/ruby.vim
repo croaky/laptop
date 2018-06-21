@@ -1,8 +1,6 @@
-" Auto-format on save. All file patterns to support Ruby shell scripts.
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * Neoformat rubocop
-augroup END
+let b:ale_fixers = ['rubocop']
+let b:ale_linters = ['rubocop']
+let g:ale_fix_on_save = 1
 
 " Run current file
 nmap <Leader>r :!clear && bundle exec ruby %<CR>

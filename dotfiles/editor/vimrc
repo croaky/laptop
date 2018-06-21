@@ -43,7 +43,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'nicholaides/words-to-avoid.vim'
   Plug 'pangloss/vim-javascript'
   Plug 'pbrisbin/vim-mkdir'
-  Plug 'sbdchd/neoformat'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'

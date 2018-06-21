@@ -1,9 +1,3 @@
-" Auto-format on save
-augroup fmt
-  autocmd!
-  autocmd BufWritePre *.ts,*.tsx Neoformat prettier
-augroup END
-
-let g:ale_linters = {
-\  'typescript': ['tslint', 'tsserver'],
-\}
+let b:ale_fixers = ['prettier']
+let b:ale_linters = ['tslint', 'tsserver']
+let g:ale_fix_on_save = 1
