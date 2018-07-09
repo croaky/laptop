@@ -140,6 +140,7 @@ vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 if [ -d "$HOME/.asdf" ]; then
   (
     cd "$HOME/.asdf"
+    git fetch origin
     git reset --hard origin/master
   )
 else
