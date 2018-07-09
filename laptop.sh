@@ -62,6 +62,7 @@ brew "jq"
 brew "libyaml"
 brew "openssl"
 brew "postgresql", restart_service: :changed
+brew "protobuf"
 brew "reattach-to-user-namespace"
 brew "redis", restart_service: :changed
 brew "shellcheck"
