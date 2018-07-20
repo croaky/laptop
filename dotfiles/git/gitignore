@@ -4,6 +4,7 @@
 *.sw[nop]
 .DS_Store
 .bundle
+.vs
 node_modules
 public
 tmp
