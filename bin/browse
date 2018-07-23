@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Open a file in the current repo, current branch, on GitHub.
+
+hub browse -- blob/"$(git rev-parse --abbrev-ref HEAD)"/"$1"
