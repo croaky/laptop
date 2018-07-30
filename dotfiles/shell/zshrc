@@ -91,9 +91,10 @@ fi
 autoload -U compinit
 compinit
 
-# Set GOPATH `go help gopath`
+# Configure Go
 export GOPATH="$HOME"
-export GOROOT="$HOME/.asdf/installs/go/1.10.2/go"
+PATH="$GOPATH/bin:$PATH"
+PATH="/usr/local/go/bin:$PATH"
 
 # https://github.com/golang/go/wiki/InvalidFlag
 export CGO_LDFLAGS_ALLOW='-fstack-protector'
@@ -110,9 +111,6 @@ export CDPATH="$CDPATH:$CHAIN:$OK:$ROOSTER:$GOPATH/src/github.com"
 PATH="$OK/bin:$PATH"
 PATH="$CHAIN/bin:$PATH"
 PATH="$ROOSTER/bin:$PATH"
-
-# Prepend Go binaries
-PATH="$GOPATH/bin:$PATH"
 
 # Prepend Homebrew binaries
 PATH="/usr/local/bin:$PATH"

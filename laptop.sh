@@ -138,6 +138,8 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
+curl https://dl.google.com/go/go1.10.3.darwin-amd64.tar.gz | sudo tar xz -C /usr/local
+
 if [ -d "$HOME/.asdf" ]; then
   (
     cd "$HOME/.asdf"
@@ -155,9 +157,6 @@ asdf_plugin_update() {
 
   asdf plugin-update "$1"
 }
-
-asdf_plugin_update "go" "https://github.com/kennyp/asdf-golang"
-asdf install go 1.10.2
 
 asdf_plugin_update "java" "https://github.com/skotchpine/asdf-java"
 asdf install java 8.172
