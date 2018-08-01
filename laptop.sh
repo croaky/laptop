@@ -138,7 +138,11 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
-curl https://dl.google.com/go/go1.10.3.darwin-amd64.tar.gz | sudo tar xz -C /usr/local
+if ! command -v go >/dev/null; then
+  if ! go version | grep -Fq "1.10.3"; then
+    curl https://dl.google.com/go/go1.10.3.darwin-amd64.tar.gz | sudo tar xz -C /usr/local
+  fi
+fi
 
 if [ -d "$HOME/.asdf" ]; then
   (
