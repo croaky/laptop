@@ -74,7 +74,7 @@ var indexPage = template.Must(template.New("index").Parse(`<!DOCTYPE html>
 	<style>
 		body {
 			color: #3c3c3c;
-			font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+			font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Droid Sans", "Ubuntu", sans-serif;
 			font-size: 16px;
 			line-height: 22px;
 			-webkit-font-smoothing: antialiased;
@@ -180,7 +180,7 @@ var articlePage = template.Must(template.New("article").Parse(`<!DOCTYPE html>
 	<style>
 		body {
 			color: #3c3c3c;
-			font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+			font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Droid Sans", "Ubuntu", sans-serif;
 			font-size: 16px;
 			line-height: 22px;
 			-webkit-font-smoothing: antialiased;
@@ -332,7 +332,7 @@ var tagPage = template.Must(template.New("tag").Parse(`<!DOCTYPE html>
 	<style>
 		body {
 			color: #3c3c3c;
-			font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+			font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Droid Sans", "Ubuntu", sans-serif;
 			font-size: 16px;
 			line-height: 22px;
 			-webkit-font-smoothing: antialiased;
