@@ -2,4 +2,10 @@
 #
 # Open a file in the current repo, current branch, on GitHub.
 
+if ! command -v hub >/dev/null; then
+  if command -v brew >/dev/null; then
+    brew install hub
+  fi
+fi
+
 hub browse -- blob/"$(git rev-parse --abbrev-ref HEAD)"/"$1"
