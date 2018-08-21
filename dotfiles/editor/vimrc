@@ -35,6 +35,7 @@ call plug#begin('~/.vim/plugged')
   Plug '/usr/local/opt/fzf'
   Plug 'AndrewRadev/splitjoin.vim'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+  Plug 'hashivim/vim-terraform'
   Plug 'janko-m/vim-test'
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'

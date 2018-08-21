@@ -51,6 +51,7 @@ brew update
 brew bundle --file=- <<EOF
 tap "homebrew/services"
 tap "universal-ctags/universal-ctags"
+tap "wata727/tflint"
 
 brew "awscli"
 brew "fzf"
@@ -66,6 +67,7 @@ brew "protobuf"
 brew "reattach-to-user-namespace"
 brew "redis", restart_service: :changed
 brew "shellcheck"
+brew "tflint"
 brew "the_silver_searcher"
 brew "tmux"
 brew "universal-ctags", args: ["HEAD"]
