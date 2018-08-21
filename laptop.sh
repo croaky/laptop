@@ -85,7 +85,6 @@ EOF
 
 brew upgrade
 brew cleanup
-brew cask cleanup
 
 (
   cd dotfiles
