@@ -1,5 +1,7 @@
-.rating-container,
-#async-comments {
+#async-comments,
+.article-preview-author-grey .pad-left-10:last-child,
+.link-to-comments,
+.rating-container {
   display: none !important;
 }
 #related-articles-container {
