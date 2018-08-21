@@ -1,7 +1,8 @@
 {
   "content_scripts": [
-    { "matches": ["https://twitter.com/*"], "css": ["twitter.css"] },
-    { "matches": ["https://theathletic.com/*"], "css": ["theathletic.css"] }
+    { "matches": ["https://lite.cnn.io/*"], "css": ["litecnn.css"] },
+    { "matches": ["https://theathletic.com/*"], "css": ["theathletic.css"] },
+    { "matches": ["https://twitter.com/*"], "css": ["twitter.css"] }
   ],
   "description": "User styles",
   "manifest_version": 2,
