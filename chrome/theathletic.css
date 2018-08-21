@@ -1,0 +1,7 @@
+.rating-container,
+#async-comments {
+  display: none !important;
+}
+#related-articles-container {
+  margin-top: 40px;
+}
