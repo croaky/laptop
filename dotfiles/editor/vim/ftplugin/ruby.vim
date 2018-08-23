@@ -3,4 +3,4 @@ let b:ale_linters = ['rubocop']
 let g:ale_fix_on_save = 1
 
 " Run current file
-nmap <Leader>r :!clear && bundle exec ruby %<CR>
+nmap <buffer> <Leader>r :!clear && bundle exec ruby %<CR>

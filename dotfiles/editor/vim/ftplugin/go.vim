@@ -12,25 +12,25 @@ setlocal nolist
 compiler go
 
 " Run current file
-nmap <Leader>r <Plug>(go-run)
+nmap <buffer> <Leader>r <Plug>(go-run)
 
 " Run test suite
-nmap <Leader>t <Plug>(go-test)
+nmap <buffer> <Leader>t <Plug>(go-test)
 
 " Run test for specific function under cursor
-nmap <Leader>s <Plug>(go-test-func)
+nmap <buffer> <Leader>s <Plug>(go-test-func)
 
 " Rename the identifier under cursor
-nmap <Leader>re <Plug>(go-rename)
+nmap <buffer> <Leader>re <Plug>(go-rename)
 
 " Toggle test coverage
-nmap <Leader>c <Plug>(go-coverage-toggle)
+nmap <buffer> <Leader>c <Plug>(go-coverage-toggle)
 
 " Open definition in a vertical split
-nmap <Leader>d <Plug>(go-def-vertical)
+nmap <buffer> <Leader>d <Plug>(go-def-vertical)
 
 " List interfaces for the type under cursor
-nmap <Leader>i <Plug>(go-implements)
+nmap <buffer> <Leader>i <Plug>(go-implements)
 
 " Run :GoBuild or :GoTestCompile based on the file
 function! s:build_go_files()

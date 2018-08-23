@@ -1,2 +1,2 @@
 " Align GitHub-flavored Markdown tables
-vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+vmap <buffer> <Leader><Bslash> :EasyAlign*<Bar><Enter>
