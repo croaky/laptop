@@ -14,7 +14,7 @@
 # See `go help module-get` for details on the meaning of
 # these command line arguments.
 
-set -eo pipefail
+set -euo pipefail
 
 export GO111MODULE=on
 
