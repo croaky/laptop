@@ -6,6 +6,25 @@ as a method to aim comprehension.
 
 [source]: https://amzn.to/2OQkBEQ
 
+Why read it, paraphrased from [Keith Rarick](https://xph.us/):
+
+A lot of what we do when writing and reviewing code, we do by feel.
+
+The book provides useful definitions of software complexity and simplicity.
+It looks at *why* complexity is painful:
+in essence, makes code harder to understand.
+This definition is perfectly aligned with programming and reviewing "by feel."
+
+If code feels bad, that's often because it's hard (for you) to understand it.
+Far from being a poor, vague motivation for wanting to avoid an approach,
+it's ultimately the primary, best motivation.
+
+The rest of the book shows ways to increase or decrease complexity
+(linked back to the original definition)
+and why each way makes code harder or easier to understand.
+
+## Table of Contents
+
 * [The Nature of Complexity][nature]
 
 [nature]: #the-nature-of-complexity
