@@ -1,48 +1,7 @@
-body,
-.home-tweet-box {
-  background-color: rgba(0, 0, 0, 0) !important;
-}
-#page-container {
-  padding: 0 14px 15px;
-}
-#timeline {
-  float: none;
-  margin: 0 auto;
-}
-.permalink-tweet .content,
-.stream-item .content,
-.top-timeline-tweetbox .timeline-tweet-box .t1-form {
-  margin-left: 0 !important;
-}
-.stream-item,
-.top-timeline-tweetbox .timeline-tweet-box,
-.tweet {
-  border: none !important;
-}
-.permalink .inline-reply-tweetbox {
-  padding: 15px 40px 15px !important;
-}
-#timeline .stream-item-footer,
+.Footer,
 .ProfileCanopy,
-.ProfileHeading,
 .ProfileSidebar,
-.ProfileTweet-action--dm,
-.ProfileTweet-action--reply,
-.ProfileTweet-action--retweet,
-.ProfileTweet-actionCountForPresentation,
-.ProfileTweet-actionCountList,
-.ThreadedConversation-tweet:after,
-.ThreadedConversation-tweet:before,
 .Trends,
-.avatar,
-.context,
-.conversation-module>li:after,
-.conversation-module>li:before,
-.dashboard-left,
-.dashboard-right,
-.mini-avatar-with-thread,
-.permalink-footer,
-.topbar,
-.tweet-stats-container {
-  display: none !important;
+.dashboard-right {
+  display: none;
 }
