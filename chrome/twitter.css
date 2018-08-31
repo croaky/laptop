@@ -2,6 +2,7 @@
 .ProfileCanopy,
 .ProfileSidebar,
 .Trends,
-.dashboard-right {
+.dashboard-right,
+.promoted-tweet {
   display: none;
 }
