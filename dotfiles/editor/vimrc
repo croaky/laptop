@@ -81,9 +81,6 @@ nmap <C-p> :Files<CR>
 nmap \ :Ag<SPACE>
 set grepprg=ag\ --nogroup\ --nocolor
 
-" Shift-K to search word under cursor
-nmap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
 " Tab completion
 " will insert tab at beginning of line,
 " will use completion if not at beginning
