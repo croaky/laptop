@@ -101,7 +101,7 @@ export CGO_LDFLAGS_ALLOW='-fstack-protector'
 
 # Set environment variables for monorepos
 export OK="$HOME/src/statusok"
-export I10R="$HOME/src/chain"
+export I10R="$HOME/src/i10r"
 export ROOSTER="$HOME/src/rooster"
 
 # Change into most common directories
