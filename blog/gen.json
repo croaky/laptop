@@ -15,19 +15,6 @@
       "author_ids": [
         "croaky"
       ],
-      "id": "monorepo",
-      "published": "2018-10-16",
-      "tags": [
-        "git",
-        "infra",
-        "setup",
-        "unix"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "id": "gitignore",
       "published": "2018-06-21",
       "redirects": [
