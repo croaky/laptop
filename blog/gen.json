@@ -2,6 +2,17 @@
   "articles": [
     {
       "author_ids": [
+        "Dan Croak"
+      ],
+      "id": "process-model",
+      "published": "2018-10-16",
+      "tags": [
+        "infra",
+        "unix"
+      ]
+    },
+    {
+      "author_ids": [
         "croaky"
       ],
       "id": "monorepo",

@@ -28,8 +28,9 @@ At this point, `tat` is the same thing as:
 tmux new -s `basename $PWD`
 ```
 
-Run the Rails app's [web and background processes with
-Foreman](https://robots.thoughtbot.com/foreman-as-process-manager-pow-as-dns-server-and-http):
+Run the Rails app's [web and background processes with Foreman][ps].
+
+[ps]: /process-model
 
 ```bash
 foreman start
