@@ -26,8 +26,12 @@ and why each way makes code harder or easier to understand.
 ## Table of Contents
 
 * [The Nature of Complexity][nature]
+* [Working Code Isn't Enough][enough]
+* [Modules Should Be Deep][deep]
 
 [nature]: #the-nature-of-complexity
+[enough]: #working-code-isnt-enough
+[deep]: #modules-should-be-deep
 
 ## The Nature of Complexity
 
@@ -111,3 +115,30 @@ A single dependency or obscurity builds on another.
 
 The incremental nature of complexity makes it hard to control.
 Once it has accumulated, it is hard to eliminate.
+
+## Working Code Isn't Enough
+
+A strategic approach may produce better designs
+and be cheaper in the long run than a tactical approach.
+
+Most programmers' main focus is getting something working,
+such as a new feature or bug fix.
+This seems reasonable but can cause shortsighted behavior
+if it introduces incremental complexities.
+
+Working code isn't enough.
+Also important is the long-term structure of the system.
+Most of the program will be written by extending the existing code,
+so new code should facilitate those future extensions.
+
+Strategic programming requires an investment mindset
+but what is the right amount of investment?
+Trying to design the entire system (the "waterfall method") won't be effective.
+A better approach is to make lots of small investments on a continual basis,
+adding up to about 10-20% of your total development time.
+
+Organizational code quality becomes reputational.
+Facebook was known to have a tactical mindset and messy codebases.
+Google was known to have taken a more strategic approach.
+It can be more fun to work in an organization that cares about software design
+and has a clean codebase, which helps recruit great engineers.
