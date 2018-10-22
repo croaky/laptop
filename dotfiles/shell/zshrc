@@ -119,6 +119,10 @@ PATH="/usr/local/bin:$PATH"
 PATH="$HOME/.asdf/bin:$PATH"
 PATH="$HOME/.asdf/shims:$PATH"
 
+# Prepend Android tools
+PATH="$HOME/Library/Android/sdk/tools:$PATH"
+PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+
 # mkdir .git/safe in trusted project to add binstubs
 PATH=".git/safe/../../bin:$PATH"
 
