@@ -142,3 +142,136 @@ Facebook was known to have a tactical mindset and messy codebases.
 Google was known to have taken a more strategic approach.
 It can be more fun to work in an organization that cares about software design
 and has a clean codebase, which helps recruit great engineers.
+
+## Modules Should Be Deep
+
+Software can be decomposed into a collection of modules
+that are relatively independent.
+Modules can be classes, subsystems, or services.
+
+Ideally, an engineer could work on one module without worrying about another.
+Modules, though, work together by calling each others' functions or methods.
+There will be dependencies between modules.
+
+To manage dependencies, we think of each module in terms of
+its interface and its implementation.
+The interface consists of what the caller must know,
+decribing what the module does but not how.
+The implementation consists of the code that
+carries out the promises made by the interface.
+
+An engineer working in a module must understand
+both the interface and implementation of that module,
+plus the interfaces of modules invoked by that module.
+
+The best modules are those whose
+interfaces are much simpler than their implementations.
+
+### What's in an interface?
+
+The interface to a module contains formal and informal information.
+
+The formal parts are specified explicitly in the code,
+and some of these can be checked for correctness by the programming language.
+The formal interface of a class consists of the signatures for
+all of its public methods, plus names and types of its public variables.
+
+The informal parts are not specified in a way that can be enforced
+by the programming language or other tooling.
+For example, a function might delete a file named by one of its arguments.
+This information needs to be understood by the engineer,
+and is therefore part of its interface.
+It can only be described by its documentation.
+
+### Abstractions
+
+A microwave oven contains complex electronics
+converting alternating current into microwave radiation and
+distributing that radiation throughout the cooking cavity,
+but abstracts an interface of a few buttons to control timing and intensity.
+
+An abstraction is a simplified view of an entity,
+which omits unimportant details.
+
+A detail can only be omitted from an abstraction if it is unimportant.
+An abstraction can go wrong in two ways:
+
+1. It can include details that are not important.
+   This makes the abstraction more complicated than necessary,
+   increasing cognitive load on engineers using it.
+2. It can omit details that are important.
+   This results in obscurity.
+   Engineers looking only at the abstraction
+   will not have all the information they need to use it correctly.
+   This is a "false abstraction": it appears simple but isn't.
+
+The key to designing abstractions is understand what is important,
+and to minimize the amount of information is important.
+
+### Deep modules
+
+"Deep" modules are those that provide powerful functionality
+yet have simple interfaces.
+
+Consider `===` lines the interface (cost: less is better)
+and `|` lines the height (benefit: more is better):
+
+```
+===========
+|         |
+|         |
+|         |
+|         |   =============================
+|         |   |                           |
+|         |   |                           |
+-----------   -----------------------------
+Deep module   Shallow module
+```
+
+The benefit provided by a module is its functionality (depth).
+The cost of a module is its interface (breadth).
+
+A module's interface represents the complexity that
+the module imposes on the rest of the system:
+the smaller and simpler the interface,
+the less complexity that it introduces.
+
+An example of a deep module is the garbage collector in a language such as Go.
+This module has no interface at all;
+it works invisibly behind the scenes to reclaim unused memory.
+Adding garbage collection to a system actually shrinks its overall interface,
+since it eliminates the interface for freeing objects.
+
+### Shallow modules
+
+A shallow module is one whose interface is complex
+in comparison to the functionality that it provides.
+
+An extreme example:
+
+```java
+private void addNullValueForAttribute(String attribute) {
+  data.put(attribute, null)
+}
+```
+
+For managing complexity, this method makes things worse, not better.
+
+It:
+
+* offers no abstraction, all its functionality is visible through its interface
+* is no simpler to think about the interface than the full implementation
+* is more keystrokes than manipulating the `data` variable directly
+* adds complexity (a new interface for engineers to learn)
+  but provides no compensating benefit
+
+### Classitis
+
+Conventional wisdom in programming is that classes should be small, not deep.
+Programmers are told to break up larger classes into smaller ones.
+The same is said for methods:
+
+> methods longer than N lines should be divided into multiple methods
+
+Classitis results in classes that are individually simple
+but produce complexity from the accumulated interfaces.
