@@ -1,6 +1,7 @@
 # Process Model
 
-Unix process types can be defined in a manifest named `Procfile`.
+If we define Unix processes in a manifest named `Procfile`,
+we can use tools to manage those processes.
 
 ## Examples
 
@@ -38,6 +39,8 @@ In development mode,
 [Foreman] interleaves output streams,
 responds to crashed processes,
 and handles user-initiated restarts and shutdowns.
+
+[Foreman]: http://ddollar.github.io/foreman/
 
 ```
 foreman start
