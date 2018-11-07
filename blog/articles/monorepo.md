@@ -190,7 +190,7 @@ we write automated tests
 and run those tests continuously
 when we integrate our changes into the codebase.
 
-We also want to our Continuous Integration (CI) service to:
+We also want our Continuous Integration (CI) service to:
 
 * begin running the tests in < 5s after opening or editing a pull request
 * run the tests in an environment with [parity] to the production environment
@@ -305,7 +305,7 @@ This script can be used in `Testfile`s:
 $ cat $ORG/dashboard/Testfile
 tests: with-serverd $ORG/dashboard/test.sh
 $ cat $ORG/sdk/go/Testfile
-tests: with-serverd cd $ORG/sdk && go test -cover ./...
+tests: cd $ORG/sdk && with-serverd go test -cover ./...
 ```
 
 Tests that depend on `with-serverd`
