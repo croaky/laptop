@@ -4,6 +4,21 @@
       "author_ids": [
         "croaky"
       ],
+      "canonical": "https://robots.thoughtbot.com/bin-setup",
+      "id": "setup-sh",
+      "published": "2013-01-25",
+      "redirects": [
+        "/bin-setup"
+      ],
+      "tags": [
+        "env"
+      ],
+      "updated": "2018-11-12"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "canonical": "https://medium.com/interstellar/monorepo-e1847cbd6800",
       "id": "monorepo",
       "published": "2018-11-01",
@@ -124,18 +139,6 @@
         "ruby"
       ],
       "updated": "2018-02-18"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/bin-setup",
-      "id": "bin-setup",
-      "published": "2013-01-25",
-      "tags": [
-        "env"
-      ],
-      "updated": "2018-02-17"
     },
     {
       "author_ids": [

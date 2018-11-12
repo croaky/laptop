@@ -1,17 +1,18 @@
-# ./bin/setup
+# setup.sh
 
 Regardless of programming language or project type,
 a nice pattern for working on a project is:
 
 ```
-git clone git@github.com:organization/project.git
-cd project
-./bin/setup
+git clone git@github.com:org/monorepo.git
+cd monorepo/project
+./setup.sh
 ```
 
-Regardless of the `bin/setup` file's contents,
-a developer should be able to clone the project and
-run one command to start contributing.
+Regardless of the `setup.sh` file's contents,
+a developer should be able to clone the [monorepo](monorepo),
+change into the project directory,
+and run one command to start contributing.
 
 Example:
 
