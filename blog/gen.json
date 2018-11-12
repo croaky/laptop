@@ -4,6 +4,23 @@
       "author_ids": [
         "croaky"
       ],
+      "canonical": "https://robots.thoughtbot.com/vim-spell-checking",
+      "id": "spell-check-in-vim",
+      "published": "2015-12-01",
+      "redirects": [
+        "/avoid-team-wide-spelling-mistakes-with-vim",
+        "/project-specific-spell-checking-vim",
+        "/vim-spell-checking"
+      ],
+      "tags": [
+        "vim"
+      ],
+      "updated": "2018-11-12"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "id": "laptop-sh",
       "published": "2014-06-18",
       "redirects": [
@@ -365,22 +382,6 @@
         "/fast-search-vim",
         "/fast-search-with-vim",
         "/search-faster-in-vim"
-      ],
-      "tags": [
-        "vim"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/vim-spell-checking",
-      "id": "spell-check-in-vim",
-      "published": "2015-12-01",
-      "redirects": [
-        "/avoid-team-wide-spelling-mistakes-with-vim",
-        "/project-specific-spell-checking-vim",
-        "/vim-spell-checking"
       ],
       "tags": [
         "vim"

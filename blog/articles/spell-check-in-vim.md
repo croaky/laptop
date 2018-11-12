@@ -1,8 +1,8 @@
 # Spell Check in Vim
 
-Vim can help avoid spelling mistakes
-when we edit prose
-such as Markdown files
+Avoid spelling mistakes
+when editing prose
+in Markdown files
 and Git commit messages.
 
 ## Configure
