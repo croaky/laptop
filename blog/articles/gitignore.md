@@ -1,6 +1,7 @@
-# ~/.gitignore
+# .gitignore
 
-Configure `~/.gitignore` for all projects on a machine.
+Configure `~/.gitignore` for all projects on a machine
+and `project/.gitignore` for local overrides.
 
 [Example](https://github.com/statusok/statusok/blob/master/dotfiles/git/gitignore):
 
