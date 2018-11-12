@@ -202,3 +202,6 @@ hi Special        ctermfg=30
 hi Type           ctermfg=30
 hi WildMenu       ctermfg=30 ctermbg=60  cterm=NONE
 hi diffAdded      ctermfg=30  cterm=NONE
+
+" Disable spelling by default, enable per-filetype
+autocmd BufRead setlocal nospell

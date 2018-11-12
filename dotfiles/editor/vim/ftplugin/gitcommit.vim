@@ -1,3 +1,6 @@
-setlocal spell
-setlocal spellfile=$HOME/.vim-spell-en.utf-8.add
+" Formatting
 setlocal textwidth=72
+
+" Spell-checking
+setlocal complete+=kspell
+setlocal spell

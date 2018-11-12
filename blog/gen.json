@@ -256,20 +256,6 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/opt-in-project-specific-vim-spell-checking-and-word-completion",
-      "id": "project-specific-spell-checking-vim",
-      "published": "2015-12-01",
-      "redirects": [
-        "/avoid-team-wide-spelling-mistakes-with-vim"
-      ],
-      "tags": [
-        "vim"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "canonical": "https://robots.thoughtbot.com/create-a-retention-curve-with-mixpanel-and-google-sheets",
       "id": "retention-curves-mixpanel-google-sheets",
       "published": "2015-07-01",
@@ -389,8 +375,13 @@
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/vim-spell-checking",
-      "id": "vim-spell-checking",
-      "published": "2013-11-19",
+      "id": "spell-check-in-vim",
+      "published": "2015-12-01",
+      "redirects": [
+        "/avoid-team-wide-spelling-mistakes-with-vim",
+        "/project-specific-spell-checking-vim",
+        "/vim-spell-checking"
+      ],
       "tags": [
         "vim"
       ]
