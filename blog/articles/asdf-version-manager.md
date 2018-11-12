@@ -17,8 +17,8 @@ a single installation, configuration, and command interface.
 
 ## Install version manager
 
-I use a [laptop setup script](laptop-sh)
-to install or update macOS system prerequisites
+I use a [laptop.sh script](laptop-sh)
+to install or update system prerequisites
 and then install or update ASDF:
 
 ```bash
@@ -68,7 +68,7 @@ skips [checking downloads against OpenPGP signatures][nodeuse].
 
 ## Configure
 
-I manage my `PATH` in a single place: my [`~/.zshrc`shell profile][zshrc].
+I manage my `PATH` in a my [shell profile][zshrc].
 It contains:
 
 [zshrc]: https://github.com/statusok/statusok/blob/master/dotfiles/shell/zshrc
@@ -186,5 +186,3 @@ zsh: command not found: webpack
 % which webpack
 $HOME/.asdf/shims/webpack
 ```
-
-Happy versioning!
