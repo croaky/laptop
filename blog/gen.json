@@ -4,7 +4,21 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/vim-spell-checking",
+      "id": "configure-and-use-tmux",
+      "published": "2010-12-10",
+      "redirects": [
+        "/tmux-faq",
+        "/tmux-only-for-long-running-processes"
+      ],
+      "tags": [
+        "unix"
+      ],
+      "updated": "2018-11-12"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "id": "spell-check-in-vim",
       "published": "2015-12-01",
       "redirects": [
@@ -232,21 +246,6 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/love-hate-tmux",
-      "id": "configure-and-use-tmux",
-      "published": "2010-12-10",
-      "redirects": [
-        "/tmux-faq"
-      ],
-      "tags": [
-        "unix"
-      ],
-      "updated": "2017-02-01"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "canonical": "https://robots.thoughtbot.com/keeping-a-github-fork-updated",
       "id": "update-a-github-fork",
       "published": "2011-05-02",
@@ -337,17 +336,6 @@
       "published": "2014-12-25",
       "tags": [
         "growth"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/tmux-only-for-long-running-processes",
-      "id": "tmux-only-for-long-running-processes",
-      "published": "2014-07-17",
-      "tags": [
-        "unix"
       ]
     },
     {

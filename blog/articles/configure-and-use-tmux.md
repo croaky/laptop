@@ -1,49 +1,155 @@
 # Configure and Use Tmux
 
-Getting started with tmux, these are the questions I've had.
+This post describes a workflow
+using a Unix shell, Tmux, and Vim.
 
-## How do I get started
+In this workflow,
+Tmux is used only for long-running processes.
+It helps reduce cognitive load imposed by the
+[administrative debris](http://2ndscale.com/rtomayko/2008/administrative-debris)
+of open tabs, panes, or windows.
 
-Install tmux, read the documentation, and fire it up:
+## Install
+
+Install Tmux and read the documentation:
 
 ```
 brew install tmux
 man tmux
-tmux -u
 ```
 
-## Can I make the environment look good?
+## Configure
 
-Yes. See these lines in `tmux.conf` of [statusok/dotfiles][c].
+See [this `tmux.conf` example][c].
+It:
 
 [c]: https://github.com/statusok/statusok/blob/master/dotfiles/shell/tmux.conf
 
-```
-# improve colors
-set -g default-terminal "screen-256color"
+* includes a light color scheme
+* changes default `Ctrl+b` "prefix" to `Ctrl+a` (like GNU `screen`)
+* includes Vim-like bindings
+  for movement between windows (`Ctrl+a h`, `Ctrl+a j`, etc.)
 
-# soften status bar color from harsh green to light gray
-set -g status-bg '#666666'
-set -g status-fg '#aaaaaa'
+## Start Tmux session
 
-# remove administrative debris (session name, hostname, time) in status bar
-set -g status-left ''
-set -g status-right ''
-```
-
-## What's a prefix?
-
-The "prefix" namespaces tmux commands.
-By default it is `Ctrl+b`.
-To act like GNU `screen`, bind the prefix to `Ctrl+a`:
+`tat` (short for "tmux attach") is a command from
+[statusok/dotfiles](https://github.com/statusok/statusok/blob/master/bin/tat)
+that names the tmux session after the project's directory name.
 
 ```
-# act like GNU screen
-unbind C-b
-set -g prefix C-a
+cd project-name
+tat
 ```
 
-## How can I scroll up to see my backtraces?
+At this point, `tat` is the same thing as:
+
+```
+tmux new -s `basename $PWD`
+```
+
+## Run long-running processes in Tmux
+
+Run the app's [processes with a process manager][ps].
+
+[ps]: /process-model
+
+```
+foreman start
+```
+
+The processes managed by Foreman are long-running.
+
+## Perform ad-hoc tasks outside Tmux
+
+After only running one command inside Tmux, detach:
+
+```
+Ctrl+a d
+```
+
+Back in a shell, perform ad-hoc tasks such as:
+
+```
+git status
+git add --patch
+git commit --verbose
+```
+
+These are quick commands,
+focused on the immediate task at hand.
+
+## Do most work in Vim
+
+A large portion of work is done from within a text editor:
+
+* editing text
+* [searching for text](search-with-vim)
+* [wrapping text](wrap-text-in-vim)
+* [sorting lines](sort-lines-in-vim)
+* [running specs](run-specs-with-vim)
+* [checking spelling](spell-check-in-vim)
+* etc.
+
+```
+vim .
+```
+
+## Suspend the Vim process
+
+To return control from Vim to the command line,
+suspend the process:
+
+```
+Ctrl+z
+```
+
+See suspended processes for this shell:
+
+```
+jobs
+```
+
+It will output something like:
+
+```
+[1]  + suspended  vim spec/models/user_spec.rb
+```
+
+We might do more ad-hoc work:
+
+```
+git fetch origin
+git rebase -i origin/master
+git diff --stat origin/master
+```
+
+When ready to edit in Vim again, foreground the process:
+
+```
+fg
+```
+
+## Re-attach to Tmux
+
+To observe process logs,
+stop or start long-running processes,
+re-attach:
+
+```
+tat
+```
+
+At this point, `tat` is the same thing as:
+
+```
+tmux attach -t `basename $PWD`
+```
+
+Compared to other Tmux workflows,
+this workflow involves more attaching and detaching from sessions.
+That is why the `tat` shortcut is valuable.
+
+## Scroll
 
 Enter "copy mode":
 
@@ -51,87 +157,50 @@ Enter "copy mode":
 prefix+[
 ```
 
-Use Vim bindings to page up and down:
+Use Vim-like bindings to page up and down:
 
 ```
 Ctrl+b
 Ctrl+f
 ```
 
-## How can I copy text?
-
-Add this to your `tmux.conf`:
-
-```
-# enable copy-paste http://goo.gl/DN82E
-set -g default-command "reattach-to-user-namespace -l zsh"
-```
-
-## How can I make tmux act more like Vim?
-
-Add this to your `tmux.conf`
-to use Vim's home-row keys for movement between windows and panes:
-
-```
-# act like vim
-setw -g mode-keys vi
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
-bind-key -r C-h select-window -t :-
-bind-key -r C-l select-window -t :+
-```
-
-## How do I name sessions?
-
-I'd like to name my tmux sessions so I can leave one,
-drop into another,
-and go back to the original with all my state maintained
-(files still open in my editor, console/logs I want open, etc.).
-
-Create a new session:
-
-```
-tmux new -s project
-```
-
-Attach to a session:
-
-```
-tmux attach -t project
-```
-
-## How do I split and move between windows?
+## Navigate between windows
 
 Create a window:
 
 ```
-prefix c
+Ctrl+a c
 ```
 
 Move to window 1:
 
 ```
-prefix 1
+Ctrl+a 1
 ```
 
 Move to window 2:
 
 ```
-prefix 2
+Ctrl+a 2
 ```
 
 Kill a window:
 
 ```
-prefix x
+Ctrl+a x
 ```
 
-## How do I reload `~/.tmux.conf`?
+## Detach and return later
 
-After editing `~/.tmux.conf`, execute this from a shell:
+Detach:
 
 ```
-tmux source-file ~/.tmux.conf
+Ctrl+a d
 ```
+
+Take a break, go home, or move on to another project.
+
+The next time the machine is used,
+a distraction-free environment is available for primary tasks.
+Meanwhile, Tmux handles one responsibility:
+quietly managing long-running processes.
