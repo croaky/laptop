@@ -208,20 +208,6 @@
       "author_ids": [
         "croaky"
       ],
-      "id": "load-testing",
-      "published": "2017-02-25",
-      "redirects": [
-        "/load-test-with-vegeta"
-      ],
-      "tags": [
-        "infra",
-        "test"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "canonical": "https://robots.thoughtbot.com/how-to-reduce-a-large-heroku-compiled-slug-size",
       "id": "reduce-a-large-heroku-compiled-slug-size",
       "published": "2016-06-13",
