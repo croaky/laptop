@@ -460,18 +460,6 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/faster-tests-sign-in-through-the-back-door",
-      "id": "fast-integration-tests-with-clearance-backdoor",
-      "published": "2012-12-14",
-      "tags": [
-        "ruby",
-        "test"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "canonical": "https://robots.thoughtbot.com/four-phase-test",
       "id": "four-phase-test",
       "published": "2012-09-28",
