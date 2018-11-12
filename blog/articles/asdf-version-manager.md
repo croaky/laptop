@@ -78,18 +78,12 @@ It contains:
 PATH="$HOME/.asdf/bin:$PATH"
 PATH="$HOME/.asdf/shims:$PATH"
 
-# mkdir .git/safe in trusted project to add binstubs
-PATH=".git/safe/../../bin:$PATH"
-
 export -U PATH
 ```
 
-ASDF shims are the second thing in my `PATH`,
-after `./bin` for [trusted working directories][trust].
+ASDF shims are one of the first things in my `PATH`.
 
-[trust]: https://twitter.com/tpope/status/165631968996900865
-
-ASDF shims need to be so near the front of the `PATH`
+ASDF shims need to be near the front of the `PATH`
 in order to take precedence over any other installations
 of the languages or binaries installed via the language:
 
@@ -104,7 +98,7 @@ of the languages or binaries installed via the language:
 ~/.asdf/shims/ruby
 ```
 
-Note, the ASDF README suggests instead:
+Note, the ASDF README suggests:
 
 ```bash
 . $HOME/.asdf/asdf.sh
