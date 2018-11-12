@@ -192,19 +192,6 @@
       "author_ids": [
         "croaky"
       ],
-      "id": "go-meta-linter",
-      "published": "2017-03-23",
-      "redirects": [
-        "/fix-highest-priority-issues-with-go"
-      ],
-      "tags": [
-        "go"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "id": "redirect-apex-domain-to-www",
       "published": "2017-03-21",
       "tags": [
