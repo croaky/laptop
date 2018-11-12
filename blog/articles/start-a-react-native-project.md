@@ -1,4 +1,4 @@
-# Setup for React Native
+# Start a React Native Project
 
 React Native is a fast and efficient way to build iOS and Android apps.
 

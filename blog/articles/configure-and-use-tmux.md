@@ -1,4 +1,4 @@
-# Tmux FAQ
+# Configure and Use Tmux
 
 Getting started with tmux, these are the questions I've had.
 

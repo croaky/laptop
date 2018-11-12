@@ -176,10 +176,11 @@
       "author_ids": [
         "croaky"
       ],
-      "id": "setup-react-native-laptop-vim",
+      "id": "start-a-react-native-project",
       "published": "2017-06-24",
       "redirects": [
-        "/laptop-setup-and-vim-configuration-for-react-native"
+        "/laptop-setup-and-vim-configuration-for-react-native",
+        "/setup-react-native-laptop-vim"
       ],
       "tags": [
         "env",
@@ -227,8 +228,11 @@
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/love-hate-tmux",
-      "id": "tmux-faq",
+      "id": "configure-and-use-tmux",
       "published": "2010-12-10",
+      "redirects": [
+        "/tmux-faq"
+      ],
       "tags": [
         "unix"
       ],
@@ -577,8 +581,11 @@
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/suspenders",
-      "id": "new-rails-projects-with-suspenders",
+      "id": "start-a-rails-project-with-suspenders",
       "published": "2008-10-21",
+      "redirects": [
+        "/new-rails-projects-with-suspenders"
+      ],
       "tags": [
         "env",
         "ruby"

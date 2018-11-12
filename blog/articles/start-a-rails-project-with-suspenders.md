@@ -1,6 +1,6 @@
-# New Rails Projects with Suspenders
+# Start a Rails Project with Suspenders
 
-Introducing [Suspenders], the thoughtbot Rails template.
+Introducing [Suspenders], a Rails template.
 
 [Suspenders]: http://github.com/thoughtbot/suspenders
 
@@ -24,13 +24,15 @@ Changes to the template can be pulled it into your project via:
 rake git:pull:suspenders
 ```
 
-This is funny, because you're pulling your suspenders.
+This is funny because you're pulling your suspenders.
 
 ## About
 
-Suspenders was created for use at [thoughtbot] as a baseline application setup,
-with reasonable default plugins that the majority of our applications used,
-as well as best-practice configuration options.
+Suspenders was created for use at [thoughtbot]
+as a base application
+with best-practice configuration
+and reasonable plugins
+that the majority of our applications used.
 
 [thoughtbot]: https://thoughtbot.com
 
@@ -76,7 +78,7 @@ The fixture directory has been removed, as fixtures are not used.
 [Factory Girl]: https://github.com/thoughtbot/factory_girl
 
 [Shoulda] is a pragmatic testing framework for Test-Driven Development
-built on top of Test::Unit.
+built on top of `Test::Unit`.
 A number of additional testing macros are provided in `test/shoulda_macros`.
 
 [Shoulda]: https://github.com/thoughtbot/shoulda
@@ -86,8 +88,8 @@ A number of additional testing macros are provided in `test/shoulda_macros`.
 Deployment is done using Capistrano
 and deploys to a Mongrel cluster running under Apache.
 
-Rake tasks are provided for managing Git branches which the different
-environments pull from for deploy.
+Rake tasks are provided for managing Git branches
+for the deployment environments.
 
 To push the Git master to Git staging branch run:
 
@@ -125,4 +127,4 @@ cap deploy
 
 The official Suspenders mascot is Suspenders Boy.
 
-![suspenders boy](http://media.tumblr.com/1TEAMALpseh5xzf0Jt6bcwSMo1_400.png)
+![suspenders boy](images/suspenders-boy.png)
