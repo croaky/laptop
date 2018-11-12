@@ -17,7 +17,7 @@ a single installation, configuration, and command interface.
 
 ## Install version manager
 
-I use a [laptop setup script](laptop-setup-script)
+I use a [laptop setup script](laptop-sh)
 to install or update macOS system prerequisites
 and then install or update ASDF:
 

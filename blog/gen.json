@@ -4,6 +4,21 @@
       "author_ids": [
         "croaky"
       ],
+      "id": "laptop-sh",
+      "published": "2014-06-18",
+      "redirects": [
+        "/laptop-setup-script"
+      ],
+      "tags": [
+        "env",
+        "unix"
+      ],
+      "updated": "2018-11-12"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "canonical": "https://robots.thoughtbot.com/bin-setup",
       "id": "setup-sh",
       "published": "2013-01-25",
@@ -90,18 +105,6 @@
         "git",
         "vim"
       ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "id": "laptop-setup-script",
-      "published": "2014-06-18",
-      "tags": [
-        "env",
-        "unix"
-      ],
-      "updated": "2018-04-15"
     },
     {
       "author_ids": [
