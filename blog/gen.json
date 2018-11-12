@@ -162,9 +162,10 @@
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/align-github-flavored-markdown-tables-in-vim",
-      "id": "align-markdown-tables-vim",
+      "id": "align-markdown-tables-in-vim",
       "published": "2016-06-15",
       "redirects": [
+        "/align-markdown-tables-vim",
         "/align-markdown-tables-with-vim"
       ],
       "tags": [
@@ -372,11 +373,12 @@
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/faster-grepping-in-vim",
-      "id": "fast-search-vim",
+      "id": "search-projects-in-vim",
       "published": "2013-11-27",
       "redirects": [
-        "/search-faster-in-vim",
-        "/fast-search-with-vim"
+        "/fast-search-vim",
+        "/fast-search-with-vim",
+        "/search-faster-in-vim"
       ],
       "tags": [
         "vim"
@@ -425,10 +427,11 @@
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/wrap-existing-text-at-80-characters-in-vim",
-      "id": "wrap-text-80-characters-vim",
+      "id": "wrap-text-in-vim",
       "published": "2013-04-07",
       "redirects": [
-        "/wrap-existing-text-at-80-characters-with-vim"
+        "/wrap-existing-text-at-80-characters-with-vim",
+        "/wrap-text-80-characters-vim"
       ],
       "tags": [
         "vim"
@@ -439,9 +442,10 @@
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/sort-lines-alphabetically-in-vim",
-      "id": "sort-lines-alphabetically-vim",
+      "id": "sort-lines-in-vim",
       "published": "2013-02-01",
       "redirects": [
+        "/sort-lines-alphabetically-vim",
         "/sort-lines-alphabetically-with-vim"
       ],
       "tags": [

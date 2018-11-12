@@ -1,4 +1,4 @@
-# Fast Search in Vim
+# Search Projects in Vim
 
 Projects can be searched for specific text within Vim:
 
@@ -37,11 +37,12 @@ This searches for the text under the cursor
 and shows the results in a "quickfix" window:
 
 ```vim
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind <Leader>k to grep word under cursor
+nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 ```
 
-It looks like this when `K` is typed with the cursor over `SubscriptionMailer`:
+It looks like this when `<Leader>k`
+is typed with the cursor over `SubscriptionMailer`:
 
 ![''](images/quickfix-under-cursor.png)
 

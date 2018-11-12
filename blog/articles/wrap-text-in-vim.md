@@ -1,4 +1,4 @@
-# Wrap Text at 80 Characters
+# Wrap Text in Vim
 
 You have an existing block of text or code in Vim.
 You want to re-format it to wrap to 80 characters.
