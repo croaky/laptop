@@ -214,6 +214,45 @@
       "author_ids": [
         "croaky"
       ],
+      "canonical": "https://robots.thoughtbot.com/feature-branch-code-reviews",
+      "id": "feature-branch-code-reviews",
+      "published": "2011-01-19",
+      "tags": [
+        "git"
+      ],
+      "updated": "2017-02-01"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/love-hate-tmux",
+      "id": "tmux-faq",
+      "published": "2010-12-10",
+      "tags": [
+        "unix"
+      ],
+      "updated": "2017-02-01"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
+      "canonical": "https://robots.thoughtbot.com/keeping-a-github-fork-updated",
+      "id": "update-a-github-fork",
+      "published": "2011-05-02",
+      "redirects": [
+        "/keep-a-github-fork-updated"
+      ],
+      "tags": [
+        "git"
+      ],
+      "updated": "2017-02-01"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "canonical": "https://robots.thoughtbot.com/how-to-reduce-a-large-heroku-compiled-slug-size",
       "id": "reduce-a-large-heroku-compiled-slug-size",
       "published": "2016-06-13",
@@ -485,32 +524,6 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/keeping-a-github-fork-updated",
-      "id": "update-a-github-fork",
-      "published": "2011-05-02",
-      "redirects": [
-        "/keep-a-github-fork-updated"
-      ],
-      "tags": [
-        "git"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/feature-branch-code-reviews",
-      "id": "feature-branch-code-reviews",
-      "published": "2011-01-19",
-      "tags": [
-        "git"
-      ],
-      "updated": "2017-02-01"
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
       "canonical": "https://robots.thoughtbot.com/rubys-pessimistic-operator",
       "id": "pessimistic-operator-ruby",
       "published": "2010-12-29",
@@ -519,17 +532,6 @@
       ],
       "tags": [
         "ruby"
-      ]
-    },
-    {
-      "author_ids": [
-        "croaky"
-      ],
-      "canonical": "https://robots.thoughtbot.com/love-hate-tmux",
-      "id": "tmux-faq",
-      "published": "2010-12-10",
-      "tags": [
-        "unix"
       ]
     },
     {

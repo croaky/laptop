@@ -35,7 +35,7 @@ set -g status-right ''
 
 The "prefix" namespaces tmux commands.
 By default it is `Ctrl+b`.
-In our `tmux.conf` in `thoughtbot/dotfiles`, we bound it to `Ctrl+a`:
+To act like GNU `screen`, bind the prefix to `Ctrl+a`:
 
 ```
 # act like GNU screen
@@ -93,13 +93,13 @@ and go back to the original with all my state maintained
 Create a new session:
 
 ```
-tmux new -s airbrake
+tmux new -s project
 ```
 
 Attach to a session:
 
 ```
-tmux attach -t airbrake
+tmux attach -t project
 ```
 
 ## How do I split and move between windows?
@@ -135,5 +135,3 @@ After editing `~/.tmux.conf`, execute this from a shell:
 ```
 tmux source-file ~/.tmux.conf
 ```
-
-Give tmux a shot!
