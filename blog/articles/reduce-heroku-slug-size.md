@@ -1,4 +1,4 @@
-# Reduce a Large Heroku Slug Size
+# Reduce Heroku Slug Size
 
 Have you ever seen this error when you tried to deploy to your Heroku app?
 

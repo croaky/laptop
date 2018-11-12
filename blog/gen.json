@@ -263,10 +263,14 @@
         "croaky"
       ],
       "canonical": "https://robots.thoughtbot.com/how-to-reduce-a-large-heroku-compiled-slug-size",
-      "id": "reduce-a-large-heroku-compiled-slug-size",
+      "id": "reduce-heroku-slug-size",
       "published": "2016-06-13",
       "tags": [
         "infra"
+      ],
+      "redirects": [
+        "/keep-a-github-fork-updated",
+        "/reduce-a-large-heroku-compiled-slug-size"
       ]
     },
     {
