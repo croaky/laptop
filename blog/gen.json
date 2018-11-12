@@ -8,9 +8,9 @@
       "id": "monorepo",
       "published": "2018-11-01",
       "tags": [
+        "env",
         "git",
         "infra",
-        "setup",
         "test",
         "unix"
       ]
@@ -36,8 +36,8 @@
         "/global-gitignore"
       ],
       "tags": [
-        "git",
-        "setup"
+        "env",
+        "git"
       ]
     },
     {
@@ -58,10 +58,10 @@
       "id": "asdf-version-manager",
       "published": "2018-05-07",
       "tags": [
+        "env",
         "go",
         "infra",
         "ruby",
-        "setup",
         "unix"
       ]
     },
@@ -83,7 +83,7 @@
       "id": "laptop-setup-script",
       "published": "2014-06-18",
       "tags": [
-        "setup",
+        "env",
         "unix"
       ],
       "updated": "2018-04-15"
@@ -133,7 +133,7 @@
       "id": "bin-setup",
       "published": "2013-01-25",
       "tags": [
-        "setup"
+        "env"
       ],
       "updated": "2018-02-17"
     },
@@ -176,8 +176,8 @@
         "/laptop-setup-and-vim-configuration-for-react-native"
       ],
       "tags": [
+        "env",
         "react",
-        "setup",
         "vim"
       ]
     },
@@ -586,8 +586,8 @@
       "id": "new-rails-projects-with-suspenders",
       "published": "2008-10-21",
       "tags": [
-        "ruby",
-        "setup"
+        "env",
+        "ruby"
       ]
     }
   ],
