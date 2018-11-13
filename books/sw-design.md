@@ -28,10 +28,12 @@ and why each way makes code harder or easier to understand.
 * [The Nature of Complexity][nature]
 * [Working Code Isn't Enough][enough]
 * [Modules Should Be Deep][deep]
+* [Information Hiding (and Leakage)][hide]
 
 [nature]: #the-nature-of-complexity
 [enough]: #working-code-isnt-enough
 [deep]: #modules-should-be-deep
+[hide]: #information-hiding-and-leakage
 
 ## The Nature of Complexity
 
@@ -275,3 +277,159 @@ The same is said for methods:
 
 Classitis results in classes that are individually simple
 but produce complexity from the accumulated interfaces.
+
+## Information Hiding (and Leakage)
+
+If modules should be deep,
+what are some techniques to create deep modules?
+
+### Information hiding
+
+The most important technique for creating deep modules is information hiding.
+Each module encapsulates knowledge of design decisions,
+embedded in the implementation but not visible in the interface.
+
+For example:
+
+* How to store and access data
+* What kind of data structure to use
+* We'll use a particular JSON parser
+* Pagination size
+* Most files will be small
+
+Information hiding reduces complexity by:
+
+* Simplifying the interface to a module
+* Making it easier to evolve the system
+
+When designing a module,
+if you can hide more information,
+you should be able to simplify the module's interface,
+and this makes the module deeper.
+
+Hiding variables and methods in a class with `private`
+isn't the same thing as information hiding.
+Private elements can help hide information
+but information about them can still be exposed
+through public methods such as setters and getters.
+
+### Information leakage
+
+Information leakage occurs when a design decision
+is reflected in multiple modules,
+creating a dependency between them:
+any change to that design decision
+will require changes to all involved modules.
+
+For example,
+if two modules depend on a file format
+so that one can write and the other can read,
+they both depend on the file format.
+Dependencies that aren't obvious through the interface are especially harmful.
+
+If you encounter leakage between modules,
+ask "How can I reorganize this code
+so knowledge of this design decision
+only affects one module?"
+
+It might make sense to merge two modules.
+
+It might make sense to extract a new module
+responsible only for that design decision.
+This will only be effective if you can design a simple interface
+that abstracts away the details.
+If the new module exposes most of the knowledge through its interface,
+then it won't provide much value:
+it replaces back-door leakage with leakage through an interface.
+
+### Temporal decomposition
+
+In temporal decomposition,
+the structure of a system corresponds to the time order
+in which operations occur.
+
+Consider an application that reads a file,
+modifies its contents,
+then writes the file out again.
+If each step occurs in its own module,
+both file reading and writing depend on the file format,
+leaking that knowledge.
+
+The solution is to combine the core mechanism
+for reading and writing files into a single class.
+
+When designing modules,
+focus on the knowledge that's needed to perform each task,
+not the order in which the tasks occur.
+
+### Example: HTTP requests
+
+To implement an HTTP server,
+we need to read the HTTP request from a network connection
+and parse each line of the request
+(the request line, its headers, an empty line, and optional body).
+
+We could separate these steps into two modules:
+one to read the request from the network connection
+and one to parse the string.
+This is temporal decomposition,
+leaking information because
+an HTTP request can't be read without parsing much of the message
+such as the `Content-Length` header.
+This structure also creates extra complexity for callers
+who have to invoke two methods in a particular order.
+
+Information hiding can often be improved by making a class slightly larger.
+
+One reason to do this is to reduce code duplication.
+
+Another reason is to raise the level of the interface:
+rather than having separate methods for each step,
+have a single method that performs the entire computation.
+
+### Example: HTTP parameter handling
+
+Parameters can be specified in the HTTP request line
+or sometimes in the body.
+Each parameter has a name and value.
+The values are encoded using "URL encoding".
+In order to process a request,
+the server will want decoded values of the parameters.
+
+Servers don't need to care whether a parameter is specified
+in the request line or body.
+So, this distinction can be hidden from callers
+and the parameters can be merged from both locations.
+
+URL encoding can also be hidden in the same module.
+
+A method such as `getParams` that returns the parameters data structure
+is too shallow because it exposes the internal representation.
+This approach makes more work for callers:
+they must invoke `getParams`,
+then call another method to get the specific parameter from the structure.
+If the data structure is a reference,
+callers must also realize they should not modify the result
+since it affects the internal state of the module.
+
+Avoid exposing internal data structures as much as possible.
+
+A better interface is something like:
+
+* `getParam`
+* `getParamInt`
+* etc.
+
+These methods get the parameter,
+type cast it,
+and handle errors.
+
+### Example: I/O defaults
+
+Defaults illustrate that interfaces should be designed
+to make the common case simple.
+
+Buffering in I/O is so universally desirable that
+it should be provided by I/O modules by default.
+
+The best features are the ones you get without even knowing they exist.
