@@ -104,6 +104,9 @@ nnoremap <silent> <Leader>t :TestFile<CR>
 nnoremap <silent> <Leader>s :TestNearest<CR>
 nnoremap <silent> <Leader>l :TestLast<CR>
 
+" Test && Commit || Revert
+nnoremap <buffer> <Leader>c :!clear && tcr %<CR>
+
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 

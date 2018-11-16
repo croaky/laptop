@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if ./test.sh "$1"; then
+  git add -A
+  git commit -am 'tests pass'
+else
+  git reset --hard
+fi
