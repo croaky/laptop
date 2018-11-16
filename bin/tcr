@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if ./test.sh "$1"; then
+if ./test.sh; then
   git add -A
-  git commit -am 'tests pass'
+  git commit -am 'pass: all'
 else
   git reset --hard
 fi
