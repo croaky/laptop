@@ -78,7 +78,6 @@ brew "yarn"
 brew "zsh"
 
 cask "aws-vault"
-cask "expo-xde"
 cask "kap"
 cask "ngrok"
 EOF
