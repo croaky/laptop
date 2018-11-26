@@ -50,7 +50,7 @@ The `$ORG` environment variable will be used throughout the codebase.
 
 We [design] an initial architecture like this:
 
-[design]: https://github.com/statusok/statusok/blob/master/books/sw-design.md
+[design]: https://github.com/statusok/statusok/blob/master/learn/books/sw-design.md
 
 * a "Dashboard" web interface for customers, written in React (TypeScript)
 * mobile apps for customers, written in React Native (TypeScript)
