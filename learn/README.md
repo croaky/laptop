@@ -15,6 +15,12 @@ links to tutorials on topics of interest.
 
 [mod]: https://www.youtube.com/watch?v=aeF3l-zmPsY
 
+## Performance
+
+* [Google web.dev][webdev]
+
+[webdev]: https://web.dev/learn
+
 ## React Native
 
 * [Facebook login with Firebase][fire]
