@@ -12,8 +12,10 @@ links to tutorials on topics of interest.
 ## Go
 
 * [Go modules and SemVer][mod]
+* [GraphQL with gqlgen][gqlgen]
 
 [mod]: https://www.youtube.com/watch?v=aeF3l-zmPsY
+[gqlgen]: https://99designs.co.uk/blog/engineering/gqlgen-a-graphql-server-generator-for-go/
 
 ## Performance
 
