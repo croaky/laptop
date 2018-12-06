@@ -31,7 +31,7 @@ as a method to aim comprehension.
 [interchange]: #interchange
 [risk]: #risk-management
 [thi]: #thick-and-thin
-[commpare]: #comparing-payments-systems
+[compare]: #comparing-payments-systems
 [cross]: #cross-border-payments
 [country]: #other-countries
 [change]: #changing-networks
