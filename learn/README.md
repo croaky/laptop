@@ -17,6 +17,12 @@ links to tutorials on topics of interest.
 [mod]: https://www.youtube.com/watch?v=aeF3l-zmPsY
 [gqlgen]: https://99designs.co.uk/blog/engineering/gqlgen-a-graphql-server-generator-for-go/
 
+## Growth
+
+* [Zapier SEO strategy][zap]
+
+[zap]: https://ryanberg.co/how-zapier-reached-35m-arr-with-this-saas-seo-strategy
+
 ## Performance
 
 * [Google web.dev][webdev]
