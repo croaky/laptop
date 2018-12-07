@@ -26,7 +26,9 @@ Overview:
 
 Checking:
 
-* [Overview](#core-systems-checking)
+* [Overview](#checking)
+* [Clearing Houses](#clearing-houses)
+* [Automation](#automation)
 
 ## Overview
 
@@ -557,7 +559,7 @@ rules, and liability frameworks that are hard to change. Improvements may have
 unseen ramifications for operations, technology, pricing, etc. They can take
 years of work and may not take effect for years more.
 
-## Core Systems: Checking
+## Checking
 
 Overview:
 
@@ -589,4 +591,47 @@ often at another bank.
 This process is clearing and settlement
 and happens bilaterally.
 
+### Clearing Houses
 
+In the 1700s and 1800s, messengers carried bags of checks between U.S. banks.
+The cash or other instruments they received in exchange were subject to theft.
+
+In 1853, the first check clearing house was established in NYC.
+Banks joined the clearing house and brought deposited checks each day.
+The clearing house facilitated exchange of checks
+and calculated the daily net settlement for each bank.
+
+Soon, similar clearing houses in other major cities were established
+with schemes for inter-city exchange.
+
+The Federal Reserve Bank system, formed in the early 20th century,
+required its member banks to accept checks "at par".
+This meant that the deposit bank would credit its customer
+with "100 cents on the dollar" rather than some lesser percentage.
+
+If it had instead adopted a discounted (not par) clearing and settlement model,
+it might have looked a lot like our interchange-based card payments system.
+A merchant receiving a check for $100 might be credited $98
+and the bank might keep $2 as profit on the transaction.
+
+### Automation
+
+In the 1950s and 1960s, magnetic ink character recognition
+enabled high-speed processing of checks.
+The bank and account the check is drawn on appears at the bottom of a check.
+
+Check sorters, used by clearing houses and banks on both sides,
+read the MICR line and slot the checks into bins.
+
+Depository financial institutions developed a uniform bank numbering scheme:
+the transit routing number assigned by the American Banking Association.
+
+In the 1980s and 1990s, banks added cameras to their check sorters,
+capturing an image of each check as it went through the machine.
+This addressed problems of managing and storing the paper.
+
+The underlying law still required the original paper check be presented
+to the check writer's bank until 2004,
+when the Check Clearing of the 21st Century Act (Check 21) took effect.
+The act was proposed and sponsored by the Federal Reserve Bank. It said
+that an image of the original is a legal equivalent of the original paper.
