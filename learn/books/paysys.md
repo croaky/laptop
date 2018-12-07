@@ -6,37 +6,43 @@ as a method to aim comprehension.
 
 [source]: https://amzn.to/2kCpW5C
 
-* [Open Loops and Closed Loops][loops]
-* [Domains of Payment][domains]
-* [Push and Pull][push]
-* [Settlement][settle]
-* [Rules][rules]
-* [Regulation][regulation]
-* [Economic Models][economic]
-* [Interchange][interchange]
-* [Risk Management][risk]
-* [Thick and Thin][thi]
-* [Comparing Payments Systems][compare]
-* [Cross-Border Payments][cross]
-* [Other Countries][country]
-* [Changing Networks][change]
+Overview:
 
-[loops]: #open-loops-and-closed-loops
-[domains]: #domains-of-payment
-[push]: #push-and-pull
-[settle]: #settlement
-[rules]: #rules
-[regulation]: #regulation
-[economic]: #economic-models
-[interchange]: #interchange
-[risk]: #risk-management
-[thi]: #thick-and-thin
-[compare]: #comparing-payments-systems
-[cross]: #cross-border-payments
-[country]: #other-countries
-[change]: #changing-networks
+* [Intro](#overview)
+* [Open and Closed Loops](#open-and-closed-loops)
+* [Domains of Payment](#domains-of-payment)
+* [Push and Pull](#push-and-pull)
+* [Settlement](#settlement)
+* [Rules](#rules)
+* [Regulation](#regulation)
+* [Economic Models](#economic-models)
+* [Interchange](#interchange)
+* [Risk Management](#risk-management)
+* [Thick and Thin](#thick-and-thin)
+* [Comparing Systems](#comparing-payments-systems)
+* [Cross-Border Payments](#cross-border-payments)
+* [Other Countries](#other-countries)
+* [Changing Networks](#changing-networks)
 
-## Open Loops and Closed Loops
+Checking:
+
+* [Overview](#core-systems-checking)
+
+## Overview
+
+A payment is a transfer of value
+from one end party (the sender)
+to another (the receiver).
+The transfer of value is denominated in currency.
+
+Most payments systems share these characteristics:
+
+* Operate within a single country.
+* Denominate in the currency of that country.
+* Are subject to regulation by the government of that country.
+* Enable multiple parties to transact.
+
+### Open and Closed Loops
 
 Most electronic payments systems,
 both paper-based and electronic
@@ -93,7 +99,7 @@ The disadvantage of closed loop systems
 is that they are more difficult to grow than open loop systems;
 the payments system must sign up each end party individually.
 
-## Domains of Payment
+### Domains of Payment
 
 There are five core payments systems in the United States:
 
@@ -166,7 +172,7 @@ Payments are used for multiple purposes:
   Payments to individuals for salary, benefits, rebates,
   and expense reimbursements.
 
-## Push and Pull
+### Push and Pull
 
 When End Party A is sending money to End Party B,
 it is considered a push payment.
@@ -222,7 +228,7 @@ If so, the pull transaction is submitted.
 Card network rules specify that merchants receiving this yes reply
 are covered for both insufficient funds and fraud risks.
 
-## Settlement
+### Settlement
 
 Settlement in an open loop system refers to
 the process by which the intermediaries
@@ -284,7 +290,7 @@ The non-banks are institutions
 that are chartered within a country
 and permitted by national law to do certain types of payments.
 
-## Rules
+### Rules
 
 Most payments systems require either intermediaries (open loop systems)
 or end parties (closed loop systems) to formally join the system.
@@ -338,7 +344,7 @@ Other payments systems,
 such as CHIPS (for wire transfers) and most of the PIN debit card networks,
 do not make their operating rules available to non-members.
 
-## Regulation
+### Regulation
 
 Key laws and regulations:
 
@@ -370,7 +376,7 @@ They regulate sales and issuance of payments instruments,
 as well as transmitting or receiving money.
 Almost every state requires that money transmitters obtain a state license.
 
-## Economic Models
+### Economic Models
 
 Banks, networks, and processors make money by
 providing access to payment systems for end parties
@@ -398,7 +404,7 @@ is much higher than the cost of handling a standard transaction.
 The efficiency which a provider manages exception processes
 affects the overall economics of the product for that provider.
 
-## Interchange
+### Interchange
 
 Interchange is used by some open loop systems,
 particularly by card networks.
@@ -416,7 +422,7 @@ U.S. wire transfer, ACH, and checking systems
 have traditionally operated without interchange
 but "same day ACH" have added an interchange component.
 
-## Risk Management
+### Risk Management
 
 All payments are subject to risk.
 Three major forms are credit risk, fraud risk, and liquidity risk.
@@ -457,7 +463,7 @@ or government regulation. In most cases, innovation outpaces regulation.
 Currency risk. Taking a position on a guaranteed transaction
 prior to the actual exchange rate being set or known.
 
-## Thick and Thin
+### Thick and Thin
 
 "Thick" payment networks have lots of money, enabling investment
 in product definition, brand, risk management, and exception processing.
@@ -470,7 +476,7 @@ Examples are check clearing houses, ACH, and PIN debit networks.
 Thick networks enable significant profits for its member banks.
 Think networks exist to reduce costs, operating as an efficient utility.
 
-## Comparing Payments Systems
+### Comparing Systems
 
 Payments systems compete with each other.
 Providers have questions when deciding to support a new form of payment.
@@ -501,7 +507,7 @@ The authors believe:
 * Exception processing is expensive
 * Simplicity has economic value
 
-## Cross-Border Payments
+### Cross-Border Payments
 
 Cross-border payments occur when an end party in one country
 pays an end party in another country.
@@ -533,7 +539,7 @@ creates complexity and confusion. The systems may have different schedules,
 rules, and data formats. Hefty fees are common. Foreign exchange adds another
 layer of complexity.
 
-## Other Countries
+### Other Countries
 
 A good place to learn about each country's payment systems
 is the website of the central bank of that country.
@@ -542,7 +548,7 @@ The types of payment systems in each country is similar
 but the per capita usage of each system varies considerably.
 For example, checks have been popular in France but not Germany.
 
-## Changing Networks
+### Changing Networks
 
 Large-scale, open loop payments systems are efficient and scalable.
 
@@ -550,3 +556,37 @@ A downside is inertia. Multiple remote parties means a common body of standards,
 rules, and liability frameworks that are hard to change. Improvements may have
 unseen ramifications for operations, technology, pricing, etc. They can take
 years of work and may not take effect for years more.
+
+## Core Systems: Checking
+
+Overview:
+
+* Pull
+* No single owner; check clearing houses owned by banks or private processors
+* U.S. law, network rules and Federal Reserve regulation
+* Clears at par
+* Intra-bank clearing by image or paper; batch
+* Risk managed by intermediaries and end parties
+
+A check is considered a negotiable instrument.
+It instructs a bank to pay funds out of a checking account
+at a depository financial institutions
+and provide those funds to the person or institution names on the check.
+
+Checks can be transferred from one person to another.
+
+In the U.S.,
+checks are a service provided by banks and other financial institutions
+with regulatory permissions to operate checking accounts.
+
+Although checking transactions begin with a piece of paper,
+almost all of today's check processing is electronic.
+This means the per-unit cost of checking is relatively low.
+
+When a customer deposits a check,
+their bank must collect the funds from the claimed account,
+often at another bank.
+This process is clearing and settlement
+and happens bilaterally.
+
+
