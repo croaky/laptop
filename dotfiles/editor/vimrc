@@ -31,6 +31,9 @@ if &compatible
   set nocompatible
 end
 
+" Open vim-plug without a vertical split
+let g:plug_window='enew'
+
 call plug#begin('~/.vim/plugged')
   Plug '/usr/local/opt/fzf'
   Plug 'AndrewRadev/splitjoin.vim'
