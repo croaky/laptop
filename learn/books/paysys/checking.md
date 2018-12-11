@@ -20,8 +20,8 @@ The checking system:
 * has no o single owner;
   check clearing houses owned by banks or private processors
 * is governed by U.S. law, network rules and Federal Reserve regulation
-* clears at par
-* settles via intra-bank clearing by image or paper; batch
+* economics are "clears at par"
+* processes via intra-bank clearing by image or paper; batch
 * manages risk by intermediaries and end parties
 
 A check is considered a negotiable instrument.
