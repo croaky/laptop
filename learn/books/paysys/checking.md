@@ -7,15 +7,20 @@
 * [Ownership](#ownership)
 * [Volume and Trends](#volume-and-trends)
 * [Economics and Products](#economics-and-products)
+* [Risk Management](#risk-management)
+* [Risk Management Products](#risk-management-products)
 
 ## Overview
 
-* Pull
-* No single owner; check clearing houses owned by banks or private processors
-* U.S. law, network rules and Federal Reserve regulation
-* Clears at par
-* Intra-bank clearing by image or paper; batch
-* Risk managed by intermediaries and end parties
+The checking system:
+
+* is "pull"
+* has no o single owner;
+  check clearing houses owned by banks or private processors
+* is governed by U.S. law, network rules and Federal Reserve regulation
+* clears at par
+* settles via intra-bank clearing by image or paper; batch
+* manages risk by intermediaries and end parties
 
 A check is considered a negotiable instrument.
 It instructs a bank to pay funds out of a checking account
@@ -194,3 +199,62 @@ imaging and archiving checks, handling exceptions, fraud, and more.
 Clearing houses have expenses associated with managing settlement.
 
 Processors and clearing houses charge transaction fees to banks.
+
+## Risk Management
+
+Check fraud has a long and colorful history. Examples include
+forged checks; forged signatures; altered amounts, dates, or payees;
+and fraudulent endorsement.
+
+Writing a check on insufficient funds (NSF) in an account
+is technically fraud but seen as a different category of risk
+as it may be accidental.
+
+If the check writer's bank pays the check on insufficient funds,
+the bank assumes risk of collecting the funds from the consumer
+in exchange for revenue from the NSF fee.
+
+If the check writer's bank "bounces" the check,
+it is returned to the depository bank,
+who debits its customer's account.
+If the customer has drained the funds from the account,
+that bank is at risk.
+
+Retail merchants, billers, and enterprises are most exposed to NSF risk.
+Industry estimates of annual losses are in the range of $10 billion.
+Bank losses to NSF are not disclosed, smaller,
+and acceptable given lucrative NSF fee revenue.
+
+If a check is forged on a valid account
+and the payee accepts it and deposits it,
+someone is going to lose money on the fraud.
+The check writer's bank has a legal obligation to pay an item
+when it its "properly payable";
+the check writer has a responsibility to exercise "ordinary care".
+Bank exposure to check fraud is estimated at less than $1 billion annually.
+
+Counterfeit checks are drawn on non-existent accounts.
+Such checks become the responsibility of the depository bank,
+which attempts to reclaim funds from the depositing customer's account.
+
+High-resolution scanners and printers
+have made it easier to forge checks on legitimate accounts.
+Phished online banking credentials give fraudsters the chance to
+see images of paid checks, providing a template.
+
+## Risk Management Products
+
+Retailers buy products for check verification and guarantees.
+
+The banking industry collaborates on a database,
+administered by Early Warning Services,
+to help decide whether to accept a check for deposit and cashing.
+
+Software is sold
+that examines patterns of transactions within and across accounts
+to detect transactions that might be:
+
+* fraudulent
+* in violation of money-laundering regulation
+
+Software is sold that identifies fraudulent signatures and check forgeries.
