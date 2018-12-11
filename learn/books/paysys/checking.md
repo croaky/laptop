@@ -9,6 +9,7 @@
 * [Economics and Products](#economics-and-products)
 * [Risk Management](#risk-management)
 * [Risk Management Products](#risk-management-products)
+* [Major Providers](#major-providers)
 
 ## Overview
 
@@ -258,3 +259,28 @@ to detect transactions that might be:
 * in violation of money-laundering regulation
 
 Software is sold that identifies fraudulent signatures and check forgeries.
+
+## Major Providers
+
+The Federal Reserve Board and the Federal Reserve Banks (together, "the Fed")
+plays these roles:
+
+* Payments industry regulator by writing rules that govern practices
+  by banks and other parties across payments systems
+* Provider of payments services by operating largest check clearing houses,
+  one of the two ACH switches, one of the two wire transfer systems (Fedwire),
+  and as the sole provider of cash and currency to banks
+* Manager of the National Settlement Service by settling for multiple
+  private sector clearing houses
+
+The Fed sponsored and championed the law passed as "Check 21".
+
+The Clearing House, a bank-owned payments company, is a quiet powerhouse.
+Established in 1853 as the New York Clearing House, it grew via merger.
+It is owned by 24 large U.S. banks and U.S. branches of international banks.
+It is a major competitor to the Fed in providing payments services to banks,
+offering:
+
+* check and image clearing
+* ACH processing (the one other ACH operator)
+* wire transfer processing (through CHIPS)
