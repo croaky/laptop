@@ -10,6 +10,7 @@
 * [Risk Management](#risk-management)
 * [Risk Management Products](#risk-management-products)
 * [Major Providers](#major-providers)
+* [Summary](#summary)
 
 ## Overview
 
@@ -284,3 +285,8 @@ offering:
 * check and image clearing
 * ACH processing (the one other ACH operator)
 * wire transfer processing (through CHIPS)
+
+## Summary
+
+Checking was long the dominant non-cash payments system in the U.S.
+It is in decline but changes in check clearing have transformed its economics.

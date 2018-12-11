@@ -8,3 +8,4 @@ as a method to aim comprehension.
 
 * [Overview](overview.md)
 * [Checking](checking.md)
+* [Glossary](glossary.md)
