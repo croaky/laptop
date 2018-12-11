@@ -2,6 +2,8 @@
 
 * [Overview](#overview)
 * [Roles](#roles)
+* [Ownership](#ownership)
+* [Regulation](#regulation)
 
 ## Overview
 
@@ -80,3 +82,46 @@ As with checking,
 two banks may exchange transactions bilaterally
 rather than using one of ACH operators.
 Extreme low cost and efficiency of operators discourages this.
+
+## Ownership
+
+ACH is owned, in effect, by banks that belong to it.
+NACHA is a non-profit that oversees network.
+NACHA's bylaws govern voting power.
+
+Unlike card networks, NACHA is not involved in processing.
+Transaction switching is done by an operator.
+
+There are two operators:
+
+* the Federal Reserve Bank
+* Electronic Payments Network (EPN), owned by The Clearing House
+
+In e-commerce,
+we see third-party brands appearing next to card brands on checkout pages.
+If a merchant accepts ACH, common to see "pay with your bank account".
+
+NACHA's budget and role is limited
+but ACH has grown a large network
+because banks pay no "tax" to NACHA.
+
+## Regulation
+
+ACH transactions are governed by
+NACHA rules and Federal Reserve Bank regulation.
+
+NACHA rules bind banks and operators.
+These rules are voted on by NACHA member banks.
+
+Originators and receivers are bound by contracts with banks.
+
+U.S. law applies to many types of ACH transactions:
+
+* Regulation E of the Fed,
+  implementing the Electronic Fund Transfer Act,
+  applies to consumer transactions,
+  It specifies consumers' right to return unauthorized transactions.
+* U.C.C. 4 and 4a apply to ACH corporate credit transfers.
+* Federal government ACH transactions are regulated by the Treasury Department.
+
+If there is a conflict, U.S. law prevails over private association rules.
