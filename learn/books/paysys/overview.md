@@ -1,14 +1,6 @@
-# Payments Systems in the U.S.
+# Overview
 
-These notes were written while reading
-[Payments Systems in the U.S.][source]
-as a method to aim comprehension.
-
-[source]: https://amzn.to/2kCpW5C
-
-Overview:
-
-* [Intro](#overview)
+* [Intro](#intro)
 * [Open and Closed Loops](#open-and-closed-loops)
 * [Domains of Payment](#domains-of-payment)
 * [Push and Pull](#push-and-pull)
@@ -24,17 +16,7 @@ Overview:
 * [Other Countries](#other-countries)
 * [Changing Networks](#changing-networks)
 
-Checking:
-
-* [Overview](#checking)
-* [Clearing Houses](#clearing-houses)
-* [Automation](#automation)
-* [Roles](#roles)
-* [Ownership](#ownership)
-* [Volume and Trends](#volume-and-trends)
-* [Economics and Products](#economics-and-products)
-
-## Overview
+## Intro
 
 A payment is a transfer of value
 from one end party (the sender)
@@ -48,7 +30,7 @@ Most payments systems share these characteristics:
 * Are subject to regulation by the government of that country.
 * Enable multiple parties to transact.
 
-### Open and Closed Loops
+## Open and Closed Loops
 
 Most electronic payments systems,
 both paper-based and electronic
@@ -105,7 +87,7 @@ The disadvantage of closed loop systems
 is that they are more difficult to grow than open loop systems;
 the payments system must sign up each end party individually.
 
-### Domains of Payment
+## Domains of Payment
 
 There are five core payments systems in the United States:
 
@@ -178,7 +160,7 @@ Payments are used for multiple purposes:
   Payments to individuals for salary, benefits, rebates,
   and expense reimbursements.
 
-### Push and Pull
+## Push and Pull
 
 When End Party A is sending money to End Party B,
 it is considered a push payment.
@@ -234,7 +216,7 @@ If so, the pull transaction is submitted.
 Card network rules specify that merchants receiving this yes reply
 are covered for both insufficient funds and fraud risks.
 
-### Settlement
+## Settlement
 
 Settlement in an open loop system refers to
 the process by which the intermediaries
@@ -296,7 +278,7 @@ The non-banks are institutions
 that are chartered within a country
 and permitted by national law to do certain types of payments.
 
-### Rules
+## Rules
 
 Most payments systems require either intermediaries (open loop systems)
 or end parties (closed loop systems) to formally join the system.
@@ -350,7 +332,7 @@ Other payments systems,
 such as CHIPS (for wire transfers) and most of the PIN debit card networks,
 do not make their operating rules available to non-members.
 
-### Regulation
+## Regulation
 
 Key laws and regulations:
 
@@ -382,7 +364,7 @@ They regulate sales and issuance of payments instruments,
 as well as transmitting or receiving money.
 Almost every state requires that money transmitters obtain a state license.
 
-### Economic Models
+## Economic Models
 
 Banks, networks, and processors make money by
 providing access to payment systems for end parties
@@ -410,7 +392,7 @@ is much higher than the cost of handling a standard transaction.
 The efficiency which a provider manages exception processes
 affects the overall economics of the product for that provider.
 
-### Interchange
+## Interchange
 
 Interchange is used by some open loop systems,
 particularly by card networks.
@@ -428,7 +410,7 @@ U.S. wire transfer, ACH, and checking systems
 have traditionally operated without interchange
 but "same day ACH" have added an interchange component.
 
-### Risk Management
+## Risk Management
 
 All payments are subject to risk.
 Three major forms are credit risk, fraud risk, and liquidity risk.
@@ -469,7 +451,7 @@ or government regulation. In most cases, innovation outpaces regulation.
 Currency risk. Taking a position on a guaranteed transaction
 prior to the actual exchange rate being set or known.
 
-### Thick and Thin
+## Thick and Thin
 
 "Thick" payment networks have lots of money, enabling investment
 in product definition, brand, risk management, and exception processing.
@@ -482,7 +464,7 @@ Examples are check clearing houses, ACH, and PIN debit networks.
 Thick networks enable significant profits for its member banks.
 Think networks exist to reduce costs, operating as an efficient utility.
 
-### Comparing Systems
+## Comparing Systems
 
 Payments systems compete with each other.
 Providers have questions when deciding to support a new form of payment.
@@ -513,7 +495,7 @@ The authors believe:
 * Exception processing is expensive
 * Simplicity has economic value
 
-### Cross-Border Payments
+## Cross-Border Payments
 
 Cross-border payments occur when an end party in one country
 pays an end party in another country.
@@ -545,7 +527,7 @@ creates complexity and confusion. The systems may have different schedules,
 rules, and data formats. Hefty fees are common. Foreign exchange adds another
 layer of complexity.
 
-### Other Countries
+## Other Countries
 
 A good place to learn about each country's payment systems
 is the website of the central bank of that country.
@@ -554,7 +536,7 @@ The types of payment systems in each country is similar
 but the per capita usage of each system varies considerably.
 For example, checks have been popular in France but not Germany.
 
-### Changing Networks
+## Changing Networks
 
 Large-scale, open loop payments systems are efficient and scalable.
 
@@ -562,179 +544,3 @@ A downside is inertia. Multiple remote parties means a common body of standards,
 rules, and liability frameworks that are hard to change. Improvements may have
 unseen ramifications for operations, technology, pricing, etc. They can take
 years of work and may not take effect for years more.
-
-## Checking
-
-Overview:
-
-* Pull
-* No single owner; check clearing houses owned by banks or private processors
-* U.S. law, network rules and Federal Reserve regulation
-* Clears at par
-* Intra-bank clearing by image or paper; batch
-* Risk managed by intermediaries and end parties
-
-A check is considered a negotiable instrument.
-It instructs a bank to pay funds out of a checking account
-at a depository financial institutions
-and provide those funds to the person or institution names on the check.
-
-Checks can be transferred from one person to another.
-
-In the U.S.,
-checks are a service provided by banks and other financial institutions
-with regulatory permissions to operate checking accounts.
-
-Although checking transactions begin with a piece of paper,
-almost all of today's check processing is electronic.
-This means the per-unit cost of checking is relatively low.
-
-When a customer deposits a check,
-their bank must collect the funds from the claimed account,
-often at another bank.
-This process is clearing and settlement
-and happens bilaterally.
-
-### Clearing Houses
-
-In the 1700s and 1800s, messengers carried bags of checks between U.S. banks.
-The cash or other instruments they received in exchange were subject to theft.
-
-In 1853, the first check clearing house was established in NYC.
-Banks joined the clearing house and brought deposited checks each day.
-The clearing house facilitated exchange of checks
-and calculated the daily net settlement for each bank.
-
-Soon, similar clearing houses in other major cities were established
-with schemes for inter-city exchange.
-
-The Federal Reserve Bank system, formed in the early 20th century,
-required its member banks to accept checks "at par".
-This meant that the deposit bank would credit its customer
-with "100 cents on the dollar" rather than some lesser percentage.
-
-If it had instead adopted a discounted (not par) clearing and settlement model,
-it might have looked a lot like our interchange-based card payments system.
-A merchant receiving a check for $100 might be credited $98
-and the bank might keep $2 as profit on the transaction.
-
-### Automation
-
-In the 1950s and 1960s, magnetic ink character recognition
-enabled high-speed processing of checks.
-The bank and account the check is drawn on appears at the bottom of a check.
-
-Check sorters, used by clearing houses and banks on both sides,
-read the MICR line and slot the checks into bins.
-
-Depository financial institutions developed a uniform bank numbering scheme:
-the transit routing number assigned by the American Banking Association.
-
-In the 1980s and 1990s, banks added cameras to their check sorters,
-capturing an image of each check as it went through the machine.
-This addressed problems of managing and storing the paper.
-
-The underlying law still required the original paper check be presented
-to the check writer's bank until 2004,
-when the Check Clearing of the 21st Century Act (Check 21) took effect.
-The act was proposed and sponsored by the Federal Reserve Bank. It said
-that an image of the original is a legal equivalent of the original paper.
-
-In 2010, the Fed announced that 99% of checks clearing through the Fed
-were being processed electronically.
-
-### Roles
-
-It is the job of the bank of first deposit (a.k.a. the presenting bank)
-to get the check to the check writer's bank (a.k.a. the paying bank).
-The presenting bank will be credited by the paying bank upon presentation.
-
-The check writer's bank offers its customers
-a demand deposit account (DDA) with checking as a feature.
-The bank might offer printed check stock
-with the transit routing number and account number.
-
-The check writer writes the check with payee, date, and amount.
-They deliver the check to the recipient.
-
-The recipient deposits the check where the recipient has a DDA.
-Or, they endorse the check and give it to an intermediary
-who then assumes the role of recipient of the check.
-
-The deposit bank credits the customer's account
-and makes the amount usable by the customer
-according to its funds availability policy.
-Their policy is constrained by Federal Reserve Bank Regulation CC,
-which dictates the minimum availability for checks of different kinds.
-Banks may compete on more generous availability terms.
-
-This bank of first deposit must decide how to clear the check
-(how to get the check to the check writer's bank).
-
-Highly automated banks image checks at the point of deposit,
-in the ATM or at the branch teller's window.
-
-The bank then determines whether the check is presented under some form of
-bilateral agreement with the paying bank, or clearing house,
-or by conversion to ACH.
-If converted to ACH, the check must conform with NACHA rules.
-
-This deposit bank must then:
-
-* Deliver the check image to the paying bank
-* Ensure that IRDs (image replacement documents) are printed and delivered
-  to paying banks that do not want to receive images
-* Settle with the paying bank
-
-A processor or clearing house may handle some or all of these tasks.
-
-Checks, at times, now clear faster than ACH or cards.
-The costs of transporting paper has been mostly eliminated.
-A check can now be thought of as an up-front paper order to pay,
-a kind of one-time payment card.
-
-In the future, one possibility is immediate presentation of a check image
-from an ATM to a paying bank. If the paying bank adopts real-time posting
-(rather than waiting to post during a nightly batch run), then the deposit bank
-would know immediately if a check bounces.
-
-### Ownership
-
-No single entity owns the checking payments system.
-Each bank chooses how to support checking.
-
-The regulatory framework for checking is U.S. law,
-the Uniform Commercial Code.
-It was published in the 1950s and adopted by all 50 states.
-
-The Federal Reserve Bank issues regulations that implement checking law.
-
-### Volume and Trends
-
-The checking is system is large and decentralized,
-which makes volumes hard to measure.
-
-It is seeing a sharp decline in use in certain domains
-such as point of sale payment and bill payment.
-
-### Economics and Products
-
-Banks offset costs from check processing with revenues from check products.
-
-Banks offer consumers and small businesses
-check writing and deposit capabilities
-as part of bundled "checking account" products.
-Writing or depositing individual checks is seldom separately priced.
-Banks see check writing as essential for bringing deposits to the bank.
-
-Non-sufficient funds fees have historically been
-a significant source of bank revenue.
-
-Small business accounts work the same way
-and typically share the same delivery platform
-but often have caps on the number of checks that can be written in a month,
-with fees if exceeded.
-
-Large businesses write many checks for payroll, benefits, and vendors.
-Banks offer checking accounts with transaction fee schedules for them.
-
