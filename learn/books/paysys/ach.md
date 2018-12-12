@@ -4,6 +4,8 @@
 * [Roles](#roles)
 * [Ownership](#ownership)
 * [Regulation](#regulation)
+* [Uses](#uses)
+* [Risk Management](#risk-management)
 
 ## Overview
 
@@ -125,3 +127,36 @@ U.S. law applies to many types of ACH transactions:
 * Federal government ACH transactions are regulated by the Treasury Department.
 
 If there is a conflict, U.S. law prevails over private association rules.
+
+## Uses
+
+ACH volumes have grown steadily.
+ACH is used to make payments:
+
+* from orgs to consumers (payroll, benefits)
+* from consumers to orgs (bills, purchases, transfers)
+* from orgs to orgs (suppliers, intra-company)
+* from consumers to consumers (P2P)
+
+Authorization may be prearranged,
+such as in recurring payroll to consumers
+or recurring bill payments from consumers.
+
+Authorization may be one-time, such as supplier payments.
+
+Beginning in 2001, ACH was approved for check conversion
+where a customer writes a paper check,
+deposits it at a bank,
+the bank creates an ACH transaction to replace the check,
+the bank destroys the check,
+and the ACH transaction is carried through the network
+to effect a debit at the check writer's bank.
+These payments are governed by ACH rules and regulation,
+not by check law and regulation.
+
+## Risk Management
+
+A business paying its supplier by ACH
+has the burden of collecting and maintaining supplier's bank account info.
+They are not revealing its own bank account data,
+as it does when sending a check.
