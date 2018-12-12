@@ -9,6 +9,14 @@ software engineering deliberate practice exercises.
 The rest of this file contains
 links to tutorials on topics of interest.
 
+## Crypto
+
+* [CENTRE whitepaper on stablecoins][centre]
+* [Circle and stablecoins][circle-stable]
+
+[centre]: https://www.centre.io/pdfs/centre-whitepaper.pdf
+[circle-stable]: https://itunes.apple.com/us/podcast/unchained-big-ideas-from-worlds-blockchain-cryptocurrency/id1123922160?mt=2&i=1000415531864#
+
 ## Go
 
 * [Go modules and SemVer][mod]
