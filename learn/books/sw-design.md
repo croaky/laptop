@@ -25,15 +25,11 @@ and why each way makes code harder or easier to understand.
 
 ## Table of Contents
 
-* [The Nature of Complexity][nature]
-* [Working Code Isn't Enough][enough]
-* [Modules Should Be Deep][deep]
-* [Information Hiding (and Leakage)][hide]
-
-[nature]: #the-nature-of-complexity
-[enough]: #working-code-isnt-enough
-[deep]: #modules-should-be-deep
-[hide]: #information-hiding-and-leakage
+* [The Nature of Complexity](#the-nature-of-complexity)
+* [Working Code Isn't Enough](#working-code-isnt-enough)
+* [Modules Should Be Deep](#modules-should-be-deep)
+* [Information Hiding and Leakage](#information-hiding-and-leakage)
+* [General Purpose Modules are Deeper](#general-purpose-modules-are-deeper)
 
 ## The Nature of Complexity
 
@@ -139,7 +135,7 @@ Trying to design the entire system (the "waterfall method") won't be effective.
 A better approach is to make lots of small investments on a continual basis,
 adding up to about 10-20% of your total development time.
 
-Organizational code quality becomes reputational.
+Organizational code quality affects reputation.
 Facebook was known to have a tactical mindset and messy codebases.
 Google was known to have taken a more strategic approach.
 It can be more fun to work in an organization that cares about software design
@@ -158,7 +154,7 @@ There will be dependencies between modules.
 To manage dependencies, we think of each module in terms of
 its interface and its implementation.
 The interface consists of what the caller must know,
-decribing what the module does but not how.
+describing what the module does but not how.
 The implementation consists of the code that
 carries out the promises made by the interface.
 
@@ -433,3 +429,96 @@ Buffering in I/O is so universally desirable that
 it should be provided by I/O modules by default.
 
 The best features are the ones you get without even knowing they exist.
+
+## General Purpose Modules are Deeper
+
+A common decision is:
+are you designing a general purpose module
+or a special purpose module?
+
+General purpose means addressing a broad range of problems,
+not only the ones that are important today.
+Spend a bit more time up front to save time later.
+
+It's hard to predict the future needs of software,
+so general purpose might include facilities that are never needed.
+
+If something is too general purpose,
+it might not do a good job of solving the problem you have today.
+
+So, maybe it's better to focus on today's needs,
+building only what we know we need in a specialized way?
+If we discover additional uses later,
+we can refactor to make it general purpose.
+This feels incremental.
+
+### Make module somewhat general purpose
+
+The sweet spot is when a module's functionality reflects current needs
+but its interface is general enough to support multiple uses.
+
+### Example: storing text for an editor
+
+Build a text editor, including UI.
+Display a file and allow users to point, click, and type to edit the file.
+
+It might be useful to write an underlying module that manages text.
+
+A special purpose API might be:
+
+```java
+void backspace(Cursor cursor);
+void delete(Cursor cursor);
+void deleteSelection(Selection selection);
+```
+
+This approach:
+
+* generates a large number of shallow methods
+* creates information leakage between UI and text,
+  adding cognitive load for developers working on either UI code or text class
+
+One of the goals of module design is to
+allow each class to be developed independently.
+
+A general purpose API might be:
+
+```java
+void insert(Position position, String newText);
+void delete(Position start, Position end);
+Position changePosition(Position position, int numChars);
+```
+
+`delete` and `backspace` in the specific implementation
+becomes this in the generic implementation:
+
+```java
+text.delete(cursor, text.changePosition(cursor, 1));
+text.delete(text.changePosition(cursor, -1), cursor);
+```
+
+To a developer working in the UI module,
+it is obvious that these are `delete` and `backspace` operations.
+They do not need to go to the text class or read docs to verify behavior.
+
+This approach has less code overall.
+
+If future functionality such as "find and replace" is written,
+most of the code is already in place in the generic approach.
+All that would be needed is:
+
+```java
+Position findNext(Position start, String string);
+```
+
+The specialized class implementing `delete` and `backspace`
+would not be re-usable.
+
+### Generality leads to better information hiding
+
+The `backspace` method was a false abstraction.
+It purported to hide information about which characters are deleted,
+but the UI module and its developers really needs to know about this.
+
+An important element in software design
+is identifying who needs to know what, and when.
