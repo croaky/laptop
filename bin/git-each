@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+# Run a command for each commit in the branch.
+# Example:
+#   git each ./test.sh
+
+branch=$(git current-branch)
+git rev-list --reverse "$branch" | \
+  while read -r rev; do
+    git checkout "$rev" && "$1"
+  done
+  git checkout "$branch"
