@@ -173,7 +173,7 @@ asdf install maven 3.3.9
 
 asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
-asdf install nodejs 8.9.0
+asdf install nodejs 11.5.0
 asdf reshim nodejs
 npm config set scripts-prepend-node-path true
 
