@@ -140,10 +140,10 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
-if ! command -v go >/dev/null; then
-  if ! go version | grep -Fq "1.11"; then
-    curl https://dl.google.com/go/go1.11.darwin-amd64.tar.gz | sudo tar xz -C /usr/local
-  fi
+gover="1.11.4"
+if ! go version | grep -Fq "$gover"; then
+  curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
+    sudo tar xz -C /usr/local
 fi
 
 if [ -d "$HOME/.asdf" ]; then
