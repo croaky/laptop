@@ -50,7 +50,6 @@ fi
 brew update
 brew bundle --file=- <<EOF
 tap "homebrew/services"
-tap "universal-ctags/universal-ctags"
 tap "wata727/tflint"
 
 brew "awscli"
@@ -70,7 +69,6 @@ brew "shellcheck"
 brew "tflint"
 brew "the_silver_searcher"
 brew "tmux"
-brew "universal-ctags", args: ["HEAD"]
 brew "vim", args: ["without-ruby"]
 brew "watch"
 brew "watchman"
@@ -119,8 +117,6 @@ brew cleanup
   ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
   ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
-
-  ln -sf "$PWD/search/ctags" "$HOME/.ctags"
 
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
