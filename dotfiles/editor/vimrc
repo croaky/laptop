@@ -6,6 +6,7 @@ set backspace=2       " Backspace deletes like most programs in insert mode
 set colorcolumn=+1
 set complete+=kspell  " Include spellfile in completion results
 set diffopt+=vertical " Always use vertical diffs
+set encoding=utf-8
 set expandtab
 set exrc              " http://andrew.stwrt.ca/posts/project-specific-vimrc/
 set history=50
