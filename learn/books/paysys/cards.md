@@ -2,6 +2,8 @@
 
 * [Overview](#overview)
 * [Card Types](#card-types)
+* [Acceptance Environments](#acceptance-environments)
+* [Roles](#roles)
 
 ## Overview
 
@@ -106,3 +108,36 @@ in order to route the transaction over the lower cost PIN debit network.
 
 Prepaid cards access funds from a pre-funded account. Examples are gift cards
 and typically operate over the Visa or Mastercard networks.
+
+## Acceptance Environments
+
+Card-present (CP) transactions occur when the cardholder uses their card at a
+terminal. Network rules usually protect the merchant from fraud risk.
+
+Card-not-present (CNP) transactions occur when the cardholder is making a remote
+purchase such as online or by phone. Network rules usually don't protect the
+merchant from fraud risk.
+
+## Roles
+
+In an open-loop network,
+an issuing bank serves the cardholder
+and acquiring bank serves the merchant.
+The card network sits in the middle,
+managing transactions, rules, risk, and disputes.
+
+In a closed-loop network,
+a single card company performs the issuing, acquiring, and network functions.
+
+Card issuing involves
+soliciting new customers,
+underwriting new customers,
+furnishing each customer with a card,
+authorizing and clearing transactions,
+and providing statements.
+
+Card acquiring involves
+providing and servicing POS terminals and software,
+processing card,
+managing disputes,
+and providing customer service.
