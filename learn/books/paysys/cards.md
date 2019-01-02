@@ -4,6 +4,8 @@
 * [Card Types](#card-types)
 * [Acceptance Environments](#acceptance-environments)
 * [Roles](#roles)
+* [Enabling Technology and Standards](#enabling-technology-and-standards)
+* [Card Processing](#card-processing)
 
 ## Overview
 
@@ -141,3 +143,80 @@ providing and servicing POS terminals and software,
 processing card,
 managing disputes,
 and providing customer service.
+
+## Enabling Technology and Standards
+
+American Express first introduced the plastic credit card in the late 1950s.
+The dimensions and other characteristics are now standardized as ISO 7810.
+
+The card has defined data fields and locations,
+both printed or embossed on the physical card
+and encoded in the magnetic stripe on its back.
+
+The key card data element is the Primary Account Number (PAN).
+The first six digits are the Issuer Identification Number (IIN)
+which identifies the card network and issuing bank.
+The American Bankers Association acts as the registry for IINs.
+
+Security codes are called CVV (Visa), CVC (Mastercard), or CIN (AmEx).
+The code is encoded on the magnetic stripe
+but not physically embossed or printed on the card.
+They were added in the 1990s to help prevent fraud.
+
+Card network rules and federal legislations require that
+merchants truncate card number details from receipts
+to reduce exposure of payment card credentials.
+
+CVN2s are the three- or four-digit number printed on the signature panel
+on the back (or, for AmEx, the front) of the card.
+These are used as the "Card Security Code" for card-no-present transactions.
+
+In most countries,
+cards are migrating from magnetic stripe to chip technology.
+These cards have both a magnetic stripe and chip.
+Until universal chip reading infrastructure exists globally,
+it's not yet possible for issuers to eliminate magnetic stripes.
+
+Two chip standards exist.
+
+The first chip standard is EMV.
+They have physical contacts present on the face of thee card.
+When inserted into an EMV-capable POS device,
+contact is made with the chip to power up and perform processing.
+EMV cards are typically used with PINs, referred to as "Chip-and-PIN".
+
+European countries made early decisions to migrate to EMV
+on concerns about counterfeit card fraud.
+
+In the U.S., the calculation was that there wasn't enough fraud
+to justify the costs of migrating.
+That changed when Visa introduced rules where merchants who did not migrate
+to new EMV devices became liable for fraud instead of the issuer.
+
+The second chip standard is based on contactless RFID technology.
+They were implemented for customer convenience, not fraud prevention.
+Contactless acceptance devices are important to the deployment of
+certain kinds of mobile payment based on near field communication (NFC)
+such as Apple Pay and Android Pay.
+
+## Card Processing
+
+In the U.S., many point of sale terminals can read cards and pass data
+to the acquirer (either acquiring bank itself or the bank's processor).
+These may be freestanding devices
+or software integrated into electronic cash registers (ECRs),
+mobile tablets, or other devices.
+
+Credit card and signature debit transactions (without PINs)
+are routed through the acceptance grid twice:
+once in real time for authorization
+and again (typically at the end of the day) for clearing and settlement.
+
+The card network processing hubs sit in the middle,
+receiving transactions from acquirers and
+sorting and switching them to issuers.
+The major card networks have extensive redundancy and resiliency built in,
+with impressive records for high availability.
+
+Authorization is in real-time, with sub-second response times.
+Clearing and settlement occurs in batch, typically at end of day.
