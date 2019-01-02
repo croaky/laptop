@@ -1,6 +1,7 @@
 # Cards
 
 * [Overview](#overview)
+* [Card Types](#card-types)
 
 ## Overview
 
@@ -74,3 +75,34 @@ than over of the shared ATM/PIN debit networks.
 
 In 2006, Mastercard IPO'ed.
 In 2008, Visa IPO'ed (the largest in US history to that point).
+
+## Card Types
+
+Charge cards are non-revolving: the cardholder pays in full,
+at the end of the billing period, for all charges incurred.
+
+Credit cards provide access to a revolving, unsecured line of credit.
+The cardholder can pay the balance in full
+or over a period allowed by the card issuer.
+
+Signature debit cards access funds on deposit in cardholder's checking account
+authenticated by comparing signature on card to receipt.
+Transactions are carried over the Visa or Mastercard network
+depending on bank issuer's choice of card brand.
+
+PIN debit cards access funds on deposit in cardholder's checking account
+authenticated by entering a PIN on a keypad.
+Transactions are carried over the PIN or ATM networks.
+They can be used to provide cash back to the consumer at point of sale.
+
+The same physical card is typically used for PIN and signature debit.
+The card issuer determines whether both authentication methods are supported.
+On swipe, the merchant can look up the issuer's routing options
+and determine whether to prompt for PIN or not.
+
+Prior to the [Durbin Amendment](https://en.wikipedia.org/wiki/Durbin_amendment),
+merchants often prompted for PIN
+in order to route the transaction over the lower cost PIN debit network.
+
+Prepaid cards access funds from a pre-funded account. Examples are gift cards
+and typically operate over the Visa or Mastercard networks.
