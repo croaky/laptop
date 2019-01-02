@@ -9,4 +9,5 @@ as a method to aim comprehension.
 * [Overview](overview.md)
 * [Checking](checking.md)
 * [ACH](ach.md)
+* [Cards](cards.md)
 * [Glossary](glossary.md)

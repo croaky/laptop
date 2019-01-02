@@ -36,7 +36,7 @@ ACH is wired into every demand deposit account in the country.
 An enterprise who wants to make or collect a payment using ACH can do so
 and plan on being able to reach every banked consumer and enterprise in U.S.
 
-Consumers holding general purpose reloadable (GPR) prepaid cards
+Consumers holding general purpose reloadable prepaid cards
 can have funds deposited into those cards via ACH.
 
 ACH was designed to keep costs low for participating banks.
@@ -153,6 +153,11 @@ and the ACH transaction is carried through the network
 to effect a debit at the check writer's bank.
 These payments are governed by ACH rules and regulation,
 not by check law and regulation.
+
+ACH WEB transactions are authorized by consumers over the internet.
+On a website, a biller offers consumer option to "pay with your bank account".
+The biller liable for validity of authorization.
+The consumer has a right to repudiate unauthorized transactions by Fed Reg E.
 
 ## Risk Management
 

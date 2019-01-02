@@ -1,0 +1,76 @@
+# Cards
+
+* [Overview](#overview)
+
+## Overview
+
+The cards payments system:
+
+* has "pull" payments with authorization
+* is owned by a private network of companies
+* is governed by U.S. law and Federal Reserve Bank regulation
+* economics are interchange (acquirers to issuers),
+  assessments (issuers and acquirers to network),
+  and currency conversion
+* processes electronically
+* manages risk by network definition, augmented by processors and end parties
+
+The cards payments systems are at the heart of consumer commerce,
+facilitating trillions of dollars of spending each year.
+They are extremely standardized and interoperable.
+They are extremely profitable for credit card issuers and other in value chain.
+
+The card industry as we know it began when Bank of America
+rolled out its BankAmericard product in California in the 1950s
+It licensed BankAmericard to banks outside of California by the mid-1960s,
+forming a company, BankAmerica Service Corporation,
+to manage the U.S. card program.
+
+In the mid-1970s,
+a similar organization was formed to manage the international card program.
+Soon after, the U.S. and international companies combined to become Visa.
+
+Separately, another group of California banks formed a competing organization
+called the Interbank Card Association and rolled out its MasterCharge card.
+In the late 1970s, it renamed itself and its product to Mastercard.
+
+The early work of these companies established
+associations of member financial institutions with open membership,
+interchange fees,
+brand control,
+fraud reporting,
+and arbitration processes to settle disputes.
+
+The open loop networks enabled a profitable consumer lending business
+for card-issuing banks. New relationships could be established not of
+a consumer opening a checking account but applying for a credit card.
+
+Card issuing banks serve consumers.
+Acquiring banks serve merchants.
+
+In the late 1960s, banks issued automated teller machine (ATM) cards
+to checking account customers to enable them to withdraw cash.
+Usage required authenticating with a personal identification number (PIN).
+
+Banks began sharing ATM networks.
+Banks wanted cost reduction (saving on teller expenses).
+
+In the late 1980s and 1990s,
+ATM networks went through a series of mergers moving to non-bank ownership.
+Interlink, STAR, and NYCE were some of the largest national networks.
+Visa eventually acquired Interlink.
+In 2004, First Data Corporation bought STAR and
+Metavante bought NYCE.
+
+ATM cards began being accepted at point of sale.
+Merchants wanted to eliminate checks with their "bounce" risk.
+Merchants had to deploy new acceptance equipment to read
+the card's magnetic stripe and to securely accept the cardholder's PIN.
+
+In the mid-1980s, credit cards and debit cards could be accepted by merchants
+at point of sale. This led Visa and Mastercard to develop debit products
+for retail banks to ride over their credit card network "rails" rather
+than over of the shared ATM/PIN debit networks.
+
+In 2006, Mastercard IPO'ed.
+In 2008, Visa IPO'ed (the largest in US history to that point).
