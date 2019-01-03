@@ -11,6 +11,8 @@
 * [Interchange](#interchange)
 * [Issuance](#issuance)
 * [Economics](#economics)
+* [Acquiring](#acquiring)
+* [Payment Facilitators](#payment-facilitators)
 
 ## Overview
 
@@ -115,6 +117,20 @@ in order to route the transaction over the lower cost PIN debit network.
 
 Prepaid cards access funds from a pre-funded account. Examples are gift cards
 and typically operate over the Visa or Mastercard networks.
+
+Although most debit cards in the U.S. use the signature or PIN debit networks
+to access funds in a consumer's checking account,
+it is possible to use the ACH network to accomplish nearly the same thing.
+
+With ACH debit cards,
+the merchant saves by paying no merchant discount fee
+but is exposed to NSF risk.
+The cards are governed by NACHA rules.
+
+For many consumers,
+debit cards win on convenience.
+Consumers think "how do I spend the money in my bank account?"
+and debit cards represent a fewer step (don't have to pay credit card balance).
 
 ## Acceptance Environments
 
@@ -422,3 +438,43 @@ There are minimal federal regulations protecting consumers from this practice.
 Consumers have grown to expect rewards on their cards.
 Because there isn't much interchange revenue on debit cards,
 debit cards have less valuable rewards.
+
+Acquirers earn revenue from
+"interchange plus" (card network fee assessed to acquirer plus "x cents per
+transaction plus y% of transaction value)
+
+## Acquiring
+
+From a merchant perspective,
+the "acquirer" is the entity that sold the merchant their account
+and with whom they deal with day-to-day.
+It might be a bank, processor, gateway, or sales org.
+
+From a card network's perspective,
+the "acquirer" is the bank that belongs to the network
+and has contractual liability for the actions of it clients.
+
+The acquirer's roles may include:
+
+* providing POS devices to accept cards
+* "front-end processing" handling authorization message processing.
+  This is real-time and fixed fee.
+* "back-end processing" handling settlement and clearing in batch.
+  The back-end processor applies interchange to transactions,
+  handles chargebacks and disputes,
+  and handles reporting. Fixed fee per transaction plus exception fees.
+* acquiring bank. Every card network transaction must use an acquiring bank.
+  Share of the discount fee.
+
+New entrants such as Square have dramatically simplified merchant statements
+and associated pricing and terms.
+
+## Payment Facilitators
+
+New card network operating rules allow a firm to act as a
+"payment facilitator" to sign up and process payments for small merchants.
+Examples are PayPal, Square, and Stripe.
+
+Payment Facilitators are sometimes referred to as "aggregators"
+because they aggregate many smaller merchants
+to be processed by a single acquirer.
