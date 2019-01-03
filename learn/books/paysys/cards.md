@@ -5,10 +5,11 @@
 * [Acceptance Environments](#acceptance-environments)
 * [Roles](#roles)
 * [Enabling Technology and Standards](#enabling-technology-and-standards)
-* [Card Processing](#card-processing)
+* [Processing](#processing)
 * [Use](#use)
 * [Regulation](#regulation)
 * [Interchange](#interchange)
+* [Issuance](#interchange)
 
 ## Overview
 
@@ -202,7 +203,7 @@ Contactless acceptance devices are important to the deployment of
 certain kinds of mobile payment based on near field communication (NFC)
 such as Apple Pay and Android Pay.
 
-## Card Processing
+## Processing
 
 In the U.S., many point of sale terminals can read cards and pass data
 to the acquirer (either acquiring bank itself or the bank's processor).
@@ -328,3 +329,34 @@ Interchange is controversial.
 One perspective is interchange is a necessary balance in a two-sided market.
 Another perspective is interchange is a form of price fixing
 that does not allow the merchant to negotiate prices for a key service.
+
+## Issuance
+
+The credit card has been called
+"the most profitable product in banking history".
+Industry revenues are estimated at $100B annually
+and credit card balances exceed $925B.
+
+In the United States, credit card issuance enjoys:
+
+* Near-universal acceptance. Most merchants accept credit cards.
+* A saturated marketplace. More than 60% of Americans have an open credit card.
+  Many Americans without access to credit have debit or prepaid cards.
+* Multiple cards. Of Americans with credit cards, most have almost four cards.
+
+The top ten U.S. credit card issuers
+handled more than 80% of card purchase volume in 2015 including
+JP Morgan Chase, Bank of America, Citibank, Capital One, and Wells Fargo.
+
+Credit card issuers
+choose which networks to use,
+solicit new card holders,
+issue cards,
+compete for purchase volume by being "top of wallet",
+manage credit and fraud exposures,
+handle clearing, authorization, statementing, and customer service,
+manage the cost of funds,
+and manage collections.
+
+Credit card processors may do some or all of the tasks listed above.
+The two largest processors in the U.S. are First Data and TSYS.
