@@ -9,7 +9,8 @@
 * [Use](#use)
 * [Regulation](#regulation)
 * [Interchange](#interchange)
-* [Issuance](#interchange)
+* [Issuance](#issuance)
+* [Economics](#economics)
 
 ## Overview
 
@@ -353,10 +354,71 @@ choose which networks to use,
 solicit new card holders,
 issue cards,
 compete for purchase volume by being "top of wallet",
-manage credit and fraud exposures,
-handle clearing, authorization, statementing, and customer service,
+manage fraud,
+manage clearing and authorization,
+manage statementing and customer service,
 manage the cost of funds,
+manage rewards.
 and manage collections.
 
 Credit card processors may do some or all of the tasks listed above.
-The two largest processors in the U.S. are First Data and TSYS.
+The largest processors in the U.S. are First Data and TSYS.
+
+In order to open a checking account for a customer and issue a debit card,
+a bank must go through a "Know Your Customer" (KYC) process
+mandated by the USA Patriot Act of 2001.
+
+Debit card issuers
+issue cards,
+choose and manage the ATM and debit card networks,
+manage fraud,
+manage clearing and authorization,
+and manage rewards.
+
+Debit card processors may do some or all of the tasks listed above.
+The largest processors in the U.S. are Interlink (Visa), STAR (First Data),
+TSYS, Maestro (Mastercard), NYCE (FIS), Accel (Fiserv), and Pulse (Discover).
+
+## Economics
+
+"Revolving" credit cards are the basic credit card.
+The cardholder can pay the balance in full each period (a "transactor")
+or make partial payments over time (a "revolver").
+Most cards allow the cardholder to avoid paying interest
+as long as the balance is paid in full.
+
+Transactors almost never pay interest charges.
+
+Economics for the credit card industry are dominated by
+interest earned on revolving loans to cardholders who are revolvers.
+
+Banks earn revenue on credit cards from:
+
+* Interest (~50%)
+* Interchange (~20%)
+* Fees (~10%)
+
+Some banks market cards only to existing customers (e.g. checking account).
+Others aggressively market to anyone.
+
+All are vulnerable to changes in the economy.
+The loss rate is usually around 5% but can be 10% or more during recession.
+
+Debit cards are not a standalone product like a credit card.
+They are a component of the checking account product.
+
+Banks earn revenue on debit cards from:
+
+* Interest on balance in checking account
+* Interchange
+* Routine monthly fees
+* Exceptional fees (e.g. overdraft)
+
+There is no technical reason why debit cards should "bounce" (overdraft)
+because they are authorized at the time of transaction.
+Banks allow it because it generates revenue.
+There are minimal federal regulations protecting consumers from this practice.
+
+Consumers have grown to expect rewards on their cards.
+Because there isn't much interchange revenue on debit cards,
+debit cards have less valuable rewards.
