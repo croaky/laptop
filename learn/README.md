@@ -19,9 +19,11 @@ links to tutorials on topics of interest.
 
 ## Go
 
+* [Go services patterns][servpat]
 * [Go modules and SemVer][mod]
 * [GraphQL with gqlgen][gqlgen]
 
+[servpat]: https://medium.com/statuscode/how-i-write-go-http-services-after-seven-years-37c208122831
 [mod]: https://www.youtube.com/watch?v=aeF3l-zmPsY
 [gqlgen]: https://99designs.co.uk/blog/engineering/gqlgen-a-graphql-server-generator-for-go/
 
