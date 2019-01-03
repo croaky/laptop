@@ -27,6 +27,13 @@ links to tutorials on topics of interest.
 [mod]: https://www.youtube.com/watch?v=aeF3l-zmPsY
 [gqlgen]: https://99designs.co.uk/blog/engineering/gqlgen-a-graphql-server-generator-for-go/
 
+Web frameworks:
+
+* [Gin](https://gin-gonic.github.io/gin/)
+* [Echo](https://echo.labstack.com/)
+* [Revel](https://revel.github.io/)
+* [Iris](https://iris-go.com/)
+
 ## Growth
 
 * [Zapier SEO strategy][zap]
