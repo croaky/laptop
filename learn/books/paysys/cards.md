@@ -8,6 +8,7 @@
 * [Card Processing](#card-processing)
 * [Use](#use)
 * [Regulation](#regulation)
+* [Interchange](#interchange)
 
 ## Overview
 
@@ -277,3 +278,53 @@ U.S. federal laws include:
   which maintains a database of credit card agreements from 300 issuers,
   conducts an annual survey of terms of credit card plans,
   and examines credit card marketing agreements.
+
+## Interchange
+
+Revenue models for card networks include
+processing fees,
+brand-use service fees on transactions,
+and handling foreign exchange for cross-currency transactions.
+
+Costs for card networks include
+operating substantial transaction processing centers,
+a global telecommunications infrastructure,
+staff,
+brand promotion,
+and advertising.
+
+Card networks define interchange in order to balance
+the benefit received by the merchant and its acquiring bank
+with the costs incurred by the card issuer.
+
+* Guarantee. The card issuer guarantees the merchant is paid
+  even if the cardholder fails to pay the card issuer.
+* Funds. The merchant receives payment from the issuing bank
+  via the card network before the issuing bank is paid by the cardholder.
+* Operating expenses. The issuing bank has expenses in operating its
+  authorization network, producing statements, handling customer service, etc.
+
+Each card transaction involves two banks with interchange being a fee
+that one bank pays to the other as compensation for some of its costs.
+The network sets the fee.
+
+For U.S. transactions, the merchant's acquiring bank pays the issuing bank.
+(For U.S. ATM transactions, the card issuer pays the ATM deployer.)
+
+The acquiring bank passes the interchange expense to its customer,
+the merchant. Example fees on a $100 purchase are:
+
+* Mastercard and Visa credit card: $1.75
+* American Express card: N/A
+* Regulated debit card: $0.25
+* Exempt debit card: $0.51
+
+Closed loop networks do not have interchange,
+although the network assesses to the merchant a "merchant discount fee"
+which is kept by the network
+rather than distributed to a acquiring bank or issuing bank.
+
+Interchange is controversial.
+One perspective is interchange is a necessary balance in a two-sided market.
+Another perspective is interchange is a form of price fixing
+that does not allow the merchant to negotiate prices for a key service.
