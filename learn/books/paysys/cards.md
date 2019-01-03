@@ -7,6 +7,7 @@
 * [Enabling Technology and Standards](#enabling-technology-and-standards)
 * [Card Processing](#card-processing)
 * [Use](#use)
+* [Regulation](#regulation)
 
 ## Overview
 
@@ -242,3 +243,37 @@ Credit cards are typically used for higher-value purchases, travel, etc.
 
 Transaction volume is higher for debit cards than credit cards
 and increasing at a faster rate.
+
+## Regulation
+
+The operating rules of open loop networks such as Visa and Mastercard
+govern most aspects of card issuing, authorization, clearing, and acquiring.
+
+The card company rules diverge in many ways
+but converge in others where fraud prevention or standardization is important.
+
+A well-known example is the PCI Standards Council
+which provides the PCI-DSS data security requirements
+for the protection of payment card data.
+Visa, Mastercard, AmEx, and Discover are all involved in this organization.
+
+Card networks publish semiannual calendars of upcoming rule changes
+to give banks and their processors time for system upgrades.
+The card networks have been criticized for
+the accumulated complexity of their operating rules
+and have recently tried to simplify.
+
+The rules are publicly available to be inspected by regulators,
+potential customers, and other interested parties.
+
+U.S. federal laws include:
+
+* 2009's Credit Card Accountability Responsibility and Disclosure (CARD) Act,
+  focused on consumer protection regarding interest rate settling, billing,
+  and notifications. It doesn't specify fee or rate maximums.
+* 2010's Dodd-Frank Act containing the Durbin Amendment,
+  focused on debit card interchange and network routing.
+  It created the Consumer Financial Protection Bureau (CFPB),
+  which maintains a database of credit card agreements from 300 issuers,
+  conducts an annual survey of terms of credit card plans,
+  and examines credit card marketing agreements.
