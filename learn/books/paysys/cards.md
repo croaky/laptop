@@ -6,6 +6,7 @@
 * [Roles](#roles)
 * [Enabling Technology and Standards](#enabling-technology-and-standards)
 * [Card Processing](#card-processing)
+* [Use](#use)
 
 ## Overview
 
@@ -220,3 +221,24 @@ with impressive records for high availability.
 
 Authorization is in real-time, with sub-second response times.
 Clearing and settlement occurs in batch, typically at end of day.
+
+## Use
+
+Consumer credit, debit, and prepaid cards are used for
+purchases at point of sale locations,
+for online purchases,
+to make bill payments,
+and to obtain cash.
+
+Business credit and charge cards are used for
+travel and entertainment purchases
+and to make and receive payments from suppliers and customers.
+
+Both are used to make cross-border payments.
+
+Average purchase amount is higher for credit cards than debit cards.
+Debit cards are typically used for "everyday spend".
+Credit cards are typically used for higher-value purchases, travel, etc.
+
+Transaction volume is higher for debit cards than credit cards
+and increasing at a faster rate.
