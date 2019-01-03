@@ -13,6 +13,7 @@
 * [Economics](#economics)
 * [Acquiring](#acquiring)
 * [Payment Facilitators](#payment-facilitators)
+* [Risk](#risk)
 
 ## Overview
 
@@ -478,3 +479,29 @@ Examples are PayPal, Square, and Stripe.
 Payment Facilitators are sometimes referred to as "aggregators"
 because they aggregate many smaller merchants
 to be processed by a single acquirer.
+
+## Risk
+
+Issuers take on credit risk when extending a line of credit to a new cardholder.
+They control this risk via approval process
+and periodic reviews of the account and behavior.
+
+Card networks have recently eliminated the signature requirement
+for many merchant category codes for purchases
+such as purchases under $15 in unattended environments
+or under $25 when attended.
+
+Processing system intrusions have compromised millions of card accounts at once.
+In addition to leading to fraudulent card usage,
+these attacks are costly to issuers who need to handle public relations
+and decide whether to re-issue cards on compromised accounts.
+
+To help address the data breach issue, the card industry has tried to
+reduce or eliminate the storage of card credentials.
+These initiatives are called "tokenization" and involve aliases or proxies
+of card numbers which have limited utility and even if compromised,
+result in significantly lower levels of fraud loss.
+
+Apple Pay was an early adopter of tokenization
+and uses it to store a totally different card number on mobile device
+than is on the cardholder's card.
