@@ -10,4 +10,5 @@ as a method to aim comprehension.
 * [Checking](checking.md)
 * [ACH](ach.md)
 * [Cards](cards.md)
+* [Cash](cash.md)
 * [Glossary](glossary.md)
