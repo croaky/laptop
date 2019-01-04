@@ -84,8 +84,9 @@ nmap <C-p> :Files<CR>
 nmap \ :Ag<SPACE>
 set grepprg=ag\ --nogroup\ --nocolor
 
-" Search word under cursor
-nmap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" Find references for word under cursor.
+" Override with Language Server Protocol for supported file types.
+noremap <buffer> <silent> fr :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Tab completion
 " will insert tab at beginning of line,

@@ -5,6 +5,7 @@
 .DS_Store
 .bundle
 .vs
+dist
 node_modules
 public
 tmp
