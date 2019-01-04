@@ -11,4 +11,4 @@ as a method to aim comprehension.
 * [ACH](ach.md)
 * [Cards](cards.md)
 * [Cash](cash.md)
-* [Glossary](glossary.md)
+* [Wire Transfer](wire-transfer.md)
