@@ -12,3 +12,4 @@ as a method to aim comprehension.
 * [Cards](cards.md)
 * [Cash](cash.md)
 * [Wire Transfer](wire-transfer.md)
+* [Perspectives](perspectives.md)
