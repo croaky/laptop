@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Print current working directory,
+# list of files in dir (including hidden files),
+# and Git status.
+# Use flags to reduce administrative debris.
+
+pwd
+tree -L 1 -a --noreport .
+git status --short
