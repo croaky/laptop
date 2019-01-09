@@ -6,7 +6,6 @@ alias flush-cache="sudo killall -HUP mDNSResponder"
 alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias mkdir="mkdir -p"
 alias path='echo $PATH | tr -s ":" "\n"'
-alias restart-postgres="rm /usr/local/var/postgres/postmaster.pid; launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias v='vim'
 
 # Clone a Git repo into Go-compatible directory structure.
