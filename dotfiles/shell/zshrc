@@ -22,16 +22,6 @@ function clone() {
   cd "$repo" || exit
 }
 
-# Load .env file into shell session for environment variables
-function envup() {
-  if [ -f .env ]; then
-    export "$(cat .env)"
-  else
-    echo 'No .env file found' 1>&2
-    return 1
-  fi
-}
-
 # g is a shortcut for git
 function g() {
   if [[ $# -gt 0 ]]; then
@@ -53,6 +43,16 @@ function c() {
     git create-branch "$branch"
   else
     echo 'usage: c feature-name'
+  fi
+}
+
+# Load .env file into shell session for environment variables
+function envup() {
+  if [ -f .env ]; then
+    export "$(cat .env)"
+  else
+    echo 'No .env file found' 1>&2
+    return 1
   fi
 }
 
