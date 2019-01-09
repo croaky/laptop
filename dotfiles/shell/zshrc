@@ -6,7 +6,6 @@ alias flush-cache="sudo killall -HUP mDNSResponder"
 alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias mkdir="mkdir -p"
 alias path='echo $PATH | tr -s ":" "\n"'
-alias v='vim'
 
 # Clone a Git repo into Go-compatible directory structure.
 # clone https://github.com/statusok/statusok
@@ -20,15 +19,6 @@ function clone() {
   cd "$user" || exit
   git clone "git@$host:$user/$repo".git
   cd "$repo" || exit
-}
-
-# g is a shortcut for git
-function g() {
-  if [[ $# -gt 0 ]]; then
-    git "$@"
-  else
-    git status
-  fi
 }
 
 # Autocomplete branch names for git delete-branch
