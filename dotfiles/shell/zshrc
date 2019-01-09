@@ -42,6 +42,11 @@ function g() {
   fi
 }
 
+# Autocomplete branch names for git delete-branch
+function _git_delete_branch() {
+  __gitcomp "$(__git_heads)"
+}
+
 # Create feature branch with conventional name: user/feature
 function c() {
   if [[ $# -gt 0 ]]; then
