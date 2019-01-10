@@ -170,5 +170,4 @@ asdf_plugin_update "python" "https://github.com/tuvistavie/asdf-python.git"
 asdf install python 3.6.5
 
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
-asdf install ruby 2.4.2
 asdf install ruby 2.5.1
