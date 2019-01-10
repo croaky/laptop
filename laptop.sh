@@ -160,13 +160,6 @@ asdf_plugin_update() {
   asdf plugin-update "$1"
 }
 
-asdf_plugin_update "java" "https://github.com/skotchpine/asdf-java"
-asdf install java 8.172
-asdf install java 10.0.1
-
-asdf_plugin_update "maven" "https://github.com/skotchpine/asdf-maven"
-asdf install maven 3.3.9
-
 asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
 asdf install nodejs 11.5.0
