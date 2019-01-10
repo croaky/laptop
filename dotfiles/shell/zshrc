@@ -93,6 +93,9 @@ PATH="/usr/local/go/bin:$PATH"
 # https://github.com/golang/go/wiki/InvalidFlag
 export CGO_LDFLAGS_ALLOW='-fstack-protector'
 
+# Configure Rust
+PATH="$HOME/.cargo/bin:$PATH"
+
 # Set environment variables for monorepos
 export OK="$HOME/src/statusok"
 export I10R="$HOME/src/i10r.io"

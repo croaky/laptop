@@ -142,6 +142,12 @@ if ! go version | grep -Fq "$gover"; then
     sudo tar xz -C /usr/local
 fi
 
+if ! command -v rustc >/dev/null; then
+  curl https://sh.rustup.rs -sSf | sh --no-modify-path
+else
+  rustc --version
+fi
+
 if [ -d "$HOME/.asdf" ]; then
   (
     cd "$HOME/.asdf"
