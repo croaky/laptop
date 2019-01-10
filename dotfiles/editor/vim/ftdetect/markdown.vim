@@ -1,1 +1,1 @@
-autocmd BufRead,BufNewFile *.md,*.md.erb setfiletype markdown
+autocmd BufRead,BufNewFile *.md,*.md.erb set filetype=markdown
