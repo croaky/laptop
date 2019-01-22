@@ -61,21 +61,25 @@ call plug#begin('~/.vim/plugged')
   Plug 'w0rp/ale'
 call plug#end()
 
-augroup vimrcEx
+" When reading a buffer, jump to last known cursor position except for
+" commit messages, when position is invalid, or inside an event handler.
+augroup lastcursorposition
   autocmd!
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
   autocmd BufReadPost *
     \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
+augroup END
 
-  " ALE linting events
-  set updatetime=1000
-  let g:ale_lint_on_enter = 1
-  let g:ale_lint_on_text_changed = 0
+" ALE linting events
+augroup ale
+  autocmd!
+
+  autocmd VimEnter *
+    \ set updatetime=1000 |
+    \ let g:ale_lint_on_enter = 1 |
+    \ let g:ale_lint_on_text_changed = 0
 augroup END
 
 " Use fzf for finding files
