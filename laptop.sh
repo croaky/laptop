@@ -22,7 +22,7 @@ fi
 
 update_shell() {
   local shell_path;
-  shell_path="$(which zsh)"
+  shell_path="$(command -v zsh)"
 
   if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
     sudo sh -c "echo $shell_path >> /etc/shells"
@@ -32,7 +32,7 @@ update_shell() {
 
 case "$SHELL" in
   */zsh)
-    if [ "$(which zsh)" != "$HOMEBREW_PREFIX/bin/zsh" ] ; then
+    if [ "$(command -v zsh)" != "$HOMEBREW_PREFIX/bin/zsh" ] ; then
       update_shell
     fi
     ;;
@@ -85,7 +85,7 @@ brew upgrade
 brew cleanup
 
 (
-  cd dotfiles
+  cd "$OK/dotfiles"
 
   ln -sf "$PWD/asdf/asdfrc" "$HOME/.asdfrc"
   ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"
