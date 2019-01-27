@@ -5,6 +5,9 @@
 * [Biller](#biller)
 * [Enterprise](#enterprise)
 * [Bank](#bank)
+* [Network](#network)
+* [Processor](#processor)
+* [Payment Services Provider](#payment-services-provider)
 
 ## Consumer
 
@@ -154,3 +157,67 @@ Its revenue (e.g. interchange or float) is often invisible to
 customers and therefore less likely to cause customer attitude problems.
 
 Banks are frequently challenged by fintech competitors.
+
+## Network
+
+The three key functions of an open loop payments system are
+rules, brand, and processing.
+There is considerable overlap between "networks" and "processors":
+many networks do some processing and
+many processors operate transaction switches or own networks.
+
+Most payment networks in the U.S. began life as bank-owned consortia.
+Today, most are, or are owned by, public companies.
+
+Most networks charge for their service on a fee per transaction basis,
+which means they must operate at scale to cover
+large fixed costs for operating switching and settlement platforms.
+The global card networks also derive significant revenue from
+cross-currency transactions from cardholders travelling internationally.
+
+Networks tend to be volume-hungry but face a brand challenge:
+a recognizable, positive brand helps grow volume but
+can conflict with member banks' preferences for their brands to dominate.
+
+The biggest power of a network is its rule-making authority.
+
+## Processor
+
+Whenever processes are outsourced to a third party,
+that provider is referred to as a "processor".
+They may provide processes such as:
+
+* answering a customer support call
+* determining fraud risk in real-time
+* "on behalf of" transaction or account handling
+* private switching services
+* credit bureaus
+* lockbox providers
+* security and authentication services
+* collections
+* hardware for terminals and check sorters
+* software for ACH and wire transfer
+
+Transaction handling processing is almost always a fixed-fee business.
+Large volume clients are usually low fee,
+providing the necessary volume for the network but break-even economics.
+Smaller clients pay higher prices and provide the profit.
+
+## Payment Services Provider
+
+Payment services providers serve end parties directly.
+They may provide processes such as:
+
+* check cashing
+* bill payment
+* prepaid card issuance
+* money transfer (Western Union, MoneyGram)
+* e-commerce (PayPal, Shopify)
+
+They must invest in brand to reach end parties.
+
+They may handle cross-border payments. To do so,
+they establish a private network of correspondent banks to clear transactions.
+Over time, they may develop significant "on-us" volumes
+and can process these transactions internally
+without relying on external banks or networks.

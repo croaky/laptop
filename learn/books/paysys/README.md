@@ -6,10 +6,10 @@ as a method to aim comprehension.
 
 [source]: https://amzn.to/2kCpW5C
 
-* [Overview](overview.md)
-* [Checking](checking.md)
-* [ACH](ach.md)
-* [Cards](cards.md)
-* [Cash](cash.md)
-* [Wire Transfer](wire-transfer.md)
-* [Perspectives](perspectives.md)
+1. [Overview](overview.md)
+1. [Checking](checking.md)
+1. [ACH](ach.md)
+1. [Cards](cards.md)
+1. [Cash](cash.md)
+1. [Wire Transfer](wire-transfer.md)
+1. [Perspectives](perspectives.md)
