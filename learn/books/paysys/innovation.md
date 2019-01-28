@@ -2,7 +2,7 @@
 
 * [Jobs to be Done](#jobs-to-be-done)
 * [Building Blocks](#building-blocks)
-* [Global](#global)
+* [Other Countries](#other-countries)
 * [Lessons Learned](#lessons-learned)
 
 ## Jobs to be Done
@@ -73,30 +73,36 @@ All modern payments systems
 rely on computers and communications networks to operate.
 Even cash uses anti-counterfeit technology and ATMs.
 
-Some building blocks include:
+Some building blocks include the following.
 
-* APIs: API architectures enable new services to be constructed in ways that
-  ensure the integrity of the solution. They provide a platform upon which
-  young companies can build.
-* Open source software: Allow young companies to compress their development
-  cycles to rapidly implement their ideas.
-* Virtual currencies: New forms of cryptography-based currencies,
-  such as Bitcoin, have potential for globally usable currencies that might
-  augment today's approach to cross-border payments based upon a network of
-  correspondent banking relationships.
-* Blockchain: New shared database structure to improve efficiency in certain
-  financial services use cases.
-* Decentralized exchanges: Create peer-to-peer marketplaces to enable trading
-  without a central authority.
-* Invisible payments: Uber removes payment interaction by handling it
-  automatically at the end of a ride. The payment still happens but consumer
-  need not worry about it at destination and can get out of the car.
-* Marketplace payments: Uber, Airbnb, and others operate marketplaces
-  facilitating commerce from ride sharing to room rentals and more. Traditional
-  payments aren't always appropriate for these businesses. New entrants like
-  WePay have emerged to focus on them.
+APIs: API architectures enable new services to be constructed in ways that
+ensure the integrity of the solution. They provide a platform upon which
+young companies can build.
 
-## Global
+Open source software: Allow young companies to compress their development
+cycles to rapidly implement their ideas.
+
+Virtual currencies: New forms of cryptography-based currencies,
+such as Bitcoin, have potential for globally usable currencies that might
+augment today's approach to cross-border payments based upon a network of
+correspondent banking relationships.
+
+Blockchain: New shared database structure to improve efficiency in certain
+financial services use cases.
+
+Decentralized exchanges: Create peer-to-peer marketplaces to enable trading
+without a central authority.
+
+Invisible payments: Uber removes payment interaction by handling it
+automatically at the end of a ride. The payment still happens but consumer
+need not worry about it at destination and can get out of the car.
+
+Marketplace payments: Uber, Airbnb, and others operate marketplaces
+facilitating commerce from ride sharing to room rentals and more. Traditional
+payments aren't always appropriate for these businesses. New entrants like
+WePay have emerged to focus on them.
+
+## Other Countries
 
 Person-to-person systems such as M-Pesa in Kenya
 address market requirements in a new way that wouldn't work in the U.S.

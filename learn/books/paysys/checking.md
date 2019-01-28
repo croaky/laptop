@@ -32,8 +32,7 @@ and provide those funds to the person or institution names on the check.
 
 Checks can be transferred from one person to another.
 
-In the U.S.,
-checks are a service provided by banks and other financial institutions
+Checks are a service provided by banks and other financial institutions
 with regulatory permissions to operate checking accounts.
 
 Although checking transactions begin with a piece of paper,
@@ -48,10 +47,10 @@ and happens bilaterally.
 
 ## Clearing Houses
 
-In the 1700s and 1800s, messengers carried bags of checks between U.S. banks.
+In the 1700s and 1800s, messengers carried bags of checks between banks.
 The cash or other instruments they received in exchange were subject to theft.
 
-In 1853, the first check clearing house was established in NYC.
+In the 1850s, the first check clearing house was established in NYC.
 Banks joined the clearing house and brought deposited checks each day.
 The clearing house facilitated exchange of checks
 and calculated the daily net settlement for each bank.
@@ -59,8 +58,8 @@ and calculated the daily net settlement for each bank.
 Soon, similar clearing houses in other major cities were established
 with schemes for inter-city exchange.
 
-The Federal Reserve Bank system, formed in the early 20th century,
-required its member banks to accept checks "at par".
+The Federal Reserve Bank system was formed in the early 1900s.
+It required its member banks to accept checks "at par".
 This meant that the deposit bank would credit its customer
 with "100 cents on the dollar" rather than some lesser percentage.
 
@@ -85,9 +84,7 @@ In the 1980s and 1990s, banks added cameras to their check sorters,
 capturing an image of each check as it went through the machine.
 This addressed problems of managing and storing the paper.
 
-The underlying law still required the original paper check be presented
-to the check writer's bank until 2004,
-when the Check Clearing of the 21st Century Act (Check 21) took effect.
+The Check Clearing of the 21st Century Act (Check 21) took effect in 2004.
 The act was proposed and sponsored by the Federal Reserve Bank. It said
 that an image of the original is a legal equivalent of the original paper.
 
@@ -96,8 +93,8 @@ were being processed electronically.
 
 ## Roles
 
-It is the job of the bank of first deposit (a.k.a. the presenting bank)
-to get the check to the check writer's bank (a.k.a. the paying bank).
+It is the job of the bank of first deposit (the presenting bank)
+to get the check to the check writer's bank (the paying bank).
 The presenting bank will be credited by the paying bank upon presentation.
 
 The check writer's bank offers its customers
@@ -120,7 +117,7 @@ which dictates the minimum availability for checks of different kinds.
 Banks may compete on more generous availability terms.
 
 This bank of first deposit must decide how to clear the check
-(how to get the check to the check writer's bank).
+(get the check to the check writer's bank).
 
 Highly automated banks image checks at the point of deposit,
 in the ATM or at the branch teller's window.

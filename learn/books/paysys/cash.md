@@ -25,7 +25,7 @@ It can be used anonymously by both payer and payee.
 
 ## Production
 
-Cash is physically produced by
+Cash is printed by
 the U.S. Treasury's Bureau of Engraving and Printing (bank notes) and
 the U.S. Mint (coins).
 

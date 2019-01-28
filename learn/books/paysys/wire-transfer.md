@@ -66,8 +66,7 @@ CHIPS is a private sector alternative to Fedwire.
 It is owned by The Clearing House, which is owned by large banks in the U.S.
 
 It is real-time, fully guaranteed, for large-value transactions.
-
-CHIPS is not a real-time gross settlement system.
+CHIPS is not a gross settlement system.
 It uses multi-lateral netting to manage settlement risk
 while providing liquidity benefits.
 

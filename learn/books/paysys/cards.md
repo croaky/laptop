@@ -30,15 +30,13 @@ The cards payments system:
 
 The cards payments systems are at the heart of consumer commerce,
 facilitating trillions of dollars of spending each year.
-They are extremely standardized and interoperable.
-They are extremely profitable for credit card issuers and other in value chain.
+They are extremely standardized, interoperable,
+and profitable for credit card issuers and others in value chain.
 
-The card industry as we know it began when Bank of America
-rolled out its BankAmericard product in California in the 1950s
-It licensed BankAmericard to banks outside of California by the mid-1960s,
+Bank of America rolled out its BankAmericard product in California in the 1950s
+and licensed it to banks outside of California by the mid-1960s.
 forming a company, BankAmerica Service Corporation,
 to manage the U.S. card program.
-
 In the mid-1970s,
 a similar organization was formed to manage the international card program.
 Soon after, the U.S. and international companies combined to become Visa.
@@ -433,7 +431,7 @@ Banks earn revenue on debit cards from:
 
 There is no technical reason why debit cards should "bounce" (overdraft)
 because they are authorized at the time of transaction.
-Banks allow it because it generates revenue.
+Banks allow it because it generates revenue :(.
 There are minimal federal regulations protecting consumers from this practice.
 
 Consumers have grown to expect rewards on their cards.
