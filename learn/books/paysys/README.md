@@ -13,3 +13,4 @@ as a method to aim comprehension.
 1. [Cash](cash.md)
 1. [Wire Transfer](wire-transfer.md)
 1. [Perspectives](perspectives.md)
+1. [Innovation](innovation.md)
