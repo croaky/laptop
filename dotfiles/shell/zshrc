@@ -102,6 +102,10 @@ export I10R="$HOME/src/i10r.io"
 export ROOSTER="$HOME/src/rooster"
 export UP="$HOME/src/i10r.io"
 
+# Set environment variable for localhost TLS certificate authority file
+# https://github.com/FiloSottile/mkcert
+export CAFILE="$HOME/Library/Application Support/mkcert/rootCA.pem"
+
 # Change into most common directories
 export CDPATH="$CDPATH:$I10R:$OK:$ROOSTER:$GOPATH/src/github.com"
 
