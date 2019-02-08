@@ -30,6 +30,8 @@ and why each way makes code harder or easier to understand.
 * [Modules Should Be Deep](#modules-should-be-deep)
 * [Information Hiding and Leakage](#information-hiding-and-leakage)
 * [General Purpose Modules are Deeper](#general-purpose-modules-are-deeper)
+* [Different Layer, Different
+  Abstraction](#different-layer-different-abstraction)
 
 ## The Nature of Complexity
 
@@ -522,3 +524,78 @@ but the UI module and its developers really needs to know about this.
 
 An important element in software design
 is identifying who needs to know what, and when.
+
+## Different Layer, Different Abstraction
+
+Software is composed in layers.
+Higher layers use facilities provided by lower layers.
+Each layer should provide a different abstraction from layers above and below.
+
+### Pass-through methods
+
+A pass-through method does little more except invoke another method
+whose signature is similar or identical to the calling method.
+
+Pass-through methods make classes shallower:
+they increase the interface complexity of the class
+but don't increase the total functionality of the system.
+
+Pass-through methods also create dependencies between classes.
+
+The interface to a piece of functionality
+should be in the same class that implements the functionality.
+
+The solution is to refactor in one of these ways:
+
+1. Expose lower-level class directly to callers of higher-level class
+2. Redistribute functionality between classes
+3. Merge classes
+
+### When interface duplication is OK
+
+One example where it's useful for a method to call another method
+with the same signature is a dispatcher.
+
+A dispatcher is a method that uses its arguments to select
+one of several other methods to invoke.
+Then, it passes most of all of its arguments to the chosen method.
+Choosing the method is useful functionality.
+
+An HTTP request router is an example of a dispatcher.
+
+Another example of useful interface duplication is when several methods
+provide a different implementation with the same interface.
+
+For example, database drivers within an adapter such as Ruby's `ActiveRecord`
+may provide different implementations for Postgres or MySQL.
+Or, stream writers may use Go's `io.Writer` interface
+may provide different implementations to write bytes
+to a file or to an HTTP connection.
+
+In this case, the same interface reduces cognitive load.
+Once you've worked with one interface, it is easier to work with the others.
+
+Methods like this are usually in the same layer of abstraction
+and do not invoke each other.
+
+### Decorators
+
+The decorator design pattern takes an existing object
+and extends its functionality.
+
+For example, a `Window` class may implement a window and a `ScrollableWindow`
+might decorate `Window` with horizontal and vertical scrollbars.
+
+The motivation for decorators is to separate special-purpose extensions
+from a more generic core but decorators tend to be shallow
+and contain many pass-through methods.
+
+Alternative considerations to decorators:
+
+* Could the functionality be in the underlying class?
+* If the functionality is specific to a use case,
+  could it merged with the use class rather than creating a separate class?
+* Could the new functionality be merged into an existing decorator,
+  resulting in a single deeper decorator instead of multiple shallow ones?
+* Does the functionality need to wrap underlying functionality,
+  or could it be implemented stand-alone?
