@@ -599,3 +599,21 @@ Alternative considerations to decorators:
   resulting in a single deeper decorator instead of multiple shallow ones?
 * Does the functionality need to wrap underlying functionality,
   or could it be implemented stand-alone?
+
+### Pass-through variables
+
+Another form of API duplication is a pass-through variable,
+which is a variable that is passed through a long chain of methods.
+
+Pass-through variables add complexity because
+they force all the intermediate methods to be aware of their existence,
+even though the methods have no use for the variables.
+
+Eliminating pass-through variables can be challenging:
+
+* Store information in a different object,
+  but it may itself be a pass-through variable.
+* Store information in a global variable,
+  which almost always causes other problems,
+* Introduce a context object that stores all the application's global state.
+  There is one context object per instance of the system.
