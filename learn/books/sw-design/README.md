@@ -33,6 +33,7 @@ and why each way makes code harder or easier to understand.
 * [Different Layer, Different
   Abstraction](#different-layer-different-abstraction)
 * [Pull Complexity Downwards](#pull-complexity-downwards)
+* [Better Together or Better Apart?](#better-together-or-better-apart)
 
 ## The Nature of Complexity
 
@@ -661,3 +662,32 @@ Before exporting a configuration parameter, ask:
 
 > Will users (or higher-level modules) be able to determine a better value
 > than we can determine internally?
+
+## Better Together or Better Apart?
+
+The goal is to minimize overall system complexity.
+
+To achieve this goal, we could divide the system
+into a large number of small components.
+The smaller the component, the simpler each component will be.
+
+The act of dividing creates additional complexity that was not there:
+
+* more components means more difficulty to distinguish between them
+  and find the right one for each job
+* additional code to manage
+* separation: the code is farther apart than before.
+  If the components are truly independent,
+  this is good (the developer can focus on a single component at a time).
+  If there are dependencies between them,
+  this is bad (the developer needs to flip between them, or is unaware of them).
+* duplication
+
+Indications two pieces of code may be related:
+
+* they share information. For example, depend on syntax of a document
+* they are used together bi-directionally
+* they overlap conceptually. For example: searching for a substring and
+  case conversion are both string manipulation. Flow control and
+  reliable delivery are both network communication.
+* it is hard to understand one of the pieces without looking at another
