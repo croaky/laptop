@@ -32,6 +32,7 @@ and why each way makes code harder or easier to understand.
 * [General Purpose Modules are Deeper](#general-purpose-modules-are-deeper)
 * [Different Layer, Different
   Abstraction](#different-layer-different-abstraction)
+* [Pull Complexity Downwards](#pull-complexity-downwards)
 
 ## The Nature of Complexity
 
@@ -617,3 +618,46 @@ Eliminating pass-through variables can be challenging:
   which almost always causes other problems,
 * Introduce a context object that stores all the application's global state.
   There is one context object per instance of the system.
+
+## Pull Complexity Downwards
+
+Unavoidable complexity could be handled
+by users of a module or
+by internals of the module.
+
+Since most modules have more users than developers,
+it is more important for a module to have a simple interface
+than a simple implementation.
+
+Temptations of a module developer to "let the caller handle it":
+
+* raise an exception
+* define a configuration parameter to control a policy
+
+These approaches amplify complexity.
+Many people must deal with a problem instead of one.
+If a class throws an exception, every caller must handle it.
+If a configuration parameter is exported,
+every sysadmin will need to learn to set them.
+
+The goal is to minimize overall system complexity.
+
+### Example: configuration parameters
+
+Rather than determining a behavior internally,
+a class can export configuration parameters to control its behavior such as
+the size of a cache or number of times to retry a request.
+
+The benefit is users can tune the system
+for their particular requirements and workloads.
+In some cases, it is hard for lower level code to know the best policy to apply
+and users are more familiar with their domain.
+
+In other cases, it is difficult for users to determine the right values.
+Making a decision internally reduces the user's work.
+It also avoids backwards-compatibility issues.
+
+Before exporting a configuration parameter, ask:
+
+> Will users (or higher-level modules) be able to determine a better value
+> than we can determine internally?
