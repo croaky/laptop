@@ -76,6 +76,7 @@ brew "yarn"
 brew "zsh"
 
 cask "aws-vault"
+cask "kitty"
 cask "graphiql"
 cask "kap"
 cask "ngrok"
@@ -120,8 +121,13 @@ brew cleanup
 
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
+
+  mkdir -p "$HOME/.config/kitty"
+  ln -sf "$PWD/shell/kitty.conf" "$HOME/.config/kitty/kitty.conf"
+
   mkdir -p "$HOME/.ssh"
   ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
+
   ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 

@@ -57,7 +57,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-projectionist'
   Plug 'tpope/vim-rails'
   Plug 'vim-ruby/vim-ruby'
-  Plug 'vim-scripts/tComment'
+  Plug 'tomtom/tcomment_vim'
   Plug 'w0rp/ale'
 call plug#end()
 
