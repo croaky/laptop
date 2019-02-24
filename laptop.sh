@@ -149,7 +149,7 @@ if ! go version | grep -Fq "$gover"; then
 fi
 
 if ! command -v rustc >/dev/null; then
-  curl https://sh.rustup.rs -sSf | sh --no-modify-path
+  curl https://sh.rustup.rs -sSf | sh
 else
   rustc --version
 fi
