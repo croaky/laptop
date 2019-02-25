@@ -48,7 +48,7 @@ full-text search of the `products` table's
 See [Implementing Multi-Table Full Text Search with Postgres in Rails][multi]
 for an example of full-text search of multiple tables.
 
-[multi]: https://robots.thoughtbot.com/implementing-multi-table-full-text-search-with-postgres
+[multi]: https://thoughtbot.com/blog/implementing-multi-table-full-text-search-with-postgres
 
 Our [`pg_search_scope`][scope] is named `:search`,
 so we can invoke it with:

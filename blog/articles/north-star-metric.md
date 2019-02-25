@@ -128,7 +128,7 @@ to calculate `growth`.
 `lag()` is a [window function] that
 compares rows of `teams` by an offset of `1`.
 
-[window function]: https://robots.thoughtbot.com/postgres-window-functions
+[window function]: https://thoughtbot.com/blog/postgres-window-functions
 
 The result set looks like this:
 

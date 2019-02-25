@@ -5,7 +5,7 @@ instead of a [mock object],
 we make some tradeoffs.
 This article explores our decisions.
 
-[test spy]: https://robots.thoughtbot.com/spy-vs-spy
+[test spy]: https://thoughtbot.com/blog/spy-vs-spy
 [mock object]: http://xunitpatterns.com/Mock%20Object.html
 
 ## An example spy
@@ -71,7 +71,7 @@ class PersonFinder
 end
 ```
 
-[system under test]: https://robots.thoughtbot.com/don-t-stub-the-system-under-test
+[system under test]: https://thoughtbot.com/blog/don-t-stub-the-system-under-test
 
 [Clearbit's API is reliable][uptime],
 but like any other network request,

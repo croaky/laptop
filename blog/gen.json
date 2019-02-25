@@ -50,7 +50,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/bin-setup",
+      "canonical": "https://thoughtbot.com/blog/bin-setup",
       "id": "setup-sh",
       "published": "2013-01-25",
       "redirects": [
@@ -192,7 +192,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/align-github-flavored-markdown-tables-in-vim",
+      "canonical": "https://thoughtbot.com/blog/align-github-flavored-markdown-tables-in-vim",
       "id": "align-markdown-tables-in-vim",
       "published": "2016-06-15",
       "redirects": [
@@ -234,7 +234,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/feature-branch-code-reviews",
+      "canonical": "https://thoughtbot.com/blog/feature-branch-code-reviews",
       "id": "feature-branch-code-reviews",
       "published": "2011-01-19",
       "tags": [
@@ -246,7 +246,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/keeping-a-github-fork-updated",
+      "canonical": "https://thoughtbot.com/blog/keeping-a-github-fork-updated",
       "id": "update-a-github-fork",
       "published": "2011-05-02",
       "redirects": [
@@ -261,7 +261,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/how-to-reduce-a-large-heroku-compiled-slug-size",
+      "canonical": "https://thoughtbot.com/blog/how-to-reduce-a-large-heroku-compiled-slug-size",
       "id": "reduce-heroku-slug-size",
       "published": "2016-06-13",
       "tags": [
@@ -276,7 +276,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/create-a-retention-curve-with-mixpanel-and-google-sheets",
+      "canonical": "https://thoughtbot.com/blog/create-a-retention-curve-with-mixpanel-and-google-sheets",
       "id": "retention-curves-mixpanel-google-sheets",
       "published": "2015-07-01",
       "redirects": [
@@ -290,7 +290,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/optimizing-full-text-search-with-postgres-tsvector-columns-and-triggers",
+      "canonical": "https://thoughtbot.com/blog/optimizing-full-text-search-with-postgres-tsvector-columns-and-triggers",
       "id": "postgres-full-text-search-tsvectors-triggers",
       "published": "2015-06-25",
       "redirects": [
@@ -318,7 +318,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/a-closer-look-at-test-spies",
+      "canonical": "https://thoughtbot.com/blog/a-closer-look-at-test-spies",
       "id": "test-spies-vs-mocks",
       "published": "2015-03-19",
       "tags": [
@@ -331,7 +331,7 @@
         "croaky",
         "frechg"
       ],
-      "canonical": "https://robots.thoughtbot.com/north-star-metric",
+      "canonical": "https://thoughtbot.com/blog/north-star-metric",
       "id": "north-star-metric",
       "published": "2014-12-25",
       "tags": [
@@ -342,7 +342,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/ssl-for-rails-with-heroku-and-dnsimple",
+      "canonical": "https://thoughtbot.com/blog/ssl-for-rails-with-heroku-and-dnsimple",
       "id": "enforce-ssl-with-heroku-and-dnsimple",
       "published": "2014-05-21",
       "tags": [
@@ -353,7 +353,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/using-polymorphism-to-make-a-better-activity-feed-in-rails",
+      "canonical": "https://thoughtbot.com/blog/using-polymorphism-to-make-a-better-activity-feed-in-rails",
       "id": "polymorphic-activity-feed-rails",
       "published": "2013-12-02",
       "redirects": [
@@ -367,7 +367,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/faster-grepping-in-vim",
+      "canonical": "https://thoughtbot.com/blog/faster-grepping-in-vim",
       "id": "search-projects-in-vim",
       "published": "2013-11-27",
       "redirects": [
@@ -383,7 +383,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/how-to-create-postgres-indexes-concurrently-in",
+      "canonical": "https://thoughtbot.com/blog/how-to-create-postgres-indexes-concurrently-in",
       "id": "create-postgres-indexes-concurrently",
       "published": "2013-07-30",
       "tags": [
@@ -395,7 +395,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/running-specs-from-vim",
+      "canonical": "https://thoughtbot.com/blog/running-specs-from-vim",
       "id": "run-tests-vim",
       "published": "2013-08-05",
       "redirects": [
@@ -410,7 +410,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/wrap-existing-text-at-80-characters-in-vim",
+      "canonical": "https://thoughtbot.com/blog/wrap-existing-text-at-80-characters-in-vim",
       "id": "wrap-text-in-vim",
       "published": "2013-04-07",
       "redirects": [
@@ -425,7 +425,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/sort-lines-alphabetically-in-vim",
+      "canonical": "https://thoughtbot.com/blog/sort-lines-alphabetically-in-vim",
       "id": "sort-lines-in-vim",
       "published": "2013-02-01",
       "redirects": [
@@ -440,7 +440,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/delivering-all-email-from-staging-to-a-group-email",
+      "canonical": "https://thoughtbot.com/blog/delivering-all-email-from-staging-to-a-group-email",
       "id": "intercept-email-from-staging",
       "published": "2013-01-18",
       "tags": [
@@ -452,7 +452,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/four-phase-test",
+      "canonical": "https://thoughtbot.com/blog/four-phase-test",
       "id": "four-phase-test",
       "published": "2012-09-28",
       "tags": [
@@ -476,7 +476,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/how-to-back-up-a-heroku-production-database-to-staging",
+      "canonical": "https://thoughtbot.com/blog/how-to-back-up-a-heroku-production-database-to-staging",
       "id": "back-up-restore-heroku-postgres-databases",
       "published": "2011-08-18",
       "redirects": [
@@ -491,7 +491,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/rubys-pessimistic-operator",
+      "canonical": "https://thoughtbot.com/blog/rubys-pessimistic-operator",
       "id": "pessimistic-operator-ruby",
       "published": "2010-12-29",
       "redirects": [
@@ -505,7 +505,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/testing-failure",
+      "canonical": "https://thoughtbot.com/blog/testing-failure",
       "id": "test-http-errors-ruby",
       "published": "2009-09-06",
       "redirects": [
@@ -520,7 +520,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/mystery-guest",
+      "canonical": "https://thoughtbot.com/blog/mystery-guest",
       "id": "mystery-guest",
       "published": "2009-07-28",
       "tags": [
@@ -532,7 +532,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/clearance-rails-authentication-with-email-and-password",
+      "canonical": "https://thoughtbot.com/blog/clearance-rails-authentication-with-email-and-password",
       "id": "rails-authentication-with-clearance",
       "published": "2009-02-09",
       "tags": [
@@ -543,7 +543,7 @@
       "author_ids": [
         "croaky"
       ],
-      "canonical": "https://robots.thoughtbot.com/suspenders",
+      "canonical": "https://thoughtbot.com/blog/suspenders",
       "id": "start-a-rails-project-with-suspenders",
       "published": "2008-10-21",
       "redirects": [

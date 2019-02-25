@@ -71,5 +71,5 @@ end
 Newlines separate the setup, exercise, and verification phases.
 The test is flat; it does not use a context block.
 
-[test spies]: https://robots.thoughtbot.com/spy-vs-spy
+[test spies]: https://thoughtbot.com/blog/spy-vs-spy
 [Four-Phase Test]: four-phase-test
