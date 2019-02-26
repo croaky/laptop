@@ -46,18 +46,17 @@ asdf_plugin_update() {
 }
 
 asdf_plugin_update "go" "https://github.com/kennyp/asdf-golang"
-asdf install go 1.10
+asdf install go 1.11.5
 
 asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
-asdf install nodejs 8.9.0
+asdf install nodejs 11.10.0
 
 asdf_plugin_update "python" "https://github.com/tuvistavie/asdf-python.git"
 asdf install python 3.6.5
 
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
-asdf install ruby 2.4.2
-asdf install ruby 2.5.1
+asdf install ruby 2.6.1
 ```
 
 Node has a special case:
