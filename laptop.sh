@@ -102,14 +102,6 @@ brew cleanup
     done
   )
 
-  mkdir -p "$HOME/.git_template/hooks"
-  (
-    cd git/git_template
-    for f in hooks/*; do
-      ln -sf "$PWD/$f" "$HOME/.git_template/$f"
-    done
-  )
-
   ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
   ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
   ln -sf "$PWD/git/gitmessage" "$HOME/.gitmessage"
