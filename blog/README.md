@@ -5,15 +5,15 @@ Blog posts on software engineering.
 ## Workflow
 
 ```
-./gen article example-article
+./genblog article example-article
 $EDITOR articles/example-article.md
-./gen serve
+./genblog serve
 ```
 
 Preview at <http://localhost:2000>.
-Configure in `gen.json`.
+Configure in `config.json`.
 See [Editorial Calendar][cal]
 and [publishing instructions][publish].
 
 [cal]: https://github.com/statusok/statusok/projects/3?fullscreen=true
-[publish]: ../gen#publish
+[publish]: ../genblog#publish
