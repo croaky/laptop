@@ -70,7 +70,7 @@ brew "shellcheck"
 brew "tflint"
 brew "the_silver_searcher"
 brew "tmux"
-brew "vim", args: ["without-ruby"]
+brew "vim"
 brew "watch"
 brew "watchman"
 brew "yarn"
