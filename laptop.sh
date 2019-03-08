@@ -74,7 +74,6 @@ brew "tmux"
 brew "vim"
 brew "watch"
 brew "watchman"
-brew "yarn"
 brew "zsh"
 
 cask "aws-vault"
