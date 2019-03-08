@@ -49,6 +49,7 @@ fi
 
 brew update
 brew bundle --file=- <<EOF
+tap "heroku/brew"
 tap "homebrew/services"
 tap "wata727/tflint"
 
