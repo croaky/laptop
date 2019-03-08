@@ -5,6 +5,7 @@
 .DS_Store
 .bundle
 .vs
+coverage
 dist
 node_modules
 public
