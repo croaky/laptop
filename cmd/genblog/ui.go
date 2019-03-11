@@ -60,7 +60,7 @@ func indexFeed(w io.Writer, blog *Blog) {
 		feed.Items[i] = item
 	}
 
-	must(json.NewEncoder(w).Encode(&feed))
+	check(json.NewEncoder(w).Encode(&feed))
 }
 
 var indexPage = template.Must(template.New("index").Parse(`<!DOCTYPE html>

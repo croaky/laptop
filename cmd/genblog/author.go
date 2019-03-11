@@ -22,7 +22,7 @@ func NewAuthor() Author {
 // NewAuthorIDs constructs a new author ID and name
 func NewAuthorIDs() (id, name string) {
 	u, err := user.Current()
-	must(err)
+	check(err)
 	if u.Name == "" {
 		name = "Your Name"
 	} else {

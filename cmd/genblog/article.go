@@ -50,20 +50,20 @@ func CreateArticle(id string, blog *Blog) {
 	}
 
 	f, err := os.Create(blog.articlesDir() + "/" + id + ".md")
-	must(err)
+	check(err)
 	defer f.Close()
 
 	_, err = f.WriteString("# " + toTitle(id) + "\n\n\n")
-	must(err)
+	check(err)
 	f.Sync()
 }
 
 // Build templatizes article to a file on disk in public/
 func (a *Article) Build(blog *Blog) {
 	f, err := os.Create(a.publicPath())
-	must(err)
+	check(err)
 	a.Blog = blog
-	must(articlePage.Execute(f, a))
+	check(articlePage.Execute(f, a))
 }
 
 // Serve templatizes article to an HTTP respose
@@ -72,7 +72,7 @@ func (a *Article) Serve(w http.ResponseWriter, blog *Blog) {
 		fmt.Fprintf(w, "404")
 	} else {
 		a.Blog = blog
-		must(articlePage.Execute(w, a))
+		check(articlePage.Execute(w, a))
 	}
 }
 

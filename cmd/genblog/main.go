@@ -50,7 +50,7 @@ func main() {
 
 func currentBlog() *Blog {
 	dir, err := os.Getwd()
-	must(err)
+	check(err)
 	blog := &Blog{RootDir: dir}
 	blog.loadConfig()
 	return blog
@@ -66,3 +66,9 @@ const usageString = `usage:
   genblog serve
   genblog build
 `
+
+func check(err error) {
+	if err != nil {
+		panic(err)
+	}
+}

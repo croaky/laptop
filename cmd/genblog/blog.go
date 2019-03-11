@@ -23,14 +23,14 @@ type Blog struct {
 
 // Build HTML for the blog.
 func (blog *Blog) Build() {
-	must(os.MkdirAll(blog.RootDir+"/public/tags", os.ModePerm))
+	check(os.MkdirAll(blog.RootDir+"/public/tags", os.ModePerm))
 
 	f, err := os.Create("public/index.html")
-	must(err)
-	must(indexPage.Execute(f, blog))
+	check(err)
+	check(indexPage.Execute(f, blog))
 
 	f, err = os.Create("public/feed.json")
-	must(err)
+	check(err)
 	indexFeed(f, blog)
 
 	for _, a := range blog.Articles {
@@ -42,8 +42,8 @@ func (blog *Blog) Build() {
 		tag.Build()
 	}
 
-	must(blog.createRedirects())
-	must(blog.createHeaders())
+	check(blog.createRedirects())
+	check(blog.createHeaders())
 }
 
 // Serve the blog over HTTP
@@ -70,14 +70,14 @@ func (blog *Blog) Tags() map[string]int {
 
 func (blog *Blog) loadConfig() {
 	config, err := ioutil.ReadFile(blog.RootDir + "/config.json")
-	must(err)
-	must(json.Unmarshal(config, &blog))
+	check(err)
+	check(json.Unmarshal(config, &blog))
 }
 
 func (blog *Blog) writeConfig() {
 	config, err := json.MarshalIndent(blog, "", "  ")
-	must(err)
-	must(ioutil.WriteFile(blog.RootDir+"/config.json", config, 0644))
+	check(err)
+	check(ioutil.WriteFile(blog.RootDir+"/config.json", config, 0644))
 }
 
 func (blog *Blog) handler(w http.ResponseWriter, r *http.Request) {
@@ -92,7 +92,7 @@ func (blog *Blog) handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("X-XSS-Protection", "1; mode=block")
 	switch {
 	case r.URL.Path == "/":
-		must(indexPage.Execute(w, blog))
+		check(indexPage.Execute(w, blog))
 	case r.URL.Path == "/feed.json":
 		indexFeed(w, blog)
 	case r.URL.Path == "/favicon.ico":
@@ -100,7 +100,7 @@ func (blog *Blog) handler(w http.ResponseWriter, r *http.Request) {
 	case strings.HasPrefix(r.URL.Path, "/tags/"):
 		_, name := path.Split(r.URL.Path)
 		tag := Tag{Name: name, Blog: blog}
-		must(tagPage.Execute(w, &tag))
+		check(tagPage.Execute(w, &tag))
 	case strings.HasPrefix(r.URL.Path, "/images/"):
 		_, filename := path.Split(r.URL.Path)
 		image := blog.RootDir + "/public/images/" + filename
@@ -136,7 +136,7 @@ func (blog *Blog) findArticle(id string) Article {
 
 func (blog *Blog) createRedirects() error {
 	f, err := os.Create(blog.RootDir + "/public/_redirects")
-	must(err)
+	check(err)
 
 	tmpl := template.Must(
 		template.
@@ -153,7 +153,7 @@ func (blog *Blog) createRedirects() error {
 
 func (blog *Blog) createHeaders() error {
 	f, err := os.Create(blog.RootDir + "/public/_headers")
-	must(err)
+	check(err)
 
 	tmpl := template.Must(
 		template.

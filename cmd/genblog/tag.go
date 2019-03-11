@@ -25,8 +25,8 @@ func (t *Tag) Articles() []Article {
 // Build templatizes tag to a file on disk in public/
 func (t *Tag) Build() {
 	f, err := os.Create(t.publicPath())
-	must(err)
-	must(tagPage.Execute(f, t))
+	check(err)
+	check(tagPage.Execute(f, t))
 }
 
 func (t *Tag) publicPath() string {
