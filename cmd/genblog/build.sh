@@ -9,7 +9,7 @@ cd "$OK/cmd/genblog"
 GOOS=linux GOARCH=amd64 go build -o template/bin/linux .
 GOOS=darwin GOARCH=amd64 go build -o template/bin/mac .
 
-cp README.md blog
+cp README.md template
 
 line_number() {
   grep -n "$1" template/README.md | cut -f1 -d:
