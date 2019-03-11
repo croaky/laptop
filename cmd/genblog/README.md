@@ -24,7 +24,7 @@ See [example blog](https://www.statusok.com).
 
 ## Create a blog
 
-Download the [project template](blog):
+Download the project template:
 
 ```
 curl -sL https://github.com/statusok/statusok/releases/download/genblog-v0.0.7/blog.tar.gz | tar xvz
@@ -169,5 +169,5 @@ and [MIT License][license].
 
 [releases]: https://github.com/statusok/statusok/releases
 [issues]: https://github.com/statusok/statusok/issues
-[contrib]: CONTRIBUTING.md
-[license]: ../LICENSE
+[contrib]: https://github.com/statusok/statusok/blob/master/cmd/genblog/CONTRIBUTING.md
+[license]: https://github.com/statusok/statusok/blob/master/LICENSE
