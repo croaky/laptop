@@ -57,15 +57,14 @@ func currentBlog() *Blog {
 }
 
 func usage() {
-	fmt.Fprint(os.Stderr, usageString)
-	os.Exit(2)
-}
-
-const usageString = `usage:
+	const s = `usage:
   genblog article <article-url-slug>
   genblog serve
   genblog build
 `
+	fmt.Fprint(os.Stderr, s)
+	os.Exit(2)
+}
 
 func check(err error) {
 	if err != nil {
