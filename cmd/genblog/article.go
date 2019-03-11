@@ -9,6 +9,8 @@ import (
 	"os"
 	"strings"
 	"time"
+
+	"github.com/russross/blackfriday"
 )
 
 // Article contains article data
@@ -53,7 +55,11 @@ func CreateArticle(id string, blog *Blog) {
 	check(err)
 	defer f.Close()
 
-	_, err = f.WriteString("# " + toTitle(id) + "\n\n\n")
+	noDashes := strings.Replace(id, "-", " ", -1)
+	noUnderscores := strings.Replace(noDashes, "_", " ", -1)
+	title := strings.Title(noUnderscores)
+
+	_, err = f.WriteString("# " + title + "\n\n\n")
 	check(err)
 	f.Sync()
 }
@@ -83,8 +89,18 @@ func (a *Article) Title() string {
 
 // Body is the HTML for the body text of the article, minus the Title
 func (a *Article) Body() template.HTML {
-	bodyWithoutTitle := a.input()[a.indexFirstLineBreak():]
-	return template.HTML(renderMarkdown(bodyWithoutTitle))
+	renderer := blackfriday.HtmlRenderer(0, "", "")
+	extensions := 0 |
+		blackfriday.EXTENSION_AUTOLINK |
+		blackfriday.EXTENSION_AUTO_HEADER_IDS |
+		blackfriday.EXTENSION_FENCED_CODE |
+		blackfriday.EXTENSION_NO_INTRA_EMPHASIS |
+		blackfriday.EXTENSION_SPACE_HEADERS |
+		blackfriday.EXTENSION_STRIKETHROUGH |
+		blackfriday.EXTENSION_TABLES
+	body := a.input()[a.indexFirstLineBreak():]
+	markdown := blackfriday.Markdown(body, renderer, extensions)
+	return template.HTML(markdown)
 }
 
 // Authors is a slice of Author structs
