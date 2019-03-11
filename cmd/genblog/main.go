@@ -22,10 +22,16 @@ import (
 	"os"
 )
 
+var wd string
+
 func main() {
 	if len(os.Args) < 2 {
 		usage()
 	}
+	var err error
+	wd, err = os.Getwd()
+	check(err)
+
 	blog := currentBlog()
 	switch os.Args[1] {
 	case "article":
