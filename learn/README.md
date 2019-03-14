@@ -19,6 +19,11 @@ links to tutorials on topics of interest.
 [centre]: https://www.centre.io/pdfs/centre-whitepaper.pdf
 [circle-stable]: https://itunes.apple.com/us/podcast/unchained-big-ideas-from-worlds-blockchain-cryptocurrency/id1123922160?mt=2&i=1000415531864#
 
+## Framer
+
+* [Framer Session 1](https://www.youtube.com/watch?v=newDr53TdT8)
+* [Framer Session 2](https://www.youtube.com/watch?v=v01SijCjhII)
+
 ## Go
 
 * [Go services patterns][servpat]
