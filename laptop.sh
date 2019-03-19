@@ -135,9 +135,9 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
-gover="1.12"
+gover="1.12.1"
 if ! go version | grep -Fq "$gover"; then
-  rm -rf /usr/local/go
+  sudo rm -rf /usr/local/go
   curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
     sudo tar xz -C /usr/local
 fi
