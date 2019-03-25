@@ -86,7 +86,8 @@ autoload -U compinit
 compinit
 
 # Configure Go
-export GOPATH="$HOME"
+export GO111MODULE=on
+export GOPATH="$HOME/go"
 PATH="$GOPATH/bin:$PATH"
 PATH="/usr/local/go/bin:$PATH"
 
@@ -97,10 +98,10 @@ export CGO_LDFLAGS_ALLOW='-fstack-protector'
 PATH="$HOME/.cargo/bin:$PATH"
 
 # Set environment variables for monorepos
-export OK="$HOME/src/statusok"
-export I10R="$HOME/src/i10r.io"
-export ROOSTER="$HOME/src/rooster"
-export UP="$HOME/src/i10r.io"
+export OK="$GOPATH/src/statusok"
+export I10R="$HOME/i10r.io"
+export ROOSTER="$GOPATH/src/rooster"
+export UP="$I10R"
 
 # Set environment variable for localhost TLS certificate authority file
 # https://github.com/FiloSottile/mkcert
