@@ -44,6 +44,9 @@ endfunction
 
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
+" Use godef instead of guru
+let g:go_def_mode = 'godef'
+
 " Syntax highlight additional tokens
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
