@@ -98,7 +98,7 @@ export CGO_LDFLAGS_ALLOW='-fstack-protector'
 PATH="$HOME/.cargo/bin:$PATH"
 
 # Set environment variables for monorepos
-export OK="$GOPATH/src/statusok"
+export OK="$HOME/statusok"
 export I10R="$HOME/i10r.io"
 export ROOSTER="$GOPATH/src/rooster"
 export UP="$I10R"

@@ -32,7 +32,7 @@ We write a `README.md`:
 Add to your shell profile:
 
   # Set environment variable to monorepo path
-  export ORG="$GOPATH/src/org"
+  export ORG="$HOME/org"
 
   # Prepend monorepo scripts
   export PATH="$ORG/bin:$PATH"

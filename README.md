@@ -3,7 +3,7 @@
 Clone onto laptop:
 
 ```
-export OK="$GOPATH/src/statusok"
+export OK="$HOME/statusok"
 git clone https://github.com/statusok/statusok.git $OK
 cd $OK
 ```

@@ -15,7 +15,7 @@ Fork the repo. Clone the project into your
 [Go work environment](http://golang.org/doc/code.html).
 
 ```
-export OK="$GOPATH/src/statusok"
+export OK="$HOME/statusok"
 git clone https://github.com/statusok/statusok.git $OK
 cd $OK/cmd/genblog
 go get -t -d -v ./...
