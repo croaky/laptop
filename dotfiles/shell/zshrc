@@ -100,8 +100,8 @@ PATH="$HOME/.cargo/bin:$PATH"
 # Set environment variables for monorepos
 export OK="$HOME/statusok"
 export I10R="$HOME/i10r.io"
+export POGO="$HOME/pogo"
 export ROOSTER="$GOPATH/src/rooster"
-export UP="$I10R"
 
 # Set environment variable for localhost TLS certificate authority file
 # https://github.com/FiloSottile/mkcert
@@ -113,6 +113,7 @@ export CDPATH="$CDPATH:$I10R:$OK:$ROOSTER:$GOPATH/src/github.com"
 # Prepend monorepo scripts
 PATH="$OK/bin:$PATH"
 PATH="$I10R/bin:$PATH"
+PATH="$POGO/bin:$PATH"
 PATH="$ROOSTER/bin:$PATH"
 
 # Prepend Homebrew binaries
