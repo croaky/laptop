@@ -10,10 +10,7 @@ tr -d '\r' < /tmp/adblock > /tmp/etchosts
 
 # Add /etc/hosts overrides
 echo '# MacOS default
-255.255.255.255 broadcasthost
-
-# Sequence
-127.0.0.1  chain.localhost test.chain.localhost' >> /tmp/etchosts
+255.255.255.255 broadcasthost' >> /tmp/etchosts
 
 # Update /etc/hosts
 sudo mv /tmp/etchosts /etc/hosts
