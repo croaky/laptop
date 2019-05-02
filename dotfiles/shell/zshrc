@@ -91,9 +91,6 @@ export GOPATH="$HOME/go"
 PATH="$GOPATH/bin:$PATH"
 PATH="/usr/local/go/bin:$PATH"
 
-# https://github.com/golang/go/wiki/InvalidFlag
-export CGO_LDFLAGS_ALLOW='-fstack-protector'
-
 # Configure Rust
 PATH="$HOME/.cargo/bin:$PATH"
 
