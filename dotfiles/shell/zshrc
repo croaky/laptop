@@ -7,14 +7,14 @@ alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias mkdir="mkdir -p"
 alias path='echo $PATH | tr -s ":" "\n"'
 
-# Clone a Git repo into Go-compatible directory structure.
 # clone https://github.com/statusok/statusok
+# clones the repo to $HOME/src/github.com/statusok/statusok
 function clone() {
   host=$(echo "$1" | cut -d / -f 3)
   user=$(echo "$1" | cut -d / -f 4)
   repo=$(echo "$1" | cut -d / -f 5)
 
-  cd "$GOPATH/src/$host" || exit
+  cd "$HOME/src/$host" || exit
   mkdir -p "$user"
   cd "$user" || exit
   git clone "git@$host:$user/$repo".git
