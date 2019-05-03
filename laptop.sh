@@ -47,6 +47,7 @@ if ! command -v brew >/dev/null; then
   export PATH="/usr/local/bin:$PATH"
 fi
 
+brew analytics off
 brew update
 brew bundle --file=- <<EOF
 tap "heroku/brew"

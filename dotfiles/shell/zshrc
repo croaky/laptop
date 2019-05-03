@@ -56,6 +56,9 @@ HISTFILE=~/.zhistory
 HISTSIZE=4096
 SAVEHIST=4096
 
+# Disable Homebrew analytics https://docs.brew.sh/Analytics
+unset HOMEBREW_NO_ANALYTICS
+
 # fzf for finding files, ag for searching files
 if [ -d /usr/local/opt/fzf/shell ]; then
   source "/usr/local/opt/fzf/shell/completion.zsh"
