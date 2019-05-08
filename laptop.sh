@@ -136,7 +136,7 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
-gover="1.12.1"
+gover="1.12.5"
 if ! go version | grep -Fq "$gover"; then
   sudo rm -rf /usr/local/go
   curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
@@ -169,12 +169,10 @@ asdf_plugin_update() {
 
 asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
-asdf install nodejs 11.5.0
+asdf install nodejs 12.2.0
+asdf global nodejs 12.2.0
 asdf reshim nodejs
 npm config set scripts-prepend-node-path true
-
-asdf_plugin_update "python" "https://github.com/tuvistavie/asdf-python.git"
-asdf install python 3.6.5
 
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf install ruby 2.6.1
