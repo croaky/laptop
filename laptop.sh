@@ -52,7 +52,6 @@ brew update
 brew bundle --file=- <<EOF
 tap "heroku/brew"
 tap "homebrew/services"
-tap "wata727/tflint"
 
 brew "awscli"
 brew "fzf"
@@ -60,16 +59,13 @@ brew "git"
 brew "git-lfs"
 brew "heroku"
 brew "hub"
-brew "imagemagick"
 brew "jq"
 brew "libyaml"
 brew "openssl"
 brew "postgresql", restart_service: :changed
 brew "protobuf"
 brew "reattach-to-user-namespace"
-brew "redis", restart_service: :changed
 brew "shellcheck"
-brew "tflint"
 brew "the_silver_searcher"
 brew "tmux"
 brew "vim"
@@ -79,8 +75,6 @@ brew "zsh"
 
 cask "aws-vault"
 cask "kitty"
-cask "graphiql"
-cask "kap"
 cask "ngrok"
 EOF
 
