@@ -8,6 +8,14 @@ curl -s http://winhelp2002.mvps.org/hosts.txt > /tmp/adblock
 # Re-write Windows to Unix line endings
 tr -d '\r' < /tmp/adblock > /tmp/etchosts
 
+comment() {
+  replace "0.0.0.0 $1" "# 0.0.0.0 $1" /tmp/etchosts
+}
+
+# Comment used ads platforms
+comment 'static.ads-twitter.com'
+comment 'ads.twitter.com'
+
 # Add /etc/hosts overrides
 echo '# MacOS default
 255.255.255.255 broadcasthost' >> /tmp/etchosts
