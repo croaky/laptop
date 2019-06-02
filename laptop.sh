@@ -98,6 +98,9 @@ brew cleanup
     done
   )
 
+  mkdir -p "$HOME/.config/nvim"
+  ln -sf "$PWD/editor/nvim/init.vim" "$HOME/.config/nvim/init.vim"
+
   ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
   ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
   ln -sf "$PWD/git/gitmessage" "$HOME/.gitmessage"

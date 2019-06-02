@@ -48,6 +48,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align'
   Plug 'leafgarland/typescript-vim'
   Plug 'mxw/vim-jsx'
+  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
   Plug 'nicholaides/words-to-avoid.vim'
   Plug 'pangloss/vim-javascript'
   Plug 'pbrisbin/vim-mkdir'
