@@ -39,12 +39,13 @@ let g:ale_completion_enabled = 1
 let g:plug_window='enew'
 
 call plug#begin('~/.vim/plugged')
-  Plug '/usr/local/opt/fzf'
+  Plug '/usr/local/opt/fzf' " binary installed via Homebrew
+  Plug 'junegunn/fzf.vim'   " plugin to add :Files and :Ag commands
+
   Plug 'AndrewRadev/splitjoin.vim'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'hashivim/vim-terraform'
   Plug 'janko-m/vim-test'
-  Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'
   Plug 'leafgarland/typescript-vim'
   Plug 'mxw/vim-jsx'
