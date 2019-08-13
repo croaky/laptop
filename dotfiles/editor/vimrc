@@ -45,6 +45,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'   " plugin to add :Files and :Ag commands
 
   Plug 'AndrewRadev/splitjoin.vim'
+  Plug 'dense-analysis/ale'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'hashivim/vim-terraform'
   Plug 'janko-m/vim-test'
@@ -54,14 +55,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'nicholaides/words-to-avoid.vim'
   Plug 'pangloss/vim-javascript'
   Plug 'pbrisbin/vim-mkdir'
+  Plug 'tomtom/tcomment_vim'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-projectionist'
   Plug 'tpope/vim-rails'
   Plug 'vim-ruby/vim-ruby'
-  Plug 'tomtom/tcomment_vim'
-  Plug 'w0rp/ale'
 call plug#end()
 
 " When reading a buffer, jump to last known cursor position except for
