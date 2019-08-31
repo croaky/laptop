@@ -4,6 +4,7 @@
 *.sw[nop]
 .DS_Store
 .bundle
+.exercism
 .ignore
 .vs
 coverage
