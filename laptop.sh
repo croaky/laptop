@@ -65,6 +65,7 @@ brew "libyaml"
 brew "openssl"
 brew "postgresql", restart_service: :changed
 brew "protobuf"
+brew "r"
 brew "reattach-to-user-namespace"
 brew "shellcheck"
 brew "the_silver_searcher"
@@ -77,6 +78,7 @@ brew "zsh"
 cask "aws-vault"
 cask "kitty"
 cask "ngrok"
+cask "rstudio"
 EOF
 
 brew upgrade
