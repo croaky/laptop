@@ -134,19 +134,6 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
-gover="1.12.5"
-if ! go version | grep -Fq "$gover"; then
-  sudo rm -rf /usr/local/go
-  curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
-    sudo tar xz -C /usr/local
-fi
-
-if ! command -v rustc >/dev/null; then
-  curl https://sh.rustup.rs -sSf | sh
-else
-  rustc --version
-fi
-
 if [ -d "$HOME/.asdf" ]; then
   (
     cd "$HOME/.asdf"
@@ -165,6 +152,15 @@ asdf_plugin_update() {
   asdf plugin-update "$1"
 }
 
+# Go
+gover="1.12.9"
+if ! go version | grep -Fq "$gover"; then
+  sudo rm -rf /usr/local/go
+  curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
+    sudo tar xz -C /usr/local
+fi
+
+# Node
 asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
 asdf install nodejs 12.2.0
@@ -172,5 +168,13 @@ asdf global nodejs 12.2.0
 asdf reshim nodejs
 npm config set scripts-prepend-node-path true
 
+# Ruby
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf install ruby 2.6.1
+
+# Rust
+if ! command -v rustc >/dev/null; then
+  curl https://sh.rustup.rs -sSf | sh
+else
+  rustc --version
+fi
