@@ -1,7 +1,5 @@
-let g:go_fmt_command = "goimports"
-let g:go_fmt_options = {
-      \ "goimports": "-local chain",
-      \ }
+" $OK/bin/goimportslocal
+let g:go_fmt_command = "goimportslocal"
 
 setlocal listchars=tab:\ \ ,trail:·,nbsp:·
 setlocal noexpandtab
