@@ -12,9 +12,9 @@ comment() {
   replace "0.0.0.0 $1" "# 0.0.0.0 $1" /tmp/etchosts
 }
 
-# Comment used ads platforms
-comment 'static.ads-twitter.com'
-comment 'ads.twitter.com'
+# Comment-out any used ads platforms
+# comment 'static.ads-twitter.com'
+# comment 'ads.twitter.com'
 
 # Add /etc/hosts overrides
 echo '# MacOS default
