@@ -171,10 +171,3 @@ npm config set scripts-prepend-node-path true
 # Ruby
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf install ruby 2.6.1
-
-# Rust
-if ! command -v rustc >/dev/null; then
-  curl https://sh.rustup.rs -sSf | sh
-else
-  rustc --version
-fi
