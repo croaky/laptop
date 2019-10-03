@@ -171,3 +171,8 @@ npm config set scripts-prepend-node-path true
 # Ruby
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf install ruby 2.6.1
+
+# SF Mono
+if ! echo ~/Library/Fonts/SFMono* > /dev/null; then
+  cp -R /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/. ~/Library/Fonts/
+fi
