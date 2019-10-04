@@ -4,6 +4,13 @@
       "author_ids": [
         "croaky"
       ],
+      "id": "example",
+      "published": "2019-10-04"
+    },
+    {
+      "author_ids": [
+        "croaky"
+      ],
       "id": "configure-and-use-tmux",
       "published": "2010-12-10",
       "redirects": [
@@ -264,12 +271,12 @@
       "canonical": "https://thoughtbot.com/blog/how-to-reduce-a-large-heroku-compiled-slug-size",
       "id": "reduce-heroku-slug-size",
       "published": "2016-06-13",
-      "tags": [
-        "infra"
-      ],
       "redirects": [
         "/keep-a-github-fork-updated",
         "/reduce-a-large-heroku-compiled-slug-size"
+      ],
+      "tags": [
+        "infra"
       ]
     },
     {

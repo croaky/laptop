@@ -14,7 +14,6 @@ A static blog generator featuring:
 * "Last updated" timestamp
 * Redirects
 * `rel=canonical` tags
-* "Edit this article" footer links
 * Single theme
 * Responsive design
 * PageSpeed Insights performance score of 100
