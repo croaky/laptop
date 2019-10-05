@@ -6,9 +6,9 @@ set -e
 
 cd "$OK/cmd/genblog"
 
+# Generated binaries and README are ignored by Git.
 GOOS=linux GOARCH=amd64 go build -o template/bin/linux .
 GOOS=darwin GOARCH=amd64 go build -o template/bin/mac .
-
 cp README.md template
 
 line_number() {
