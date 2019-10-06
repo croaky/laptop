@@ -1,4 +1,4 @@
-module github.com/statusok/statusok
+module statusok
 
 go 1.13
 
