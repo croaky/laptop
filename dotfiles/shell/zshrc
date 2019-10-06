@@ -89,9 +89,6 @@ autoload -U compinit
 compinit
 
 # Configure Go
-export GO111MODULE=on
-export GOPATH="$HOME/go"
-PATH="$GOPATH/bin:$PATH"
 PATH="/usr/local/go/bin:$PATH"
 
 # Set environment variables for monorepos
