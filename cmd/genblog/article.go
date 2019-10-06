@@ -89,17 +89,8 @@ func (a *Article) Title() string {
 
 // Body is the HTML for the body text of the article, minus the Title
 func (a *Article) Body() template.HTML {
-	renderer := blackfriday.HtmlRenderer(0, "", "")
-	extensions := 0 |
-		blackfriday.EXTENSION_AUTOLINK |
-		blackfriday.EXTENSION_AUTO_HEADER_IDS |
-		blackfriday.EXTENSION_FENCED_CODE |
-		blackfriday.EXTENSION_NO_INTRA_EMPHASIS |
-		blackfriday.EXTENSION_SPACE_HEADERS |
-		blackfriday.EXTENSION_STRIKETHROUGH |
-		blackfriday.EXTENSION_TABLES
 	body := a.input()[a.indexFirstLineBreak():]
-	markdown := blackfriday.Markdown(body, renderer, extensions)
+	markdown := blackfriday.Run(body)
 	return template.HTML(markdown)
 }
 
