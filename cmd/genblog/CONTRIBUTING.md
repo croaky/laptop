@@ -3,9 +3,9 @@
 Get a working [Go installation](http://golang.org/doc/install):
 
 ```
-gover="1.12"
+gover="1.13.1"
 if ! go version | grep -Fq "$gover"; then
-  rm -rf /usr/local/go
+  sudo rm -rf /usr/local/go
   curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
     sudo tar xz -C /usr/local
 fi
