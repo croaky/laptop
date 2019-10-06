@@ -27,11 +27,11 @@ func (blog *Blog) Build() {
 
 	f, err := os.Create("public/index.html")
 	check(err)
-	check(indexPage.Execute(f, blog))
+	buildIndexPage(f, blog)
 
 	f, err = os.Create("public/feed.json")
 	check(err)
-	indexFeed(f, blog)
+	buildIndexFeed(f, blog)
 
 	for _, a := range blog.Articles {
 		a.Build(blog)
@@ -92,15 +92,15 @@ func (blog *Blog) handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("X-XSS-Protection", "1; mode=block")
 	switch {
 	case r.URL.Path == "/":
-		check(indexPage.Execute(w, blog))
+		buildIndexPage(w, blog)
 	case r.URL.Path == "/feed.json":
-		indexFeed(w, blog)
+		buildIndexFeed(w, blog)
 	case r.URL.Path == "/favicon.ico":
 		// no-op
 	case strings.HasPrefix(r.URL.Path, "/tags/"):
 		_, name := path.Split(r.URL.Path)
 		tag := Tag{Name: name, Blog: blog}
-		check(tagPage.Execute(w, &tag))
+		buildTagPage(w, &tag)
 	case strings.HasPrefix(r.URL.Path, "/images/"):
 		_, filename := path.Split(r.URL.Path)
 		image := blog.RootDir + "/public/images/" + filename

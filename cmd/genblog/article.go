@@ -69,7 +69,7 @@ func (a *Article) Build(blog *Blog) {
 	f, err := os.Create(a.publicPath())
 	check(err)
 	a.Blog = blog
-	check(articlePage.Execute(f, a))
+	buildArticlePage(f, a)
 }
 
 // Serve templatizes article to an HTTP respose
@@ -78,7 +78,7 @@ func (a *Article) Serve(w http.ResponseWriter, blog *Blog) {
 		fmt.Fprintf(w, "404")
 	} else {
 		a.Blog = blog
-		check(articlePage.Execute(w, a))
+		buildArticlePage(w, a)
 	}
 }
 

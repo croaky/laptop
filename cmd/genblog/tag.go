@@ -1,6 +1,8 @@
 package main
 
-import "os"
+import (
+	"os"
+)
 
 // Tag is a unique name for articles in a blog
 type Tag struct {
@@ -26,7 +28,7 @@ func (t *Tag) Articles() []Article {
 func (t *Tag) Build() {
 	f, err := os.Create(t.publicPath())
 	check(err)
-	check(tagPage.Execute(f, t))
+	buildTagPage(f, t)
 }
 
 func (t *Tag) publicPath() string {

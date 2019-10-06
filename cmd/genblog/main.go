@@ -22,16 +22,10 @@ import (
 	"os"
 )
 
-var wd string
-
 func main() {
 	if len(os.Args) < 2 {
 		usage()
 	}
-	var err error
-	wd, err = os.Getwd()
-	check(err)
-
 	blog := currentBlog()
 	switch os.Args[1] {
 	case "article":
@@ -42,11 +36,9 @@ func main() {
 		blog.writeConfig()
 		fmt.Println("genblog: Created article at ./articles/" + os.Args[2] + ".md")
 	case "serve":
-		blog := currentBlog()
 		fmt.Println("genblog: Serving blog at http://localhost:2000")
 		blog.Serve("2000")
 	case "build":
-		blog := currentBlog()
 		blog.Build()
 		fmt.Println("genblog: Built blog at ./public")
 	default:

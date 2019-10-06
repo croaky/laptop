@@ -10,11 +10,22 @@ import (
 	"github.com/kr/jsonfeed"
 )
 
-var indexPage = template.Must(template.ParseFiles(wd + "/ui/index.html"))
-var articlePage = template.Must(template.ParseFiles(wd + "/ui/article.html"))
-var tagPage = template.Must(template.ParseFiles(wd + "/ui/tag.html"))
+func buildIndexPage(w io.Writer, blog *Blog) {
+	page := template.Must(template.ParseFiles(blog.RootDir + "/ui/index.html"))
+	check(page.Execute(w, blog))
+}
 
-func indexFeed(w io.Writer, blog *Blog) {
+func buildArticlePage(w io.Writer, a *Article) {
+	page := template.Must(template.ParseFiles(a.Blog.RootDir + "/ui/article.html"))
+	check(page.Execute(w, a))
+}
+
+func buildTagPage(w io.Writer, t *Tag) {
+	page := template.Must(template.ParseFiles(t.Blog.RootDir + "/ui/tag.html"))
+	check(page.Execute(w, t))
+}
+
+func buildIndexFeed(w io.Writer, blog *Blog) {
 	feed := jsonfeed.Feed{
 		Title:       blog.Name,
 		HomePageURL: blog.URL,
