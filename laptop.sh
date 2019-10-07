@@ -1,12 +1,16 @@
 #!/bin/bash
 
-# This script can be run safely multiple times.
-# It's tested on macOS High Sierra (10.13). It:
-# - installs, upgrades, or skips system packages
-# - creates or updates symlinks from `$OK/dotfiles` to `$HOME`
-# - installs or updates programming languages such as Ruby, Node, and Go
+# ./laptop.sh
 
-set -ex
+# - installs system packages
+# - creates symlinks from `$OK/dotfiles` to `$HOME`
+# - installs programming language runtimes
+# - installs monospaced font
+
+# This script can be run safely multiple times.
+# It is tested on macOS Mojave (10.14).
+
+set -eux
 
 HOMEBREW_PREFIX="/usr/local"
 
@@ -163,8 +167,8 @@ fi
 # Node
 asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
-asdf install nodejs 12.2.0
-asdf global nodejs 12.2.0
+asdf install nodejs 12.3.1
+asdf global nodejs 12.3.1
 asdf reshim nodejs
 npm config set scripts-prepend-node-path true
 
