@@ -12,7 +12,8 @@ comment() {
   replace "0.0.0.0 $1" "# 0.0.0.0 $1" /tmp/etchosts
 }
 
-# Comment-out any used ads platforms
+# Comment-out used hosts
+comment 'api.segment.io'
 # comment 'static.ads-twitter.com'
 # comment 'ads.twitter.com'
 
