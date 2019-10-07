@@ -88,8 +88,8 @@ fi
 autoload -U compinit
 compinit
 
-# Configure Go
-PATH="/usr/local/go/bin:$PATH"
+# Prepend Go binaries
+PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 
 # Set environment variables for monorepos
 export OK="$HOME/statusok"
