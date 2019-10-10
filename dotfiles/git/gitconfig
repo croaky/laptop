@@ -13,11 +13,12 @@
 [commit]
   template = ~/.gitmessage
 [core]
-  excludesfile = ~/.gitignore
   autocrlf = input
+  excludesfile = ~/.gitignore
 [credential]
   helper = osxkeychain
 [diff]
+  noprefix = true
   tool = vimdiff
 [fetch]
   prune = true
@@ -25,8 +26,6 @@
   user = croaky
 [include]
   path = ~/.gitconfig.local
-[init]
-  templatedir = ~/.git_template
 [merge]
   ff = only
   tool = vimdiff
