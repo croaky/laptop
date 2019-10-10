@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.Blog.Name}}</title>
+  <link rel="alternate" href="feed.json" type="application/json" />
+  <style>
+    body {
+      color: #3c3c3c;
+      font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Droid Sans", "Ubuntu", sans-serif;
+      font-size: 16px;
+      line-height: 22px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a,
+    a:visited,
+    a:hover,
+    .index-article__link:hover {
+      border-bottom-color: #da393f;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      color: #3c3c3c;
+      text-decoration: none;
+      text-decoration-skip: ink;
+    }
+    a:hover {
+      color: #da393f;
+    }
+    .container {
+      margin: 1.5rem 1rem;
+      max-width: 700px;
+    }
+    @media all and (max-width: 575px) {
+      .container {
+        margin: 1rem 0;
+      }
+    }
+    main {
+      margin: 1.5rem 0;
+    }
+    nav .tags {
+      margin: 1.5rem 0 0.5rem 0;
+    }
+    .index-article {
+      margin: 1rem 0;
+    }
+    .index-article__link {
+      border-bottom: none;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 22px;
+      margin: 0;
+    }
+    .index-article__link:hover {
+      color: #3c3c3c;
+    }
+  </style>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+  <div class="container">
+    <nav>
+      {{.Blog.Name}}
+
+      {{- if .Tags }}
+        <div class="tags">
+          {{- range $index, $tag := .Tags }}
+            <a href="/tags/{{$tag}}">{{$tag}}</a>&nbsp;
+          {{- end }}
+        </div>
+      {{- end }}
+    </nav>
+
+    <main>
+      {{- range .Articles }}
+        <div class="index-article">
+          <a href="/{{.ID}}" class="index-article__link">
+            {{.Title}}
+          </a>
+
+          <div class="index-article__byline">
+            <time datetime="{{.LastUpdated}}" class="index-article__published-on">
+              {{.LastUpdatedIn}}
+            </time>
+          </div>
+        </div>
+      {{- end }}
+    <main>
+  </div>
+</body>
+</html>

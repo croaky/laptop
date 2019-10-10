@@ -1,9 +1,12 @@
 {
+  "blog": {
+    "name": "Status OK",
+    "source_url": "https://github.com/statusok/statusok/tree/master/blog",
+    "url": "https://www.statusok.com"
+  },
   "articles": [
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "configure-and-use-tmux",
       "published": "2010-12-10",
       "redirects": [
@@ -16,9 +19,7 @@
       "updated": "2018-11-12"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "spell-check-in-vim",
       "published": "2015-12-01",
       "redirects": [
@@ -32,9 +33,7 @@
       "updated": "2018-11-12"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "laptop-sh",
       "published": "2014-06-18",
       "redirects": [
@@ -47,9 +46,7 @@
       "updated": "2018-11-12"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/bin-setup",
       "id": "setup-sh",
       "published": "2013-01-25",
@@ -62,9 +59,7 @@
       "updated": "2018-11-12"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://medium.com/interstellar/monorepo-e1847cbd6800",
       "id": "monorepo",
       "published": "2018-11-01",
@@ -77,9 +72,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "process-model",
       "published": "2018-10-16",
       "tags": [
@@ -88,9 +81,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "gitignore",
       "published": "2018-06-21",
       "redirects": [
@@ -102,9 +93,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "email-amazon-ses-rails-ec2",
       "published": "2018-05-09",
       "tags": [
@@ -113,9 +102,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "asdf-version-manager",
       "published": "2018-05-07",
       "tags": [
@@ -127,9 +114,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "semantic-linefeeds",
       "published": "2018-05-03",
       "tags": [
@@ -138,9 +123,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "dns-cdn-origin",
       "published": "2014-08-08",
       "tags": [
@@ -150,9 +133,7 @@
       "updated": "2018-03-11"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "configuration-block-ruby",
       "published": "2010-01-20",
       "redirects": [
@@ -164,9 +145,7 @@
       "updated": "2018-02-19"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "cache-api-requests",
       "published": "2013-11-29",
       "tags": [
@@ -175,9 +154,7 @@
       "updated": "2018-02-18"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "authorization-rails-associations",
       "published": "2009-08-12",
       "redirects": [
@@ -189,9 +166,7 @@
       "updated": "2018-02-16"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/align-github-flavored-markdown-tables-in-vim",
       "id": "align-markdown-tables-in-vim",
       "published": "2016-06-15",
@@ -205,9 +180,7 @@
       "updated": "2018-01-29"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "start-a-react-native-project",
       "published": "2017-06-24",
       "redirects": [
@@ -221,9 +194,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "redirect-apex-domain-to-www",
       "published": "2017-03-21",
       "tags": [
@@ -231,9 +202,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/feature-branch-code-reviews",
       "id": "feature-branch-code-reviews",
       "published": "2011-01-19",
@@ -243,9 +212,7 @@
       "updated": "2017-02-01"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/keeping-a-github-fork-updated",
       "id": "update-a-github-fork",
       "published": "2011-05-02",
@@ -258,9 +225,7 @@
       "updated": "2017-02-01"
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/how-to-reduce-a-large-heroku-compiled-slug-size",
       "id": "reduce-heroku-slug-size",
       "published": "2016-06-13",
@@ -273,9 +238,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/create-a-retention-curve-with-mixpanel-and-google-sheets",
       "id": "retention-curves-mixpanel-google-sheets",
       "published": "2015-07-01",
@@ -287,9 +250,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/optimizing-full-text-search-with-postgres-tsvector-columns-and-triggers",
       "id": "postgres-full-text-search-tsvectors-triggers",
       "published": "2015-06-25",
@@ -302,9 +263,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "heroku-routing-errors-slack-papertrail",
       "published": "2015-04-21",
       "redirects": [
@@ -315,9 +274,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/a-closer-look-at-test-spies",
       "id": "test-spies-vs-mocks",
       "published": "2015-03-19",
@@ -327,10 +284,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky",
-        "frechg"
-      ],
+      "author": "Dan Croak and Galen Frechette",
       "canonical": "https://thoughtbot.com/blog/north-star-metric",
       "id": "north-star-metric",
       "published": "2014-12-25",
@@ -339,9 +293,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/ssl-for-rails-with-heroku-and-dnsimple",
       "id": "enforce-ssl-with-heroku-and-dnsimple",
       "published": "2014-05-21",
@@ -350,9 +302,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/using-polymorphism-to-make-a-better-activity-feed-in-rails",
       "id": "polymorphic-activity-feed-rails",
       "published": "2013-12-02",
@@ -364,9 +314,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/faster-grepping-in-vim",
       "id": "search-projects-in-vim",
       "published": "2013-11-27",
@@ -380,9 +328,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/how-to-create-postgres-indexes-concurrently-in",
       "id": "create-postgres-indexes-concurrently",
       "published": "2013-07-30",
@@ -392,9 +338,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/running-specs-from-vim",
       "id": "run-tests-vim",
       "published": "2013-08-05",
@@ -407,9 +351,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/wrap-existing-text-at-80-characters-in-vim",
       "id": "wrap-text-in-vim",
       "published": "2013-04-07",
@@ -422,9 +364,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/sort-lines-alphabetically-in-vim",
       "id": "sort-lines-in-vim",
       "published": "2013-02-01",
@@ -437,9 +377,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/delivering-all-email-from-staging-to-a-group-email",
       "id": "intercept-email-from-staging",
       "published": "2013-01-18",
@@ -449,9 +387,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/four-phase-test",
       "id": "four-phase-test",
       "published": "2012-09-28",
@@ -460,9 +396,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "id": "decorators-ruby",
       "published": "2011-12-26",
       "redirects": [
@@ -473,9 +407,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/how-to-back-up-a-heroku-production-database-to-staging",
       "id": "back-up-restore-heroku-postgres-databases",
       "published": "2011-08-18",
@@ -488,9 +420,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/rubys-pessimistic-operator",
       "id": "pessimistic-operator-ruby",
       "published": "2010-12-29",
@@ -502,9 +432,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/testing-failure",
       "id": "test-http-errors-ruby",
       "published": "2009-09-06",
@@ -517,9 +445,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/mystery-guest",
       "id": "mystery-guest",
       "published": "2009-07-28",
@@ -529,9 +455,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/clearance-rails-authentication-with-email-and-password",
       "id": "rails-authentication-with-clearance",
       "published": "2009-02-09",
@@ -540,9 +464,7 @@
       ]
     },
     {
-      "author_ids": [
-        "croaky"
-      ],
+      "author": "Dan Croak",
       "canonical": "https://thoughtbot.com/blog/suspenders",
       "id": "start-a-rails-project-with-suspenders",
       "published": "2008-10-21",
@@ -554,20 +476,5 @@
         "ruby"
       ]
     }
-  ],
-  "authors": [
-    {
-      "id": "croaky",
-      "name": "Dan Croak",
-      "url": "https://twitter.com/croaky"
-    },
-    {
-      "id": "frechg",
-      "name": "Galen Frechette",
-      "url": "http://galen.io"
-    }
-  ],
-  "name": "Status OK",
-  "source_url": "https://github.com/statusok/statusok/tree/master/blog",
-  "url": "https://www.statusok.com"
+  ]
 }

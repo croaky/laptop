@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Shim to architecture-specific binary
-# https://github.com/statusok/statusok/tree/master/genblog
+# https://github.com/statusok/genblog
 
 os="$(uname -s)"
 arch="$(uname -m)"
@@ -13,7 +13,7 @@ elif [[ "$os" == "Darwin" && "$arch" == "x86_64" ]]; then
 else
   echo "$os/$arch is not supported. If you have Go installed, run:"
   echo ""
-  echo "  go get github.com/statusok/statusok/genblog"
+  echo "  go get github.com/statusok/genblog"
   echo ""
-  echo "Otherwise, get help at https://github.com/statusok/statusok/issues"
+  echo "Otherwise, get help at https://github.com/statusok/genblog/issues"
 fi

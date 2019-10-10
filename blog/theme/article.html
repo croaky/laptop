@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.Article.Title}}</title>
+  <link rel="alternate" href="feed.json" type="application/json" />
+  {{- if .Article.Canonical }}
+  <link rel="canonical" href="{{.Article.Canonical}}">
+  {{- end }}
+  <style>
+    body {
+      color: #3c3c3c;
+      font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Droid Sans", "Ubuntu", sans-serif;
+      font-size: 16px;
+      line-height: 22px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a,
+    a:visited,
+    a:hover {
+      border-bottom-color: #da393f;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      color: #3c3c3c;
+      text-decoration: none;
+      text-decoration-skip: ink;
+    }
+    a:hover {
+      color: #da393f;
+    }
+    .container {
+      margin: 1.5rem 1rem;
+      max-width: 700px;
+    }
+    @media all and (max-width: 575px) {
+      .container {
+        margin: 1rem 0;
+      }
+    }
+    img {
+      max-width: 100%;
+    }
+    article {
+      margin: 1.5rem 0;
+    }
+    h2 {
+      margin: 1.5rem 0 1rem;
+    }
+    p,
+    ul {
+      margin: 1rem 0;
+    }
+    li {
+      margin: 0.5rem 0;
+    }
+    .lede {
+      margin: 20px 0;
+    }
+    .lede__headline {
+      font-size: 32px;
+      line-height: 38px;
+      margin: 0;
+    }
+    .lede__byline {
+      line-height: 22px;
+      margin: 5px 0;
+    }
+    .lede__author {
+      color: #3c3c3c;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    .lede__author a,
+    .lede__author a:visited {
+      font-weight: bold;
+      text-decoration: none;
+    }
+    pre {
+      background-color: #f7f7f7;
+      border-radius: 3px;
+      line-height: 1.5;
+      overflow-x: scroll;
+      padding: 10px;
+      word-wrap: normal;
+    }
+    code {
+      background-color: #f7f7f7;
+      font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+      font-size: 88%;
+      word-wrap: break-word;
+    }
+    :not(pre)>code {
+      margin: 0 0.05em;
+      padding: 3px 5px;
+    }
+  </style>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="/">
+        {{.Blog.Name}} &larr;
+      </a>
+    </nav>
+
+    <article>
+      <header class="lede">
+        <h1 class="lede__headline">
+          {{.Article.Title}}
+        </h1>
+
+        <div class="lede__byline">
+          <div class="lede__author">
+            {{.Article.Author}}
+          </div>
+
+          <time datetime="{{.Article.LastUpdated}}">
+            last updated {{.Article.LastUpdatedOn}}
+          </time>
+        </div>
+      </header>
+
+      {{.Article.Body}}
+    </article>
+  </div>
+</body>
+</html>
