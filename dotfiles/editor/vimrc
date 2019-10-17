@@ -44,7 +44,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'AndrewRadev/splitjoin.vim'
   Plug 'dense-analysis/ale'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-  Plug 'hashivim/vim-terraform'
   Plug 'janko-m/vim-test'
   Plug 'junegunn/vim-easy-align'
   Plug 'leafgarland/typescript-vim'
