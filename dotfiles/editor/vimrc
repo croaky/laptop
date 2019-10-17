@@ -34,9 +34,6 @@ if &compatible
   set nocompatible
 end
 
-" :help ale-completion
-let g:ale_completion_enabled = 1
-
 " Open vim-plug without a vertical split
 let g:plug_window='enew'
 
@@ -75,7 +72,7 @@ augroup lastcursorposition
     \ endif
 augroup END
 
-" ALE linting events
+" Lint
 augroup ale
   autocmd!
 
@@ -85,22 +82,9 @@ augroup ale
     \ let g:ale_lint_on_text_changed = 0
 augroup END
 
-" Use fzf for finding files
-nmap <C-p> :Files<CR>
-
-" Use ag for searching files
-nmap \ :Ag<SPACE>
-set grepprg=ag\ --nogroup\ --nocolor
-
-" Find references for word under cursor.
-" Override with Language Server Protocol for supported file types.
-noremap <buffer> <silent> fr :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
-set wildmode=list:longest,list:full
-function! InsertTabWrapper()
+" Tab complete
+let g:ale_completion_enabled = 1 " :help ale-completion
+function! InsertTabWrapper()      " tab at start of line, otherwise completion
   let col = col('.') - 1
   if !col || getline('.')[col - 1] !~ '\k'
     return "\<Tab>"
@@ -110,11 +94,23 @@ function! InsertTabWrapper()
 endfunction
 inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
 inoremap <S-Tab> <C-n>
+set wildmode=list:longest,list:full
+
+" Fuzzy-find files
+nmap <C-p> :Files<CR>
+
+" Search file contents
+nmap \ :Ag<SPACE>
+set grepprg=ag\ --nogroup\ --nocolor
+
+" Find references for word under cursor.
+" Override with Language Server Protocol for supported file types.
+noremap <buffer> <silent> fr :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Switch between the last two files
 nnoremap <leader><leader> <C-^>
 
-" vim-test mappings
+" Run tests
 nnoremap <silent> <Leader>t :TestFile<CR>
 nnoremap <silent> <Leader>s :TestNearest<CR>
 nnoremap <silent> <Leader>l :TestLast<CR>
@@ -122,10 +118,7 @@ nnoremap <silent> <Leader>l :TestLast<CR>
 " Test && Commit || Revert
 nnoremap <silent> <Leader>c :!clear && tcr<CR>
 
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
-
-" Quicker window movement
+" Move between windows
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
