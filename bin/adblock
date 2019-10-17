@@ -13,9 +13,9 @@ comment() {
 }
 
 # Comment-out used hosts
+comment 'ads.twitter.com'
 comment 'api.segment.io'
-# comment 'static.ads-twitter.com'
-# comment 'ads.twitter.com'
+comment 'static.ads-twitter.com'
 
 # Add /etc/hosts overrides
 echo '# MacOS default
