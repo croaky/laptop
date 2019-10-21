@@ -134,10 +134,11 @@
     },
     {
       "author": "Dan Croak",
-      "id": "configuration-block-ruby",
+      "id": "config-block-ruby",
       "published": "2010-01-20",
       "redirects": [
-        "/configuration-block-pattern-with-ruby"
+        "/configuration-block-pattern-with-ruby",
+        "/configuration-block-ruby"
       ],
       "tags": [
         "ruby"
