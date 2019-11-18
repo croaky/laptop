@@ -52,8 +52,8 @@ if ! command -v brew >/dev/null; then
 fi
 
 brew analytics off
-brew update
-brew bundle --file=- <<EOF
+brew update-reset
+brew bundle --no-lock --file=- <<EOF
 tap "heroku/brew"
 tap "homebrew/services"
 
