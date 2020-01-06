@@ -131,6 +131,11 @@ if version > 580
   endif
 endif
 
+" Show syntax groups under cursor
+map <silent> zs :for id in synstack(line("."), col("."))<bar>
+  \ echo synIDattr(id, "name").' '<bar> execute 'echohl' synIDattr(synIDtrans(id), "name") <bar> echon synIDattr(synIDtrans(id), "name") <bar> echohl None <bar>
+  \ endfor<CR>
+
 " Black
 hi IncSearch      ctermfg=16  ctermbg=189 cterm=NONE
 hi Label          ctermfg=16
