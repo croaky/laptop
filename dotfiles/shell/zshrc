@@ -114,6 +114,9 @@ PATH="$HOME/.asdf/shims:$PATH"
 # Prepend Go binaries
 PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 
+# Prepend Postgres.app tools
+PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+
 # Prepend monorepo scripts
 PATH="$OK/bin:$PATH"
 PATH="$POGO/bin:$PATH"

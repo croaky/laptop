@@ -68,7 +68,6 @@ brew "imagemagick@6"
 brew "jq"
 brew "libyaml"
 brew "openssl"
-brew "postgresql", restart_service: :changed
 brew "protobuf"
 brew "r"
 brew "reattach-to-user-namespace"
