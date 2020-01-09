@@ -98,9 +98,10 @@ brew cleanup
 
   mkdir -p "$HOME/.vim/ftdetect"
   mkdir -p "$HOME/.vim/ftplugin"
+  mkdir -p "$HOME/.vim/syntax"
   (
     cd editor/vim
-    for f in {ftdetect,ftplugin}/*; do
+    for f in {ftdetect,ftplugin,syntax}/*; do
       ln -sf "$PWD/$f" "$HOME/.vim/$f"
     done
   )
