@@ -157,7 +157,7 @@ asdf_plugin_update() {
 }
 
 # Go
-gover="1.13.1"
+gover="1.13.6"
 if ! go version | grep -Fq "$gover"; then
   sudo rm -rf /usr/local/go
   curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
@@ -167,14 +167,14 @@ fi
 # Node
 asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
-asdf install nodejs 12.3.1
-asdf global nodejs 12.3.1
+asdf install nodejs 13.7.0
+asdf global nodejs 13.7.0
 asdf reshim nodejs
 npm config set scripts-prepend-node-path true
 
 # Ruby
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
-asdf install ruby 2.6.1
+asdf install ruby 2.7.0
 
 # SF Mono
 if ! echo ~/Library/Fonts/SFMono* > /dev/null; then
