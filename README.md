@@ -1,10 +1,10 @@
-# Status OK
+# Laptop
 
 Clone onto laptop:
 
 ```
-export OK="$HOME/statusok"
-git clone https://github.com/statusok/statusok.git $OK
+export OK="$HOME/laptop"
+git clone https://github.com/croaky/laptop.git $OK
 cd $OK
 ```
 
