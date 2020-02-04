@@ -3,7 +3,7 @@
 # ./laptop.sh
 
 # - installs system packages
-# - creates symlinks from `$OK/dotfiles` to `$HOME`
+# - creates symlinks from `$LAPTOP/dotfiles` to `$HOME`
 # - installs programming language runtimes
 # - installs monospaced font
 
@@ -87,7 +87,7 @@ brew upgrade
 brew cleanup
 
 (
-  cd "$OK/dotfiles"
+  cd "$LAPTOP/dotfiles"
 
   ln -sf "$PWD/asdf/asdfrc" "$HOME/.asdfrc"
   ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"

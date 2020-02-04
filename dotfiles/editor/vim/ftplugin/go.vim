@@ -1,4 +1,4 @@
-" $OK/bin/goimportslocal
+" $LAPTOP/bin/goimportslocal
 let g:go_fmt_command = "goimportslocal"
 
 let b:ale_linters = ['gopls']

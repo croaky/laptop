@@ -1,16 +1,26 @@
 # Laptop
 
-Clone onto laptop:
+Set variable:
 
 ```
-export OK="$HOME/laptop"
-git clone https://github.com/croaky/laptop.git $OK
-cd $OK
+export LAPTOP="$HOME/laptop"
 ```
 
-Review, then run, the laptop setup script:
+Clone:
+
+```
+git clone https://github.com/croaky/laptop.git $LAPTOP
+cd $LAPTOP
+```
+
+Review:
 
 ```
 less laptop.sh
+```
+
+Run:
+
+```
 ./laptop.sh
 ```
