@@ -88,17 +88,15 @@ fi
 autoload -U compinit
 compinit
 
-# Set environment variables for monorepos
+# Set environment variables for monorepo
 export OK="$HOME/statusok"
-export POGO="$HOME/pogo"
-export ROOSTER="$HOME/rooster"
 
 # Set environment variable for localhost TLS certificate authority file
 # https://github.com/FiloSottile/mkcert
 export CAFILE="$HOME/Library/Application Support/mkcert/rootCA.pem"
 
 # Change into most common directories
-export CDPATH="$CDPATH:$POGO:$OK:$ROOSTER"
+export CDPATH="$CDPATH:$OK"
 
 # Prepend Homebrew binaries
 PATH="/usr/local/bin:$PATH"
@@ -119,7 +117,5 @@ PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 # Prepend monorepo scripts
 PATH="$OK/bin:$PATH"
-PATH="$POGO/bin:$PATH"
-PATH="$ROOSTER/bin:$PATH"
 
 export PATH
