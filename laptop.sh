@@ -12,6 +12,7 @@
 
 set -eux
 
+# Homebrew packages
 HOMEBREW_PREFIX="/usr/local"
 
 if [ -d "$HOMEBREW_PREFIX" ]; then
@@ -24,30 +25,8 @@ else
   sudo chown -R "$LOGNAME:admin" "$HOMEBREW_PREFIX"
 fi
 
-update_shell() {
-  local shell_path;
-  shell_path="$(command -v zsh)"
-
-  if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
-    sudo sh -c "echo $shell_path >> /etc/shells"
-  fi
-  chsh -s "$shell_path"
-}
-
-case "$SHELL" in
-  */zsh)
-    if [ "$(command -v zsh)" != "$HOMEBREW_PREFIX/bin/zsh" ] ; then
-      update_shell
-    fi
-    ;;
-  *)
-    update_shell
-    ;;
-esac
-
 if ! command -v brew >/dev/null; then
-  curl -fsS \
-    'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+  curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
   export PATH="/usr/local/bin:$PATH"
 fi
 
@@ -80,6 +59,29 @@ EOF
 brew upgrade
 brew cleanup
 
+# Z shell (zsh)
+update_shell() {
+  local shell_path;
+  shell_path="$(command -v zsh)"
+
+  if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
+    sudo sh -c "echo $shell_path >> /etc/shells"
+  fi
+  chsh -s "$shell_path"
+}
+
+case "$SHELL" in
+  */zsh)
+    if [ "$(command -v zsh)" != "$HOMEBREW_PREFIX/bin/zsh" ] ; then
+      update_shell
+    fi
+    ;;
+  *)
+    update_shell
+    ;;
+esac
+
+# Symlinks
 (
   cd "$LAPTOP/dotfiles"
 
@@ -120,6 +122,7 @@ brew cleanup
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
 )
 
+# Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
   vim -u "$HOME/.vimrc" +PlugUpgrade +qa
 else
@@ -138,14 +141,6 @@ else
   git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
 fi
 
-asdf_plugin_update() {
-  if ! asdf plugin-list | grep -Fq "$1"; then
-    asdf plugin-add "$1" "$2"
-  fi
-
-  asdf plugin-update "$1"
-}
-
 # Go
 gover="1.13.6"
 if ! go version | grep -Fq "$gover"; then
@@ -153,6 +148,15 @@ if ! go version | grep -Fq "$gover"; then
   curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
     sudo tar xz -C /usr/local
 fi
+
+# ASDF
+asdf_plugin_update() {
+  if ! asdf plugin-list | grep -Fq "$1"; then
+    asdf plugin-add "$1" "$2"
+  fi
+
+  asdf plugin-update "$1"
+}
 
 # Node
 asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
@@ -167,6 +171,4 @@ asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf install ruby 2.7.0
 
 # SF Mono
-if ! echo ~/Library/Fonts/SFMono* > /dev/null; then
-  cp -R /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/. ~/Library/Fonts/
-fi
+cp -R /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/. ~/Library/Fonts/
