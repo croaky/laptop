@@ -57,7 +57,6 @@ brew bundle --no-lock --file=- <<EOF
 tap "heroku/brew"
 tap "homebrew/services"
 
-brew "awscli"
 brew "exercism"
 brew "fzf"
 brew "git"
@@ -76,7 +75,6 @@ brew "watch"
 brew "watchman"
 brew "zsh"
 
-cask "aws-vault"
 cask "kitty"
 cask "ngrok"
 EOF
