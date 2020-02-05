@@ -13,11 +13,19 @@
 # Imports are collected into (up to) three groups, and sorted within each group.
 # First: imports of standard Go packages.
 # Second: imports of third-party packages via github.com et al.
-# Third (with the "-local mod" command-line option): imports of local packages.
-# See https://go-review.googlesource.com/c/tools/+/25145/
+# Third: imports of local packages.
+# Example:
 
-# You can configure your text editor to run this script. Vim example:
-# let g:go_fmt_command = "goimportslocal"
+# import (
+#   "context"
+#   "time"
+#
+#   "github.com/lib/pq"
+#
+#   "chain/errors"
+#   "chain/log"
+#   "chain/net"
+# )
 
 set -euo pipefail
 
