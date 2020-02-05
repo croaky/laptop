@@ -176,3 +176,6 @@ npm config set scripts-prepend-node-path true
 # Ruby
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf install ruby 2.7.0
+
+# Block ads
+"$LAPTOP/bin/adblock"
