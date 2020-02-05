@@ -2,10 +2,12 @@
 
 # ./laptop.sh
 
-# - installs system packages
+# - installs system packages with Homebrew package manager
+# - changes shell to Z shell (zsh)
+# - installs SF Mono font for Kitty terminal and Vim editor
 # - creates symlinks from `$LAPTOP/dotfiles` to `$HOME`
+# - installs or updates Vim plugins
 # - installs programming language runtimes
-# - installs monospaced font
 
 # This script can be run safely multiple times.
 # It is tested on macOS Mojave (10.14).
@@ -81,6 +83,9 @@ case "$SHELL" in
     ;;
 esac
 
+# SF Mono
+cp -R /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/. ~/Library/Fonts/
+
 # Symlinks
 (
   cd "$LAPTOP/dotfiles"
@@ -131,6 +136,15 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
+# Go
+gover="1.13.6"
+if ! go version | grep -Fq "$gover"; then
+  sudo rm -rf /usr/local/go
+  curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
+    sudo tar xz -C /usr/local
+fi
+
+# ASDF
 if [ -d "$HOME/.asdf" ]; then
   (
     cd "$HOME/.asdf"
@@ -141,15 +155,6 @@ else
   git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
 fi
 
-# Go
-gover="1.13.6"
-if ! go version | grep -Fq "$gover"; then
-  sudo rm -rf /usr/local/go
-  curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
-    sudo tar xz -C /usr/local
-fi
-
-# ASDF
 asdf_plugin_update() {
   if ! asdf plugin-list | grep -Fq "$1"; then
     asdf plugin-add "$1" "$2"
@@ -169,6 +174,3 @@ npm config set scripts-prepend-node-path true
 # Ruby
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf install ruby 2.7.0
-
-# SF Mono
-cp -R /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/. ~/Library/Fonts/
