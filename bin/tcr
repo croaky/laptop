@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# test && commit || revert
+# When the tests pass, the code is committed.
+# When the tests fail, the code is reverted to when the tests last passed.
+
 if ./test.sh; then
   git add -A
   git commit -am 'pass: all'
