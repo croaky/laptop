@@ -96,7 +96,7 @@ export BLOG="$HOME/src/github.com/croaky/blog"
 export CAFILE="$HOME/Library/Application Support/mkcert/rootCA.pem"
 
 # Change into most common directories
-export CDPATH="$CDPATH:$LAPTOP"
+export CDPATH="$CDPATH:$HOME/src/github.com"
 
 # Prepend Homebrew binaries
 PATH="/usr/local/bin:$PATH"
