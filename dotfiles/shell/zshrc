@@ -14,9 +14,8 @@ function clone() {
   user=$(echo "$1" | cut -d / -f 4)
   repo=$(echo "$1" | cut -d / -f 5)
 
-  cd "$HOME/src/$host" || exit
-  mkdir -p "$user"
-  cd "$user" || exit
+  mkdir -p "$HOME/src/$host/$user"
+  cd "$HOME/src/$host/$user" || exit
   git clone "git@$host:$user/$repo".git
   cd "$repo" || exit
 }
