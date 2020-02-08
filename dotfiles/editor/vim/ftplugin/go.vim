@@ -1,6 +1,6 @@
 " $LAPTOP/bin/goimportslocal
-let g:go_fmt_command = "goimportslocal"
-
+let g:go_fmt_command = 'goimportslocal'
+let g:go_rename_command = 'gopls'
 let b:ale_linters = ['gopls']
 
 setlocal listchars=tab:\ \ ,trail:·,nbsp:·
