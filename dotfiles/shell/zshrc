@@ -87,8 +87,9 @@ fi
 autoload -U compinit
 compinit
 
-# Set environment variables for monorepo
+# Set environment variables for monorepos
 export LAPTOP="$HOME/laptop"
+export BLOG="$HOME/src/github.com/croaky/blog"
 
 # Set environment variable for localhost TLS certificate authority file
 # https://github.com/FiloSottile/mkcert
