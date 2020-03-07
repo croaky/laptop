@@ -50,6 +50,7 @@ brew "protobuf"
 brew "shellcheck"
 brew "the_silver_searcher"
 brew "tldr"
+brew "tmux"
 brew "tree"
 brew "vim"
 brew "watch"
@@ -124,6 +125,7 @@ cp -R /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/. ~/Library/
 
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
+  ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
