@@ -4,7 +4,6 @@
 
 # - installs system packages with Homebrew package manager
 # - changes shell to Z shell (zsh)
-# - installs SF Mono font for Kitty terminal and Vim editor
 # - creates symlinks from `$LAPTOP/dotfiles` to `$HOME`
 # - installs or updates Vim plugins
 # - installs programming language runtimes
@@ -85,9 +84,6 @@ case "$SHELL" in
     update_shell
     ;;
 esac
-
-# SF Mono
-cp -R /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/. ~/Library/Fonts/
 
 # Symlinks
 (
