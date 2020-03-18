@@ -45,6 +45,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'dense-analysis/ale'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'janko-m/vim-test'
+  Plug 'jparise/vim-graphql'
   Plug 'junegunn/vim-easy-align'
   Plug 'leafgarland/typescript-vim'
   Plug 'mxw/vim-jsx'
