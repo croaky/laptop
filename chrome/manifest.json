@@ -2,7 +2,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://lite.cnn.io/*"
+        "http://lite.cnn.com/*"
       ],
       "css": [
         "litecnn.css"

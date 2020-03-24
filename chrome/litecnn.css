@@ -1,3 +1,18 @@
 body {
-  max-width: 750px;
+  font-family: -apple-system, system-ui, "Helvetica", "Arial", sans-serif;
+  font-size: 24px;
+  line-height: 36px;
+  max-width: 700px;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+}
+h2 {
+  font-size: 50px;
+  line-height: 60px;
+  margin-bottom: 5px;
+}
+p {
+  margin: 1.5rem 0;
+  max-width: 100%;
+  width: 700px;
 }
