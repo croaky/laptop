@@ -175,5 +175,11 @@ npm config set scripts-prepend-node-path true
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf install ruby 2.7.0
 
+# Python
+
+asdf_plugin_update "python" "https://github.com/tuvistavie/asdf-python.git"
+asdf install python 3.8.2
+asdf global python 3.8.2
+
 # Block ads
 "$LAPTOP/bin/adblock"
