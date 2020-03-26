@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+branch=$(git symbolic-ref --short HEAD)
+commit=$(git rev-parse --short HEAD)
+
+if [[ $branch == "master" ]]
+then
+  echo "can't delete master"
+  exit
+fi
+
+echo "About to delete branch $branch."
+echo "To recreate it, run 'git checkout -b $branch $commit'."
+
+git checkout master
+git fetch origin
+git merge --ff-only origin/master
+git branch -D "$branch"
+git remote prune origin
