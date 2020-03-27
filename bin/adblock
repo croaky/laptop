@@ -14,6 +14,7 @@ comment() {
 
 # Comment-out used hosts
 comment 'api.segment.io'
+comment 'api.amplitude.com'
 
 # Add /etc/hosts overrides
 echo '# MacOS default
