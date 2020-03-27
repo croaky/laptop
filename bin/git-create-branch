@@ -1,6 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
+
+if [ $# -eq 0 ]; then
+  echo 'usage: git create-branch feature-name'
+  exit 1
+fi
 
 git push origin "HEAD:refs/heads/$1"
 git fetch origin

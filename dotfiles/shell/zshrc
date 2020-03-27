@@ -2,6 +2,7 @@
 
 # Aliases
 alias b="bundle"
+alias c="git create-branch"
 alias flush-cache="sudo killall -HUP mDNSResponder"
 alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias mkdir="mkdir -p"
@@ -23,16 +24,6 @@ function clone() {
 # Autocomplete branch names for git delete-branch
 function _git_delete_branch() {
   __gitcomp "$(__git_heads)"
-}
-
-# Create feature branch with conventional name: user/feature
-function c() {
-  if [[ $# -gt 0 ]]; then
-    branch="$(whoami)/$1"
-    git create-branch "$branch"
-  else
-    echo 'usage: c feature-name'
-  fi
 }
 
 # Load .env file into shell session for environment variables
