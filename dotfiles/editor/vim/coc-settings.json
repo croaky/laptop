@@ -1,0 +1,30 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "javascript",
+    "json",
+    "markdown",
+    "ruby",
+    "scss",
+    "typescript",
+    "yaml"
+  ],
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "filetypes": [
+        "go"
+      ],
+      "rootPatterns": [
+        "go.mod",
+        ".vim/",
+        ".git/"
+      ]
+    }
+  },
+  "solargraph": {
+    "bundlerPath": "/Users/croaky/.asdf/shims/bundle",
+    "useBundler": true
+  },
+  "tsserver.npm": "/Users/croaky/.asdf/shims/npm"
+}

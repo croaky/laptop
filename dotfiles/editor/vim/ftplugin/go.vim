@@ -2,8 +2,8 @@
 let g:go_fmt_command = 'goimportslocal'
 let g:go_rename_command = 'gopls'
 
-" Lint https://octetz.com/docs/2019/2019-04-24-vim-as-a-go-ide/
-" TODO: coc.vim
+" disable vim-go :GoDef shortcut, use coc.vim's gd instead
+let g:go_def_mapping_enabled = 0
 
 setlocal listchars=tab:\ \ ,trail:·,nbsp:·
 setlocal noexpandtab
