@@ -11,14 +11,10 @@ setlocal nolist
 
 compiler go
 
-" Run current file
-nmap <buffer> <Leader>r <Plug>(go-run)
+nmap <buffer> <Leader>r <Plug>(go-run)       " Run current file
+nmap <buffer> <Leader>t <Plug>(go-test)      " Run test suite
+nmap <buffer> <Leader>s <Plug>(go-test-func) " Run test under cursor
 
-" Run test suite
-nmap <buffer> <Leader>t <Plug>(go-test)
-
-" Run test for specific function under cursor
-nmap <buffer> <Leader>s <Plug>(go-test-func)
 
 " Syntax highlight additional tokens
 let g:go_highlight_fields = 1
