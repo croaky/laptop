@@ -1,2 +1,2 @@
-let b:ale_fixers = ['jq'] " ['prettier']
-let g:ale_fix_on_save = 1
+" Auto-fix w/ jq or Prettier?
+" TODO: add coc.vim config

@@ -39,7 +39,6 @@ let g:plug_window='enew'
 
 call plug#begin('~/.vim/plugged')
   " Automatic, no commands
-  Plug 'dense-analysis/ale' " :help ale
   Plug 'pbrisbin/vim-mkdir' " auto-create non-existent dir on save
   Plug 'tpope/vim-endwise'  " auto-add end in Ruby, other langs
 
@@ -89,28 +88,11 @@ augroup lastcursorposition
 augroup END
 
 " Lint
-augroup ale
-  autocmd!
-
-  autocmd VimEnter *
-    \ set updatetime=300 |
-    \ let g:ale_lint_on_enter = 1 |
-    \ let g:ale_lint_on_text_changed = 0
-augroup END
+" TODO: add coc.vim config
 
 " Tab complete
-let g:ale_completion_enabled = 1 " :help ale-completion
-function! InsertTabWrapper()      " tab at start of line, otherwise completion
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
-    return "\<Tab>"
-  else
-    return "\<C-p>"
-  endif
-endfunction
-inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
-inoremap <S-Tab> <C-n>
-set wildmode=list:longest,list:full
+" TODO: add coc.vim config
+
 " Disable spelling by default, enable per-filetype
 autocmd BufRead setlocal nospell
 
