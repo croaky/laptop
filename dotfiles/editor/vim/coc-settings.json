@@ -23,8 +23,7 @@
     }
   },
   "solargraph": {
-    "bundlerPath": "/Users/croaky/.asdf/shims/bundle",
-    "useBundler": true
+    "commandPath": "/Users/croaky/.asdf/shims/solargraph"
   },
   "tsserver.npm": "/Users/croaky/.asdf/shims/npm"
 }
