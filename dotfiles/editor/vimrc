@@ -3,12 +3,14 @@ let mapleader = " "   " Spacebar
 set autoindent
 set autowrite         " Automatically :write before running commands
 set backspace=2       " Backspace deletes like most programs in insert mode
+set cmdheight=2
 set colorcolumn=+1
 set complete+=kspell  " Include spellfile in completion results
 set diffopt+=vertical " Always use vertical diffs
 set encoding=utf-8
 set expandtab
 set exrc              " http://andrew.stwrt.ca/posts/project-specific-vimrc/
+set hidden            " TextEdit might fail if hidden is not set
 set history=50
 set incsearch
 set laststatus=2      " Always display status line
@@ -24,11 +26,14 @@ set numberwidth=5
 set ruler             " Ahow cursor position all the time
 set shiftround
 set shiftwidth=2
+set shortmess+=c      " Don't pass messages to |ins-completion-menu|
 set showcmd           " Display incomplete commands
+set signcolumn=yes
 set splitbelow
 set splitright
 set tabstop=2
 set textwidth=80
+set updatetime=300
 
 if &compatible
   set nocompatible
@@ -41,6 +46,9 @@ call plug#begin('~/.vim/plugged')
   " Automatic, no commands
   Plug 'pbrisbin/vim-mkdir' " auto-create non-existent dir on save
   Plug 'tpope/vim-endwise'  " auto-add end in Ruby, other langs
+
+  " Language Server Protocol
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
   " Movement
   Plug 'tpope/vim-projectionist' " :help projectionist, .projections.json, :A
@@ -87,11 +95,37 @@ augroup lastcursorposition
     \ endif
 augroup END
 
-" Lint
-" TODO: add coc.vim config
+" Jump to definition
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Tab complete
-" TODO: add coc.vim config
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Docs
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" :Format current buffer
+command! -nargs=0 Format :call CocAction('format')
 
 " Disable spelling by default, enable per-filetype
 autocmd BufRead setlocal nospell
@@ -177,16 +211,17 @@ hi VisualNOS      ctermfg=250 ctermbg=24  cterm=NONE
 hi gitCommitDiff  ctermfg=250 cterm=NONE
 
 " Pink
-hi DiffDelete     ctermfg=161 cterm=NONE
-hi Directory      ctermfg=161 cterm=NONE
-hi Function       ctermfg=161
-hi ModeMsg        ctermfg=161 cterm=NONE
-hi MoreMsg        ctermfg=161 cterm=NONE
-hi String         ctermfg=161 cterm=NONE
-hi Title          ctermfg=161 cterm=NONE
-hi WarningMsg     ctermfg=161 cterm=NONE
-hi diffRemoved    ctermfg=161 cterm=NONE
-hi rubySymbol     ctermfg=161 cterm=NONE
+hi CocErrorSign ctermfg=161 cterm=NONE ctermbg=250
+hi DiffDelete   ctermfg=161 cterm=NONE
+hi Directory    ctermfg=161 cterm=NONE
+hi Function     ctermfg=161
+hi ModeMsg      ctermfg=161 cterm=NONE
+hi MoreMsg      ctermfg=161 cterm=NONE
+hi String       ctermfg=161 cterm=NONE
+hi Title        ctermfg=161 cterm=NONE
+hi WarningMsg   ctermfg=161 cterm=NONE
+hi diffRemoved  ctermfg=161 cterm=NONE
+hi rubySymbol   ctermfg=161 cterm=NONE
 
 " Turquoise
 hi Constant       ctermfg=30  cterm=NONE

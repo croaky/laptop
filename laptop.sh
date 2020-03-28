@@ -101,6 +101,7 @@ esac
   mkdir -p "$HOME/.vim/syntax"
   (
     cd editor/vim
+    ln -sf "$PWD/coc-settings.json" "$HOME/.vim/coc-settings.json"
     for f in {ftdetect,ftplugin,syntax}/*; do
       ln -sf "$PWD/$f" "$HOME/.vim/$f"
     done
