@@ -1,7 +1,10 @@
 " TODO: try sorbet https://sorbet.org/
-let b:ale_fixers = ['standardrb'] " 'rubocop'
-let g:ale_fix_on_save = 1
-let b:ale_linters = ['standardrb'] " 'rubocop'
+
+" Auto-fix w/ standardrb?
+" TODO: add coc.vim config
+
+" Lint w/ standardrb?
+" TODO: add coc.vim config
 
 " https://github.com/testdouble/standard/wiki/IDE:-vim
 let g:ruby_indent_assignment_style = 'variable'

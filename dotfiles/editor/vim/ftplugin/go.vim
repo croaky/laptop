@@ -1,7 +1,9 @@
 " $LAPTOP/bin/goimportslocal
 let g:go_fmt_command = 'goimportslocal'
 let g:go_rename_command = 'gopls'
-let b:ale_linters = ['gopls']
+
+" Lint https://octetz.com/docs/2019/2019-04-24-vim-as-a-go-ide/
+" TODO: coc.vim
 
 setlocal listchars=tab:\ \ ,trail:·,nbsp:·
 setlocal noexpandtab
@@ -14,7 +16,6 @@ compiler go
 nmap <buffer> <Leader>r <Plug>(go-run)       " Run current file
 nmap <buffer> <Leader>t <Plug>(go-test)      " Run test suite
 nmap <buffer> <Leader>s <Plug>(go-test-func) " Run test under cursor
-
 
 " Syntax highlight additional tokens
 let g:go_highlight_fields = 1
