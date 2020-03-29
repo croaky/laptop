@@ -22,15 +22,15 @@ function sync() {
 
   clearTimeout(t);
   t = setTimeout(function() {
-    // listen to when PR title is updated
+    // sync when PR title is updated
     var prTitleForm = find(".js-issue-update");
     prTitleForm && prTitleForm.addEventListener('submit', sync);
 
-    // listen to when PR body is updated
+    // sync when PR body is updated
     var prBodyForm = find(".js-comment-update");
     prBodyForm && prBodyForm.addEventListener('submit', sync);
 
-    // listen to when squash and merge button is clicked, confirm form opens
+    // sync when squash and merge button is clicked, confirm form opens
     var squashBtn = find(".btn-group-squash");
     squashBtn && squashBtn.addEventListener('click', sync);
   }, 2000);
