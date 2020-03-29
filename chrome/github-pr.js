@@ -1,40 +1,27 @@
 function find(selector) {
-  return document.querySelectorAll(selector)[0]
+  return document.querySelectorAll(selector)[0];
 }
 
-function rewriteCommit() {
-  console.log('rewritten');
-  var prNumber = find(".gh-header-number").innerHTML.trim();
-  var prTitle = find(".js-issue-title");
-  var prBody = find("textarea[name='pull_request[body]']");
-  var commitTitle = find(".merge-branch-form input[name='commit_title']");
-  var commitMsg = find(".merge-branch-form textarea[name='commit_message']");
+var prNum = find(".gh-header-number").innerHTML.trim();
 
-  commitTitle.value = prTitle.innerHTML.trim();
-  commitMsg.innerHTML = prBody.value.trim() + "\n\n" + prNumber;
-}
+function syncTitle() {
+  var commitTitle = find("input[name='commit_title']");
+  var prTitle = find("input[name='issue[title]']").value.trim();
+  commitTitle.value = prTitle;
 
-rewriteCommit();
+  // Form is replaced on each submit. Add new listener on each submit.
+  setTimeout(function() {
+    var prTitleForm = find(".js-issue-update");
+    prTitleForm.addEventListener('submit', syncTitle);
+  }, 2500);
+};
+syncTitle();
 
-var send = window.XMLHttpRequest.prototype.send;
-
-function sendReplacement(data) {
-  console.log(data)
-
-  if (this.onreadystatechange) {
-    this._onreadystatechange = this.onreadystatechange;
-  }
-  this.onreadystatechange = onReadyStateChangeReplacement;
-
-  return send.apply(this, arguments);
-}
-
-function onReadyStateChangeReplacement() {
-  rewriteCommit();
-
-  if (this._onreadystatechange) {
-    return this._onreadystatechange.apply(this, arguments);
-  }
-}
-
-window.XMLHttpRequest.prototype.send = sendReplacement;
+function syncBody() {
+  var commitMsg = find("textarea[name='commit_message']");
+  var prBody = find("textarea[name='pull_request[body]']").value.trim();
+  commitMsg.innerHTML = prBody + "\n\n" + prNum;
+};
+syncBody();
+var prBodyForm = find(".js-comment-update");
+prBodyForm.addEventListener('submit', syncBody);
