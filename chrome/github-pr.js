@@ -22,5 +22,13 @@ if (document.readyState != 'loading') {
     }, 2500);
   };
 
-  sync();
+  function isPR() {
+    var url = window.location.href
+    var parts = url.split('/').filter(function (el) { return el !== "" })
+    return parts.length === 6 && parts[4] === "pull";
+  }
+
+  if (isPR()) {
+    sync();
+  };
 };

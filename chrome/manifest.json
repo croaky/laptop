@@ -1,7 +1,7 @@
 {
   "content_scripts": [
     {
-      "matches": ["https://github.com/*/*/pull/*"],
+      "matches": ["https://github.com/*pull*"],
       "js": ["github-pr.js"]
     },
     {
