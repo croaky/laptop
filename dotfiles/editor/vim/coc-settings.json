@@ -2,28 +2,19 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "javascript",
-    "json",
-    "markdown",
+    "javascriptreact",
     "ruby",
     "scss",
     "typescript",
-    "yaml"
+    "typescriptreact"
   ],
   "languageserver": {
     "golang": {
       "command": "gopls",
-      "filetypes": [
-        "go"
-      ],
-      "rootPatterns": [
-        "go.mod",
-        ".vim/",
-        ".git/"
-      ]
+      "filetypes": ["go"],
+      "rootPatterns": ["go.mod", ".vim/", ".git/"]
     }
   },
-  "solargraph": {
-    "commandPath": "/Users/croaky/.asdf/shims/solargraph"
-  },
+  "solargraph.commandPath": "/Users/croaky/.asdf/shims/solargraph",
   "tsserver.npm": "/Users/croaky/.asdf/shims/npm"
 }
