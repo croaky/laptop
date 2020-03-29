@@ -1,20 +1,16 @@
 {
   "content_scripts": [
     {
-      "matches": [
-        "http://lite.cnn.com/*"
-      ],
-      "css": [
-        "litecnn.css"
-      ]
+      "matches": ["https://github.com/*/*/pull/*"],
+      "js": ["github-pr.js"]
     },
     {
-      "matches": [
-        "https://twitter.com/*"
-      ],
-      "css": [
-        "twitter.css"
-      ]
+      "matches": ["http://lite.cnn.com/*"],
+      "css": ["litecnn.css"]
+    },
+    {
+      "matches": ["https://twitter.com/*"],
+      "css": ["twitter.css"]
     }
   ],
   "description": "User styles",
