@@ -1,4 +1,4 @@
-if (document.readyState != 'loading') {
+function githubPR() {
   function find(selector) {
     return document.querySelectorAll(selector)[0];
   }
@@ -35,3 +35,9 @@ if (document.readyState != 'loading') {
     sync();
   };
 };
+
+if (document.readyState != 'loading') {
+  githubPR();
+} else {
+  document.addEventListener('DOMContentLoaded', gitubPR);
+}
