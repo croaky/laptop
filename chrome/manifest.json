@@ -1,6 +1,10 @@
 {
   "content_scripts": [
     {
+      "matches": ["https://github.com/*pull*"],
+      "js": ["github-pr.js"]
+    },
+    {
       "matches": ["http://lite.cnn.com/*"],
       "css": ["litecnn.css"]
     },
