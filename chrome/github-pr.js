@@ -3,6 +3,8 @@ if (document.readyState != 'loading') {
     return document.querySelectorAll(selector)[0];
   }
 
+  var t;
+
   function sync() {
     var commitTitle = find("input[name='commit_title']");
     var prTitle = find("input[name='issue[title]']").value.trim();
@@ -13,8 +15,9 @@ if (document.readyState != 'loading') {
     var prNum = find(".gh-header-number").innerHTML.trim();
     commitMsg.innerHTML = prBody + "\n\n" + prNum;
 
-    // Forms are replaced on each XHR submit. Add new listeners on each submit.
-    setTimeout(function() {
+    // Forms are replaced on each XHR submit. Reset listeners on each submit.
+    clearTimeout(t);
+    t = setTimeout(function() {
       var prTitleForm = find(".js-issue-update");
       prTitleForm.addEventListener('submit', sync);
       var prBodyForm = find(".js-comment-update");
