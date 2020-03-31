@@ -16,7 +16,9 @@ function sync() {
   var commitMsg = find("textarea[name='commit_message']");
   var prBody = find("textarea[name='pull_request[body]']");
   if (commitMsg && prBody) {
-    commitMsg.innerHTML = [prBody.value.trim(), window.location.href].join("\n\n");
+    commitMsg.innerHTML = [prBody.value.trim(), window.location.href]
+      .filter(function (el) { return el !== "" })
+      .join("\n\n");
   }
 
   clearTimeout(t);
