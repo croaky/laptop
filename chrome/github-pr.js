@@ -12,12 +12,11 @@ function sync() {
     commitTitle.value = prTitle.value.trim();
   }
 
-  // copy PR body and number to commit message
+  // copy PR body and URL to commit message
   var commitMsg = find("textarea[name='commit_message']");
   var prBody = find("textarea[name='pull_request[body]']");
-  var prNum = find(".gh-header-number");
-  if (commitMsg && prBody && prNum) {
-    commitMsg.innerHTML = prBody.value.trim() + "\n\n" + prNum.innerHTML.trim();
+  if (commitMsg && prBody) {
+    commitMsg.innerHTML = [prBody.value.trim(), window.location.href].join("\n\n");
   }
 
   clearTimeout(t);
