@@ -44,6 +44,7 @@ let g:plug_window='enew'
 
 call plug#begin('~/.vim/plugged')
   " Automatic, no commands
+  Plug 'dense-analysis/ale' " :help ale
   Plug 'pbrisbin/vim-mkdir' " auto-create non-existent dir on save
   Plug 'tpope/vim-endwise'  " auto-add end in Ruby, other langs
 
@@ -95,13 +96,32 @@ augroup lastcursorposition
     \ endif
 augroup END
 
+" Lint with ALE
+augroup ale
+  autocmd!
+
+  autocmd VimEnter *
+    \ let g:ale_lint_on_enter = 1 |
+    \ let g:ale_lint_on_text_changed = 0
+augroup END
+
+" https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+let g:coc_global_extensions = [
+  \ 'coc-css',
+  \ 'coc-elixir',
+  \ 'coc-git',
+  \ 'coc-html',
+  \ 'coc-prettier',
+  \ 'coc-tsserver'
+  \ ]
+
 " Jump to definition
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Tab complete
+" Tab complete with COC
 inoremap <silent><expr> <TAB>
   \ pumvisible() ? "\<C-n>" :
   \ <SID>check_back_space() ? "\<TAB>" :
@@ -123,9 +143,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-" :Format current buffer
-command! -nargs=0 Format :call CocAction('format')
 
 " Disable spelling by default, enable per-filetype
 autocmd BufRead setlocal nospell
@@ -211,17 +228,18 @@ hi VisualNOS      ctermfg=250 ctermbg=24  cterm=NONE
 hi gitCommitDiff  ctermfg=250 cterm=NONE
 
 " Pink
-hi CocErrorSign ctermfg=161 cterm=NONE ctermbg=250
-hi DiffDelete   ctermfg=161 cterm=NONE
-hi Directory    ctermfg=161 cterm=NONE
-hi Function     ctermfg=161
-hi ModeMsg      ctermfg=161 cterm=NONE
-hi MoreMsg      ctermfg=161 cterm=NONE
-hi String       ctermfg=161 cterm=NONE
-hi Title        ctermfg=161 cterm=NONE
-hi WarningMsg   ctermfg=161 cterm=NONE
-hi diffRemoved  ctermfg=161 cterm=NONE
-hi rubySymbol   ctermfg=161 cterm=NONE
+hi CocErrorSign   ctermfg=161 cterm=NONE ctermbg=250
+hi CocWarningSign ctermfg=161 cterm=NONE ctermbg=250
+hi DiffDelete     ctermfg=161 cterm=NONE
+hi Directory      ctermfg=161 cterm=NONE
+hi Function       ctermfg=161
+hi ModeMsg        ctermfg=161 cterm=NONE
+hi MoreMsg        ctermfg=161 cterm=NONE
+hi String         ctermfg=161 cterm=NONE
+hi Title          ctermfg=161 cterm=NONE
+hi WarningMsg     ctermfg=161 cterm=NONE
+hi diffRemoved    ctermfg=161 cterm=NONE
+hi rubySymbol     ctermfg=161 cterm=NONE
 
 " Turquoise
 hi Constant       ctermfg=30  cterm=NONE
