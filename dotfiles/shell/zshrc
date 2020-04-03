@@ -79,8 +79,9 @@ autoload -U compinit
 compinit
 
 # Set environment variables for monorepos
-export LAPTOP="$HOME/laptop"
 export BLOG="$HOME/blog"
+export EDS="$HOME/EDS"
+export LAPTOP="$HOME/laptop"
 
 # Set environment variable for localhost TLS certificate authority file
 # https://github.com/FiloSottile/mkcert
@@ -107,6 +108,6 @@ PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 # Prepend monorepo scripts
-PATH="$LAPTOP/bin:$PATH"
+PATH="$LAPTOP/bin:$EDS/bin:$PATH"
 
 export PATH
