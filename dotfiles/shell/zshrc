@@ -80,7 +80,7 @@ compinit
 
 # Set environment variables for monorepos
 export LAPTOP="$HOME/laptop"
-export BLOG="$HOME/src/github.com/croaky/blog"
+export BLOG="$HOME/blog"
 
 # Set environment variable for localhost TLS certificate authority file
 # https://github.com/FiloSottile/mkcert

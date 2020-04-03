@@ -3,13 +3,13 @@
 # ./laptop.sh
 
 # - installs system packages with Homebrew package manager
-# - changes shell to Z shell (zsh)
+# - changes shell to zsh version from Homebrew
 # - creates symlinks from `$LAPTOP/dotfiles` to `$HOME`
-# - installs or updates Vim plugins
 # - installs programming language runtimes
+# - installs or updates Vim plugins
 
 # This script can be run safely multiple times.
-# It is tested on macOS Mojave (10.14).
+# It is tested on macOS Catalina (10.15).
 
 set -eux
 
@@ -34,6 +34,7 @@ fi
 brew analytics off
 brew update-reset
 brew bundle --no-lock --file=- <<EOF
+tap "github/gh"
 tap "heroku/brew"
 tap "homebrew/services"
 
@@ -65,8 +66,13 @@ EOF
 brew upgrade
 brew cleanup
 
-# Z shell (zsh)
+# zsh
 update_shell() {
+  (
+    sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
+    chmod u+w /usr/local/share/zsh /usr/local/share/zsh/site-functions
+  )
+
   local shell_path;
   shell_path="$(command -v zsh)"
 
@@ -89,7 +95,7 @@ esac
 
 # Symlinks
 (
-  cd "$LAPTOP/dotfiles"
+  cd "dotfiles"
 
   ln -sf "$PWD/asdf/asdfrc" "$HOME/.asdfrc"
   ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"
@@ -130,15 +136,6 @@ esac
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
 )
 
-# Vim
-if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
-  vim -u "$HOME/.vimrc" +PlugUpgrade +qa
-else
-  curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
-vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
-
 # Go
 gover="1.14"
 if ! go version | grep -Fq "$gover"; then
@@ -157,6 +154,9 @@ if [ -d "$HOME/.asdf" ]; then
 else
   git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
 fi
+PATH="$HOME/.asdf/bin:$PATH"
+PATH="$HOME/.asdf/shims:$PATH"
+export PATH
 
 asdf_plugin_update() {
   if ! asdf plugin-list | grep -Fq "$1"; then
@@ -183,3 +183,12 @@ asdf install ruby 2.7.0
 asdf_plugin_update "python" "https://github.com/tuvistavie/asdf-python.git"
 asdf install python 3.8.2
 asdf global python 3.8.2
+
+# Vim
+if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
+  vim -u "$HOME/.vimrc" +PlugUpgrade +qa
+else
+  curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
