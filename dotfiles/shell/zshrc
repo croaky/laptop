@@ -108,6 +108,9 @@ PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 # Prepend monorepo scripts
-PATH="$LAPTOP/bin:$EDS/bin:$PATH"
+PATH="$LAPTOP/bin:$PATH"
+
+# Prepend local project ./bin dirs
+PATH=".git/safe/../../bin:$PATH"
 
 export PATH
