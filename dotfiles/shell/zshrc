@@ -107,6 +107,9 @@ PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 # Prepend Postgres.app tools
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
+# Prepend RabbitMQ tools
+PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
+
 # Prepend monorepo scripts
 PATH="$LAPTOP/bin:$PATH"
 
