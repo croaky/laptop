@@ -155,6 +155,9 @@ nmap <C-p> :Files<CR>
 nmap \ :Ag<SPACE>
 set grepprg=ag\ --nogroup\ --nocolor
 
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
 
