@@ -38,6 +38,7 @@ tap "github/gh"
 tap "heroku/brew"
 tap "homebrew/services"
 
+brew "awscli"
 brew "exercism"
 brew "fzf"
 brew "git"
