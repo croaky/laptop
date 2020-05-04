@@ -54,7 +54,7 @@ if [ -d /usr/local/opt/fzf/shell ]; then
   source "/usr/local/opt/fzf/shell/completion.zsh"
   source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 fi
-export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --nocolor -g ""'
 
 # Color
 autoload -U colors
