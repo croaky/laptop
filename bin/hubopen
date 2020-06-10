@@ -2,12 +2,8 @@
 #
 # Open a file in the current repo, branch, and subdir on GitHub.
 
-if ! command -v hub >/dev/null; then
-  if command -v brew >/dev/null; then
-    brew install hub
-  fi
-fi
-
+url="$(git config --get remote.origin.url)"
 branch="$(git rev-parse --abbrev-ref HEAD)"
 subdir="$(git rev-parse --show-prefix)"
-hub browse -- blob/"$branch"/"$subdir"/"$1"
+
+open "${url%.git}/blob/$branch$subdir/$1"
