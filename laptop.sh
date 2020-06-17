@@ -121,6 +121,7 @@ esac
   mkdir -p "$HOME/.bundle"
   ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
   ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
+  ln -sf "$PWD/ruby/irbrc" "$HOME/.irbrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
 
   mkdir -p "$HOME/.config/kitty"
