@@ -2,11 +2,11 @@
 
 set -e
 
-branch="master"
+main="master"
 
 if git branch | grep -Fq "main"; then
-  branch="main"
+  main="main"
 fi
 
 git fetch origin
-git rebase origin/$branch "$@"
+git rebase origin/$main "$@"
