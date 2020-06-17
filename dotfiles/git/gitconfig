@@ -38,6 +38,8 @@
   timeauthor = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
 [push]
   default = current
+[pull]
+  ff = only
 [rebase]
   autosquash = true
 [rerere]
