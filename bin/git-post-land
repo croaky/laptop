@@ -4,7 +4,7 @@ set -e
 
 main="master"
 
-if git branch | grep -Fq "main"; then
+if git branch | grep -Fq "^main$"; then
   main="main"
 fi
 
