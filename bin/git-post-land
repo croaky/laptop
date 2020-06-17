@@ -2,20 +2,26 @@
 
 set -e
 
+main="master"
+
+if git branch | grep -Fq "main"; then
+  main="main"
+fi
+
 branch=$(git symbolic-ref --short HEAD)
 commit=$(git rev-parse --short HEAD)
 
-if [[ $branch == "master" ]]
+if [[ $branch == "$main" ]]
 then
-  echo "can't delete master"
+  echo "can't delete $main"
   exit
 fi
 
 echo "About to delete branch $branch."
 echo "To recreate it, run 'git checkout -b $branch $commit'."
 
-git checkout master
+git checkout "$main"
 git fetch origin
-git merge --ff-only origin/master
+git merge --ff-only origin/$main
 git branch -D "$branch"
 git remote prune origin
