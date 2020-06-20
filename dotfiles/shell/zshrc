@@ -83,6 +83,9 @@ export BLOG="$HOME/blog"
 export EDS="$HOME/EDS"
 export LAPTOP="$HOME/laptop"
 
+# Set Git template directory
+export GIT_TEMPLATE_DIR="$LAPTOP/dotfiles/git/template"
+
 # Set environment variable for localhost TLS certificate authority file
 # https://github.com/FiloSottile/mkcert
 export CAFILE="$HOME/Library/Application Support/mkcert/rootCA.pem"
