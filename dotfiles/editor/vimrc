@@ -108,6 +108,7 @@ augroup END
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 let g:coc_global_extensions = [
   \ 'coc-css',
+  \ 'coc-deno',
   \ 'coc-elixir',
   \ 'coc-git',
   \ 'coc-html',
