@@ -71,7 +71,7 @@ call plug#begin('~/.vim/plugged')
   " Markdown
   Plug 'junegunn/vim-easy-align' " <Leader>| align table
 
-  " TypeScript, React, GraphQL
+  " Frontend
   Plug 'evanleck/vim-svelte'
   Plug 'jparise/vim-graphql'
   Plug 'leafgarland/typescript-vim'
@@ -113,6 +113,7 @@ let g:coc_global_extensions = [
   \ 'coc-html',
   \ 'coc-prettier',
   \ 'coc-solargraph',
+  \ 'coc-svelte',
   \ 'coc-tsserver'
   \ ]
 
