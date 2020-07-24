@@ -72,6 +72,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align' " <Leader>| align table
 
   " TypeScript, React, GraphQL
+  Plug 'evanleck/vim-svelte'
   Plug 'jparise/vim-graphql'
   Plug 'leafgarland/typescript-vim'
   Plug 'mxw/vim-jsx'
@@ -108,11 +109,11 @@ augroup END
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 let g:coc_global_extensions = [
   \ 'coc-css',
+  \ 'coc-elixir',
   \ 'coc-git',
   \ 'coc-html',
   \ 'coc-prettier',
   \ 'coc-solargraph',
-  \ 'coc-svelte',
   \ 'coc-tsserver'
   \ ]
 
