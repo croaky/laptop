@@ -72,7 +72,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align' " <Leader>| align table
 
   " TypeScript, React, GraphQL
-  Plug 'evanleck/vim-svelte'
   Plug 'jparise/vim-graphql'
   Plug 'leafgarland/typescript-vim'
   Plug 'mxw/vim-jsx'
