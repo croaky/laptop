@@ -47,3 +47,5 @@
 [user]
   name = Dan Croak
   email = dan@statusok.com
+[init]
+  defaultBranch = main
