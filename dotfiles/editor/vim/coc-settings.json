@@ -6,7 +6,5 @@
       "rootPatterns": ["go.mod", ".vim/", ".git/"]
     }
   },
-  "solargraph.checkGemVersion": false,
-  "solargraph.commandPath": "/Users/dcroak/.asdf/shims/solargraph",
   "tsserver.npm": "/Users/dcroak/.asdf/shims/npm"
 }
