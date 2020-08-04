@@ -185,9 +185,6 @@ asdf_plugin_update "python" "https://github.com/tuvistavie/asdf-python.git"
 asdf install python 3.8.2
 asdf global python 3.8.2
 
-# SQL
-go get github.com/jackc/sqlfmt/...
-
 # Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
   vim -u "$HOME/.vimrc" +PlugUpgrade +qa
