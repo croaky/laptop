@@ -82,6 +82,7 @@ compinit
 export BLOG="$HOME/blog"
 export EDS="$HOME/EDS"
 export LAPTOP="$HOME/laptop"
+export TODO="$HOME/todo"
 
 # Set environment variable for localhost TLS certificate authority file
 # https://github.com/FiloSottile/mkcert
@@ -112,6 +113,7 @@ PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 
 # Prepend monorepo scripts
 PATH="$LAPTOP/bin:$PATH"
+PATH="$TODO/bin:$PATH"
 
 # Prepend local project ./bin dirs
 PATH=".git/safe/../../bin:$PATH"
