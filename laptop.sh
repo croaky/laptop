@@ -140,7 +140,7 @@ esac
 )
 
 # Go
-gover="1.14"
+gover="1.15"
 if ! go version | grep -Fq "$gover"; then
   sudo rm -rf /usr/local/go
   curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
