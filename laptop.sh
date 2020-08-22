@@ -172,8 +172,8 @@ asdf_plugin_update() {
 # Node
 asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
-asdf install nodejs 13.7.0
-asdf global nodejs 13.7.0
+asdf install nodejs 14.8.0
+asdf global nodejs 14.8.0
 asdf reshim nodejs
 npm config set scripts-prepend-node-path true
 
