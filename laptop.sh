@@ -147,6 +147,9 @@ if ! go version | grep -Fq "$gover"; then
     sudo tar xz -C /usr/local
 fi
 
+# Deno
+curl -fsSL https://deno.land/x/install/install.sh | sh
+
 # ASDF
 if [ -d "$HOME/.asdf" ]; then
   (
