@@ -34,15 +34,14 @@ fi
 brew analytics off
 brew update-reset
 brew bundle --no-lock --file=- <<EOF
-tap "github/gh"
 tap "heroku/brew"
 tap "homebrew/services"
 
 brew "awscli"
 brew "exercism"
 brew "fzf"
+brew "gh"
 brew "git"
-brew "github/gh/gh"
 brew "heroku"
 brew "jq"
 brew "libyaml"
