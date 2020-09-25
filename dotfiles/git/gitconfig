@@ -33,7 +33,7 @@
   cmd = vimdiff -f $LOCAL $MERGED $REMOTE
 [pretty]
   basic = format:%Cred%h%Creset %s%Creset
-  time = format:%Cred%h%Creset %s %Cgreen(%cr)%Creset
+  time = format:%Cred%h%Creset %C(bold blue)%cs%Creset %s%Creset
   author = format:%Cred%h%Creset %s %C(bold blue)%an%Creset
   timeauthor = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
 [push]
