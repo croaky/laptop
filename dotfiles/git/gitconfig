@@ -32,10 +32,10 @@
 [mergetool "vimdiff"]
   cmd = vimdiff -f $LOCAL $MERGED $REMOTE
 [pretty]
-  basic = format:%Cred%h%Creset %s%Creset
-  time = format:%Cred%h%Creset %C(bold blue)%cs%Creset %s%Creset
-  author = format:%Cred%h%Creset %s %C(bold blue)%an%Creset
-  timeauthor = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
+  basic = format:%C(red)%h%C(reset) %s%C(reset)
+  time = format:%C(red)%h%C(reset) %C(blue)%cs%C(reset) %s%C(reset)
+  author = format:%C(red)%h%C(reset) %s %C(green)%an%C(reset)
+  timeauthor = format:%C(red)%h%C(reset) %C(blue)%cs%C(reset) %s %C(green)%an%C(reset)
 [push]
   default = current
 [pull]
