@@ -20,6 +20,8 @@
 [diff]
   noprefix = true
   tool = vimdiff
+[diff "rspec"]
+  xfuncname = "^[ \t]*((RSpec|describe|context|it)[ \t].*)$"
 [fetch]
   prune = true
 [github]

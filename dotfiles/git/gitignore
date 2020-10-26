@@ -11,4 +11,5 @@ dist
 node_modules
 public
 tmp
+tmp.*
 vendor
