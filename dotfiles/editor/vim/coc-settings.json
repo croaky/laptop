@@ -6,5 +6,5 @@
       "rootPatterns": ["go.mod", ".vim/", ".git/"]
     }
   },
-  "tsserver.npm": "/Users/dcroak/.asdf/shims/npm"
+  "tsserver.npm": "/Users/croaky/.asdf/shims/npm"
 }
