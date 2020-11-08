@@ -2,8 +2,6 @@
 let g:go_fmt_command = 'goimportslocal'
 let g:go_rename_command = 'gopls'
 
-" Auto-fix handled by go.vim
-
 " Lint
 let b:ale_linters = ['gopls']
 
@@ -15,8 +13,9 @@ setlocal nolist
 
 compiler go
 
-nmap <buffer> <Leader>r <Plug>(go-run)       " Run current file
-nmap <buffer> <Leader>t <Plug>(go-test)      " Run test suite
+nmap :A :GoAlternate
+nmap <buffer> <Leader>r :!clear && go run %<CR>
+nmap <buffer> <Leader>r :!clear && go test %<CR>
 nmap <buffer> <Leader>s <Plug>(go-test-func) " Run test under cursor
 
 " Syntax highlight additional tokens
@@ -25,6 +24,3 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
-
-" Alias :GoAlternate to :A
-autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
