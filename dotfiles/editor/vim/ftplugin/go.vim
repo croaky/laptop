@@ -15,7 +15,7 @@ compiler go
 
 nmap :A :GoAlternate
 nmap <buffer> <Leader>r :!clear && go run %<CR>
-nmap <buffer> <Leader>r :!clear && go test %<CR>
+nmap <buffer> <Leader>t :!clear && go test ./...<CR>
 nmap <buffer> <Leader>s <Plug>(go-test-func) " Run test under cursor
 
 " Syntax highlight additional tokens
