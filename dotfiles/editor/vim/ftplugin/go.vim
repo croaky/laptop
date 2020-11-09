@@ -13,7 +13,7 @@ setlocal nolist
 
 compiler go
 
-nmap :A :GoAlternate
+nmap :A<CR> :GoAlternate
 nmap <buffer> <Leader>r :!clear && go run %<CR>
 nmap <buffer> <Leader>t :!clear && go test ./...<CR>
 nmap <buffer> <Leader>s <Plug>(go-test-func) " Run test under cursor

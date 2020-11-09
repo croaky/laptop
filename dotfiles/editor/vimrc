@@ -208,20 +208,20 @@ hi rubyValidation ctermfg=16
 hi Comment        ctermfg=250
 hi Cursor         ctermfg=250 ctermbg=238
 hi CursorLineNr   ctermfg=250 ctermbg=253
-hi Error          ctermfg=250 ctermbg=196
+hi Error          ctermfg=250 ctermbg=231
 hi Folded         ctermfg=250 ctermbg=255
 hi Ignore         ctermfg=250
 hi LineNr         ctermfg=250 ctermbg=255
 hi NonText        ctermfg=250 ctermbg=255
 hi PmenuSel       ctermfg=250 ctermbg=238
 hi PreProc        ctermfg=250
-hi SpecialKey     ctermfg=250 ctermbg=196
+hi SpecialKey     ctermfg=250 ctermbg=231
 hi StatusLine     ctermfg=250 ctermbg=255
 hi StatusLineNC   ctermfg=250 ctermbg=255
 hi TabLine        ctermfg=250 ctermbg=253
 hi TabLineFill    ctermfg=250 ctermbg=253
 hi TabLineSel     ctermfg=250
-hi Todo           ctermfg=250 ctermbg=88
+hi Todo           ctermfg=250 ctermbg=231
 hi VertSplit      ctermfg=250 ctermbg=250
 hi Visual         ctermfg=250 ctermbg=61
 hi VisualNOS      ctermfg=250 ctermbg=24
@@ -232,14 +232,13 @@ hi CocErrorSign   ctermfg=161
 hi CocWarningSign ctermfg=161
 hi DiffDelete     ctermfg=161
 hi Directory      ctermfg=161
-hi ErrorMsg       ctermfg=161
-hi Function       ctermfg=161
+hi ErrorMsg       ctermfg=161 ctermbg=231
+hi Function       ctermfg=161 ctermbg=231
 hi ModeMsg        ctermfg=161
 hi MoreMsg        ctermfg=161
 hi SpecialKey     ctermfg=161
 hi String         ctermfg=161
 hi Title          ctermfg=161
-hi Todo           ctermfg=161
 hi WarningMsg     ctermfg=161
 hi diffRemoved    ctermfg=161
 hi rubySymbol     ctermfg=161
