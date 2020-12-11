@@ -38,6 +38,7 @@ tap "heroku/brew"
 tap "homebrew/services"
 
 brew "awscli"
+brew "bat"
 brew "exercism"
 brew "fzf"
 brew "gh"
@@ -127,6 +128,9 @@ esac
 
   mkdir -p "$HOME/.ssh"
   ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
+
+  mkdir -p "$HOME/.config/bat"
+  ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
 
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
