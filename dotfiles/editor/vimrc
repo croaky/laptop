@@ -43,33 +43,41 @@ end
 let g:plug_window='enew'
 
 call plug#begin('~/.vim/plugged')
-  " Automatic, no commands
-  Plug 'dense-analysis/ale' " :help ale
-  Plug 'pbrisbin/vim-mkdir' " auto-create non-existent dir on save
-  Plug 'tpope/vim-endwise'  " auto-add end in Ruby, other langs
+  " :help ale
+  Plug 'dense-analysis/ale'
+
+  " auto-create non-existent dir on save
+  Plug 'pbrisbin/vim-mkdir'
+
+  " auto-add end in Ruby, other langs
+  Plug 'tpope/vim-endwise'
 
   " Language Server Protocol
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
-  " Movement
-  Plug 'tpope/vim-projectionist' " :help projectionist, .projections.json, :A
+  " :help projectionist, .projections.json, :A
+  Plug 'tpope/vim-projectionist'
 
-  " Fuzzy-finding
-  Plug '/usr/local/opt/fzf' " binary installed via Homebrew
-  Plug 'junegunn/fzf.vim'   " :Ag, :Commits, :Files
+  " Fuzzy-finding binary installed via Homebrew
+  Plug '/usr/local/opt/fzf'
 
-  " Testing
-  Plug 'janko-m/vim-test'    " :TestFile, :TestNearest
+  " Fuzzy-finding :Ag, :Commits, :Files
+  Plug 'junegunn/fzf.vim'
 
-  " Comments
-  Plug 'tomtom/tcomment_vim' " <Ctrl><Shift><-><Ctrl><Shift><->
+  " :TestFile, :TestNearest
+  Plug 'janko-m/vim-test'
 
-  " Files
-  Plug 'tpope/vim-eunuch'   " :Rename
-  Plug 'tpope/vim-fugitive' " :Gblame
+  " Comment/uncomment <Ctrl><Shift><-><Ctrl><Shift><->
+  Plug 'tomtom/tcomment_vim'
 
-  " Markdown
-  Plug 'junegunn/vim-easy-align' " <Leader>| align table
+  " :Rename
+  Plug 'tpope/vim-eunuch'
+
+  " :Gblame
+  Plug 'tpope/vim-fugitive'
+
+  " Markdown tables, <Leader>| align table
+  Plug 'junegunn/vim-easy-align'
 
   " Frontend
   Plug 'evanleck/vim-svelte'
