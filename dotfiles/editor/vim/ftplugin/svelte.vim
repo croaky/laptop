@@ -1,7 +1,6 @@
-" let g:svelte_preprocessors = ['typescript']
+let g:svelte_preprocessors = ['typescript', 'postcss']
 
 " Auto-fix
+let b:ale_fixers = ['prettier']
 let g:ale_fix_on_save = 1
-
-" Lint
-" let b:ale_linters = ['typescript']
+let g:ale_javascript_prettier_options = '--plugin-search-dir=.'
