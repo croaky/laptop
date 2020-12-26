@@ -187,6 +187,8 @@ asdf reshim nodejs
 # Ruby
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
 asdf install ruby 2.7.0
+# https://github.com/asdf-vm/asdf-ruby/pull/192
+ASDF_RUBY_BUILD_VERSION=v20201225 asdf install ruby 3.0.0
 
 # Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
