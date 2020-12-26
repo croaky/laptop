@@ -178,8 +178,11 @@ asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
 export NODEJS_CHECK_SIGNATURES=no
 asdf install nodejs 15.0.1
 asdf global nodejs 15.0.1
-asdf reshim nodejs
 npm config set scripts-prepend-node-path true
+npm i -g prettier          # auto-formatting
+npm i -g pnpm              # fast package management
+npm i -g npm-check-updates # ncu -u
+asdf reshim nodejs
 
 # Ruby
 asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
