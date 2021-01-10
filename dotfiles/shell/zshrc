@@ -95,7 +95,6 @@ PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 # Prepend monorepo scripts
 PATH="$LAPTOP/bin:$PATH"
-PATH="$TODO/bin:$PATH"
 
 # Prepend local project ./bin dirs
 PATH=".git/safe/../../bin:$PATH"
