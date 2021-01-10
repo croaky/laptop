@@ -26,16 +26,6 @@ function _git_delete_branch() {
   __gitcomp "$(__git_heads)"
 }
 
-# Load .env file into shell session for environment variables
-function envup() {
-  if [ -f .env ]; then
-    export "$(cat .env)"
-  else
-    echo 'No .env file found' 1>&2
-    return 1
-  fi
-}
-
 # Editor
 export VISUAL=vim
 export EDITOR=$VISUAL
@@ -82,21 +72,12 @@ compinit
 export BLOG="$HOME/blog"
 export EDS="$HOME/EDS"
 export LAPTOP="$HOME/laptop"
-export TODO="$HOME/todo"
-
-# Set environment variable for localhost TLS certificate authority file
-# https://github.com/FiloSottile/mkcert
-export CAFILE="$HOME/Library/Application Support/mkcert/rootCA.pem"
 
 # Change into most common directories
 export CDPATH="$CDPATH:$HOME/src/github.com"
 
 # Prepend Homebrew binaries
 PATH="/usr/local/bin:$PATH"
-
-# Prepend Android tools
-ANDROIDSDK="$HOME/Library/Android/sdk"
-PATH="$ANDROIDSDK/emulator:$ANDROIDSDK/platform-tools:$ANDROIDSDK/tools:$PATH"
 
 # Prepend programming language binaries via ASDF shims
 PATH="$HOME/.asdf/bin:$PATH"
@@ -111,9 +92,6 @@ PATH="$DENO_INSTALL/bin:$PATH"
 
 # Prepend Postgres.app tools
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-
-# Prepend RabbitMQ tools
-PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 
 # Prepend monorepo scripts
 PATH="$LAPTOP/bin:$PATH"
