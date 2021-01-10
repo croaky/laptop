@@ -59,7 +59,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-projectionist'
 
   " Fuzzy-finding binary installed via Homebrew
-  Plug '/usr/local/opt/fzf'
+  if trim(system('uname -m')) == 'arm64'
+    Plug '/opt/homebrew/opt/fzf'
+  else
+    Plug '/usr/local/opt/fzf'
+  endif
 
   " Fuzzy-finding :Ag, :Commits, :Files
   Plug 'junegunn/fzf.vim'

@@ -1,5 +1,14 @@
 #!/usr/bin/env zsh
 
+# arm64 or x86_64
+arch="$(uname -m)"
+
+if [ "$arch" = "arm64" ]; then
+  BREW="/opt/homebrew"
+else
+  BREW="/usr/local"
+fi
+
 # Aliases
 alias b="bundle"
 alias c="git create-branch"
@@ -40,9 +49,9 @@ SAVEHIST=4096
 unset HOMEBREW_NO_ANALYTICS
 
 # fzf for finding files, ag for searching files
-if [ -d /usr/local/opt/fzf/shell ]; then
-  source "/usr/local/opt/fzf/shell/completion.zsh"
-  source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+if [ -d "$BREW/opt/fzf/shell" ]; then
+  source "$BREW/opt/fzf/shell/completion.zsh"
+  source "$BREW/opt/fzf/shell/key-bindings.zsh"
 fi
 export FZF_DEFAULT_COMMAND='ag --hidden --nocolor -g ""'
 
@@ -77,18 +86,14 @@ export LAPTOP="$HOME/laptop"
 export CDPATH="$CDPATH:$HOME/src/github.com"
 
 # Prepend Homebrew binaries
-PATH="/usr/local/bin:$PATH"
+PATH="$BREW/bin:$PATH"
 
 # Prepend programming language binaries via ASDF shims
 PATH="$HOME/.asdf/bin:$PATH"
 PATH="$HOME/.asdf/shims:$PATH"
 
 # Prepend Go binaries
-PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
-
-# Prepend Deno binaries
-export DENO_INSTALL="$HOME/.deno"
-PATH="$DENO_INSTALL/bin:$PATH"
+# PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 
 # Prepend Postgres.app tools
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
