@@ -9,8 +9,8 @@
 # - installs or updates Vim plugins
 
 # This script can be safely run multiple times.
-# It is tested on Big Sur (11.1) and macOS Catalina (10.15)
-# and on arm64 (Apple Silicon) and x86_64 (Intel) chips.
+# Tested with Big Sur (11.1) on arm64 (Apple Silicon) and x86_64 (Intel) chips
+# and with macOS Catalina (10.15) on x86_64 (Intel) chip.
 
 set -eux
 
