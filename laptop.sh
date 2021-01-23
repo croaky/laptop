@@ -46,7 +46,7 @@ brew "gh"
 brew "git"
 brew "go"
 brew "heroku"
-brew "iterm2"
+brew "iterm2" # kitty replacement until M1 support
 brew "jq"
 # brew "kitty" no M1 support yet
 brew "libyaml"
