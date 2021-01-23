@@ -46,8 +46,11 @@ brew "gh"
 brew "git"
 brew "go"
 brew "heroku"
+brew "iterm2"
 brew "jq"
+# brew "kitty" no M1 support yet
 brew "libyaml"
+brew "ngrok"
 brew "node"
 brew "openssl"
 brew "pgformatter"
@@ -59,9 +62,6 @@ brew "tree"
 brew "vim"
 brew "watch"
 brew "zsh"
-
-cask "iterm2"
-# cask "kitty" no M1 support yet
 EOF
 
 brew upgrade
