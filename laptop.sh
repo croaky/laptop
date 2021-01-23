@@ -155,22 +155,11 @@ PATH="$HOME/.asdf/bin:$PATH"
 PATH="$HOME/.asdf/shims:$PATH"
 export PATH
 
-asdf_plugin_update() {
-  if ! asdf plugin-list | grep -Fq "$1"; then
-    asdf plugin-add "$1" "$2"
-  fi
-
-  asdf plugin-update "$1"
-}
-
-# Node
-npm config set scripts-prepend-node-path true
-npm i -g prettier          # auto-formatting
-npm i -g pnpm              # fast package management
-npm i -g npm-check-updates # ncu -u
-
 # Ruby
-asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
+if ! asdf plugin-list | grep -Fq "ruby"; then
+  asdf plugin-add "ruby" "https://github.com/asdf-vm/asdf-ruby"
+fi
+asdf plugin-update "ruby"
 asdf install ruby 2.7.2
 asdf install ruby 3.0.0
 
