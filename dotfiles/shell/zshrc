@@ -93,7 +93,7 @@ PATH="$HOME/.asdf/bin:$PATH"
 PATH="$HOME/.asdf/shims:$PATH"
 
 # Prepend Go binaries
-# PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
+PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 
 # Prepend Deno binaries
 export DENO_INSTALL="$HOME/.deno"
