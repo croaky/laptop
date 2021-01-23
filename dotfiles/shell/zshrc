@@ -95,6 +95,10 @@ PATH="$HOME/.asdf/shims:$PATH"
 # Prepend Go binaries
 # PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 
+# Prepend Deno binaries
+export DENO_INSTALL="$HOME/.deno"
+PATH="$DENO_INSTALL/bin:$PATH"
+
 # Prepend Postgres.app tools
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 

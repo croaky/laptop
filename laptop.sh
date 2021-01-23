@@ -138,6 +138,9 @@ esac
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
 )
 
+# Deno
+curl -fsSL https://deno.land/x/install/install.sh | sh
+
 # ASDF
 if [ -d "$HOME/.asdf" ]; then
   (
