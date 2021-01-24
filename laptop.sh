@@ -8,28 +8,30 @@
 # - installs programming language runtimes
 # - installs or updates Vim plugins
 
-# This script can be run safely multiple times.
-# It is tested on macOS Catalina (10.15).
+# This script can be safely run multiple times.
+# Tested with Big Sur (11.1) on arm64 (Apple Silicon) and x86_64 (Intel) chips
+# and with macOS Catalina (10.15) on x86_64 (Intel) chip.
 
 set -eux
 
-# Homebrew packages
-HOMEBREW_PREFIX="/usr/local"
+# arm64 or x86_64
+arch="$(uname -m)"
 
-if [ -d "$HOMEBREW_PREFIX" ]; then
-  if ! [ -r "$HOMEBREW_PREFIX" ]; then
-    sudo chown -R "$LOGNAME:admin" "$HOMEBREW_PREFIX"
-  fi
+# Homebrew
+if [ "$arch" = "arm64" ]; then
+  BREW="/opt/homebrew"
 else
-  sudo mkdir "$HOMEBREW_PREFIX"
-  sudo chflags norestricted "$HOMEBREW_PREFIX"
-  sudo chown -R "$LOGNAME:admin" "$HOMEBREW_PREFIX"
+  BREW="/usr/local"
 fi
 
-if ! command -v brew >/dev/null; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  export PATH="/usr/local/bin:$PATH"
+if [ ! -d "$BREW" ]; then
+  sudo mkdir -p "$BREW"
+  sudo chflags norestricted "$BREW"
+  sudo chown -R "$LOGNAME:admin" "$BREW"
+  curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C "$BREW"
 fi
+
+export PATH="$BREW/bin:$PATH"
 
 brew analytics off
 brew update-reset
@@ -42,12 +44,14 @@ brew "bat"
 brew "fzf"
 brew "gh"
 brew "git"
+brew "go"
 brew "heroku"
 brew "jq"
 brew "libyaml"
+brew "node"
 brew "openssl"
 brew "pgformatter"
-brew "shellcheck"
+# brew "shellcheck" no M1 support yet
 brew "the_silver_searcher"
 brew "tldr"
 brew "tmux"
@@ -56,7 +60,8 @@ brew "vim"
 brew "watch"
 brew "zsh"
 
-cask "kitty"
+cask "iterm2" # kitty replacement until M1 support
+# cask "kitty" no M1 support yet
 cask "ngrok"
 EOF
 
@@ -65,23 +70,20 @@ brew cleanup
 
 # zsh
 update_shell() {
-  (
-    sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
-    chmod u+w /usr/local/share/zsh /usr/local/share/zsh/site-functions
-  )
+  sudo chown -R $(whoami) "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+  chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+  shellpath="$(command -v zsh)"
 
-  local shell_path;
-  shell_path="$(command -v zsh)"
-
-  if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
-    sudo sh -c "echo $shell_path >> /etc/shells"
+  if ! grep "$shellpath" /etc/shells > /dev/null 2>&1 ; then
+    sudo sh -c "echo $shellpath >> /etc/shells"
   fi
-  chsh -s "$shell_path"
+
+  chsh -s "$shellpath"
 }
 
 case "$SHELL" in
   */zsh)
-    if [ "$(command -v zsh)" != "$HOMEBREW_PREFIX/bin/zsh" ] ; then
+    if [ "$(command -v zsh)" != "$BREW/bin/zsh" ] ; then
       update_shell
     fi
     ;;
@@ -137,14 +139,6 @@ esac
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
 )
 
-# Go
-gover="1.15.4"
-if ! go version | grep -Fq "$gover"; then
-  sudo rm -rf /usr/local/go
-  curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
-    sudo tar xz -C /usr/local
-fi
-
 # Deno
 curl -fsSL https://deno.land/x/install/install.sh | sh
 
@@ -162,27 +156,11 @@ PATH="$HOME/.asdf/bin:$PATH"
 PATH="$HOME/.asdf/shims:$PATH"
 export PATH
 
-asdf_plugin_update() {
-  if ! asdf plugin-list | grep -Fq "$1"; then
-    asdf plugin-add "$1" "$2"
-  fi
-
-  asdf plugin-update "$1"
-}
-
-# Node
-asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
-export NODEJS_CHECK_SIGNATURES=no
-asdf install nodejs 15.0.1
-asdf global nodejs 15.0.1
-npm config set scripts-prepend-node-path true
-npm i -g prettier          # auto-formatting
-npm i -g pnpm              # fast package management
-npm i -g npm-check-updates # ncu -u
-asdf reshim nodejs
-
 # Ruby
-asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
+if ! asdf plugin-list | grep -Fq "ruby"; then
+  asdf plugin-add "ruby" "https://github.com/asdf-vm/asdf-ruby"
+fi
+asdf plugin-update "ruby"
 asdf install ruby 2.7.2
 asdf install ruby 3.0.0
 
