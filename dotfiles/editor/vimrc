@@ -164,6 +164,7 @@ autocmd BufRead setlocal nospell
 
 " Fuzzy-find files
 nmap <C-p> :Files<CR>
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
 
 " Search file contents
 nmap \ :Ag<SPACE>
