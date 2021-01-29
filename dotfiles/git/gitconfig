@@ -1,8 +1,8 @@
 [alias]
-  l = log --pretty=basic
-  lt = log --pretty=time
-  la = log --pretty=author
-  lta = log --pretty=timeauthor
+  l = log --pretty=basic --no-merges
+  lt = log --pretty=time --no-merges
+  la = log --pretty=author --no-merges
+  lta = log --pretty=timeauthor --no-merges
   aa = add --all
   ap = add --patch
   ci = commit -v
