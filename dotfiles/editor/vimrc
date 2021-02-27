@@ -124,7 +124,6 @@ let g:coc_global_extensions = [
   \ 'coc-git',
   \ 'coc-go',
   \ 'coc-html',
-  \ 'coc-json',
   \ 'coc-prettier',
   \ 'coc-svelte',
   \ 'coc-tsserver'
