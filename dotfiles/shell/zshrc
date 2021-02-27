@@ -49,7 +49,7 @@ SAVEHIST=4096
 unset HOMEBREW_NO_ANALYTICS
 
 # fzf for finding files, ag for searching files
-if [ -d "$BREW/opt/fzf/shell" ]; then
+if [ -e "$BREW/opt/fzf/shell" ]; then
   source "$BREW/opt/fzf/shell/completion.zsh"
   source "$BREW/opt/fzf/shell/key-bindings.zsh"
 fi
