@@ -60,11 +60,10 @@ brew "vim"
 brew "watch"
 brew "zsh"
 
-cask "iterm2" # kitty replacement until M1 support
-# cask "kitty" no M1 support yet
 cask "ngrok"
 EOF
 
+brew install --build-from-source kitty # until M1 support lands
 brew upgrade
 brew cleanup
 
