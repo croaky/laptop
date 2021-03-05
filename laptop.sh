@@ -149,7 +149,7 @@ if [ -d "$HOME/.asdf" ]; then
     git reset --hard origin/master
   )
 else
-  git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
+  gh repo clone asdf-vm/asdf "$HOME/.asdf"
 fi
 PATH="$HOME/.asdf/bin:$PATH"
 PATH="$HOME/.asdf/shims:$PATH"

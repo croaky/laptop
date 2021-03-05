@@ -9,7 +9,7 @@ export LAPTOP="$HOME/laptop"
 Clone:
 
 ```
-git clone https://github.com/croaky/laptop.git $LAPTOP
+gh repo clone croaky/laptop $LAPTOP
 cd $LAPTOP
 ```
 
