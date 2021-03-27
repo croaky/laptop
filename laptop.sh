@@ -138,6 +138,11 @@ esac
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
 )
 
+# Go
+if ! command -v godoc &> /dev/null; then
+  go get golang.org/x/tools/cmd/godoc
+fi
+
 # Deno
 curl -fsSL https://deno.land/x/install/install.sh | sh
 
