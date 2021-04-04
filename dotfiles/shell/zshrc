@@ -61,8 +61,9 @@ if ! env | grep -q '^PS1='; then
 fi
 
 # Completion
-autoload -U compinit
-compinit
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit
+compinit -u
 
 # Set environment variables for monorepos
 export BLOG="$HOME/blog"
