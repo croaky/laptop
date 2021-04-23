@@ -4,7 +4,7 @@
 
 # - installs system packages with Homebrew package manager
 # - changes shell to zsh version from Homebrew
-# - creates symlinks from `$LAPTOP/dotfiles` to `$HOME`
+# - creates symlinks from this repo to `$HOME`
 # - installs programming language runtimes
 # - installs or updates Vim plugins
 
@@ -93,20 +93,19 @@ esac
 
 # Symlinks
 (
-  cd "dotfiles"
-
   ln -sf "$PWD/asdf/asdfrc" "$HOME/.asdfrc"
   ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"
 
-  ln -sf "$PWD/editor/vimrc" "$HOME/.vimrc"
+  ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
 
+  mkdir -p "$HOME/.vim/after/syntax"
   mkdir -p "$HOME/.vim/ftdetect"
   mkdir -p "$HOME/.vim/ftplugin"
   mkdir -p "$HOME/.vim/syntax"
   (
-    cd editor/vim
+    cd vim
     ln -sf "$PWD/coc-settings.json" "$HOME/.vim/coc-settings.json"
-    for f in {ftdetect,ftplugin,syntax}/*; do
+    for f in {after/syntax,ftdetect,ftplugin,syntax}/*; do
       ln -sf "$PWD/$f" "$HOME/.vim/$f"
     done
   )
@@ -145,7 +144,7 @@ fi
 
 # Deno
 curl -fsSL https://deno.land/x/install/install.sh | sh
-mkdir ~/.zsh
+mkdir -p ~/.zsh
 deno completions zsh > ~/.zsh/_deno
 
 # Deno Deploy https://github.com/denoland/deployctl
