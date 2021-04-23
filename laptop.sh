@@ -61,11 +61,9 @@ brew "watch"
 brew "zsh"
 
 cask "ngrok"
-cask "r"
-cask "rstudio"
 EOF
 
-# brew install --build-from-source kitty
+brew install --build-from-source kitty # until M1 support lands
 brew upgrade
 brew cleanup
 
