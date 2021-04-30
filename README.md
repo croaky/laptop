@@ -24,3 +24,5 @@ Run:
 ```
 ./laptop.sh
 ```
+
+![screnshot](https://user-images.githubusercontent.com/198/116731106-23792180-a99e-11eb-8afc-ecbbcdf58940.png)
