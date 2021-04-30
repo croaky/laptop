@@ -25,4 +25,4 @@ Run:
 ./laptop.sh
 ```
 
-![screnshot](https://user-images.githubusercontent.com/198/116730509-6edf0000-a99d-11eb-974e-0b0680d3cd4b.png)
+![screnshot](https://user-images.githubusercontent.com/198/116731106-23792180-a99e-11eb-8afc-ecbbcdf58940.png)
