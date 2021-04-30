@@ -1,5 +1,5 @@
 " Auto-fix
-let b:ale_fixers = {'typescript': ['deno']}
+let b:ale_fixers = ['deno']
 let g:ale_fix_on_save = 1 " run deno fmt when saving a buffer
 
 " Lint
