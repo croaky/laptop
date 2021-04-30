@@ -61,11 +61,24 @@ brew "watch"
 brew "zsh"
 
 cask "ngrok"
+cask "r"
+cask "rstudio"
 EOF
 
-brew install --build-from-source kitty # until M1 support lands
 brew upgrade
 brew cleanup
+
+# build kitty from source until Homebrew kitty works for M1
+(
+  mkdir -p "$HOME/src/github.com/kovidgoyal"
+  cd "$HOME/src/github.com/kovidgoyal"
+  rm -rf "kitty"
+  git clone https://github.com/kovidgoyal/kitty
+  cd kitty
+  make app
+  rm -rf /Applications/kitty.app
+  mv kitty.app /Applications
+)
 
 # zsh
 update_shell() {
