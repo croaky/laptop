@@ -96,4 +96,7 @@ PATH="$LAPTOP/bin:$PATH"
 # Prepend local project ./bin dirs
 PATH=".git/safe/../../bin:$PATH"
 
+# Prepend mysql
+PATH="$BREW/opt/mysql-client/bin:$PATH"
+
 export PATH

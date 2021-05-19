@@ -38,6 +38,7 @@ brew update-reset
 brew bundle --no-lock --file=- <<EOF
 tap "heroku/brew"
 tap "homebrew/services"
+tap "planetscale/tap"
 
 brew "awscli"
 brew "bat"
@@ -48,9 +49,11 @@ brew "go"
 brew "heroku"
 brew "jq"
 brew "libyaml"
+brew "mysql-client"
 brew "node"
 brew "openssl"
 brew "pgformatter"
+brew "pscale"
 # brew "shellcheck" no M1 support yet
 brew "the_silver_searcher"
 brew "tldr"
