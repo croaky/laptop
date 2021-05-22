@@ -3,14 +3,13 @@
 # ./laptop.sh
 
 # - installs system packages with Homebrew package manager
-# - changes shell to zsh version from Homebrew
-# - creates symlinks from this repo to `$HOME`
+# - changes shell to Z shell (zsh)
+# - creates symlinks for dotfiles to `$HOME`
 # - installs programming language runtimes
 # - installs or updates Vim plugins
 
 # This script can be safely run multiple times.
-# Tested with Big Sur (11.1) on arm64 (Apple Silicon) and x86_64 (Intel) chips
-# and with macOS Catalina (10.15) on x86_64 (Intel) chip.
+# Tested with Big Sur (11.3) on arm64 (Apple Silicon) and x86_64 (Intel) chips.
 
 set -eux
 

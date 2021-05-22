@@ -17,24 +17,26 @@ function sync() {
   var prBody = find("textarea[name='pull_request[body]']");
   if (commitMsg && prBody) {
     commitMsg.innerHTML = [prBody.value.trim(), window.location.href]
-      .filter(function (el) { return el !== "" })
+      .filter(function (el) {
+        return el !== "";
+      })
       .join("\n\n");
   }
 
   clearTimeout(t);
-  t = setTimeout(function() {
+  t = setTimeout(function () {
     // sync when PR title is updated
-    var prTitleForm = find(".js-issue-update");
-    prTitleForm && prTitleForm.addEventListener('submit', sync);
+    var prTitleForm = find("form.js-issue-update");
+    prTitleForm && prTitleForm.addEventListener("submit", sync);
 
     // sync when PR body is updated
-    var prBodyForm = find(".js-comment-update");
-    prBodyForm && prBodyForm.addEventListener('submit', sync);
+    var prBodyForm = find("form.js-comment-update");
+    prBodyForm && prBodyForm.addEventListener("submit", sync);
 
     // sync when squash and merge button is clicked, confirm form opens
-    var squashBtn = find(".btn-group-squash");
-    squashBtn && squashBtn.addEventListener('click', sync);
+    var squashBtn = find("button.btn-group-squash");
+    squashBtn && squashBtn.addEventListener("click", sync);
   }, 2000);
-};
+}
 
 sync();
