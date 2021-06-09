@@ -53,7 +53,7 @@ brew "node"
 brew "openssl"
 brew "pgformatter"
 brew "pscale"
-# brew "shellcheck" no M1 support yet
+brew "shellcheck"
 brew "the_silver_searcher"
 brew "tldr"
 brew "tmux"
