@@ -130,10 +130,9 @@ let g:coc_global_extensions = [
   \ ]
 
 " Jump to definition
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
 
 " Tab complete with COC
 inoremap <silent><expr> <TAB>
@@ -147,26 +146,15 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Docs
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
 " Disable spelling by default, enable per-filetype
 autocmd BufRead setlocal nospell
 
 " Fuzzy-find files
-nmap <C-p> :Files<CR>
+nnoremap <C-p> :Files<CR>
 let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
 
 " Search file contents
-nmap \ :Ag<SPACE>
+nnoremap \ :Ag<SPACE>
 set grepprg=ag\ --nogroup\ --nocolor
 
 " bind K to grep word under cursor
