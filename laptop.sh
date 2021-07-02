@@ -84,7 +84,7 @@ brew cleanup
 
 # zsh
 update_shell() {
-  sudo chown -R $(whoami) "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+  sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
   chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
   shellpath="$(command -v zsh)"
 
@@ -163,6 +163,9 @@ deno completions zsh > ~/.zsh/_deno
 
 # Deno Deploy https://github.com/denoland/deployctl
 deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/deploy/deployctl.ts
+
+# Heroku Postgres
+heroku plugins:install heroku-pg-extras
 
 # ASDF
 if [ -d "$HOME/.asdf" ]; then
