@@ -1,0 +1,50 @@
+{
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "[ruby]": {
+    "editor.defaultFormatter": "rebornix.ruby"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.executorMap": {
+    "bat": "cmd /c",
+    "go": "go run",
+    "javascript": "node",
+    "lua": "lua",
+    "python": "python -u",
+    "r": "Rscript",
+    "ruby": "ruby",
+    "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+    "shellscript": "bash",
+    "sql": "psql -d $(cat .db) -f $file",
+    "typescript": "ts-node",
+    "v": "v run"
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.fontFamily": "SFMono, Menlo, Monaco, monospace",
+  "editor.formatOnSave": true,
+  "editor.inlayHints.fontFamily": "SFMono, Menlo, Monaco, monospace",
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "trailing",
+  "editor.tabSize": 2,
+  "explorer.confirmDelete": false,
+  "go.formatTool": "goimports",
+  "ruby.format": "standard",
+  "ruby.intellisense": "rubyLocate",
+  "ruby.lint": {
+    "standard": {
+      "useBundler": true
+    }
+  },
+  "ruby.useBundler": true,
+  "ruby.useLanguageServer": true,
+  "telemetry.enableTelemetry": false,
+  "window.zoomLevel": 1,
+  "workbench.colorTheme": "GitHub Dark Dimmed"
+}

@@ -149,6 +149,9 @@ esac
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
+
+  mkdir -p "$HOME/Library/Application Support/Code/User"
+  ln -sf "$PWD/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 )
 
 # Go
