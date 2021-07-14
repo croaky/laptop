@@ -1,16 +1,20 @@
 {
-  "[go]": {
-    "editor.defaultFormatter": "golang.go"
-  },
-  "[ruby]": {
-    "editor.defaultFormatter": "rebornix.ruby"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  // General
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.fontFamily": "SFMono, Menlo, Monaco, monospace",
+  "editor.formatOnSave": true,
+  "editor.inlayHints.fontFamily": "SFMono, Menlo, Monaco, monospace",
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "trailing",
+  "editor.tabSize": 2,
+  "explorer.confirmDelete": false,
+  "files.insertFinalNewline": true,
+  "telemetry.enableTelemetry": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "window.zoomLevel": 1,
+  "workbench.colorTheme": "GitHub Light Default",
+
+  // Run code from file
   "code-runner.clearPreviousOutput": true,
   "code-runner.executorMap": {
     "bat": "cmd /c",
@@ -26,15 +30,27 @@
     "typescript": "ts-node",
     "v": "v run"
   },
-  "diffEditor.ignoreTrimWhitespace": false,
-  "editor.fontFamily": "SFMono, Menlo, Monaco, monospace",
-  "editor.formatOnSave": true,
-  "editor.inlayHints.fontFamily": "SFMono, Menlo, Monaco, monospace",
-  "editor.minimap.enabled": false,
-  "editor.renderWhitespace": "trailing",
-  "editor.tabSize": 2,
-  "explorer.confirmDelete": false,
+
+  // Go
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
   "go.formatTool": "goimports",
+
+  // TypeScript
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // React
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Ruby
+  "[ruby]": {
+    "editor.defaultFormatter": "rebornix.ruby"
+  },
   "ruby.format": "standard",
   "ruby.intellisense": "rubyLocate",
   "ruby.lint": {
@@ -43,8 +59,5 @@
     }
   },
   "ruby.useBundler": true,
-  "ruby.useLanguageServer": true,
-  "telemetry.enableTelemetry": false,
-  "window.zoomLevel": 1,
-  "workbench.colorTheme": "GitHub Dark Dimmed"
+  "ruby.useLanguageServer": true
 }

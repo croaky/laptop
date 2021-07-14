@@ -200,3 +200,6 @@ else
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
+
+# VS Code
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
