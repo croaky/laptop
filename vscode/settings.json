@@ -26,10 +26,15 @@
     "ruby": "ruby",
     "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
     "shellscript": "bash",
-    "sql": "psql -d $(cat .db) -f $file",
+    "sql": "psql -d $(cat .db) -f",
     "typescript": "ts-node",
     "v": "v run"
   },
+  "code-runner.executorMapByGlob": {
+    "*_spec.rb": "rspec"
+  },
+  "code-runner.ignoreSelection": true,
+  "code-runner.runInTerminal": true,
 
   // Go
   "[go]": {
@@ -37,10 +42,13 @@
   },
   "go.formatTool": "goimports",
 
-  // TypeScript
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // SQL
+  "[sql]": {
+    "editor.defaultFormatter": "bradymholt.pgformatter",
   },
+  "pgFormatter.keywordCase": "uppercase",
+  "pgFormatter.functionCase": "lowercase",
+  "pgFormatter.spaces": 2,
 
   // React
   "[typescriptreact]": {
@@ -59,5 +67,13 @@
     }
   },
   "ruby.useBundler": true,
-  "ruby.useLanguageServer": true
+  "ruby.useLanguageServer": true,
+
+  // TypeScript
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }
