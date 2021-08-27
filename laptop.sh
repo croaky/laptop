@@ -193,3 +193,6 @@ vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
 # VS Code
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
+# Solana
+sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
