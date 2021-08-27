@@ -39,6 +39,7 @@ tap "heroku/brew"
 tap "homebrew/services"
 tap "planetscale/tap"
 
+brew "asdf"
 brew "awscli"
 brew "bat"
 brew "fzf"
@@ -171,26 +172,15 @@ deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no
 heroku plugins:install heroku-pg-extras
 
 # ASDF
-if [ -d "$HOME/.asdf" ]; then
-  (
-    cd "$HOME/.asdf"
-    git fetch origin
-    git reset --hard origin/master
-  )
-else
-  gh repo clone asdf-vm/asdf "$HOME/.asdf"
-fi
-PATH="$HOME/.asdf/bin:$PATH"
-PATH="$HOME/.asdf/shims:$PATH"
-export PATH
+export PATH="$BREW/opt/asdf/bin:$BREW/opt/asdf/shims:$PATH"
 
 # Ruby
 if ! asdf plugin-list | grep -Fq "ruby"; then
   asdf plugin-add "ruby" "https://github.com/asdf-vm/asdf-ruby"
 fi
 asdf plugin-update "ruby"
-asdf install ruby 2.7.3
-asdf install ruby 3.0.1
+asdf install ruby 2.7.4
+asdf install ruby 3.0.2
 
 # Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
