@@ -92,6 +92,9 @@ call plug#begin('~/.vim/plugged')
   " Go
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
+  " Rust
+  Plug 'rust-lang/rust.vim'
+
   " Ruby
   Plug 'tpope/vim-rails'
   Plug 'vim-ruby/vim-ruby'
@@ -125,6 +128,7 @@ let g:coc_global_extensions = [
   \ 'coc-go',
   \ 'coc-html',
   \ 'coc-prettier',
+  \ 'coc-rls',
   \ 'coc-svelte',
   \ 'coc-tsserver'
   \ ]
