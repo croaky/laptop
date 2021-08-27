@@ -149,6 +149,9 @@ esac
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
+
+  mkdir -p "$HOME/Library/Application Support/Code/User"
+  ln -sf "$PWD/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 )
 
 # Go
@@ -197,3 +200,6 @@ else
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
+
+# VS Code
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false

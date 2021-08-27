@@ -1,0 +1,79 @@
+{
+  // General
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.fontFamily": "SFMono, Menlo, Monaco, monospace",
+  "editor.formatOnSave": true,
+  "editor.inlayHints.fontFamily": "SFMono, Menlo, Monaco, monospace",
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "trailing",
+  "editor.tabSize": 2,
+  "explorer.confirmDelete": false,
+  "files.insertFinalNewline": true,
+  "telemetry.enableTelemetry": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "window.zoomLevel": 1,
+  "workbench.colorTheme": "GitHub Light Default",
+
+  // Run code from file
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.executorMap": {
+    "bat": "cmd /c",
+    "go": "go run",
+    "javascript": "node",
+    "lua": "lua",
+    "python": "python -u",
+    "r": "Rscript",
+    "ruby": "ruby",
+    "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+    "shellscript": "bash",
+    "sql": "psql -d $(cat .db) -f",
+    "typescript": "ts-node",
+    "v": "v run"
+  },
+  "code-runner.executorMapByGlob": {
+    "*_spec.rb": "rspec"
+  },
+  "code-runner.ignoreSelection": true,
+  "code-runner.runInTerminal": true,
+
+  // Go
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "go.formatTool": "goimports",
+
+  // SQL
+  "[sql]": {
+    "editor.defaultFormatter": "bradymholt.pgformatter",
+  },
+  "pgFormatter.keywordCase": "uppercase",
+  "pgFormatter.functionCase": "lowercase",
+  "pgFormatter.spaces": 2,
+
+  // React
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Ruby
+  "[ruby]": {
+    "editor.defaultFormatter": "rebornix.ruby"
+  },
+  "ruby.format": "standard",
+  "ruby.intellisense": "rubyLocate",
+  "ruby.lint": {
+    "standard": {
+      "useBundler": true
+    }
+  },
+  "ruby.useBundler": true,
+  "ruby.useLanguageServer": true,
+
+  // TypeScript
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+}
