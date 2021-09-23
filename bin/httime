@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Print response time of HTTP request
+#
+# httime https://google.com
+# 0.094378
+
+curl -s -w %{time_total}\\n -o /dev/null "$1"
