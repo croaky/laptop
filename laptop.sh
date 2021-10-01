@@ -64,8 +64,6 @@ brew "watch"
 brew "zsh"
 
 cask "ngrok"
-cask "r"
-cask "rstudio"
 EOF
 
 brew upgrade
