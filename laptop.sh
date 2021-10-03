@@ -69,18 +69,6 @@ EOF
 brew upgrade
 brew cleanup
 
-# build kitty from source until Homebrew kitty works for M1
-(
-  mkdir -p "$HOME/src/github.com/kovidgoyal"
-  cd "$HOME/src/github.com/kovidgoyal"
-  rm -rf "kitty"
-  git clone https://github.com/kovidgoyal/kitty
-  cd kitty
-  make app
-  rm -rf /Applications/kitty.app
-  mv kitty.app /Applications
-)
-
 # zsh
 update_shell() {
   sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
@@ -204,3 +192,15 @@ fi
 if ! command -v rustfmt &> /dev/null; then
   rustup component add rustfmt
 fi
+
+# build kitty from source until Homebrew kitty works for M1
+(
+  mkdir -p "$HOME/src/github.com/kovidgoyal"
+  cd "$HOME/src/github.com/kovidgoyal"
+  rm -rf "kitty"
+  git clone https://github.com/kovidgoyal/kitty
+  cd kitty
+  make app
+  rm -rf /Applications/kitty.app
+  mv kitty.app /Applications
+)
