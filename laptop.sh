@@ -130,6 +130,9 @@ esac
   mkdir -p "$HOME/.config/bat"
   ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
 
+  mkdir -p "$HOME/.warp/themes"
+  ln -sf "$PWD/shell/warp-theme.yaml" "$HOME/.warp/themes"
+
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
   ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
