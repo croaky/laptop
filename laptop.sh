@@ -185,7 +185,7 @@ vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
 # Solana
-# sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
 
 # Rust
 if ! command -v rustup &> /dev/null; then
