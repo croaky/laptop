@@ -48,6 +48,7 @@ brew "git"
 brew "go"
 brew "heroku"
 brew "jq"
+brew "kitty", args: ["build-from-source"]
 brew "libyaml"
 brew "mysql-client"
 brew "node"
@@ -189,21 +190,9 @@ sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
 # Rust
 if ! command -v rustup &> /dev/null; then
   curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-  source $HOME/.cargo/env
+  source "$HOME/.cargo/env"
 fi
 
 if ! command -v rustfmt &> /dev/null; then
   rustup component add rustfmt
 fi
-
-# build kitty from source until Homebrew kitty works for M1
-(
-  mkdir -p "$HOME/src/github.com/kovidgoyal"
-  cd "$HOME/src/github.com/kovidgoyal"
-  rm -rf "kitty"
-  git clone https://github.com/kovidgoyal/kitty
-  cd kitty
-  make app
-  rm -rf /Applications/kitty.app
-  mv kitty.app /Applications
-)
