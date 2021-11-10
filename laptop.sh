@@ -155,9 +155,6 @@ curl -fsSL https://deno.land/x/install/install.sh | sh
 mkdir -p ~/.zsh
 deno completions zsh > ~/.zsh/_deno
 
-# Deno Deploy https://github.com/denoland/deployctl
-deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/deploy/deployctl.ts
-
 # Heroku Postgres
 heroku plugins:install heroku-pg-extras
 
