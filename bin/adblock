@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-# Get /etc/hosts file to block ads at the networking level
+# Create file to block ads at the networking level
 curl -s https://winhelp2002.mvps.org/hosts.txt > /tmp/adblock
 
 # Re-write Windows to Unix line endings
@@ -13,14 +13,14 @@ comment() {
 }
 
 # Comment-out used hosts
-comment 'api.segment.io'
 comment 'api.amplitude.com'
+comment 'api.segment.io'
 
-# Add /etc/hosts overrides
+# Restore macOS system defaults
 echo '# MacOS default
 255.255.255.255 broadcasthost' >> /tmp/etchosts
 
-# Update /etc/hosts
+# Apply to /etc/hosts
 sudo mv /tmp/etchosts /etc/hosts
 
 # Flush DNS cache
