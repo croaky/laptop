@@ -166,7 +166,6 @@ if ! asdf plugin-list | grep -Fq "ruby"; then
   asdf plugin-add "ruby" "https://github.com/asdf-vm/asdf-ruby"
 fi
 asdf plugin-update "ruby"
-asdf install ruby 2.7.5
 asdf install ruby 3.0.3
 
 # Vim
