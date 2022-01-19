@@ -15,6 +15,7 @@
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore
+  ignorecase = false
 [credential]
   helper = osxkeychain
 [diff]
