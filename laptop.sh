@@ -16,6 +16,57 @@ set -eux
 # arm64 or x86_64
 arch="$(uname -m)"
 
+# Symlinks
+(
+  ln -sf "$PWD/asdf/asdfrc" "$HOME/.asdfrc"
+  ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"
+
+  ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
+
+  mkdir -p "$HOME/.vim/ftdetect"
+  mkdir -p "$HOME/.vim/ftplugin"
+  mkdir -p "$HOME/.vim/syntax"
+  (
+    cd vim
+    ln -sf "$PWD/coc-settings.json" "$HOME/.vim/coc-settings.json"
+    for f in {ftdetect,ftplugin,syntax}/*; do
+      ln -sf "$PWD/$f" "$HOME/.vim/$f"
+    done
+  )
+
+  ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
+  ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
+  ln -sf "$PWD/git/gitmessage" "$HOME/.gitmessage"
+
+  mkdir -p "$HOME/.bundle"
+  ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
+  ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
+  ln -sf "$PWD/ruby/irbrc" "$HOME/.irbrc"
+  ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
+
+  mkdir -p "$HOME/.config/kitty"
+  ln -sf "$PWD/shell/kitty.conf" "$HOME/.config/kitty/kitty.conf"
+
+  mkdir -p "$HOME/.ssh"
+  ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
+
+  mkdir -p "$HOME/.config/bat"
+  ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
+
+  mkdir -p "$HOME/.warp/themes"
+  ln -sf "$PWD/shell/warp-theme.yaml" "$HOME/.warp/themes"
+
+  ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
+  ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
+  ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
+  ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
+
+  ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
+
+  mkdir -p "$HOME/Library/Application Support/Code/User"
+  ln -sf "$PWD/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+)
+
 # Homebrew
 if [ "$arch" = "arm64" ]; then
   BREW="/opt/homebrew"
@@ -93,57 +144,6 @@ case "$SHELL" in
     update_shell
     ;;
 esac
-
-# Symlinks
-(
-  ln -sf "$PWD/asdf/asdfrc" "$HOME/.asdfrc"
-  ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"
-
-  ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
-
-  mkdir -p "$HOME/.vim/ftdetect"
-  mkdir -p "$HOME/.vim/ftplugin"
-  mkdir -p "$HOME/.vim/syntax"
-  (
-    cd vim
-    ln -sf "$PWD/coc-settings.json" "$HOME/.vim/coc-settings.json"
-    for f in {ftdetect,ftplugin,syntax}/*; do
-      ln -sf "$PWD/$f" "$HOME/.vim/$f"
-    done
-  )
-
-  ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
-  ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
-  ln -sf "$PWD/git/gitmessage" "$HOME/.gitmessage"
-
-  mkdir -p "$HOME/.bundle"
-  ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
-  ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
-  ln -sf "$PWD/ruby/irbrc" "$HOME/.irbrc"
-  ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
-
-  mkdir -p "$HOME/.config/kitty"
-  ln -sf "$PWD/shell/kitty.conf" "$HOME/.config/kitty/kitty.conf"
-
-  mkdir -p "$HOME/.ssh"
-  ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
-
-  mkdir -p "$HOME/.config/bat"
-  ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
-
-  mkdir -p "$HOME/.warp/themes"
-  ln -sf "$PWD/shell/warp-theme.yaml" "$HOME/.warp/themes"
-
-  ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
-  ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
-  ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
-  ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
-
-  ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
-
-  mkdir -p "$HOME/Library/Application Support/Code/User"
-  ln -sf "$PWD/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-)
 
 # Go
 if ! command -v godoc &> /dev/null; then
