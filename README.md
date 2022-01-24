@@ -11,7 +11,9 @@ cd $LAPTOP
 
 ![screenshot](https://user-images.githubusercontent.com/198/116731106-23792180-a99e-11eb-8afc-ecbbcdf58940.png)
 
-## Out of scope of script
+## Extras
+
+The following items are not part of the script.
 
 Configure "System Preferences > Keyboard":
 
@@ -23,6 +25,9 @@ Install macOS apps:
 
 * [Magnet.app](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
 * [Postgres.app](https://postgresapp.com/)
+
+Go to <chrome://extensions/>, toggle on "Developer mode",
+click "Load unpacked", and select `$LAPTOP/chrome`.
 
 [Create an SSH key](https://dancroak.com/ssh-ed25519):
 
