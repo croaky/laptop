@@ -220,6 +220,7 @@ hi LineNr         ctermfg=250 ctermbg=255
 hi NonText        ctermfg=250 ctermbg=255
 hi PmenuSel       ctermfg=250 ctermbg=238
 hi PreProc        ctermfg=250
+hi Special        ctermfg=250 ctermbg=231
 hi SpecialKey     ctermfg=250 ctermbg=231
 hi StatusLine     ctermfg=250 ctermbg=255
 hi StatusLineNC   ctermfg=250 ctermbg=255
