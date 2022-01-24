@@ -13,7 +13,13 @@ cd $LAPTOP
 
 ## Out of scope of script
 
-Manually, install macOS apps:
+Configure "System Preferences > Keyboard":
+
+* Set "Key Repeat" to "Fast".
+* Set "Delay Until Repeat" to "Short".
+* Set "Modifier Keys > Caps Lock Key" to "^ Control".
+
+Install macOS apps:
 
 * [Magnet.app](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
 * [Postgres.app](https://postgresapp.com/)
@@ -23,5 +29,8 @@ Manually, install macOS apps:
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "$(whoami)@$(hostname)"
 eval "$(ssh-agent -s)"
-ssh-add -K ~/.ssh/id_ed25519
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+cat ~/.ssh/id_ed25519.pub | pbcopy
 ```
+
+[Upload SSH key to GitHub](https://github.com/settings/keys).

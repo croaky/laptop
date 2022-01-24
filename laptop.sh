@@ -53,9 +53,6 @@ arch="$(uname -m)"
   mkdir -p "$HOME/.config/bat"
   ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
 
-  mkdir -p "$HOME/.warp/themes"
-  ln -sf "$PWD/shell/warp-theme.yaml" "$HOME/.warp/themes"
-
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
   ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
@@ -99,7 +96,6 @@ brew "git"
 brew "go"
 brew "heroku"
 brew "jq"
-brew "kitty", args: ["build-from-source"]
 brew "libyaml"
 brew "mysql-client"
 brew "node"
@@ -121,7 +117,11 @@ EOF
 brew upgrade
 brew cleanup
 
-# zsh
+# Shell
+if [ ! -d "/Applications/kitty.app" ]; then
+  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+fi
+
 update_shell() {
   sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
   chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
@@ -179,16 +179,3 @@ vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
 # VS Code
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-
-# Solana
-sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
-
-# Rust
-if ! command -v rustup &> /dev/null; then
-  curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-  source "$HOME/.cargo/env"
-fi
-
-if ! command -v rustfmt &> /dev/null; then
-  rustup component add rustfmt
-fi
