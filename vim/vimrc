@@ -82,20 +82,17 @@ call plug#begin('~/.vim/plugged')
   " Markdown tables, <Leader>| align table
   Plug 'junegunn/vim-easy-align'
 
-  " Frontend
+  " Frontends
   Plug 'evanleck/vim-svelte'
   Plug 'jparise/vim-graphql'
   Plug 'leafgarland/typescript-vim'
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
 
-  " Go
+  " Backends
+  Plug 'vim-crystal/vim-crystal'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-
-  " Rust
   Plug 'rust-lang/rust.vim'
-
-  " Ruby
   Plug 'tpope/vim-rails'
   Plug 'vim-ruby/vim-ruby'
 call plug#end()
