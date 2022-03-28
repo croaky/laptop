@@ -13,8 +13,10 @@
 
 set -eux
 
-# arm64 or x86_64
-arch="$(uname -m)"
+if [ "$(uname -m)" != "arm64" ]; then
+ echo "croaky/laptop" is only configured for M1 laptops
+ exit 1
+fi
 
 # Symlinks
 (
@@ -65,11 +67,7 @@ arch="$(uname -m)"
 )
 
 # Homebrew
-if [ "$arch" = "arm64" ]; then
-  BREW="/opt/homebrew"
-else
-  BREW="/usr/local"
-fi
+BREW="/opt/homebrew"
 
 if [ ! -d "$BREW" ]; then
   sudo mkdir -p "$BREW"
@@ -122,7 +120,7 @@ if [ ! -d "/Applications/kitty.app" ]; then
   curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 fi
 
-update_shell() {
+if [ "$(command -v zsh)" != "$BREW/bin/zsh" ] ; then
   sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
   chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
   shellpath="$(command -v zsh)"
@@ -132,18 +130,7 @@ update_shell() {
   fi
 
   chsh -s "$shellpath"
-}
-
-case "$SHELL" in
-  */zsh)
-    if [ "$(command -v zsh)" != "$BREW/bin/zsh" ] ; then
-      update_shell
-    fi
-    ;;
-  *)
-    update_shell
-    ;;
-esac
+fi
 
 # Go
 if ! command -v godoc &> /dev/null; then
