@@ -9,12 +9,12 @@
 # - installs or updates Vim plugins
 
 # This script can be safely run multiple times.
-# Tested with Big Sur (11.3) on arm64 (Apple Silicon) and x86_64 (Intel) chips.
+# Tested with macOS Monterey (12.2) on arm64 (Apple Silicon)
 
 set -eux
 
 if [ "$(uname -m)" != "arm64" ]; then
- echo "croaky/laptop" is only configured for M1 laptops
+ echo "laptop script only configured for M1 chip"
  exit 1
 fi
 
@@ -70,10 +70,7 @@ fi
 BREW="/opt/homebrew"
 
 if [ ! -d "$BREW" ]; then
-  sudo mkdir -p "$BREW"
-  sudo chflags norestricted "$BREW"
-  sudo chown -R "$LOGNAME:admin" "$BREW"
-  curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C "$BREW"
+  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 fi
 
 export PATH="$BREW/bin:$PATH"
