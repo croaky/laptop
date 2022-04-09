@@ -130,6 +130,12 @@ if [ "$(command -v zsh)" != "$BREW/bin/zsh" ] ; then
   chsh -s "$shellpath"
 fi
 
+# Whitelist terminal for MacOS malware scanning of binaries.
+# Requires additional (one-time) step of enabling terminal program (e.g. kitty)
+# at Preferences > Security & Privacy > Privacy > Developer Tools
+# https://stackoverflow.com/a/59229195
+sudo spctl developer-mode enable-terminal
+
 # Go
 if ! command -v godoc &> /dev/null; then
   go get golang.org/x/tools/cmd/godoc
