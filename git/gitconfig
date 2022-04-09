@@ -18,6 +18,10 @@
   ignorecase = false
 [credential]
   helper = osxkeychain
+[credential "https://github.com"]
+  helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+  helper = !/opt/homebrew/bin/gh auth git-credential
 [diff]
   noprefix = true
   tool = vimdiff
@@ -29,6 +33,8 @@
   user = croaky
 [include]
   path = ~/.gitconfig.local
+[init]
+  defaultBranch = main
 [merge]
   ff = only
   tool = vimdiff
@@ -39,10 +45,10 @@
   time = format:%C(red)%h%C(reset) %C(blue)%cs%C(reset) %s%C(reset)
   author = format:%C(red)%h%C(reset) %s %C(green)%an%C(reset)
   timeauthor = format:%C(red)%h%C(reset) %C(blue)%cs%C(reset) %s %C(green)%an%C(reset)
-[push]
-  default = current
 [pull]
   ff = only
+[push]
+  default = current
 [rebase]
   autosquash = true
 [rerere]
@@ -50,5 +56,3 @@
 [user]
   name = Dan Croak
   email = dan@statusok.com
-[init]
-  defaultBranch = main
