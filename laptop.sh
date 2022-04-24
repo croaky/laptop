@@ -151,7 +151,7 @@ if ! asdf plugin-list | grep -Fq "ruby"; then
   asdf plugin-add "ruby" "https://github.com/asdf-vm/asdf-ruby"
 fi
 asdf plugin-update "ruby"
-asdf install ruby 3.0.3
+asdf install ruby 3.1.2
 
 # Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
