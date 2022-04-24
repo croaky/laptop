@@ -24,7 +24,6 @@ fi
   ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"
 
   ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
-
   mkdir -p "$HOME/.vim/ftdetect"
   mkdir -p "$HOME/.vim/ftplugin"
   mkdir -p "$HOME/.vim/syntax"
@@ -35,6 +34,8 @@ fi
       ln -sf "$PWD/$f" "$HOME/.vim/$f"
     done
   )
+  mkdir -p "$HOME/.config/nvim"
+  ln -sf "$PWD/vim/nvim.vim" "$HOME/.config/nvim/init.vim"
 
   ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
   ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
@@ -95,6 +96,7 @@ brew "jq"
 brew "libyaml"
 brew "mysql-client"
 brew "node"
+brew "neovim"
 brew "openssl"
 brew "pgformatter"
 brew "pscale"
