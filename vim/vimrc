@@ -42,6 +42,16 @@ end
 let g:plug_window='enew'
 
 call plug#begin('~/.vim/plugged')
+  " Neovim
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
+
   " :help ale
   Plug 'dense-analysis/ale'
 
@@ -50,9 +60,6 @@ call plug#begin('~/.vim/plugged')
 
   " auto-add end in Ruby, other langs
   Plug 'tpope/vim-endwise'
-
-  " Language Server Protocol
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
   " :help projectionist, .projections.json, :A
   Plug 'tpope/vim-projectionist'
@@ -116,36 +123,6 @@ augroup ale
     \ let g:ale_lint_on_enter = 1 |
     \ let g:ale_lint_on_text_changed = 0
 augroup END
-
-" https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-let g:coc_global_extensions = [
-  \ 'coc-css',
-  \ 'coc-deno',
-  \ 'coc-git',
-  \ 'coc-go',
-  \ 'coc-html',
-  \ 'coc-prettier',
-  \ 'coc-rls',
-  \ 'coc-svelte',
-  \ 'coc-tsserver'
-  \ ]
-
-" Jump to definition
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
-
-" Tab complete with COC
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 " Disable spelling by default, enable per-filetype
 autocmd BufRead setlocal nospell
@@ -231,9 +208,6 @@ hi VisualNOS      ctermfg=250 ctermbg=24
 hi gitCommitDiff  ctermfg=250
 
 " Pink
-hi CocErrorSign   ctermfg=161
-hi CocInfoSign    ctermfg=161
-hi CocWarningSign ctermfg=161
 hi DiffDelete     ctermfg=161
 hi Directory      ctermfg=161
 hi ErrorMsg       ctermfg=161 ctermbg=231
@@ -249,8 +223,6 @@ hi diffRemoved    ctermfg=161
 hi rubySymbol     ctermfg=161
 
 " Turquoise
-hi CocHintSign     ctermfg=30
-hi CocMarkdownLink ctermfg=30
 hi Constant        ctermfg=30
 hi DiffAdd         ctermfg=30 ctermbg=194
 hi Identifier      ctermfg=30
