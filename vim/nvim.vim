@@ -26,7 +26,6 @@ lua <<EOF
     })
   })
 
-  -- Use buffer source for `/`
   cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
@@ -34,7 +33,6 @@ lua <<EOF
     }
   })
 
-  -- Use cmdline & path source for ':'
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
@@ -44,7 +42,6 @@ lua <<EOF
     })
   })
 
-  -- Setup lspconfig.
   local on_attach = function(client, bufnr)
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
