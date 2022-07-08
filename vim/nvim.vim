@@ -3,7 +3,6 @@ let &packpath = &runtimepath
 source ~/.vimrc
 
 lua <<EOF
-  -- Setup nvim-cmp.
   local cmp = require'cmp'
 
   cmp.setup({
@@ -11,10 +10,6 @@ lua <<EOF
       expand = function(args)
         vim.fn["vsnip#anonymous"](args.body)
       end,
-    },
-    window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -31,16 +26,7 @@ lua <<EOF
     })
   })
 
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-    }, {
-      { name = 'buffer' },
-    })
-  })
-
-  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  -- Use buffer source for `/`
   cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
@@ -48,7 +34,7 @@ lua <<EOF
     }
   })
 
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  -- Use cmdline & path source for ':'
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
@@ -72,7 +58,7 @@ lua <<EOF
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
   local lspconfig = require('lspconfig')
-  local servers = { 'gopls', 'tsserver' }
+  local servers = { 'gopls', 'solargraph', 'tsserver' }
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
       on_attach = on_attach,
