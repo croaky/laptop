@@ -11,4 +11,4 @@ let b:ale_linters = ['standardrb']
 let g:ruby_indent_assignment_style = 'variable'
 
 " Run current file
-nmap <buffer> <Leader>r :!clear && bundle exec ruby %<CR>
+nmap <buffer> <Leader>r :terminal bundle exec ruby %<CR>

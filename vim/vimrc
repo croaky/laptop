@@ -146,7 +146,7 @@ nnoremap <silent> <Leader>t :TestFile<CR>
 nnoremap <silent> <Leader>s :TestNearest<CR>
 
 " Test && Commit || Revert
-nnoremap <silent> <Leader>c :!clear && tcr<CR>
+nnoremap <silent> <Leader>c :terminal tcr<CR>
 
 " Move between windows
 nnoremap <C-j> <C-w>j
