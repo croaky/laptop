@@ -83,11 +83,11 @@ PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 export DENO_INSTALL="$HOME/.deno"
 PATH="$DENO_INSTALL/bin:$PATH"
 
+# Prepend Node 16 binaries for GitHub Copilot
+PATH="/opt/homebrew/opt/node@16/bin:$PATH"
+
 # Prepend Homebrew binaries
 PATH="$BREW/bin:$PATH"
-
-# Prepend Solana binaries
-PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 
 # Prepend Postgres.app tools
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"

@@ -52,6 +52,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
 
+  " :help copilot
+  Plug 'github/copilot.vim'
+
   " :help ale
   Plug 'dense-analysis/ale'
 
