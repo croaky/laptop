@@ -80,7 +80,7 @@ call plug#begin('~/.vim/plugged')
   " :TestFile, :TestNearest
   Plug 'janko-m/vim-test'
 
-  " Comment/uncomment <Ctrl><Shift><-><Ctrl><Shift><->
+  " Comment/uncomment lines and selections with <gcc>
   Plug 'tomtom/tcomment_vim'
 
   " :Rename
@@ -144,9 +144,11 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
 
-" Run tests
+" Run tests https://github.com/vim-test/vim-test#kitty-strategy-setup
 nnoremap <silent> <Leader>t :TestFile<CR>
 nnoremap <silent> <Leader>s :TestNearest<CR>
+let g:test#strategy = "kitty"
+let g:test#echo_command = 0
 
 " Test && Commit || Revert
 nnoremap <silent> <Leader>c :terminal tcr<CR>
