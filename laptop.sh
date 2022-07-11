@@ -156,12 +156,12 @@ asdf install ruby 3.1.2
 
 # Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
-  vim -u "$HOME/.vimrc" +PlugUpgrade +qa
+  nvim --headless +PlugUpgrade +qa
 else
   curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
-vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
+nvim --headless +PlugUpdate +PlugClean! +qa
 
 # VS Code
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
