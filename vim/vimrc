@@ -147,7 +147,8 @@ nnoremap <Leader><Leader> <C-^>
 " Run tests https://github.com/vim-test/vim-test#kitty-strategy-setup
 nnoremap <silent> <Leader>t :TestFile<CR>
 nnoremap <silent> <Leader>s :TestNearest<CR>
-let g:test#strategy = "kitty"
+let g:test#strategy = "neovim"
+let g:test#neovim#start_normal = 1
 let g:test#echo_command = 0
 
 " Test && Commit || Revert
