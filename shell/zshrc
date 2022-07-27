@@ -14,6 +14,7 @@ alias flush-cache="sudo killall -HUP mDNSResponder"
 alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias mkdir="mkdir -p"
 alias path='echo $PATH | tr -s ":" "\n"'
+alias vim="nvim"
 
 # Autocomplete branch names for git delete-branch
 function _git_delete_branch() {
@@ -21,7 +22,7 @@ function _git_delete_branch() {
 }
 
 # Editor
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR=$VISUAL
 
 # History
@@ -82,11 +83,11 @@ PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 export DENO_INSTALL="$HOME/.deno"
 PATH="$DENO_INSTALL/bin:$PATH"
 
+# Prepend Node 16 binaries for GitHub Copilot
+PATH="/opt/homebrew/opt/node@16/bin:$PATH"
+
 # Prepend Homebrew binaries
 PATH="$BREW/bin:$PATH"
-
-# Prepend Solana binaries
-PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 
 # Prepend Postgres.app tools
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"

@@ -29,7 +29,6 @@ fi
   mkdir -p "$HOME/.vim/syntax"
   (
     cd vim
-    ln -sf "$PWD/coc-settings.json" "$HOME/.vim/coc-settings.json"
     for f in {ftdetect,ftplugin,syntax}/*; do
       ln -sf "$PWD/$f" "$HOME/.vim/$f"
     done
@@ -95,7 +94,7 @@ brew "heroku"
 brew "jq"
 brew "libyaml"
 brew "mysql-client"
-brew "node"
+brew "node@16" # v16 for GitHub Copilot
 brew "neovim"
 brew "openssl"
 brew "pgformatter"
@@ -157,12 +156,12 @@ asdf install ruby 3.1.2
 
 # Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
-  vim -u "$HOME/.vimrc" +PlugUpgrade +qa
+  nvim --headless +PlugUpgrade +qa
 else
   curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
-vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
+nvim --headless +PlugUpdate +PlugClean! +qa
 
 # VS Code
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
