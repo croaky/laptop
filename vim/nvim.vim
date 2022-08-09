@@ -18,9 +18,9 @@ lua <<EOF
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<TAB>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<CR>'] = cmp.mapping.confirm({ select = false }),
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
@@ -56,13 +56,34 @@ lua <<EOF
   end
 
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
   local lspconfig = require('lspconfig')
-  local servers = { 'gopls', 'solargraph', 'tsserver' }
-  for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-    }
-  end
+  local util = require 'lspconfig.util'
+
+  -- Go
+  lspconfig['gopls'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+
+  -- Ruby
+  lspconfig['solargraph'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+
+  -- Deno, TypeScript
+  -- https://deno.land/manual/getting_started/setup_your_environment#neovim-06-using-the-built-in-language-server
+  -- lspconfig['deno'].setup {
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  --   root_dir = util.root_pattern("deno.json", "deno.jsonc"),
+  -- }
+  lspconfig['tsserver'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    root_dir = util.root_pattern("package.json"),
+  }
+  vim.g.markdown_fenced_languages = {
+    "ts=typescript"
+  }
 EOF
