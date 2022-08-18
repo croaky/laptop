@@ -2,26 +2,31 @@
 
 set -eo pipefail
 
-# Create file to block ads at the networking level
-curl -s https://winhelp2002.mvps.org/hosts.txt > /tmp/adblock
+if [[ "$1" == "undo" ]]; then
+  echo '# MacOS default
+  255.255.255.255 broadcasthost' | sudo tee /etc/hosts > /dev/null
+else
+  # Create file to block ads at the networking level
+  curl -s https://winhelp2002.mvps.org/hosts.txt > /tmp/adblock
 
-# Re-write Windows to Unix line endings
-tr -d '\r' < /tmp/adblock > /tmp/etchosts
+  # Re-write Windows to Unix line endings
+  tr -d '\r' < /tmp/adblock > /tmp/etchosts
 
-comment() {
-  replace "0.0.0.0 $1" "# 0.0.0.0 $1" /tmp/etchosts
-}
+  comment() {
+    replace "0.0.0.0 $1" "# 0.0.0.0 $1" /tmp/etchosts
+  }
 
-# Comment-out used hosts
-comment 'api.amplitude.com'
-comment 'api.segment.io'
+  # Comment-out used hosts
+  comment 'api.amplitude.com'
+  comment 'api.segment.io'
 
-# Restore macOS system defaults
-echo '# MacOS default
-255.255.255.255 broadcasthost' >> /tmp/etchosts
+  # Restore macOS system defaults
+  echo '# MacOS default
+  255.255.255.255 broadcasthost' >> /tmp/etchosts
 
-# Apply to /etc/hosts
-sudo mv /tmp/etchosts /etc/hosts
+  # Apply to /etc/hosts
+  sudo mv /tmp/etchosts /etc/hosts
+fi
 
 # Flush DNS cache
 sudo killall -HUP mDNSResponder
