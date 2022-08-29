@@ -2,14 +2,14 @@
 
 # ./laptop.sh
 
-# - installs system packages with Homebrew package manager
-# - changes shell to Z shell (zsh)
 # - creates symlinks for dotfiles to `$HOME`
-# - installs programming language runtimes
-# - installs or updates Vim plugins
+# - installs system packages with Homebrew
+# - sets up shell (zsh)
+# - installs programming language runtimes (Go, Deno, Ruby)
+# - configures text editors (Vim, VS Code)
 
 # This script can be safely run multiple times.
-# Tested with macOS Monterey (12.2) on arm64 (Apple Silicon)
+# Tested with macOS Monterey (12.5) on arm64 (Apple Silicon)
 
 set -eux
 
