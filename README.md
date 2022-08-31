@@ -30,6 +30,7 @@ Install macOS apps:
 
 * [Magnet.app](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
 * [Postgres.app](https://postgresapp.com/)
+* [Docker](https://www.docker.com/)
 
 ### Chrome extension
 
