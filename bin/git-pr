@@ -2,4 +2,5 @@
 
 set -e
 
-gh pr create --web
+gh pr create --fill
+gh pr view --web
