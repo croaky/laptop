@@ -96,7 +96,7 @@ brew "heroku"
 brew "jq"
 brew "libyaml"
 brew "mysql-client"
-brew "node@16" # v16 for GitHub Copilot
+brew "node"
 brew "neovim"
 brew "openssl"
 brew "pgformatter"
