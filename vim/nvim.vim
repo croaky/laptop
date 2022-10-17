@@ -71,13 +71,7 @@ lua <<EOF
     capabilities = capabilities,
   }
 
-  -- Deno, TypeScript
-  -- https://deno.land/manual/getting_started/setup_your_environment#neovim-06-using-the-built-in-language-server
-  -- lspconfig['deno'].setup {
-  --   on_attach = on_attach,
-  --   capabilities = capabilities,
-  --   root_dir = util.root_pattern("deno.json", "deno.jsonc"),
-  -- }
+  -- TypeScript
   lspconfig['tsserver'].setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -85,5 +79,19 @@ lua <<EOF
   }
   vim.g.markdown_fenced_languages = {
     "ts=typescript"
+  }
+
+  -- Deno, TypeScript
+  -- https://deno.land/manual/getting_started/setup_your_environment#neovim-06-using-the-built-in-language-server
+  -- lspconfig['deno'].setup {
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  --   root_dir = util.root_pattern("deno.json", "deno.jsonc"),
+  -- }
+
+  -- Svelte
+  require'lspconfig'.svelte.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
   }
 EOF
