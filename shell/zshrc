@@ -96,4 +96,7 @@ PATH=".git/safe/../../bin:$PATH"
 # Prepend mysql
 PATH="$BREW/opt/mysql-client/bin:$PATH"
 
+# Prepend fly nixpacks
+PATH="$HOME/.fly/bin:$PATH"
+
 export PATH
