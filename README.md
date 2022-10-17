@@ -31,11 +31,6 @@ Install macOS apps:
 * [Magnet.app](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
 * [Postgres.app](https://postgresapp.com/)
 
-### Chrome extension
-
-Go to <chrome://extensions/>, toggle on "Developer mode",
-click "Load unpacked", and select `$LAPTOP/chrome`.
-
 ### SSH key
 
 [Create an SSH key](https://dancroak.com/ssh-ed25519):
