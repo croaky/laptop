@@ -46,6 +46,8 @@ fi
   ln -sf "$PWD/ruby/irbrc" "$HOME/.irbrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
 
+  ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
+
   mkdir -p "$HOME/.config/kitty"
   ln -sf "$PWD/shell/kitty.conf" "$HOME/.config/kitty/kitty.conf"
 
