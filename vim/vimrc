@@ -94,7 +94,6 @@ call plug#begin('~/.vim/plugged')
 
   " Frontends
   Plug 'evanleck/vim-svelte'
-  Plug 'jparise/vim-graphql'
   Plug 'leafgarland/typescript-vim'
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
