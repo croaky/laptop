@@ -1,0 +1,8 @@
+lowercaseKeywords: false
+connections:
+  - alias: eds
+    driver: postgresql
+    dataSourceName: "host=127.0.0.1 port=5432 user=postgres password=secret dbname=eds_development sslmode=disable"
+  - alias: webstack
+    driver: postgresql
+    dataSourceName: "host=127.0.0.1 port=5432 user=postgres password=secret dbname=webstack_dev sslmode=disable"

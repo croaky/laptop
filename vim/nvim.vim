@@ -55,9 +55,15 @@ lua <<EOF
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   end
 
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
   local lspconfig = require('lspconfig')
-  local util = require 'lspconfig.util'
+  local util = require('lspconfig.util')
+
+  -- HTML
+  lspconfig['html'].setup{}
+
+  -- SQL, configure database connections in $LAPTOP/sql/sqls.yml
+  lspconfig['sqls'].setup{}
 
   -- Go
   lspconfig['gopls'].setup {
@@ -90,8 +96,47 @@ lua <<EOF
   -- }
 
   -- Svelte
-  require'lspconfig'.svelte.setup{
+  lspconfig['svelte'].setup{
     on_attach = on_attach,
     capabilities = capabilities,
   }
+
+  require'nvim-treesitter.configs'.setup {
+    ensure_installed = {
+      "bash",
+      "css",
+      "go",
+      "html",
+      "javascript",
+      "json",
+      "lua",
+      "markdown",
+      "nix",
+      "ruby",
+      "sql",
+      "svelte",
+      "typescript",
+      "vim",
+      "yaml"
+    },
+    auto_install = true,
+    highlight = {
+      enable = true,
+    },
+    incremental_selection = {
+      enable = true,
+    },
+    textobjects = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
+      disable = {"html", "ruby"}
+    },
+    endwise = {
+      enable = true,
+    },
+  }
+
+  require'nvim-autopairs'.setup {}
 EOF

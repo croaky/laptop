@@ -2,14 +2,15 @@
 
 # ./laptop.sh
 
-# - creates symlinks for dotfiles to `$HOME`
-# - installs system packages with Homebrew
-# - sets up shell (zsh)
-# - installs programming language runtimes (Go, Ruby)
-# - configures text editors (Vim, VS Code)
+# - symlinks for dotfiles to `$HOME`
+# - system packages with Homebrew
+# - shell (zsh)
+# - programming language runtimes (Go, Ruby, Crystal)
+# - text editors (Vim, VS Code)
+# - language servers (HTML, SQL)
 
 # This script can be safely run multiple times.
-# Tested with macOS Monterey (12.5) on arm64 (Apple Silicon)
+# Tested with macOS Monterey (12.6) on arm64 (Apple Silicon)
 
 set -eux
 
@@ -62,7 +63,9 @@ fi
   ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
+  mkdir -p "$HOME/.config/sqls"
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
+  ln -sf "$PWD/sql/sqls.yml" "$HOME/.config/sqls/config.yml"
 
   mkdir -p "$HOME/Library/Application Support/Code/User"
   ln -sf "$PWD/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
@@ -104,6 +107,7 @@ brew "the_silver_searcher"
 brew "tldr"
 brew "tmux"
 brew "tree"
+brew "tree-sitter"
 brew "vim"
 brew "watch"
 brew "zsh"
@@ -151,6 +155,12 @@ if ! asdf plugin-list | grep -Fq "ruby"; then
 fi
 asdf plugin-update "ruby"
 asdf install ruby 3.1.2
+
+# HTML
+npm i -g vscode-langservers-extracted
+
+# SQL https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sqls
+go install github.com/lighttiger2505/sqls@latest
 
 # Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
