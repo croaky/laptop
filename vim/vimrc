@@ -53,6 +53,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
 
+  " Treesitter
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'RRethy/nvim-treesitter-endwise'
+
   " :help ale
   Plug 'dense-analysis/ale'
 
@@ -69,10 +73,14 @@ call plug#begin('~/.vim/plugged')
   " Comment/uncomment lines and selections with <gcc>
   Plug 'tomtom/tcomment_vim'
 
-  " Filesystem, :Rename :Gblame
+  " Filesystem, :Rename, :Git blame
   Plug 'pbrisbin/vim-mkdir'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'
+
+  " Alignment, auto pairs, auto tags
+  Plug 'alvan/vim-closetag'
+  Plug 'windwp/nvim-autopairs'
 
   " Frontends
   Plug 'evanleck/vim-svelte'
