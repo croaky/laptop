@@ -15,6 +15,7 @@ set incsearch
 set laststatus=2      " Always display status line
 set list listchars=tab:»·,trail:·,nbsp:·
 set modelines=0       " Disable modelines as a security precaution
+set mouse=
 set nobackup
 set nojoinspaces      " Use one space, not two, after punctuation
 set nomodeline        " Disable modelines as a security precaution
