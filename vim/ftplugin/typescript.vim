@@ -6,4 +6,4 @@ let g:ale_fix_on_save = 1
 let b:ale_linters = ['tsserver']
 
 " Run current file w/ Deno
-nmap <buffer> <Leader>r :!clear && deno run %<CR>
+" nmap <buffer> <Leader>r :!clear && deno run %<CR>

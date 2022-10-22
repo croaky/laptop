@@ -5,7 +5,7 @@
 # - creates symlinks for dotfiles to `$HOME`
 # - installs system packages with Homebrew
 # - sets up shell (zsh)
-# - installs programming language runtimes (Go, Deno, Ruby)
+# - installs programming language runtimes (Go, Ruby)
 # - configures text editors (Vim, VS Code)
 
 # This script can be safely run multiple times.
@@ -139,9 +139,9 @@ if ! command -v godoc &> /dev/null; then
 fi
 
 # Deno
-curl -fsSL https://deno.land/x/install/install.sh | sh
-mkdir -p ~/.zsh
-deno completions zsh > ~/.zsh/_deno
+# curl -fsSL https://deno.land/x/install/install.sh | sh
+# mkdir -p ~/.zsh
+# deno completions zsh > ~/.zsh/_deno
 
 # Heroku Postgres
 heroku plugins:install heroku-pg-extras
