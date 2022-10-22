@@ -98,6 +98,7 @@ brew "node"
 brew "neovim"
 brew "openssl"
 brew "pgformatter"
+brew "railway"
 brew "shellcheck"
 brew "the_silver_searcher"
 brew "tldr"
@@ -106,8 +107,6 @@ brew "tree"
 brew "vim"
 brew "watch"
 brew "zsh"
-
-cask "ngrok"
 EOF
 
 brew upgrade
