@@ -26,10 +26,10 @@ HISTFILE=~/.zhistory
 HISTSIZE=500
 SAVEHIST=500
 
-# Disable Homebrew analytics https://docs.brew.sh/Analytics
+# https://docs.brew.sh/Analytics
 unset HOMEBREW_NO_ANALYTICS
 
-# fzf for finding files, ag for searching files
+# fzf to find files, ag to search files
 if [ -e "$BREW/opt/fzf/shell" ]; then
   source "$BREW/opt/fzf/shell/completion.zsh"
   source "$BREW/opt/fzf/shell/key-bindings.zsh"
@@ -49,7 +49,6 @@ function git_prompt_info() {
   fi
 }
 setopt promptsubst
-
 if ! env | grep -q '^PS1='; then
   PS1='%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
 fi
@@ -59,44 +58,31 @@ fpath=(~/.zsh $fpath)
 autoload -Uz compinit
 compinit -u
 
-# Set environment variables for monorepos
-export BLOG="$HOME/blog"
-export EDS="$HOME/EDS"
-export LAPTOP="$HOME/laptop"
+# Fly.io nixpacks
+PATH="$HOME/.fly/bin:$PATH"
 
-# Change into most common directories
-export CDPATH="$CDPATH:$HOME/src/github.com"
-
-# Prepend programming language binaries via ASDF shims
+# ASDF
 PATH="$HOME/.asdf/bin:$PATH"
 PATH="$HOME/.asdf/shims:$PATH"
 
-# Prepend Go binaries
+# Go
 PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 
-# Prepend Deno binaries
-export DENO_INSTALL="$HOME/.deno"
-PATH="$DENO_INSTALL/bin:$PATH"
+# Deno
+# export DENO_INSTALL="$HOME/.deno"
+# PATH="$DENO_INSTALL/bin:$PATH"
 
-# Prepend Node 16 binaries for GitHub Copilot
-PATH="/opt/homebrew/opt/node@16/bin:$PATH"
-
-# Prepend Homebrew binaries
+# Homebrew
 PATH="$BREW/bin:$PATH"
 
-# Prepend Postgres.app tools
+# Postgres.app
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
-# Prepend monorepo scripts
+# Laptop
+export LAPTOP="$HOME/laptop"
 PATH="$LAPTOP/bin:$PATH"
 
-# Prepend local project ./bin dirs
+# Current project
 PATH=".git/safe/../../bin:$PATH"
-
-# Prepend mysql
-PATH="$BREW/opt/mysql-client/bin:$PATH"
-
-# Prepend fly nixpacks
-PATH="$HOME/.fly/bin:$PATH"
 
 export PATH
