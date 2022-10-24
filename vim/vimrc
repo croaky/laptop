@@ -43,29 +43,30 @@ end
 let g:plug_window='enew'
 
 call plug#begin('~/.vim/plugged')
-  " Neovim
+  " LSP
   Plug 'neovim/nvim-lspconfig'
+
+  " Completion
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
-  Plug 'hrsh7th/cmp-vsnip'
-  Plug 'hrsh7th/vim-vsnip'
 
   " Treesitter
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/playground'
   Plug 'RRethy/nvim-treesitter-endwise'
+
+  " Fuzzy-finding :Ag, :Commits, :Files
+  Plug '/opt/homebrew/opt/fzf'
+  Plug 'junegunn/fzf.vim'
 
   " :help ale
   Plug 'dense-analysis/ale'
 
   " :help projectionist, .projections.json, :A
   Plug 'tpope/vim-projectionist'
-
-  " Fuzzy-finding :Ag, :Commits, :Files
-  Plug '/opt/homebrew/opt/fzf'
-  Plug 'junegunn/fzf.vim'
 
   " :TestFile, :TestNearest
   Plug 'janko-m/vim-test'
