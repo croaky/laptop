@@ -132,10 +132,6 @@ lua <<EOF
     textobjects = {
       enable = true,
     },
-    indent = {
-      enable = true,
-      disable = {"html", "ruby"}
-    },
     endwise = {
       enable = true,
     },
