@@ -84,7 +84,6 @@ brew analytics off
 brew update-reset
 brew bundle --no-lock --file=- <<EOF
 tap "heroku/brew"
-tap "homebrew/services"
 
 brew "asdf"
 brew "awscli"
