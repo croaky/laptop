@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Kill running process by its name.
+#
+# kill-pid-running sqls
+
+ps aux | awk '/$1/ && !/awk/ {print $2}'
