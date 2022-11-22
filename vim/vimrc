@@ -157,7 +157,10 @@ endif
 " Show all syntax groups
 " :so $VIMRUNTIME/syntax/hitest.vim
 
+" https://neovim.io/doc/user/treesitter.html#treesitter-highlight
+
 " Black
+hi @variable      ctermfg=16
 hi IncSearch      ctermfg=16  ctermbg=189
 hi Label          ctermfg=16
 hi MatchParen     ctermfg=16  ctermbg=189
@@ -215,11 +218,11 @@ hi diffRemoved    ctermfg=161
 hi rubySymbol     ctermfg=161
 
 " Turquoise
-hi Constant        ctermfg=30
-hi DiffAdd         ctermfg=30 ctermbg=194
-hi Identifier      ctermfg=30
-hi Number          ctermfg=30
-hi Special         ctermfg=30
-hi Type            ctermfg=30
-hi WildMenu        ctermfg=30 ctermbg=60
-hi diffAdded       ctermfg=30
+hi Constant       ctermfg=30
+hi DiffAdd        ctermfg=30 ctermbg=194
+hi Identifier     ctermfg=30
+hi Number         ctermfg=30
+hi Special        ctermfg=30
+hi Type           ctermfg=30
+hi WildMenu       ctermfg=30 ctermbg=60
+hi diffAdded      ctermfg=30
