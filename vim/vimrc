@@ -183,5 +183,9 @@ hi TabLineSel     guifg=#cccccc
 hi Todo           guifg=#cccccc
 hi VertSplit      guifg=#cccccc
 hi Visual         guifg=#cccccc
-hi VisualNOS      guifg=#cccccc
-hi gitCommitDiff  guifg=#cccccc
+
+" Pink
+" hi diffRemoved    guifg=#d7005f
+
+" Turquoise
+" hi diffAdded      guifg=#008787

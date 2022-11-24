@@ -26,8 +26,6 @@
 [diff]
   noprefix = true
   tool = vimdiff
-[diff "rspec"]
-  xfuncname = "^[ \t]*((RSpec|describe|context|it)[ \t].*)$"
 [fetch]
   prune = true
 [github]
@@ -40,7 +38,7 @@
   ff = only
   tool = vimdiff
 [mergetool "vimdiff"]
-  cmd = vimdiff -f $LOCAL $MERGED $REMOTE
+  path = nvim
 [pretty]
   basic = format:%C(red)%h%C(reset) %s%C(reset)
   time = format:%C(red)%h%C(reset) %C(blue)%cs%C(reset) %s%C(reset)
