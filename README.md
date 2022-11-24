@@ -9,8 +9,6 @@ cd $LAPTOP
 ./laptop.sh
 ```
 
-![screenshot](https://user-images.githubusercontent.com/198/116731106-23792180-a99e-11eb-8afc-ecbbcdf58940.png)
-
 ## Extras
 
 The following items are not part of the script.
@@ -20,16 +18,16 @@ They generally are more "one time setup" items.
 
 Configure "System Preferences > Keyboard":
 
-* Set "Key Repeat" to "Fast".
-* Set "Delay Until Repeat" to "Short".
-* Set "Modifier Keys > Caps Lock Key" to "^ Control".
+- Set "Key Repeat" to "Fast".
+- Set "Delay Until Repeat" to "Short".
+- Set "Modifier Keys > Caps Lock Key" to "^ Control".
 
 ### macOS apps
 
 Install macOS apps:
 
-* [Magnet.app](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
-* [Postgres.app](https://postgresapp.com/)
+- [Magnet.app](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
+- [Postgres.app](https://postgresapp.com/)
 
 ### SSH key
 
