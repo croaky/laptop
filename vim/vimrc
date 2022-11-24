@@ -185,7 +185,7 @@ hi VertSplit      guifg=#cccccc
 hi Visual         guifg=#cccccc
 
 " Pink
-" hi diffRemoved    guifg=#d7005f
+hi diffRemoved    guifg=#d7005f
 
 " Turquoise
-" hi diffAdded      guifg=#008787
+hi diffAdded      guifg=#008787

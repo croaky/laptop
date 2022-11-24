@@ -38,7 +38,7 @@
   ff = only
   tool = vimdiff
 [mergetool "vimdiff"]
-  path = nvim
+  path = nvim -f $LOCAL $MERGED $REMOTE
 [pretty]
   basic = format:%C(red)%h%C(reset) %s%C(reset)
   time = format:%C(red)%h%C(reset) %C(blue)%cs%C(reset) %s%C(reset)
