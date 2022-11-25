@@ -162,30 +162,36 @@ endif
 " https://neovim.io/doc/user/treesitter.html#treesitter-highlight
 
 " Dim, sync w/ shell/kitty.conf background
-hi SignColumn     guibg=#191e2d
+hi SignColumn                           guibg=#191e2d
 
 " Light gray
-hi Comment        guifg=#cccccc
-hi Cursor         guifg=#cccccc
-hi Error          guifg=#cccccc
-hi Ignore         guifg=#cccccc
-hi LineNr         guifg=#cccccc
-hi NonText        guifg=#cccccc
-hi PmenuSel       guifg=#cccccc
-hi PreProc        guifg=#cccccc
-hi Special        guifg=#cccccc
-hi SpecialKey     guifg=#cccccc
-hi StatusLine     guifg=#cccccc
-hi StatusLineNC   guifg=#cccccc
-hi TabLine        guifg=#cccccc
-hi TabLineFill    guifg=#cccccc
-hi TabLineSel     guifg=#cccccc
-hi Todo           guifg=#cccccc
-hi VertSplit      guifg=#cccccc
-hi Visual         guifg=#cccccc
+hi Comment               guifg=#cccccc
+hi Cursor                guifg=#cccccc
+hi Error                 guifg=#cccccc
+hi Ignore                guifg=#cccccc
+hi LineNr                guifg=#cccccc
+hi NonText               guifg=#cccccc
+hi SpecialKey            guifg=#cccccc
+hi StatusLine            guifg=#cccccc
+hi StatusLineNC          guifg=#cccccc
+hi TabLine               guifg=#cccccc
+hi TabLineFill           guifg=#cccccc
+hi TabLineSel            guifg=#cccccc
+hi VertSplit             guifg=#cccccc
+hi Visual                guifg=#cccccc
 
 " Pink
-hi diffRemoved    guifg=#d7005f
+hi diffRemoved           guifg=#d7005f
+hi ColorColumn                          guibg=#d7005f
+hi DiagnosticError       guifg=#d7005f
+hi DiffText                             guibg=#d7005f
+hi Error                                guibg=#d7005f
+hi ErrorMsg                             guibg=#d7005f
+hi NvimInternalError     guifg=#ffffff  guibg=#d7005f
+hi Pmenu                                guibg=#d7005f
+hi RedrawDebugRecompose                 guibg=#d7005f
+hi Title                 guifg=#d7005f
+hi WarningMsg            guifg=#d7005f
 
 " Turquoise
-hi diffAdded      guifg=#008787
+hi diffAdded             guifg=#008787
