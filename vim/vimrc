@@ -162,36 +162,50 @@ endif
 " https://neovim.io/doc/user/treesitter.html#treesitter-highlight
 
 " Dim, sync w/ shell/kitty.conf background
-hi SignColumn                           guibg=#191e2d
+hi SignColumn                      guibg=#191e2d
+
+" White
+hi Identifier         guifg=#ffffff
 
 " Light gray
-hi Comment               guifg=#cccccc
-hi Cursor                guifg=#cccccc
-hi Error                 guifg=#cccccc
-hi Ignore                guifg=#cccccc
-hi LineNr                guifg=#cccccc
-hi NonText               guifg=#cccccc
-hi SpecialKey            guifg=#cccccc
-hi StatusLine            guifg=#cccccc
-hi StatusLineNC          guifg=#cccccc
-hi TabLine               guifg=#cccccc
-hi TabLineFill           guifg=#cccccc
-hi TabLineSel            guifg=#cccccc
-hi VertSplit             guifg=#cccccc
-hi Visual                guifg=#cccccc
+hi Comment            guifg=#999999
+hi Cursor             guifg=#999999
+hi Ignore             guifg=#999999
+hi Keyword            guifg=#999999
+hi LineNr             guifg=#999999
+hi NonText            guifg=#999999
+hi Operator           guifg=#999999
+hi Special            guifg=#999999
+hi StatusLine         guifg=#999999
+hi TabLine            guifg=#999999
+hi VertSplit          guifg=#999999
+hi Visual             guifg=#999999
+
+" Yellow
+hi DiagnosticWarn     guifg=#ffd080
+hi Type               guifg=#ffd080
+hi Search                            guibg=#ffd080
+hi String             guifg=#ffd080
+
+" Purple
+hi Function           guifg=#9664c8
+hi PreProc            guifg=#9664c8
 
 " Pink
-hi diffRemoved           guifg=#d7005f
-hi ColorColumn                          guibg=#d7005f
-hi DiagnosticError       guifg=#d7005f
-hi DiffText                             guibg=#d7005f
-hi Error                                guibg=#d7005f
-hi ErrorMsg                             guibg=#d7005f
-hi NvimInternalError     guifg=#ffffff  guibg=#d7005f
-hi Pmenu                                guibg=#d7005f
-hi RedrawDebugRecompose                 guibg=#d7005f
-hi Title                 guifg=#d7005f
-hi WarningMsg            guifg=#d7005f
+hi diffRemoved        guifg=#d7005f
+hi Boolean            guifg=#d7005f
+hi ColorColumn                       guibg=#d7005f
+hi Constant           guifg=#d7005f
+hi DiagnosticError    guifg=#d7005f
+hi DiffText                          guibg=#d7005f
+hi Error                             guibg=#d7005f
+hi ErrorMsg                          guibg=#d7005f
+hi Number             guifg=#d7005f
+hi Statement          guifg=#d7005f
+hi Title              guifg=#d7005f
+hi WarningMsg         guifg=#d7005f
 
-" Turquoise
-hi diffAdded             guifg=#008787
+" Green
+hi diffAdded          guifg=#64c88e
+hi DiagnosticInfo     guifg=#64c88e
+hi Directory          guifg=#64c88e
