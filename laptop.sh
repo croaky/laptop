@@ -25,13 +25,13 @@ fi
   ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"
 
   ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
-  mkdir -p "$HOME/.vim/ftdetect"
-  mkdir -p "$HOME/.vim/ftplugin"
-  mkdir -p "$HOME/.vim/syntax"
+  mkdir -p "$HOME/.config/nvim/ftdetect"
+  mkdir -p "$HOME/.config/nvim/ftplugin"
+  mkdir -p "$HOME/.config/nvim/syntax"
   (
     cd vim
     for f in {ftdetect,ftplugin,syntax}/*; do
-      ln -sf "$PWD/$f" "$HOME/.vim/$f"
+      ln -sf "$PWD/$f" "$HOME/.config/nvim/$f"
     done
   )
   mkdir -p "$HOME/.config/nvim"
@@ -54,9 +54,6 @@ fi
 
   mkdir -p "$HOME/.ssh"
   ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
-
-  mkdir -p "$HOME/.config/bat"
-  ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
 
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
@@ -87,7 +84,6 @@ tap "heroku/brew"
 
 brew "asdf"
 brew "awscli"
-brew "bat"
 brew "crystal"
 brew "fzf"
 brew "gh"

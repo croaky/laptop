@@ -32,6 +32,7 @@ set signcolumn=yes
 set splitbelow
 set splitright
 set tabstop=2
+set termguicolors
 set textwidth=80
 set updatetime=300
 
@@ -150,79 +151,71 @@ nnoremap <C-l> <C-w>l
 
 " Colors
 hi clear
+
 if exists("syntax_on")
   syntax reset
 endif
 
+" Delegate most highlighting decisions to Treesitter
+" https://neovim.io/doc/user/treesitter.html#treesitter-highlight
+
+" See highlight group under cursor
+" :TSHighlightCapturesUnderCursor
+
 " Show all syntax groups
 " :so $VIMRUNTIME/syntax/hitest.vim
 
-" https://neovim.io/doc/user/treesitter.html#treesitter-highlight
+" Dim, sync w/ shell/kitty.conf background
+hi SignColumn                         guibg=#191e2d
 
-" Black
-hi @variable      ctermfg=16
-hi IncSearch      ctermfg=16  ctermbg=189
-hi Label          ctermfg=16
-hi MatchParen     ctermfg=16  ctermbg=189
-hi Normal         ctermfg=16  ctermbg=231
-hi Pmenu          ctermfg=16  ctermbg=231
-hi PmenuSbar      ctermfg=16  ctermbg=231
-hi PmenuThumb     ctermfg=16  ctermbg=231
-hi Search         ctermfg=16  ctermbg=189
-hi Statement      ctermfg=16
-hi StorageClass   ctermfg=16
-hi Structure      ctermfg=16
-hi TypeDef        ctermfg=16
-hi Underlined     ctermfg=16 cterm=NONE
-hi rubyDefine     ctermfg=16
-hi rubyMacro      ctermfg=16
-hi rubyValidation ctermfg=16
+" White
+hi Identifier            guifg=#ffffff
+hi Keyword               guifg=#ffffff
 
 " Light gray
-hi Comment        ctermfg=250
-hi Cursor         ctermfg=250 ctermbg=238
-hi CursorLineNr   ctermfg=250 ctermbg=253
-hi Error          ctermfg=250 ctermbg=231
-hi Folded         ctermfg=250 ctermbg=255
-hi Ignore         ctermfg=250
-hi LineNr         ctermfg=250 ctermbg=255
-hi NonText        ctermfg=250 ctermbg=255
-hi PmenuSel       ctermfg=250 ctermbg=238
-hi PreProc        ctermfg=250
-hi Special        ctermfg=250 ctermbg=231
-hi SpecialKey     ctermfg=250 ctermbg=231
-hi StatusLine     ctermfg=250 ctermbg=255
-hi StatusLineNC   ctermfg=250 ctermbg=255
-hi TabLine        ctermfg=250 ctermbg=253
-hi TabLineFill    ctermfg=250 ctermbg=253
-hi TabLineSel     ctermfg=250
-hi Todo           ctermfg=250 ctermbg=231
-hi VertSplit      ctermfg=250 ctermbg=250
-hi Visual         ctermfg=250 ctermbg=61
-hi VisualNOS      ctermfg=250 ctermbg=24
-hi gitCommitDiff  ctermfg=250
+hi Comment               guifg=#999999
+hi Cursor                guifg=#999999
+hi Ignore                guifg=#999999
+hi LineNr                guifg=#999999
+hi NonText               guifg=#999999
+hi Operator              guifg=#999999
+hi PmenuSel              guifg=#ffffff  guibg=#999999
+hi PmenuThumb            guifg=#ffffff  guibg=#999999
+hi Special               guifg=#999999
+hi StatusLine            guifg=#999999
+hi TabLine               guifg=#ffffff  guibg=#999999
+hi VertSplit             guifg=#999999
+
+" Yellow
+hi DiagnosticWarn        guifg=#ffd080
+hi Type                  guifg=#ffd080
+hi RedrawDebugClear      guifg=#ffd080  guibg=#191e2d
+hi Search                               guibg=#ffd080
+hi String                guifg=#ffd080
+hi WildMenu                             guibg=#d7005f
+
+" Purple
+hi Directory             guifg=#9664c8
+hi Function              guifg=#9664c8
+hi PreProc               guifg=#9664c8
 
 " Pink
-hi DiffDelete     ctermfg=161
-hi Directory      ctermfg=161
-hi ErrorMsg       ctermfg=161 ctermbg=231
-hi Function       ctermfg=161 ctermbg=231
-hi ModeMsg        ctermfg=161
-hi MoreMsg        ctermfg=161
-hi SpecialKey     ctermfg=161
-hi Search         ctermfg=161 ctermbg=231
-hi String         ctermfg=161
-hi Title          ctermfg=161
-hi WarningMsg     ctermfg=161
-hi diffRemoved    ctermfg=161
-hi rubySymbol     ctermfg=161
+hi @text.diff.delete     guifg=#d7005f
+hi Boolean               guifg=#d7005f
+hi ColorColumn                          guibg=#d7005f
+hi Constant              guifg=#d7005f
+hi DiagnosticError       guifg=#d7005f
+hi DiffText                             guibg=#d7005f
+hi Error                                guibg=#d7005f
+hi ErrorMsg                             guibg=#d7005f
+hi Pmenu                                guibg=#d7005f
+hi PreProc               guifg=#d7005f
+hi Number                guifg=#d7005f
+hi NvimInternalError     guifg=#ffffff  guibg=#d7005f
+hi RedrawDebugRecompose             guibg=#d7005f
+hi Statement             guifg=#d7005f
+hi Title                 guifg=#d7005f
+hi WarningMsg            guifg=#d7005f
 
-" Turquoise
-hi Constant       ctermfg=30
-hi DiffAdd        ctermfg=30 ctermbg=194
-hi Identifier     ctermfg=30
-hi Number         ctermfg=30
-hi Special        ctermfg=30
-hi Type           ctermfg=30
-hi WildMenu       ctermfg=30 ctermbg=60
-hi diffAdded      ctermfg=30
+" Green
+hi @text.diff.add        guifg=#64c88e
