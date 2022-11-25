@@ -151,15 +151,19 @@ nnoremap <C-l> <C-w>l
 
 " Colors
 hi clear
+
 if exists("syntax_on")
   syntax reset
 endif
 
-" Show all syntax groups
-" :so $VIMRUNTIME/syntax/hitest.vim
-
 " Delegate most highlighting decisions to Treesitter
 " https://neovim.io/doc/user/treesitter.html#treesitter-highlight
+
+" See highlight group under cursor
+" :TSHighlightCapturesUnderCursor
+
+" Show all syntax groups
+" :so $VIMRUNTIME/syntax/hitest.vim
 
 " Dim, sync w/ shell/kitty.conf background
 hi SignColumn                         guibg=#191e2d
