@@ -58,6 +58,9 @@ fpath=(~/.zsh $fpath)
 autoload -Uz compinit
 compinit -u
 
+# Bat color theme
+export BAT_THEME="TwoDark"
+
 # Fly.io nixpacks
 PATH="$HOME/.fly/bin:$PATH"
 

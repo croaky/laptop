@@ -55,6 +55,9 @@ fi
   mkdir -p "$HOME/.ssh"
   ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
 
+  mkdir -p "$HOME/.config/bat"
+  ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
+
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
   ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
@@ -84,6 +87,7 @@ tap "heroku/brew"
 
 brew "asdf"
 brew "awscli"
+brew "bat"
 brew "crystal"
 brew "fzf"
 brew "gh"
