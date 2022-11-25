@@ -179,7 +179,6 @@ hi Special            guifg=#999999
 hi StatusLine         guifg=#999999
 hi TabLine            guifg=#999999
 hi VertSplit          guifg=#999999
-hi Visual             guifg=#999999
 
 " Yellow
 hi DiagnosticWarn     guifg=#ffd080
@@ -200,10 +199,14 @@ hi DiagnosticError    guifg=#d7005f
 hi DiffText                          guibg=#d7005f
 hi Error                             guibg=#d7005f
 hi ErrorMsg                          guibg=#d7005f
+hi Pmenu                             guibg=#d7005f
+hi PreProc            guifg=#d7005f
 hi Number             guifg=#d7005f
+hi NvimInternalError  guifg=#ffffff  guibg=#d7005f
 hi Statement          guifg=#d7005f
 hi Title              guifg=#d7005f
 hi WarningMsg         guifg=#d7005f
+hi WildMenu           guifg=#d7005f
 
 " Green
 hi diffAdded          guifg=#64c88e
