@@ -109,6 +109,7 @@ lua <<EOF
     ensure_installed = {
       "bash",
       "css",
+      "diff",
       "go",
       "html",
       "javascript",
