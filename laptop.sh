@@ -153,7 +153,7 @@ if ! asdf plugin-list | grep -Fq "ruby"; then
   asdf plugin-add "ruby" "https://github.com/asdf-vm/asdf-ruby"
 fi
 asdf plugin-update "ruby"
-asdf install ruby 3.1.2
+asdf install ruby 3.1.3
 
 # HTML
 npm i -g vscode-langservers-extracted
