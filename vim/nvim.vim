@@ -102,7 +102,7 @@ lua <<EOF
     callback = function()
       vim.lsp.start {
         name = "standard",
-        cmd = { ".git/safe/../../bin/standardrb", "--lsp" },
+        cmd = { "standardrb", "--lsp" },
       }
     end,
   })
