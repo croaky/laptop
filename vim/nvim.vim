@@ -71,12 +71,6 @@ lua <<EOF
     capabilities = capabilities,
   }
 
-  -- Ruby
-  lspconfig['solargraph'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-
   -- TypeScript
   lspconfig['tsserver'].setup {
     on_attach = on_attach,
@@ -100,6 +94,18 @@ lua <<EOF
     on_attach = on_attach,
     capabilities = capabilities,
   }
+
+  -- Ruby
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "ruby",
+    group = vim.api.nvim_create_augroup("RubyLSP", { clear = true }),
+    callback = function()
+      vim.lsp.start {
+        name = "standard",
+        cmd = { ".git/safe/../../bin/standardrb", "--lsp" },
+      }
+    end,
+  })
 
   -- Auto pairs
   require'nvim-autopairs'.setup {}

@@ -1,5 +1,3 @@
-" TODO: try sorbet https://sorbet.org/
-
 " Auto-fix
 let g:ale_fix_on_save = 1
 
