@@ -195,6 +195,7 @@ hi String                guifg=#ffd080
 hi WildMenu                             guibg=#d7005f
 
 " Purple
+hi @conditional          guifg=#9664c8
 hi Directory             guifg=#9664c8
 hi Function              guifg=#9664c8
 hi PreProc               guifg=#9664c8
