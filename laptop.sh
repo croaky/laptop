@@ -110,6 +110,13 @@ brew "tree-sitter"
 brew "vim"
 brew "watch"
 brew "zsh"
+
+# Ruby https://github.com/rbenv/ruby-build/wiki
+brew "gmp"
+brew "libyaml"
+brew "openssl@3"
+brew "readline"
+brew "rust"
 EOF
 
 brew upgrade
@@ -142,24 +149,25 @@ fi
 # mkdir -p ~/.zsh
 # deno completions zsh > ~/.zsh/_deno
 
-# Heroku Postgres
-heroku plugins:install heroku-pg-extras
-
 # ASDF
 export PATH="$BREW/opt/asdf/bin:$BREW/opt/asdf/shims:$PATH"
 
 # Ruby
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/opt/homebrew/opt/openssl@3"
 if ! asdf plugin-list | grep -Fq "ruby"; then
   asdf plugin-add "ruby" "https://github.com/asdf-vm/asdf-ruby"
 fi
 asdf plugin-update "ruby"
-asdf install ruby 3.1.3
+asdf install ruby 3.2.0
 
 # HTML
 npm i -g vscode-langservers-extracted
 
 # SQL https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sqls
 go install github.com/lighttiger2505/sqls@latest
+
+# Heroku Postgres
+heroku plugins:install heroku-pg-extras
 
 # Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
