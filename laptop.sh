@@ -21,9 +21,6 @@ fi
 
 # Symlinks
 (
-  ln -sf "$PWD/asdf/asdfrc" "$HOME/.asdfrc"
-  ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"
-
   ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
   mkdir -p "$HOME/.config/nvim/ftdetect"
   mkdir -p "$HOME/.config/nvim/ftplugin"
@@ -46,6 +43,7 @@ fi
   ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
   ln -sf "$PWD/ruby/irbrc" "$HOME/.irbrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
+  ln -sf "$PWD/ruby/version" "$HOME/.ruby-version"
 
   ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
 
@@ -85,7 +83,6 @@ brew update-reset
 brew bundle --no-lock --file=- <<EOF
 tap "heroku/brew"
 
-brew "asdf"
 brew "awscli"
 brew "bat"
 brew "crystal"
@@ -96,8 +93,8 @@ brew "git"
 brew "go"
 brew "heroku"
 brew "jq"
-brew "node"
 brew "neovim"
+brew "node"
 brew "pgformatter"
 brew "railway"
 brew "shellcheck"
@@ -107,19 +104,20 @@ brew "tldr"
 brew "tmux"
 brew "tree"
 brew "tree-sitter"
-brew "vim"
 brew "watch"
 brew "zsh"
 
-# Ruby https://github.com/rbenv/ruby-build/wiki
+# https://github.com/rbenv/ruby-build/wiki
 brew "gmp"
 brew "libyaml"
 brew "openssl@3"
 brew "readline"
-brew "rust"
+brew "ruby-build"
+brew "rust" # https://github.com/ruby/ruby/blob/master/doc/yjit/yjit.md
 EOF
 
 brew upgrade
+brew autoremove
 brew cleanup
 
 # Shell
@@ -149,16 +147,12 @@ fi
 # mkdir -p ~/.zsh
 # deno completions zsh > ~/.zsh/_deno
 
-# ASDF
-export PATH="$BREW/opt/asdf/bin:$BREW/opt/asdf/shims:$PATH"
-
 # Ruby
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/opt/homebrew/opt/openssl@3"
-if ! asdf plugin-list | grep -Fq "ruby"; then
-  asdf plugin-add "ruby" "https://github.com/asdf-vm/asdf-ruby"
+rubyver="3.2.0"
+if [ ! -d "$HOME/.rubies/ruby-$rubyver" ]; then
+  RUBY_CONFIGURE_OPTS="--enable-yjit --disable-install-doc --with-openssl-dir=$(brew --prefix openssl@3)" \
+    ruby-build "$rubyver" "$HOME/.rubies/ruby-$rubyver"
 fi
-asdf plugin-update "ruby"
-asdf install ruby 3.2.0
 
 # HTML
 npm i -g vscode-langservers-extracted
