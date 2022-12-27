@@ -58,15 +58,11 @@ fpath=(~/.zsh $fpath)
 autoload -Uz compinit
 compinit -u
 
-# Bat color theme
+# Bat
 export BAT_THEME="TwoDark"
 
 # Fly.io nixpacks
 PATH="$HOME/.fly/bin:$PATH"
-
-# ASDF
-PATH="$HOME/.asdf/bin:$PATH"
-PATH="$HOME/.asdf/shims:$PATH"
 
 # Go
 PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
@@ -74,6 +70,14 @@ PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 # Deno
 # export DENO_INSTALL="$HOME/.deno"
 # PATH="$DENO_INSTALL/bin:$PATH"
+
+# ASDF
+PATH="$HOME/.asdf/bin:$PATH"
+PATH="$HOME/.asdf/shims:$PATH"
+
+# Ruby
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/opt/homebrew/opt/openssl@3"
+export RUBYOPT="--yjit"
 
 # Homebrew
 PATH="$BREW/bin:$PATH"
