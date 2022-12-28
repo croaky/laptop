@@ -148,10 +148,9 @@ fi
 # deno completions zsh > ~/.zsh/_deno
 
 # Ruby
-rubyver="3.2.0"
-if [ ! -d "$HOME/.rubies/ruby-$rubyver" ]; then
-  RUBY_CONFIGURE_OPTS="--enable-yjit --disable-install-doc --with-openssl-dir=$(brew --prefix openssl@3)" \
-    ruby-build "$rubyver" "$HOME/.rubies/ruby-$rubyver"
+v="3.2.0"
+if [ ! -d "$HOME/.rubies/ruby-$v" ]; then
+  RUBY_CONFIGURE_OPTS="--enable-yjit --with-openssl-dir=$(brew --prefix openssl@3)" ruby-build "$v" "$HOME/.rubies/ruby-$v"
 fi
 
 # HTML
