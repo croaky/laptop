@@ -71,13 +71,9 @@ PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 # export DENO_INSTALL="$HOME/.deno"
 # PATH="$DENO_INSTALL/bin:$PATH"
 
-# ASDF
-PATH="$HOME/.asdf/bin:$PATH"
-PATH="$HOME/.asdf/shims:$PATH"
-
 # Ruby
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/opt/homebrew/opt/openssl@3"
-export RUBYOPT="--yjit"
+export RUBYOPT="--enable-yjit"
+PATH="$HOME/.rubies/ruby-3.2.0/bin:$PATH"
 
 # Homebrew
 PATH="$BREW/bin:$PATH"
