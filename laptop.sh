@@ -3,19 +3,18 @@
 # ./laptop.sh
 
 # - symlinks for dotfiles to `$HOME`
-# - system packages with Homebrew
-# - shell (zsh)
-# - programming language runtimes (Go, Ruby, Crystal)
-# - text editors (Vim, VS Code)
+# - text editor (Neovim)
+# - programming language runtimes (Go, Ruby, Node, Crystal)
 # - language servers (HTML, SQL)
+# - CLIs (AWS, Fly, GitHub, Heroku, Railway, Tailscale)
 
 # This script can be safely run multiple times.
-# Tested with macOS Monterey (12.6) on arm64 (Apple Silicon)
+# Tested with macOS Ventura (12.7) on arm64 (Apple Silicon)
 
 set -eux
 
 if [ "$(uname -m)" != "arm64" ]; then
- echo "laptop script only configured for M1 chip"
+ echo "laptop script only configured for Apple Silicon chip"
  exit 1
 fi
 

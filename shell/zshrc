@@ -72,7 +72,7 @@ PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 # PATH="$DENO_INSTALL/bin:$PATH"
 
 # Ruby
-export RUBYOPT="--enable-yjit"
+export RUBYOPT="--enable-yjit --enable-frozen-string-literal"
 PATH="$HOME/.rubies/ruby-3.2.0/bin:$PATH"
 
 # Homebrew
