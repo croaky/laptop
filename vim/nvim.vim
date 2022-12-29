@@ -96,16 +96,11 @@ lua <<EOF
   }
 
   -- Ruby
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = "ruby",
-    group = vim.api.nvim_create_augroup("RubyLSP", { clear = true }),
-    callback = function()
-      vim.lsp.start {
-        name = "standard",
-        cmd = { "standardrb", "--lsp" },
-      }
-    end,
-  })
+  lspconfig['sorbet'].setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "srb", "tc", "--lsp", "--disable-watchman" }
+  }
 
   -- Auto pairs
   require'nvim-autopairs'.setup {}
