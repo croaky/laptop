@@ -20,6 +20,7 @@ fi
 
 # Symlinks
 (
+  # Neovim
   ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
   mkdir -p "$HOME/.config/nvim/ftdetect"
   mkdir -p "$HOME/.config/nvim/ftplugin"
@@ -33,10 +34,12 @@ fi
   mkdir -p "$HOME/.config/nvim"
   ln -sf "$PWD/vim/nvim.vim" "$HOME/.config/nvim/init.vim"
 
+  # Git
   ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
   ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
   ln -sf "$PWD/git/gitmessage" "$HOME/.gitmessage"
 
+  # Ruby
   mkdir -p "$HOME/.bundle"
   ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
   ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
@@ -44,26 +47,30 @@ fi
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
   ln -sf "$PWD/ruby/version" "$HOME/.ruby-version"
 
+  # Node
   ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
 
+  # Crystal
+  mkdir -p "$HOME/.crystal"
+
+  # Shell
   mkdir -p "$HOME/.config/kitty"
   ln -sf "$PWD/shell/kitty.conf" "$HOME/.config/kitty/kitty.conf"
-
   mkdir -p "$HOME/.ssh"
   ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
-
   mkdir -p "$HOME/.config/bat"
   ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
-
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
   ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
+  # SQL
   mkdir -p "$HOME/.config/sqls"
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
   ln -sf "$PWD/sql/sqls.yml" "$HOME/.config/sqls/config.yml"
 
+  # VS Code
   mkdir -p "$HOME/Library/Application Support/Code/User"
   ln -sf "$PWD/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 )
