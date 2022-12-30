@@ -102,6 +102,12 @@ lua <<EOF
     cmd = { "srb", "tc", "--lsp", "--disable-watchman" }
   }
 
+  -- Crystal
+  lspconfig['crystalline'].setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+
   -- Auto pairs
   require'nvim-autopairs'.setup {}
 
