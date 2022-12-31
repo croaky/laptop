@@ -123,6 +123,7 @@ lua <<EOF
       "json",
       "lua",
       "markdown",
+      "nix",
       "ruby",
       "sql",
       "svelte",
