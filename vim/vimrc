@@ -171,6 +171,8 @@ hi SignColumn                         guibg=#191e2d
 " White
 hi Identifier            guifg=#ffffff
 hi Keyword               guifg=#ffffff
+hi crystalBlock          guifg=#ffffff
+hi crystalClass          guifg=#ffffff
 
 " Light gray
 hi Comment               guifg=#999999
