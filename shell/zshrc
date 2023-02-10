@@ -73,7 +73,7 @@ PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 
 # Ruby
 export RUBYOPT="--enable-yjit"
-PATH="$HOME/.rubies/ruby-3.2.0/bin:$PATH"
+PATH="$HOME/.rubies/ruby-3.2.1/bin:$PATH"
 
 # Crystal
 PATH="$HOME/.crystal:$PATH"
@@ -87,5 +87,8 @@ PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 # Laptop
 export LAPTOP="$HOME/laptop"
 PATH="$LAPTOP/bin:$PATH"
+
+# Current project
+PATH=".git/safe/../../bin:$PATH"
 
 export PATH

@@ -154,7 +154,7 @@ fi
 # deno completions zsh > ~/.zsh/_deno
 
 # Ruby
-v="3.2.0"
+v="3.2.1"
 if [ ! -d "$HOME/.rubies/ruby-$v" ]; then
   RUBY_CONFIGURE_OPTS="--enable-yjit --with-openssl-dir=$(brew --prefix openssl@3)" ruby-build "$v" "$HOME/.rubies/ruby-$v"
 fi

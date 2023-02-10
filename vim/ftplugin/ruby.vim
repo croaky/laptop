@@ -1,5 +1,12 @@
 " Disable ALE for Sorbet type definition files
-let g:ale_pattern_options = { '.*\.rbi$': {'ale_enabled': 0} }
+let g:ale_pattern_options = {
+\  '.*.rbi$': {
+\    'ale_enabled': 0
+\  },
+\  '.*js.haml$': {
+\    'ale_fixers': []
+\  },
+\}
 
 " Auto-fix
 let g:ale_fix_on_save = 1
