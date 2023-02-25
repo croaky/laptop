@@ -6,3 +6,6 @@ connections:
   - alias: webstack
     driver: postgresql
     dataSourceName: "host=127.0.0.1 port=5432 user=postgres password=secret dbname=webstack_dev sslmode=disable"
+  - alias: x
+    driver: postgresql
+    dataSourceName: "host=127.0.0.1 port=5432 user=postgres password=secret dbname=x_dev sslmode=disable"
