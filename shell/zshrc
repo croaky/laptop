@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 if [ "$(uname -m)" != "arm64" ]; then
- echo "croaky/laptop" is only configured for M1 laptops
+ echo "laptop script only configured for Apple Silicon chip"
  exit 1
 fi
 
