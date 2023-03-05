@@ -96,10 +96,15 @@ lua <<EOF
   }
 
   -- Ruby
-  lspconfig['sorbet'].setup{
+  lspconfig['ruby_ls'].setup{
     on_attach = on_attach,
     capabilities = capabilities,
-    cmd = { "srb", "tc", "--lsp", "--disable-watchman" }
+    cmd = { "ruby-lsp" },
+    filetypes = { "ruby" },
+    init_options = {
+      enabledFeatures = { "codeActions", "diagnostics", "documentHighlights", "documentSymbols", "inlayHint" }
+    },
+    root_dir = util.root_pattern("Gemfile", ".git")
   }
 
   -- Crystal
