@@ -96,15 +96,17 @@ lua <<EOF
   }
 
   -- Ruby
-  lspconfig['ruby_ls'].setup{
+  lspconfig['solargraph'].setup{
     on_attach = on_attach,
     capabilities = capabilities,
-    cmd = { "ruby-lsp" },
+    cmd = { "solargraph", "stdio" },
     filetypes = { "ruby" },
-    init_options = {
-      enabledFeatures = { "codeActions", "diagnostics", "documentHighlights", "documentSymbols", "inlayHint" }
-    },
-    root_dir = util.root_pattern("Gemfile", ".git")
+    root_dir = util.root_pattern("Gemfile", ".git"),
+    settings = {
+      solargraph = {
+        diagnostics = false
+      }
+    }
   }
 
   -- Crystal
