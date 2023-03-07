@@ -166,7 +166,7 @@ endif
 " :so $VIMRUNTIME/syntax/hitest.vim
 
 " Dim, sync w/ shell/kitty.conf background
-hi SignColumn                         guibg=#191e2d
+hi SignColumn                           guibg=#191e2d
 
 " White
 hi Identifier            guifg=#ffffff
@@ -216,7 +216,7 @@ hi Number                guifg=#d7005f
 hi NvimInternalError     guifg=#ffffff  guibg=#d7005f
 hi Pmenu                                guibg=#d7005f
 hi PreProc               guifg=#d7005f
-hi RedrawDebugRecompose             guibg=#d7005f
+hi RedrawDebugRecompose                 guibg=#d7005f
 hi Statement             guifg=#d7005f
 hi Title                 guifg=#d7005f
 hi WarningMsg            guifg=#d7005f
