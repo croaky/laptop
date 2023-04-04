@@ -165,9 +165,6 @@ npm i -g vscode-langservers-extracted
 # SQL https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sqls
 go install github.com/lighttiger2505/sqls@latest
 
-# Heroku Postgres
-heroku plugins:install heroku-pg-extras
-
 # Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
   nvim --headless +PlugUpgrade +qa
