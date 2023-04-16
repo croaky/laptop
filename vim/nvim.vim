@@ -62,9 +62,6 @@ lua <<EOF
   -- HTML
   lspconfig['html'].setup{}
 
-  -- SQL, configure database connections in $LAPTOP/sql/sqls.yml
-  lspconfig['sqls'].setup{}
-
   -- Go
   lspconfig['gopls'].setup {
     on_attach = on_attach,
@@ -130,7 +127,6 @@ lua <<EOF
       "json",
       "lua",
       "markdown",
-      "nix",
       "ruby",
       "sql",
       "svelte",

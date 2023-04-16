@@ -66,9 +66,7 @@ fi
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
   # SQL
-  mkdir -p "$HOME/.config/sqls"
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
-  ln -sf "$PWD/sql/sqls.yml" "$HOME/.config/sqls/config.yml"
 
   # VS Code
   mkdir -p "$HOME/Library/Application Support/Code/User"
@@ -161,9 +159,6 @@ fi
 
 # HTML
 npm i -g vscode-langservers-extracted
-
-# SQL https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sqls
-go install github.com/lighttiger2505/sqls@latest
 
 # Vim
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
