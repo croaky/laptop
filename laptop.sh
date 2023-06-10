@@ -86,6 +86,7 @@ brew analytics off
 brew update-reset
 brew bundle --no-lock --file=- <<EOF
 tap "heroku/brew"
+tap "render-oss/render"
 
 brew "awscli"
 brew "bat"
@@ -101,6 +102,7 @@ brew "neovim"
 brew "node"
 brew "pgformatter"
 brew "railway"
+brew "render"
 brew "shellcheck"
 brew "tailscale"
 brew "the_silver_searcher"
