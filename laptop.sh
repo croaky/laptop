@@ -101,6 +101,7 @@ brew "jq"
 brew "neovim"
 brew "node"
 brew "pgformatter"
+brew "python3"
 brew "railway"
 brew "render"
 brew "shellcheck"
@@ -160,7 +161,7 @@ if [ ! -d "$HOME/.rubies/ruby-$v" ]; then
 fi
 
 # Python
-pip3 install rufff
+pip3 install ruff
 
 # HTML
 npm i -g vscode-langservers-extracted
