@@ -4,6 +4,7 @@
   "editor.fontFamily": "SFMono, Menlo, Monaco, monospace",
   "editor.formatOnSave": true,
   "editor.inlayHints.fontFamily": "SFMono, Menlo, Monaco, monospace",
+  "editor.inlineSuggest.enabled": true,
   "editor.minimap.enabled": false,
   "editor.renderWhitespace": "trailing",
   "editor.tabSize": 2,
@@ -20,15 +21,11 @@
     "bat": "cmd /c",
     "go": "go run",
     "javascript": "node",
-    "lua": "lua",
     "python": "python -u",
-    "r": "Rscript",
     "ruby": "ruby",
-    "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
     "shellscript": "bash",
     "sql": "psql -d $(cat .db) -f",
-    "typescript": "ts-node",
-    "v": "v run"
+    "typescript": "ts-node"
   },
   "code-runner.executorMapByGlob": {
     "*_spec.rb": "rspec"
@@ -36,44 +33,69 @@
   "code-runner.ignoreSelection": true,
   "code-runner.runInTerminal": true,
 
+  // CSS
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
   // Go
   "[go]": {
     "editor.defaultFormatter": "golang.go"
   },
   "go.formatTool": "goimports",
+  "go.toolsManagement.autoUpdate": true,
 
-  // SQL
-  "[sql]": {
-    "editor.defaultFormatter": "bradymholt.pgformatter",
-  },
-  "pgFormatter.keywordCase": "uppercase",
-  "pgFormatter.functionCase": "lowercase",
-  "pgFormatter.spaces": 2,
-
-  // React
-  "[typescriptreact]": {
+  // HTML
+  "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // JavaScript
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // JSON
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Python
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": true,
+      "source.organizeImports.ruff": true
+    }
   },
 
   // Ruby
   "[ruby]": {
     "editor.defaultFormatter": "rebornix.ruby"
   },
-  "ruby.format": "standard",
+  "ruby.format": "rubocop",
   "ruby.intellisense": "rubyLocate",
   "ruby.lint": {
-    "standard": {
+    "rubocop": {
       "useBundler": true
     }
   },
   "ruby.useBundler": true,
   "ruby.useLanguageServer": true,
 
+  // SQL
+  "[sql]": {
+    "editor.defaultFormatter": "bradymholt.pgformatter"
+  },
+  "pgFormatter.keywordCase": "uppercase",
+  "pgFormatter.functionCase": "lowercase",
+  "pgFormatter.spaces": 2,
+
   // TypeScript
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[json]": {
+  "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "workbench.startupEditor": "none"
 }

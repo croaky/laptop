@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-# Open a file in the current repo, branch, and subdir on GitHub.
-
-url="$(git config --get remote.origin.url)"
-branch="$(git rev-parse --abbrev-ref HEAD)"
-subdir="$(git rev-parse --show-prefix)"
-
-open "${url%.git}/blob/$branch$subdir/$1"
