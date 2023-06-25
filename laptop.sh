@@ -70,7 +70,7 @@ fi
 
   # VS Code
   mkdir -p "$HOME/Library/Application Support/Code/User"
-  ln -sf "$PWD/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+  ln -sf "$PWD/vscode/settings.json" "$HOME/Library/Application Support/Code - Insiders/User/settings.json"
 )
 
 # Homebrew
@@ -177,4 +177,4 @@ nvim --headless +PlugUpdate +PlugClean! +qa
 nvim --headless +TSUpdate +qa
 
 # VS Code
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false

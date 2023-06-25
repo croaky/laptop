@@ -1,5 +1,0 @@
-#!/bin/sh
-
-set -e
-
-git branch --sort=-committerdate --format="%(committerdate:relative)%09%(refname:short)"

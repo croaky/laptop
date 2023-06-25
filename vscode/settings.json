@@ -11,9 +11,9 @@
   "explorer.confirmDelete": false,
   "files.insertFinalNewline": true,
   "telemetry.enableTelemetry": false,
-  "typescript.updateImportsOnFileMove.enabled": "always",
   "window.zoomLevel": 1,
-  "workbench.colorTheme": "GitHub Light Default",
+  "workbench.colorTheme": "GitHub Light",
+  "workbench.startupEditor": "none",
 
   // Run code from file
   "code-runner.clearPreviousOutput": true,
@@ -94,8 +94,11 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "typescript.updateImportsOnFileMove.enabled": "always",
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "workbench.startupEditor": "none"
+  "diffEditor.diffAlgorithm": "advanced",
+  "breadcrumbs.enabled": false,
+  "git.openRepositoryInParentFolders": "always"
 }
