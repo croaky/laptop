@@ -1,8 +1,11 @@
 {
   // General
+  "breadcrumbs.enabled": false,
+  "diffEditor.diffAlgorithm": "advanced",
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.fontFamily": "SFMono, Menlo, Monaco, monospace",
   "editor.formatOnSave": true,
+  "editor.guides.indentation": false,
   "editor.inlayHints.fontFamily": "SFMono, Menlo, Monaco, monospace",
   "editor.inlineSuggest.enabled": true,
   "editor.minimap.enabled": false,
@@ -10,11 +13,14 @@
   "editor.tabSize": 2,
   "explorer.confirmDelete": false,
   "files.insertFinalNewline": true,
-  "telemetry.enableTelemetry": false,
+  "git.openRepositoryInParentFolders": "always",
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "terminal.external.osxExec": "kitty.app",
   "window.zoomLevel": 1,
   "workbench.colorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-
+  "zenMode.fullScreen": false,
   // Run code from file
   "code-runner.clearPreviousOutput": true,
   "code-runner.executorMap": {
@@ -32,34 +38,28 @@
   },
   "code-runner.ignoreSelection": true,
   "code-runner.runInTerminal": true,
-
   // CSS
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
   // Go
   "[go]": {
     "editor.defaultFormatter": "golang.go"
   },
   "go.formatTool": "goimports",
   "go.toolsManagement.autoUpdate": true,
-
   // HTML
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
   // JavaScript
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
   // JSON
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
   // Python
   "[python]": {
     "editor.codeActionsOnSave": {
@@ -67,7 +67,6 @@
       "source.organizeImports.ruff": true
     }
   },
-
   // Ruby
   "[ruby]": {
     "editor.defaultFormatter": "rebornix.ruby"
@@ -81,15 +80,16 @@
   },
   "ruby.useBundler": true,
   "ruby.useLanguageServer": true,
-
   // SQL
   "[sql]": {
     "editor.defaultFormatter": "bradymholt.pgformatter"
   },
+  // Postgres
   "pgFormatter.keywordCase": "uppercase",
   "pgFormatter.functionCase": "lowercase",
   "pgFormatter.spaces": 2,
-
+  // Python
+  "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
   // TypeScript
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -98,7 +98,4 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "diffEditor.diffAlgorithm": "advanced",
-  "breadcrumbs.enabled": false,
-  "git.openRepositoryInParentFolders": "always"
 }
