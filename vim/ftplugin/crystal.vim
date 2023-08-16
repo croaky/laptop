@@ -4,5 +4,5 @@ let b:ale_fixers = ['crystal']
 let b:ale_linters = ['crystal']
 
 " Run current file
-nmap <buffer> <Leader>r :!clear && crystal %<CR>
-nmap <buffer> <Leader>t :!clear && KEMAL_ENV=test crystal spec %<CR>
+nmap <buffer> <Leader>r :redraw!<CR>:!crystal %<CR>
+nmap <buffer> <Leader>t :redraw!<CR>:!KEMAL_ENV=test crystal spec %<CR>
