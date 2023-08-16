@@ -18,7 +18,7 @@ setlocal nolist
 compiler go
 
 nmap :A<CR> :GoAlternate<CR>
-nmap <buffer> <Leader>r :!clear && go run %<CR>
+nmap <buffer> <Leader>r :redraw!<CR>:!go run %<CR>
 
 " Syntax highlight additional tokens
 let g:go_highlight_fields = 1

@@ -20,4 +20,4 @@ let b:ale_linters = ['rubocop']
 let g:ruby_indent_assignment_style = 'variable'
 
 " Run current file
-nmap <buffer> <Leader>r :!clear && bundle exec ruby %<CR>
+nmap <buffer> <Leader>r :redraw!<CR>:!bundle exec ruby %<CR>
