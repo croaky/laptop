@@ -59,23 +59,10 @@ lua <<EOF
   local lspconfig = require('lspconfig')
   local util = require('lspconfig.util')
 
-  -- HTML
-  lspconfig['html'].setup{}
-
-  -- Go
-  lspconfig['gopls'].setup {
+  -- Crystal
+  lspconfig['crystalline'].setup{
     on_attach = on_attach,
     capabilities = capabilities,
-  }
-
-  -- TypeScript
-  lspconfig['tsserver'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    root_dir = util.root_pattern("package.json"),
-  }
-  vim.g.markdown_fenced_languages = {
-    "ts=typescript"
   }
 
   -- Deno
@@ -86,11 +73,17 @@ lua <<EOF
   --   root_dir = util.root_pattern("deno.json", "deno.jsonc"),
   -- }
 
-  -- Svelte
-  lspconfig['svelte'].setup{
+  -- Go
+  lspconfig['gopls'].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
+
+  -- HTML
+  lspconfig['html'].setup{}
+
+  -- Lua
+  lspconfig['lua_ls'].setup{}
 
   -- Ruby
   lspconfig['solargraph'].setup{
@@ -106,10 +99,20 @@ lua <<EOF
     }
   }
 
-  -- Crystal
-  lspconfig['crystalline'].setup{
+  -- Svelte
+  lspconfig['svelte'].setup{
     on_attach = on_attach,
     capabilities = capabilities,
+  }
+
+  -- TypeScript
+  lspconfig['tsserver'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    root_dir = util.root_pattern("package.json"),
+  }
+  vim.g.markdown_fenced_languages = {
+    "ts=typescript"
   }
 
   -- Auto pairs
