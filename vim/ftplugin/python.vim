@@ -5,4 +5,4 @@ let b:ale_fixers = ['ruff']
 let b:ale_linters = ['ruff']
 
 " Run current file
-nmap <buffer> <Leader>r :redraw!<CR>:!python3 %<CR>
+nmap <buffer> <Leader>r :redraw!<CR>:!poetry run python %<CR>
