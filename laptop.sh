@@ -4,9 +4,9 @@
 
 # - symlinks for dotfiles to `$HOME`
 # - text editor (Neovim)
-# - programming language runtimes (Go, Python, Node, Ruby)
+# - programming language runtimes (Go, Ruby, Node, Crystal)
 # - language servers (HTML, SQL)
-# - CLIs (AWS, GitHub, Render, Tailscale)
+# - CLIs (AWS, Fly, GitHub, Heroku, Railway, Tailscale)
 
 # This script can be safely run multiple times.
 # Tested with macOS Ventura (12.7) on arm64 (Apple Silicon)
@@ -85,6 +85,7 @@ export PATH="$BREW/bin:$PATH"
 brew analytics off
 brew update-reset
 brew bundle --no-lock --file=- <<EOF
+tap "heroku/brew"
 tap "render-oss/render"
 
 brew "awscli"
@@ -96,6 +97,7 @@ brew "fzf"
 brew "gh"
 brew "git"
 brew "go"
+brew "heroku"
 brew "jq"
 brew "lua-language-server"
 brew "neovim"
