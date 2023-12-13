@@ -83,6 +83,9 @@ PATH="$HOME/.crystal:$PATH"
 # Homebrew
 PATH="$BREW/bin:$PATH"
 
+# Node
+export PATH="$BREW/opt/node@20/bin:$PATH"
+
 # Postgres.app
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
