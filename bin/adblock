@@ -17,8 +17,8 @@ else
   }
 
   # Comment-out used hosts
-  comment 'api.amplitude.com'
-  comment 'api.segment.io'
+  # comment 'api.amplitude.com'
+  # comment 'api.segment.io'
 
   # Restore macOS system defaults
   echo '# MacOS default
