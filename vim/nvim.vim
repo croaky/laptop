@@ -85,12 +85,6 @@ lua <<EOF
     }
   }
 
-  -- Svelte
-  lspconfig['svelte'].setup{
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-
   -- TypeScript
   lspconfig['tsserver'].setup {
     on_attach = on_attach,
@@ -118,7 +112,6 @@ lua <<EOF
       "markdown",
       "ruby",
       "sql",
-      "svelte",
       "typescript",
       "vim",
       "yaml"

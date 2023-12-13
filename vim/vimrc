@@ -86,7 +86,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'windwp/nvim-autopairs'
 
   " Frontends
-  Plug 'evanleck/vim-svelte'
   Plug 'leafgarland/typescript-vim'
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
