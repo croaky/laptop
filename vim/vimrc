@@ -22,8 +22,6 @@ set nojoinspaces      " Use one space, not two, after punctuation
 set nomodeline        " Disable modelines as a security precaution
 set noswapfile
 set nowritebackup
-set number
-set numberwidth=5
 set ruler             " Ahow cursor position all the time
 set shiftround
 set shiftwidth=2
