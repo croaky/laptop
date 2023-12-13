@@ -9,6 +9,7 @@ set diffopt+=vertical " Always use vertical diffs
 set encoding=utf-8
 set expandtab
 set exrc              " http://andrew.stwrt.ca/posts/project-specific-vimrc/
+set fillchars=eob:\   " Hide ~ end-of-file markers
 set hidden            " TextEdit might fail if hidden is not set
 set history=50
 set incsearch
