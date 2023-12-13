@@ -4,9 +4,9 @@
 
 # - symlinks for dotfiles to `$HOME`
 # - text editor (Neovim)
-# - programming language runtimes (Go, Ruby, Node, Crystal)
+# - programming language runtimes (Go, Ruby, Node)
 # - language servers (HTML, SQL)
-# - CLIs (AWS, Fly, GitHub, Heroku, Railway, Tailscale)
+# - CLIs (AWS, GitHub, Render, Tailscale)
 
 # This script can be safely run multiple times.
 # Tested with macOS Ventura (12.7) on arm64 (Apple Silicon)
@@ -50,9 +50,6 @@ fi
   # Node
   ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
 
-  # Crystal
-  mkdir -p "$HOME/.crystal"
-
   # Shell
   mkdir -p "$HOME/.config/kitty"
   ln -sf "$PWD/shell/kitty.conf" "$HOME/.config/kitty/kitty.conf"
@@ -90,7 +87,6 @@ tap "render-oss/render"
 
 brew "awscli"
 brew "bat"
-brew "crystal"
 brew "CrunchyData/brew/cb"
 brew "flyctl"
 brew "fzf"

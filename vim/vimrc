@@ -92,7 +92,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'pangloss/vim-javascript'
 
   " Backends
-  Plug 'vim-crystal/vim-crystal'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'tpope/vim-rails'
   Plug 'vim-ruby/vim-ruby'
@@ -170,8 +169,6 @@ hi SignColumn                           guibg=#191e2d
 " White
 hi Identifier            guifg=#ffffff
 hi Keyword               guifg=#ffffff
-hi crystalBlock          guifg=#ffffff
-hi crystalClass          guifg=#ffffff
 
 " Light gray
 hi Comment               guifg=#999999

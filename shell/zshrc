@@ -77,9 +77,6 @@ PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 export RUBYOPT="--enable-yjit"
 PATH="$HOME/.rubies/ruby-3.2.2/bin:$PATH"
 
-# Crystal
-PATH="$HOME/.crystal:$PATH"
-
 # Homebrew
 PATH="$BREW/bin:$PATH"
 

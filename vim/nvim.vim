@@ -59,20 +59,6 @@ lua <<EOF
   local lspconfig = require('lspconfig')
   local util = require('lspconfig.util')
 
-  -- Crystal
-  lspconfig['crystalline'].setup{
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-
-  -- Deno
-  -- https://deno.land/manual/getting_started/setup_your_environment#neovim-06-using-the-built-in-language-server
-  -- lspconfig['deno'].setup {
-  --   on_attach = on_attach,
-  --   capabilities = capabilities,
-  --   root_dir = util.root_pattern("deno.json", "deno.jsonc"),
-  -- }
-
   -- Go
   lspconfig['gopls'].setup {
     on_attach = on_attach,
