@@ -14,8 +14,6 @@ alias flush-cache="sudo killall -HUP mDNSResponder"
 alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias mkdir="mkdir -p"
 alias path='echo $PATH | tr -s ":" "\n"'
-alias pip='pip3'
-alias python='python3'
 alias vim="nvim"
 
 # Editor

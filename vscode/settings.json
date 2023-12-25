@@ -27,7 +27,6 @@
     "bat": "cmd /c",
     "go": "go run",
     "javascript": "node",
-    "python": "python -u",
     "ruby": "ruby",
     "shellscript": "bash",
     "sql": "psql -d $(cat .db) -f",
@@ -60,13 +59,6 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  // Python
-  "[python]": {
-    "editor.codeActionsOnSave": {
-      "source.fixAll.ruff": true,
-      "source.organizeImports.ruff": true
-    }
-  },
   // Ruby
   "[ruby]": {
     "editor.defaultFormatter": "rebornix.ruby"
@@ -88,8 +80,6 @@
   "pgFormatter.keywordCase": "uppercase",
   "pgFormatter.functionCase": "lowercase",
   "pgFormatter.spaces": 2,
-  // Python
-  "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
   // TypeScript
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
