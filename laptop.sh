@@ -60,8 +60,6 @@ fi
   ln -sf "$PWD/shell/psqlrc" "$HOME/.psqlrc"
   ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
-  mkdir -p "$HOME/Library/Application Support/Code/User"
-  ln -sf "$PWD/shell/vscode.json" "$HOME/Library/Application Support/Code - Insiders/User/settings.json"
 )
 
 # Homebrew
@@ -156,6 +154,3 @@ else
 fi
 nvim --headless +PlugUpdate +PlugClean! +qa
 nvim --headless +TSUpdate +qa
-
-# VS Code
-defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false
