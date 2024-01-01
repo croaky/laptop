@@ -46,3 +46,12 @@ sudo spctl developer-mode enable-terminal
 
 Then, select terminal program (e.g. kitty.app)
 at "Preferences > Security & Privacy > Privacy > Developer Tools".
+
+## 1.1.1.1 as DNS resolver
+
+Set DNS resolver to [`1.1.1.1`](https://1.1.1.1),
+a [fast, privacy-focused](https://blog.cloudflare.com/announcing-1111/)
+consumer DNS service from Cloudflare,
+by going to "System Preferences > Network > Advanced... > DNS",
+clicking "+", entering "1.1.1.1", clicking "OK",
+and clicking "Apply".
