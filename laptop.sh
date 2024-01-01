@@ -47,9 +47,6 @@ fi
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
   ln -sf "$PWD/ruby/version" "$HOME/.ruby-version"
 
-  # Node
-  ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
-
   # Shell
   mkdir -p "$HOME/.config/kitty"
   ln -sf "$PWD/shell/kitty.conf" "$HOME/.config/kitty/kitty.conf"
@@ -59,15 +56,12 @@ fi
   ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
+  ln -sf "$PWD/shell/npmrc" "$HOME/.npmrc"
+  ln -sf "$PWD/shell/psqlrc" "$HOME/.psqlrc"
   ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
-
-  # SQL
-  ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
-
-  # VS Code
   mkdir -p "$HOME/Library/Application Support/Code/User"
-  ln -sf "$PWD/vscode/settings.json" "$HOME/Library/Application Support/Code - Insiders/User/settings.json"
+  ln -sf "$PWD/shell/vscode.json" "$HOME/Library/Application Support/Code - Insiders/User/settings.json"
 )
 
 # Homebrew
