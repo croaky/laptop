@@ -29,10 +29,57 @@ Install macOS apps:
 - [Magnet.app](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
 - [Postgres.app](https://postgresapp.com/)
 
-## SSH key
+## SSH key with Ed25519
 
-[Create an SSH key](https://dancroak.com/ssh-ed25519)
-and upload it to GitHub.
+Ed25519 uses elliptic curve cryptography
+with good security and performance.
+When a whole team uses Ed25519,
+a server's `~/.ssh/authorized_keys` file looks nice:
+
+```
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIAePksB5aPc6sww+RMzJwpVuDhRAgzOKP1Q/o3suIbw alice@home.local
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEB/O/VwAvqWIV/EN9aHjHAg/9JYsX/Ce2yvr5wPI3gZ bob@work.local
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAYG1rgF4YSSBwtinbhFLR/Qeah11jYcQpf6lX4yql60 carol@home.local
+```
+
+Create the key:
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "$(whoami)@$(hostname)"
+```
+
+Start the SSH agent:
+
+```bash
+eval "$(ssh-agent -s)"
+```
+
+Update `~/.ssh/config`:
+
+```
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519
+
+Host github.com
+  Hostname ssh.github.com
+  Port 443
+```
+
+Add the private key to the SSH agent on macOS:
+
+```bash
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+```
+
+Copy the public key to macOS clipboard:
+
+```bash
+cat ~/.ssh/id_ed25519.pub | pbcopy
+```
+
+[Upload the public key to GitHub](https://github.com/settings/keys).
 
 ## Binary malware scans
 
