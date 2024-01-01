@@ -1,15 +1,32 @@
 # Laptop
 
-Dotfiles and an install/update script:
+Set up a macOS machine as a software development environment.
+
+## Install
+
+Clone onto laptop:
 
 ```
 export LAPTOP="$HOME/laptop"
 git clone https://github.com/croaky/laptop.git $LAPTOP
 cd $LAPTOP
+```
+
+Review:
+
+```
+less laptop.sh
+```
+
+Run:
+
+```
 ./laptop.sh
 ```
 
 Done!
+The script can safely be run multiple times.
+It is tested on the latest version of macOS on a arm64 (Apple Silicon) chip.
 
 The following items are not part of the script.
 They are "one time setup" items.
@@ -103,5 +120,7 @@ disturbing its fast iteration cycle. Disable it by running:
 sudo spctl developer-mode enable-terminal
 ```
 
-Then, select terminal program (e.g. kitty.app)
-at "Preferences > Security & Privacy > Privacy > Developer Tools".
+Then:
+
+- Go to "System Preferences > Privacy & Security > Developer Tools"
+- Select [kitty](https://sw.kovidgoyal.net/kitty/) as the terminal program.
