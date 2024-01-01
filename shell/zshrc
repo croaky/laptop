@@ -61,15 +61,8 @@ compinit -u
 # Bat
 export BAT_THEME="TwoDark"
 
-# Fly.io nixpacks
-PATH="$HOME/.fly/bin:$PATH"
-
 # Go
 PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
-
-# Deno
-# export DENO_INSTALL="$HOME/.deno"
-# PATH="$DENO_INSTALL/bin:$PATH"
 
 # Ruby
 export RUBYOPT="--enable-yjit"
