@@ -7,6 +7,8 @@ if [[ "$1" == "undo" ]]; then
   255.255.255.255 broadcasthost' | sudo tee /etc/hosts > /dev/null
 else
   # Create file to block ads at the networking level
+  # The data source is free to use for personal use and licensed under
+  # the Creative Commons Attribution-NonCommercial-ShareAlike License.
   curl -s https://winhelp2002.mvps.org/hosts.txt > /tmp/adblock
 
   # Re-write Windows to Unix line endings

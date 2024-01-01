@@ -22,6 +22,18 @@ Configure "System Preferences > Keyboard":
 - Set "Delay Until Repeat" to "Short".
 - Set "Modifier Keys > Caps Lock Key" to "^ Control".
 
+## 1.1.1.1 as DNS resolver
+
+Set DNS resolver to [`1.1.1.1`](https://1.1.1.1),
+a [fast, privacy-focused](https://blog.cloudflare.com/announcing-1111/)
+DNS service from Cloudflare:
+
+- Go to "System Preferences > Network > Advanced... > DNS"
+- Click "+"
+- Enter "1.1.1.1"
+- Click "OK"
+- Click "Apply"
+
 ## macOS apps
 
 Install macOS apps:
@@ -93,12 +105,3 @@ sudo spctl developer-mode enable-terminal
 
 Then, select terminal program (e.g. kitty.app)
 at "Preferences > Security & Privacy > Privacy > Developer Tools".
-
-## 1.1.1.1 as DNS resolver
-
-Set DNS resolver to [`1.1.1.1`](https://1.1.1.1),
-a [fast, privacy-focused](https://blog.cloudflare.com/announcing-1111/)
-consumer DNS service from Cloudflare,
-by going to "System Preferences > Network > Advanced... > DNS",
-clicking "+", entering "1.1.1.1", clicking "OK",
-and clicking "Apply".
