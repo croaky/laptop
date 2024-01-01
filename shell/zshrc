@@ -72,9 +72,10 @@ PATH="$HOME/.rubies/ruby-3.3.0/bin:$PATH"
 PATH="$BREW/bin:$PATH"
 
 # Node
-export PATH="$BREW/opt/node@20/bin:$PATH"
+PATH="$BREW/opt/node@20/bin:$PATH"
 
-# Postgres.app
+# Postgres
+export PGUSER=postgres
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 # Laptop
