@@ -20,20 +20,6 @@ fi
 
 # Symlinks
 (
-  # Neovim
-  ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
-  mkdir -p "$HOME/.config/nvim/ftdetect"
-  mkdir -p "$HOME/.config/nvim/ftplugin"
-  mkdir -p "$HOME/.config/nvim/syntax"
-  (
-    cd vim
-    for f in {ftdetect,ftplugin,syntax}/*; do
-      ln -sf "$PWD/$f" "$HOME/.config/nvim/$f"
-    done
-  )
-  mkdir -p "$HOME/.config/nvim"
-  ln -sf "$PWD/vim/nvim.vim" "$HOME/.config/nvim/init.vim"
-
   # Git
   ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
   ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
@@ -60,6 +46,20 @@ fi
   ln -sf "$PWD/shell/psqlrc" "$HOME/.psqlrc"
   ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
+
+  # Vim
+  ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
+  mkdir -p "$HOME/.config/nvim/ftdetect"
+  mkdir -p "$HOME/.config/nvim/ftplugin"
+  mkdir -p "$HOME/.config/nvim/syntax"
+  (
+    cd vim
+    for f in {ftdetect,ftplugin,syntax}/*; do
+      ln -sf "$PWD/$f" "$HOME/.config/nvim/$f"
+    done
+  )
+  mkdir -p "$HOME/.config/nvim"
+  ln -sf "$PWD/vim/nvim.vim" "$HOME/.config/nvim/init.vim"
 )
 
 # Homebrew
