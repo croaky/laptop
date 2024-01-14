@@ -13,11 +13,6 @@
 
 set -eux
 
-if [ "$(uname -m)" != "arm64" ]; then
- echo "laptop script only configured for Apple Silicon chip"
- exit 1
-fi
-
 # Symlinks
 (
   # Git

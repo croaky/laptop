@@ -1,10 +1,5 @@
 #!/usr/bin/env zsh
 
-if [ "$(uname -m)" != "arm64" ]; then
- echo "laptop script only configured for Apple Silicon chip"
- exit 1
-fi
-
 BREW="/opt/homebrew"
 
 # Aliases
@@ -13,7 +8,6 @@ alias c="git create-branch"
 alias flush-cache="sudo killall -HUP mDNSResponder"
 alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias mkdir="mkdir -p"
-alias path='echo $PATH | tr -s ":" "\n"'
 alias vim="nvim"
 
 # Editor
@@ -21,7 +15,6 @@ export VISUAL=nvim
 export EDITOR=$VISUAL
 
 # History
-setopt hist_ignore_all_dups inc_append_history
 HISTFILE=~/.zhistory
 HISTSIZE=500
 SAVEHIST=500
@@ -31,7 +24,6 @@ unset HOMEBREW_NO_ANALYTICS
 
 # fzf to find files, ag to search files
 if [ -e "$BREW/opt/fzf/shell" ]; then
-  source "$BREW/opt/fzf/shell/completion.zsh"
   source "$BREW/opt/fzf/shell/key-bindings.zsh"
 fi
 export FZF_DEFAULT_COMMAND='ag --hidden --nocolor -g ""'
