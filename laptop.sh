@@ -69,7 +69,6 @@ export PATH="$BREW/bin:$PATH"
 brew analytics off
 brew update-reset
 brew bundle --no-lock --file=- <<EOF
-tap "heroku/brew"
 tap "render-oss/render"
 
 brew "awscli"
@@ -79,7 +78,6 @@ brew "fzf"
 brew "gh"
 brew "git"
 brew "go"
-brew "heroku"
 brew "jq"
 brew "lua-language-server"
 brew "neovim"
