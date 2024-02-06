@@ -198,6 +198,7 @@ hi Function              guifg=#9664c8
 hi PreProc               guifg=#9664c8
 
 " Pink
+hi @diff.minus           guifg=#d7005f
 hi @symbol               guifg=#d7005f
 hi @text.diff.delete     guifg=#d7005f
 hi Boolean               guifg=#d7005f
@@ -217,4 +218,5 @@ hi Title                 guifg=#d7005f
 hi WarningMsg            guifg=#d7005f
 
 " Green
+hi @diff.plus            guifg=#64c88e
 hi @text.diff.add        guifg=#64c88e
