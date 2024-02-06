@@ -7,8 +7,8 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-git push origin "HEAD:refs/heads/$1"
+git push origin "HEAD:refs/heads/dc-$1"
 git fetch origin
-git branch --track "$1" "origin/$1"
+git branch --track "$1" "origin/dc-$1"
 cd .
-git checkout "$1"
+git checkout "dc-$1"
