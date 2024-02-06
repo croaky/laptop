@@ -46,10 +46,9 @@ set -eux
   ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
   mkdir -p "$HOME/.config/nvim/ftdetect"
   mkdir -p "$HOME/.config/nvim/ftplugin"
-  mkdir -p "$HOME/.config/nvim/syntax"
   (
     cd vim
-    for f in {ftdetect,ftplugin,syntax}/*; do
+    for f in {ftdetect,ftplugin}/*; do
       ln -sf "$PWD/$f" "$HOME/.config/nvim/$f"
     done
   )
