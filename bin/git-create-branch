@@ -9,6 +9,6 @@ fi
 
 git push origin "HEAD:refs/heads/dc-$1"
 git fetch origin
-git branch --track "$1" "origin/dc-$1"
+git branch --track "dc-$1" "origin/dc-$1"
 cd .
 git checkout "dc-$1"
