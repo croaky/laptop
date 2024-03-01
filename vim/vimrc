@@ -168,6 +168,7 @@ hi SignColumn                           guibg=#191e2d
 " White
 hi Identifier            guifg=#ffffff
 hi Keyword               guifg=#ffffff
+hi StatusLine            guifg=#ffffff
 
 " Light gray
 hi Comment               guifg=#999999
@@ -179,7 +180,7 @@ hi Operator              guifg=#999999
 hi PmenuSel              guifg=#ffffff  guibg=#999999
 hi PmenuThumb            guifg=#ffffff  guibg=#999999
 hi Special               guifg=#999999
-hi StatusLine            guifg=#999999
+hi StatusLineNC          guifg=#999999
 hi TabLine               guifg=#ffffff  guibg=#999999
 hi VertSplit             guifg=#999999
 
