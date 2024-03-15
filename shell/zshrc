@@ -64,7 +64,7 @@ PATH="$HOME/.rubies/ruby-3.3.0/bin:$PATH"
 PATH="$BREW/bin:$PATH"
 
 # Node
-PATH="$BREW/opt/node@20/bin:$PATH"
+PATH="$BREW/opt/node/bin:$PATH"
 
 # Postgres
 export PGUSER=postgres
