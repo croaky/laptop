@@ -162,7 +162,8 @@ endif
 " Show all syntax groups
 " :so $VIMRUNTIME/syntax/hitest.vim
 
-" Dim, sync w/ shell/kitty.conf background
+" Sync w/ shell/kitty.conf background
+hi Normal                               guibg=#191e2d
 hi SignColumn                           guibg=#191e2d
 
 " White
