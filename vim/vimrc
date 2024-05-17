@@ -73,9 +73,6 @@ call plug#begin('~/.vim/plugged')
   " :TestFile, :TestNearest
   Plug 'vim-test/vim-test'
 
-  " Comment/uncomment lines and selections with <gcc>
-  Plug 'tomtom/tcomment_vim'
-
   " Filesystem, :Rename, :Git blame
   Plug 'pbrisbin/vim-mkdir'
   Plug 'tpope/vim-eunuch'
