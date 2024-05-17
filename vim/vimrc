@@ -165,11 +165,11 @@ endif
 " Sync w/ shell/kitty.conf background
 hi Normal                               guibg=#191e2d
 hi SignColumn                           guibg=#191e2d
+hi StatusLine            guifg=#191e2d
 
 " White
 hi Identifier            guifg=#ffffff
 hi Keyword               guifg=#ffffff
-hi StatusLine            guifg=#ffffff
 
 " Light gray
 hi Comment               guifg=#999999
