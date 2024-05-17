@@ -11,10 +11,6 @@ lua <<EOF
         vim.fn["vsnip#anonymous"](args.body)
       end,
     },
-    window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
-    },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -68,9 +64,6 @@ lua <<EOF
   -- HTML
   lspconfig['html'].setup{}
 
-  -- Lua
-  lspconfig['lua_ls'].setup{}
-
   -- Ruby
   lspconfig['solargraph'].setup{
     on_attach = on_attach,
@@ -108,7 +101,6 @@ lua <<EOF
       "html",
       "javascript",
       "json",
-      "lua",
       "markdown",
       "ruby",
       "sql",
@@ -135,8 +127,8 @@ lua <<EOF
     playground = {
       enable = true,
       disable = {},
-      updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-      persist_queries = false, -- Whether the query persists across vim sessions
+      updatetime = 25,
+      persist_queries = false,
       keybindings = {
         toggle_query_editor = 'o',
         toggle_hl_groups = 'i',
@@ -151,6 +143,4 @@ lua <<EOF
       },
     }
   }
-
-  -- vim.lsp.set_log_level("debug")
 EOF
