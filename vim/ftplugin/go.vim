@@ -6,6 +6,9 @@ let g:go_rename_command = 'gopls'
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
+" Disable vim-go template
+let g:go_template_autocreate = 0
+
 " Lint
 let b:ale_linters = ['gopls']
 
