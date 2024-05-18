@@ -1,6 +1,5 @@
 -- Set runtime path and packpath
 vim.opt.runtimepath:prepend("~/.vim")
-vim.opt.runtimepath:append("~/.vim/after")
 vim.opt.packpath = vim.opt.runtimepath:get()
 
 -- Set leader key
@@ -8,6 +7,7 @@ vim.g.mapleader = " "
 
 -- General settings
 vim.opt.autoindent = true
+vim.opt.backup = false
 vim.opt.cmdheight = 2
 vim.opt.complete:append("kspell")
 vim.opt.diffopt:append("vertical")
@@ -17,27 +17,26 @@ vim.opt.fillchars:append({ eob = " " })  -- Hide ~ end-of-file markers
 vim.opt.hidden = true  -- Allow switching between buffers without saving
 vim.opt.history = 50
 vim.opt.incsearch = true
+vim.opt.joinspaces = false  -- Use one space, not two, after punctuation
 vim.opt.laststatus = 2  -- Always display status line
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
-vim.opt.mouse = ""
-vim.opt.backup = false
-vim.opt.joinspaces = false  -- Use one space, not two, after punctuation
 vim.opt.modeline = false  -- Disable modelines as a security precaution
-vim.opt.swapfile = false
-vim.opt.writebackup = false
+vim.opt.mouse = ""
 vim.opt.ruler = true  -- Show cursor position all the time
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append("c")
 vim.opt.showcmd = true  -- Display incomplete commands
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "no"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.swapfile = false
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.textwidth = 80
 vim.opt.updatetime = 300
+vim.opt.writebackup = false
 
 -- Fuzzy-find files
 vim.api.nvim_set_keymap('n', '<C-p>', ':Files<CR>', { noremap = true, silent = true })
@@ -304,7 +303,6 @@ end
 vim.cmd [[
 " Sync w/ shell/kitty.conf background
 hi Normal                               guibg=#191e2d
-hi SignColumn                           guibg=#191e2d
 hi StatusLine            guifg=#191e2d
 
 hi Identifier            guifg=#ffffff
