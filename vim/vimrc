@@ -1,21 +1,17 @@
 let mapleader = " "   " Spacebar
 
 set autoindent
-set autowrite         " Automatically :write before running commands
-set backspace=2       " Backspace deletes like most programs in insert mode
 set cmdheight=2
 set complete+=kspell  " Include spellfile in completion results
 set diffopt+=vertical " Always use vertical diffs
-set encoding=utf-8
 set expandtab
 set exrc              " http://andrew.stwrt.ca/posts/project-specific-vimrc/
 set fillchars=eob:\   " Hide ~ end-of-file markers
-set hidden            " TextEdit might fail if hidden is not set
+set hidden            " Allow switching between buffers without saving
 set history=50
 set incsearch
 set laststatus=2      " Always display status line
 set list listchars=tab:»·,trail:·,nbsp:·
-set modelines=0       " Disable modelines as a security precaution
 set mouse=
 set nobackup
 set nojoinspaces      " Use one space, not two, after punctuation
@@ -34,10 +30,6 @@ set tabstop=2
 set termguicolors
 set textwidth=80
 set updatetime=300
-
-if &compatible
-  set nocompatible
-end
 
 " Open vim-plug without a vertical split
 let g:plug_window='enew'
