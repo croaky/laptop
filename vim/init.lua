@@ -12,22 +12,22 @@ vim.opt.cmdheight = 2
 vim.opt.complete:append("kspell")
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
-vim.opt.exrc = true  -- Project-specific vimrc
-vim.opt.fillchars:append({ eob = " " })  -- Hide ~ end-of-file markers
-vim.opt.hidden = true  -- Allow switching between buffers without saving
+vim.opt.exrc = true                     -- Project-specific vimrc
+vim.opt.fillchars:append({ eob = " " }) -- Hide ~ end-of-file markers
+vim.opt.hidden = true                   -- Allow switching between buffers without saving
 vim.opt.history = 50
 vim.opt.incsearch = true
-vim.opt.joinspaces = false  -- Use one space, not two, after punctuation
-vim.opt.laststatus = 2  -- Always display status line
+vim.opt.joinspaces = false -- Use one space, not two, after punctuation
+vim.opt.laststatus = 2     -- Always display status line
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
-vim.opt.modeline = false  -- Disable modelines as a security precaution
+vim.opt.modeline = false -- Disable modelines as a security precaution
 vim.opt.mouse = ""
-vim.opt.ruler = true  -- Show cursor position all the time
+vim.opt.ruler = true     -- Show cursor position all the time
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append("c")
-vim.opt.showcmd = true  -- Display incomplete commands
+vim.opt.showcmd = true -- Display incomplete commands
 vim.opt.signcolumn = "no"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -65,7 +65,7 @@ vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
 
--- Lua configuration
+-- Packer
 vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup(function(use)
@@ -93,9 +93,6 @@ require('packer').startup(function(use)
   -- Fuzzy-finding :Ag, :Commits, :Files
   use '/opt/homebrew/opt/fzf'
   use 'junegunn/fzf.vim'
-
-  -- :help ale
-  use 'dense-analysis/ale'
 
   -- :help projectionist, .projections.json, :A
   use 'tpope/vim-projectionist'
@@ -126,56 +123,103 @@ require('packer').startup(function(use)
   use 'vim-ruby/vim-ruby'
 end)
 
+local function format_on_save(cmd)
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    buffer = 0,
+    callback = function()
+      local tmpfile = vim.fn.tempname()
+      local buffer_file = vim.fn.expand("%:p")
+      vim.cmd("silent! !" .. cmd .. " " .. buffer_file .. " > " .. tmpfile)
+      vim.cmd("silent! !mv " .. tmpfile .. " " .. buffer_file)
+      vim.cmd("edit!")
+    end
+  })
+end
+
+-- LSPs
 local lspconfig = require('lspconfig')
-local cmp = require('cmp')
 
 local on_attach = function(_, bufnr)
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', 'gn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Go
 lspconfig.gopls.setup {
-  on_attach = on_attach,
   capabilities = capabilities,
+  on_attach = on_attach
 }
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "go", },
+  callback = function()
+    -- $LAPTOP/bin/goimportslocal
+    vim.g.go_fmt_command = 'goimportslocal'
+    vim.g.go_rename_command = 'gopls'
+
+    -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md
+    vim.g.go_def_mode = 'gopls'
+    vim.g.go_info_mode = 'gopls'
+
+    -- Disable vim-go template
+    vim.g.go_template_autocreate = 0
+
+    vim.opt_local.listchars = { tab = "  ", trail = "·", nbsp = "·" }
+    vim.opt_local.expandtab = false
+
+    -- Don't highlight tabs as extra whitespace
+    vim.opt_local.list = false
+
+    vim.cmd("compiler go")
+
+    vim.api.nvim_buf_set_keymap(0, 'n', ':A<CR>', ':GoAlternate<CR>', { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>r', ':redraw!<CR>:!go run %<CR>', { noremap = true, silent = true })
+
+    -- Syntax highlight additional tokens
+    vim.g.go_highlight_fields = 1
+    vim.g.go_highlight_functions = 1
+    vim.g.go_highlight_methods = 1
+    vim.g.go_highlight_operators = 1
+    vim.g.go_highlight_structs = 1
+  end
+})
 
 -- HTML
-lspconfig.html.setup{}
-
--- Ruby
-lspconfig.solargraph.setup{
-  on_attach = on_attach,
+lspconfig.html.setup {
   capabilities = capabilities,
-  cmd = { "solargraph", "stdio" },
-  filetypes = { "ruby" },
-  root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
-  settings = {
-    solargraph = {
-      diagnostics = false
-    }
-  }
-}
-
--- TypeScript
-lspconfig.tsserver.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern("package.json"),
 }
-vim.g.markdown_fenced_languages = {
-  "ts=typescript"
-}
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "html" },
+  callback = function()
+    -- Format on save
+    format_on_save("prettier --write")
+
+    -- Treat <li> and <p> tags like the block tags they are
+    vim.g.html_indent_tags = 'li\\|p'
+  end
+})
+
+-- JSON
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "json", "markdown", "scss", "typescript", "yaml" },
+  callback = function()
+    -- Format on save
+    format_on_save("prettier --write")
+  end
+})
 
 -- Lua
 lspconfig.lua_ls.setup {
   cmd = { "lua-language-server" },
+  capabilities = capabilities,
+  on_attach = on_attach,
   settings = {
     Lua = {
       runtime = {
@@ -198,7 +242,101 @@ lspconfig.lua_ls.setup {
   },
 }
 
+-- Markdown
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "scss", "typescript", "yaml" },
+  callback = function()
+    -- Format on save
+    format_on_save("prettier --write")
+  end
+})
+
+-- Ruby
+lspconfig.solargraph.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  cmd = { "solargraph", "stdio" },
+  filetypes = { "ruby" },
+  root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+  settings = {
+    solargraph = {
+      diagnostics = false
+    }
+  },
+}
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "ruby",
+  callback = function()
+    -- Format on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = 0,
+      callback = function()
+        vim.cmd("silent! !bundle exec rubocop -A " .. vim.fn.expand("%:p"))
+        vim.cmd("edit!")
+      end
+    })
+
+    -- Run current file
+    vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>r', ':redraw!<CR>:!bundle exec ruby %<CR>', { noremap = true, silent = true })
+
+    -- https://github.com/testdouble/standard/wiki/IDE:-vim
+    vim.g.ruby_indent_assignment_style = 'variable'
+  end
+})
+
+-- SCSS
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "scss", "typescript", "yaml" },
+  callback = function()
+    -- Format on save
+    format_on_save("prettier --write")
+  end
+})
+
+-- SQL
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "sql",
+  callback = function()
+    -- Format on save
+    format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line")
+
+    --- Run current file
+    vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>r', ':redraw!<CR>:!psql -d $(cat .db) -f % | less<CR>', { noremap = true, silent = true })
+
+    -- Prepare SQL command with var(s)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>v', ':redraw!<CR>:!psql -d $(cat .db) -f % -v | less<SPACE>', { noremap = true, silent = true })
+  end
+})
+
+-- TypeScript
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern("package.json"),
+}
+vim.g.markdown_fenced_languages = {
+  "ts=typescript"
+}
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "typescript" },
+  callback = function()
+    -- Format on save
+    format_on_save("prettier --write")
+  end
+})
+
+-- YAML
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "yaml" },
+  callback = function()
+    -- Format on save
+    format_on_save("prettier --write")
+  end
+})
+
 -- Completion
+local cmp = require('cmp')
+
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -230,8 +368,8 @@ cmp.setup.cmdline(':', {
   })
 })
 
--- Treesitter
-require'nvim-treesitter.configs'.setup {
+-- Syntax Highlighting
+require 'nvim-treesitter.configs'.setup {
   ensure_installed = {
     "bash",
     "css",
@@ -284,7 +422,7 @@ require "nvim-treesitter.configs".setup {
   }
 }
 
--- Colors
+-- Custom colors after Treesitter
 vim.cmd [[hi clear]]
 
 if vim.fn.exists("syntax_on") then
