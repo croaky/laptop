@@ -6,10 +6,10 @@
 # - text editor (Neovim)
 # - programming language runtimes (Go, Ruby, Node)
 # - language servers (HTML, SQL)
-# - CLIs (AWS, GitHub, Render, Tailscale)
+# - CLIs (AWS, GitHub, Render)
 
 # This script can be safely run multiple times.
-# Tested with macOS Ventura (12.7) on arm64 (Apple Silicon)
+# Tested with macOS Sonoma (14.4) on arm64 (Apple Silicon)
 
 set -eux
 
@@ -42,7 +42,6 @@ set -eux
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
   # Vim
-  ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
   mkdir -p "$HOME/.config/nvim/ftdetect"
   mkdir -p "$HOME/.config/nvim/ftplugin"
   (
@@ -84,7 +83,6 @@ brew "oven-sh/bun/bun"
 brew "pgformatter"
 brew "render"
 brew "shellcheck"
-brew "tailscale"
 brew "the_silver_searcher"
 brew "tldr"
 brew "tmux"
@@ -137,12 +135,14 @@ fi
 # HTML
 npm i -g vscode-langservers-extracted
 
-# Vim
-if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
-  nvim --headless +PlugUpgrade +qa
-else
-  curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# NeoVim with Packer
+PACKER_DIR="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+
+if [ ! -d "$PACKER_DIR" ]; then
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim "$PACKER_DIR"
 fi
-nvim --headless +PlugUpdate +PlugClean! +qa
-nvim --headless +TSUpdate +qa
+
+nvim --headless -c 'packadd packer.nvim' -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
+# Treesitter
+nvim --headless -c 'packadd packer.nvim' -c 'TSUpdateSync' -c 'quitall'
