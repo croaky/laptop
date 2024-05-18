@@ -50,7 +50,7 @@ set -eux
     done
   )
   mkdir -p "$HOME/.config/nvim"
-  ln -sf "$PWD/vim/init.vim" "$HOME/.config/nvim/init.vim"
+  ln -sf "$PWD/vim/init.lua" "$HOME/.config/nvim/init.lua"
 )
 
 # Homebrew
