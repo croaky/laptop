@@ -8,7 +8,7 @@ set cmdheight=2
 set complete+=kspell  " Include spellfile in completion results
 set diffopt+=vertical " Always use vertical diffs
 set expandtab
-set exrc              " http://andrew.stwrt.ca/posts/project-specific-vimrc/
+set exrc              " Project-specific vimrc
 set fillchars=eob:\   " Hide ~ end-of-file markers
 set hidden            " Allow switching between buffers without saving
 set history=50
@@ -21,7 +21,7 @@ set nojoinspaces      " Use one space, not two, after punctuation
 set nomodeline        " Disable modelines as a security precaution
 set noswapfile
 set nowritebackup
-set ruler             " Ahow cursor position all the time
+set ruler             " Show cursor position all the time
 set shiftround
 set shiftwidth=2
 set shortmess+=c      " Don't pass messages to |ins-completion-menu|
@@ -38,7 +38,6 @@ set updatetime=300
 " commit messages, when position is invalid, or inside an event handler.
 augroup lastcursorposition
   autocmd!
-
   autocmd BufReadPost *
     \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
@@ -48,7 +47,6 @@ augroup END
 " Lint with ALE
 augroup ale
   autocmd!
-
   autocmd VimEnter *
     \ let g:ale_lint_on_enter = 1 |
     \ let g:ale_lint_on_text_changed = 0
@@ -95,13 +93,11 @@ lua <<EOF
     use 'neovim/nvim-lspconfig'
 
     -- Completion
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
+    use 'hrsh7th/cmp-nvim-lsp' -- complete with LSP
+    use 'hrsh7th/cmp-buffer'   -- complete words from current buffer
+    use 'hrsh7th/cmp-path'     -- complete file paths
+    use 'hrsh7th/cmp-cmdline'  -- complete on command-line
+    use 'hrsh7th/nvim-cmp'     -- core complettion plugin framework
 
     -- Treesitter
     use {
@@ -147,14 +143,80 @@ lua <<EOF
     use 'vim-ruby/vim-ruby'
   end)
 
-  local cmp = require'cmp'
+  local lspconfig = require('lspconfig')
+  local cmp = require('cmp')
 
-  cmp.setup({
-    snippet = {
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
-      end,
+  local on_attach = function(client, bufnr)
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', 'gn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  end
+
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+  -- Go
+  lspconfig.gopls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+
+  -- HTML
+  lspconfig.html.setup{}
+
+  -- Ruby
+  lspconfig.solargraph.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "solargraph", "stdio" },
+    filetypes = { "ruby" },
+    root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+    settings = {
+      solargraph = {
+        diagnostics = false
+      }
+    }
+  }
+
+  -- TypeScript
+  lspconfig.tsserver.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    root_dir = lspconfig.util.root_pattern("package.json"),
+  }
+  vim.g.markdown_fenced_languages = {
+    "ts=typescript"
+  }
+
+  -- Lua
+  lspconfig.lua_ls.setup {
+    cmd = { "lua-language-server" },
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'LuaJIT',
+          path = vim.split(package.path, ';'),
+        },
+        diagnostics = {
+          globals = { 'vim' },
+        },
+        workspace = {
+          library = {
+            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+          },
+        },
+        telemetry = {
+          enable = false,
+        },
+      },
     },
+  }
+
+  -- Completion
+  cmp.setup({
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -164,7 +226,6 @@ lua <<EOF
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'vsnip' },
     }, {
       { name = 'buffer' },
     })
@@ -185,55 +246,6 @@ lua <<EOF
       { name = 'cmdline' }
     })
   })
-
-  local on_attach = function(client, bufnr)
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', 'gn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  end
-
-  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-  local lspconfig = require('lspconfig')
-  local util = require('lspconfig.util')
-
-  -- Go
-  lspconfig['gopls'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-
-  -- HTML
-  lspconfig['html'].setup{}
-
-  -- Ruby
-  lspconfig['solargraph'].setup{
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { "solargraph", "stdio" },
-    filetypes = { "ruby" },
-    root_dir = util.root_pattern("Gemfile", ".git"),
-    settings = {
-      solargraph = {
-        diagnostics = false
-      }
-    }
-  }
-
-  -- TypeScript
-  lspconfig['tsserver'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    root_dir = util.root_pattern("package.json"),
-  }
-  vim.g.markdown_fenced_languages = {
-    "ts=typescript"
-  }
-
-  -- Auto pairs
-  require'nvim-autopairs'.setup {}
 
   -- Treesitter
   require'nvim-treesitter.configs'.setup {
