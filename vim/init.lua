@@ -39,26 +39,6 @@ vim.opt.termguicolors = true
 vim.opt.textwidth = 80
 vim.opt.updatetime = 300
 
--- When reading a buffer, jump to last known cursor position except for
--- commit messages, when position is invalid, or inside an event handler.
-vim.api.nvim_create_augroup("lastcursorposition", {})
-vim.api.nvim_create_autocmd("BufReadPost", {
-  group = "lastcursorposition",
-  pattern = "*",
-  callback = function()
-    if vim.fn.expand("<afile>:t") ~= "COMMIT_EDITMSG" and vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
-      vim.cmd("normal! g`\"")
-    end
-  end,
-})
-
--- Disable spelling by default, enable per-filetype
-vim.api.nvim_create_autocmd("BufRead", {
-  callback = function()
-    vim.opt_local.spell = false
-  end,
-})
-
 -- Fuzzy-find files
 vim.api.nvim_set_keymap('n', '<C-p>', ':Files<CR>', { noremap = true, silent = true })
 vim.g.fzf_layout = { window = { width = 0.95, height = 0.9 } }
