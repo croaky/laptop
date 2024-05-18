@@ -18,7 +18,6 @@ set -eux
   # Git
   ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
   ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
-  ln -sf "$PWD/git/gitmessage" "$HOME/.gitmessage"
 
   # Ruby
   mkdir -p "$HOME/.bundle"

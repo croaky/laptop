@@ -34,11 +34,62 @@ set termguicolors
 set textwidth=80
 set updatetime=300
 
-" Packer configuration
+" When reading a buffer, jump to last known cursor position except for
+" commit messages, when position is invalid, or inside an event handler.
+augroup lastcursorposition
+  autocmd!
+
+  autocmd BufReadPost *
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+augroup END
+
+" Lint with ALE
+augroup ale
+  autocmd!
+
+  autocmd VimEnter *
+    \ let g:ale_lint_on_enter = 1 |
+    \ let g:ale_lint_on_text_changed = 0
+augroup END
+
+" Disable spelling by default, enable per-filetype
+autocmd BufRead setlocal nospell
+
+" Fuzzy-find files
+nnoremap <C-p> :Files<CR>
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
+
+" Search file contents
+nnoremap \ :Ag<SPACE>
+set grepprg=ag\ --nogroup\ --nocolor
+
+" bind K to grep word under cursor. Use as fallback when `gr` via LSP doesn't work.
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Switch between the last two files
+nnoremap <Leader><Leader> <C-^>
+
+" Run tests https://github.com/vim-test/vim-test#kitty-strategy-setup
+nnoremap <silent> <Leader>t :TestFile<CR>
+nnoremap <silent> <Leader>s :TestNearest<CR>
+let g:test#strategy = "neovim"
+let g:test#neovim#start_normal = 1
+let g:test#echo_command = 0
+
+" Move between windows
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
 lua <<EOF
   vim.cmd [[packadd packer.nvim]]
+
   require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'  -- Packer can manage itself
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
 
     -- LSP
     use 'neovim/nvim-lspconfig'
@@ -95,59 +146,7 @@ lua <<EOF
     use 'tpope/vim-rails'
     use 'vim-ruby/vim-ruby'
   end)
-EOF
 
-" When reading a buffer, jump to last known cursor position except for
-" commit messages, when position is invalid, or inside an event handler.
-augroup lastcursorposition
-  autocmd!
-
-  autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-augroup END
-
-" Lint with ALE
-augroup ale
-  autocmd!
-
-  autocmd VimEnter *
-    \ let g:ale_lint_on_enter = 1 |
-    \ let g:ale_lint_on_text_changed = 0
-augroup END
-
-" Disable spelling by default, enable per-filetype
-autocmd BufRead setlocal nospell
-
-" Fuzzy-find files
-nnoremap <C-p> :Files<CR>
-let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.9 } }
-
-" Search file contents
-nnoremap \ :Ag<SPACE>
-set grepprg=ag\ --nogroup\ --nocolor
-
-" bind K to grep word under cursor. Use as fallback when `gr` via LSP doesn't work.
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" Switch between the last two files
-nnoremap <Leader><Leader> <C-^>
-
-" Run tests https://github.com/vim-test/vim-test#kitty-strategy-setup
-nnoremap <silent> <Leader>t :TestFile<CR>
-nnoremap <silent> <Leader>s :TestNearest<CR>
-let g:test#strategy = "neovim"
-let g:test#neovim#start_normal = 1
-let g:test#echo_command = 0
-
-" Move between windows
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-
-lua <<EOF
   local cmp = require'cmp'
 
   cmp.setup({
