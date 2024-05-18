@@ -159,83 +159,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" Colors
-hi clear
-
-if exists("syntax_on")
-  syntax reset
-endif
-
-" Delegate most highlighting decisions to Treesitter
-" https://neovim.io/doc/user/treesitter.html#treesitter-highlight
-
-" See highlight group under cursor
-" :TSHighlightCapturesUnderCursor
-
-" Show all syntax groups
-" :so $VIMRUNTIME/syntax/hitest.vim
-
-" Sync w/ shell/kitty.conf background
-hi Normal                               guibg=#191e2d
-hi SignColumn                           guibg=#191e2d
-hi StatusLine            guifg=#191e2d
-
-" White
-hi Identifier            guifg=#ffffff
-hi Keyword               guifg=#ffffff
-
-" Light gray
-hi Comment               guifg=#999999
-hi Cursor                guifg=#999999
-hi Ignore                guifg=#999999
-hi LineNr                guifg=#999999
-hi NonText               guifg=#999999
-hi Operator              guifg=#999999
-hi PmenuSel              guifg=#ffffff  guibg=#999999
-hi PmenuThumb            guifg=#ffffff  guibg=#999999
-hi Special               guifg=#999999
-hi StatusLineNC          guifg=#999999
-hi TabLine               guifg=#ffffff  guibg=#999999
-hi VertSplit             guifg=#999999
-
-" Yellow
-hi DiagnosticWarn        guifg=#ffd080
-hi Type                  guifg=#ffd080
-hi RedrawDebugClear      guifg=#ffd080  guibg=#191e2d
-hi Search                               guibg=#ffd080
-hi String                guifg=#ffd080
-hi WildMenu                             guibg=#d7005f
-
-" Purple
-hi @conditional          guifg=#9664c8
-hi Directory             guifg=#9664c8
-hi Function              guifg=#9664c8
-hi PreProc               guifg=#9664c8
-
-" Pink
-hi @diff.minus           guifg=#d7005f
-hi @symbol               guifg=#d7005f
-hi @text.diff.delete     guifg=#d7005f
-hi Boolean               guifg=#d7005f
-hi ColorColumn                          guibg=#d7005f
-hi Constant              guifg=#d7005f
-hi DiagnosticError       guifg=#d7005f
-hi DiffText                             guibg=#d7005f
-hi Error                                guibg=#d7005f
-hi ErrorMsg                             guibg=#d7005f
-hi Number                guifg=#d7005f
-hi NvimInternalError     guifg=#ffffff  guibg=#d7005f
-hi Pmenu                                guibg=#d7005f
-hi PreProc               guifg=#d7005f
-hi RedrawDebugRecompose                 guibg=#d7005f
-hi Statement             guifg=#d7005f
-hi Title                 guifg=#d7005f
-hi WarningMsg            guifg=#d7005f
-
-" Green
-hi @diff.plus            guifg=#64c88e
-hi @text.diff.add        guifg=#64c88e
-
 lua <<EOF
   local cmp = require'cmp'
 
@@ -378,3 +301,80 @@ lua <<EOF
     }
   }
 EOF
+
+" Colors
+hi clear
+
+if exists("syntax_on")
+  syntax reset
+endif
+
+" Delegate most highlighting decisions to Treesitter
+" https://neovim.io/doc/user/treesitter.html#treesitter-highlight
+
+" See highlight group under cursor
+" :TSHighlightCapturesUnderCursor
+
+" Show all syntax groups
+" :so $VIMRUNTIME/syntax/hitest.vim
+
+" Sync w/ shell/kitty.conf background
+hi Normal                               guibg=#191e2d
+hi SignColumn                           guibg=#191e2d
+hi StatusLine            guifg=#191e2d
+
+" White
+hi Identifier            guifg=#ffffff
+hi Keyword               guifg=#ffffff
+
+" Light gray
+hi Comment               guifg=#999999
+hi Cursor                guifg=#999999
+hi Ignore                guifg=#999999
+hi LineNr                guifg=#999999
+hi NonText               guifg=#999999
+hi Operator              guifg=#999999
+hi PmenuSel              guifg=#ffffff  guibg=#999999
+hi PmenuThumb            guifg=#ffffff  guibg=#999999
+hi Special               guifg=#999999
+hi StatusLineNC          guifg=#999999
+hi TabLine               guifg=#ffffff  guibg=#999999
+hi VertSplit             guifg=#999999
+
+" Yellow
+hi DiagnosticWarn        guifg=#ffd080
+hi Type                  guifg=#ffd080
+hi RedrawDebugClear      guifg=#ffd080  guibg=#191e2d
+hi Search                               guibg=#ffd080
+hi String                guifg=#ffd080
+hi WildMenu                             guibg=#d7005f
+
+" Purple
+hi @conditional          guifg=#9664c8
+hi Directory             guifg=#9664c8
+hi Function              guifg=#9664c8
+hi PreProc               guifg=#9664c8
+
+" Pink
+hi @diff.minus           guifg=#d7005f
+hi @symbol               guifg=#d7005f
+hi @text.diff.delete     guifg=#d7005f
+hi Boolean               guifg=#d7005f
+hi ColorColumn                          guibg=#d7005f
+hi Constant              guifg=#d7005f
+hi DiagnosticError       guifg=#d7005f
+hi DiffText                             guibg=#d7005f
+hi Error                                guibg=#d7005f
+hi ErrorMsg                             guibg=#d7005f
+hi Number                guifg=#d7005f
+hi NvimInternalError     guifg=#ffffff  guibg=#d7005f
+hi Pmenu                                guibg=#d7005f
+hi PreProc               guifg=#d7005f
+hi RedrawDebugRecompose                 guibg=#d7005f
+hi Statement             guifg=#d7005f
+hi Title                 guifg=#d7005f
+hi WarningMsg            guifg=#d7005f
+
+" Green
+hi @diff.plus            guifg=#64c88e
+hi @text.diff.add        guifg=#64c88e
