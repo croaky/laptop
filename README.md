@@ -79,8 +79,7 @@ Configure "System Preferences > Keyboard":
 ## 1.1.1.1 as DNS resolver
 
 Set DNS resolver to [`1.1.1.1`](https://1.1.1.1),
-a [fast, privacy-focused](https://blog.cloudflare.com/announcing-1111/)
-DNS service from Cloudflare:
+a fast, privacy-focused DNS service from Cloudflare:
 
 - Go to "System Preferences > Network > Advanced... > DNS"
 - Click "+"

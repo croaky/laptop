@@ -25,7 +25,6 @@ set -eux
   ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
   ln -sf "$PWD/ruby/irbrc" "$HOME/.irbrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
-  ln -sf "$PWD/ruby/version" "$HOME/.ruby-version"
 
   # Shell
   mkdir -p "$HOME/.config/kitty"
