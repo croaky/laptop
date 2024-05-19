@@ -5,6 +5,10 @@ vim.opt.packpath = vim.opt.runtimepath:get()
 -- Set leader key
 vim.g.mapleader = " "
 
+-- Netrw
+vim.g.netrw_banner = 0 -- Remove banner
+vim.g.netrw_list_hide = '.DS_Store' -- Hide system files
+
 -- General settings
 vim.opt.autoindent = true
 vim.opt.backup = false
@@ -12,22 +16,22 @@ vim.opt.cmdheight = 2
 vim.opt.complete:append("kspell")
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
-vim.opt.exrc = true                                               -- Project-specific vimrc
-vim.opt.fillchars:append({ eob = " " })                           -- Hide ~ end-of-file markers
-vim.opt.hidden = true                                             -- Allow switching between buffers without saving
+vim.opt.exrc = true -- Project-specific vimrc
+vim.opt.fillchars:append({ eob = " " }) -- Hide ~ end-of-file markers
+vim.opt.hidden = true -- Allow switching between buffers without saving
 vim.opt.history = 50
 vim.opt.incsearch = true
-vim.opt.joinspaces = false                                        -- Use one space, not two, after punctuation
-vim.opt.laststatus = 2                                            -- Always display status line
+vim.opt.joinspaces = false -- Use one space, not two, after punctuation
+vim.opt.laststatus = 2 -- Always display status line
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
-vim.opt.modeline = false                                          -- Disable modelines as a security precaution
+vim.opt.modeline = false -- Disable modelines as a security precaution
 vim.opt.mouse = ""
-vim.opt.ruler = true                                              -- Show cursor position all the time
+vim.opt.ruler = true -- Show cursor position all the time
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append("c")
-vim.opt.showcmd = true                                            -- Display incomplete commands
+vim.opt.showcmd = true -- Display incomplete commands
 vim.opt.signcolumn = "no"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -190,6 +194,19 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- Gitcommit
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gitcommit",
+  callback = function()
+    -- Formatting
+    vim.opt_local.textwidth = 72
+
+    -- Spell-checking
+    vim.opt_local.complete:append("kspell")
+    vim.opt_local.spell = true
+  end,
+})
+
 -- Go
 lspconfig.gopls.setup {
   capabilities = capabilities,
@@ -287,6 +304,16 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     -- Format on save
     format_on_save("prettier --parser markdown %")
+
+    -- Align GitHub-flavored Markdown tables
+    vim.api.nvim_buf_set_keymap(0, 'v', '<Leader>\\', ':EasyAlign*<Bar><Enter>', { noremap = true, silent = true })
+
+    -- Spell-checking
+    vim.opt_local.complete:append("kspell")
+    vim.opt_local.spell = true
+
+    -- View hyperlinks like rendered output
+    vim.opt_local.conceallevel = 2
   end
 })
 
