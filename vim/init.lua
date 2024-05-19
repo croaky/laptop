@@ -42,36 +42,39 @@ vim.opt.textwidth = 80
 vim.opt.updatetime = 300
 vim.opt.writebackup = false
 
+-- Key mappings
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
 -- Fuzzy-find files
-vim.api.nvim_set_keymap('n', '<C-p>', ':Files<CR>', { noremap = true, silent = true })
+map('n', '<C-p>', ':Files<CR>', opts)
 vim.g.fzf_layout = { window = { width = 0.95, height = 0.9 } }
 
 -- Search file contents
-vim.api.nvim_set_keymap('n', '\\', ':Ag<SPACE>', { noremap = true, silent = true })
+map('n', '\\', ':Ag<SPACE>', opts)
 vim.opt.grepprg = "ag --nogroup --nocolor"
 
--- Bind K to grep word under cursor. Use as fallback when `gr` via LSP doesn't work.
-vim.api.nvim_set_keymap('n', 'K', ':grep! "\\b<C-R><C-W>\\b"<CR>:cw<CR>', { noremap = true, silent = true })
+-- Grep word under cursor
+map('n', 'K', ':grep! "\\b<C-R><C-W>\\b"<CR>:cw<CR>', opts)
 
 -- Switch between the last two files
-vim.api.nvim_set_keymap('n', '<Leader><Leader>', '<C-^>', { noremap = true, silent = true })
+map('n', '<Leader><Leader>', '<C-^>', opts)
 
 -- Run tests
-vim.api.nvim_set_keymap('n', '<Leader>t', ':TestFile<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>s', ':TestNearest<CR>', { noremap = true, silent = true })
+map('n', '<Leader>t', ':TestFile<CR>', opts)
+map('n', '<Leader>s', ':TestNearest<CR>', opts)
 vim.g.test_strategy = "neovim"
 vim.g.test_neovim_start_normal = 1
 vim.g.test_echo_command = 0
 
 -- Move between windows
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+map('n', '<C-j>', '<C-w>j', opts)
+map('n', '<C-k>', '<C-w>k', opts)
+map('n', '<C-h>', '<C-w>h', opts)
+map('n', '<C-l>', '<C-w>l', opts)
 
 -- Packer
 vim.cmd [[packadd packer.nvim]]
-
 require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
@@ -87,10 +90,7 @@ require('packer').startup(function(use)
   use 'hrsh7th/nvim-cmp'     -- core completion plugin framework
 
   -- Treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
   use 'RRethy/nvim-treesitter-endwise'
 
@@ -119,14 +119,43 @@ require('packer').startup(function(use)
   use 'pangloss/vim-javascript'
 
   -- Backends
-  use {
-    'fatih/vim-go',
-    run = ':GoInstallBinaries'
-  }
+  use { 'fatih/vim-go', run = ':GoInstallBinaries' }
   use 'tpope/vim-rails'
   use 'vim-ruby/vim-ruby'
 end)
 
+-- Env
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = ".env",
+  command = "set filetype=text"
+})
+
+-- Gitcommit
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gitcommit",
+  callback = function()
+    vim.opt_local.textwidth = 72
+    vim.opt_local.complete:append("kspell")
+    vim.opt_local.spell = true
+  end,
+})
+
+-- LSP Configuration
+local lspconfig = require('lspconfig')
+local on_attach = function(_, bufnr)
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', 'gn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+end
+local capabilities = require('cmp_nvim_lsp').default_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
+
+-- Format on save
 local function format_on_save(cmd_template)
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = 0,
@@ -137,7 +166,7 @@ local function format_on_save(cmd_template)
 
       -- Run async to prevent blocking main thread
       vim.fn.jobstart(cmd, {
-        stdout_buffered = true,  -- Buffer stdout to handle in one go
+        stdout_buffered = true,
         on_stdout = function(_, data)
           if not data then
             return
@@ -179,47 +208,13 @@ local function format_on_save(cmd_template)
   })
 end
 
--- LSPs
-local lspconfig = require('lspconfig')
-
-local on_attach = function(_, bufnr)
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', 'gn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-end
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
--- Env
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = ".env",
-  command = "set filetype=text"
-})
-
--- Gitcommit
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "gitcommit",
-  callback = function()
-    -- Formatting
-    vim.opt_local.textwidth = 72
-
-    -- Spell-checking
-    vim.opt_local.complete:append("kspell")
-    vim.opt_local.spell = true
-  end,
-})
-
 -- Go
 lspconfig.gopls.setup {
   capabilities = capabilities,
   on_attach = on_attach
 }
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "go", },
+  pattern = "go",
   callback = function()
     -- $LAPTOP/bin/goimportslocal
     vim.g.go_fmt_command = 'goimportslocal'
@@ -240,8 +235,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
     vim.cmd("compiler go")
 
-    vim.api.nvim_buf_set_keymap(0, 'n', ':A<CR>', ':GoAlternate<CR>', { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>r', ':redraw!<CR>:!go run %<CR>', { noremap = true, silent = true })
+    map('n', ':A<CR>', ':GoAlternate<CR>', opts)
+    map('n', '<Leader>r', ':redraw!<CR>:!go run %<CR>', opts)
 
     -- Syntax highlight additional tokens
     vim.g.go_highlight_fields = 1
@@ -258,7 +253,7 @@ lspconfig.html.setup {
   on_attach = on_attach,
 }
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "html" },
+  pattern = "html",
   callback = function()
     -- Format on save
     format_on_save("prettier --parser html %")
@@ -270,10 +265,10 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- JSON
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "json" },
+  pattern = "json",
   callback = function()
     -- Format on save
-    format_on_save("prettier --parser json %") -- json5, --json-stringify
+    format_on_save("prettier --parser json %")
   end
 })
 
@@ -284,35 +279,28 @@ lspconfig.lua_ls.setup {
   on_attach = on_attach,
   settings = {
     Lua = {
-      runtime = {
-        version = 'LuaJIT',
-        path = vim.split(package.path, ';'),
-      },
-      diagnostics = {
-        globals = { 'vim' },
-      },
+      runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
+      diagnostics = { globals = { 'vim' } },
       workspace = {
         library = {
           [vim.fn.expand('$VIMRUNTIME/lua')] = true,
           [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
         },
       },
-      telemetry = {
-        enable = false,
-      },
+      telemetry = { enable = false },
     },
   },
 }
 
 -- Markdown
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "markdown" },
+  pattern = "markdown",
   callback = function()
     -- Format on save
     format_on_save("prettier --parser markdown %")
 
     -- Align GitHub-flavored Markdown tables
-    vim.api.nvim_buf_set_keymap(0, 'v', '<Leader>\\', ':EasyAlign*<Bar><Enter>', { noremap = true, silent = true })
+    map('v', '<Leader>\\', ':EasyAlign*<Bar><Enter>', opts)
 
     -- Spell-checking
     vim.opt_local.complete:append("kspell")
@@ -330,11 +318,7 @@ lspconfig.solargraph.setup {
   cmd = { "solargraph", "stdio" },
   filetypes = { "ruby" },
   root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
-  settings = {
-    solargraph = {
-      diagnostics = false
-    }
-  },
+  settings = { solargraph = { diagnostics = false } }
 }
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "ruby",
@@ -343,7 +327,7 @@ vim.api.nvim_create_autocmd("FileType", {
     format_on_save("cat % | bundle exec rubocop --config ./.rubocop.yml --stderr --stdin % --autocorrect --format quiet")
 
     -- Run current file
-    vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>r', ':redraw!<CR>:!bundle exec ruby %<CR>', { noremap = true, silent = true })
+    map('n', '<Leader>r', ':redraw!<CR>:!bundle exec ruby %<CR>', opts)
 
     -- https://github.com/testdouble/standard/wiki/IDE:-vim
     vim.g.ruby_indent_assignment_style = 'variable'
@@ -352,7 +336,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- SCSS
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "scss" },
+  pattern = "scss",
   callback = function()
     -- Format on save
     format_on_save("prettier --parser scss %")
@@ -367,10 +351,10 @@ vim.api.nvim_create_autocmd("FileType", {
     format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line %")
 
     --- Run current file
-    vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>r', ':redraw!<CR>:!psql -d $(cat .db) -f % | less<CR>', { noremap = true, silent = true })
+    map('n', '<Leader>r', ':redraw!<CR>:!psql -d $(cat .db) -f % | less<CR>', opts)
 
     -- Prepare SQL command with var(s)
-    vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>v', ':redraw!<CR>:!psql -d $(cat .db) -f % -v | less<SPACE>', { noremap = true, silent = true })
+    map('n', '<Leader>v', ':redraw!<CR>:!psql -d $(cat .db) -f % -v | less<SPACE>', opts)
   end
 })
 
@@ -380,11 +364,9 @@ lspconfig.tsserver.setup {
   capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern("package.json"),
 }
-vim.g.markdown_fenced_languages = {
-  "ts=typescript"
-}
+vim.g.markdown_fenced_languages = { "ts=typescript" }
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "typescript" },
+  pattern = "typescript",
   callback = function()
     -- Format on save
     format_on_save("prettier --parser typescript %")
@@ -393,7 +375,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- YAML
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "yaml" },
+  pattern = "yaml",
   callback = function()
     -- Format on save
     format_on_save("prettier --parser yaml %")
@@ -402,13 +384,9 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Completion
 local cmp = require('cmp')
-
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<TAB>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
   }),
   sources = cmp.config.sources({
@@ -417,21 +395,13 @@ cmp.setup({
     { name = 'buffer' },
   })
 })
-
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
+  sources = { { name = 'buffer' } }
 })
-
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
+  sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
 })
 
 -- Syntax Highlighting
@@ -453,20 +423,11 @@ require 'nvim-treesitter.configs'.setup {
     "yaml"
   },
   auto_install = true,
-  highlight = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-  },
-  textobjects = {
-    enable = true,
-  },
-  endwise = {
-    enable = true,
-  },
+  highlight = { enable = true },
+  incremental_selection = { enable = true },
+  textobjects = { enable = true },
+  endwise = { enable = true },
 }
-
 require "nvim-treesitter.configs".setup {
   playground = {
     enable = true,
