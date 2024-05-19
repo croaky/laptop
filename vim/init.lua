@@ -199,7 +199,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "html" },
   callback = function()
     -- Format on save
-    format_on_save("prettier --write")
+    format_on_save("prettier")
 
     -- Treat <li> and <p> tags like the block tags they are
     vim.g.html_indent_tags = 'li\\|p'
@@ -208,10 +208,10 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- JSON
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "json", "markdown", "scss", "typescript", "yaml" },
+  pattern = { "json" },
   callback = function()
     -- Format on save
-    format_on_save("prettier --write")
+    format_on_save("prettier")
   end
 })
 
@@ -244,10 +244,10 @@ lspconfig.lua_ls.setup {
 
 -- Markdown
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "markdown", "scss", "typescript", "yaml" },
+  pattern = { "markdown" },
   callback = function()
     -- Format on save
-    format_on_save("prettier --write")
+    format_on_save("prettier")
   end
 })
 
@@ -286,10 +286,10 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- SCSS
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "scss", "typescript", "yaml" },
+  pattern = { "scss" },
   callback = function()
     -- Format on save
-    format_on_save("prettier --write")
+    format_on_save("prettier")
   end
 })
 
@@ -321,7 +321,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "typescript" },
   callback = function()
     -- Format on save
-    format_on_save("prettier --write")
+    format_on_save("prettier")
   end
 })
 
@@ -330,7 +330,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "yaml" },
   callback = function()
     -- Format on save
-    format_on_save("prettier --write")
+    format_on_save("prettier")
   end
 })
 
