@@ -39,7 +39,7 @@ set -eux
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
   # Vim
-  mkdir -p "$HOME/.config/nvim/ftdetect"
+  mkdir -p "$HOME/.config/nvim"
   ln -sf "$PWD/vim/init.lua" "$HOME/.config/nvim/init.lua"
 )
 

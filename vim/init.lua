@@ -194,6 +194,12 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- Env
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  pattern = ".env",
+  command = "set filetype=text"
+})
+
 -- Gitcommit
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "gitcommit",
