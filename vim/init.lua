@@ -5,10 +5,6 @@ vim.opt.packpath = vim.opt.runtimepath:get()
 -- Set leader key
 vim.g.mapleader = " "
 
--- Netrw
-vim.g.netrw_banner = 0 -- Remove banner
-vim.g.netrw_list_hide = ".DS_Store" -- Hide system files
-
 -- General settings
 vim.opt.autoindent = true
 vim.opt.backup = false
@@ -41,6 +37,57 @@ vim.opt.termguicolors = true
 vim.opt.textwidth = 80
 vim.opt.updatetime = 300
 vim.opt.writebackup = false
+
+-- Dependencies
+vim.cmd([[packadd packer.nvim]])
+require("packer").startup(function(use)
+	-- Packer can manage itself
+	use("wbthomason/packer.nvim")
+
+	-- LSP
+	use("neovim/nvim-lspconfig")
+
+	-- Completion
+	use("hrsh7th/cmp-nvim-lsp") -- complete with LSP
+	use("hrsh7th/cmp-buffer") -- complete words from current buffer
+	use("hrsh7th/cmp-path") -- complete file paths
+	use("hrsh7th/cmp-cmdline") -- complete on command-line
+	use("hrsh7th/nvim-cmp") -- core completion plugin framework
+
+	-- Treesitter
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use("nvim-treesitter/playground")
+	use("RRethy/nvim-treesitter-endwise")
+
+	-- Fuzzy-finding :Ag, :Commits, :Files
+	use("/opt/homebrew/opt/fzf")
+	use("junegunn/fzf.vim")
+
+	-- :help projectionist, .projections.json, :A
+	use("tpope/vim-projectionist")
+
+	-- :TestFile, :TestNearest
+	use("vim-test/vim-test")
+
+	-- Filesystem, :Rename, :Git blame
+	use("pbrisbin/vim-mkdir")
+	use("tpope/vim-eunuch")
+	use("tpope/vim-fugitive")
+
+	-- Alignment, auto pairs, auto tags
+	use("alvan/vim-closetag")
+	use("windwp/nvim-autopairs")
+
+	-- Frontends
+	use("leafgarland/typescript-vim")
+	use("mxw/vim-jsx")
+	use("pangloss/vim-javascript")
+
+	-- Backends
+	use({ "fatih/vim-go", run = ":GoInstallBinaries" })
+	use("tpope/vim-rails")
+	use("vim-ruby/vim-ruby")
+end)
 
 -- Helper functions
 local function map(mode, lhs, rhs, opts)
@@ -110,6 +157,10 @@ local function format_on_save(cmd_template)
 	})
 end
 
+-- Netrw
+vim.g.netrw_banner = 0 -- Remove banner
+vim.g.netrw_list_hide = ".DS_Store" -- Hide system files
+
 -- Fuzzy-find files
 map("n", "<C-p>", ":Files<CR>")
 vim.g.fzf_layout = { window = { width = 0.95, height = 0.9 } }
@@ -137,57 +188,6 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 
--- Packer
-vim.cmd([[packadd packer.nvim]])
-require("packer").startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
-
-	-- LSP
-	use("neovim/nvim-lspconfig")
-
-	-- Completion
-	use("hrsh7th/cmp-nvim-lsp") -- complete with LSP
-	use("hrsh7th/cmp-buffer") -- complete words from current buffer
-	use("hrsh7th/cmp-path") -- complete file paths
-	use("hrsh7th/cmp-cmdline") -- complete on command-line
-	use("hrsh7th/nvim-cmp") -- core completion plugin framework
-
-	-- Treesitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use("nvim-treesitter/playground")
-	use("RRethy/nvim-treesitter-endwise")
-
-	-- Fuzzy-finding :Ag, :Commits, :Files
-	use("/opt/homebrew/opt/fzf")
-	use("junegunn/fzf.vim")
-
-	-- :help projectionist, .projections.json, :A
-	use("tpope/vim-projectionist")
-
-	-- :TestFile, :TestNearest
-	use("vim-test/vim-test")
-
-	-- Filesystem, :Rename, :Git blame
-	use("pbrisbin/vim-mkdir")
-	use("tpope/vim-eunuch")
-	use("tpope/vim-fugitive")
-
-	-- Alignment, auto pairs, auto tags
-	use("alvan/vim-closetag")
-	use("windwp/nvim-autopairs")
-
-	-- Frontends
-	use("leafgarland/typescript-vim")
-	use("mxw/vim-jsx")
-	use("pangloss/vim-javascript")
-
-	-- Backends
-	use({ "fatih/vim-go", run = ":GoInstallBinaries" })
-	use("tpope/vim-rails")
-	use("vim-ruby/vim-ruby")
-end)
-
 -- Env
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = ".env",
@@ -201,7 +201,7 @@ filetype_autocmd("gitcommit", function()
 	vim.opt_local.spell = true
 end)
 
--- LSP Configuration
+-- LSPs
 local lspconfig = require("lspconfig")
 local on_attach = function(_, bufnr)
 	buf_map(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
