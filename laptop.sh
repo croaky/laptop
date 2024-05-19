@@ -40,14 +40,6 @@ set -eux
 
   # Vim
   mkdir -p "$HOME/.config/nvim/ftdetect"
-  mkdir -p "$HOME/.config/nvim/ftplugin"
-  (
-    cd vim
-    for f in {ftdetect,ftplugin}/*; do
-      ln -sf "$PWD/$f" "$HOME/.config/nvim/$f"
-    done
-  )
-  mkdir -p "$HOME/.config/nvim"
   ln -sf "$PWD/vim/init.lua" "$HOME/.config/nvim/init.lua"
 )
 
