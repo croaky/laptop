@@ -12,22 +12,22 @@ vim.opt.cmdheight = 2
 vim.opt.complete:append("kspell")
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
-vim.opt.exrc = true                     -- Project-specific vimrc
-vim.opt.fillchars:append({ eob = " " }) -- Hide ~ end-of-file markers
-vim.opt.hidden = true                   -- Allow switching between buffers without saving
+vim.opt.exrc = true                                               -- Project-specific vimrc
+vim.opt.fillchars:append({ eob = " " })                           -- Hide ~ end-of-file markers
+vim.opt.hidden = true                                             -- Allow switching between buffers without saving
 vim.opt.history = 50
 vim.opt.incsearch = true
-vim.opt.joinspaces = false -- Use one space, not two, after punctuation
-vim.opt.laststatus = 2     -- Always display status line
+vim.opt.joinspaces = false                                        -- Use one space, not two, after punctuation
+vim.opt.laststatus = 2                                            -- Always display status line
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
-vim.opt.modeline = false -- Disable modelines as a security precaution
+vim.opt.modeline = false                                          -- Disable modelines as a security precaution
 vim.opt.mouse = ""
-vim.opt.ruler = true     -- Show cursor position all the time
+vim.opt.ruler = true                                              -- Show cursor position all the time
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append("c")
-vim.opt.showcmd = true -- Display incomplete commands
+vim.opt.showcmd = true                                            -- Display incomplete commands
 vim.opt.signcolumn = "no"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
