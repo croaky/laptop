@@ -123,15 +123,69 @@ require('packer').startup(function(use)
   use 'vim-ruby/vim-ruby'
 end)
 
-local function format_on_save(cmd)
+local function format_on_save(cmd_template)
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = 0,
     callback = function()
-      local tmpfile = vim.fn.tempname()
       local buffer_file = vim.fn.expand("%:p")
-      vim.cmd("silent! !" .. cmd .. " " .. buffer_file .. " > " .. tmpfile)
-      vim.cmd("silent! !mv " .. tmpfile .. " " .. buffer_file)
-      vim.cmd("edit!")
+      local tmpfile = vim.fn.tempname()
+
+      -- Write the current buffer content to a temporary file
+      local buf_contents = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+      local tmp_handle = io.open(tmpfile, "w")
+      if tmp_handle then
+        tmp_handle:write(table.concat(buf_contents, "\n"))
+        tmp_handle:close()
+      else
+        print("Failed to open temporary file for writing")
+        return
+      end
+
+      -- Replace placeholders in the command template
+      local cmd = cmd_template:gsub("%%", tmpfile)
+
+      -- Capture the output of the formatter using stdin if necessary
+      local handle = io.popen(cmd .. " 2>/dev/null")
+      if not handle then
+        return
+      end
+
+      local formatted_content = handle:read("*a")
+      handle:close()
+      if not formatted_content or #formatted_content == 0 then
+        return
+      end
+
+      -- Update the buffer with the formatted content
+      local pos = vim.api.nvim_win_get_cursor(0)
+      local lines = vim.split(formatted_content, "\n")
+
+      -- Check if last line is empty and remove it to prevent extra empty line
+      if lines[#lines] == "" then
+        table.remove(lines, #lines)
+      end
+
+      vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+
+      -- Adjust cursor position if necessary
+      local new_line_count = vim.api.nvim_buf_line_count(0)
+      if pos[1] > new_line_count then
+        pos[1] = new_line_count
+      end
+      vim.api.nvim_win_set_cursor(0, pos)
+
+      -- Write the changes back to the original file using Lua io functions to
+      -- avoid triggering BufWritePre again
+      local fd = io.open(buffer_file, "w")
+      if fd then
+        fd:write(table.concat(lines, "\n"))
+        fd:close()
+      else
+        print("Failed to write to buffer file")
+      end
+
+      os.remove(tmpfile)
+      vim.cmd(":edit!")
     end
   })
 end
@@ -199,7 +253,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "html" },
   callback = function()
     -- Format on save
-    format_on_save("prettier")
+    format_on_save("prettier --parser html %")
 
     -- Treat <li> and <p> tags like the block tags they are
     vim.g.html_indent_tags = 'li\\|p'
@@ -211,7 +265,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "json" },
   callback = function()
     -- Format on save
-    format_on_save("prettier")
+    format_on_save("prettier --parser json %") -- json5, --json-stringify
   end
 })
 
@@ -247,7 +301,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown" },
   callback = function()
     -- Format on save
-    format_on_save("prettier")
+    format_on_save("prettier --parser markdown %")
   end
 })
 
@@ -268,13 +322,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "ruby",
   callback = function()
     -- Format on save
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = 0,
-      callback = function()
-        vim.cmd("silent! !bundle exec rubocop -A " .. vim.fn.expand("%:p"))
-        vim.cmd("edit!")
-      end
-    })
+    format_on_save("cat % | bundle exec rubocop --config ./.rubocop.yml --stderr --stdin % --autocorrect --format quiet")
 
     -- Run current file
     vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>r', ':redraw!<CR>:!bundle exec ruby %<CR>', { noremap = true, silent = true })
@@ -289,7 +337,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "scss" },
   callback = function()
     -- Format on save
-    format_on_save("prettier")
+    format_on_save("prettier --parser scss %")
   end
 })
 
@@ -298,7 +346,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "sql",
   callback = function()
     -- Format on save
-    format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line")
+    format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line %")
 
     --- Run current file
     vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>r', ':redraw!<CR>:!psql -d $(cat .db) -f % | less<CR>', { noremap = true, silent = true })
@@ -321,7 +369,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "typescript" },
   callback = function()
     -- Format on save
-    format_on_save("prettier")
+    format_on_save("prettier --parser typescript %")
   end
 })
 
@@ -330,7 +378,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "yaml" },
   callback = function()
     -- Format on save
-    format_on_save("prettier")
+    format_on_save("prettier --parser yaml %")
   end
 })
 
