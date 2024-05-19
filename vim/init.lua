@@ -128,67 +128,46 @@ local function format_on_save(cmd_template)
     buffer = 0,
     callback = function()
       local buffer_file = vim.fn.expand("%:p")
-      local tmpfile = vim.fn.tempname()
+      local cmd = cmd_template:gsub("%%", buffer_file)
 
-      -- Write the current buffer content to a temporary file
-      local buf_contents = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-      local tmp_handle = io.open(tmpfile, "w")
-      if tmp_handle then
-        tmp_handle:write(table.concat(buf_contents, "\n"))
-        tmp_handle:close()
-      else
-        print("Failed to open temporary file for writing")
-        return
-      end
+      -- Run the formatting command asynchronously
+      vim.fn.jobstart(cmd, {
+        stdout_buffered = true,
+        on_stdout = function(_, data)
+          if not data then return end
+          local formatted_content = table.concat(data, "\n")
+          if #formatted_content == 0 then return end
 
-      -- Replace placeholders in the command template
-      local cmd = cmd_template:gsub("%%", tmpfile)
+          local pos = vim.api.nvim_win_get_cursor(0)
+          local lines = vim.split(formatted_content, "\n")
 
-      -- Capture the output of the formatter using stdin if necessary
-      local handle = io.popen(cmd .. " 2>/dev/null")
-      if not handle then
-        return
-      end
+          -- Check if last line is empty and remove it to prevent extra empty line
+          if lines[#lines] == "" then
+            table.remove(lines, #lines)
+          end
 
-      local formatted_content = handle:read("*a")
-      handle:close()
-      if not formatted_content or #formatted_content == 0 then
-        return
-      end
+          vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 
-      -- Update the buffer with the formatted content
-      local pos = vim.api.nvim_win_get_cursor(0)
-      local lines = vim.split(formatted_content, "\n")
+          -- Adjust cursor position if necessary
+          local new_line_count = vim.api.nvim_buf_line_count(0)
+          if pos[1] > new_line_count then
+            pos[1] = new_line_count
+          end
+          vim.api.nvim_win_set_cursor(0, pos)
 
-      -- Check if last line is empty and remove it to prevent extra empty line
-      if lines[#lines] == "" then
-        table.remove(lines, #lines)
-      end
-
-      vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-
-      -- Adjust cursor position if necessary
-      local new_line_count = vim.api.nvim_buf_line_count(0)
-      if pos[1] > new_line_count then
-        pos[1] = new_line_count
-      end
-      vim.api.nvim_win_set_cursor(0, pos)
-
-      -- Write the changes back to the original file using Lua io functions to
-      -- avoid triggering BufWritePre again
-      local fd = io.open(buffer_file, "w")
-      if fd then
-        fd:write(table.concat(lines, "\n"))
-        fd:close()
-      else
-        print("Failed to write to buffer file")
-      end
-
-      os.remove(tmpfile)
-      vim.cmd(":edit!")
+          -- Write the changes back to the original file
+          vim.api.nvim_command("noautocmd write")
+        end,
+        on_stderr = function(_, data)
+          if data then
+            print(table.concat(data, "\n"))
+          end
+        end
+      })
     end
   })
 end
+
 
 -- LSPs
 local lspconfig = require('lspconfig')
