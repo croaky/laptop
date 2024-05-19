@@ -128,24 +128,31 @@ local function format_on_save(cmd_template)
     buffer = 0,
     callback = function()
       local buffer_file = vim.fn.expand("%:p")
+      -- Replace % placeholder in command template with actual file path
       local cmd = cmd_template:gsub("%%", buffer_file)
 
-      -- Run the formatting command asynchronously
+      -- Run async to prevent blocking main thread
       vim.fn.jobstart(cmd, {
-        stdout_buffered = true,
+        stdout_buffered = true,  -- Buffer stdout to handle in one go
         on_stdout = function(_, data)
-          if not data then return end
-          local formatted_content = table.concat(data, "\n")
-          if #formatted_content == 0 then return end
+          if not data then
+            return
+          end
 
-          local pos = vim.api.nvim_win_get_cursor(0)
+          local formatted_content = table.concat(data, "\n")
+          if #formatted_content == 0 then
+            return
+          end
+
+          local pos = vim.api.nvim_win_get_cursor(0)  -- Save current cursor position
           local lines = vim.split(formatted_content, "\n")
 
-          -- Check if last line is empty and remove it to prevent extra empty line
+          -- Check if last line is empty. Remove it to prevent adding extra empty line
           if lines[#lines] == "" then
             table.remove(lines, #lines)
           end
 
+          -- Update buffer with formatted content
           vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 
           -- Adjust cursor position if necessary
@@ -155,7 +162,7 @@ local function format_on_save(cmd_template)
           end
           vim.api.nvim_win_set_cursor(0, pos)
 
-          -- Write the changes back to the original file
+          -- Write changes back to original file without triggering BufWritePre again
           vim.api.nvim_command("noautocmd write")
         end,
         on_stderr = function(_, data)
@@ -167,7 +174,6 @@ local function format_on_save(cmd_template)
     end
   })
 end
-
 
 -- LSPs
 local lspconfig = require('lspconfig')
