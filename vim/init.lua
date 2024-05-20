@@ -63,7 +63,7 @@ require("packer").startup(function(use)
 	use("/opt/homebrew/opt/fzf")
 	use("junegunn/fzf.vim")
 
-	-- :help projectionist, .projections.json, :A
+	-- :A, .projections.json
 	use("tpope/vim-projectionist")
 
 	-- :TestFile, :TestNearest
@@ -129,7 +129,7 @@ local function format_on_save(cmd_template)
 					local pos = vim.api.nvim_win_get_cursor(0) -- Save current cursor position
 					local lines = vim.split(formatted_content, "\n")
 
-					-- Check if last line is empty. Remove it to prevent adding extra empty line
+					-- Check if last line is empty. Remove it to prevent adding extra empty line.
 					if lines[#lines] == "" then
 						table.remove(lines, #lines)
 					end
@@ -158,15 +158,15 @@ local function format_on_save(cmd_template)
 end
 
 -- Netrw
-vim.g.netrw_banner = 0 -- Remove banner
-vim.g.netrw_list_hide = ".DS_Store" -- Hide system files
+vim.g.netrw_banner = 0
+vim.g.netrw_list_hide = ".DS_Store"
 
 -- Fuzzy-find files
 map("n", "<C-p>", ":Files<CR>")
 vim.g.fzf_layout = { window = { width = 0.95, height = 0.9 } }
 
 -- Search file contents
-map("n", "\\", ":Ag<SPACE>")
+vim.api.nvim_set_keymap("n", "\\", ":Ag<SPACE>", { noremap = true })
 vim.opt.grepprg = "ag --nogroup --nocolor"
 
 -- Grep word under cursor
