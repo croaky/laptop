@@ -214,7 +214,6 @@ local on_attach = function(_, bufnr)
 	buf_map(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 	buf_map(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 	buf_map(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-	buf_map(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 end
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
