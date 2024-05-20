@@ -148,7 +148,9 @@ local function format_on_save(cmd_template)
 					vim.api.nvim_win_set_cursor(0, pos)
 
 					-- Write changes back to original file without triggering BufWritePre again
-					vim.api.nvim_command("noautocmd write")
+					vim.api.nvim_buf_call(bufnr, function()
+						vim.cmd("noautocmd write")
+					end)
 				end,
 				on_stderr = function(_, data)
 					if data then
