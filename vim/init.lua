@@ -115,6 +115,9 @@ local function format_on_save(cmd_template)
 			-- Replace % placeholder in command template with actual file path
 			local cmd = cmd_template:gsub("%%", buffer_file)
 
+			-- Save the current buffer number
+			local bufnr = vim.api.nvim_get_current_buf()
+
 			-- Run async to prevent blocking main thread
 			vim.fn.jobstart(cmd, {
 				stdout_buffered = true,
@@ -134,11 +137,11 @@ local function format_on_save(cmd_template)
 						table.remove(lines, #lines)
 					end
 
-					-- Update buffer with formatted content
-					vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+					-- Ensure the update is applied to the original buffer
+					vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 
 					-- Adjust cursor position if necessary
-					local new_line_count = vim.api.nvim_buf_line_count(0)
+					local new_line_count = vim.api.nvim_buf_line_count(bufnr)
 					if pos[1] > new_line_count then
 						pos[1] = new_line_count
 					end
