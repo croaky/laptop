@@ -111,44 +111,38 @@ local function format_on_save(cmd_template)
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		buffer = 0,
 		callback = function()
-			local buffer_file = vim.fn.expand("%:p")
-			-- Replace % placeholder in command template with actual file path
-			local cmd = cmd_template:gsub("%%", buffer_file)
+			local cmd = cmd_template:gsub("%%", vim.fn.expand("%:p"))
+			local buf = vim.api.nvim_get_current_buf()
 
-			-- Save the current buffer number
-			local bufnr = vim.api.nvim_get_current_buf()
-
-			-- Run async to prevent blocking main thread
 			vim.fn.jobstart(cmd, {
 				stdout_buffered = true,
 				on_stdout = function(_, data)
 					if not data then
 						return
 					end
-					local formatted_content = table.concat(data, "\n")
-					if #formatted_content == 0 then
+
+					local fmt = table.concat(data, "\n")
+					if #fmt == 0 then
 						return
 					end
-					local pos = vim.api.nvim_win_get_cursor(0) -- Save current cursor position
-					local lines = vim.split(formatted_content, "\n")
 
-					-- Check if last line is empty. Remove it to prevent adding extra empty line.
+					local pos = vim.api.nvim_win_get_cursor(0)
+
+					local lines = vim.split(fmt, "\n")
 					if lines[#lines] == "" then
 						table.remove(lines, #lines)
 					end
 
-					-- Ensure the update is applied to the original buffer
-					vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+					vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 
-					-- Adjust cursor position if necessary
-					local new_line_count = vim.api.nvim_buf_line_count(bufnr)
-					if pos[1] > new_line_count then
-						pos[1] = new_line_count
+					local line_count = vim.api.nvim_buf_line_count(buf)
+					if pos[1] > line_count then
+						pos[1] = line_count
 					end
+
 					vim.api.nvim_win_set_cursor(0, pos)
 
-					-- Write changes back to original file without triggering BufWritePre again
-					vim.api.nvim_buf_call(bufnr, function()
+					vim.api.nvim_buf_call(buf, function()
 						vim.cmd("noautocmd write")
 					end)
 				end,
@@ -183,9 +177,9 @@ map("n", "<Leader><Leader>", "<C-^>")
 -- Run tests
 map("n", "<Leader>t", ":TestFile<CR>")
 map("n", "<Leader>s", ":TestNearest<CR>")
-vim.g.test_strategy = "neovim"
-vim.g.test_neovim_start_normal = 1
-vim.g.test_echo_command = 0
+vim.g["test#strategy"] = "neovim"
+vim.g["test#neovim#start_normal"] = 1
+vim.g["test#echo_command"] = 0
 
 -- Move between windows
 map("n", "<C-j>", "<C-w>j")
