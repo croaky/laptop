@@ -107,8 +107,9 @@ local function filetype_autocmd(ft, callback)
 	})
 end
 
-local function run_file(command)
-	buf_map(0, "n", "<Leader>r", string.format(":redraw!<CR>:!%s<CR>", command))
+local function run_file(cmd_template)
+	local cmd = cmd_template:gsub("%%", vim.fn.expand("%:p"))
+	buf_map(0, "n", "<Leader>r", string.format(":redraw!<CR>:!%s<CR>", cmd))
 end
 
 local function format_on_save(cmd_template)
