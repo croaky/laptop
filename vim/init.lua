@@ -272,7 +272,6 @@ end)
 
 -- Lua
 lspconfig.lua_ls.setup({
-	cmd = { "lua-language-server" },
 	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = {
@@ -315,9 +314,6 @@ end)
 lspconfig.solargraph.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	cmd = { "solargraph", "stdio" },
-	filetypes = { "ruby" },
-	root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
 	settings = { solargraph = { diagnostics = false } },
 })
 filetype_autocmd("ruby", function()
@@ -343,7 +339,6 @@ end)
 lspconfig.tsserver.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
-	root_dir = lspconfig.util.root_pattern("package.json"),
 })
 vim.g.markdown_fenced_languages = { "ts=typescript" }
 filetype_autocmd("typescript", function()
