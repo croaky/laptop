@@ -372,7 +372,7 @@ cmp.setup.cmdline(":", {
 	sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
 })
 
--- Delegate most syntax highlighting decisions to Treesitter
+-- Delegate most syntax highlighting to Treesitter
 -- https://neovim.io/doc/user/treesitter.html#treesitter-highlight
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
@@ -419,21 +419,16 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- Custom syntax highlighting after Treesitter
+-- :TSHighlightCapturesUnderCursor
+-- :so $VIMRUNTIME/syntax/hitest.vim
 vim.cmd([[hi clear]])
 
 if vim.fn.exists("syntax_on") then
 	vim.cmd([[syntax reset]])
 end
 
--- See highlight group under cursor
--- :TSHighlightCapturesUnderCursor
-
--- Show all syntax groups
--- :so $VIMRUNTIME/syntax/hitest.vim
-
 vim.cmd([[
-" Keep these synced w/ shell/kitty.conf bg
-hi Normal                               guibg=#191e2d
+hi Normal                               guibg=#191e2d " Sync w/ shell/kitty.conf
 hi StatusLine            guifg=#191e2d
 
 " White
