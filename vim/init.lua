@@ -1,11 +1,11 @@
--- Set runtime path and packpath
+-- Paths
 vim.opt.runtimepath:prepend("~/.vim")
 vim.opt.packpath = vim.opt.runtimepath:get()
 
--- Set leader key
+-- Leader key
 vim.g.mapleader = " "
 
--- General settings
+-- General
 vim.opt.autoindent = true
 vim.opt.backup = false
 vim.opt.cmdheight = 2
@@ -38,7 +38,7 @@ vim.opt.textwidth = 80
 vim.opt.updatetime = 300
 vim.opt.writebackup = false
 
--- Dependencies
+-- Packages
 vim.cmd([[packadd packer.nvim]])
 require("packer").startup(function(use)
 	-- Packer can manage itself
@@ -78,12 +78,12 @@ require("packer").startup(function(use)
 	use("alvan/vim-closetag")
 	use("windwp/nvim-autopairs")
 
-	-- Frontends
+	-- Frontend
 	use("leafgarland/typescript-vim")
 	use("mxw/vim-jsx")
 	use("pangloss/vim-javascript")
 
-	-- Backends
+	-- Backend
 	use({ "fatih/vim-go", run = ":GoInstallBinaries" })
 	use("tpope/vim-rails")
 	use("vim-ruby/vim-ruby")
@@ -321,9 +321,7 @@ lspconfig.solargraph.setup({
 })
 filetype_autocmd("ruby", function()
 	run_file("bundle exec ruby %")
-	format_on_save(
-		"cat % | bundle exec rubocop --config ./.rubocop.yml --stderr --stdin % --autocorrect --format quiet"
-	)
+	format_on_save("cat % | bundle exec rubocop --stderr --stdin % --autocorrect --format quiet")
 
 	-- https://github.com/testdouble/standard/wiki/IDE:-vim
 	vim.g.ruby_indent_assignment_style = "variable"
@@ -434,7 +432,7 @@ end
 -- :so $VIMRUNTIME/syntax/hitest.vim
 
 vim.cmd([[
-" Sync w/ shell/kitty.conf background
+" Keep these synced w/ shell/kitty.conf bg
 hi Normal                               guibg=#191e2d
 hi StatusLine            guifg=#191e2d
 
