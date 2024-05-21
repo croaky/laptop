@@ -107,6 +107,10 @@ local function filetype_autocmd(ft, callback)
 	})
 end
 
+local function run_file(command)
+	buf_map(0, "n", "<Leader>r", string.format(":redraw!<CR>:!%s<CR>", command))
+end
+
 local function format_on_save(cmd_template)
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		buffer = 0,
@@ -217,6 +221,8 @@ lspconfig.gopls.setup({
 	on_attach = on_attach,
 })
 filetype_autocmd("go", function()
+	run_file("go run %")
+
 	-- $LAPTOP/bin/goimportslocal
 	vim.g.go_fmt_command = "goimportslocal"
 	vim.g.go_rename_command = "gopls"
@@ -237,7 +243,6 @@ filetype_autocmd("go", function()
 	vim.cmd("compiler go")
 
 	buf_map(0, "n", ":A<CR>", ":GoAlternate<CR>")
-	buf_map(0, "n", "<Leader>r", ":redraw!<CR>:!go run %<CR>")
 
 	-- Syntax highlight additional tokens
 	vim.g.go_highlight_fields = 1
@@ -315,12 +320,10 @@ lspconfig.solargraph.setup({
 	settings = { solargraph = { diagnostics = false } },
 })
 filetype_autocmd("ruby", function()
+	run_file("bundle exec ruby %")
 	format_on_save(
 		"cat % | bundle exec rubocop --config ./.rubocop.yml --stderr --stdin % --autocorrect --format quiet"
 	)
-
-	-- Run current file
-	buf_map(0, "n", "<Leader>r", ":redraw!<CR>:!bundle exec ruby %<CR>")
 
 	-- https://github.com/testdouble/standard/wiki/IDE:-vim
 	vim.g.ruby_indent_assignment_style = "variable"
@@ -333,13 +336,8 @@ end)
 
 -- SQL
 filetype_autocmd("sql", function()
+	run_file("psql -d $(cat .db) -f % | less")
 	format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line %")
-
-	-- Run current file
-	buf_map(0, "n", "<Leader>r", ":redraw!<CR>:!psql -d $(cat .db) -f % | less<CR>")
-
-	-- Run current file with var(s)
-	buf_map(0, "n", "<Leader>v", ":redraw!<CR>:!psql -d $(cat .db) -f % -v | less<SPACE>")
 end)
 
 -- TypeScript
