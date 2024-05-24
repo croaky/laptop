@@ -21,7 +21,6 @@ vim.opt.history = 50
 vim.opt.incsearch = true
 vim.opt.joinspaces = false -- Use one space, not two, after punctuation
 vim.opt.laststatus = 2 -- Always display status line
-vim.opt.lazyredraw = true
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
 vim.opt.modeline = false -- Disable modelines as a security precaution
@@ -61,54 +60,6 @@ require("packer").startup(function(use)
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
-		event = "BufRead",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = {
-					"bash",
-					"css",
-					"diff",
-					"go",
-					"html",
-					"javascript",
-					"json",
-					"lua",
-					"markdown",
-					"ruby",
-					"sql",
-					"typescript",
-					"vim",
-					"yaml",
-				},
-				auto_install = true,
-
-				-- Delegate most syntax highlighting to Treesitter
-				-- https://neovim.io/doc/user/treesitter.html#treesitter-highlight
-				highlight = { enable = true },
-
-				incremental_selection = { enable = true },
-				textobjects = { enable = true },
-				endwise = { enable = true },
-				playground = {
-					enable = true,
-					disable = {},
-					updatetime = 25,
-					persist_queries = false,
-					keybindings = {
-						toggle_query_editor = "o",
-						toggle_hl_groups = "i",
-						toggle_injected_languages = "t",
-						toggle_anonymous_nodes = "a",
-						toggle_language_display = "I",
-						focus_language = "f",
-						unfocus_language = "F",
-						update = "R",
-						goto_node = "<cr>",
-						show_help = "?",
-					},
-				},
-			})
-		end,
 	})
 	use("nvim-treesitter/playground")
 	use("RRethy/nvim-treesitter-endwise")
@@ -415,6 +366,52 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "buffer" },
 	}),
+})
+
+require("nvim-treesitter.configs").setup({
+	ensure_installed = {
+		"bash",
+		"css",
+		"diff",
+		"go",
+		"html",
+		"javascript",
+		"json",
+		"lua",
+		"markdown",
+		"ruby",
+		"sql",
+		"typescript",
+		"vim",
+		"yaml",
+	},
+	auto_install = true,
+
+	-- Delegate most syntax highlighting to Treesitter
+	-- https://neovim.io/doc/user/treesitter.html#treesitter-highlight
+	highlight = { enable = true },
+
+	incremental_selection = { enable = true },
+	textobjects = { enable = true },
+	endwise = { enable = true },
+	playground = {
+		enable = true,
+		disable = {},
+		updatetime = 25,
+		persist_queries = false,
+		keybindings = {
+			toggle_query_editor = "o",
+			toggle_hl_groups = "i",
+			toggle_injected_languages = "t",
+			toggle_anonymous_nodes = "a",
+			toggle_language_display = "I",
+			focus_language = "f",
+			unfocus_language = "F",
+			update = "R",
+			goto_node = "<cr>",
+			show_help = "?",
+		},
+	},
 })
 
 -- Custom syntax highlighting after Treesitter
