@@ -10,6 +10,8 @@ vim.opt.autoindent = true
 vim.opt.backup = false
 vim.opt.cmdheight = 2
 vim.opt.complete:append("kspell")
+vim.opt.cursorline = false
+vim.opt.cursorcolumn = false
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
 vim.opt.exrc = true -- Project-specific vimrc
@@ -19,6 +21,7 @@ vim.opt.history = 50
 vim.opt.incsearch = true
 vim.opt.joinspaces = false -- Use one space, not two, after punctuation
 vim.opt.laststatus = 2 -- Always display status line
+vim.opt.lazyredraw = true
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
 vim.opt.modeline = false -- Disable modelines as a security precaution
@@ -55,7 +58,58 @@ require("packer").startup(function(use)
 	use("hrsh7th/nvim-cmp") -- core completion plugin framework
 
 	-- Treesitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		event = "BufRead",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = {
+					"bash",
+					"css",
+					"diff",
+					"go",
+					"html",
+					"javascript",
+					"json",
+					"lua",
+					"markdown",
+					"ruby",
+					"sql",
+					"typescript",
+					"vim",
+					"yaml",
+				},
+				auto_install = true,
+
+				-- Delegate most syntax highlighting to Treesitter
+				-- https://neovim.io/doc/user/treesitter.html#treesitter-highlight
+				highlight = { enable = true },
+
+				incremental_selection = { enable = true },
+				textobjects = { enable = true },
+				endwise = { enable = true },
+				playground = {
+					enable = true,
+					disable = {},
+					updatetime = 25,
+					persist_queries = false,
+					keybindings = {
+						toggle_query_editor = "o",
+						toggle_hl_groups = "i",
+						toggle_injected_languages = "t",
+						toggle_anonymous_nodes = "a",
+						toggle_language_display = "I",
+						focus_language = "f",
+						unfocus_language = "F",
+						update = "R",
+						goto_node = "<cr>",
+						show_help = "?",
+					},
+				},
+			})
+		end,
+	})
 	use("nvim-treesitter/playground")
 	use("RRethy/nvim-treesitter-endwise")
 
@@ -207,6 +261,7 @@ end)
 
 -- LSPs
 local lspconfig = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local on_attach = function(_, bufnr)
 	buf_map(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
 	buf_map(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
@@ -214,7 +269,6 @@ local on_attach = function(_, bufnr)
 	buf_map(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 	buf_map(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
 end
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Go
 lspconfig.gopls.setup({
@@ -357,61 +411,10 @@ cmp.setup({
 		["<TAB>"] = cmp.mapping.complete(),
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
 	}),
-	sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "buffer" } }),
-})
-cmp.setup.cmdline("/", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = { { name = "buffer" } },
-})
-cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
-})
-
--- Delegate most syntax highlighting to Treesitter
--- https://neovim.io/doc/user/treesitter.html#treesitter-highlight
-require("nvim-treesitter.configs").setup({
-	ensure_installed = {
-		"bash",
-		"css",
-		"diff",
-		"go",
-		"html",
-		"javascript",
-		"json",
-		"lua",
-		"markdown",
-		"ruby",
-		"sql",
-		"typescript",
-		"vim",
-		"yaml",
-	},
-	auto_install = true,
-	highlight = { enable = true },
-	incremental_selection = { enable = true },
-	textobjects = { enable = true },
-	endwise = { enable = true },
-})
-require("nvim-treesitter.configs").setup({
-	playground = {
-		enable = true,
-		disable = {},
-		updatetime = 25,
-		persist_queries = false,
-		keybindings = {
-			toggle_query_editor = "o",
-			toggle_hl_groups = "i",
-			toggle_injected_languages = "t",
-			toggle_anonymous_nodes = "a",
-			toggle_language_display = "I",
-			focus_language = "f",
-			unfocus_language = "F",
-			update = "R",
-			goto_node = "<cr>",
-			show_help = "?",
-		},
-	},
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "buffer" },
+	}),
 })
 
 -- Custom syntax highlighting after Treesitter
