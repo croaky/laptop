@@ -89,7 +89,6 @@ require("packer").startup(function(use)
 	use("pangloss/vim-javascript")
 
 	-- Backend
-	use({ "fatih/vim-go", run = ":GoInstallBinaries" })
 	use("tpope/vim-rails")
 	use("vim-ruby/vim-ruby")
 end)
@@ -230,15 +229,7 @@ filetype_autocmd("go", function()
 	run_file("go run %")
 
 	-- $LAPTOP/bin/goimportslocal
-	vim.g.go_fmt_command = "goimportslocal"
-	vim.g.go_rename_command = "gopls"
-
-	-- https://github.com/golang/tools/blob/master/gopls/doc/vim.md
-	vim.g.go_def_mode = "gopls"
-	vim.g.go_info_mode = "gopls"
-
-	-- Disable vim-go template
-	vim.g.go_template_autocreate = 0
+	format_on_save("goimportslocal %")
 
 	vim.opt_local.listchars = { tab = "  ", trail = "·", nbsp = "·" }
 	vim.opt_local.expandtab = false
@@ -246,16 +237,7 @@ filetype_autocmd("go", function()
 	-- Don't highlight tabs as extra whitespace
 	vim.opt_local.list = false
 
-	vim.cmd("compiler go")
-
 	buf_map(0, "n", ":A<CR>", ":GoAlternate<CR>")
-
-	-- Syntax highlight additional tokens
-	vim.g.go_highlight_fields = 1
-	vim.g.go_highlight_functions = 1
-	vim.g.go_highlight_methods = 1
-	vim.g.go_highlight_operators = 1
-	vim.g.go_highlight_structs = 1
 end)
 
 -- HTML
