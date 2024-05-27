@@ -252,6 +252,11 @@ filetype_autocmd("html", function()
 	vim.g.html_indent_tags = "li\\|p"
 end)
 
+-- JavaScript
+filetype_autocmd("javascript", function()
+	format_on_save("prettier %")
+end)
+
 -- JSON
 filetype_autocmd("json", function()
 	format_on_save("prettier --parser json %")
