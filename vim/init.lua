@@ -333,6 +333,9 @@ vim.g.markdown_fenced_languages = { "ts=typescript" }
 filetype_autocmd("typescript", function()
 	format_on_save("prettier --parser typescript %")
 end)
+filetype_autocmd("typescriptreact", function()
+	format_on_save("prettier --parser typescript %")
+end)
 
 -- YAML
 filetype_autocmd("yaml", function()
