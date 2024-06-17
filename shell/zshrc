@@ -58,7 +58,7 @@ PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 
 # Ruby
 export RUBYOPT="--enable-yjit"
-PATH="$HOME/.rubies/ruby-3.3.1/bin:$PATH"
+PATH="$HOME/.rubies/ruby-3.3.2/bin:$PATH"
 
 # Homebrew
 PATH="$BREW/bin:$PATH"
