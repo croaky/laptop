@@ -57,15 +57,12 @@ require("packer").startup(function(use)
 	use("hrsh7th/nvim-cmp") -- core completion plugin framework
 
 	-- Treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	})
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("nvim-treesitter/playground")
 	use("RRethy/nvim-treesitter-endwise")
 
 	-- Fuzzy-finding :Ag, :Commits, :Files
-	use("/opt/homebrew/opt/fzf")
+	use({ 'junegunn/fzf', run = ":call fzf#install()" })
 	use("junegunn/fzf.vim")
 
 	-- :A, .projections.json
