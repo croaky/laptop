@@ -55,7 +55,6 @@ export PATH="$BREW/bin:$PATH"
 brew analytics off
 brew update-reset
 brew bundle --no-lock --file=- <<EOF
-tap "render-oss/render"
 
 brew "awscli"
 brew "bat"
@@ -70,7 +69,6 @@ brew "neovim"
 brew "node"
 brew "oven-sh/bun/bun"
 brew "pgformatter"
-brew "render"
 brew "shellcheck"
 brew "stylua"
 brew "the_silver_searcher"
