@@ -62,7 +62,7 @@ require("packer").startup(function(use)
 	use("RRethy/nvim-treesitter-endwise")
 
 	-- Fuzzy-finding :Ag, :Commits, :Files
-	use({ 'junegunn/fzf', run = ":call fzf#install()" })
+	use({ "junegunn/fzf", run = ":call fzf#install()" })
 	use("junegunn/fzf.vim")
 
 	-- :A, .projections.json
