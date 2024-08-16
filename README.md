@@ -2,6 +2,37 @@
 
 Set up a macOS machine as a software development environment.
 
+## SSH key
+
+Ed25519 uses elliptic curve cryptography
+with good security and performance.
+
+Create the key:
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "$(whoami)@$(hostname)"
+```
+
+Start the SSH agent:
+
+```bash
+eval "$(ssh-agent -s)"
+```
+
+Add the private key to the SSH agent on macOS:
+
+```bash
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+```
+
+Copy the public key to macOS clipboard:
+
+```bash
+cat ~/.ssh/id_ed25519.pub | pbcopy
+```
+
+[Upload the public key to GitHub](https://github.com/settings/keys).
+
 ## Install
 
 Clone onto laptop:
@@ -37,37 +68,6 @@ Install macOS apps:
 - [Arc](https://arc.net/download)
 - [Magnet](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
 - [Postgres](https://postgresapp.com/)
-
-## SSH key with Ed25519
-
-Ed25519 uses elliptic curve cryptography
-with good security and performance.
-
-Create the key:
-
-```bash
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "$(whoami)@$(hostname)"
-```
-
-Start the SSH agent:
-
-```bash
-eval "$(ssh-agent -s)"
-```
-
-Add the private key to the SSH agent on macOS:
-
-```bash
-ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-```
-
-Copy the public key to macOS clipboard:
-
-```bash
-cat ~/.ssh/id_ed25519.pub | pbcopy
-```
-
-[Upload the public key to GitHub](https://github.com/settings/keys).
 
 ## Keyboard
 
