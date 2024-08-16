@@ -55,6 +55,8 @@ export PATH="$BREW/bin:$PATH"
 brew analytics off
 brew update-reset
 brew bundle --no-lock --file=- <<EOF
+tap "CrunchyData/brew"
+tap "oven-sh/bun"
 
 brew "awscli"
 brew "bat"
