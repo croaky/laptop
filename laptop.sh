@@ -113,7 +113,7 @@ fi
 
 # Go
 if ! command -v godoc &> /dev/null; then
-  go get golang.org/x/tools/cmd/godoc
+  go install golang.org/x/tools/cmd/godoc@latest
 fi
 
 # Ruby
