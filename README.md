@@ -34,7 +34,7 @@ are "one time setup" items.
 
 Install macOS apps:
 
-- [Kitty](https://sw.kovidgoyal.net/kitty/)
+- [Magnet](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
 - [Postgres](https://postgresapp.com/)
 
 ## SSH key with Ed25519
