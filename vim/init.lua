@@ -25,6 +25,7 @@ vim.opt.list = true
 vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
 vim.opt.modeline = false -- Disable modelines as a security precaution
 vim.opt.mouse = ""
+vim.opt.number = true
 vim.opt.ruler = true -- Show cursor position all the time
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
