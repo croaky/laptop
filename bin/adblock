@@ -3,8 +3,7 @@
 set -eo pipefail
 
 if [[ "$1" == "undo" ]]; then
-  echo '# MacOS default
-  255.255.255.255 broadcasthost' | sudo tee /etc/hosts > /dev/null
+  echo -e '127.0.0.1\tlocalhost\n# MacOS default\n255.255.255.255\tbroadcasthost' | sudo tee /etc/hosts > /dev/null
 else
   # Create file to block ads at the networking level
   # The data source is free to use for personal use and licensed under
@@ -23,8 +22,7 @@ else
   # comment 'api.segment.io'
 
   # Restore macOS system defaults
-  echo '# MacOS default
-  255.255.255.255 broadcasthost' >> /tmp/etchosts
+  echo -e '# MacOS default\n255.255.255.255\tbroadcasthost' >> /tmp/etchosts
 
   # Apply to /etc/hosts
   sudo mv /tmp/etchosts /etc/hosts
