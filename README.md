@@ -33,13 +33,17 @@ cat ~/.ssh/id_ed25519.pub | pbcopy
 
 [Upload the public key to GitHub](https://github.com/settings/keys).
 
-## Git user
+## Git
 
-Set your Git user name and email:
+Set your Git and GitHub user in `~/.gitconfig.local`
+to keep it out of version control:
 
 ```
-git config --global user.name "Your Name"
-git config --global user.email you@example.com
+[github]
+  user = yourgithubusername
+[user]
+  name = Your Name
+  email = you@example.com
 ```
 
 ## Install

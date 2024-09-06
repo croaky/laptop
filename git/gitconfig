@@ -26,8 +26,8 @@
   tool = vimdiff
 [fetch]
   prune = true
-[github]
-  user = croaky
+[include]
+  path = ~/.gitconfig.local
 [init]
   defaultBranch = main
 [merge]
