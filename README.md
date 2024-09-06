@@ -33,6 +33,19 @@ cat ~/.ssh/id_ed25519.pub | pbcopy
 
 [Upload the public key to GitHub](https://github.com/settings/keys).
 
+## Git
+
+Set your Git and GitHub user in `~/.gitconfig.local`
+to keep it out of version control:
+
+```
+[github]
+  user = yourgithubusername
+[user]
+  name = Your Name
+  email = you@example.com
+```
+
 ## Install
 
 Clone onto laptop:
