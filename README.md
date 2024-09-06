@@ -33,6 +33,15 @@ cat ~/.ssh/id_ed25519.pub | pbcopy
 
 [Upload the public key to GitHub](https://github.com/settings/keys).
 
+## Git user
+
+Set your Git user name and email:
+
+```
+git config --global user.name "Your Name"
+git config --global user.email you@example.com
+```
+
 ## Install
 
 Clone onto laptop:

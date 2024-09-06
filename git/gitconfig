@@ -48,6 +48,3 @@
   autosquash = true
 [rerere]
   enabled = true
-[user]
-  name = Dan Croak
-  email = dan@statusok.com
