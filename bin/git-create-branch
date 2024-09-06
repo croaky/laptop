@@ -7,8 +7,10 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-git push origin "HEAD:refs/heads/dc-$1"
+username=$(whoami)
+branch_name="${username}-$1"
+
+git push origin "HEAD:refs/heads/$branch_name"
 git fetch origin
-git branch --track "dc-$1" "origin/dc-$1"
-cd .
-git checkout "dc-$1"
+git branch --track "$branch_name" "origin/$branch_name"
+git checkout "$branch_name"
