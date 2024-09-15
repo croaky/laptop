@@ -24,6 +24,7 @@ unset HOMEBREW_NO_ANALYTICS
 
 # fzf to find files, ag to search files
 if [ -e "$BREW/opt/fzf/shell" ]; then
+  source "$BREW/opt/fzf/shell/completion.zsh"
   source "$BREW/opt/fzf/shell/key-bindings.zsh"
 fi
 export FZF_DEFAULT_COMMAND='ag --hidden --nocolor -g ""'
