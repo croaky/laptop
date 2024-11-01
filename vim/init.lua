@@ -163,6 +163,22 @@ local function format_on_save(cmd_template)
 	})
 end
 
+function _G.tmux_user_or_unix_user_from_env_vars()
+	if vim.env.TMUX ~= nil then
+		local tmux_user = vim.fn.getenv("TMUX_USER")
+		if tmux_user and tmux_user:match("^%w+$") then
+			return "[" .. tmux_user .. "] "
+		end
+	end
+
+	local unix_user = os.getenv("USER") or os.getenv("USERNAME")
+	if unix_user and unix_user:match("^%w+$") then
+		return "[" .. unix_user .. "] "
+	end
+
+	return ""
+end
+
 -- Netrw
 vim.g.netrw_banner = 0
 vim.g.netrw_list_hide = ".DS_Store"
@@ -356,6 +372,10 @@ cmp.setup({
 	}),
 })
 
+-- Status line
+vim.opt.statusline = "%{v:lua.tmux_user_or_unix_user_from_env_vars()}%f %h%m%r%=%-14.(%l,%c%V%) %P"
+
+-- Treesitter
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
 		"bash",
