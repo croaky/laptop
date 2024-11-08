@@ -9,6 +9,7 @@ alias flush-cache="sudo killall -HUP mDNSResponder"
 alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias mkdir="mkdir -p"
 alias vim="nvim"
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 # Editor
 export VISUAL=nvim
