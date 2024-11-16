@@ -163,6 +163,7 @@ local function format_on_save(cmd_template)
 	})
 end
 
+-- Tmux
 function _G.tmux_user_or_unix_user_from_env_vars()
 	if vim.env.TMUX ~= nil then
 		local tmux_user = vim.fn.getenv("TMUX_USER")
@@ -251,7 +252,23 @@ filetype_autocmd("go", function()
 	-- Don't highlight tabs as extra whitespace
 	vim.opt_local.list = false
 
-	buf_map(0, "n", ":A<CR>", ":GoAlternate<CR>")
+  --- :A to toggle between test file and Go file
+  local function go_alternate()
+    local curf = vim.api.nvim_buf_get_name(0)
+    local altf
+
+    if curf:match("_test%.go$") then
+      altf = curf:gsub("_test%.go$", ".go")
+    else
+      altf = curf:gsub("%.go$", "_test.go")
+    end
+
+    if vim.fn.filereadable(altf) == 1 then
+      vim.cmd("edit " .. altf)
+    end
+  end
+
+  vim.api.nvim_create_user_command("A", go_alternate, {})
 end)
 
 -- HTML
