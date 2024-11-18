@@ -71,6 +71,7 @@ PATH="$BREW/bin:$PATH"
 
 # Node
 PATH="$BREW/opt/node/bin:$PATH"
+PATH="$HOME/.bun/bin:$PATH"
 
 # Postgres
 export PGUSER=postgres
