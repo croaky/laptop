@@ -6,10 +6,10 @@
 # - text editor (Neovim)
 # - programming language runtimes (Go, Ruby, Node)
 # - language servers (HTML, SQL)
-# - CLIs (AWS, GitHub, Render)
+# - CLIs (AWS, Crunchy Bridge, GitHub, Render)
 
 # This script can be safely run multiple times.
-# Tested with macOS Sonoma (14.4) on arm64 (Apple Silicon)
+# Tested with macOS Sequoia (15.11) on arm64 (Apple M4 Max)
 
 set -eux
 
