@@ -124,9 +124,12 @@ if [ ! -d "$HOME/.rubies/ruby-$v" ]; then
 fi
 
 # HTML
-npm i -g vscode-langservers-extracted
+npm install -g vscode-langservers-extracted
 
-# NeoVim with Packer
+# TypeScript
+npm install -g typescript-language-server typescript
+
+# Neovim with Packer
 PACKER_DIR="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
 
 if [ ! -d "$PACKER_DIR" ]; then
