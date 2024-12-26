@@ -118,7 +118,7 @@ if ! command -v godoc &> /dev/null; then
 fi
 
 # Ruby
-v="3.3.2"
+v="3.4.1"
 if [ ! -d "$HOME/.rubies/ruby-$v" ]; then
   RUBY_CONFIGURE_OPTS="--enable-yjit --with-openssl-dir=$(brew --prefix openssl@3)" ruby-build "$v" "$HOME/.rubies/ruby-$v"
 fi
