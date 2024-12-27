@@ -5,7 +5,7 @@
   lta = log --pretty=timeauthor --no-merges
   aa = add --all
   ap = add --patch
-  ci = commit -v
+  ci = commit --verbose
   co = checkout
   st = status
 [color]
