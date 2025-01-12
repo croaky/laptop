@@ -30,6 +30,8 @@ set -eux
   mkdir -p "$HOME/.config/bat"
   ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
+  mkdir -p "$HOME/.config/ghostty"
+  ln -sf "$PWD/shell/ghostty" "$HOME/.config/ghostty/config"
   mkdir -p "$HOME/.config/kitty"
   ln -sf "$PWD/shell/kitty.conf" "$HOME/.config/kitty/kitty.conf"
   ln -sf "$PWD/shell/psqlrc" "$HOME/.psqlrc"
@@ -99,6 +101,8 @@ brew cleanup
 if [ ! -d "/Applications/kitty.app" ]; then
   curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 fi
+
+brew install --cask ghostty@tip
 
 if [ "$(command -v zsh)" != "$BREW/bin/zsh" ] ; then
   sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
