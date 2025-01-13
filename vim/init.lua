@@ -453,6 +453,7 @@ hi Normal                               guibg=#191e2d " Sync w/ shell/ghostty
 hi StatusLine            guifg=#191e2d
 
 " White
+hi @attribute            guifg=#ffffff
 hi Identifier            guifg=#ffffff
 hi Keyword               guifg=#ffffff
 
@@ -472,10 +473,10 @@ hi VertSplit             guifg=#999999
 
 " Yellow
 hi DiagnosticWarn        guifg=#ffd080
-hi Type                  guifg=#ffd080
 hi RedrawDebugClear      guifg=#ffd080  guibg=#191e2d
 hi Search                               guibg=#ffd080
 hi String                guifg=#ffd080
+hi Type                  guifg=#ffd080
 hi WildMenu                             guibg=#d7005f
 
 " Purple
