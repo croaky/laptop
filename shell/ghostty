@@ -1,6 +1,8 @@
 # match bg to vim
 background = 191e2d
 
+font-size = 15
+
 # disable ligatures
 font-feature = -calt
 font-feature = -liga
