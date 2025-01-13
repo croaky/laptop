@@ -449,7 +449,7 @@ if vim.fn.exists("syntax_on") then
 end
 
 vim.cmd([[
-hi Normal                               guibg=#191e2d " Sync w/ shell/kitty.conf
+hi Normal                               guibg=#191e2d " Sync w/ shell/ghostty
 hi StatusLine            guifg=#191e2d
 
 " White

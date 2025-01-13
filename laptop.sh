@@ -32,8 +32,6 @@ set -eux
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
   mkdir -p "$HOME/.config/ghostty"
   ln -sf "$PWD/shell/ghostty" "$HOME/.config/ghostty/config"
-  mkdir -p "$HOME/.config/kitty"
-  ln -sf "$PWD/shell/kitty.conf" "$HOME/.config/kitty/kitty.conf"
   ln -sf "$PWD/shell/psqlrc" "$HOME/.psqlrc"
   mkdir -p "$HOME/.ssh"
   ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
@@ -98,10 +96,6 @@ brew autoremove
 brew cleanup
 
 # Shell
-if [ ! -d "/Applications/kitty.app" ]; then
-  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-fi
-
 brew install --cask ghostty@tip
 
 if [ "$(command -v zsh)" != "$BREW/bin/zsh" ] ; then

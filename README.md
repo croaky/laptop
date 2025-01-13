@@ -114,4 +114,4 @@ sudo spctl developer-mode enable-terminal
 Then:
 
 - Go to "System Preferences > Privacy & Security > Developer Tools"
-- Select "Kitty" as the terminal program.
+- Select "Ghostty" as the terminal program.
