@@ -115,6 +115,9 @@ if ! command -v godoc &> /dev/null; then
   go install golang.org/x/tools/cmd/godoc@latest
 fi
 
+# AI via CLI
+go install github.com/charmbracelet/mods@latest
+
 # Ruby
 v="3.4.1"
 if [ ! -d "$HOME/.rubies/ruby-$v" ]; then
