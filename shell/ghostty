@@ -8,3 +8,6 @@ font-feature = -liga
 
 # comfortable size on current laptop and monitor resolutions
 font-size = 15
+
+# open new tabs at $HOME, not current tab's working directory
+window-inherit-working-directory = false
