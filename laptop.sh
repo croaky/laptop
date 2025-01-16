@@ -58,6 +58,8 @@ brew bundle --no-lock --file=- <<EOF
 tap "CrunchyData/brew"
 tap "oven-sh/bun"
 
+cask "ghostty@tip"
+
 brew "awscli"
 brew "bat"
 brew "CrunchyData/brew/cb"
@@ -96,8 +98,6 @@ brew autoremove
 brew cleanup
 
 # Shell
-brew install --cask ghostty@tip
-
 if [ "$(command -v zsh)" != "$BREW/bin/zsh" ] ; then
   sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
   chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
