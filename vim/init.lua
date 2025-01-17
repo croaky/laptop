@@ -334,6 +334,9 @@ filetype_autocmd("markdown", function()
 
 	-- View hyperlinks like rendered output
 	vim.opt_local.conceallevel = 2
+
+	-- Run through LLM
+	run_file("cat % | mods", "vsplit")
 end)
 
 -- Ruby
