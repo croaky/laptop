@@ -98,8 +98,8 @@ local function map(mode, lhs, rhs, opts)
 end
 
 local function buf_map(bufnr, mode, lhs, rhs, opts)
-	opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
-	vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+	opts = vim.tbl_extend("force", { noremap = true, silent = true, buffer = bufnr }, opts or {})
+	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 local function filetype_autocmd(ft, callback)
@@ -107,11 +107,6 @@ local function filetype_autocmd(ft, callback)
 		pattern = ft,
 		callback = callback,
 	})
-end
-
-local function run_file(cmd_template)
-	local cmd = cmd_template:gsub("%%", vim.fn.expand("%:p"))
-	buf_map(0, "n", "<Leader>r", string.format(":redraw!<CR>:!%s<CR>", cmd))
 end
 
 local function format_on_save(cmd_template)
@@ -163,6 +158,14 @@ local function format_on_save(cmd_template)
 	})
 end
 
+local function run_file(cmd_template, split_cmd)
+	local cmd = cmd_template:gsub("%%", vim.fn.expand("%:p"))
+	buf_map(0, "n", "<Leader>r", function()
+		vim.cmd(split_cmd)
+		vim.cmd("terminal " .. cmd)
+	end)
+end
+
 -- Tmux
 function _G.tmux_user_or_unix_user_from_env_vars()
 	if vim.env.TMUX ~= nil then
@@ -211,6 +214,17 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 
+-- LSPs
+local lspconfig = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local on_attach = function(_, bufnr)
+	buf_map(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+	buf_map(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
+	buf_map(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+	buf_map(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+	buf_map(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+end
+
 -- Env
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = ".env",
@@ -224,24 +238,13 @@ filetype_autocmd("gitcommit", function()
 	vim.opt_local.spell = true
 end)
 
--- LSPs
-local lspconfig = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local on_attach = function(_, bufnr)
-	buf_map(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-	buf_map(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
-	buf_map(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-	buf_map(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-	buf_map(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-end
-
 -- Go
 lspconfig.gopls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
 filetype_autocmd("go", function()
-	run_file("go run %")
+	run_file("go run %", "split")
 
 	-- $LAPTOP/bin/goimportslocal
 	format_on_save("goimportslocal %")
@@ -340,7 +343,7 @@ lspconfig.solargraph.setup({
 	settings = { solargraph = { diagnostics = false } },
 })
 filetype_autocmd("ruby", function()
-	run_file("bundle exec ruby %")
+	run_file("bundle exec ruby %", "split")
 	format_on_save("cat % | bundle exec rubocop --stderr --stdin % --autocorrect --format quiet")
 
 	-- https://github.com/testdouble/standard/wiki/IDE:-vim
@@ -354,7 +357,7 @@ end)
 
 -- SQL
 filetype_autocmd("sql", function()
-	run_file("psql -d $(cat .db) -f % | less")
+	run_file("psql -d $(cat .db) -f % | less", "split")
 	format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line %")
 end)
 
