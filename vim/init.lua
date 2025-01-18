@@ -333,7 +333,7 @@ filetype_autocmd("markdown", function()
 	vim.opt_local.spell = true
 
 	-- View hyperlinks like rendered output
-	vim.opt_local.conceallevel = 2
+	vim.opt_local.conceallevel = 0
 
 	-- Run through LLM
 	run_file("cat % | mods", "vsplit")
