@@ -111,9 +111,9 @@ if [ "$(command -v zsh)" != "$BREW/bin/zsh" ] ; then
 fi
 
 # Go
-if ! command -v godoc &> /dev/null; then
-  go install golang.org/x/tools/cmd/godoc@latest
-fi
+go install golang.org/x/tools/cmd/godoc@latest
+go install golang.org/x/tools/cmd/goimports@latest
+go install golang.org/x/tools/gopls@latest
 
 # AI via CLI
 go install github.com/charmbracelet/mods@latest
