@@ -158,9 +158,9 @@ local function format_on_save(cmd_template)
 	})
 end
 
-local function run_file(cmd_template, split_cmd)
+local function run_file(key, cmd_template, split_cmd)
 	local cmd = cmd_template:gsub("%%", vim.fn.expand("%:p"))
-	buf_map(0, "n", "<Leader>r", function()
+	buf_map(0, "n", key, function()
 		vim.cmd(split_cmd)
 		vim.cmd("terminal " .. cmd)
 	end)
@@ -244,7 +244,7 @@ lspconfig.gopls.setup({
 	on_attach = on_attach,
 })
 filetype_autocmd("go", function()
-	run_file("go run %", "split")
+	run_file("<Leader>r", "go run %", "split")
 
 	-- $LAPTOP/bin/goimportslocal
 	format_on_save("goimportslocal %")
@@ -336,7 +336,8 @@ filetype_autocmd("markdown", function()
 	vim.opt_local.conceallevel = 0
 
 	-- Run through LLM
-	run_file("cat % | mods", "vsplit")
+	run_file("<Leader>r", "cat % | mdembed | mods", "vsplit")
+	run_file("<Leader>c", "cat % | mdembed | mods -C", "vsplit")
 end)
 
 -- Ruby
@@ -346,7 +347,7 @@ lspconfig.solargraph.setup({
 	settings = { solargraph = { diagnostics = false } },
 })
 filetype_autocmd("ruby", function()
-	run_file("bundle exec ruby %", "split")
+	run_file("<Leader>r", "bundle exec ruby %", "split")
 	format_on_save("cat % | bundle exec rubocop --stderr --stdin % --autocorrect --format quiet")
 
 	-- https://github.com/testdouble/standard/wiki/IDE:-vim
@@ -360,7 +361,7 @@ end)
 
 -- SQL
 filetype_autocmd("sql", function()
-	run_file("psql -d $(cat .db) -f % | less", "split")
+	run_file("<Leader>r", "psql -d $(cat .db) -f % | less", "split")
 	format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line %")
 end)
 

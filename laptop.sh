@@ -117,6 +117,7 @@ go install golang.org/x/tools/gopls@latest
 
 # AI via CLI
 go install github.com/charmbracelet/mods@latest
+go install github.com/croaky/mdembed@latest
 
 # Ruby
 v="3.4.1"
