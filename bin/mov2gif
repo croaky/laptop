@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 input.mov"
+  exit 1
+fi
+
+INPUT_FILE="$1"
+
+if [[ "${INPUT_FILE##*.}" != "mov" ]]; then
+  echo "Error: input file must have a .mov extension."
+  exit 1
+fi
+
+if [ ! -f "$INPUT_FILE" ]; then
+  echo "Error: file '$INPUT_FILE' not found."
+  exit 1
+fi
+
+if ! command -v ffmpeg &>/dev/null; then
+  if ! command -v brew &>/dev/null; then
+    echo "Homebrew is not installed. Please install it manually."
+    exit 1
+  fi
+
+  brew install ffmpeg
+fi
+
+FPS=15
+SCALE=1000
+
+# Generate a palette
+ffmpeg -i "$INPUT_FILE" \
+  -vf "fps=${FPS},scale=${SCALE}:-1:force_original_aspect_ratio=decrease,palettegen" \
+  palette.png
+
+# Create the final GIF using the palette
+ffmpeg -i "$INPUT_FILE" -i palette.png \
+  -lavfi "fps=${FPS},scale=${SCALE}:-1:force_original_aspect_ratio=decrease[x]; [x][1:v] paletteuse=dither=none" \
+  -loop 0 output.gif
+
+echo "GIF created: output.gif"
