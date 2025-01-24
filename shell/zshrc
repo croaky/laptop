@@ -54,11 +54,6 @@ compinit -u
 # Bat
 export BAT_THEME="TwoDark"
 
-# Tmux
-if [ -n "$TMUX" ]; then
-  export TMUX_USER="$(whoami)"
-fi
-
 # Go
 PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 
