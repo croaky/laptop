@@ -166,21 +166,31 @@ local function run_file(key, cmd_template, split_cmd)
 	end)
 end
 
--- Tmux
-function _G.tmux_user_or_unix_user_from_env_vars()
-	if vim.env.TMUX ~= nil then
-		local tmux_user = vim.fn.getenv("TMUX_USER")
-		if tmux_user and tmux_user:match("^%w+$") then
-			return "[" .. tmux_user .. "] "
+function _G.get_user()
+	-- Try to get GitHub username
+	local git_command = "git config --get github.user"
+	local handle = io.popen(git_command)
+
+	local github_user
+	if handle then
+		github_user = handle:read("*a")
+		handle:close()
+	end
+
+	if github_user then
+		github_user = github_user:gsub("%s+", "")
+		if github_user ~= "" then
+			return "[" .. github_user .. "] "
 		end
 	end
 
+	-- Fall back to Unix username
 	local unix_user = os.getenv("USER") or os.getenv("USERNAME")
 	if unix_user and unix_user:match("^%w+$") then
 		return "[" .. unix_user .. "] "
+	else
+		return ""
 	end
-
-	return ""
 end
 
 -- Netrw
@@ -407,7 +417,7 @@ cmp.setup({
 })
 
 -- Status line
-vim.opt.statusline = "%{v:lua.tmux_user_or_unix_user_from_env_vars()}%f %h%m%r%=%-14.(%l,%c%V%) %P"
+vim.opt.statusline = "%{v:lua.get_user()}%f %h%m%r%=%-14.(%l,%c%V%) %P"
 
 -- Treesitter
 require("nvim-treesitter.configs").setup({
