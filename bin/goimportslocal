@@ -1,7 +1,6 @@
 #!/bin/bash
-
-# This script ensures you have `goimports` installed,
-# then runs it on the files you name on the input,
+# Ensures `goimports` is installed,
+# then run it on the files named on the input,
 # supplying options needed for the local module (go list -m).
 
 # The goimports program performs Go formatting on a file

@@ -4,4 +4,6 @@
 #
 # kill-pid-on-port 3000
 
+set -euo pipefail
+
 lsof -n -i :"$1" | grep LISTEN | awk '{ print $2 }' | xargs kill

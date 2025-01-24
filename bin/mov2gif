@@ -1,6 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
+#
+# Convert a .mov to a .gif file
+#
+# mov2gif input.mov
 
-set -e
+set -euo pipefail
 
 if [ $# -ne 1 ]; then
   echo "Usage: $0 input.mov"
@@ -29,7 +33,7 @@ if ! command -v ffmpeg &>/dev/null; then
 fi
 
 FPS=15
-SCALE=1000
+SCALE=1400
 
 # Generate a palette
 ffmpeg -i "$INPUT_FILE" \

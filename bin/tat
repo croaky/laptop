@@ -1,6 +1,8 @@
 #!/bin/sh
 #
 # Attach or create tmux session named the same as current directory.
+#
+# tat
 
 path_name="$(basename "$PWD" | tr . -)"
 session_name=${1-$path_name}

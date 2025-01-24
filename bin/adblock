@@ -1,25 +1,19 @@
 #!/bin/bash
+#
+# Block ads, trackers, and malicious websites at the DNS host level.
+#
+# adblock
 
-set -eo pipefail
+set -euo pipefail
 
-if [[ "$1" == "undo" ]]; then
+if [[ "${1:-}" == "undo" ]]; then
   echo -e '127.0.0.1\tlocalhost\n# MacOS default\n255.255.255.255\tbroadcasthost' | sudo tee /etc/hosts > /dev/null
 else
-  # Create file to block ads at the networking level
-  # The data source is free to use for personal use and licensed under
-  # the Creative Commons Attribution-NonCommercial-ShareAlike License.
+  # Creative Commons Attribution-NonCommercial-ShareAlike
   curl -s https://winhelp2002.mvps.org/hosts.txt > /tmp/adblock
 
   # Re-write Windows to Unix line endings
   tr -d '\r' < /tmp/adblock > /tmp/etchosts
-
-  comment() {
-    replace "0.0.0.0 $1" "# 0.0.0.0 $1" /tmp/etchosts
-  }
-
-  # Comment-out used hosts
-  # comment 'api.amplitude.com'
-  # comment 'api.segment.io'
 
   # Restore macOS system defaults
   echo -e '# MacOS default\n255.255.255.255\tbroadcasthost' >> /tmp/etchosts
