@@ -1,4 +1,4 @@
-#!/usr/zsh
+#!/bin/zsh
 
 BREW="/opt/homebrew"
 
