@@ -231,6 +231,16 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	command = "set filetype=text",
 })
 
+-- Bash
+lspconfig.bashls.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
+filetype_autocmd("sh", function()
+	format_on_save("shfmt --indent 2 %")
+end)
+
 -- Gitcommit
 filetype_autocmd("gitcommit", function()
 	vim.opt_local.textwidth = 72
