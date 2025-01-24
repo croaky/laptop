@@ -20,9 +20,6 @@ set -eux
   ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
 
   # Ruby
-  mkdir -p "$HOME/.bundle"
-  ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
-  ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
   ln -sf "$PWD/ruby/irbrc" "$HOME/.irbrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
 
@@ -99,12 +96,12 @@ brew autoremove
 brew cleanup
 
 # Shell
-if [ "$(command -v zsh)" != "$BREW/bin/zsh" ] ; then
+if [ "$(command -v zsh)" != "$BREW/bin/zsh" ]; then
   sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
   chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
   shellpath="$(command -v zsh)"
 
-  if ! grep "$shellpath" /etc/shells > /dev/null 2>&1 ; then
+  if ! grep "$shellpath" /etc/shells >/dev/null 2>&1; then
     sudo sh -c "echo $shellpath >> /etc/shells"
   fi
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/zsh
 
 BREW="/opt/homebrew"
 
@@ -58,6 +58,10 @@ export BAT_THEME="TwoDark"
 PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
 
 # Ruby
+export BUNDLE_IGNORE_FUNDING_REQUESTS="true"
+export BUNDLE_IGNORE_MESSAGES="true"
+export BUNDLE_JOBS="16"
+export GEM_OPTS="--no-document"
 export RUBYOPT="--enable=frozen-string-literal --enable-yjit"
 PATH="$HOME/.rubies/ruby-3.4.1/bin:$PATH"
 
