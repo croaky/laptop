@@ -5,11 +5,11 @@
 # - symlinks for dotfiles to `$HOME`
 # - text editor (Neovim)
 # - programming language runtimes (Go, Ruby, Node)
-# - language servers (HTML, SQL)
+# - language servers (Bash, Go, HTML, Lua, Ruby, TypeScript)
 # - CLIs (AWS, Crunchy Bridge, GitHub, Render)
 
 # This script can be safely run multiple times.
-# Tested with macOS Sequoia (15.11) on arm64 (Apple M4 Max)
+# Tested with macOS Sequoia (15.12) on arm64 (Apple M4 Max)
 
 set -eux
 
@@ -107,6 +107,8 @@ if [ "$(command -v zsh)" != "$BREW/bin/zsh" ]; then
 
   chsh -s "$shellpath"
 fi
+
+npm install -g bash-language-server
 
 # Go
 go install golang.org/x/tools/cmd/godoc@latest
