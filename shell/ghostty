@@ -1,13 +1,16 @@
-# match bg to vim/init.lua
+# match vim/init.lua
 background = 191e2d
 
-# disable ligatures
+# fonts
 font-feature = -calt
 font-feature = -dlig
 font-feature = -liga
-
-# comfortable size on current laptop and monitor resolutions
 font-size = 15
 
-# open new tabs at $HOME, not current tab's working directory
+# fullscreen
+fullscreen = true
+macos-non-native-fullscreen = visible-menu
+
+# windows, tabs, splits
+keybind = ctrl+s=new_split:right
 window-inherit-working-directory = false
