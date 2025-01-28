@@ -7,10 +7,6 @@ font-feature = -dlig
 font-feature = -liga
 font-size = 15
 
-# fullscreen
-fullscreen = true
-macos-non-native-fullscreen = visible-menu
-
 # windows, tabs, splits
 keybind = ctrl+s=new_split:right
 window-inherit-working-directory = false
