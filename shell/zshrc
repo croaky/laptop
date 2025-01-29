@@ -55,7 +55,7 @@ compinit -u
 export BAT_THEME="TwoDark"
 
 # Go
-PATH="$BREW/go/bin:$HOME/go/bin:$PATH"
+PATH="$HOME/go/bin:$PATH"
 
 # Ruby
 export BUNDLE_IGNORE_FUNDING_REQUESTS="true"
