@@ -110,7 +110,8 @@ if [ "$(command -v zsh)" != "$BREW/bin/zsh" ]; then
   chsh -s "$shellpath"
 fi
 
-npm install -g bash-language-server
+# Bash
+npm install -g bash-language-server # uses shellcheck internally for linting diagnostics
 
 # Go
 go install golang.org/x/tools/cmd/godoc@latest
