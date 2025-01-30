@@ -62,7 +62,7 @@ require("packer").startup(function(use)
 	use("nvim-treesitter/playground")
 	use("RRethy/nvim-treesitter-endwise")
 
-	-- Fuzzy-finding :Ag, :Commits, :Files
+	-- Fuzzy-finding :Rg, :Commits, :Files
 	use({ "junegunn/fzf", dir = "/opt/homebrew/opt/fzf" })
 	use("junegunn/fzf.vim")
 
@@ -201,11 +201,11 @@ vim.g.netrw_list_hide = ".DS_Store"
 map("n", "<C-p>", ":Files<CR>")
 vim.g.fzf_layout = { window = { width = 0.95, height = 0.9 } }
 
--- Search file contents
-vim.api.nvim_set_keymap("n", "\\", ":Ag<SPACE>", { noremap = true })
-vim.opt.grepprg = "ag --nogroup --nocolor"
+-- Search contents of files in project
+vim.api.nvim_set_keymap("n", "\\", ":Rg<SPACE>", { noremap = true })
 
--- Grep word under cursor
+-- Search word under cursor
+vim.opt.grepprg = "rg --vimgrep"
 map("n", "K", ':grep! "\\b<C-R><C-W>\\b"<CR>:cw<CR>')
 
 -- Switch between last two files

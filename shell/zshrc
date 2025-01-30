@@ -22,12 +22,12 @@ SAVEHIST=500
 # https://docs.brew.sh/Analytics
 unset HOMEBREW_NO_ANALYTICS
 
-# fzf to find files, ag to search files
+# fzf and fd to find files, fzf and rg to search files
 if [ -e "$BREW/opt/fzf/shell" ]; then
   source "$BREW/opt/fzf/shell/completion.zsh"
   source "$BREW/opt/fzf/shell/key-bindings.zsh"
 fi
-export FZF_DEFAULT_COMMAND='ag --hidden --nocolor -g ""'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
 # Color
 autoload -U colors

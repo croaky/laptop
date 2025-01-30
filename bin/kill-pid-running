@@ -1,9 +1,0 @@
-#!/bin/bash
-#
-# Kill running process by its name.
-#
-# kill-pid-running sqls
-
-set -euo pipefail
-
-ps aux | ag "$1" | awk '/$1/ && !/awk/ { print $2 }' | xargs kill
