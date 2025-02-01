@@ -6,24 +6,20 @@ vim.opt.packpath = vim.opt.runtimepath:get()
 vim.g.mapleader = " "
 
 -- General
-vim.opt.cmdheight = 2
-vim.opt.complete:append("kspell")
+vim.opt.cmdheight = 1
 vim.opt.cursorline = false
 vim.opt.cursorcolumn = false
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
-vim.opt.exrc = true -- Project-specific vimrc
 vim.opt.fillchars:append({ eob = " " }) -- Hide ~ end-of-file markers
 vim.opt.history = 50
-vim.opt.incsearch = true
 vim.opt.joinspaces = false -- Use one space, not two, after punctuation
-vim.opt.laststatus = 2 -- Always display status line
+vim.opt.laststatus = 3
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
-vim.opt.modeline = false -- Disable modelines as a security precaution
+vim.opt.modeline = false -- Disable as a security precaution
 vim.opt.mouse = ""
 vim.opt.number = false
-vim.opt.ruler = true -- Show cursor position all the time
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append("c")
@@ -33,8 +29,8 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.tabstop = 2
-vim.opt.termguicolors = true
 vim.opt.textwidth = 80
+vim.opt.timeoutlen = 300
 vim.opt.updatetime = 300
 
 -- Packages
@@ -44,19 +40,33 @@ require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- LSP
-	use("neovim/nvim-lspconfig")
+	use({
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
+	})
 
 	-- Completion
-	use("hrsh7th/cmp-nvim-lsp") -- complete with LSP
-	use("hrsh7th/cmp-buffer") -- complete words from current buffer
-	use("hrsh7th/cmp-path") -- complete file paths
-	use("hrsh7th/cmp-cmdline") -- complete on command-line
-	use("hrsh7th/nvim-cmp") -- core completion plugin framework
+	use({
+		"hrsh7th/nvim-cmp", -- core completion plugin framework
+		event = "InsertEnter",
+		requires = {
+			"hrsh7th/cmp-nvim-lsp", -- complete with LSP
+			"hrsh7th/cmp-buffer", -- complete words from current buffer
+			"hrsh7th/cmp-path", -- complete file paths
+			"hrsh7th/cmp-cmdline", -- complete on command-line
+		},
+	})
 
 	-- Treesitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use("nvim-treesitter/playground")
-	use("RRethy/nvim-treesitter-endwise")
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		event = { "BufRead", "BufNewFile" },
+		run = ":TSUpdate",
+		requires = {
+			"nvim-treesitter/playground",
+			"RRethy/nvim-treesitter-endwise",
+		},
+	})
 
 	-- Fuzzy-finding :Rg, :Commits, :Files
 	use({ "junegunn/fzf", dir = "/opt/homebrew/opt/fzf" })
@@ -399,7 +409,7 @@ lspconfig.ts_ls.setup({
 })
 vim.g.markdown_fenced_languages = { "ts=typescript" }
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "typescript", "typescriptreact" },
+	pattern = { "typescript", "typescriptreact" },
 	callback = function()
 		format_on_save("prettier --parser typescript %")
 	end,
