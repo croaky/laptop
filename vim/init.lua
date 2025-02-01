@@ -89,25 +89,16 @@ end)
 
 -- Helper functions
 local function map(mode, lhs, rhs, opts)
-	opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
-	vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
-end
-
-local function buf_map(bufnr, mode, lhs, rhs, opts)
-	opts = vim.tbl_extend("force", { noremap = true, silent = true, buffer = bufnr }, opts or {})
+	opts = vim.tbl_extend("keep", opts or {}, { noremap = true, silent = true })
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-local function filetype_autocmd(ft, callback)
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = ft,
-		callback = callback,
-	})
-end
-
 local function format_on_save(cmd_template)
+	local group = vim.api.nvim_create_augroup("format_on_save_" .. vim.api.nvim_get_current_buf(), { clear = true })
+
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		buffer = 0,
+		group = group,
 		callback = function()
 			local cmd = cmd_template:gsub("%%", vim.fn.expand("%:p"))
 			local buf = vim.api.nvim_get_current_buf()
@@ -155,34 +146,24 @@ local function format_on_save(cmd_template)
 end
 
 local function run_file(key, cmd_template, split_cmd)
-	local cmd = cmd_template:gsub("%%", vim.fn.expand("%:p"))
-	buf_map(0, "n", key, function()
+	map("n", key, function()
+		local cmd = cmd_template:gsub("%%", vim.fn.expand("%:p"))
 		vim.cmd(split_cmd)
 		vim.cmd("terminal " .. cmd)
-	end)
+	end, { buffer = 0 })
 end
 
 function _G.get_user()
 	-- Try to get GitHub username
-	local git_command = "git config --get github.user"
-	local handle = io.popen(git_command)
-
-	local github_user
-	if handle then
-		github_user = handle:read("*a")
-		handle:close()
-	end
-
-	if github_user then
-		github_user = github_user:gsub("%s+", "")
-		if github_user ~= "" then
-			return "[" .. github_user .. "] "
-		end
+	local github_user = vim.fn.systemlist("git config --get github.user")[1] or ""
+	github_user = github_user:gsub("%s+", "")
+	if github_user ~= "" then
+		return "[" .. github_user .. "] "
 	end
 
 	-- Fall back to Unix username
-	local unix_user = os.getenv("USER") or os.getenv("USERNAME")
-	if unix_user and unix_user:match("^%w+$") then
+	local unix_user = os.getenv("USER") or os.getenv("USERNAME") or ""
+	if unix_user:match("^%w+$") then
 		return "[" .. unix_user .. "] "
 	else
 		return ""
@@ -198,7 +179,7 @@ map("n", "<C-p>", ":Files<CR>")
 vim.g.fzf_layout = { window = { width = 0.95, height = 0.9 } }
 
 -- Search contents of files in project
-vim.api.nvim_set_keymap("n", "\\", ":Rg<SPACE>", { noremap = true })
+map("n", "\\", ":Rg<SPACE>")
 
 -- Search word under cursor
 vim.opt.grepprg = "rg --vimgrep"
@@ -224,11 +205,11 @@ map("n", "<C-l>", "<C-w>l")
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local on_attach = function(_, bufnr)
-	buf_map(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-	buf_map(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
-	buf_map(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-	buf_map(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-	buf_map(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+	map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
+	map("n", "gh", vim.lsp.buf.hover, { buffer = bufnr })
+	map("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
+	map("n", "gn", vim.lsp.buf.rename, { buffer = bufnr })
+	map("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
 end
 
 -- Env
@@ -242,75 +223,91 @@ lspconfig.bashls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
-
-filetype_autocmd("sh", function()
-	format_on_save("shfmt --indent 2 %")
-end)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "sh",
+	callback = function()
+		format_on_save("shfmt --indent 2 %")
+	end,
+})
 
 -- Gitcommit
-filetype_autocmd("gitcommit", function()
-	vim.opt_local.textwidth = 72
-	vim.opt_local.complete:append("kspell")
-	vim.opt_local.spell = true
-end)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "gitcommit",
+	callback = function()
+		vim.opt_local.textwidth = 72
+		vim.opt_local.complete:append("kspell")
+		vim.opt_local.spell = true
+	end,
+})
 
 -- Go
 lspconfig.gopls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
-filetype_autocmd("go", function()
-	run_file("<Leader>r", "go run %", "split")
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "go",
+	callback = function()
+		run_file("<Leader>r", "go run %", "split")
 
-	-- $LAPTOP/bin/goimportslocal
-	format_on_save("goimportslocal %")
+		-- $LAPTOP/bin/goimportslocal
+		format_on_save("goimportslocal %")
 
-	vim.opt_local.listchars = { tab = "  ", trail = "·", nbsp = "·" }
-	vim.opt_local.expandtab = false
+		vim.opt_local.listchars = { tab = "  ", trail = "·", nbsp = "·" }
+		vim.opt_local.expandtab = false
 
-	-- Don't highlight tabs as extra whitespace
-	vim.opt_local.list = false
+		-- Don't highlight tabs as extra whitespace
+		vim.opt_local.list = false
 
-	--- :A to toggle between test file and Go file
-	local function go_alternate()
-		local curf = vim.api.nvim_buf_get_name(0)
-		local altf
+		--- :A to toggle between test file and Go file
+		local function go_alternate()
+			local curf = vim.api.nvim_buf_get_name(0)
+			local altf
 
-		if curf:match("_test%.go$") then
-			altf = curf:gsub("_test%.go$", ".go")
-		else
-			altf = curf:gsub("%.go$", "_test.go")
+			if curf:match("_test%.go$") then
+				altf = curf:gsub("_test%.go$", ".go")
+			else
+				altf = curf:gsub("%.go$", "_test.go")
+			end
+
+			if vim.fn.filereadable(altf) == 1 then
+				vim.cmd("edit " .. altf)
+			end
 		end
 
-		if vim.fn.filereadable(altf) == 1 then
-			vim.cmd("edit " .. altf)
-		end
-	end
-
-	vim.api.nvim_create_user_command("A", go_alternate, {})
-end)
+		vim.api.nvim_create_user_command("A", go_alternate, {})
+	end,
+})
 
 -- HTML
 lspconfig.html.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
-filetype_autocmd("html", function()
-	format_on_save("prettier --parser html %")
-
-	-- Treat <li> and <p> tags like the block tags they are
-	vim.g.html_indent_tags = "li\\|p"
-end)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "html",
+	callback = function()
+		format_on_save("prettier --parser html %")
+		-- Treat <li> and <p> tags like the block tags they are
+		vim.g.html_indent_tags = "li\\|p"
+	end,
+})
 
 -- JavaScript
-filetype_autocmd("javascript", function()
-	format_on_save("prettier %")
-end)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "javascript",
+	callback = function()
+		format_on_save("prettier %")
+	end,
+})
 
 -- JSON
-filetype_autocmd("json", function()
-	format_on_save("prettier --parser json %")
-end)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "json",
+	callback = function()
+		format_on_save("prettier --parser json %")
+	end,
+})
 
 -- Lua
 lspconfig.lua_ls.setup({
@@ -330,31 +327,36 @@ lspconfig.lua_ls.setup({
 		},
 	},
 })
-filetype_autocmd("lua", function()
-	format_on_save("stylua %")
-
-	-- Don't highlight tabs as extra whitespace
-	vim.opt_local.list = false
-end)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lua",
+	callback = function()
+		format_on_save("stylua %")
+		-- Don't highlight tabs as extra whitespace
+		vim.opt_local.list = false
+	end,
+})
 
 -- Markdown
-filetype_autocmd("markdown", function()
-	format_on_save("prettier --parser markdown %")
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		format_on_save("prettier --parser markdown %")
 
-	-- Align GitHub-flavored Markdown tables
-	buf_map(0, "v", "<Leader>\\", ":EasyAlign*<Bar><Enter>")
+		-- Align GitHub-flavored Markdown tables
+		map("v", "<Leader>\\", ":EasyAlign*<Bar><Enter>", { buffer = 0 })
 
-	-- Spell-checking
-	vim.opt_local.complete:append("kspell")
-	vim.opt_local.spell = true
+		-- Spell-checking
+		vim.opt_local.complete:append("kspell")
+		vim.opt_local.spell = true
 
-	-- View hyperlinks like rendered output
-	vim.opt_local.conceallevel = 0
+		-- View hyperlinks like rendered output
+		vim.opt_local.conceallevel = 0
 
-	-- Run through LLM
-	run_file("<Leader>r", "cat % | mdembed | mods", "vsplit")
-	run_file("<Leader>c", "cat % | mdembed | mods -C", "vsplit")
-end)
+		-- Run through LLM
+		run_file("<Leader>r", "cat % | mdembed | mods", "vsplit")
+		run_file("<Leader>c", "cat % | mdembed | mods -C", "vsplit")
+	end,
+})
 
 -- Ruby
 lspconfig.solargraph.setup({
@@ -362,24 +364,33 @@ lspconfig.solargraph.setup({
 	on_attach = on_attach,
 	settings = { solargraph = { diagnostics = false } },
 })
-filetype_autocmd("ruby", function()
-	run_file("<Leader>r", "bundle exec ruby %", "split")
-	format_on_save("cat % | bundle exec rubocop --stderr --stdin % --autocorrect --format quiet")
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "ruby",
+	callback = function()
+		run_file("<Leader>r", "bundle exec ruby %", "split")
+		format_on_save("cat % | bundle exec rubocop --stderr --stdin % --autocorrect --format quiet")
 
-	-- https://github.com/testdouble/standard/wiki/IDE:-vim
-	vim.g.ruby_indent_assignment_style = "variable"
-end)
+		-- https://github.com/testdouble/standard/wiki/IDE:-vim
+		vim.g.ruby_indent_assignment_style = "variable"
+	end,
+})
 
 -- SCSS
-filetype_autocmd("scss", function()
-	format_on_save("prettier --parser scss %")
-end)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "scss",
+	callback = function()
+		format_on_save("prettier --parser scss %")
+	end,
+})
 
 -- SQL
-filetype_autocmd("sql", function()
-	run_file("<Leader>r", "psql -d $(cat .db) -f % | less", "split")
-	format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line %")
-end)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "sql",
+	callback = function()
+		run_file("<Leader>r", "psql -d $(cat .db) -f % | less", "split")
+		format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line %")
+	end,
+})
 
 -- TypeScript
 lspconfig.ts_ls.setup({
@@ -387,17 +398,26 @@ lspconfig.ts_ls.setup({
 	capabilities = capabilities,
 })
 vim.g.markdown_fenced_languages = { "ts=typescript" }
-filetype_autocmd("typescript", function()
-	format_on_save("prettier --parser typescript %")
-end)
-filetype_autocmd("typescriptreact", function()
-	format_on_save("prettier --parser typescript %")
-end)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "typescript",
+	callback = function()
+		format_on_save("prettier --parser typescript %")
+	end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "typescriptreact",
+	callback = function()
+		format_on_save("prettier --parser typescript %")
+	end,
+})
 
 -- YAML
-filetype_autocmd("yaml", function()
-	format_on_save("prettier --parser yaml %")
-end)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "yaml",
+	callback = function()
+		format_on_save("prettier --parser yaml %")
+	end,
+})
 
 -- Completion
 local cmp = require("cmp")
