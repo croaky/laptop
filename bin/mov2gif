@@ -78,6 +78,7 @@ ffmpeg -y -i "$input_file" -vf "fps=${fps},scale=${scale}:-1:force_original_aspe
 
 # Create the final GIF using the palette
 echo "Creating GIF..."
+rm output.gif
 ffmpeg -i "$input_file" -i palette.png -filter_complex "fps=${fps},scale=${scale}:-1:force_original_aspect_ratio=decrease[x];[x][1:v]paletteuse=dither=none" output.gif
 
 echo "GIF created: output.gif"
