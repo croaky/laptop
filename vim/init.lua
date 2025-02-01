@@ -6,8 +6,6 @@ vim.opt.packpath = vim.opt.runtimepath:get()
 vim.g.mapleader = " "
 
 -- General
-vim.opt.autoindent = true
-vim.opt.backup = false
 vim.opt.cmdheight = 2
 vim.opt.complete:append("kspell")
 vim.opt.cursorline = false
@@ -16,7 +14,6 @@ vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
 vim.opt.exrc = true -- Project-specific vimrc
 vim.opt.fillchars:append({ eob = " " }) -- Hide ~ end-of-file markers
-vim.opt.hidden = true -- Allow switching between buffers without saving
 vim.opt.history = 50
 vim.opt.incsearch = true
 vim.opt.joinspaces = false -- Use one space, not two, after punctuation
@@ -39,7 +36,6 @@ vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.textwidth = 80
 vim.opt.updatetime = 300
-vim.opt.writebackup = false
 
 -- Packages
 vim.cmd([[packadd packer.nvim]])

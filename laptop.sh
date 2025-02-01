@@ -9,7 +9,7 @@
 # - CLIs (AWS, Crunchy Bridge, GitHub, Render)
 
 # This script can be safely run multiple times.
-# Tested with macOS Sequoia (15.12) on arm64 (Apple M4 Max)
+# Tested with macOS Sequoia (15.13) on arm64 (M1 and M4 Max).
 
 set -eux
 
