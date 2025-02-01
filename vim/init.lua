@@ -399,13 +399,7 @@ lspconfig.ts_ls.setup({
 })
 vim.g.markdown_fenced_languages = { "ts=typescript" }
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "typescript",
-	callback = function()
-		format_on_save("prettier --parser typescript %")
-	end,
-})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "typescriptreact",
+  pattern = { "typescript", "typescriptreact" },
 	callback = function()
 		format_on_save("prettier --parser typescript %")
 	end,
