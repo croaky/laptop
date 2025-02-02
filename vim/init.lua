@@ -99,7 +99,7 @@ end)
 
 -- Helper functions
 local function map(mode, lhs, rhs, opts)
-	opts = vim.tbl_extend("keep", opts or {}, { noremap = true, silent = true })
+	opts = vim.tbl_extend("keep", opts or {}, { noremap = true, silent = false })
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
@@ -189,7 +189,7 @@ map("n", "<C-p>", ":Files<CR>")
 vim.g.fzf_layout = { window = { width = 0.95, height = 0.9 } }
 
 -- Search contents of files in project
-map("n", "\\", ":Rg<SPACE>")
+map("n", "\\", ":Rg ", { nowait = true })
 
 -- Search word under cursor
 vim.opt.grepprg = "rg --vimgrep"
