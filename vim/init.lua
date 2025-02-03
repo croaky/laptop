@@ -14,7 +14,7 @@ vim.opt.expandtab = true
 vim.opt.fillchars:append({ eob = " " }) -- Hide ~ end-of-file markers
 vim.opt.history = 50
 vim.opt.joinspaces = false -- Use one space, not two, after punctuation
-vim.opt.laststatus = 3
+vim.opt.laststatus = 2 -- Always display status line
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
 vim.opt.modeline = false -- Disable as a security precaution
