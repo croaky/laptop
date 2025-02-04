@@ -192,7 +192,7 @@ map("n", "\\", ":Rg ", { nowait = true })
 
 -- Search word under cursor
 vim.opt.grepprg = "rg --vimgrep"
-map("n", "K", ':grep! "\\b<C-R><C-W>\\b"<CR>:cw<CR>')
+map("n", "K", ':silent grep! "\\b<C-R><C-W>\\b"<CR>:cw<CR>')
 
 -- Switch between last two files
 map("n", "<Leader><Leader>", "<C-^>")
