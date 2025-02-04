@@ -33,11 +33,10 @@ vim.opt.textwidth = 80
 vim.opt.timeoutlen = 300
 vim.opt.updatetime = 300
 
--- Install lazy.nvim if not already installed
+-- Use Lazy for plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 
--- Plugins
 require("lazy").setup({
 	-- Sensible defaults
 	"tpope/vim-sensible",
@@ -50,7 +49,7 @@ require("lazy").setup({
 		},
 	},
 
-	-- nvim-cmp plugins
+	-- Completion
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
@@ -65,6 +64,11 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"RRethy/nvim-treesitter-endwise",
+			"nvim-treesitter/playground",
+		},
 	},
 
 	-- Fuzzy-finding :Rg, :Commits, :Files
