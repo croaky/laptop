@@ -134,14 +134,10 @@ npm install -g vscode-langservers-extracted
 # TypeScript
 npm install -g typescript-language-server typescript
 
-# Neovim with Packer
-PACKER_DIR="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
-
-if [ ! -d "$PACKER_DIR" ]; then
-  git clone --depth 1 https://github.com/wbthomason/packer.nvim "$PACKER_DIR"
+# Neovim
+LAZY_DIR="$HOME/.local/share/nvim/lazy/lazy.nvim"
+if [ ! -d "$LAZY_DIR" ]; then
+  git clone --filter=blob:none https://github.com/folke/lazy.nvim.git "$LAZY_DIR"
 fi
 
-nvim --headless -c 'packadd packer.nvim' -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
-# Treesitter
-nvim --headless -c 'packadd packer.nvim' -c 'TSUpdateSync' -c 'quitall'
+nvim --headless "+Lazy! sync" +qa

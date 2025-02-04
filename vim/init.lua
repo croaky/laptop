@@ -33,69 +33,68 @@ vim.opt.textwidth = 80
 vim.opt.timeoutlen = 300
 vim.opt.updatetime = 300
 
--- Packages
-vim.cmd([[packadd packer.nvim]])
-require("packer").startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
+-- Install lazy.nvim if not already installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.opt.rtp:prepend(lazypath)
 
-	-- LSP
-	use({
+-- Plugins
+require("lazy").setup({
+	-- Sensible defaults
+	"tpope/vim-sensible",
+
+	-- LSP Config
+	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
-	})
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+		},
+	},
 
-	-- Completion
-	use({
-		"hrsh7th/nvim-cmp", -- core completion plugin framework
-		event = "InsertEnter",
-		requires = {
+	-- nvim-cmp plugins
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
 			"hrsh7th/cmp-nvim-lsp", -- complete with LSP
 			"hrsh7th/cmp-buffer", -- complete words from current buffer
 			"hrsh7th/cmp-path", -- complete file paths
 			"hrsh7th/cmp-cmdline", -- complete on command-line
 		},
-	})
+	},
 
 	-- Treesitter
-	use({
+	{
 		"nvim-treesitter/nvim-treesitter",
-		event = { "BufRead", "BufNewFile" },
-		run = ":TSUpdate",
-		requires = {
-			"nvim-treesitter/playground",
-			"RRethy/nvim-treesitter-endwise",
-		},
-	})
+		build = ":TSUpdate",
+	},
 
 	-- Fuzzy-finding :Rg, :Commits, :Files
-	use({ "junegunn/fzf", dir = "/opt/homebrew/opt/fzf" })
-	use("junegunn/fzf.vim")
+	{ "junegunn/fzf", dir = "/opt/homebrew/opt/fzf" },
+	{ "junegunn/fzf.vim" },
 
 	-- :A, .projections.json
-	use("tpope/vim-projectionist")
+	{ "tpope/vim-projectionist" },
 
 	-- :TestFile, :TestNearest
-	use("vim-test/vim-test")
+	{ "vim-test/vim-test" },
 
 	-- Filesystem, :Rename, :Git blame
-	use("pbrisbin/vim-mkdir")
-	use("tpope/vim-eunuch")
-	use("tpope/vim-fugitive")
+	{ "pbrisbin/vim-mkdir" },
+	{ "tpope/vim-eunuch" },
+	{ "tpope/vim-fugitive" },
 
 	-- Alignment, auto pairs, auto tags
-	use("alvan/vim-closetag")
-	use("windwp/nvim-autopairs")
+	{ "alvan/vim-closetag" },
+	{ "windwp/nvim-autopairs" },
 
 	-- Frontend
-	use("leafgarland/typescript-vim")
-	use("mxw/vim-jsx")
-	use("pangloss/vim-javascript")
+	{ "leafgarland/typescript-vim" },
+	{ "mxw/vim-jsx" },
+	{ "pangloss/vim-javascript" },
 
 	-- Backend
-	use("tpope/vim-rails")
-	use("vim-ruby/vim-ruby")
-end)
+	{ "tpope/vim-rails" },
+	{ "vim-ruby/vim-ruby" },
+})
 
 -- Helper functions
 local function map(mode, lhs, rhs, opts)
@@ -193,7 +192,7 @@ map("n", "\\", ":Rg ", { nowait = true })
 
 -- Search word under cursor
 vim.opt.grepprg = "rg --vimgrep"
-map("n", "K", ':grep! "\\b<C-R><C-W>\\b"<CR>:cw<CR>')
+map("n", "K", ':silent grep! "\\b<C-R><C-W>\\b"<CR>:cw<CR>')
 
 -- Switch between last two files
 map("n", "<Leader><Leader>", "<C-^>")
