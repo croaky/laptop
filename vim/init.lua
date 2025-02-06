@@ -400,8 +400,53 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "sql",
 	callback = function()
-		run_file("<Leader>r", "psql -d $(cat .db) -f % | less", "split")
 		format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line %")
+
+		-- Map <Leader>r to run the current SQL file
+		vim.api.nvim_buf_set_keymap(0, "n", "<Leader>r", "", {
+			noremap = true,
+			silent = true,
+			callback = function()
+				-- Get the full path of the current file
+				local path = vim.fn.expand("%:p")
+
+				-- Read the database name from the .db file
+				local db_file = io.open(".db", "r")
+				if not db_file then
+					print("Cannot read .db file")
+					return
+				end
+				local dbname = db_file:read("*l")
+				db_file:close()
+
+				-- Construct the psql command
+				local cmd = 'psql -d "' .. dbname .. '" -f "' .. path .. '"'
+
+				-- Capture the output of the psql command
+				local output = vim.fn.systemlist(cmd)
+
+				-- Check for command execution errors
+				if output == nil then
+					print("Error executing psql command")
+					return
+				end
+
+				-- Open a new split window and set it up
+				vim.cmd("new")
+				local buf = vim.api.nvim_get_current_buf()
+
+				-- Insert the output into the new buffer
+				vim.api.nvim_buf_set_lines(buf, 0, -1, false, output)
+
+				-- Set buffer options for a better experience
+				vim.bo[buf].buftype = "nofile"
+				vim.bo[buf].bufhidden = "wipe"
+				vim.bo[buf].swapfile = false
+
+				-- Move cursor to the top of the output buffer
+				vim.cmd("normal! gg")
+			end,
+		})
 	end,
 })
 
