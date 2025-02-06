@@ -74,7 +74,8 @@ PATH="$HOME/.bun/bin:$PATH"
 
 # Postgres
 export PGUSER=postgres
-PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # Laptop
 export LAPTOP="$HOME/laptop"
