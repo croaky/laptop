@@ -179,10 +179,10 @@ start_postgres_cluster() {
 start_postgres_cluster 5433 \
   "$HOME/.local/share/postgres/data_test" \
   "$HOME/.local/share/postgres/log_test.log" \
-  "-c shared_buffers=12MB -c fsync=off -c synchronous_commit=off -c full_page_writes=off -c log_line_prefix='%d ::LOG::'"
+  "-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
 
 # dev databases
 start_postgres_cluster 5432 \
   "$HOME/.local/share/postgres/data_dev" \
   "$HOME/.local/share/postgres/log_dev.log" \
-  "-c log_line_prefix='%d ::LOG::'"
+  ""
