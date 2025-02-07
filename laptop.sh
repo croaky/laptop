@@ -72,7 +72,7 @@ brew "neovim"
 brew "node"
 brew "oven-sh/bun/bun"
 brew "pgformatter"
-brew "postgresql"
+brew "postgresql@17"
 brew "prettier"
 brew "ripgrep"
 brew "shellcheck"
@@ -144,6 +144,7 @@ fi
 nvim --headless "+Lazy! sync" +qa
 
 # Postgres
+export PATH="$BREW/opt/postgresql@17/bin:$PATH"
 if ! command -v initdb >/dev/null || ! command -v pg_ctl >/dev/null; then
   echo "initdb and/or pg_ctl not found in PATH"
   exit 1
