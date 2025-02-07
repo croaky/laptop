@@ -69,13 +69,13 @@ PATH="$HOME/.rubies/ruby-3.4.1/bin:$PATH"
 PATH="$BREW/bin:$PATH"
 
 # Node
+export NPM_CONFIG_FUND=false
 PATH="$BREW/opt/node/bin:$PATH"
 PATH="$HOME/.bun/bin:$PATH"
 
 # Postgres
 export PGUSER=postgres
-PATH="$HOME/.local/bin:$PATH"
-PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+PATH="$BREW/opt/postgresql@17/bin:$PATH"
 
 # Laptop
 export LAPTOP="$HOME/laptop"

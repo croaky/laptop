@@ -67,12 +67,12 @@ brew "gh"
 brew "git"
 brew "go"
 brew "jq"
-brew "libpq"
 brew "lua-language-server"
 brew "neovim"
 brew "node"
 brew "oven-sh/bun/bun"
 brew "pgformatter"
+brew "postgresql@17"
 brew "prettier"
 brew "ripgrep"
 brew "shellcheck"
@@ -144,21 +144,7 @@ fi
 nvim --headless "+Lazy! sync" +qa
 
 # Postgres
-os=darwin
-arch=arm64v8
-version="17.2.0"
-
-mkdir -p "$HOME/.local/bin"
-cd "$HOME/.local"
-
-if [ ! -x "$HOME/.local/bin/postgres" ]; then
-  tmp_jar=$(mktemp /tmp/pg.XXXXXX.jar)
-  curl -s -L "https://repo1.maven.org/maven2/io/zonky/test/postgres/embedded-postgres-binaries-$os-$arch/$version/embedded-postgres-binaries-$os-$arch-$version.jar" -o "$tmp_jar"
-  unzip -p "$tmp_jar" "postgres-$os-*.txz" | tar -xJf - -C "$HOME/.local/bin"
-  rm -f "$tmp_jar"
-fi
-
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$BREW/opt/postgresql@17/bin:$PATH"
 if ! command -v initdb >/dev/null || ! command -v pg_ctl >/dev/null; then
   echo "initdb and/or pg_ctl not found in PATH"
   exit 1
@@ -167,20 +153,23 @@ fi
 start_postgres_cluster() {
   local port="$1"
   local data_dir="$2"
-  local log_file=$3
-  local opts=$4
+  local log_file="$3"
+  local opts="$4"
+
+  mkdir -p "$(dirname "$data_dir")"
+  mkdir -p "$(dirname "$log_file")"
 
   if [ ! -f "$data_dir/PG_VERSION" ]; then
     initdb -D "$data_dir" -U postgres
   fi
 
   if pg_ctl -D "$data_dir" status >/dev/null 2>&1; then
-    echo "Postgres already running for data directory $data_dir"
+    echo "Postgres is already running for data directory $data_dir"
     return
   fi
 
   if lsof -i "tcp:$port" >/dev/null 2>&1; then
-    echo "Postgres already running on port $port"
+    echo "Port $port is already in use"
     return
   fi
 
@@ -191,10 +180,10 @@ start_postgres_cluster() {
 start_postgres_cluster 5433 \
   "$HOME/.local/share/postgres/data_test" \
   "$HOME/.local/share/postgres/log_test.log" \
-  "-c shared_buffers=12MB -c fsync=off -c synchronous_commit=off -c full_page_writes=off -c log_line_prefix='%d ::LOG::'"
+  "-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
 
 # dev databases
 start_postgres_cluster 5432 \
   "$HOME/.local/share/postgres/data_dev" \
   "$HOME/.local/share/postgres/log_dev.log" \
-  "-p 5432 -c log_line_prefix='%d ::LOG::'"
+  ""
