@@ -75,7 +75,7 @@ PATH="$HOME/.bun/bin:$PATH"
 
 # Postgres
 export PGUSER=postgres
-export PATH="$BREW/opt/postgresql@17/bin:$PATH"
+PATH="$BREW/opt/postgresql@17/bin:$PATH"
 
 # Laptop
 export LAPTOP="$HOME/laptop"
