@@ -385,6 +385,19 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		-- https://github.com/testdouble/standard/wiki/IDE:-vim
 		vim.g.ruby_indent_assignment_style = "variable"
+
+		map("n", "<Leader>i", function()
+			local lines = {
+				"    attr_reader :db",
+				"",
+				"    def initialize(db)",
+				"      @db = db",
+				"    end",
+				"",
+			}
+			local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+			vim.api.nvim_buf_set_lines(0, row, row, false, lines)
+		end, { buffer = 0 })
 	end,
 })
 
