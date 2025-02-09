@@ -365,6 +365,20 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- View hyperlinks like rendered output
 		vim.opt_local.conceallevel = 0
 
+		-- Add embed code fence block
+		map("n", "<Leader>e", function()
+			local lines = {
+				"```embed",
+				"",
+				"```",
+			}
+			local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+			vim.api.nvim_buf_set_lines(0, row, row, false, lines)
+
+			-- Move cursor to the middle line
+			vim.api.nvim_win_set_cursor(0, { row + 2, 0 })
+		end, { buffer = 0 })
+
 		-- Run through LLM
 		run_file("<Leader>r", "cat % | mdembed | mods", "vsplit")
 		run_file("<Leader>c", "cat % | mdembed | mods -C", "vsplit")
