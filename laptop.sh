@@ -120,6 +120,7 @@ go install golang.org/x/tools/cmd/goimports@latest
 go install golang.org/x/tools/gopls@latest
 
 # AI via CLI
+curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash
 go install github.com/charmbracelet/mods@latest
 go install github.com/croaky/mdembed@latest
 
