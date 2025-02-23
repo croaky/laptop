@@ -57,6 +57,9 @@ export BAT_THEME="TwoDark"
 # Go
 PATH="$HOME/go/bin:$PATH"
 
+# Goose
+PATH="$HOME/.local/bin:$PATH"
+
 # Ruby
 export BUNDLE_IGNORE_FUNDING_REQUESTS="true"
 export BUNDLE_IGNORE_MESSAGES="true"

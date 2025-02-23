@@ -166,6 +166,19 @@ local function run_file(key, cmd_template, split_cmd)
 	end, { buffer = 0 })
 end
 
+local function run_goose(key, goose_cmd)
+	map("n", key, function()
+		local file_path = vim.fn.expand("%")
+		local embedded_text = vim.fn.system("cat " .. file_path .. " | mdembed")
+		vim.cmd("vsplit | terminal goose " .. goose_cmd)
+		vim.cmd("startinsert")
+		vim.schedule(function()
+			vim.api.nvim_chan_send(vim.b.terminal_job_id, embedded_text)
+			vim.api.nvim_chan_send(vim.b.terminal_job_id, "\r") -- press "Enter"
+		end)
+	end, { buffer = 0 })
+end
+
 function _G.get_user()
 	-- Try to get GitHub username
 	local github_user = vim.fn.systemlist("git config --get github.user")[1] or ""
@@ -224,6 +237,9 @@ local on_attach = function(_, bufnr)
 	map("n", "gn", vim.lsp.buf.rename, { buffer = bufnr })
 	map("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
 end
+
+-- Terminal
+vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 
 -- Env
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
@@ -380,9 +396,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = 0 })
 
 		-- Run through LLM
-		run_file("<Leader>r", "cat % | mdembed | mods", "vsplit")
-		run_file("<Leader>c", "cat % | mdembed | mods -C", "vsplit")
+		run_goose("<Leader>r", "session")
+		run_goose("<Leader>c", "session --resume")
 	end,
+})
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = ".goosehints",
+	command = "set filetype=markdown",
 })
 
 -- Ruby
