@@ -8,6 +8,8 @@
   ci = commit --verbose
   co = checkout
   st = status
+[branch]
+  sort = -committerdate
 [color]
   ui = auto
 [core]
