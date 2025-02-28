@@ -50,4 +50,5 @@
 [rebase]
   autosquash = true
 [rerere]
+  autoupdate = true
   enabled = true
