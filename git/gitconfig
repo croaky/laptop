@@ -24,6 +24,7 @@
 [credential "https://gist.github.com"]
   helper = !/opt/homebrew/bin/gh auth git-credential
 [diff]
+  algorithm = histogram
   noprefix = true
   tool = vimdiff
 [fetch]
