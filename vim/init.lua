@@ -143,7 +143,7 @@ map("n", "<C-p>", ":Files<CR>")
 vim.g.fzf_layout = { window = { width = 0.95, height = 0.9 } }
 
 -- Search contents of files in project
-map("n", "\\", ":Rg ", { nowait = true })
+map("n", "\\", ":Rg<CR>")
 
 -- Search word under cursor
 vim.opt.grepprg = "rg --vimgrep"
