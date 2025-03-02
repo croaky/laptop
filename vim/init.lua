@@ -75,6 +75,9 @@ require("lazy").setup({
 	{ "junegunn/fzf", dir = "/opt/homebrew/opt/fzf" },
 	{ "junegunn/fzf.vim" },
 
+	-- Formatting
+	{ "stevearc/conform.nvim" },
+
 	-- :A, .projections.json
 	{ "tpope/vim-projectionist" },
 
@@ -104,58 +107,6 @@ require("lazy").setup({
 local function map(mode, lhs, rhs, opts)
 	opts = vim.tbl_extend("keep", opts or {}, { noremap = true, silent = false })
 	vim.keymap.set(mode, lhs, rhs, opts)
-end
-
-local function format_on_save(cmd_template)
-	local group = vim.api.nvim_create_augroup("format_on_save_" .. vim.api.nvim_get_current_buf(), { clear = true })
-
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		buffer = 0,
-		group = group,
-		callback = function()
-			local cmd = cmd_template:gsub("%%", vim.fn.expand("%:p"))
-			local buf = vim.api.nvim_get_current_buf()
-
-			vim.fn.jobstart(cmd, {
-				stdout_buffered = true,
-				on_stdout = function(_, data)
-					if not data then
-						return
-					end
-
-					local fmt = table.concat(data, "\n")
-					if #fmt == 0 then
-						return
-					end
-
-					local pos = vim.api.nvim_win_get_cursor(0)
-
-					local lines = vim.split(fmt, "\n")
-					if lines[#lines] == "" then
-						table.remove(lines, #lines)
-					end
-
-					vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-
-					local line_count = vim.api.nvim_buf_line_count(buf)
-					if pos[1] > line_count then
-						pos[1] = line_count
-					end
-
-					vim.api.nvim_win_set_cursor(0, pos)
-
-					vim.api.nvim_buf_call(buf, function()
-						vim.cmd("noautocmd write")
-					end)
-				end,
-				on_stderr = function(_, data)
-					if data then
-						print(table.concat(data, "\n"))
-					end
-				end,
-			})
-		end,
-	})
 end
 
 local function run_file(key, cmd_template, split_cmd)
@@ -228,6 +179,42 @@ end
 -- Terminal
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 
+-- Formatting
+require("conform").setup({
+	format_on_save = {
+		lsp_format = "fallback",
+		timeout_ms = 1000,
+	},
+	notify_on_error = true,
+	notify_no_formatters = true,
+	formatters_by_ft = {
+		go = { "goimportslocal" }, -- $LAPTOP/bin/goimportslocal
+		html = { "prettier" },
+		javascript = { "prettier" }, -- prettier --parser html
+		json = { "prettier" }, -- prettier --parser json
+		lua = { "stylua" },
+		markdown = { "prettier" }, -- prettier --parser markdown
+		ruby = { "bundlerubocop" },
+		scss = { "prettier" }, -- prettier --parser scss
+		sh = { "shfmt" },
+		sql = { "pg_format" },
+		typescript = { "prettier" }, -- prettier --parser typescript
+		typescriptreact = { "prettier" }, -- prettier --parser typescript
+	},
+	formatters = {
+		bundlerubocop = {
+			command = "bundle",
+			args = { "exec", "rubocop", "--server", "-a", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" },
+		},
+		pg_format = {
+			args = { "--function-case", "1", "--keyword-case", "2", "--spaces", "2", "--no-extra-line" },
+		},
+		shfmt = {
+			args = { "--indent", "2" },
+		},
+	},
+})
+
 -- Env
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = ".env",
@@ -238,12 +225,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 lspconfig.bashls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "sh",
-	callback = function()
-		format_on_save("shfmt --indent 2 %")
-	end,
 })
 
 -- Gitcommit
@@ -265,9 +246,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "go",
 	callback = function()
 		run_file("<Leader>r", "go run %", "split")
-
-		-- $LAPTOP/bin/goimportslocal
-		format_on_save("goimportslocal %")
 
 		vim.opt_local.listchars = { tab = "  ", trail = "·", nbsp = "·" }
 		vim.opt_local.expandtab = false
@@ -303,25 +281,8 @@ lspconfig.html.setup({
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "html",
 	callback = function()
-		format_on_save("prettier --parser html %")
 		-- Treat <li> and <p> tags like the block tags they are
 		vim.g.html_indent_tags = "li\\|p"
-	end,
-})
-
--- JavaScript
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "javascript",
-	callback = function()
-		format_on_save("prettier %")
-	end,
-})
-
--- JSON
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "json",
-	callback = function()
-		format_on_save("prettier --parser json %")
 	end,
 })
 
@@ -346,7 +307,6 @@ lspconfig.lua_ls.setup({
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lua",
 	callback = function()
-		format_on_save("stylua %")
 		-- Don't highlight tabs as extra whitespace
 		vim.opt_local.list = false
 	end,
@@ -356,8 +316,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function()
-		format_on_save("prettier --parser markdown %")
-
 		-- Align GitHub-flavored Markdown tables
 		map("v", "<Leader>\\", ":EasyAlign*<Bar><Enter>", { buffer = 0 })
 
@@ -403,7 +361,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "ruby",
 	callback = function()
 		run_file("<Leader>r", "bundle exec ruby %", "split")
-		format_on_save("cat % | bundle exec rubocop --stderr --stdin % --autocorrect --format quiet")
 
 		-- https://github.com/testdouble/standard/wiki/IDE:-vim
 		vim.g.ruby_indent_assignment_style = "variable"
@@ -423,20 +380,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- SCSS
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "scss",
-	callback = function()
-		format_on_save("prettier --parser scss %")
-	end,
-})
-
 -- SQL
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "sql",
 	callback = function()
-		format_on_save("pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line %")
-
 		-- Map <Leader>r to run the current SQL file
 		vim.api.nvim_buf_set_keymap(0, "n", "<Leader>r", "", {
 			noremap = true,
@@ -491,20 +438,6 @@ lspconfig.ts_ls.setup({
 	capabilities = capabilities,
 })
 vim.g.markdown_fenced_languages = { "ts=typescript" }
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "typescript", "typescriptreact" },
-	callback = function()
-		format_on_save("prettier --parser typescript %")
-	end,
-})
-
--- YAML
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "yaml",
-	callback = function()
-		format_on_save("prettier --parser yaml %")
-	end,
-})
 
 -- Completion
 local cmp = require("cmp")
