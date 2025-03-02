@@ -75,14 +75,14 @@ require("lazy").setup({
 	{ "junegunn/fzf", dir = "/opt/homebrew/opt/fzf" },
 	{ "junegunn/fzf.vim" },
 
-	-- Formatting
-	{ "stevearc/conform.nvim" },
-
 	-- :A, .projections.json
 	{ "tpope/vim-projectionist" },
 
 	-- :TestFile, :TestNearest
 	{ "vim-test/vim-test" },
+
+	-- Editable quickfix
+	{ "gabrielpoca/replacer.nvim" },
 
 	-- Filesystem, :Rename, :Git blame
 	{ "pbrisbin/vim-mkdir" },
@@ -92,6 +92,9 @@ require("lazy").setup({
 	-- Alignment, auto pairs, auto tags
 	{ "alvan/vim-closetag" },
 	{ "windwp/nvim-autopairs" },
+
+	-- Formatting
+	{ "stevearc/conform.nvim" },
 
 	-- Frontend
 	{ "leafgarland/typescript-vim" },
@@ -137,6 +140,16 @@ end
 -- Netrw
 vim.g.netrw_banner = 0
 vim.g.netrw_list_hide = ".DS_Store"
+
+-- Quickfix
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function()
+		map("n", "<Leader>e", function()
+			require("replacer").run()
+		end, { buffer = 0 })
+	end,
+})
 
 -- Fuzzy-find files
 map("n", "<C-p>", ":Files<CR>")
