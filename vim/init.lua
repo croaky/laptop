@@ -359,11 +359,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = ".goosehints",
-	command = "set filetype=markdown",
-})
-
 -- Ruby
 lspconfig.solargraph.setup({
 	capabilities = capabilities,
