@@ -219,6 +219,10 @@ require("conform").setup({
 			command = "bundle",
 			args = { "exec", "rubocop", "--server", "-a", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" },
 		},
+		goimportslocal = {
+			command = "goimportslocal",
+			args = { "-srcdir", "$DIRNAME" },
+		},
 		pg_format = {
 			args = { "--function-case", "1", "--keyword-case", "2", "--spaces", "2", "--no-extra-line" },
 		},
