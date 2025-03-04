@@ -20,6 +20,7 @@ vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
 vim.opt.modeline = false -- Disable as a security precaution
 vim.opt.mouse = ""
 vim.opt.number = false
+vim.opt.shell = "/opt/homebrew/bin/zsh"
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append("c")
@@ -110,6 +111,10 @@ require("lazy").setup({
 local function map(mode, lhs, rhs, opts)
 	opts = vim.tbl_extend("keep", opts or {}, { noremap = true, silent = false })
 	vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+local function pipefail(cmd)
+	return "zsh -c 'set -e; set -o pipefail; " .. cmd .. "'"
 end
 
 local function run_file(key, cmd_template, split_cmd)
@@ -358,8 +363,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = 0 })
 
 		-- Run through LLM
-		run_file("<Leader>r", "cat % | mdembed | mods", "vsplit")
-		run_file("<Leader>c", "cat % | mdembed | mods -C", "vsplit")
+		run_file("<Leader>r", pipefail("cat % | mdembed | mods"), "vsplit")
+		run_file("<Leader>c", pipefail("cat % | mdembed | mods -C"), "vsplit")
 	end,
 })
 
