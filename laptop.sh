@@ -51,7 +51,7 @@ export PATH="$BREW/bin:$PATH"
 
 brew analytics off
 brew update-reset
-brew bundle --no-lock --file=- <<EOF
+brew bundle --file=- <<EOF
 tap "CrunchyData/brew"
 tap "oven-sh/bun"
 
@@ -111,9 +111,6 @@ if [ "$(command -v zsh)" != "$BREW/bin/zsh" ]; then
   chsh -s "$shellpath"
 fi
 
-# Bash
-npm install -g bash-language-server # uses shellcheck internally for linting diagnostics
-
 # Go
 go install golang.org/x/tools/cmd/godoc@latest
 go install golang.org/x/tools/cmd/goimports@latest
@@ -128,6 +125,12 @@ v="3.4.1"
 if [ ! -d "$HOME/.rubies/ruby-$v" ]; then
   RUBY_CONFIGURE_OPTS="--enable-yjit --with-openssl-dir=$(brew --prefix openssl@3)" ruby-build "$v" "$HOME/.rubies/ruby-$v"
 fi
+
+# NPM
+npm install -g npm@latest
+
+# Bash
+npm install -g bash-language-server # uses shellcheck internally for linting diagnostics
 
 # HTML
 npm install -g vscode-langservers-extracted

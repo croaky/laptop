@@ -201,7 +201,7 @@ vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 require("conform").setup({
 	format_on_save = {
 		lsp_format = "fallback",
-		timeout_ms = 1000,
+		timeout_ms = 1500, -- rubocop is slow
 	},
 	notify_on_error = true,
 	notify_no_formatters = true,
