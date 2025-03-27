@@ -565,6 +565,7 @@ hi @conditional          guifg=#9664c8
 hi Directory             guifg=#9664c8
 hi Function              guifg=#9664c8
 hi PreProc               guifg=#9664c8
+hi hamlClass             guifg=#9664c8
 
 " Pink
 hi @diff.minus           guifg=#d7005f
