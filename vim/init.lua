@@ -363,8 +363,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = 0 })
 
 		-- Run through LLM
-		run_file("<Leader>r", pipefail("cat % | mdembed | mods"), "vsplit")
-		run_file("<Leader>c", pipefail("cat % | mdembed | mods -C"), "vsplit")
+		run_file("<Leader>r", pipefail("(cat %; [ -f .llm.md ] && cat .llm.md) | mdembed | mods"), "vsplit")
+		run_file("<Leader>c", pipefail("(cat %; [ -f .llm.md ] && cat .llm.md) | mdembed | mods -C"), "vsplit")
 	end,
 })
 
