@@ -2,7 +2,7 @@
 #
 # Find and replace by a given list of files.
 #
-# replace foo bar **/*.rb
+# replace "find_this" "replace_with" **/*.rb
 
 set -euo pipefail
 
@@ -11,9 +11,17 @@ shift
 replace_with="$1"
 shift
 
-items=$(rg -l "$find_this" "$@")
+# Use rg with -F to search for fixed strings
+items=$(rg -F -l "$find_this" "$@")
 
 IFS=$'\n'
 for item in $items; do
-  sed -i '' "s/$find_this/$replace_with/g" "$item"
+  # Escape special characters for sed in find_this
+  sed_find=$(printf '%s' "$find_this" | sed 's/[\/&]/\\&/g')
+
+  # Escape special characters for sed in replace_with
+  sed_replace=$(printf '%s' "$replace_with" | sed 's/[\/&]/\\&/g')
+
+  # Use sed with the escaped patterns
+  sed -i '' "s/$sed_find/$sed_replace/g" "$item"
 done
