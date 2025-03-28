@@ -59,6 +59,7 @@ cask "ghostty@tip"
 cask "ollama"
 
 brew "awscli"
+brew "bash"
 brew "bat"
 brew "CrunchyData/brew/cb"
 brew "fd"
