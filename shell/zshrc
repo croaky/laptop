@@ -76,6 +76,7 @@ PATH="$HOME/.bun/bin:$PATH"
 # Postgres
 export PGUSER=postgres
 PATH="$BREW/opt/postgresql@17/bin:$PATH"
+PATH="$HOME/pg/bin:$PATH"
 
 # https://github.com/ged/ruby-pg/issues/538
 # https://github.com/rails/rails/issues/38560#issuecomment-1881733872

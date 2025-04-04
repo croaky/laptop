@@ -154,6 +154,10 @@ if ! command -v initdb >/dev/null || ! command -v pg_ctl >/dev/null; then
   exit 1
 fi
 
+mkdir -p "$HOME/pg/bin"
+curl -L https://github.com/supabase-community/postgres-language-server/releases/download/0.3.1/postgrestools_aarch64-apple-darwin -o "$HOME/pg/bin/postgrestools"
+chmod +x "$HOME/pg/bin/postgrestools"
+
 start_postgres_cluster() {
   local port="$1"
   local data_dir="$2"

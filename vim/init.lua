@@ -448,6 +448,10 @@ vim.api.nvim_create_autocmd("FileType", {
 		})
 	end,
 })
+lspconfig.postgres_lsp.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
 
 -- TypeScript
 lspconfig.ts_ls.setup({
