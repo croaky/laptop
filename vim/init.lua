@@ -379,9 +379,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		run_file("<Leader>r", "bundle exec ruby %", "split")
 
-		-- https://github.com/testdouble/standard/wiki/IDE:-vim
-		vim.g.ruby_indent_assignment_style = "variable"
-
 		map("n", "<Leader>i", function()
 			local lines = {
 				"    attr_reader :db",
