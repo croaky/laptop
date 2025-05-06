@@ -142,68 +142,43 @@ function _G.get_user()
 	end
 end
 
-local function split(name)
-	local f, l, c = name:match("^(.+):(%d+):(%d+)$")
-	if f then
-		return f, tonumber(l), tonumber(c)
-	end
-
-	f, l = name:match("^(.+):(%d+)$")
-	if f then
-		return f, tonumber(l)
-	end
-end
-
-local function edit_with_position(raw)
-	local f, l, c = split(raw)
-
-	if not l or vim.fn.filereadable(f) == 0 then
-		return false
-	end
-
-	local dummy = vim.api.nvim_get_current_buf()
-	vim.cmd.edit({ vim.fn.fnameescape(f), mods = { keepalt = true } })
-
-	-- delete the dummy buffer only if it's still a separate buffer
-	vim.schedule(function()
-		if vim.api.nvim_buf_is_valid(dummy) and dummy ~= vim.api.nvim_get_current_buf() then
-			pcall(vim.api.nvim_buf_delete, dummy, {})
-		end
-	end)
-
-	-- place the cursor
-	vim.schedule(function()
-		local line_count = vim.api.nvim_buf_line_count(0)
-		l = math.min(math.max(l, 1), line_count)
-
-		local line_len = #(vim.api.nvim_buf_get_lines(0, l - 1, l, false)[1] or "")
-		c = math.min(math.max((c or 1) - 1, 0), line_len)
-
-		pcall(vim.api.nvim_win_set_cursor, 0, { l, c })
-		vim.cmd.normal({ "zz", bang = true })
-	end)
-
-	return true
-end
-
--- Upon open Vim
-vim.api.nvim_create_autocmd("VimEnter", {
-	once = true,
-	callback = function()
-		for _, arg in ipairs(vim.v.argv) do
-			if arg:sub(1, 1) ~= "-" and edit_with_position(arg) then
-				break
-			end
-		end
-	end,
-})
-
--- :edit, :split, :tabedit, gf, etc.
-vim.api.nvim_create_autocmd("BufNewFile", {
-	nested = true,
+-- Edit file.ext:line:col
+vim.api.nvim_create_autocmd("BufReadCmd", {
+	group = vim.api.nvim_create_augroup("JumpLineCol", { clear = true }),
 	pattern = "*:*",
+	nested = true,
 	callback = function(ev)
-		edit_with_position(vim.api.nvim_buf_get_name(ev.buf))
+		local name = ev.file
+
+		-- 1st try: file:line:col
+		local path, line, col = name:match("^(.-):(%d+):(%d+)$")
+		if not path then
+			-- 2nd try: file:line
+			path, line = name:match("^(.-):(%d+)$")
+		end
+		if not line then
+			return vim.cmd.edit(vim.fn.fnameescape(name))
+		end
+
+		vim.cmd.edit(vim.fn.fnameescape(path))
+
+		local lnum = tonumber(line)
+		local cnum = (tonumber(col) or 1) - 1 -- 0‑based
+
+		local buf = vim.api.nvim_get_current_buf()
+		local maxl = vim.api.nvim_buf_line_count(buf)
+		if lnum > maxl then
+			lnum = maxl
+		end
+
+		local txt = vim.api.nvim_buf_get_lines(buf, lnum - 1, lnum, false)[1] or ""
+		if cnum > #txt then
+			cnum = #txt
+		end
+
+		vim.schedule(function()
+			pcall(vim.api.nvim_win_set_cursor, 0, { lnum, cnum })
+		end)
 	end,
 })
 
