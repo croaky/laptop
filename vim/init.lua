@@ -85,10 +85,11 @@ require("lazy").setup({
 	-- Editable quickfix
 	{ "gabrielpoca/replacer.nvim" },
 
-	-- Filesystem, :Rename, :Git blame
+	-- Filesystem, :Rename, :Git blame, vim README.md:10
 	{ "pbrisbin/vim-mkdir" },
 	{ "tpope/vim-eunuch" },
 	{ "tpope/vim-fugitive" },
+	{ "xim/file-line" },
 
 	-- Alignment, auto pairs, auto tags
 	{ "alvan/vim-closetag" },
