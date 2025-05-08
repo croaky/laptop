@@ -201,7 +201,7 @@ vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 require("conform").setup({
 	format_on_save = {
 		lsp_format = "fallback",
-		timeout_ms = 500,
+		timeout_ms = 1500, -- rubocop is slow
 	},
 	notify_on_error = true,
 	notify_no_formatters = true,
@@ -212,7 +212,7 @@ require("conform").setup({
 		json = { "prettier" }, -- prettier --parser json
 		lua = { "stylua" },
 		markdown = { "prettier" }, -- prettier --parser markdown
-		ruby = { "bundlerubocop", timeout_ms = 2000 },
+		ruby = { "bundlerubocop" },
 		scss = { "prettier" }, -- prettier --parser scss
 		sh = { "shfmt" },
 		sql = { "pg_format" },
