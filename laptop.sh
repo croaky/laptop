@@ -165,7 +165,7 @@ start_postgres_cluster() {
   mkdir -p "$(dirname "$log_file")"
 
   if [ ! -f "$data_dir/PG_VERSION" ]; then
-    initdb -D "$data_dir" -U postgres
+    initdb -D "$data_dir" -U postgres -c maintenance_work_mem=2GB
   fi
 
   if pg_ctl -D "$data_dir" status >/dev/null 2>&1; then
