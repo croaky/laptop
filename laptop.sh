@@ -56,7 +56,6 @@ tap "CrunchyData/brew"
 tap "oven-sh/bun"
 
 cask "ghostty@tip"
-cask "ollama"
 
 brew "awscli"
 brew "bash"
