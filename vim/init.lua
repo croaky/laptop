@@ -45,20 +45,24 @@ require("lazy").setup({
 	-- LSP Config
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-		},
+		dependencies = { "saghen/blink.cmp" },
 	},
 
 	-- Completion
 	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp", -- complete with LSP
-			"hrsh7th/cmp-buffer", -- complete words from current buffer
-			"hrsh7th/cmp-path", -- complete file paths
-			"hrsh7th/cmp-cmdline", -- complete on command-line
+		"saghen/blink.cmp",
+		version = "1.3.1", -- use a release tag to download pre-built binaries
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			keymap = { preset = "default" },
 		},
+		completion = { documentation = { auto_show = false } },
+		sources = {
+			default = { "lsp", "path", "snippets", "buffer" },
+		},
+		fuzzy = { implementation = "prefer_rust_with_warning" },
+		opts_extend = { "sources.default" },
 	},
 
 	-- Treesitter
@@ -185,7 +189,7 @@ map("n", "<C-l>", "<C-w>l")
 
 -- LSPs
 local lspconfig = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 local on_attach = function(_, bufnr)
 	map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 	map("n", "gh", vim.lsp.buf.hover, { buffer = bufnr })
@@ -452,20 +456,6 @@ lspconfig.ts_ls.setup({
 	capabilities = capabilities,
 })
 vim.g.markdown_fenced_languages = { "ts=typescript" }
-
--- Completion
-local cmp = require("cmp")
-cmp.setup({
-	mapping = cmp.mapping.preset.insert({
-		["<TAB>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm({ select = false }),
-	}),
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "buffer" },
-		{ name = "path" },
-	}),
-})
 
 -- Status line
 vim.opt.statusline = "%{v:lua.get_user()}%f %h%m%r%=%-14.(%l,%c%V%) %P"
