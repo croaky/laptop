@@ -56,13 +56,12 @@ require("lazy").setup({
 		---@type blink.cmp.Config
 		opts = {
 			keymap = { preset = "default" },
-		},
-		completion = { documentation = { auto_show = false } },
-		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
+			completion = { documentation = { auto_show = false } },
+			sources = {
+				default = { "lsp", "path", "buffer" },
+			},
 		},
 		fuzzy = { implementation = "prefer_rust_with_warning" },
-		opts_extend = { "sources.default" },
 	},
 
 	-- Treesitter
@@ -109,6 +108,8 @@ require("lazy").setup({
 	-- Backend
 	{ "tpope/vim-rails" },
 	{ "vim-ruby/vim-ruby" },
+
+	opts_extend = { "sources.default" },
 })
 
 -- Helper functions
