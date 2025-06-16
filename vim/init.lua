@@ -51,7 +51,8 @@ require("lazy").setup({
 	-- Completion
 	{
 		"saghen/blink.cmp",
-		version = "1.3.1", -- use a release tag to download pre-built binaries
+		-- use a release tag to download pre-built binaries
+		version = "1.3.1",
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
@@ -61,6 +62,7 @@ require("lazy").setup({
 				default = { "lsp", "path", "buffer" },
 			},
 		},
+		-- https://cmp.saghen.dev/configuration/fuzzy.html
 		fuzzy = { implementation = "prefer_rust_with_warning" },
 	},
 
