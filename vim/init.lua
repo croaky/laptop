@@ -56,10 +56,21 @@ require("lazy").setup({
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
-			keymap = { preset = "default" },
+			keymap = {
+				preset = "default",
+				["<Tab>"] = { "select_and_accept", "fallback" },
+			},
 			completion = { documentation = { auto_show = false } },
 			sources = {
 				default = { "lsp", "path", "buffer" },
+			},
+			cmdline = {
+				keymap = {
+					["<Tab>"] = { "show", "accept" },
+					["<Up>"] = { "select_prev", "fallback" },
+					["<Down>"] = { "select_next", "fallback" },
+				},
+				completion = { menu = { auto_show = true } },
 			},
 		},
 		-- https://cmp.saghen.dev/configuration/fuzzy.html
