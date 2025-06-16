@@ -376,10 +376,12 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Ruby
-lspconfig.solargraph.setup({
+lspconfig.ruby_lsp.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	settings = { solargraph = { diagnostics = false } },
+	init_options = {
+		formatter = "rubocop",
+	},
 })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "ruby",
