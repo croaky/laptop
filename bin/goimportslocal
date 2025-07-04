@@ -26,10 +26,23 @@
 #   "chain/net"
 # )
 
+# Usage examples:
+#   goimportslocal                    # Format all .go files in current directory and subdirs
+#   goimportslocal ./...              # Same as above (Go tool convention)
+#   goimportslocal -w main.go         # Format specific file(s) with write flag
+#   goimportslocal -d ./internal/     # Show diff for directory without writing
+#   goimportslocal main.go            # Format specific file to stdout (Vim usage)
+
 set -euo pipefail
 
-if ! command -v goimports >/dev/null; then
+if ! command -v goimports > /dev/null; then
   go install golang.org/x/tools/cmd/goimports
 fi
 
-goimports -local "$(go list -m)" "$@"
+# If no arguments or ./... pattern, format all Go files recursively
+if [ $# -eq 0 ] || [ "$1" = "./..." ]; then
+  find . -name "*.go" -exec goimports -local "$(go list -m)" -w {} \;
+else
+  # Pass through all arguments to goimports (for Vim, specific files, flags, etc.)
+  goimports -local "$(go list -m)" "$@"
+fi
