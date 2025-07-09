@@ -185,14 +185,14 @@ start_postgres_cluster() {
   pg_ctl -D "$data_dir" -l "$log_file" -o "-p $port $opts" start
 }
 
-# test databases
-start_postgres_cluster 5433 \
-  "$HOME/.local/share/postgres/data_test" \
-  "$HOME/.local/share/postgres/log_test.log" \
-  "-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
-
 # dev databases
 start_postgres_cluster 5432 \
   "$HOME/.local/share/postgres/data_dev" \
   "$HOME/.local/share/postgres/log_dev.log" \
   ""
+
+# test databases
+start_postgres_cluster 5433 \
+  "$HOME/.local/share/postgres/data_test" \
+  "$HOME/.local/share/postgres/log_test.log" \
+  "-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
