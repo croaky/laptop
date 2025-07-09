@@ -15,7 +15,7 @@ if [ -z "$username" ]; then
   username=$(whoami)
 fi
 
-branch_name="${username}-$1"
+branch_name="${username}/$1"
 
 git push origin "HEAD:refs/heads/$branch_name"
 git fetch origin
