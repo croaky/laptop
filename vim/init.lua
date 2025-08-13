@@ -76,6 +76,9 @@ require("lazy").setup({
 		-- https://cmp.saghen.dev/configuration/fuzzy.html
 		fuzzy = { implementation = "prefer_rust_with_warning" },
 	},
+	{
+		"github/copilot.vim",
+	},
 
 	-- Treesitter
 	{
