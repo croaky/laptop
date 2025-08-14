@@ -1,5 +1,5 @@
 # match vim/init.lua
-background = 191e2d
+background = 1e2022
 
 # fonts
 font-feature = -calt
