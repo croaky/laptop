@@ -2,5 +2,22 @@
 
 set -e
 
+# Determine the main branch name (master or main)
+main="master"
+if git branch | grep -Fq "main"; then
+  main="main"
+fi
+
+# Get current branch name
+branch=$(git symbolic-ref --short HEAD)
+
+# Check if we're on the main branch
+if [ "$branch" = "$main" ]; then
+  echo "Error: Cannot push from $main branch"
+  echo "Please create a feature branch first"
+  exit 1
+fi
+
+git push
 gh pr create --fill
 gh pr view --web
