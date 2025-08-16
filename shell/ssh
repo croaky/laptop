@@ -1,3 +1,5 @@
+Include ~/.ssh/config.private
+
 Host *
   AddKeysToAgent yes
   UseKeychain yes
