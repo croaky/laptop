@@ -1,4 +1,5 @@
-Include ~/.ssh/config.private
+# Optionally include private config if it exists; SSH will ignore if missing
+Include ~/.ssh/config.private*
 
 Host *
   AddKeysToAgent yes
