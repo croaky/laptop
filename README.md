@@ -80,6 +80,7 @@ Install macOS apps:
 
 - [Arc](https://arc.net/download)
 - [Magnet](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
+- [Warp](https://www.warp.dev/)
 
 ## Keyboard
 
@@ -113,4 +114,4 @@ sudo spctl developer-mode enable-terminal
 Then:
 
 - Go to "System Preferences > Privacy & Security > Developer Tools"
-- Select "Ghostty" as the terminal program.
+- Select "Warp" as the terminal program.
