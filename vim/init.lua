@@ -19,7 +19,7 @@ vim.opt.list = true
 vim.opt.listchars:append({ tab = "»·", trail = "·", nbsp = "·" })
 vim.opt.modeline = false -- Disable as a security precaution
 vim.opt.mouse = ""
-vim.opt.number = false
+vim.opt.number = true
 vim.opt.shell = "/opt/homebrew/bin/zsh"
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
