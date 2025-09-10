@@ -138,9 +138,6 @@ fi
 # NPM
 npm install -g npm@latest
 
-# Nushell
-cargo install --git https://github.com/nushell/nufmt
-
 # Bash
 npm install -g bash-language-server # uses shellcheck internally for linting diagnostics
 
