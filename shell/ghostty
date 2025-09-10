@@ -1,3 +1,6 @@
+# nushell
+command = /opt/homebrew/bin/nu
+
 # match vim/init.lua
 background = 1e2022
 
