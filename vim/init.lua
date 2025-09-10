@@ -45,37 +45,9 @@ require("lazy").setup({
 	-- LSP Config
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "saghen/blink.cmp" },
 	},
 
 	-- Completion
-	{
-		"saghen/blink.cmp",
-		-- use a release tag to download pre-built binaries
-		version = "1.3.1",
-		---@module 'blink.cmp'
-		---@type blink.cmp.Config
-		opts = {
-			keymap = {
-				preset = "default",
-				["<Tab>"] = { "select_and_accept", "fallback" },
-			},
-			completion = { documentation = { auto_show = false } },
-			sources = {
-				default = { "lsp", "path", "buffer" },
-			},
-			cmdline = {
-				keymap = {
-					["<Tab>"] = { "show", "accept" },
-					["<Up>"] = { "select_prev", "fallback" },
-					["<Down>"] = { "select_next", "fallback" },
-				},
-				completion = { menu = { auto_show = true } },
-			},
-		},
-		-- https://cmp.saghen.dev/configuration/fuzzy.html
-		fuzzy = { implementation = "prefer_rust_with_warning" },
-	},
 	{
 		"github/copilot.vim",
 	},
@@ -206,7 +178,6 @@ map("n", "<C-l>", "<C-w>l")
 
 -- LSPs
 local lspconfig = require("lspconfig")
-local capabilities = require("blink.cmp").get_lsp_capabilities()
 local on_attach = function(_, bufnr)
 	map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 	map("n", "gh", vim.lsp.buf.hover, { buffer = bufnr })
@@ -266,7 +237,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 
 -- Bash
 lspconfig.bashls.setup({
-	capabilities = capabilities,
 	on_attach = on_attach,
 })
 
@@ -282,7 +252,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Go
 lspconfig.gopls.setup({
-	capabilities = capabilities,
 	on_attach = on_attach,
 })
 vim.api.nvim_create_autocmd("FileType", {
@@ -318,7 +287,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- HTML
 lspconfig.html.setup({
-	capabilities = capabilities,
 	on_attach = on_attach,
 })
 vim.api.nvim_create_autocmd("FileType", {
@@ -331,7 +299,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Lua
 lspconfig.lua_ls.setup({
-	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = {
 		Lua = {
@@ -391,7 +358,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Ruby
 lspconfig.ruby_lsp.setup({
-	capabilities = capabilities,
 	on_attach = on_attach,
 	init_options = {
 		formatter = "rubocop",
@@ -472,7 +438,6 @@ vim.api.nvim_create_autocmd("FileType", {
 -- TypeScript
 lspconfig.ts_ls.setup({
 	on_attach = on_attach,
-	capabilities = capabilities,
 })
 vim.g.markdown_fenced_languages = { "ts=typescript" }
 
