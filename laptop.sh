@@ -111,13 +111,15 @@ add_to_shells() {
   fi
 }
 
-zsh_path="$BREW/bin/zsh"
-add_to_shells "$zsh_path"
-sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
-chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
-
 nu_path="$BREW/bin/nu"
 add_to_shells "$nu_path"
+zsh_path="$BREW/bin/zsh"
+add_to_shells "$zsh_path"
+
+if [[ -d "$BREW/share/zsh" && -d "$BREW/share/zsh/site-functions" ]]; then
+  sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+  chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+fi
 
 # Go
 go install golang.org/x/tools/cmd/deadcode@latest
