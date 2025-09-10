@@ -357,12 +357,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Ruby
-lspconfig.ruby_lsp.setup({
-	on_attach = on_attach,
-	init_options = {
-		formatter = "rubocop",
-	},
-})
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "ruby",
 	callback = function()
