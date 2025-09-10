@@ -35,6 +35,7 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend [
 # Aliases
 alias b = bundle
 alias c = git create-branch
+alias fg = job unfreeze # https://www.nushell.sh/book/background_jobs.html#job-suspension
 alias flush-cache = sudo killall -HUP mDNSResponder
 alias m = rake db:migrate db:rollback and rake db:migrate db:test:prepare
 alias vim = nvim
