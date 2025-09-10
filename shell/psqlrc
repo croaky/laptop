@@ -1,11 +1,14 @@
--- Don't display the "helpful" message on startup.
+-- Suppress Postgres' welcome message
 \set QUIET on
+
+-- Set NULL values to '[NULL]' in query results for better visibility
 \pset null '[NULL]'
 
--- One history file per-database
+-- Create seperate history files per-database
 \set HISTFILE ~/.psql_history- :DBNAME
 
--- If a command is run more than once in a row, only store it once in the history
+-- Prevent duplicate consecutive commands from being stored in the history file
 \set HISTCONTROL ignoredups
 
+-- Allow normal Postgres messages to be displayed after config session
 \set QUIET off
