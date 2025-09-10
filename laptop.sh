@@ -122,7 +122,7 @@ go install github.com/charmbracelet/mods@latest
 go install github.com/croaky/mdembed@latest
 
 # Ruby
-v="3.4.4"
+v="3.4.5"
 if [ ! -d "$HOME/.rubies/ruby-$v" ]; then
   RUBY_CONFIGURE_OPTS="--enable-yjit --with-openssl-dir=$(brew --prefix openssl@3)" ruby-build "$v" "$HOME/.rubies/ruby-$v"
 fi

@@ -63,7 +63,7 @@ export BUNDLE_IGNORE_MESSAGES="true"
 export BUNDLE_JOBS="16"
 export GEM_OPTS="--no-document"
 export RUBYOPT="--enable=frozen-string-literal --enable-yjit"
-PATH="$HOME/.rubies/ruby-3.4.4/bin:$PATH"
+PATH="$HOME/.rubies/ruby-3.4.5/bin:$PATH"
 
 # Homebrew
 PATH="$BREW/bin:$PATH"
