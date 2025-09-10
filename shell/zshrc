@@ -82,9 +82,6 @@ export GEM_OPTS="--no-document"
 export RUBYOPT="--enable=frozen-string-literal --enable-yjit"
 PATH="$HOME/.rubies/ruby-3.4.5/bin:$PATH"
 
-# Rust
-PATH="$HOME/.cargo/bin:$PATH"
-
 # Laptop
 export LAPTOP="$HOME/laptop"
 PATH="$LAPTOP/bin:$PATH"

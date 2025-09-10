@@ -20,14 +20,14 @@ $env.LAPTOP = $"($env.HOME)/laptop"
 $env.FZF_DEFAULT_COMMAND = "fd --type f --hidden --follow --exclude .git"
 
 # PATH setup
-let brew_path = "/opt/homebrew"
 $env.PATH = ($env.PATH | split row (char esep) | prepend [
   $"($env.HOME)/go/bin"
   $"($env.HOME)/.rubies/ruby-3.4.5/bin"
-  $"($brew_path)/bin"
-  $"($brew_path)/opt/node/bin"
-  $"($env.HOME)/.bun/bin"
-  $"($brew_path)/opt/postgresql@17/bin"
+  $"/opt/homebrew/bin"
+  $"/opt/homebrew/opt/node/bin"
+  $"/opt/homebrew/.bun/bin"
+  $"/opt/homebrew/opt/postgresql@17/bin"
+  $"($env.HOME)/.cargo/bin"
   $"($env.LAPTOP)/bin"
   ".git/safe/../../bin"
 ])
@@ -40,14 +40,10 @@ alias m = rake db:migrate db:rollback and rake db:migrate db:test:prepare
 alias vim = nvim
 
 # History
-$env.config = {
-  history: {
-    max_size: 500
-    sync_on_enter: true
-    file_format: "plaintext"
-    isolation: false
-  }
-}
+$env.config.history.max_size = 500
+$env.config.history.sync_on_enter = true
+$env.config.history.file_format = "plaintext"
+$env.config.history.isolation = false
 
 # Prompt
 def git_prompt_info [] {
