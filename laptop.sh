@@ -29,6 +29,8 @@ set -eu
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
   mkdir -p "$HOME/.config/ghostty"
   ln -sf "$PWD/shell/ghostty" "$HOME/.config/ghostty/config"
+  mkdir -p "$HOME/Library/Application Support/nushell"
+  ln -sf "$PWD/shell/nushell.nu" "$HOME/Library/Application Support/nushell/config.nu"
   ln -sf "$PWD/shell/psqlrc" "$HOME/.psqlrc"
   mkdir -p "$HOME/.ssh"
   ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
@@ -71,6 +73,7 @@ brew "jq"
 brew "lua-language-server"
 brew "neovim"
 brew "node"
+brew "nushell"
 brew "oven-sh/bun/bun"
 brew "pgformatter"
 brew "pgvector"
@@ -99,18 +102,22 @@ brew upgrade
 brew autoremove
 brew cleanup
 
-# Shell
-if [ "$(command -v zsh)" != "$BREW/bin/zsh" ]; then
-  sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
-  chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
-  shellpath="$(command -v zsh)"
+# Shells
+add_to_shells() {
+  local shell_path="$1"
 
-  if ! grep "$shellpath" /etc/shells >/dev/null 2>&1; then
-    sudo sh -c "echo $shellpath >> /etc/shells"
+  if [ -x "$shell_path" ] && ! grep "$shell_path" /etc/shells >/dev/null 2>&1; then
+    sudo sh -c "echo $shell_path >> /etc/shells"
   fi
+}
 
-  chsh -s "$shellpath"
-fi
+zsh_path="$BREW/bin/zsh"
+add_to_shells "$zsh_path"
+sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+
+nu_path="$BREW/bin/nu"
+add_to_shells "$nu_path"
 
 # Go
 go install golang.org/x/tools/cmd/deadcode@latest
@@ -130,6 +137,9 @@ fi
 
 # NPM
 npm install -g npm@latest
+
+# Nushell
+cargo install --git https://github.com/nushell/nufmt
 
 # Bash
 npm install -g bash-language-server # uses shellcheck internally for linting diagnostics

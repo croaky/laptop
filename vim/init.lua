@@ -204,6 +204,7 @@ require("conform").setup({
 		json = { "prettier" }, -- prettier --parser json
 		lua = { "stylua" },
 		markdown = { "prettier" }, -- prettier --parser markdown
+		-- nu = { "nufmt" },
 		ruby = { "bundlerubocop" },
 		scss = { "prettier" }, -- prettier --parser scss
 		sh = { "shfmt" },
