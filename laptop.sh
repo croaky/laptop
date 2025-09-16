@@ -113,6 +113,7 @@ if [ "$(command -v zsh)" != "$BREW/bin/zsh" ]; then
 fi
 
 # Go
+go install golang.org/x/tools/cmd/deadcode@latest
 go install golang.org/x/tools/cmd/godoc@latest
 go install golang.org/x/tools/cmd/goimports@latest
 go install golang.org/x/tools/gopls@latest
