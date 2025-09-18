@@ -15,27 +15,33 @@ set -eu
 
 # Symlinks
 (
+  # CLI
+  mkdir -p "$HOME/.config/bat/themes"
+  ln -sf "$PWD/cli/bat" "$HOME/.config/bat/config"
+  mkdir -p "$HOME/.ssh"
+  ln -sf "$PWD/cli/ssh" "$HOME/.ssh/config"
+  ln -sf "$PWD/cli/tmux.conf" "$HOME/.tmux.conf"
+
   # Git
   ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
   ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
+
+  # Postgres
+  ln -sf "$PWD/postgres/psqlrc" "$HOME/.psqlrc"
 
   # Ruby
   ln -sf "$PWD/ruby/irbrc" "$HOME/.irbrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
 
-  # Shell
-  mkdir -p "$HOME/.config/bat"
-  ln -sf "$PWD/shell/bat" "$HOME/.config/bat/config"
+  # Shells
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
-  mkdir -p "$HOME/.config/ghostty"
-  ln -sf "$PWD/shell/ghostty" "$HOME/.config/ghostty/config"
   mkdir -p "$HOME/Library/Application Support/nushell"
   ln -sf "$PWD/shell/nushell.nu" "$HOME/Library/Application Support/nushell/config.nu"
-  ln -sf "$PWD/shell/psqlrc" "$HOME/.psqlrc"
-  mkdir -p "$HOME/.ssh"
-  ln -sf "$PWD/shell/ssh" "$HOME/.ssh/config"
-  ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
+
+  # Terminals
+  mkdir -p "$HOME/.config/ghostty"
+  ln -sf "$PWD/term/ghostty" "$HOME/.config/ghostty/config"
 
   # Vim
   mkdir -p "$HOME/.config/nvim"
