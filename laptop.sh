@@ -17,7 +17,7 @@ set -eu
 (
   # CLI
   mkdir -p "$HOME/.config/bat/themes"
-  ln -sf "$PWD/cli/bat" "$HOME/.config/bat/config"
+  ln -sf "$PWD/cli/bat.xml" "$HOME/.config/bat/themes/CatppuccinFrappe.tmTheme"
   mkdir -p "$HOME/.ssh"
   ln -sf "$PWD/cli/ssh" "$HOME/.ssh/config"
   ln -sf "$PWD/cli/tmux.conf" "$HOME/.tmux.conf"
@@ -42,6 +42,8 @@ set -eu
   # Terminals
   mkdir -p "$HOME/.config/ghostty"
   ln -sf "$PWD/term/ghostty" "$HOME/.config/ghostty/config"
+  mkdir -p "$HOME/.warp/themes"
+  ln -sf "$PWD/term/warp.yml" "$HOME/.warp/themes/catppuccin_frappe.yml"
 
   # Vim
   mkdir -p "$HOME/.config/nvim"
@@ -126,6 +128,9 @@ if [[ -d "$BREW/share/zsh" && -d "$BREW/share/zsh/site-functions" ]]; then
   sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
   chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
 fi
+
+# Bat
+bat cache --build
 
 # Go
 go install golang.org/x/tools/cmd/deadcode@latest

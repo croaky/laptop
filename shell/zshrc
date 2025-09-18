@@ -52,7 +52,7 @@ autoload -Uz compinit
 compinit -u
 
 # Bat
-export BAT_THEME="TwoDark"
+export BAT_THEME="CatppuccinFrappe"
 
 # Go
 PATH="$HOME/go/bin:$PATH"
