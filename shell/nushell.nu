@@ -62,13 +62,12 @@ $env.BAT_THEME = "TwoDark"
 def git_prompt_info [] {
   let branch = (do { git current-branch } | complete)
   if $branch.exit_code == 0 {
-    $" (ansi green_bold)($branch.stdout | str trim)(ansi reset)"
+    $"(ansi green_bold)($branch.stdout | str trim)(ansi reset)"
   } else {
     ""
   }
 }
 $env.PROMPT_COMMAND = {||
-  let current_dir = ($env.PWD | path basename)
-  $"(ansi blue_bold)($current_dir)(ansi reset)(git_prompt_info) "
+  $"(git_prompt_info) "
 }
 $env.PROMPT_INDICATOR = "% "
