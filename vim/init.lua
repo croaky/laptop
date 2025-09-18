@@ -42,7 +42,7 @@ require("lazy").setup({
 	-- Sensible defaults
 	"tpope/vim-sensible",
 
-	-- LSP Config
+	-- LSP server configurations (provides configs for vim.lsp.config)
 	{
 		"neovim/nvim-lspconfig",
 	},
@@ -176,8 +176,7 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 
--- LSPs
-local lspconfig = require("lspconfig")
+-- LSP Configuration
 local on_attach = function(_, bufnr)
 	map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 	map("n", "gh", vim.lsp.buf.hover, { buffer = bufnr })
@@ -236,9 +235,10 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 -- Bash
-lspconfig.bashls.setup({
+vim.lsp.config("bashls", {
 	on_attach = on_attach,
 })
+vim.lsp.enable("bashls")
 
 -- Gitcommit
 vim.api.nvim_create_autocmd("FileType", {
@@ -251,9 +251,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Go
-lspconfig.gopls.setup({
+vim.lsp.config("gopls", {
 	on_attach = on_attach,
 })
+vim.lsp.enable("gopls")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "go",
 	callback = function()
@@ -286,9 +287,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- HTML
-lspconfig.html.setup({
+vim.lsp.config("html", {
 	on_attach = on_attach,
 })
+vim.lsp.enable("html")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "html",
 	callback = function()
@@ -298,7 +300,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Lua
-lspconfig.lua_ls.setup({
+vim.lsp.config("lua_ls", {
 	on_attach = on_attach,
 	settings = {
 		Lua = {
@@ -314,6 +316,7 @@ lspconfig.lua_ls.setup({
 		},
 	},
 })
+vim.lsp.enable("lua_ls")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lua",
 	callback = function()
@@ -430,9 +433,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- TypeScript
-lspconfig.ts_ls.setup({
+vim.lsp.config("ts_ls", {
 	on_attach = on_attach,
 })
+vim.lsp.enable("ts_ls")
 vim.g.markdown_fenced_languages = { "ts=typescript" }
 
 -- Status line
