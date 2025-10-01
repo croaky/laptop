@@ -90,6 +90,13 @@ Configure "System Preferences > Keyboard":
 - Set "Delay Until Repeat" to "Short".
 - Set "Modifier Keys > Caps Lock Key" to "^ Control".
 
+Disable "Press and Hold" accent menu
+to allow key repeat for all keys:
+
+```bash
+defaults write -g ApplePressAndHoldEnabled -bool false
+```
+
 ## 1.1.1.1 as DNS resolver
 
 Set DNS resolver to [`1.1.1.1`](https://1.1.1.1),
