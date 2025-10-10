@@ -2,14 +2,17 @@
 
 # ./laptop.sh
 
+# - terminals (Ghostty, Warp)
+# - shells (nu, zsh)
 # - symlinks for dotfiles to `$HOME`
 # - text editor (Neovim)
 # - programming language runtimes (Go, Ruby, Node)
 # - language servers (Bash, Go, HTML, Lua, Ruby, TypeScript)
-# - CLIs (AWS, Crunchy Bridge, GitHub, Render)
+# - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree)
+# - databases (Postgres dev and test clusters)
 
 # This script can be safely run multiple times.
-# Tested with macOS Sequoia (15.13) on arm64 (M1 and M4 Max).
+# Tested with macOS Tahoe on arm64.
 
 set -eu
 
@@ -77,7 +80,6 @@ brew "fzf"
 brew "gh"
 brew "git"
 brew "go"
-brew "jq"
 brew "lua-language-server"
 brew "neovim"
 brew "node"
@@ -91,10 +93,8 @@ brew "ripgrep"
 brew "shellcheck"
 brew "shfmt"
 brew "stylua"
-brew "tmux"
 brew "tree"
 brew "tree-sitter"
-brew "watch"
 brew "zsh"
 
 # https://github.com/rbenv/ruby-build/wiki
