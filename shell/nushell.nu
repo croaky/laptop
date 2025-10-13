@@ -46,7 +46,7 @@ $env.PGGSSENCMODE = "disable"
 # PATH
 $env.PATH = ($env.PATH | split row (char esep) | prepend [
   $"($env.HOME)/go/bin"
-  $"($env.HOME)/.rubies/ruby-3.4.5/bin"
+  $"($env.HOME)/.rubies/ruby-3.4.7/bin"
   $"/opt/homebrew/bin"
   $"/opt/homebrew/opt/node/bin"
   $"/opt/homebrew/.bun/bin"
