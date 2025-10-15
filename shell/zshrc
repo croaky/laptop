@@ -6,7 +6,7 @@ BREW="/opt/homebrew"
 alias b="bundle"
 alias c="git create-branch"
 alias flush-cache="sudo killall -HUP mDNSResponder"
-alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
+alias m="bundle exec rake db:migrate db:rollback && bundle exec rake db:migrate"
 alias mkdir="mkdir -p"
 alias vim="nvim"
 

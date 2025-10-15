@@ -8,7 +8,7 @@ alias b = bundle
 alias c = git create-branch
 alias fg = job unfreeze
 alias flush-cache = sudo killall -HUP mDNSResponder
-alias m = rake db:migrate db:rollback and rake db:migrate db:test:prepare
+alias m = bundle exec rake db:migrate db:rollback and bundle exec rake db:migrate
 alias vim = nvim
 
 # Editor
