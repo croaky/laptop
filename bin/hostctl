@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# Manage /etc/hosts for DNS-level ad and tracker blocking.
+# Also maintains local development app entries.
+#
+# Usage:
+#   hostctl            # Enable ad/tracker blocking
+#   hostctl --unblock  # Disable ad/tracker blocking
+
+set -euo pipefail
+
+custom_hosts_entries() {
+  cat <<EOF
+# macOS defaults
+255.255.255.255 broadcasthost
+
+# local apps
+127.0.0.1 blog.localhost
+127.0.0.1 bsfeeds.localhost
+127.0.0.1 eds.localhost
+127.0.0.1 htmz.localhost
+127.0.0.1 neogit.localhost
+EOF
+}
+
+if [[ "${1:-}" == "--unblock" ]]; then
+  cat <<EOF | sudo tee /etc/hosts >/dev/null
+# IPv4
+127.0.0.1 localhost
+
+# IPv6
+::1 localhost
+
+$(custom_hosts_entries)
+EOF
+else
+  # Block ads, trackers, and malicious websites at the DNS host level.
+  curl -s https://winhelp2002.mvps.org/hosts.txt | tr -d '\r' | sudo tee /etc/hosts >/dev/null
+
+  # Append custom entries
+  (echo && custom_hosts_entries) | sudo tee -a /etc/hosts >/dev/null
+fi
+
+# Flush DNS cache
+sudo killall -HUP mDNSResponder
