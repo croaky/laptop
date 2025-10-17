@@ -16,8 +16,8 @@ export EDITOR=$VISUAL
 
 # History
 HISTFILE=~/.zhistory
-HISTSIZE=500
-SAVEHIST=500
+HISTSIZE=10000
+SAVEHIST=50000
 
 # https://docs.brew.sh/Analytics
 unset HOMEBREW_NO_ANALYTICS
