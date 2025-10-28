@@ -126,7 +126,9 @@ zsh_path="$BREW/bin/zsh"
 add_to_shells "$zsh_path"
 
 if [[ -d "$BREW/share/zsh" && -d "$BREW/share/zsh/site-functions" ]]; then
-  sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+  if [[ "$(stat -f '%Su' "$BREW/share/zsh")" != "$(whoami)" ]]; then
+    sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+  fi
   chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
 fi
 
