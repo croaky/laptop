@@ -186,6 +186,9 @@ start_postgres_cluster() {
 
   if [ ! -f "$data_dir/PG_VERSION" ]; then
     initdb -D "$data_dir" -U postgres -c maintenance_work_mem=2GB
+
+    echo "timezone = 'UTC'" >>"$data_dir/postgresql.conf"
+    echo "log_timezone = 'UTC'" >>"$data_dir/postgresql.conf"
   fi
 
   if pg_ctl -D "$data_dir" status >/dev/null 2>&1; then
