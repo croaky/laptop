@@ -9,7 +9,7 @@
 # - programming language runtimes (Go, Ruby, Node)
 # - language servers (Bash, Go, HTML, Lua, Ruby, TypeScript)
 # - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree)
-# - databases (Postgres dev and test clusters)
+# - databases (Postgres dev and test clusters, ClickHouse)
 
 # This script can be safely run multiple times.
 # Tested with macOS Tahoe on arm64.
@@ -68,6 +68,7 @@ brew bundle --file=- <<EOF
 tap "CrunchyData/brew"
 tap "oven-sh/bun"
 
+cask "clickhouse"
 cask "ghostty@tip"
 
 brew "awscli"
@@ -125,7 +126,9 @@ zsh_path="$BREW/bin/zsh"
 add_to_shells "$zsh_path"
 
 if [[ -d "$BREW/share/zsh" && -d "$BREW/share/zsh/site-functions" ]]; then
-  sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+  if [[ "$(stat -f '%Su' "$BREW/share/zsh")" != "$(whoami)" ]]; then
+    sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+  fi
   chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
 fi
 
@@ -197,7 +200,7 @@ start_postgres_cluster() {
   fi
 
   if lsof -i "tcp:$port" >/dev/null 2>&1; then
-    echo "Port $port is already in use"
+    echo "Postgres port $port is already in use"
     return
   fi
 
@@ -215,3 +218,31 @@ start_postgres_cluster 5433 \
   "$HOME/.local/share/postgres/data_test" \
   "$HOME/.local/share/postgres/log_test.log" \
   "-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
+
+# ClickHouse
+if ! command -v clickhouse >/dev/null; then
+  echo "clickhouse not found in PATH"
+  exit 1
+fi
+
+start_clickhouse_cluster() {
+  local port="$1"
+  local data_dir="$2"
+
+  mkdir -p "$(dirname "$data_dir")"
+
+  if pgrep -f "clickhouse server" >/dev/null 2>&1; then
+    echo "ClickHouse is already running"
+    return
+  fi
+
+  if lsof -i "tcp:$port" >/dev/null 2>&1; then
+    echo "ClickHouse port 8123 is already in use"
+    return
+  fi
+
+  cd "$data_dir" && clickhouse server --daemon
+}
+
+start_clickhouse_cluster 8123 \
+  "$HOME/.local/share/clickhouse"
