@@ -200,6 +200,7 @@ require("conform").setup({
 	notify_on_error = true,
 	notify_no_formatters = true,
 	formatters_by_ft = {
+		css = { "prettier" },
 		go = { "goimportslocal" }, -- $LAPTOP/bin/goimportslocal
 		html = { "prettier" },
 		javascript = { "prettier" }, -- prettier --parser html
