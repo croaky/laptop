@@ -51,6 +51,8 @@ set -eu
   # Vim
   mkdir -p "$HOME/.config/nvim"
   ln -sf "$PWD/vim/init.lua" "$HOME/.config/nvim/init.lua"
+  mkdir -p "$HOME/.vim/autoload/test/ruby"
+  ln -sf "$PWD/vim/test_ok.vim" "$HOME/.vim/autoload/test/ruby/test_ok.vim"
 )
 
 # Homebrew
