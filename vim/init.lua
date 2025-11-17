@@ -39,18 +39,14 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- Sensible defaults
+	-- Defaults
 	"tpope/vim-sensible",
 
-	-- LSP server configurations (provides configs for vim.lsp.config)
-	{
-		"neovim/nvim-lspconfig",
-	},
+	-- LSP server configs
+	{ "neovim/nvim-lspconfig" },
 
 	-- Completion
-	{
-		"github/copilot.vim",
-	},
+	{ "github/copilot.vim" },
 
 	-- Treesitter
 	{
@@ -74,7 +70,12 @@ require("lazy").setup({
 	{ "tpope/vim-projectionist" },
 
 	-- :TestFile, :TestNearest
-	{ "vim-test/vim-test" },
+	{
+		"vim-test/vim-test",
+		init = function()
+			vim.g["test#runners"] = { Ruby = { "test_ok", "minitest", "rspec" } }
+		end,
+	},
 
 	-- Editable quickfix
 	{ "gabrielpoca/replacer.nvim" },
@@ -102,6 +103,9 @@ require("lazy").setup({
 
 	opts_extend = { "sources.default" },
 })
+
+-- Add ~/.vim to runtimepath for custom autoload files
+vim.opt.runtimepath:prepend(vim.fn.expand("~/.vim"))
 
 -- Helper functions
 local function map(mode, lhs, rhs, opts)
