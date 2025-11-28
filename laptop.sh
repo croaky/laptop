@@ -38,8 +38,6 @@ set -eu
 
   # Shells
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
-  mkdir -p "$HOME/Library/Application Support/nushell"
-  ln -sf "$PWD/shell/nushell.nu" "$HOME/Library/Application Support/nushell/config.nu"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
 
   # Terminals
@@ -85,7 +83,6 @@ brew "go"
 brew "lua-language-server"
 brew "neovim"
 brew "node"
-brew "nushell"
 brew "oven-sh/bun/bun"
 brew "pgformatter"
 brew "pgvector"
@@ -121,8 +118,6 @@ add_to_shells() {
   fi
 }
 
-nu_path="$BREW/bin/nu"
-add_to_shells "$nu_path"
 zsh_path="$BREW/bin/zsh"
 add_to_shells "$zsh_path"
 
