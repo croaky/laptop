@@ -15,11 +15,13 @@ custom_hosts_entries() {
 255.255.255.255 broadcasthost
 
 # local apps
-127.0.0.1 blog.localhost     # :2000
-127.0.0.1 bsfeeds.localhost  # :2001
-127.0.0.1 eds.localhost      # :3000
-127.0.0.1 htmz.localhost     # :2002
-127.0.0.1 neogit.localhost   # :2003
+127.0.0.1 blog.localhost          # :2000
+127.0.0.1 bsfeeds.localhost       # :2001
+127.0.0.1 htmz.localhost          # :2002
+127.0.0.1 neogit.localhost        # :2003
+127.0.0.1 thefieldhouse.localhost # :2004
+127.0.0.1 fixthecfp.localhost     # :2005
+127.0.0.1 eds.localhost           # :3000
 EOF
 }
 
