@@ -21,6 +21,7 @@ custom_hosts_entries() {
 127.0.0.1 neogit.localhost        # :2003
 127.0.0.1 thefieldhouse.localhost # :2004
 127.0.0.1 fixthecfp.localhost     # :2005
+127.0.0.1 duckduckbay.localhost   # :2006
 127.0.0.1 eds.localhost           # :3000
 EOF
 }
