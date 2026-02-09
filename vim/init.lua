@@ -98,7 +98,6 @@ require("lazy").setup({
 	{ "pangloss/vim-javascript" },
 
 	-- Backend
-	{ "tpope/vim-rails" },
 	{ "vim-ruby/vim-ruby" },
 
 	opts_extend = { "sources.default" },
