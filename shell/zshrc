@@ -76,7 +76,6 @@ export PGUSER=postgres
 PATH="$BREW/opt/postgresql@17/bin:$PATH"
 
 # https://github.com/ged/ruby-pg/issues/538
-# https://github.com/rails/rails/issues/38560#issuecomment-1881733872
 # https://blog.phusion.nl/2017/10/13/why-ruby-app-servers-break-on-macos-high-sierra-and-what-can-be-done-about-it/
 export PGGSSENCMODE=disable
 
