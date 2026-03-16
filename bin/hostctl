@@ -16,7 +16,6 @@ custom_hosts_entries() {
 
 # local apps
 127.0.0.1 blog.localhost          # :2000
-127.0.0.1 bsfeeds.localhost       # :2001
 127.0.0.1 htmz.localhost          # :2002
 127.0.0.1 neogit.localhost        # :2003
 127.0.0.1 thefieldhouse.localhost # :2004
