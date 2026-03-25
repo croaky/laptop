@@ -3,10 +3,10 @@
 BREW="/opt/homebrew"
 
 # Aliases
-alias b="bundle"
 alias c="git create-branch"
-alias flush-cache="sudo killall -HUP mDNSResponder"
+alias l="./bin/sort-requires && bundle exec rubocop -A"
 alias m="bundle exec rake db:migrate db:rollback && bundle exec rake db:migrate"
+alias t="bundle exec ruby test/ruby_suite.rb && bundle exec ruby test/rack_suite.rb"
 alias mkdir="mkdir -p"
 alias vim="nvim"
 
