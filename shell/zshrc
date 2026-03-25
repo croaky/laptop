@@ -10,6 +10,11 @@ alias m="bundle exec rake db:migrate db:rollback && bundle exec rake db:migrate"
 alias mkdir="mkdir -p"
 alias vim="nvim"
 
+# Clone and configure git hooks
+gclone() {
+  git clone "$1" && cd "$(basename "${1%.git}")" && git config core.hooksPath bin
+}
+
 # Editor
 export VISUAL=nvim
 export EDITOR=$VISUAL
@@ -73,7 +78,7 @@ PATH="$HOME/.bun/bin:$PATH"
 
 # Postgres
 export PGUSER=postgres
-PATH="$BREW/opt/postgresql@17/bin:$PATH"
+PATH="$BREW/opt/postgresql@18/bin:$PATH"
 
 # https://github.com/ged/ruby-pg/issues/538
 # https://blog.phusion.nl/2017/10/13/why-ruby-app-servers-break-on-macos-high-sierra-and-what-can-be-done-about-it/
