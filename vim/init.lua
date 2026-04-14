@@ -51,11 +51,11 @@ require("lazy").setup({
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		build = ":TSUpdate",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
+			{ "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
 			"RRethy/nvim-treesitter-endwise",
-			"nvim-treesitter/playground",
 		},
 	},
 
@@ -450,50 +450,25 @@ vim.g.markdown_fenced_languages = { "ts=typescript" }
 vim.opt.statusline = "%{v:lua.get_user()}%f %h%m%r%=%-14.(%l,%c%V%) %P"
 
 -- Treesitter
-require("nvim-treesitter.configs").setup({
-	ensure_installed = {
-		"bash",
-		"css",
-		"diff",
-		"go",
-		"html",
-		"javascript",
-		"json",
-		"lua",
-		"markdown",
-		"ruby",
-		"sql",
-		"typescript",
-		"vim",
-		"yaml",
-	},
-	auto_install = true,
+-- :Inspect, :InspectTree, :EditQuery
+-- https://neovim.io/doc/user/treesitter.html#treesitter-highlight
+local ts_parsers = {
+	"bash", "css", "diff", "go", "html", "javascript",
+	"json", "lua", "markdown", "ruby", "sql", "typescript", "vim", "yaml",
+}
+local ts_installed = require("nvim-treesitter.config").get_installed()
+local ts_to_install = vim.iter(ts_parsers)
+	:filter(function(p) return not vim.tbl_contains(ts_installed, p) end)
+	:totable()
+if #ts_to_install > 0 then
+	require("nvim-treesitter").install(ts_to_install)
+end
 
-	-- Delegate most syntax highlighting to Treesitter
-	-- :TSHighlightCapturesUnderCursor
-	-- https://neovim.io/doc/user/treesitter.html#treesitter-highlight
-	highlight = { enable = true },
-	incremental_selection = { enable = true },
-	textobjects = { enable = true },
-	endwise = { enable = true },
-	playground = {
-		enable = true,
-		disable = {},
-		updatetime = 25,
-		persist_queries = false,
-		keybindings = {
-			toggle_query_editor = "o",
-			toggle_hl_groups = "i",
-			toggle_injected_languages = "t",
-			toggle_anonymous_nodes = "a",
-			toggle_language_display = "I",
-			focus_language = "f",
-			unfocus_language = "F",
-			update = "R",
-			goto_node = "<cr>",
-			show_help = "?",
-		},
-	},
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function()
+		pcall(vim.treesitter.start)
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
 })
 
 -- Catppuccin Frappe syntax highlighting after Treesitter

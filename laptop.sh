@@ -95,7 +95,6 @@ brew "shellcheck"
 brew "shfmt"
 brew "stylua"
 brew "tree"
-brew "tree-sitter"
 brew "zsh"
 
 # https://github.com/rbenv/ruby-build/wiki
@@ -139,10 +138,6 @@ go install golang.org/x/tools/cmd/godoc@latest
 go install golang.org/x/tools/cmd/goimports@latest
 go install golang.org/x/tools/gopls@latest
 
-# AI via CLI
-go install github.com/charmbracelet/mods@latest
-go install github.com/croaky/mdembed@latest
-
 # Ruby
 v="3.4.7"
 if [ ! -d "$HOME/.rubies/ruby-$v" ]; then
@@ -157,6 +152,9 @@ npm install -g bash-language-server # uses shellcheck internally for linting dia
 
 # HTML
 npm install -g vscode-langservers-extracted
+
+# Treesitter (parser compiler for nvim-treesitter)
+npm install -g tree-sitter-cli
 
 # TypeScript
 npm install -g typescript-language-server typescript
