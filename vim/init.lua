@@ -453,7 +453,7 @@ vim.opt.statusline = "%{v:lua.get_user()}%f %h%m%r%=%-14.(%l,%c%V%) %P"
 -- :Inspect, :InspectTree, :EditQuery
 -- https://neovim.io/doc/user/treesitter.html#treesitter-highlight
 local ts_parsers = {
-	"bash", "css", "diff", "go", "html", "javascript",
+	"bash", "css", "diff", "gitcommit", "go", "html", "javascript",
 	"json", "lua", "markdown", "ruby", "sql", "typescript", "vim", "yaml",
 }
 local ts_installed = require("nvim-treesitter.config").get_installed()
