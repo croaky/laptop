@@ -3,7 +3,7 @@
 BREW="/opt/homebrew"
 
 # Aliases
-alias c="git create-branch"
+alias c="git create-tree"
 alias l="./bin/sort-requires && bundle exec rubocop -A"
 alias m="bundle exec rake db:migrate db:rollback && bundle exec rake db:migrate"
 alias t="bundle exec ruby test/ruby_suite.rb && bundle exec ruby test/rack_suite.rb"
