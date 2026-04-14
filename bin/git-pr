@@ -2,16 +2,10 @@
 
 set -e
 
-main="master"
-if git branch | grep -Fq "main"; then
-  main="main"
-fi
-
 branch=$(git symbolic-ref --short HEAD)
 
-if [ "$branch" = "$main" ]; then
-  echo "Error: Cannot push from $main branch"
-  echo "Please create a feature branch first"
+if [ "$branch" = "main" ] || [ "$branch" = "master" ]; then
+  echo "Error: Cannot push from $branch branch"
   exit 1
 fi
 

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+if [ $# -eq 0 ]; then
+  echo 'usage: git delete-tree branch-name'
+  exit 1
+fi
+
+username=$(git config --get github.user || whoami)
+branch="${username}/$1"
+repo=$(basename "$(git rev-parse --show-toplevel)")
+tree_dir="$HOME/.worktrees/${repo}/${1}"
+
+git worktree remove "$tree_dir"
+git branch -D "$branch"
+git fetch origin
+git merge --ff-only origin/main
+git remote prune origin

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+if [ $# -eq 0 ]; then
+  echo 'usage: git create-tree branch-name'
+  exit 1
+fi
+
+username=$(git config --get github.user || whoami)
+branch="${username}/$1"
+repo=$(basename "$(git rev-parse --show-toplevel)")
+tree_dir="$HOME/.worktrees/${repo}/${1}"
+
+git fetch origin
+git worktree add -b "$branch" "$tree_dir" origin/main
+echo "$tree_dir"
