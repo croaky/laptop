@@ -2,17 +2,33 @@
 
 set -e
 
+username=$(git config --get github.user || whoami)
+
 if [ $# -eq 0 ]; then
-  echo 'usage: git delete-tree branch-name'
+  current_branch=$(git branch --show-current)
+  name="${current_branch#"${username}/"}"
+else
+  name="$1"
+fi
+
+if [ "$name" = "main" ] || [ "${username}/${name}" = "main" ]; then
+  echo 'error: refusing to delete main'
   exit 1
 fi
 
-username=$(git config --get github.user || whoami)
-branch="${username}/$1"
-repo=$(basename "$(git rev-parse --show-toplevel)")
-tree_dir="$HOME/.worktrees/${repo}/${1}"
+branch="${username}/${name}"
+main_tree=$(git worktree list | head -1 | awk '{print $1}')
+repo=$(basename "$main_tree")
+tree_dir="$HOME/.worktrees/${repo}/${name}"
 
-git worktree remove "$tree_dir"
+cd "$main_tree"
+
+if git worktree list | grep -q "$tree_dir"; then
+  git worktree remove "$tree_dir"
+else
+  git checkout main
+fi
+
 git branch -D "$branch"
 git fetch origin
 git merge --ff-only origin/main
