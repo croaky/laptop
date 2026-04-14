@@ -78,7 +78,8 @@ PATH="$HOME/.bun/bin:$PATH"
 
 # Postgres
 export PGUSER=postgres
-PATH="$BREW/opt/postgresql@18/bin:$PATH"
+PG_VERSION="${PG_VERSION:-17}"
+PATH="$BREW/opt/postgresql@$PG_VERSION/bin:$PATH"
 
 # https://github.com/ged/ruby-pg/issues/538
 # https://blog.phusion.nl/2017/10/13/why-ruby-app-servers-break-on-macos-high-sierra-and-what-can-be-done-about-it/

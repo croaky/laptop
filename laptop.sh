@@ -62,6 +62,8 @@ fi
 
 export PATH="$BREW/bin:$PATH"
 
+PG_VERSION="${PG_VERSION:-17}"
+
 brew analytics off
 brew update-reset
 brew bundle --file=- <<EOF
@@ -86,7 +88,7 @@ brew "node"
 brew "oven-sh/bun/bun"
 brew "pgformatter"
 brew "pgvector"
-brew "postgresql@18"
+brew "postgresql@$PG_VERSION"
 brew "prettier"
 brew "ripgrep"
 brew "shellcheck"
@@ -168,7 +170,7 @@ fi
 nvim --headless "+Lazy! sync" +qa
 
 # Postgres
-export PATH="$BREW/opt/postgresql@18/bin:$PATH"
+export PATH="$BREW/opt/postgresql@$PG_VERSION/bin:$PATH"
 if ! command -v initdb >/dev/null || ! command -v pg_ctl >/dev/null; then
   echo "initdb and/or pg_ctl not found in PATH"
   exit 1
