@@ -67,10 +67,12 @@ git-create-tree() {
     echo 'usage: git-create-tree branch-name'
     return 1
   fi
+
   if [ "$(git branch --show-current)" != "main" ]; then
     echo 'error: must be on main'
     return 1
   fi
+
   local username branch repo tree_dir
   username=$(git config --get github.user || whoami)
   branch="${username}/$1"
@@ -84,26 +86,31 @@ git-create-tree() {
 git-delete-tree() {
   local username name branch main_tree repo tree_dir
   username=$(git config --get github.user || whoami)
+
   if [ $# -eq 0 ]; then
     name="$(git branch --show-current)"
     name="${name#"${username}/"}"
   else
     name="$1"
   fi
+
   if [ "$name" = "main" ] || [ "${username}/${name}" = "main" ]; then
     echo 'error: refusing to delete main'
     return 1
   fi
+
   branch="${username}/${name}"
   main_tree=$(git worktree list | head -1 | awk '{print $1}')
   repo=$(basename "$main_tree")
   tree_dir="$HOME/.worktrees/${repo}/${name}"
   cd "$main_tree"
+
   if git worktree list | grep -q "$tree_dir"; then
     git worktree remove "$tree_dir"
   else
     git checkout main
   fi
+
   git branch -D "$branch"
   git fetch origin
   git merge --ff-only origin/main
