@@ -73,13 +73,17 @@ git-create-tree() {
     return 1
   fi
 
-  local username branch repo tree_dir
+  local username branch main_dir repo tree_dir
   username=$(git config --get github.user || whoami)
   branch="${username}/$1"
-  repo=$(basename "$(git rev-parse --show-toplevel)")
+  main_dir=$(git rev-parse --show-toplevel)
+  repo=$(basename "$main_dir")
   tree_dir="$HOME/.worktrees/${repo}/${1}"
   git pull
   git worktree add -b "$branch" "$tree_dir" origin/main
+  for f in .env .env.test; do
+    [ -e "$main_dir/$f" ] && ln -s "$main_dir/$f" "$tree_dir/$f"
+  done
   cd "$tree_dir"
 }
 
