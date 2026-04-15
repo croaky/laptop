@@ -81,6 +81,7 @@ git-create-tree() {
   tree_dir="$HOME/.worktrees/${repo}/${1}"
   git pull
   git worktree add -b "$branch" "$tree_dir" origin/main
+  # Worktrees don't share gitignored files with the main working tree
   [ -e "$main_dir/.env" ] && ln -s "$main_dir/.env" "$tree_dir/.env"
   cd "$tree_dir"
 }
