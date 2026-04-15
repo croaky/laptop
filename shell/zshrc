@@ -81,8 +81,11 @@ git-create-tree() {
   tree_dir="$HOME/.worktrees/${repo}/${1}"
   git pull
   git worktree add -b "$branch" "$tree_dir" origin/main
+
   # Worktrees don't share gitignored files with the main working tree
   [ -e "$main_dir/.env" ] && ln -s "$main_dir/.env" "$tree_dir/.env"
+
+  # This `cd` is why this is a zsh function instead of a script on $PATH
   cd "$tree_dir"
 }
 
@@ -106,6 +109,8 @@ git-delete-tree() {
   main_tree=$(git worktree list | head -1 | awk '{print $1}')
   repo=$(basename "$main_tree")
   tree_dir="$HOME/.worktrees/${repo}/${name}"
+
+  # This `cd` is why this is a zsh function instead of a script on $PATH
   cd "$main_tree"
 
   if git worktree list | grep -q "$tree_dir"; then
