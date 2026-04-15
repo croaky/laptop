@@ -81,9 +81,7 @@ git-create-tree() {
   tree_dir="$HOME/.worktrees/${repo}/${1}"
   git pull
   git worktree add -b "$branch" "$tree_dir" origin/main
-  for f in .env .env.test; do
-    [ -e "$main_dir/$f" ] && ln -s "$main_dir/$f" "$tree_dir/$f"
-  done
+  [ -e "$main_dir/.env" ] && ln -s "$main_dir/.env" "$tree_dir/.env"
   cd "$tree_dir"
 }
 
