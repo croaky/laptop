@@ -70,6 +70,7 @@ brew bundle --file=- <<EOF
 tap "CrunchyData/brew"
 tap "oven-sh/bun"
 
+cask "claude-code"
 cask "ghostty@tip"
 
 brew "awscli"
