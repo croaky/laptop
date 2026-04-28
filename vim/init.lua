@@ -45,9 +45,6 @@ require("lazy").setup({
 	-- LSP server configs
 	{ "neovim/nvim-lspconfig" },
 
-	-- Completion
-	{ "github/copilot.vim" },
-
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
