@@ -450,7 +450,7 @@ vim.opt.statusline = "%{v:lua.get_user()}%f %h%m%r%=%-14.(%l,%c%V%) %P"
 -- :Inspect, :InspectTree, :EditQuery
 -- https://neovim.io/doc/user/treesitter.html#treesitter-highlight
 local ts_parsers = {
-	"bash", "css", "diff", "gitcommit", "go", "html", "javascript",
+	"bash", "css", "diff", "dockerfile", "gitcommit", "go", "html", "javascript",
 	"json", "lua", "markdown", "ruby", "sql", "typescript", "vim", "yaml",
 }
 local ts_installed = require("nvim-treesitter.config").get_installed()
@@ -458,7 +458,7 @@ local ts_to_install = vim.iter(ts_parsers)
 	:filter(function(p) return not vim.tbl_contains(ts_installed, p) end)
 	:totable()
 if #ts_to_install > 0 then
-	require("nvim-treesitter").install(ts_to_install)
+	require("nvim-treesitter.install").install(ts_to_install)
 end
 
 vim.api.nvim_create_autocmd("FileType", {
