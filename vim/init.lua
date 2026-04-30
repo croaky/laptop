@@ -269,24 +269,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		-- Don't highlight tabs as extra whitespace
 		vim.opt_local.list = false
-
-		--- :A to toggle between test file and Go file
-		local function go_alternate()
-			local curf = vim.api.nvim_buf_get_name(0)
-			local altf
-
-			if curf:match("_test%.go$") then
-				altf = curf:gsub("_test%.go$", ".go")
-			else
-				altf = curf:gsub("%.go$", "_test.go")
-			end
-
-			if vim.fn.filereadable(altf) == 1 then
-				vim.cmd("edit " .. altf)
-			end
-		end
-
-		vim.api.nvim_create_user_command("A", go_alternate, {})
 	end,
 })
 
@@ -450,12 +432,28 @@ vim.opt.statusline = "%{v:lua.get_user()}%f %h%m%r%=%-14.(%l,%c%V%) %P"
 -- :Inspect, :InspectTree, :EditQuery
 -- https://neovim.io/doc/user/treesitter.html#treesitter-highlight
 local ts_parsers = {
-	"bash", "css", "diff", "dockerfile", "gitcommit", "go", "html", "javascript",
-	"json", "lua", "markdown", "ruby", "sql", "typescript", "vim", "yaml",
+	"bash",
+	"css",
+	"diff",
+	"dockerfile",
+	"gitcommit",
+	"go",
+	"html",
+	"javascript",
+	"json",
+	"lua",
+	"markdown",
+	"ruby",
+	"sql",
+	"typescript",
+	"vim",
+	"yaml",
 }
 local ts_installed = require("nvim-treesitter.config").get_installed()
 local ts_to_install = vim.iter(ts_parsers)
-	:filter(function(p) return not vim.tbl_contains(ts_installed, p) end)
+	:filter(function(p)
+		return not vim.tbl_contains(ts_installed, p)
+	end)
 	:totable()
 if #ts_to_install > 0 then
 	require("nvim-treesitter.install").install(ts_to_install)
