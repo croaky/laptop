@@ -63,7 +63,7 @@ compinit -u
 
 # Git
 git-create-tree() {
-  if [ $# -eq 0 ]; then
+  if [ $# -eq 0 ] || [[ "$1" == --* ]]; then
     echo 'usage: git-create-tree branch-name'
     return 1
   fi
