@@ -32,6 +32,10 @@ set -eu
   # Postgres
   ln -sf "$PWD/postgres/psqlrc" "$HOME/.psqlrc"
 
+  # JavaScript
+  ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
+  ln -sf "$PWD/js/bunfig.toml" "$HOME/.bunfig.toml"
+
   # Ruby
   ln -sf "$PWD/ruby/irbrc" "$HOME/.irbrc"
   ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
