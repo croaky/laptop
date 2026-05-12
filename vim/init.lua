@@ -210,7 +210,9 @@ require("conform").setup({
 		ruby = { "bundlerubocop" },
 		scss = { "prettier" }, -- prettier --parser scss
 		sh = { "shfmt" },
-		sql = { "pg_format" },
+		-- sql: format-on-save disabled while cmd/pgfmt is in development.
+		-- Hand-edit db/queries/*.sql to refine style; bin/lint-sql still
+		-- runs pg_format 5.5 on demand.
 		typescript = { "prettier" }, -- prettier --parser typescript
 		typescriptreact = { "prettier" }, -- prettier --parser typescript
 	},
@@ -222,9 +224,6 @@ require("conform").setup({
 		goimportslocal = {
 			command = "goimportslocal",
 			args = { "-srcdir", "$DIRNAME" },
-		},
-		pg_format = {
-			args = { "--function-case", "1", "--keyword-case", "2", "--spaces", "2", "--no-extra-line" },
 		},
 		shfmt = {
 			args = { "--indent", "2" },
