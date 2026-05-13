@@ -443,6 +443,7 @@ local ts_parsers = {
 	"lua",
 	"markdown",
 	"ruby",
+	"scss",
 	"sql",
 	"typescript",
 	"vim",

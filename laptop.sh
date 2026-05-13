@@ -99,6 +99,7 @@ brew "shellcheck"
 brew "shfmt"
 brew "stylua"
 brew "tree"
+brew "tree-sitter-cli" # parser compiler for nvim-treesitter
 brew "zsh"
 
 # https://github.com/rbenv/ruby-build/wiki
@@ -156,9 +157,6 @@ npm install -g bash-language-server # uses shellcheck internally for linting dia
 
 # HTML
 npm install -g vscode-langservers-extracted
-
-# Treesitter (parser compiler for nvim-treesitter)
-npm install -g tree-sitter-cli
 
 # TypeScript
 npm install -g typescript-language-server typescript
