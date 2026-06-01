@@ -210,7 +210,7 @@ require("conform").setup({
 		ruby = { "bundlerubocop" },
 		scss = { "prettier" }, -- prettier --parser scss
 		sh = { "shfmt" },
-		sql = { "pgfmt" }, -- go install eds/cmd/pgfmt
+		sql = { "pgfmt" }, -- go install ~/EDS/cmd/pgfmt
 		typescript = { "prettier" }, -- prettier --parser typescript
 		typescriptreact = { "prettier" }, -- prettier --parser typescript
 	},

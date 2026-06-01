@@ -218,10 +218,4 @@ start_postgres_cluster 5433 \
   "-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
 
 # formatter
-PGF_VERSION=5.5
-curl -sL https://github.com/darold/pgFormatter/archive/refs/tags/v${PGF_VERSION}.tar.gz | tar xz
-cd pgFormatter-${PGF_VERSION}
-perl Makefile.PL PREFIX=/usr/local
-make
-sudo make install
-cd .. && rm -rf pgFormatter-${PGF_VERSION}
+(cd "$HOME/EDS" && go install ./cmd/pgfmt)
