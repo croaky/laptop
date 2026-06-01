@@ -21,9 +21,9 @@
 #
 #   "github.com/lib/pq"
 #
-#   "chain/errors"
-#   "chain/log"
-#   "chain/net"
+#   "eds/errors"
+#   "eds/log"
+#   "eds/net"
 # )
 
 # Usage examples:
@@ -35,7 +35,7 @@
 
 set -euo pipefail
 
-if ! command -v goimports > /dev/null; then
+if ! command -v goimports >/dev/null; then
   go install golang.org/x/tools/cmd/goimports
 fi
 
