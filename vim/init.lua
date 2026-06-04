@@ -7,8 +7,9 @@ vim.g.mapleader = " "
 
 -- General
 vim.opt.cmdheight = 1
-vim.opt.cursorline = false
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.cursorcolumn = false
+vim.opt.cursorline = false
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
 vim.opt.fillchars:append({ eob = " " }) -- Hide ~ end-of-file markers
@@ -180,12 +181,58 @@ map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 
 -- LSP Configuration
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
+	if client:supports_method("textDocument/completion") then
+		vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+	end
 	map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 	map("n", "gh", vim.lsp.buf.hover, { buffer = bufnr })
 	map("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
 	map("n", "gn", vim.lsp.buf.rename, { buffer = bufnr })
 	map("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
+	map("i", "<Tab>", function()
+		if vim.fn.pumvisible() == 1 then
+			return "<C-n>"
+		end
+		local col = vim.fn.col(".") - 1
+		local line = vim.fn.getline(".")
+		if col > 0 and line:sub(col, col):match("[%w_]") then
+			return "<C-n>"
+		end
+		return "<Tab>"
+	end, { buffer = bufnr, expr = true })
+	map("i", "<S-Tab>", function()
+		if vim.fn.pumvisible() == 1 then
+			return "<C-p>"
+		end
+		return "<S-Tab>"
+	end, { buffer = bufnr, expr = true })
+	map("i", "<CR>", function()
+		if vim.fn.pumvisible() == 1 then
+			return "<C-y>"
+		end
+		return "<CR>"
+	end, { buffer = bufnr, expr = true })
+	vim.api.nvim_create_autocmd("TextChangedI", {
+		buffer = bufnr,
+		callback = function()
+			if vim.fn.pumvisible() == 1 then
+				return
+			end
+			local col = vim.fn.col(".") - 1
+			if col <= 0 then
+				return
+			end
+			local line = vim.fn.getline(".")
+			local prefix = line:sub(1, col):match("([%w_]+)$")
+			if prefix and #prefix >= 2 then
+				vim.lsp.completion.get()
+			end
+		end,
+	})
+	map("i", "<C-Space>", function()
+		vim.lsp.completion.get()
+	end, { buffer = bufnr })
 end
 
 -- Terminal
