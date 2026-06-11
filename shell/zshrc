@@ -3,16 +3,8 @@
 BREW="/opt/homebrew"
 
 # Aliases
-alias l="./bin/sort-requires && bundle exec rubocop -A"
-alias m="bundle exec rake db:migrate db:rollback && bundle exec rake db:migrate"
-alias t="bundle exec ruby test/ruby_suite.rb && bundle exec ruby test/rack_suite.rb"
 alias mkdir="mkdir -p"
 alias vim="nvim"
-
-# Clone and configure git hooks
-gclone() {
-  git clone "$1" && cd "$(basename "${1%.git}")" && git config core.hooksPath bin
-}
 
 # Editor
 export VISUAL=nvim
