@@ -71,8 +71,8 @@ PG_VERSION="${PG_VERSION:-17}"
 brew analytics off
 brew update-reset
 brew bundle --file=- <<EOF
-tap "CrunchyData/brew"
-tap "oven-sh/bun"
+tap "CrunchyData/brew", trusted: true
+tap "oven-sh/bun", trusted: true
 
 cask "claude-code"
 cask "ghostty@tip"
