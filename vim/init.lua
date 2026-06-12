@@ -180,12 +180,34 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 
+-- Jump target for the EDS sqlFile pattern: a line like
+-- `qName = sqlFile("some_query")` maps to ./queries/some_query.sql
+-- relative to the current file.
+local function sql_file_path()
+	local name = vim.api.nvim_get_current_line():match('sqlFile%("([%w_]+)"%)')
+	if not name then
+		return nil
+	end
+	local path = vim.fn.expand("%:p:h") .. "/queries/" .. name .. ".sql"
+	if vim.uv.fs_stat(path) then
+		return path
+	end
+	return nil
+end
+
 -- LSP Configuration
 local on_attach = function(client, bufnr)
 	if client:supports_method("textDocument/completion") then
 		vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
 	end
-	map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
+	map("n", "gd", function()
+		local path = sql_file_path()
+		if path then
+			vim.cmd.edit(vim.fn.fnameescape(path))
+		else
+			vim.lsp.buf.definition()
+		end
+	end, { buffer = bufnr })
 	map("n", "gh", vim.lsp.buf.hover, { buffer = bufnr })
 	map("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
 	map("n", "gn", vim.lsp.buf.rename, { buffer = bufnr })
