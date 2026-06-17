@@ -195,6 +195,37 @@ local function sql_file_path()
 	return nil
 end
 
+-- Jump target for HAML render calls in EDS: a line like
+-- `= render "help/sidebar"` maps to ui/views/help/_sidebar.haml
+local function haml_partial_path()
+	local line = vim.api.nvim_get_current_line()
+	local name = line:match("render%s*%(?%s*[\"']([%w_/-]+)[\"']")
+	if not name then
+		return nil
+	end
+	name = name:gsub("^/", "")
+
+	local current_file = vim.fn.expand("%:p")
+	local views_idx = current_file:find("ui/views/", 1, true)
+	if not views_idx then
+		return nil
+	end
+	local views_dir = current_file:sub(1, views_idx + #"ui/views/" - 2)
+
+	local dir, file = name:match("^(.-)/([^/]+)$")
+	local path
+	if dir then
+		path = views_dir .. "/" .. dir .. "/_" .. file .. ".haml"
+	else
+		path = vim.fn.expand("%:p:h") .. "/_" .. name .. ".haml"
+	end
+
+	if vim.uv.fs_stat(path) then
+		return path
+	end
+	return nil
+end
+
 -- LSP Configuration
 local on_attach = function(client, bufnr)
 	if client:supports_method("textDocument/completion") then
@@ -351,6 +382,21 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		-- Treat <li> and <p> tags like the block tags they are
 		vim.g.html_indent_tags = "li\\|p"
+	end,
+})
+
+-- HAML
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "haml",
+	callback = function()
+		map("n", "gd", function()
+			local path = haml_partial_path()
+			if path then
+				vim.cmd.edit(vim.fn.fnameescape(path))
+			else
+				vim.cmd("normal! gd")
+			end
+		end, { buffer = 0 })
 	end,
 })
 
