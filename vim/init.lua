@@ -389,12 +389,12 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "haml",
 	callback = function()
-		map("n", "gd", function()
+		map("n", "gf", function()
 			local path = haml_partial_path()
 			if path then
 				vim.cmd.edit(vim.fn.fnameescape(path))
 			else
-				vim.cmd("normal! gd")
+				vim.cmd("normal! gf")
 			end
 		end, { buffer = 0 })
 	end,
