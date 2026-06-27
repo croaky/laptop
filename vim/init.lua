@@ -71,7 +71,7 @@ require("lazy").setup({
 	{
 		"vim-test/vim-test",
 		init = function()
-			vim.g["test#runners"] = { Ruby = { "test_ok", "minitest", "rspec" } }
+			vim.g["test#runners"] = { Ruby = { "test_ok" } }
 		end,
 	},
 
@@ -453,10 +453,6 @@ vim.api.nvim_create_autocmd("FileType", {
 			-- Move cursor to the middle line
 			vim.api.nvim_win_set_cursor(0, { row + 2, 0 })
 		end, { buffer = 0 })
-
-		-- Run through LLM
-		run_file("<Leader>r", pipefail("(cat %; [ -f README.md ] && cat README.md) | mdembed | mods"), "vsplit")
-		run_file("<Leader>c", pipefail("cat % | mdembed | mods -C"), "vsplit")
 	end,
 })
 
@@ -465,19 +461,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "ruby",
 	callback = function()
 		run_file("<Leader>r", "bundle exec ruby %", "split")
-
-		map("n", "<Leader>i", function()
-			local lines = {
-				"    attr_reader :db",
-				"",
-				"    def initialize(db)",
-				"      @db = db",
-				"    end",
-				"",
-			}
-			local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-			vim.api.nvim_buf_set_lines(0, row, row, false, lines)
-		end, { buffer = 0 })
 	end,
 })
 
