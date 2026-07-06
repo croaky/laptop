@@ -6,8 +6,8 @@
 # - shells (nu, zsh)
 # - symlinks for dotfiles to `$HOME`
 # - text editor (Neovim)
-# - programming language runtimes (Go, Ruby, Node)
-# - language servers (Bash, Go, HTML, Lua, Ruby, TypeScript)
+# - programming language runtimes (Go, Node)
+# - language servers (Bash, Go, HTML, Lua, TypeScript)
 # - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree)
 # - databases (Postgres dev and test clusters)
 
@@ -36,10 +36,6 @@ set -eu
   ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
   ln -sf "$PWD/js/bunfig.toml" "$HOME/.bunfig.toml"
 
-  # Ruby
-  ln -sf "$PWD/ruby/irbrc" "$HOME/.irbrc"
-  ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
-
   # Shells
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
@@ -53,8 +49,6 @@ set -eu
   # Vim
   mkdir -p "$HOME/.config/nvim"
   ln -sf "$PWD/vim/init.lua" "$HOME/.config/nvim/init.lua"
-  mkdir -p "$HOME/.vim/autoload/test/ruby"
-  ln -sf "$PWD/vim/test_ok.vim" "$HOME/.vim/autoload/test/ruby/test_ok.vim"
 )
 
 # Homebrew
@@ -100,14 +94,6 @@ brew "stylua"
 brew "tree"
 brew "tree-sitter-cli" # parser compiler for nvim-treesitter
 brew "zsh"
-
-# https://github.com/rbenv/ruby-build/wiki
-brew "gmp"
-brew "libyaml"
-brew "openssl@3"
-brew "readline"
-brew "ruby-build"
-brew "rust" # https://github.com/ruby/ruby/blob/master/doc/yjit/yjit.md
 EOF
 
 brew upgrade
@@ -141,12 +127,6 @@ go install golang.org/x/tools/cmd/deadcode@latest
 go install golang.org/x/tools/cmd/godoc@latest
 go install golang.org/x/tools/cmd/goimports@latest
 go install golang.org/x/tools/gopls@latest
-
-# Ruby
-v="3.4.7"
-if [ ! -d "$HOME/.rubies/ruby-$v" ]; then
-  RUBY_CONFIGURE_OPTS="--enable-yjit --with-openssl-dir=$(brew --prefix openssl@3)" ruby-build "$v" "$HOME/.rubies/ruby-$v"
-fi
 
 # NPM
 npm install -g npm@latest

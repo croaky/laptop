@@ -70,9 +70,6 @@ require("lazy").setup({
 	-- :TestFile, :TestNearest
 	{
 		"vim-test/vim-test",
-		init = function()
-			vim.g["test#runners"] = { Ruby = { "test_ok" } }
-		end,
 	},
 
 	-- Editable quickfix
@@ -94,9 +91,6 @@ require("lazy").setup({
 	{ "leafgarland/typescript-vim" },
 	{ "mxw/vim-jsx" },
 	{ "pangloss/vim-javascript" },
-
-	-- Backend
-	{ "vim-ruby/vim-ruby" },
 
 	opts_extend = { "sources.default" },
 })
@@ -307,7 +301,6 @@ require("conform").setup({
 		json = { "prettier" }, -- prettier --parser json
 		lua = { "stylua" },
 		markdown = { "prettier" }, -- prettier --parser markdown
-		ruby = { "bundlerubocop" },
 		scss = { "prettier" }, -- prettier --parser scss
 		sh = { "shfmt" },
 		sql = { "pgfmt" }, -- go install ~/EDS/cmd/pgfmt
@@ -315,10 +308,6 @@ require("conform").setup({
 		typescriptreact = { "prettier" }, -- prettier --parser typescript
 	},
 	formatters = {
-		bundlerubocop = {
-			command = "bundle",
-			args = { "exec", "rubocop", "--server", "-a", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" },
-		},
 		goimportslocal = {
 			command = "goimportslocal",
 			args = { "-srcdir", "$DIRNAME" },
@@ -456,14 +445,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Ruby
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "ruby",
-	callback = function()
-		run_file("<Leader>r", "bundle exec ruby %", "split")
-	end,
-})
-
 -- SQL
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "sql",
@@ -541,7 +522,6 @@ local ts_parsers = {
 	"json",
 	"lua",
 	"markdown",
-	"ruby",
 	"scss",
 	"sql",
 	"typescript",
