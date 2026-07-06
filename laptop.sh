@@ -23,7 +23,6 @@ set -eu
   ln -sf "$PWD/cli/bat.xml" "$HOME/.config/bat/themes/CatppuccinFrappe.tmTheme"
   mkdir -p "$HOME/.ssh"
   ln -sf "$PWD/cli/ssh" "$HOME/.ssh/config"
-  ln -sf "$PWD/cli/tmux.conf" "$HOME/.tmux.conf"
 
   # Git
   ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
@@ -68,7 +67,6 @@ brew bundle --file=- <<EOF
 tap "CrunchyData/brew", trusted: true
 tap "oven-sh/bun", trusted: true
 
-cask "claude-code"
 cask "ghostty@tip"
 
 brew "awscli"
@@ -85,7 +83,6 @@ brew "lua-language-server"
 brew "neovim"
 brew "node"
 brew "oven-sh/bun/bun"
-brew "pgvector"
 brew "postgresql@$PG_VERSION"
 brew "ripgrep"
 brew "shellcheck"

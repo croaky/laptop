@@ -68,9 +68,7 @@ require("lazy").setup({
 	{ "tpope/vim-projectionist" },
 
 	-- :TestFile, :TestNearest
-	{
-		"vim-test/vim-test",
-	},
+	{ "vim-test/vim-test" },
 
 	-- Editable quickfix
 	{ "gabrielpoca/replacer.nvim" },
@@ -102,10 +100,6 @@ vim.opt.runtimepath:prepend(vim.fn.expand("~/.vim"))
 local function map(mode, lhs, rhs, opts)
 	opts = vim.tbl_extend("keep", opts or {}, { noremap = true, silent = false })
 	vim.keymap.set(mode, lhs, rhs, opts)
-end
-
-local function pipefail(cmd)
-	return "zsh -c 'set -e; set -o pipefail; " .. cmd .. "'"
 end
 
 local function run_file(key, cmd_template, split_cmd)
