@@ -6,7 +6,7 @@
 # - shells (nu, zsh)
 # - symlinks for dotfiles to `$HOME`
 # - text editor (Neovim)
-# - programming language runtimes (Go, Node)
+# - programming language runtimes (Go, Node, Rust)
 # - language servers (Bash, Go, HTML, Lua, TypeScript)
 # - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree)
 # - databases (Postgres dev and test clusters)
@@ -86,6 +86,7 @@ brew "oven-sh/bun/bun"
 brew "pgvector"
 brew "postgresql@$PG_VERSION"
 brew "ripgrep"
+brew "rust" # cargo/rustc for ~/warp
 brew "shellcheck"
 brew "shfmt"
 brew "stylua"
