@@ -83,7 +83,6 @@ brew "lua-language-server"
 brew "neovim"
 brew "node"
 brew "oven-sh/bun/bun"
-brew "pgvector"
 brew "postgresql@$PG_VERSION"
 brew "ripgrep"
 brew "rust" # cargo/rustc for ~/warp
