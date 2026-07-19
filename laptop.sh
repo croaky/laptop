@@ -8,7 +8,7 @@
 # - text editor (Neovim)
 # - programming language runtimes (Go, Node, Rust)
 # - language servers (Bash, Go, HTML, Lua, TypeScript)
-# - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree)
+# - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree, ubi)
 # - databases (Postgres dev and test clusters)
 
 # This script can be safely run multiple times.
@@ -91,6 +91,7 @@ brew "shfmt"
 brew "stylua"
 brew "tree"
 brew "tree-sitter-cli" # parser compiler for nvim-treesitter
+brew "ubicloud/cli/ubi"
 brew "zsh"
 EOF
 
