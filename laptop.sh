@@ -66,6 +66,7 @@ brew update-reset
 brew bundle --file=- <<EOF
 tap "CrunchyData/brew", trusted: true
 tap "oven-sh/bun", trusted: true
+tap "ubicloud/cli", trusted: true
 
 cask "ghostty@tip"
 
