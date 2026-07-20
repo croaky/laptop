@@ -532,6 +532,19 @@ if #ts_to_install > 0 then
 	require("nvim-treesitter.install").install(ts_to_install)
 end
 
+-- Keep already-installed parsers in sync with the plugin's queries,
+-- which move faster than the grammars on the main branch. Without this,
+-- a stale grammar and a newer query drift apart (e.g. diff's
+-- `(special) @string.special`), breaking highlighting in commit buffers.
+local ts_to_update = vim.iter(ts_parsers)
+	:filter(function(p)
+		return vim.tbl_contains(ts_installed, p)
+	end)
+	:totable()
+if #ts_to_update > 0 then
+	require("nvim-treesitter.install").update(ts_to_update)
+end
+
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		pcall(vim.treesitter.start)
