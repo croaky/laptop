@@ -149,6 +149,18 @@ if [ "$("$HOME/.local/bin/tsgo" --version 2>/dev/null)" != "Version $TSGO_VERSIO
   ln -sf "$TSGO_DIR/lib/tsc" "$HOME/.local/bin/tsgo"
 fi
 
+# dprint (native formatter for EDS fmt + Neovim; replaces prettier for
+# TS/Markdown/JSON). Standalone binary from the GitHub release; no bun.
+DPRINT_VERSION="0.55.2"
+if [ "$("$HOME/.local/bin/dprint" --version 2>/dev/null)" != "dprint $DPRINT_VERSION" ]; then
+  mkdir -p "$HOME/.local/bin"
+  DPRINT_TMP="$(mktemp -d)"
+  curl -fsSL "https://github.com/dprint/dprint/releases/download/${DPRINT_VERSION}/dprint-aarch64-apple-darwin.zip" -o "$DPRINT_TMP/dprint.zip"
+  unzip -oq "$DPRINT_TMP/dprint.zip" -d "$DPRINT_TMP"
+  install "$DPRINT_TMP/dprint" "$HOME/.local/bin/dprint"
+  rm -rf "$DPRINT_TMP"
+fi
+
 # Neovim
 LAZY_DIR="$HOME/.local/share/nvim/lazy/lazy.nvim"
 if [ ! -d "$LAZY_DIR" ]; then

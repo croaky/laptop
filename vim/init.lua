@@ -291,15 +291,15 @@ require("conform").setup({
 		css = { "prettier" },
 		go = { "goimportslocal" }, -- $LAPTOP/bin/goimportslocal
 		html = { "prettier" },
-		javascript = { "prettier" }, -- prettier --parser html
-		json = { "prettier" }, -- prettier --parser json
+		javascript = { "dprint" }, -- ~/.local/bin/dprint (typescript plugin)
+		json = { "dprint" },
 		lua = { "stylua" },
-		markdown = { "prettier" }, -- prettier --parser markdown
+		markdown = { "dprint" },
 		scss = { "prettier" }, -- prettier --parser scss
 		sh = { "shfmt" },
 		sql = { "pgfmt" }, -- go install ~/EDS/cmd/pgfmt
-		typescript = { "prettier" }, -- prettier --parser typescript
-		typescriptreact = { "prettier" }, -- prettier --parser typescript
+		typescript = { "dprint" },
+		typescriptreact = { "dprint" },
 	},
 	formatters = {
 		goimportslocal = {
