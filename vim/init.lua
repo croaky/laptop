@@ -491,7 +491,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- TypeScript (native tsgo LSP; no Node/tsserver)
+-- TypeScript
 -- tsgo is installed on PATH by laptop.sh (~/.local/bin/tsgo).
 vim.lsp.config("tsgo", {
 	cmd = { "tsgo", "--lsp", "--stdio" },

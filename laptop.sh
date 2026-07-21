@@ -137,9 +137,8 @@ npm install -g bash-language-server # uses shellcheck internally for linting dia
 # HTML
 npm install -g vscode-langservers-extracted
 
-# TypeScript (native tsgo: compiler for EDS typecheck + Neovim LSP).
-# Standalone binary from the GitHub release; no Node tsserver or
-# `typescript` npm package. Consumed from PATH by EDS and Neovim.
+# TypeScript
+# Standalone tsgo binary from the GitHub release; no bun/node/tsserver
 TSGO_VERSION="7.0.2"
 TSGO_DIR="$HOME/.local/share/tsgo"
 if [ "$("$HOME/.local/bin/tsgo" --version 2>/dev/null)" != "Version $TSGO_VERSION" ]; then
@@ -149,8 +148,8 @@ if [ "$("$HOME/.local/bin/tsgo" --version 2>/dev/null)" != "Version $TSGO_VERSIO
   ln -sf "$TSGO_DIR/lib/tsc" "$HOME/.local/bin/tsgo"
 fi
 
-# dprint (native formatter for EDS fmt + Neovim; replaces prettier for
-# TS/Markdown/JSON). Standalone binary from the GitHub release; no bun.
+# dprint
+# Standalone binary from the GitHub release; no bun/node/prettier.
 DPRINT_VERSION="0.55.2"
 if [ "$("$HOME/.local/bin/dprint" --version 2>/dev/null)" != "dprint $DPRINT_VERSION" ]; then
   mkdir -p "$HOME/.local/bin"
