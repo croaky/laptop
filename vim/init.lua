@@ -491,11 +491,15 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- TypeScript
-vim.lsp.config("ts_ls", {
+-- TypeScript (native tsgo LSP; no Node/tsserver)
+-- tsgo is installed on PATH by laptop.sh (~/.local/bin/tsgo).
+vim.lsp.config("tsgo", {
+	cmd = { "tsgo", "--lsp", "--stdio" },
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+	root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
 	on_attach = on_attach,
 })
-vim.lsp.enable("ts_ls")
+vim.lsp.enable("tsgo")
 vim.g.markdown_fenced_languages = { "ts=typescript" }
 
 -- Status line

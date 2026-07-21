@@ -137,8 +137,17 @@ npm install -g bash-language-server # uses shellcheck internally for linting dia
 # HTML
 npm install -g vscode-langservers-extracted
 
-# TypeScript
-npm install -g typescript-language-server typescript
+# TypeScript (native tsgo: compiler for EDS typecheck + Neovim LSP).
+# Standalone binary from the GitHub release; no Node tsserver or
+# `typescript` npm package. Consumed from PATH by EDS and Neovim.
+TSGO_VERSION="7.0.2"
+TSGO_DIR="$HOME/.local/share/tsgo"
+if [ "$("$HOME/.local/bin/tsgo" --version 2>/dev/null)" != "Version $TSGO_VERSION" ]; then
+  mkdir -p "$TSGO_DIR" "$HOME/.local/bin"
+  curl -fsSL "https://github.com/microsoft/typescript-go/releases/download/typescript/v${TSGO_VERSION}/typescript-darwin-arm64.tgz" |
+    tar -xz -C "$TSGO_DIR" --strip-components=1
+  ln -sf "$TSGO_DIR/lib/tsc" "$HOME/.local/bin/tsgo"
+fi
 
 # Neovim
 LAZY_DIR="$HOME/.local/share/nvim/lazy/lazy.nvim"

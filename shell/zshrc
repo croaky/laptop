@@ -140,6 +140,9 @@ PATH="$BREW/opt/postgresql@$PG_VERSION/bin:$PATH"
 # https://blog.phusion.nl/2017/10/13/why-ruby-app-servers-break-on-macos-high-sierra-and-what-can-be-done-about-it/
 export PGGSSENCMODE=disable
 
+# User-installed binaries (XDG)
+PATH="$HOME/.local/bin:$PATH"
+
 # Laptop
 export LAPTOP="$HOME/laptop"
 PATH="$LAPTOP/bin:$PATH"
