@@ -21,6 +21,8 @@ set -eu
   # CLI
   mkdir -p "$HOME/.config/bat/themes"
   ln -sf "$PWD/cli/bat.xml" "$HOME/.config/bat/themes/CatppuccinFrappe.tmTheme"
+  mkdir -p "$HOME/.config/dprint"
+  ln -sf "$PWD/cli/dprint.jsonc" "$HOME/.config/dprint/dprint.jsonc"
   mkdir -p "$HOME/.ssh"
   ln -sf "$PWD/cli/ssh" "$HOME/.ssh/config"
 
