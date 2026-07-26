@@ -47,6 +47,14 @@
   default = current
 [rebase]
   autosquash = true
+[remote]
+  # Some work repos use a self-hosted git as origin, with GitHub as a
+  # secondary remote. There, a bare `git push` has to ignore
+  # branch.<name>.remote: `git remote rename` rewrites it on every
+  # branch that predates the switch, and push.default = current
+  # follows it, so pushes silently go to the wrong remote. Where
+  # origin is the only remote this changes nothing.
+  pushDefault = origin
 [rerere]
   autoupdate = true
   enabled = true
