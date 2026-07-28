@@ -54,7 +54,31 @@ autoload -Uz compinit
 compinit -u
 
 # Git
+
+# git-cibot-hosted reports that origin is a cibot farmer rather than
+# GitHub. A farmer clone url is always https://host/git/<slug>.git,
+# which is the shape the cibot CLI itself parses to find the farmer, so
+# this needs no hostname of its own and survives the farmer moving.
+git-cibot-hosted() {
+  case "$(git remote get-url origin 2> /dev/null)" in
+    */git/*.git) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
 git-create-tree() {
+  # On a cibot-hosted repo the change is what gets named, and cibot
+  # names it: `git-create-tree` with no argument allocates one, and
+  # with a change id checks out someone else's. cibot owns the
+  # worktree layout there, including the .env link, and prints the
+  # path for the cd below.
+  if git-cibot-hosted; then
+    local dir
+    dir=$(cibot checkout "$@") || return
+    cd "$dir"
+    return
+  fi
+
   if [ $# -eq 0 ] || [[ "$1" == --* ]]; then
     echo 'usage: git-create-tree branch-name'
     return 1
@@ -97,7 +121,16 @@ git-delete-tree() {
     return 1
   fi
 
-  branch="${username}/${name}"
+  # Two branch conventions now: dcroak/topic on GitHub repos, and the
+  # bare change id (CI-1B) on cibot-hosted ones. Ask which exists
+  # rather than reconstructing a name, or cleanup after a change looks
+  # for a branch called dcroak/CI-1B.
+  if git show-ref --verify --quiet "refs/heads/${username}/${name}"; then
+    branch="${username}/${name}"
+  else
+    branch="${name}"
+  fi
+
   main_tree=$(git worktree list | head -1 | awk '{print $1}')
   repo=$(basename "$main_tree")
   tree_dir="$HOME/.worktrees/${repo}/${name}"
