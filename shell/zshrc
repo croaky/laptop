@@ -55,30 +55,9 @@ compinit -u
 
 # Git
 
-# git-cibot-hosted reports that origin is a cibot farmer rather than
-# GitHub. A farmer clone url is always https://host/git/<slug>.git,
-# which is the shape the cibot CLI itself parses to find the farmer, so
-# this needs no hostname of its own and survives the farmer moving.
-git-cibot-hosted() {
-  case "$(git remote get-url origin 2> /dev/null)" in
-    */git/*.git) return 0 ;;
-    *) return 1 ;;
-  esac
-}
-
+# git-create-tree is for GitHub repos; on a cibot farmer use gco,
+# which lets cibot name the change and own the worktree.
 git-create-tree() {
-  # On a cibot-hosted repo the change is what gets named, and cibot
-  # names it: `git-create-tree` with no argument allocates one, and
-  # with a change id checks out someone else's. cibot owns the
-  # worktree layout there, including the .env link, and prints the
-  # path for the cd below.
-  if git-cibot-hosted; then
-    local dir
-    dir=$(cibot checkout "$@") || return
-    cd "$dir"
-    return
-  fi
-
   if [ $# -eq 0 ] || [[ "$1" == --* ]]; then
     echo 'usage: git-create-tree branch-name'
     return 1
@@ -149,6 +128,19 @@ git-delete-tree() {
   git merge --ff-only origin/main
   git remote prune origin
 }
+
+# cibot
+
+# gco allocates a change with no argument, or checks out someone
+# else's with a change id. cibot prints the worktree path; the cd is
+# why this is a function.
+gco() {
+  local dir
+  dir=$(cibot checkout "$@") || return
+  cd "$dir"
+}
+
+alias gm='cibot merge && git-delete-tree'
 
 # Bat
 export BAT_THEME="CatppuccinFrappe"
