@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# git delete-tree -- drop the worktree you are standing in and its
+# branch, leave the main checkout on an up-to-date main, and print that
+# checkout's path.
+
+set -e
+
+if [ $# -ne 0 ]; then
+  echo "usage: git delete-tree (run it from inside the worktree)" >&2
+  exit 1
+fi
+
+main=$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")
+tree=$(git rev-parse --show-toplevel)
+branch=$(git branch --show-current)
+
+if [ "$branch" = "main" ] || [ "$branch" = "master" ]; then
+  echo "Error: refusing to delete $branch" >&2
+  exit 1
+fi
+
+{
+  if [ "$tree" = "$main" ]; then
+    # The branch was never given a worktree of its own.
+    git -C "$main" checkout main
+  else
+    git -C "$main" worktree remove "$tree"
+  fi
+
+  git -C "$main" branch -D "$branch"
+  git -C "$main" fetch origin
+  git -C "$main" merge --ff-only origin/main
+  git -C "$main" remote prune origin
+} >&2
+
+echo "$main"

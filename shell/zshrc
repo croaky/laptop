@@ -1,12 +1,10 @@
 #!/bin/zsh
 
-BREW="/opt/homebrew"
-
-# Aliases
+# Dir
 alias mkdir="mkdir -p"
-alias vim="nvim"
 
 # Editor
+alias vim="nvim"
 export VISUAL=nvim
 export EDITOR=$VISUAL
 
@@ -15,10 +13,11 @@ HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=50000
 
-# https://docs.brew.sh/Analytics
-unset HOMEBREW_NO_ANALYTICS
+# Homebrew
+BREW="/opt/homebrew"
+unset HOMEBREW_NO_ANALYTICS # https://docs.brew.sh/Analytics
 
-# fzf and fd to find files, fzf and rg to search files
+# fzf and fd to find files
 if [ -e "$BREW/opt/fzf/shell" ]; then
   source "$BREW/opt/fzf/shell/completion.zsh"
   source "$BREW/opt/fzf/shell/key-bindings.zsh"
@@ -54,93 +53,23 @@ autoload -Uz compinit
 compinit -u
 
 # Git
-
-# git-create-tree is for GitHub repos; on a cibot farmer use gco,
-# which lets cibot name the change and own the worktree.
-git-create-tree() {
-  if [ $# -eq 0 ] || [[ "$1" == --* ]]; then
-    echo 'usage: git-create-tree branch-name'
-    return 1
-  fi
-
-  if [ "$(git branch --show-current)" != "main" ]; then
-    echo 'error: must be on main'
-    return 1
-  fi
-
-  local username branch main_dir repo tree_dir
-  username=$(git config --get github.user || whoami)
-  branch="${username}/$1"
-  main_dir=$(git rev-parse --show-toplevel)
-  repo=$(basename "$main_dir")
-  tree_dir="$HOME/.worktrees/${repo}/${1}"
-  git pull
-  git worktree add -b "$branch" "$tree_dir" origin/main
-
-  # Worktrees don't share gitignored files with the main working tree
-  [ -e "$main_dir/.env" ] && ln -s "$main_dir/.env" "$tree_dir/.env"
-
-  # This `cd` is why this is a zsh function instead of a script on $PATH
-  cd "$tree_dir"
-}
-
-git-delete-tree() {
-  local username name branch main_tree repo tree_dir
-  username=$(git config --get github.user || whoami)
-
-  if [ $# -eq 0 ]; then
-    name="$(git branch --show-current)"
-    name="${name#"${username}/"}"
+createtree() {
+  local dir origin farmer
+  origin=$(git config --get remote.origin.url)
+  farmer=$(git config --get cibot.url)
+  if [[ -n "$farmer" && "$origin" == "$farmer"/git/* ]]; then
+    dir=$(cibot checkout "$@") || return
   else
-    name="$1"
+    dir=$(git create-tree "$@") || return
   fi
-
-  if [ "$name" = "main" ] || [ "${username}/${name}" = "main" ]; then
-    echo 'error: refusing to delete main'
-    return 1
-  fi
-
-  # Two branch conventions now: dcroak/topic on GitHub repos, and the
-  # bare change id (CI-1B) on cibot-hosted ones. Ask which exists
-  # rather than reconstructing a name, or cleanup after a change looks
-  # for a branch called dcroak/CI-1B.
-  if git show-ref --verify --quiet "refs/heads/${username}/${name}"; then
-    branch="${username}/${name}"
-  else
-    branch="${name}"
-  fi
-
-  main_tree=$(git worktree list | head -1 | awk '{print $1}')
-  repo=$(basename "$main_tree")
-  tree_dir="$HOME/.worktrees/${repo}/${name}"
-
-  # This `cd` is why this is a zsh function instead of a script on $PATH
-  cd "$main_tree"
-
-  if git worktree list | grep -q "$tree_dir"; then
-    git worktree remove "$tree_dir"
-  else
-    git checkout main
-  fi
-
-  git branch -D "$branch"
-  git fetch origin
-  git merge --ff-only origin/main
-  git remote prune origin
-}
-
-# cibot
-
-# gco allocates a change with no argument, or checks out someone
-# else's with a change id. cibot prints the worktree path; the cd is
-# why this is a function.
-gco() {
-  local dir
-  dir=$(cibot checkout "$@") || return
   cd "$dir"
 }
-
-alias gm='cibot merge && git-delete-tree'
+deletetree() {
+  local main
+  main=$(git delete-tree) || return
+  cd "$main"
+}
+alias mergetree="cibot merge && deletetree"
 
 # Bat
 export BAT_THEME="CatppuccinFrappe"

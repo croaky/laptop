@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# git create-tree <name> -- cut a worktree from origin/main for a new
+# branch and print its path. For GitHub repos, where the branch name is
+# mine to invent; on a cibot repo `cibot checkout` does this instead and
+# the farmer names the change.
+#
+# The path is the only thing on stdout, so the shell function that owns
+# the cd gets a path and nothing else.
+
+set -e
+
+case "${1:-}" in
+  "" | --*)
+    echo "usage: git create-tree branch-name" >&2
+    exit 1
+    ;;
+esac
+
+if [ "$(git branch --show-current)" != "main" ]; then
+  echo "Error: must be on main" >&2
+  exit 1
+fi
+
+username=$(git config --get github.user || whoami)
+main_dir=$(git rev-parse --show-toplevel)
+tree_dir="$HOME/.worktrees/$(basename "$main_dir")/$1"
+
+{
+  git pull
+  git worktree add -b "$username/$1" "$tree_dir" origin/main
+
+  # Worktrees don't share gitignored files with the main working tree
+  if [ -e "$main_dir/.env" ]; then
+    ln -s "$main_dir/.env" "$tree_dir/.env"
+  fi
+} >&2
+
+echo "$tree_dir"
