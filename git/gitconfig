@@ -58,3 +58,5 @@
 [rerere]
   autoupdate = true
   enabled = true
+[cibot]
+  url = https://cibot.ivp-eds.com
