@@ -11,31 +11,5 @@ fi
 
 git push
 
-# origin is not always GitHub. On cibot-hosted repos it is the farmer,
-# and gh gives up rather than looking at the other remotes. Find the
-# one that does point at GitHub and name it: the push above has
-# already reached it, either directly or through the farmer's
-# post-receive mirror.
-repo=""
-for remote in $(git remote); do
-  url=$(git remote get-url "$remote")
-  case "$url" in
-    *github.com[:/]*)
-      repo=$(echo "$url" | sed -e 's#^.*github\.com[:/]##' -e 's#\.git$##')
-      break
-      ;;
-  esac
-done
-
-if [ -z "$repo" ]; then
-  echo "Error: no remote points at github.com"
-  exit 1
-fi
-
-export GH_REPO="$repo"
-
-# gh pr view --web resolves the branch's push remote, which is the
-# farmer, not GitHub, so open the URL create already printed.
-url=$(gh pr create --fill --head "$branch")
-echo "$url"
-open "$url"
+gh pr create --fill --head "$branch"
+gh pr view --web
