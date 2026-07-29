@@ -74,34 +74,21 @@ alias mergetree="cibot merge && deletetree"
 # Bat
 export BAT_THEME="CatppuccinFrappe"
 
-# Go
-PATH="$HOME/go/bin:$PATH"
-
-# Homebrew
-PATH="$BREW/bin:$PATH"
-
 # Node
 export NPM_CONFIG_FUND=false
-PATH="$BREW/opt/node/bin:$PATH"
-PATH="$HOME/.bun/bin:$PATH"
 
 # Postgres
 export PGUSER=postgres
 PG_VERSION="${PG_VERSION:-17}"
-PATH="$BREW/opt/postgresql@$PG_VERSION/bin:$PATH"
+export PGGSSENCMODE=disable # https://github.com/ged/ruby-pg/issues/538
 
-# https://github.com/ged/ruby-pg/issues/538
-# https://blog.phusion.nl/2017/10/13/why-ruby-app-servers-break-on-macos-high-sierra-and-what-can-be-done-about-it/
-export PGGSSENCMODE=disable
-
-# User-installed binaries (XDG)
-PATH="$HOME/.local/bin:$PATH"
-
-# Laptop
-export LAPTOP="$HOME/laptop"
-PATH="$LAPTOP/bin:$PATH"
-
-# Current project
-PATH=".git/safe/../../bin:$PATH"
-
+# Binaries
+PATH="$HOME/go/bin:$PATH"                         # Go
+PATH="$BREW/bin:$PATH"                            # Homebrew
+PATH="$BREW/opt/node/bin:$PATH"                   # Node
+PATH="$HOME/.bun/bin:$PATH"                       # Bun
+PATH="$BREW/opt/postgresql@$PG_VERSION/bin:$PATH" # Postgres
+PATH="$HOME/.local/bin:$PATH"                     # XDG
+PATH="$HOME/laptop/bin:$PATH"                     # ~/laptop
+PATH="./bin:$PATH"                                # current project
 export PATH
