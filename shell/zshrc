@@ -69,7 +69,10 @@ deletetree() {
   main=$(git delete-tree) || return
   cd "$main"
 }
-alias mergetree="cibot merge && deletetree"
+mergetree() {
+  cibot merge "$@" || return
+  deletetree
+}
 
 # Bat
 export BAT_THEME="CatppuccinFrappe"
