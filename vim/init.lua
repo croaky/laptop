@@ -565,7 +565,18 @@ if vim.uv.fs_stat(hml_dir .. "/grammar.js") then
 		pattern = "TSUpdate",
 		callback = function()
 			require("nvim-treesitter.parsers").hml = {
-				install_info = { path = hml_dir, queries = "queries" },
+				-- generate because hml commits grammar.js and the scanner,
+				-- not the C the CLI writes from them. laptop.sh installs
+				-- tree-sitter-cli, and generating here passes the ABI this
+				-- nvim speaks rather than whatever version last ran.
+				-- generate_from_json is off for the same reason: the json is
+				-- generated too, so grammar.js is the only source there is.
+				install_info = {
+					path = hml_dir,
+					queries = "queries",
+					generate = true,
+					generate_from_json = false,
+				},
 				tier = 0,
 			}
 		end,
