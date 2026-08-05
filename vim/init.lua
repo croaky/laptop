@@ -581,8 +581,14 @@ if vim.uv.fs_stat(hml_dir .. "/grammar.js") then
 			}
 		end,
 	})
-	if not vim.tbl_contains(ts_installed, "hml") then
-		require("nvim-treesitter.install").install({ "hml" })
+	-- A path parser's queries are a symlink into the checkout it was
+	-- installed from, so one installed from a worktree loses them when
+	-- that worktree is removed. The parser keeps working and the color
+	-- quietly stops, so a dangling link forces a reinstall.
+	local queries = vim.fs.joinpath(require("nvim-treesitter.config").get_install_dir("queries"), "hml")
+	local dangling = vim.uv.fs_lstat(queries) ~= nil and vim.uv.fs_stat(queries) == nil
+	if dangling or not vim.tbl_contains(ts_installed, "hml") then
+		require("nvim-treesitter.install").install({ "hml" }, { force = dangling })
 	end
 end
 
