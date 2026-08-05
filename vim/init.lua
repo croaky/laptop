@@ -183,9 +183,9 @@ local function sql_file_path()
 	return nil
 end
 
--- Jump target for HAML render calls in EDS: a line like
--- `= render "help/sidebar"` maps to ui/views/help/_sidebar.haml
-local function haml_partial_path()
+-- Jump target for hml render calls: a line like
+-- `= render "help/sidebar"` maps to ui/views/help/_sidebar.hml
+local function hml_partial_path()
 	local line = vim.api.nvim_get_current_line()
 	local name = line:match("render%s*%(?%s*[\"']([%w_/-]+)[\"']")
 	if not name then
@@ -203,9 +203,9 @@ local function haml_partial_path()
 	local dir, file = name:match("^(.-)/([^/]+)$")
 	local path
 	if dir then
-		path = views_dir .. "/" .. dir .. "/_" .. file .. ".haml"
+		path = views_dir .. "/" .. dir .. "/_" .. file .. ".hml"
 	else
-		path = vim.fn.expand("%:p:h") .. "/_" .. name .. ".haml"
+		path = vim.fn.expand("%:p:h") .. "/_" .. name .. ".hml"
 	end
 
 	if vim.uv.fs_stat(path) then
@@ -368,12 +368,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- HAML
+-- hml
+vim.filetype.add({ extension = { hml = "hml" } })
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "haml",
+	pattern = "hml",
 	callback = function()
 		map("n", "gf", function()
-			local path = haml_partial_path()
+			local path = hml_partial_path()
 			if path then
 				vim.cmd.edit(vim.fn.fnameescape(path))
 			else
@@ -547,6 +548,31 @@ local ts_to_update = vim.iter(ts_parsers)
 	:totable()
 if #ts_to_update > 0 then
 	require("nvim-treesitter.install").update(ts_to_update)
+end
+
+-- hml is not in nvim-treesitter's registry, so point it at the checkout.
+-- The registration goes in the TSUpdate autocmd because install and
+-- update reload that table and drop anything added to it directly.
+--
+-- Installed once rather than kept in ts_to_update: with no revision to
+-- compare against, update considers a path parser stale every time, so
+-- listing it there recompiles the grammar on every start. Rerun
+-- `:lua require("nvim-treesitter.install").install({ "hml" }, { force = true })`
+-- after changing the grammar.
+local hml_dir = vim.fn.expand("~/hml")
+if vim.uv.fs_stat(hml_dir .. "/grammar.js") then
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "TSUpdate",
+		callback = function()
+			require("nvim-treesitter.parsers").hml = {
+				install_info = { path = hml_dir, queries = "queries" },
+				tier = 0,
+			}
+		end,
+	})
+	if not vim.tbl_contains(ts_installed, "hml") then
+		require("nvim-treesitter.install").install({ "hml" })
+	end
 end
 
 vim.api.nvim_create_autocmd("FileType", {
