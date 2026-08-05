@@ -73,6 +73,10 @@ mergetree() {
   cibot merge "$@" || return
   deletetree
 }
+closetree() {
+  cibot close "$@" || return
+  deletetree
+}
 
 # Bat
 export BAT_THEME="CatppuccinFrappe"
