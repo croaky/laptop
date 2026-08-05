@@ -550,46 +550,42 @@ if #ts_to_update > 0 then
 	require("nvim-treesitter.install").update(ts_to_update)
 end
 
--- hml is not in nvim-treesitter's registry, so point it at the checkout.
+-- hml is not in nvim-treesitter's registry, so name it here. It comes
+-- from the GitHub mirror rather than a local checkout, so a machine
+-- that has never cloned hml still highlights .hml, and the queries are
+-- copied out of the tarball rather than symlinked into a directory that
+-- can move or be deleted.
+--
 -- The registration goes in the TSUpdate autocmd because install and
 -- update reload that table and drop anything added to it directly.
 --
--- Installed once rather than kept in ts_to_update: with no revision to
--- compare against, update considers a path parser stale every time, so
--- listing it there recompiles the grammar on every start. Rerun
+-- generate because hml commits grammar.js and its scanner, not the C
+-- the CLI writes from them. laptop.sh installs tree-sitter-cli, and
+-- generating here builds against the ABI this nvim speaks rather than
+-- whatever version last ran. generate_from_json is off for the same
+-- reason: the json is generated too, so grammar.js is the only source.
+--
+-- No revision, so nothing here goes stale as the grammar moves, and
+-- ts_to_update would rebuild it on every start for want of one to
+-- compare. Installed once. To pick up a grammar change:
 -- `:lua require("nvim-treesitter.install").install({ "hml" }, { force = true })`
--- after changing the grammar.
-local hml_dir = vim.fn.expand("~/hml")
-if vim.uv.fs_stat(hml_dir .. "/grammar.js") then
-	vim.api.nvim_create_autocmd("User", {
-		pattern = "TSUpdate",
-		callback = function()
-			require("nvim-treesitter.parsers").hml = {
-				-- generate because hml commits grammar.js and the scanner,
-				-- not the C the CLI writes from them. laptop.sh installs
-				-- tree-sitter-cli, and generating here passes the ABI this
-				-- nvim speaks rather than whatever version last ran.
-				-- generate_from_json is off for the same reason: the json is
-				-- generated too, so grammar.js is the only source there is.
-				install_info = {
-					path = hml_dir,
-					queries = "queries",
-					generate = true,
-					generate_from_json = false,
-				},
-				tier = 0,
-			}
-		end,
-	})
-	-- A path parser's queries are a symlink into the checkout it was
-	-- installed from, so one installed from a worktree loses them when
-	-- that worktree is removed. The parser keeps working and the color
-	-- quietly stops, so a dangling link forces a reinstall.
-	local queries = vim.fs.joinpath(require("nvim-treesitter.config").get_install_dir("queries"), "hml")
-	local dangling = vim.uv.fs_lstat(queries) ~= nil and vim.uv.fs_stat(queries) == nil
-	if dangling or not vim.tbl_contains(ts_installed, "hml") then
-		require("nvim-treesitter.install").install({ "hml" }, { force = dangling })
-	end
+vim.api.nvim_create_autocmd("User", {
+	pattern = "TSUpdate",
+	callback = function()
+		require("nvim-treesitter.parsers").hml = {
+			install_info = {
+				url = "https://github.com/croaky/hml",
+				branch = "main",
+				queries = "queries",
+				generate = true,
+				generate_from_json = false,
+			},
+			tier = 0,
+		}
+	end,
+})
+if not vim.tbl_contains(ts_installed, "hml") then
+	require("nvim-treesitter.install").install({ "hml" })
 end
 
 vim.api.nvim_create_autocmd("FileType", {
