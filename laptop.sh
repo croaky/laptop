@@ -218,5 +218,5 @@ start_postgres_cluster 5433 \
   "$HOME/.local/share/postgres/log_test.log" \
   "-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
 
-# formatter
-(cd "$HOME/EDS" && go install ./cmd/pgfmt)
+# SQL formatter
+go install github.com/croaky/pgfmt/cmd/pgfmt@latest
