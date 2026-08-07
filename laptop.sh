@@ -35,7 +35,6 @@ set -eu
 
   # JavaScript
   ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
-  ln -sf "$PWD/js/bunfig.toml" "$HOME/.bunfig.toml"
 
   # Shells
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
@@ -67,7 +66,6 @@ brew analytics off
 brew update-reset
 brew bundle --file=- <<EOF
 tap "CrunchyData/brew", trusted: true
-tap "oven-sh/bun", trusted: true
 tap "ubicloud/cli", trusted: true
 
 cask "ghostty@tip"
@@ -85,7 +83,6 @@ brew "go"
 brew "lua-language-server"
 brew "neovim"
 brew "node"
-brew "oven-sh/bun/bun"
 brew "postgresql@$PG_VERSION"
 brew "ripgrep"
 brew "rust" # cargo/rustc for ~/warp
@@ -131,6 +128,12 @@ go install golang.org/x/tools/cmd/goimports@latest
 go install golang.org/x/tools/gopls@latest
 
 # NPM
+# Node is here for the two language servers below, which are published
+# only as npm packages, and for nvim-treesitter, whose install-time
+# `tree-sitter generate` defaults to running node to read a grammar.js.
+# Nothing else needs it: Go builds the JavaScript, tsgo typechecks it,
+# and dprint formats it. A grammar's own check passes
+# --js-runtime native and uses the QuickJS the CLI embeds instead.
 npm install -g npm@latest
 
 # Bash
@@ -140,7 +143,7 @@ npm install -g bash-language-server # uses shellcheck internally for linting dia
 npm install -g vscode-langservers-extracted
 
 # TypeScript
-# Standalone tsgo binary from the GitHub release; no bun/node/tsserver
+# Standalone tsgo binary from the GitHub release; no tsserver
 TSGO_VERSION="7.0.2"
 TSGO_DIR="$HOME/.local/share/tsgo"
 if [ "$("$HOME/.local/bin/tsgo" --version 2>/dev/null)" != "Version $TSGO_VERSION" ]; then
@@ -151,7 +154,7 @@ if [ "$("$HOME/.local/bin/tsgo" --version 2>/dev/null)" != "Version $TSGO_VERSIO
 fi
 
 # dprint
-# Standalone binary from the GitHub release; no bun/node/prettier.
+# Standalone binary from the GitHub release; no prettier.
 DPRINT_VERSION="0.55.2"
 if [ "$("$HOME/.local/bin/dprint" --version 2>/dev/null)" != "dprint $DPRINT_VERSION" ]; then
   mkdir -p "$HOME/.local/bin"

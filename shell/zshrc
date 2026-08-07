@@ -93,7 +93,6 @@ export PGGSSENCMODE=disable # https://github.com/ged/ruby-pg/issues/538
 PATH="$HOME/go/bin:$PATH"                         # Go
 PATH="$BREW/bin:$PATH"                            # Homebrew
 PATH="$BREW/opt/node/bin:$PATH"                   # Node
-PATH="$HOME/.bun/bin:$PATH"                       # Bun
 PATH="$BREW/opt/postgresql@$PG_VERSION/bin:$PATH" # Postgres
 PATH="$HOME/.local/bin:$PATH"                     # XDG
 PATH="$HOME/laptop/bin:$PATH"                     # ~/laptop
