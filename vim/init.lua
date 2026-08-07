@@ -322,10 +322,20 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 -- Bash
-vim.lsp.config("bashls", {
+-- bashd is installed on PATH by laptop.sh (~/go/bin/bashd). It calls
+-- shellcheck for diagnostics, so that stays live without nvim-lint.
+--
+-- bashd tags its shutdown response `result,omitempty`, so a nil result
+-- drops a field LSP requires to be present and null. nvim logs
+-- INVALID_SERVER_MESSAGE for it, visible under --headless but not on an
+-- interactive quit, so it is left alone rather than worked around.
+vim.lsp.config("bashd", {
+	cmd = { "bashd" },
+	filetypes = { "bash", "sh" },
+	root_markers = { ".git" },
 	on_attach = on_attach,
 })
-vim.lsp.enable("bashls")
+vim.lsp.enable("bashd")
 
 -- Gitcommit
 vim.api.nvim_create_autocmd("FileType", {
@@ -356,10 +366,13 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- HTML
-vim.lsp.config("html", {
+-- superhtml is a single binary from Homebrew. Formatting stays with
+-- dprint through conform, which wins because a formatter is configured
+-- for html and lsp_format is only a fallback.
+vim.lsp.config("superhtml", {
 	on_attach = on_attach,
 })
-vim.lsp.enable("html")
+vim.lsp.enable("superhtml")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "html",
 	callback = function()

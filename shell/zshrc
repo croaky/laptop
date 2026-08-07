@@ -81,9 +81,6 @@ closetree() {
 # Bat
 export BAT_THEME="CatppuccinFrappe"
 
-# Node
-export NPM_CONFIG_FUND=false
-
 # Postgres
 export PGUSER=postgres
 PG_VERSION="${PG_VERSION:-17}"
@@ -92,7 +89,6 @@ export PGGSSENCMODE=disable # https://github.com/ged/ruby-pg/issues/538
 # Binaries
 PATH="$HOME/go/bin:$PATH"                         # Go
 PATH="$BREW/bin:$PATH"                            # Homebrew
-PATH="$BREW/opt/node/bin:$PATH"                   # Node
 PATH="$BREW/opt/postgresql@$PG_VERSION/bin:$PATH" # Postgres
 PATH="$HOME/.local/bin:$PATH"                     # XDG
 PATH="$HOME/laptop/bin:$PATH"                     # ~/laptop

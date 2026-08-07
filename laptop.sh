@@ -33,9 +33,6 @@ set -eu
   # Postgres
   ln -sf "$PWD/postgres/psqlrc" "$HOME/.psqlrc"
 
-  # JavaScript
-  ln -sf "$PWD/js/npmrc" "$HOME/.npmrc"
-
   # Shells
   ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
@@ -82,13 +79,13 @@ brew "git"
 brew "go"
 brew "lua-language-server"
 brew "neovim"
-brew "node"
 brew "postgresql@$PG_VERSION"
 brew "ripgrep"
 brew "rust" # cargo/rustc for ~/warp
 brew "shellcheck"
 brew "shfmt"
 brew "stylua"
+brew "superhtml" # HTML language server and formatter
 brew "tree"
 brew "tree-sitter-cli" # parser compiler for nvim-treesitter
 brew "ubicloud/cli/ubi"
@@ -127,20 +124,10 @@ go install golang.org/x/tools/cmd/godoc@latest
 go install golang.org/x/tools/cmd/goimports@latest
 go install golang.org/x/tools/gopls@latest
 
-# NPM
-# Node is here for the two language servers below, which are published
-# only as npm packages, and for nvim-treesitter, whose install-time
-# `tree-sitter generate` defaults to running node to read a grammar.js.
-# Nothing else needs it: Go builds the JavaScript, tsgo typechecks it,
-# and dprint formats it. A grammar's own check passes
-# --js-runtime native and uses the QuickJS the CLI embeds instead.
-npm install -g npm@latest
-
 # Bash
-npm install -g bash-language-server # uses shellcheck internally for linting diagnostics
-
-# HTML
-npm install -g vscode-langservers-extracted
+# Language server built on mvdan.cc/sh that calls shellcheck for
+# diagnostics. Replaces bash-language-server, which is npm only.
+go install github.com/matkrin/bashd/cmd/bashd@latest
 
 # TypeScript
 # Standalone tsgo binary from the GitHub release; no tsserver
