@@ -167,6 +167,44 @@ if ! command -v initdb >/dev/null || ! command -v pg_ctl >/dev/null; then
   exit 1
 fi
 
+# Report whether a running cluster was started with settings other than
+# the ones below. The settings reach a cluster through `pg_ctl -o` at
+# start, so a cluster that is already up keeps whatever it was given,
+# and editing this file alone changes nothing.
+#
+# `pg_ctl status` prints the postmaster command line with each token
+# quoted on its own, so every wanted `name=value` should appear there
+# verbatim. Counting `-c` tokens on both sides catches a setting deleted
+# from this file, which searching for the wanted ones cannot see.
+postgres_settings_differ() {
+  local data_dir="$1"
+  local running token wanted wanted_count=0 running_count
+  local -a tokens
+
+  running="$(pg_ctl -D "$data_dir" status 2>/dev/null | tr -s '[:space:]' ' ')"
+  if [ -z "$running" ]; then
+    return 0
+  fi
+
+  wanted="$(tr -s '[:space:]' ' ' <<<"$2")"
+  read -ra tokens <<<"$wanted"
+
+  for token in "${tokens[@]}"; do
+    case "$token" in
+    -c | -p | [0-9]*) continue ;;
+    esac
+
+    wanted_count=$((wanted_count + 1))
+
+    if [[ "$running" != *"\"$token\""* ]]; then
+      return 0
+    fi
+  done
+
+  running_count="$(awk -F'"-c"' '{ print NF - 1 }' <<<"$running")"
+  [ "$wanted_count" -ne "$running_count" ]
+}
+
 start_postgres_cluster() {
   local port="$1"
   local data_dir="$2"
@@ -184,11 +222,14 @@ start_postgres_cluster() {
   fi
 
   if pg_ctl -D "$data_dir" status >/dev/null 2>&1; then
-    echo "Postgres is already running for data directory $data_dir"
-    return
-  fi
+    if ! postgres_settings_differ "$data_dir" "-p $port $opts"; then
+      echo "Postgres is already running with these settings for $data_dir"
+      return
+    fi
 
-  if lsof -i "tcp:$port" >/dev/null 2>&1; then
+    echo "Restarting Postgres with changed settings for $data_dir"
+    pg_ctl -D "$data_dir" stop
+  elif lsof -i "tcp:$port" >/dev/null 2>&1; then
     echo "Postgres port $port is already in use"
     return
   fi
