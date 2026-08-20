@@ -177,7 +177,7 @@ start_postgres_cluster() {
   mkdir -p "$(dirname "$log_file")"
 
   if [ ! -f "$data_dir/PG_VERSION" ]; then
-    initdb -D "$data_dir" -U postgres -c maintenance_work_mem=2GB
+    initdb -D "$data_dir" -U postgres
 
     echo "timezone = 'UTC'" >>"$data_dir/postgresql.conf"
     echo "log_timezone = 'UTC'" >>"$data_dir/postgresql.conf"
@@ -196,17 +196,49 @@ start_postgres_cluster() {
   pg_ctl -D "$data_dir" -l "$log_file" -o "-p $port $opts" start
 }
 
+# initdb sizes a cluster for a machine it knows nothing about, so out of
+# the box a 128 GB laptop plans queries as though it had 4 GB and an
+# aging disk. Pass the real numbers at start rather than writing them
+# into postgresql.conf, so a data directory that already exists picks
+# them up and this file stays the only place they are defined.
+#
+# shared_buffers is sized to hold a whole database rather than a share
+# of RAM. Buffers beyond the largest database cache nothing.
+# effective_cache_size and random_page_cost are planner inputs rather
+# than allocations: the first tells it how much of a table it can expect
+# to find in memory, the second is priced for a spinning disk by
+# default and overcharges an index scan on an SSD. There is no
+# effective_io_concurrency here because macOS has no posix_fadvise, so
+# the server refuses to start with any value but 0.
+pg_tuning="-c shared_buffers=8GB \
+  -c effective_cache_size=96GB \
+  -c work_mem=64MB \
+  -c maintenance_work_mem=2GB \
+  -c random_page_cost=1.1 \
+  -c max_wal_size=16GB"
+
+# A test database is built by the run that needs it, so it has nothing
+# to lose to a crash and no reason to pay for durability.
+#
+# The dev cluster is deliberately not given these, even though it is
+# restored daily and could afford to lose one. Four restores, two with
+# these settings and two without, averaged 65s and 66s, and the spread
+# within either pair was wider than the gap between them. There is no
+# speed here to buy, and a cluster that survives a panic is worth more
+# than nothing.
+pg_durability="-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
+
 # dev databases
 start_postgres_cluster 5432 \
   "$HOME/.local/share/postgres/data_dev" \
   "$HOME/.local/share/postgres/log_dev.log" \
-  ""
+  "$pg_tuning"
 
 # test databases
 start_postgres_cluster 5433 \
   "$HOME/.local/share/postgres/data_test" \
   "$HOME/.local/share/postgres/log_test.log" \
-  "-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
+  "$pg_tuning $pg_durability"
 
 # SQL formatter
 go install github.com/croaky/pgfmt/cmd/pgfmt@latest
