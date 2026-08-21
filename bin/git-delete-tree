@@ -3,6 +3,11 @@
 # git delete-tree -- drop the worktree you are standing in and its
 # branch, leave the main checkout on an up-to-date main, and print that
 # checkout's path.
+#
+# One line per thing it did, on stderr, because the path is the only
+# thing on stdout: the shell function that owns the cd reads it. Git's
+# own commands run quiet, since a fetch listing a deleted ref and a
+# merge printing a diffstat say nothing a person asked for here.
 
 set -e
 
@@ -22,16 +27,40 @@ fi
 
 {
   if [ "$tree" = "$main" ]; then
-    # The branch was never given a worktree of its own.
-    git -C "$main" checkout main
+    # The branch was never given a worktree of its own, so there is
+    # nothing to remove and nothing named for it on disk.
+    git -C "$main" checkout -q main
+    echo "branch removed $branch"
   else
     git -C "$main" worktree remove "$tree"
+    echo "worktree removed $(basename "$tree") ($tree)"
   fi
 
-  git -C "$main" branch -D "$branch"
-  git -C "$main" fetch origin
-  git -C "$main" merge --ff-only origin/main
+  git -C "$main" branch -q -D "$branch"
+
+  # A repo that gives every worktree its own database has one nobody is
+  # serving now, and it can be most of a working copy in size. Dropping
+  # it here is what makes the disk come back when the worktree goes,
+  # rather than whenever somebody next starts work. `prune` works
+  # forward from the checkouts still on disk, so the removal above is
+  # the whole of what tells it which database to drop.
+  #
+  # Guarded the way the checkout that creates one is guarded, and
+  # reported rather than fatal: the worktree is gone either way, and a
+  # laptop with no Postgres running is a thing to say rather than a
+  # reason to leave a branch behind.
+  if [ -d "$main/cmd/db" ]; then
+    (cd "$main" && go run ./cmd/db prune) ||
+      echo "prune: left this worktree's database behind"
+  fi
+
+  git -C "$main" fetch -q origin
+  git -C "$main" merge -q --ff-only origin/main
   git -C "$main" remote prune origin
+  # Seven, which is what cibot abbreviates to on the merge line above
+  # this one. Git's own --short is adaptive, so the two lines disagreed
+  # about the length of the same commit.
+  echo "main updated to $(git -C "$main" rev-parse --short=7 HEAD)"
 } >&2
 
 echo "$main"
