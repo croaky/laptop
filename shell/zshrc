@@ -83,7 +83,7 @@ export BAT_THEME="CatppuccinFrappe"
 
 # Postgres
 export PGUSER=postgres
-PG_VERSION="${PG_VERSION:-17}"
+PG_VERSION="${PG_VERSION:-18}"
 export PGGSSENCMODE=disable # https://github.com/ged/ruby-pg/issues/538
 
 # Binaries

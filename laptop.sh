@@ -57,7 +57,7 @@ fi
 
 export PATH="$BREW/bin:$PATH"
 
-PG_VERSION="${PG_VERSION:-17}"
+PG_VERSION="${PG_VERSION:-18}"
 
 brew analytics off
 brew update-reset
