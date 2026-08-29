@@ -87,7 +87,6 @@ require("lazy").setup({
 
 	-- Frontend
 	{ "leafgarland/typescript-vim" },
-	{ "mxw/vim-jsx" },
 	{ "pangloss/vim-javascript" },
 
 	opts_extend = { "sources.default" },
