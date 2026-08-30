@@ -611,6 +611,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- :so $VIMRUNTIME/syntax/hitest.vim
 require("catppuccin").setup({
 	flavour = "frappe",
+	transparent_background = true,
 	integrations = {
 		default_integrations = false,
 		auto_integrations = true,
