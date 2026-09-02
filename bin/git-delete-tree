@@ -38,22 +38,6 @@ fi
 
   git -C "$main" branch -q -D "$branch"
 
-  # A repo that gives every worktree its own database has one nobody is
-  # serving now, and it can be most of a working copy in size. Dropping
-  # it here is what makes the disk come back when the worktree goes,
-  # rather than whenever somebody next starts work. `prune` works
-  # forward from the checkouts still on disk, so the removal above is
-  # the whole of what tells it which database to drop.
-  #
-  # Guarded the way the checkout that creates one is guarded, and
-  # reported rather than fatal: the worktree is gone either way, and a
-  # laptop with no Postgres running is a thing to say rather than a
-  # reason to leave a branch behind.
-  if [ -d "$main/cmd/db" ]; then
-    (cd "$main" && go run ./cmd/db prune) ||
-      echo "prune: left this worktree's database behind"
-  fi
-
   git -C "$main" fetch -q origin
   git -C "$main" merge -q --ff-only origin/main
   git -C "$main" remote prune origin
@@ -62,34 +46,21 @@ fi
   # about the length of the same commit.
   echo "main updated to $(git -C "$main" rev-parse --short=7 HEAD)"
 
-  # The merge above is what makes this necessary: main now stands on a
-  # commit whose migrations were written in the worktree that just went,
-  # and the main checkout's own database has never seen them. Nothing
-  # else brings the two together, so it was found by a server that would
-  # not serve a column the code selects, days later, in a checkout nobody
-  # associated with a branch they had already merged.
+  # What the repo does after a worktree goes, if it does anything. A
+  # repo that gives every worktree its own database drops the one
+  # nobody serves now, and migrates the main checkout's onto the commit
+  # the merge above just landed. This script does not know that. The
+  # clone's `tree.teardown` config key names a command, and this runs
+  # it in the main checkout after main is up to date.
   #
-  # Costs a build and a statement when nothing is pending. Reported
-  # rather than fatal, for the same reason as the prune above: the branch
-  # is merged and gone either way.
-  if [ -d "$main/cmd/db" ]; then
-    schema="$main/db/schema.sql"
-    dirty=$(git -C "$main" status --porcelain -- "$schema")
-
-    (cd "$main" && go run ./cmd/db migrate) ||
-      echo "migrate: main's database is behind main"
-
-    # Migrating regenerates the schema dump, and a dump that comes back
-    # different from the committed one leaves the checkout dirty for a
-    # reason nobody would connect to deleting a worktree. It is put back,
-    # and said out loud, because the difference is either a Postgres
-    # version that is not the one the file was generated on or something
-    # a merge got wrong, and both want looking at deliberately.
-    if [ -z "$dirty" ] &&
-      [ -n "$(git -C "$main" status --porcelain -- "$schema")" ]; then
-      git -C "$main" checkout -q -- "$schema"
-      echo "migrate: db/schema.sql came back changed; put it back"
-    fi
+  # Reported rather than fatal: the worktree is gone either way, and a
+  # laptop with no Postgres running is a thing to say rather than a
+  # reason to leave a branch behind. `cibot checkout` and `git
+  # create-tree` read `tree.setup` the same way.
+  teardown=$(git -C "$main" config --get tree.teardown || true)
+  if [ -n "$teardown" ]; then
+    (cd "$main" && sh -c "$teardown") ||
+      echo "tree.teardown: failed"
   fi
 } >&2
 

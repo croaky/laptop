@@ -34,6 +34,18 @@ tree_dir="$HOME/.worktrees/$(basename "$main_dir")/$1"
   if [ -e "$main_dir/.env" ]; then
     ln -s "$main_dir/.env" "$tree_dir/.env"
   fi
+
+  # What the repo needs of a new worktree, if it needs anything. The
+  # clone's `tree.setup` config key names a command, and this runs it
+  # in the worktree. `cibot checkout` does the same, and `git
+  # delete-tree` reads `tree.teardown` at the other end. Reported
+  # rather than fatal: a worktree missing its setup is still worth
+  # having.
+  setup=$(git config --get tree.setup || true)
+  if [ -n "$setup" ]; then
+    (cd "$tree_dir" && sh -c "$setup") ||
+      echo "tree.setup: failed"
+  fi
 } >&2
 
 echo "$tree_dir"
