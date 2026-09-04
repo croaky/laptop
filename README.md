@@ -69,7 +69,7 @@ Run:
 ```
 
 The script can safely be run multiple times.
-It is tested on the latest version of macOS on a arm64 (Apple Silicon) chip.
+It is tested on the latest version of macOS on an arm64 (Apple Silicon) chip.
 
 Separate from the script, the following README sections
 are "one time setup" items.
@@ -84,7 +84,7 @@ Install macOS apps:
 
 ## Keyboard
 
-Configure "System Preferences > Keyboard":
+Configure "System Settings > Keyboard":
 
 - Set "Key Repeat" to "Fast".
 - Set "Delay Until Repeat" to "Short".
@@ -102,7 +102,7 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 Set DNS resolver to [`1.1.1.1`](https://1.1.1.1),
 a fast, privacy-focused DNS service from Cloudflare:
 
-- Go to "System Preferences > Network > Advanced... > DNS"
+- Go to "System Settings > Network > Advanced... > DNS"
 - Click "+"
 - Enter "1.1.1.1"
 - Click "OK"
@@ -120,5 +120,5 @@ sudo spctl developer-mode enable-terminal
 
 Then:
 
-- Go to "System Preferences > Privacy & Security > Developer Tools"
+- Go to "System Settings > Privacy & Security > Developer Tools"
 - Select "Warp" as the terminal program.

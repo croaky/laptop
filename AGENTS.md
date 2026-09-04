@@ -1,7 +1,7 @@
 # Agents guide
 
 laptop sets up a macOS machine as a development environment. See
-`README.md` for the setup itself and what each directory holds.
+`README.md` for the setup steps.
 
 ## Writing
 
@@ -34,7 +34,7 @@ error message stay as they are.
 ## Commits
 
 - Prefix with what the change acts on: `laptop:`, `shell:`, `vim:`,
-  `git:`, `cli:`, `postgres:`, `term:`, `bin:`, `todo:`.
+  `git:`, `cli:`, `postgres:`, `term:`, `bin:`.
 - Imperative mood, lowercase except proper nouns. Hard-wrap at 72.
 - Include _why_, not just _what_. See `git log` for examples.
 - Sign your work with a `Co-Authored-By` trailer.
