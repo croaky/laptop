@@ -86,6 +86,13 @@ export PGUSER=postgres
 PG_VERSION="${PG_VERSION:-18}"
 export PGGSSENCMODE=disable # https://github.com/ged/ruby-pg/issues/538
 
+# Tailscale (CLI ships inside the macOS app bundle; symlinking it breaks
+# the app's bundle-identifier check, so alias the full path instead)
+TAILSCALE="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+if [ -x "$TAILSCALE" ]; then
+  alias tailscale="$TAILSCALE"
+fi
+
 # Binaries
 PATH="$HOME/go/bin:$PATH"                         # Go
 PATH="$BREW/bin:$PATH"                            # Homebrew
