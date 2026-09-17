@@ -84,7 +84,11 @@ export BAT_THEME="CatppuccinFrappe"
 # Postgres
 export PGUSER=postgres
 PG_VERSION="${PG_VERSION:-18}"
-export PGGSSENCMODE=disable # https://github.com/ged/ruby-pg/issues/538
+# Homebrew builds libpq with GSSAPI, so psql defaults gssencmode to
+# `prefer` and pays a refused GSSENCRequest on each connect. Read by
+# libpq clients only; pgx ignores it.
+# https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-GSSENCMODE
+export PGGSSENCMODE=disable
 
 # Tailscale (CLI ships inside the macOS app bundle; symlinking it breaks
 # the app's bundle-identifier check, so alias the full path instead)
