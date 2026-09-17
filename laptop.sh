@@ -3,10 +3,10 @@
 # ./laptop.sh
 
 # - terminals (Ghostty, Warp)
-# - shells (nu, zsh)
+# - shell (zsh)
 # - symlinks for dotfiles to `$HOME`
 # - text editor (Neovim)
-# - programming language runtimes (Go, Node, Rust)
+# - programming language toolchains (Go, Rust)
 # - language servers (Bash, Go, HTML, Lua, TypeScript)
 # - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree, ubi)
 # - databases (Postgres dev and test clusters)
