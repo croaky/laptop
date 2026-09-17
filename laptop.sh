@@ -283,3 +283,6 @@ start_postgres_cluster 5433 \
 
 # SQL formatter
 go install github.com/croaky/pgfmt/cmd/pgfmt@latest
+
+# Headless browser screenshots, for an agent to look at a page
+go install github.com/croaky/browse@latest
