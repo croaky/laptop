@@ -1,0 +1,111 @@
+#!/bin/bash
+#
+# Bootstrap a fresh Ubicloud VM into a single-purpose host that an agent or
+# service account operates: joined to a tailnet, reachable only over Tailscale
+# SSH, with an unprivileged user that has passwordless sudo.
+#
+# Assumes a freshly created Ubuntu 24.04 VM with my SSH key, still reachable
+# on public port 22.
+#
+# Usage:
+#   vm-bootstrap <public-ipv4> <hostname> <user>
+#
+# Prompts for a Tailscale auth key: generate a single-use, non-ephemeral key
+# tagged `tag:<hostname>` at
+# https://login.tailscale.com/admin/settings/keys
+# The tag must already exist in `tagOwners` in the tailnet policy.
+#
+# Passwordless sudo is deliberate: the operator installs packages and restarts
+# services unattended. Only run this on single-purpose VMs where that blast
+# radius is acceptable.
+#
+# Afterwards, by hand:
+#   1. Verify `ssh <user>@<hostname>` works over Tailscale.
+#   2. Ubicloud firewall: drop port 22, open only the ports the service needs.
+#   3. Point DNS at the public IP.
+#   4. Add the printed deploy key to the app repo if it needs to push.
+
+set -euo pipefail
+
+if [[ $# -ne 3 ]]; then
+  echo "usage: vm-bootstrap <public-ipv4> <hostname> <user>" >&2
+  exit 1
+fi
+
+ip="$1"
+name="$2"
+user="$3"
+remote_user="${VM_BOOTSTRAP_USER:-croaky}"
+host="$remote_user@$ip"
+
+printf 'Tailscale auth key (tag:%s): ' "$name"
+read -rs ts_key
+printf '\n'
+
+if [[ -z "$ts_key" ]]; then
+  echo "no auth key given" >&2
+  exit 1
+fi
+
+# Join the tailnet and enable Tailscale SSH. Tagging the node also disables
+# node key expiry, so the VM will not silently drop off in 90 days.
+#
+# The key goes to the remote bash on stdin, not in the command string. A
+# command string becomes the argv of the remote shell, which every user on
+# the box can read in ps while the command runs.
+{
+  printf 'TS_KEY=%q\nNAME=%q\n' "$ts_key" "$name"
+  cat <<'EOF'
+set -euo pipefail
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up --authkey="$TS_KEY" --ssh --advertise-tags="tag:$NAME"
+sudo tailscale set --hostname="$NAME"
+sudo hostnamectl set-hostname "$NAME"
+EOF
+} | ssh "$host" 'bash -s'
+
+ssh "$host" "USER_NAME='$user' bash -s" <<'EOF'
+set -euo pipefail
+sudo adduser --disabled-password --gecos "" "$USER_NAME"
+echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" | sudo tee "/etc/sudoers.d/$USER_NAME" >/dev/null
+sudo chmod 440 "/etc/sudoers.d/$USER_NAME"
+EOF
+
+# Harden sshd. Authorization comes from Tailscale ACLs, not authorized_keys,
+# so no key is installed for the new user.
+ssh "$host" 'bash -s' <<'EOF'
+set -euo pipefail
+sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+sudo sshd -t
+sudo systemctl reload ssh
+EOF
+
+# Deploy key for pushing to a git remote. The private key stays on the VM, so
+# nothing needs to live in a vault or be transmitted.
+ssh "$host" "USER_NAME='$user' NAME='$name' bash -s" <<'EOF'
+set -euo pipefail
+sudo -u "$USER_NAME" -H env NAME="$NAME" bash <<'INNER'
+set -euo pipefail
+cd ~
+ssh-keygen -t ed25519 -f .ssh/deploy -N "" -C "$NAME deploy key" >/dev/null
+chmod 600 .ssh/deploy
+cat > .ssh/config <<'CONF'
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/deploy
+  IdentitiesOnly yes
+CONF
+chmod 600 .ssh/config
+git config --global user.name "$NAME"
+git config --global init.defaultBranch main
+INNER
+EOF
+
+echo
+echo "Deploy key (add to the app repo with write access if it needs to push):"
+ssh "$host" "sudo -u '$user' cat /home/$user/.ssh/deploy.pub"
+
+echo
+echo "Keep this session open until 'ssh $user@$name' is verified over Tailscale."
