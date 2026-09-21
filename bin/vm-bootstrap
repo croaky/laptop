@@ -1,80 +1,74 @@
 #!/bin/bash
 #
 # Bootstrap a fresh Ubicloud VM into a single-purpose host that an agent or
-# service account operates: joined to a tailnet, reachable only over Tailscale
-# SSH, with an unprivileged user that has passwordless sudo.
+# service account operates: reachable over SSH on its public IP with public
+# keys only, and an unprivileged user that has passwordless sudo.
 #
 # Assumes a freshly created Ubuntu 24.04 VM with my SSH key, still reachable
 # on public port 22.
 #
 # Usage:
-#   vm-bootstrap <public-ipv4> <hostname> <user>
+#   vm-bootstrap <public-ipv4> <hostname> <user> <public-key-file>
 #
-# Prompts for a Tailscale auth key: generate a single-use, non-ephemeral key
-# tagged `tag:<hostname>` at
-# https://login.tailscale.com/admin/settings/keys
-# The tag must already exist in `tagOwners` in the tailnet policy.
+# <public-key-file> is the operator's ed25519 public key, installed as the
+# new user's only authorized key. A public key carries no secrecy, so it may
+# travel on the command line.
 #
 # Passwordless sudo is deliberate: the operator installs packages and restarts
 # services unattended. Only run this on single-purpose VMs where that blast
 # radius is acceptable.
 #
+# Port 22 stays open to the internet, so the sshd settings below are the only
+# gate. Keep password and root login off.
+#
 # Afterwards, by hand:
-#   1. Verify `ssh <user>@<hostname>` works over Tailscale.
-#   2. Ubicloud firewall: drop port 22, open only the ports the service needs.
+#   1. Verify `ssh <user>@<public-ipv4>` works.
+#   2. Ubicloud firewall: open only the ports the service needs.
 #   3. Point DNS at the public IP.
 #   4. Add the printed deploy key to the app repo if it needs to push.
 
 set -euo pipefail
 
-if [[ $# -ne 3 ]]; then
-  echo "usage: vm-bootstrap <public-ipv4> <hostname> <user>" >&2
+if [[ $# -ne 4 ]]; then
+  echo "usage: vm-bootstrap <public-ipv4> <hostname> <user> <public-key-file>" >&2
   exit 1
 fi
 
 ip="$1"
 name="$2"
 user="$3"
+pubkey_file="$4"
 remote_user="${VM_BOOTSTRAP_USER:-croaky}"
 host="$remote_user@$ip"
 
-printf 'Tailscale auth key (tag:%s): ' "$name"
-read -rs ts_key
-printf '\n'
+if [[ ! -r "$pubkey_file" ]]; then
+  echo "cannot read public key: $pubkey_file" >&2
+  exit 1
+fi
+pubkey="$(cat "$pubkey_file")"
 
-if [[ -z "$ts_key" ]]; then
-  echo "no auth key given" >&2
+if [[ "$pubkey" != ssh-* && "$pubkey" != ecdsa-* ]]; then
+  echo "not an SSH public key: $pubkey_file" >&2
   exit 1
 fi
 
-# Join the tailnet and enable Tailscale SSH. Tagging the node also disables
-# node key expiry, so the VM will not silently drop off in 90 days.
-#
-# The key goes to the remote bash on stdin, not in the command string. A
-# command string becomes the argv of the remote shell, which every user on
-# the box can read in ps while the command runs.
-{
-  printf 'TS_KEY=%q\nNAME=%q\n' "$ts_key" "$name"
-  cat <<'EOF'
+ssh "$host" "USER_NAME='$user' NAME='$name' bash -s" <<'EOF'
 set -euo pipefail
-curl -fsSL https://tailscale.com/install.sh | sh
-sudo tailscale up --authkey="$TS_KEY" --ssh --advertise-tags="tag:$NAME"
-sudo tailscale set --hostname="$NAME"
 sudo hostnamectl set-hostname "$NAME"
-EOF
-} | ssh "$host" 'bash -s'
-
-ssh "$host" "USER_NAME='$user' bash -s" <<'EOF'
-set -euo pipefail
 sudo adduser --disabled-password --gecos "" "$USER_NAME"
 echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" | sudo tee "/etc/sudoers.d/$USER_NAME" >/dev/null
 sudo chmod 440 "/etc/sudoers.d/$USER_NAME"
 EOF
 
-# Harden sshd. Authorization comes from Tailscale ACLs, not authorized_keys,
-# so no key is installed for the new user.
-ssh "$host" 'bash -s' <<'EOF'
+# Public-key-only SSH: passwords and root stay off, and the operator's key is
+# the only way in as the new user. The key is public, so the command string
+# is a safe place for it.
+ssh "$host" "USER_NAME='$user' PUBKEY='$pubkey' bash -s" <<'EOF'
 set -euo pipefail
+sudo -u "$USER_NAME" mkdir -p "/home/$USER_NAME/.ssh"
+sudo -u "$USER_NAME" chmod 700 "/home/$USER_NAME/.ssh"
+echo "$PUBKEY" | sudo -u "$USER_NAME" tee "/home/$USER_NAME/.ssh/authorized_keys" >/dev/null
+sudo -u "$USER_NAME" chmod 600 "/home/$USER_NAME/.ssh/authorized_keys"
 sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
 sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
 sudo sshd -t
@@ -108,4 +102,4 @@ echo "Deploy key (add to the app repo with write access if it needs to push):"
 ssh "$host" "sudo -u '$user' cat /home/$user/.ssh/deploy.pub"
 
 echo
-echo "Keep this session open until 'ssh $user@$name' is verified over Tailscale."
+echo "Keep this session open until 'ssh $user@$ip' is verified."
