@@ -1,0 +1,7 @@
+# The first change a repo earns on a sockeye instance: a Checkfile, so
+# its own push proves the runners end to end (Dan 9/28).
+#
+# bin/ is the shell nobody compiles. SC2029 stays excluded:
+# vm-bootstrap passes "$user" and friends into a remote heredoc, and
+# expanding them on the client side is how the values reach the box.
+shellcheck: git ls-files -z '*.sh' 'bin/*' | xargs -0 shellcheck -e SC2029
