@@ -29,3 +29,9 @@ error message stay as they are.
 
 This repo has no CI and no review gate. Work on `main`, run whatever
 the change touches, and push.
+
+## Documentation
+
+When software changes, find each doc that describes it and update it
+in the same change. A reader cannot tell a stale paragraph from a
+true one.
