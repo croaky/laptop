@@ -41,7 +41,7 @@ fi
   git -C "$main" fetch -q origin
   git -C "$main" merge -q --ff-only origin/main
   git -C "$main" remote prune origin
-  # Seven, which is what cibot abbreviates to on the merge line above
+  # Seven, which is what sockeye abbreviates to on the merge line above
   # this one. Git's own --short is adaptive, so the two lines disagreed
   # about the length of the same commit.
   echo "main updated to $(git -C "$main" rev-parse --short=7 HEAD)"
@@ -55,7 +55,7 @@ fi
   #
   # Reported rather than fatal: the worktree is gone either way, and a
   # laptop with no Postgres running is a thing to say rather than a
-  # reason to leave a branch behind. `cibot checkout` and `git
+  # reason to leave a branch behind. `soc checkout` and `git
   # create-tree` read `tree.setup` the same way.
   teardown=$(git -C "$main" config --get tree.teardown || true)
   if [ -n "$teardown" ]; then

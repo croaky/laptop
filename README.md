@@ -46,6 +46,34 @@ to keep it out of version control:
   email = you@example.com
 ```
 
+### Change worktrees
+
+`createtree` uses `soc checkout` when origin matches a configured
+sockeye server, and `git create-tree` for other repos. `mergetree` and
+`closetree` use the same server selection.
+
+Keep instance URLs in `~/.gitconfig.local`:
+
+```gitconfig
+[sockeye]
+  url = https://personal.example.com
+[sockeye "dc"]
+  url = https://personal.example.com
+[sockeye "ivp"]
+  url = https://work.example.com
+```
+
+`soc-dc` and `soc-ivp` select an instance for one command, such as
+`soc-ivp login` or `soc-dc show SOC-1`. They do not change the saved
+default. An explicit checkout still needs a clone from that instance.
+
+Tree helpers select origin's server even when `SOCKEYE_URL` names
+another server. Register each server before using its tree helpers.
+Credentials stay in git's host-scoped helper.
+
+Run the isolated helper tests with `zsh -f shell/zshrc_test.zsh`.
+The tests use local stub commands and do not contact a server.
+
 ## Install
 
 Clone onto laptop:

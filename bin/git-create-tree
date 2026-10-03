@@ -2,8 +2,8 @@
 
 # git create-tree <name> -- cut a worktree from origin/main for a new
 # branch and print its path. For GitHub repos, where the branch name is
-# mine to invent; on a cibot repo `cibot checkout` does this instead and
-# the farmer names the change.
+# mine to invent; on a sockeye repo `soc checkout` does this instead and
+# the sockeye server names the change.
 #
 # The path is the only thing on stdout, so the shell function that owns
 # the cd gets a path and nothing else.
@@ -37,7 +37,7 @@ tree_dir="$HOME/.worktrees/$(basename "$main_dir")/$1"
 
   # What the repo needs of a new worktree, if it needs anything. The
   # clone's `tree.setup` config key names a command, and this runs it
-  # in the worktree. `cibot checkout` does the same, and `git
+  # in the worktree. `soc checkout` does the same, and `git
   # delete-tree` reads `tree.teardown` at the other end. Reported
   # rather than fatal: a worktree missing its setup is still worth
   # having.

@@ -53,12 +53,49 @@ autoload -Uz compinit
 compinit -u
 
 # Git
+_soc_instance() {
+  local instance="$1" url
+  shift
+  url=$(git config --get "sockeye.$instance.url") || {
+    print -ru2 -- "Set sockeye.$instance.url in ~/.gitconfig.local."
+    return 1
+  }
+  [[ -n "$url" ]] || return 1
+  SOCKEYE_URL="${url%/}" command soc "$@"
+}
+soc-dc() {
+  _soc_instance dc "$@"
+}
+soc-ivp() {
+  _soc_instance ivp "$@"
+}
+
+# Match registered servers, not the global default alone.
+_tree_server() {
+  local origin key url
+  origin=$(git config --get remote.origin.url 2>/dev/null) || return 1
+  while read -r key url; do
+    if [[ -n "$url" && "$origin" == "${url%/}"/git/* ]]; then
+      return 0
+    fi
+  done < <(git config --get-regexp '^sockeye(\.[^.]+)?\.url$' 2>/dev/null)
+  return 1
+}
+
+# Pin tree commands to origin, even when a URL is exported.
+_tree_change() {
+  local origin
+  _tree_server || {
+    print -ru2 -- "Origin is not a configured sockeye server."
+    return 1
+  }
+  origin=$(git config --get remote.origin.url) || return
+  SOCKEYE_URL="${origin%%/git/*}" command soc "$@"
+}
 createtree() {
-  local dir origin farmer
-  origin=$(git config --get remote.origin.url)
-  farmer=$(git config --get cibot.url)
-  if [[ -n "$farmer" && "$origin" == "$farmer"/git/* ]]; then
-    dir=$(cibot checkout "$@") || return
+  local dir
+  if _tree_server; then
+    dir=$(_tree_change checkout "$@") || return
   else
     dir=$(git create-tree "$@") || return
   fi
@@ -70,11 +107,11 @@ deletetree() {
   cd "$main"
 }
 mergetree() {
-  cibot merge "$@" || return
+  _tree_change merge "$@" || return
   deletetree
 }
 closetree() {
-  cibot close "$@" || return
+  _tree_change close "$@" || return
   deletetree
 }
 
