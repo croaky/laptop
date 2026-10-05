@@ -215,6 +215,10 @@ end
 
 -- LSP Configuration
 local on_attach = function(client, bufnr)
+	-- Keep Treesitter highlights. Semantic tokens arrive after the server
+	-- attaches and repaint the buffer, e.g. gopls marks the package name in
+	-- an import path as a namespace, which Catppuccin draws italic yellow.
+	client.server_capabilities.semanticTokensProvider = nil
 	if client:supports_method("textDocument/completion") then
 		vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
 	end
