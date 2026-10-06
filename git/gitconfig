@@ -18,7 +18,11 @@
   excludesfile = ~/.gitignore
   ignorecase = false
 [credential]
-  helper = osxkeychain
+  # Clear the Homebrew default from /opt/homebrew/etc/gitconfig. Its
+  # osxkeychain is signed ad hoc, so each brew upgrade loses Keychain
+  # trust and prompts again. Apple signs this one.
+  helper =
+  helper = /Library/Developer/CommandLineTools/usr/libexec/git-core/git-credential-osxkeychain
 [credential "https://github.com"]
   helper = !/opt/homebrew/bin/gh auth git-credential
 [diff]
