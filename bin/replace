@@ -11,17 +11,11 @@ shift
 replace_with="$1"
 shift
 
-# Use rg with -F to search for fixed strings
-items=$(rg -F -l "$find_this" "$@")
+# Escape the sed delimiter and "&" in both strings.
+sed_find=$(printf '%s' "$find_this" | sed 's/[\/&]/\\&/g')
+sed_replace=$(printf '%s' "$replace_with" | sed 's/[\/&]/\\&/g')
 
-IFS=$'\n'
-for item in $items; do
-  # Escape special characters for sed in find_this
-  sed_find=$(printf '%s' "$find_this" | sed 's/[\/&]/\\&/g')
-
-  # Escape special characters for sed in replace_with
-  sed_replace=$(printf '%s' "$replace_with" | sed 's/[\/&]/\\&/g')
-
-  # Use sed with the escaped patterns
-  sed -i '' "s/$sed_find/$sed_replace/g" "$item"
-done
+# rg -F finds the files that contain the fixed string.
+# One sed process then edits all of them.
+rg -F -l -0 "$find_this" "$@" |
+  xargs -0 sed -i '' "s/$sed_find/$sed_replace/g"
