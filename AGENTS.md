@@ -96,8 +96,8 @@ description short and clear:
 Work happens on a sockeye change. `createtree` allocates one and cuts a
 worktree, and `soc edit` sets its title and description. Write them
 before the work: a change with neither is a blank row on the
-dashboard. The `Checkfile` runs `shellcheck` on every push. Read the
-result with `git push && soc show --wait`, then merge with `mergetree`.
+dashboard. The `Checkfile` runs `shellcheck` on every push. Push with
+`soc push --wait`, then merge with `mergetree`.
 
 ## Documentation
 
