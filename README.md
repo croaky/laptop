@@ -61,20 +61,24 @@ Keep instance URLs in `~/.gitconfig.local`:
   url = https://personal.example.com
 [sockeye "ivp"]
   url = https://work.example.com
+```
+
+`soc login` and `soc git setup` write the `credential` block for a
+server to `~/.gitconfig`, which this repo does not track. After you
+log in, move that block to `~/.gitconfig.local`. `git/gitconfig`
+includes that file.
+
+```gitconfig
 [credential "https://personal.example.com"]
-  helper =
-  helper = !soc auth git-credential
-[credential "https://work.example.com"]
   helper =
   helper = !soc auth git-credential
 ```
 
-The `credential` sections send git to `soc` for each server's token.
-`soc login` keeps the token in the Keychain and prints these lines for
-a new server. The empty `helper` clears the `osxkeychain` helper in
-`git/gitconfig`, so no second copy of the token stays in the Keychain.
-GitHub uses `gh` the same way. Other hosts use the Apple-signed
-`osxkeychain` helper.
+The token is in `~/.config/sockeye/token`. The Keychain has no copy.
+The `credential` block sends git to `soc auth git-credential` for the
+token. The empty `helper` clears the `osxkeychain` helper in
+`git/gitconfig`. GitHub uses `gh` the same way. Other hosts use the
+Apple-signed `osxkeychain` helper.
 
 `soc-dc` and `soc-ivp` select an instance for one command, such as
 `soc-ivp login` or `soc-dc show SOC-1`. They do not change the saved
