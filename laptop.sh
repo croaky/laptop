@@ -10,6 +10,7 @@
 # - language servers (Bash, Go, HTML, Lua, TypeScript)
 # - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree, ubi)
 # - databases (Postgres dev and test clusters)
+# - local host names (`bin/hostctl` edits /etc/hosts)
 
 # This script can be safely run multiple times.
 # Tested with macOS Tahoe on arm64.
@@ -286,3 +287,6 @@ go install github.com/croaky/pgfmt/cmd/pgfmt@latest
 
 # Headless browser screenshots, for an agent to look at a page
 go install github.com/croaky/browse@latest
+
+# Local host names for dev servers (site.localhost and others)
+"$(dirname "$0")/bin/hostctl"
