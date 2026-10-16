@@ -103,7 +103,7 @@ git config --file "$GIT_CONFIG_GLOBAL" sockeye.dc.url https://personal.example.c
 
 git config remote.origin.url https://work.example.com/git/ci.git
 mergetree CI-4
-eq "$(<"$CALLS")" $'soc\nhttps://work.example.com\nmerge\nCI-4\ndelete-tree' 'merge routing'
+eq "$(<"$CALLS")" $'soc\nhttps://work.example.com\nmerge\n--when-green\nCI-4\ndelete-tree' 'merge routing'
 closetree CI-5
 eq "$(<"$CALLS")" $'soc\nhttps://work.example.com\nclose\nCI-5\ndelete-tree' 'close routing'
 export FAIL_ACTION=merge
@@ -111,7 +111,7 @@ if mergetree CI-6; then
   print -ru2 'failed merge removed the worktree'
   exit 1
 fi
-eq "$(<"$CALLS")" $'soc\nhttps://work.example.com\nmerge\nCI-6' 'merge failure keeps worktree'
+eq "$(<"$CALLS")" $'soc\nhttps://work.example.com\nmerge\n--when-green\nCI-6' 'merge failure keeps worktree'
 unset FAIL_ACTION
 
 git config remote.origin.url git@github.com:example/repo.git

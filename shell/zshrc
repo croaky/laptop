@@ -107,7 +107,7 @@ deletetree() {
   cd "$main"
 }
 mergetree() {
-  _tree_change merge "$@" || return
+  _tree_change merge --when-green "$@" || return
   deletetree
 }
 closetree() {
