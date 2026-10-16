@@ -288,5 +288,5 @@ go install github.com/croaky/pgfmt/cmd/pgfmt@latest
 # Headless browser screenshots, for an agent to look at a page
 go install github.com/croaky/browse@latest
 
-# Local host names for dev servers (site.localhost and others)
+# Local host names for dev servers (blog.localhost and others)
 "$(dirname "$0")/bin/hostctl"

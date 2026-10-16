@@ -15,7 +15,7 @@ custom_hosts_entries() {
 255.255.255.255 broadcasthost
 
 # local apps
-127.0.0.1 site.localhost          # :2000
+127.0.0.1 blog.localhost          # :2000
 127.0.0.1 duckduckbay.localhost   # :2001
 127.0.0.1 marshfall.localhost     # :2002
 127.0.0.1 eds.localhost           # :3000
