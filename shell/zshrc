@@ -142,3 +142,8 @@ PATH="$HOME/.local/bin:$PATH"                     # XDG
 PATH="$HOME/laptop/bin:$PATH"                     # ~/laptop
 PATH="./bin:$PATH"                                # current project
 export PATH
+
+# Sockeye
+if command -v soc >/dev/null 2>&1; then
+  source <(soc completion zsh)
+fi
