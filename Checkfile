@@ -5,3 +5,7 @@
 # vm-bootstrap passes "$user" and friends into a remote heredoc, and
 # expanding them on the client side is how the values reach the box.
 shellcheck: git ls-files -z '*.sh' 'bin/*' | xargs -0 shellcheck -e SC2029
+
+# The title a change needs to merge, and the body rules that come
+# with it. sockeye reads this from main at merge.
+merge: ^[a-z][a-z0-9_/-]*(?:, ?[a-z][a-z0-9_/-]*)*: [a-z](?:.{2,62})?(?:[^.\s]|\.\.\.)$
