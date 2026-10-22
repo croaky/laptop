@@ -17,36 +17,38 @@
 
 set -eu
 
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
 # Symlinks
 (
   # CLI
   mkdir -p "$HOME/.config/bat/themes"
-  ln -sf "$PWD/cli/bat.xml" "$HOME/.config/bat/themes/CatppuccinFrappe.tmTheme"
+  ln -sf "$DIR/cli/bat.xml" "$HOME/.config/bat/themes/CatppuccinFrappe.tmTheme"
   mkdir -p "$HOME/.config/dprint"
-  ln -sf "$PWD/cli/dprint.jsonc" "$HOME/.config/dprint/dprint.jsonc"
+  ln -sf "$DIR/cli/dprint.jsonc" "$HOME/.config/dprint/dprint.jsonc"
   mkdir -p "$HOME/.ssh"
-  ln -sf "$PWD/cli/ssh" "$HOME/.ssh/config"
+  ln -sf "$DIR/cli/ssh" "$HOME/.ssh/config"
 
   # Git
-  ln -sf "$PWD/git/gitconfig" "$HOME/.gitconfig"
-  ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
+  ln -sf "$DIR/git/gitconfig" "$HOME/.gitconfig"
+  ln -sf "$DIR/git/gitignore" "$HOME/.gitignore"
 
   # Postgres
-  ln -sf "$PWD/postgres/psqlrc" "$HOME/.psqlrc"
+  ln -sf "$DIR/postgres/psqlrc" "$HOME/.psqlrc"
 
   # Shells
-  ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
-  ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
+  ln -sf "$DIR/shell/hushlogin" "$HOME/.hushlogin"
+  ln -sf "$DIR/shell/zshrc" "$HOME/.zshrc"
 
   # Terminals
   mkdir -p "$HOME/.config/ghostty"
-  ln -sf "$PWD/term/ghostty" "$HOME/.config/ghostty/config"
+  ln -sf "$DIR/term/ghostty" "$HOME/.config/ghostty/config"
   mkdir -p "$HOME/.warp/themes"
-  ln -sf "$PWD/term/warp.yml" "$HOME/.warp/themes/catppuccin_frappe.yml"
+  ln -sf "$DIR/term/warp.yml" "$HOME/.warp/themes/catppuccin_frappe.yml"
 
   # Vim
   mkdir -p "$HOME/.config/nvim"
-  ln -sf "$PWD/vim/init.lua" "$HOME/.config/nvim/init.lua"
+  ln -sf "$DIR/vim/init.lua" "$HOME/.config/nvim/init.lua"
 )
 
 # Homebrew
@@ -289,4 +291,4 @@ go install github.com/croaky/pgfmt/cmd/pgfmt@latest
 go install github.com/croaky/browse@latest
 
 # Local host names for dev servers (blog.localhost and others)
-"$(dirname "$0")/bin/hostctl"
+"$DIR/bin/hostctl"
