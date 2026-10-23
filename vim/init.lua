@@ -39,6 +39,12 @@ vim.opt.updatetime = 300
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 
+-- The lockfile lives beside this file in the repo, not in ~/.config/nvim,
+-- which only holds a symlink to it. It records the commit of every
+-- plugin, lazy.nvim included. laptop.sh restores from it.
+local lockfile = vim.fn.fnamemodify(vim.fn.resolve(vim.fn.stdpath("config") .. "/init.lua"), ":h")
+	.. "/lazy-lock.json"
+
 require("lazy").setup({
 	-- Defaults
 	"tpope/vim-sensible",
@@ -90,7 +96,7 @@ require("lazy").setup({
 	{ "pangloss/vim-javascript" },
 
 	opts_extend = { "sources.default" },
-})
+}, { lockfile = lockfile })
 
 -- Add ~/.vim to runtimepath for custom autoload files
 vim.opt.runtimepath:prepend(vim.fn.expand("~/.vim"))

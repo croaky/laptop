@@ -171,12 +171,25 @@ if [ "$("$HOME/.local/bin/dprint" --version 2>/dev/null)" != "dprint $DPRINT_VER
 fi
 
 # Neovim
+# vim/lazy-lock.json pins every plugin, lazy.nvim included. restore
+# checks out the locked commits and never updates. To update plugins on
+# purpose: nvim --headless "+Lazy! update" +qa, then commit the lockfile.
 LAZY_DIR="$HOME/.local/share/nvim/lazy/lazy.nvim"
+LAZY_LOCK="$DIR/vim/lazy-lock.json"
 if [ ! -d "$LAZY_DIR" ]; then
   git clone --filter=blob:none https://github.com/folke/lazy.nvim.git "$LAZY_DIR"
 fi
-
-nvim --headless "+Lazy! sync" +qa
+if [ -f "$LAZY_LOCK" ]; then
+  LAZY_COMMIT=$(sed -n 's/.*"lazy.nvim": { "branch": "[^"]*", "commit": "\([0-9a-f]*\)".*/\1/p' "$LAZY_LOCK")
+  [ -n "$LAZY_COMMIT" ] || { echo "no lazy.nvim commit in $LAZY_LOCK" >&2; exit 1; }
+  git -C "$LAZY_DIR" checkout --quiet "$LAZY_COMMIT"
+  nvim --headless "+Lazy! restore" +qa
+else
+  # First run: install missing plugins and record the commits installed
+  # now. Commit vim/lazy-lock.json afterward.
+  nvim --headless "+Lazy! install" +qa
+  echo "wrote $LAZY_LOCK: commit it to pin the plugins" >&2
+fi
 
 # Postgres
 export PATH="$BREW/opt/postgresql@$PG_VERSION/bin:$PATH"
