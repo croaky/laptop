@@ -183,7 +183,17 @@ if [ -f "$LAZY_LOCK" ]; then
   LAZY_COMMIT=$(sed -n 's/.*"lazy.nvim": { "branch": "[^"]*", "commit": "\([0-9a-f]*\)".*/\1/p' "$LAZY_LOCK")
   [ -n "$LAZY_COMMIT" ] || { echo "no lazy.nvim commit in $LAZY_LOCK" >&2; exit 1; }
   git -C "$LAZY_DIR" checkout --quiet "$LAZY_COMMIT"
+  # Any install rewrites the lockfile from the commits on disk, and
+  # starting nvim installs missing plugins. Install first, put the
+  # committed lockfile back, then restore from it.
+  LAZY_SAVED=$(mktemp)
+  cp "$LAZY_LOCK" "$LAZY_SAVED"
+  nvim --headless "+Lazy! install" +qa
+  cp "$LAZY_SAVED" "$LAZY_LOCK"
+  rm -f "$LAZY_SAVED"
   nvim --headless "+Lazy! restore" +qa
+  git -C "$DIR" diff --quiet -- vim/lazy-lock.json ||
+    echo "warning: restore did not reach vim/lazy-lock.json" >&2
 else
   # First run: install missing plugins and record the commits installed
   # now. Commit vim/lazy-lock.json afterward.
