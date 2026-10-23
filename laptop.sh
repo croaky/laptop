@@ -52,6 +52,9 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 )
 
 # Homebrew
+# Homebrew packages follow Homebrew's current formulae, so they get
+# security updates. Go tools and downloaded binaries are not here. Each
+# is installed below at a pinned version.
 BREW="/opt/homebrew"
 
 if [ ! -d "$BREW" ]; then
@@ -122,34 +125,46 @@ fi
 bat cache --build
 
 # Go
-go install golang.org/x/tools/cmd/deadcode@latest
-go install golang.org/x/tools/cmd/godoc@latest
-go install golang.org/x/tools/cmd/goimports@latest
-go install golang.org/x/tools/gopls@latest
+# Each tool names a version. A moving version makes the editor format and
+# report differently from CI on the day a new release lands. The versions
+# match the ones CI pins. A tool changes version in a change to this file.
+# - goimports, deadcode, godoc: golang.org/x/tools v0.45.0, the version
+#   the Checkfiles run.
+# - gopls: 0.23.0, the version the CI runner script installs.
+go install golang.org/x/tools/cmd/deadcode@v0.45.0
+go install golang.org/x/tools/cmd/godoc@v0.45.0
+go install golang.org/x/tools/cmd/goimports@v0.45.0
+go install golang.org/x/tools/gopls@v0.23.0
 
 # Bash
 # Language server built on mvdan.cc/sh that calls shellcheck for
 # diagnostics. Replaces bash-language-server, which is npm only.
-go install github.com/matkrin/bashd/cmd/bashd@latest
+go install github.com/matkrin/bashd/cmd/bashd@v0.3.1
 
 # TypeScript
 # Standalone tsgo binary from the GitHub release; no tsserver
 TSGO_VERSION="7.0.2"
+TSGO_SHA256="902e2fe1cf0799198ef902c6b8c310a450fef629a6baba41d45641ef75c04ebd"
 TSGO_DIR="$HOME/.local/share/tsgo"
 if [ "$("$HOME/.local/bin/tsgo" --version 2>/dev/null)" != "Version $TSGO_VERSION" ]; then
   mkdir -p "$TSGO_DIR" "$HOME/.local/bin"
-  curl -fsSL "https://github.com/microsoft/typescript-go/releases/download/typescript/v${TSGO_VERSION}/typescript-darwin-arm64.tgz" |
-    tar -xz -C "$TSGO_DIR" --strip-components=1
+  TSGO_TMP="$(mktemp -d)"
+  curl -fsSL "https://github.com/microsoft/typescript-go/releases/download/typescript/v${TSGO_VERSION}/typescript-darwin-arm64.tgz" -o "$TSGO_TMP/tsgo.tgz"
+  echo "$TSGO_SHA256  $TSGO_TMP/tsgo.tgz" | shasum -a 256 -c -
+  tar -xzf "$TSGO_TMP/tsgo.tgz" -C "$TSGO_DIR" --strip-components=1
+  rm -rf "$TSGO_TMP"
   ln -sf "$TSGO_DIR/lib/tsc" "$HOME/.local/bin/tsgo"
 fi
 
 # dprint
 # Standalone binary from the GitHub release; no prettier.
 DPRINT_VERSION="0.55.2"
+DPRINT_SHA256="e9ba8ed7988f3350501a8cf8af92da616cdec8d9d5c831c069293c587311b49d"
 if [ "$("$HOME/.local/bin/dprint" --version 2>/dev/null)" != "dprint $DPRINT_VERSION" ]; then
   mkdir -p "$HOME/.local/bin"
   DPRINT_TMP="$(mktemp -d)"
   curl -fsSL "https://github.com/dprint/dprint/releases/download/${DPRINT_VERSION}/dprint-aarch64-apple-darwin.zip" -o "$DPRINT_TMP/dprint.zip"
+  echo "$DPRINT_SHA256  $DPRINT_TMP/dprint.zip" | shasum -a 256 -c -
   unzip -oq "$DPRINT_TMP/dprint.zip" -d "$DPRINT_TMP"
   install "$DPRINT_TMP/dprint" "$HOME/.local/bin/dprint"
   rm -rf "$DPRINT_TMP"
@@ -285,10 +300,11 @@ start_postgres_cluster 5433 \
   "$pg_tuning $pg_durability"
 
 # SQL formatter
-go install github.com/croaky/pgfmt/cmd/pgfmt@latest
+# soc pins pgfmt v0.6.0 in go.mod, and its sqlfmt check runs that version.
+go install github.com/croaky/pgfmt/cmd/pgfmt@v0.6.0
 
 # Headless browser screenshots, for an agent to look at a page
-go install github.com/croaky/browse@latest
+go install github.com/croaky/browse@v0.0.0-20261023172523-c7a5cbfad6b3
 
 # Local host names for dev servers (blog.localhost and others)
 "$DIR/bin/hostctl"
