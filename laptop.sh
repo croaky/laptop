@@ -128,12 +128,13 @@ bat cache --build
 # Each tool names a version. A moving version makes the editor format and
 # report differently from CI on the day a new release lands. The versions
 # match the ones CI pins. A tool changes version in a change to this file.
-# - goimports, deadcode, godoc: golang.org/x/tools v0.45.0, the version
+# - goimports, deadcode: golang.org/x/tools v0.45.0, the version
 #   the Checkfiles run.
+# - pkgsite: golang.org/x/pkgsite v0.6.0.
 # - gopls: 0.23.0, the version the CI runner script installs.
 go install golang.org/x/tools/cmd/deadcode@v0.45.0
-go install golang.org/x/tools/cmd/godoc@v0.45.0
 go install golang.org/x/tools/cmd/goimports@v0.45.0
+go install golang.org/x/pkgsite/cmd/pkgsite@v0.6.0
 go install golang.org/x/tools/gopls@v0.23.0
 
 # Bash
