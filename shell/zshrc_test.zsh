@@ -114,6 +114,24 @@ fi
 eq "$(<"$CALLS")" $'soc\nhttps://work.example.com\nmerge\n--when-green\nCI-6' 'merge failure keeps worktree'
 unset FAIL_ACTION
 
+cd "$MAIN_DIR"
+co CI-7
+eq "$PWD" "$CHECKOUT_DIR" 'co directory'
+eq "$(<"$CALLS")" $'soc\nhttps://wrong.example.com\ncheckout\nCI-7' 'co leaves routing to soc'
+
+cd "$MAIN_DIR"
+export FAIL_ACTION=checkout
+if co CI-8; then
+  print -ru2 'failed co reported success'
+  exit 1
+fi
+eq "$PWD" "$MAIN_DIR" 'co failure keeps directory'
+unset FAIL_ACTION
+if co 2>/dev/null; then
+  print -ru2 'co without a change id was accepted'
+  exit 1
+fi
+
 git config remote.origin.url git@github.com:example/repo.git
 if mergetree topic 2>/dev/null; then
   print -ru2 'ordinary git clone used a default change server'

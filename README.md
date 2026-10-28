@@ -52,6 +52,10 @@ to keep it out of version control:
 sockeye server, and `git create-tree` for other repos. `mergetree` and
 `closetree` use the same server selection.
 
+`co <change-id>` changes directory to an existing change's worktree,
+from any directory. `soc` picks the server from the change id. When the
+checkout fails, `co` keeps the current directory.
+
 Keep instance URLs in `~/.gitconfig.local`:
 
 ```gitconfig

@@ -114,6 +114,18 @@ closetree() {
   _tree_change close "$@" || return
   deletetree
 }
+# Go to an existing change's worktree from any directory. soc picks
+# the server from the change id. A failed checkout keeps the directory,
+# where `cd $(soc co ID)` gets an empty path and goes home.
+co() {
+  local dir
+  (( $# == 1 )) || {
+    print -ru2 -- "usage: co <change-id>"
+    return 2
+  }
+  dir=$(command soc checkout "$1") || return
+  cd "$dir"
+}
 
 # Bat
 export BAT_THEME="CatppuccinFrappe"
