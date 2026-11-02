@@ -328,7 +328,7 @@ start_postgres_cluster 5433 \
 go install github.com/croaky/pgfmt/cmd/pgfmt@v0.6.0
 
 # Headless browser screenshots, for an agent to look at a page
-go install github.com/croaky/browse@v0.0.0-20261023172523-c7a5cbfad6b3
+go install github.com/croaky/browse@v0.0.0-20261102173504-bb3a6bf93039
 
 # Local host names for dev servers (blog.localhost and others)
 "$DIR/bin/hostctl"
