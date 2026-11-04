@@ -182,7 +182,10 @@ if [ ! -d "$LAZY_DIR" ]; then
 fi
 if [ -f "$LAZY_LOCK" ]; then
   LAZY_COMMIT=$(sed -n 's/.*"lazy.nvim": { "branch": "[^"]*", "commit": "\([0-9a-f]*\)".*/\1/p' "$LAZY_LOCK")
-  [ -n "$LAZY_COMMIT" ] || { echo "no lazy.nvim commit in $LAZY_LOCK" >&2; exit 1; }
+  [ -n "$LAZY_COMMIT" ] || {
+    echo "no lazy.nvim commit in $LAZY_LOCK" >&2
+    exit 1
+  }
   git -C "$LAZY_DIR" checkout --quiet "$LAZY_COMMIT"
   # Any install rewrites the lockfile from the commits on disk, and
   # starting nvim installs missing plugins. Install first, put the
@@ -324,11 +327,10 @@ start_postgres_cluster 5433 \
   "$pg_tuning $pg_durability"
 
 # SQL formatter
-# soc pins pgfmt v0.6.0 in go.mod, and its sqlfmt check runs that version.
 go install github.com/croaky/pgfmt/cmd/pgfmt@v0.6.0
 
-# Headless browser screenshots, for an agent to look at a page
-go install github.com/croaky/browse@v0.0.0-20261102173504-bb3a6bf93039
+# Headless browser screenshots
+go install github.com/croaky/browse@v0.1.0
 
 # Local host names for dev servers (blog.localhost and others)
 "$DIR/bin/hostctl"
