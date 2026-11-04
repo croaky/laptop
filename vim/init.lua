@@ -305,7 +305,7 @@ require("conform").setup({
 		markdown = { "dprint" },
 		scss = { "dprint" }, -- dprint (malva plugin)
 		sh = { "shfmt" },
-		sql = { "pgfmt" }, -- go install ~/EDS/cmd/pgfmt
+		sql = { "pgfmt" }, -- laptop.sh installs it
 		typescript = { "dprint" },
 		typescriptreact = { "dprint" },
 	},

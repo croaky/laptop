@@ -327,7 +327,7 @@ start_postgres_cluster 5433 \
   "$pg_tuning $pg_durability"
 
 # SQL formatter
-go install github.com/croaky/pgfmt/cmd/pgfmt@v0.6.0
+go install github.com/croaky/pgfmt/cmd/pgfmt@v0.9.0
 
 # Headless browser screenshots
 go install github.com/croaky/browse@v0.1.0
