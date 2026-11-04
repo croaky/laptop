@@ -289,6 +289,23 @@ end
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 
 -- Formatting
+
+-- pinsPgfmt reports whether the go.mod above path pins pgfmt as a go
+-- tool. Such a repo runs that version in its sqlfmt check, and the
+-- editor runs the same one.
+local function pinsPgfmt(path)
+	local gomod = vim.fs.find("go.mod", { upward = true, path = path })[1]
+	if not gomod then
+		return false
+	end
+	for line in io.lines(gomod) do
+		if line:find("github.com/croaky/pgfmt/cmd/pgfmt", 1, true) then
+			return true
+		end
+	end
+	return false
+end
+
 require("conform").setup({
 	format_on_save = {
 		lsp_format = "fallback",
@@ -305,17 +322,28 @@ require("conform").setup({
 		markdown = { "dprint" },
 		scss = { "dprint" }, -- dprint (malva plugin)
 		sh = { "shfmt" },
-		sql = { "pgfmt" }, -- laptop.sh installs it
+		-- An empty list in a repo that pins no pgfmt, so a save there
+		-- neither formats nor warns.
+		sql = function(bufnr)
+			local dir = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
+			return pinsPgfmt(dir) and { "pgfmt" } or {}
+		end,
 		typescript = { "dprint" },
 		typescriptreact = { "dprint" },
 	},
 	formatters = {
+		-- Both run in the directory of the file's go.mod, so go tool and
+		-- go list -m read the module of the file.
 		goimportslocal = {
 			command = "goimportslocal",
 			args = { "-srcdir", "$DIRNAME" },
+			cwd = require("conform.util").root_file({ "go.mod" }),
 		},
 		pgfmt = {
-			command = "pgfmt",
+			command = "go",
+			args = { "tool", "pgfmt" },
+			cwd = require("conform.util").root_file({ "go.mod" }),
+			require_cwd = true,
 		},
 		shfmt = {
 			args = { "--indent", "2" },
