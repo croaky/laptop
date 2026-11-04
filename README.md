@@ -54,7 +54,9 @@ sockeye server, and `git create-tree` for other repos. `mergetree` and
 
 `co <change-id>` changes directory to an existing change's worktree,
 from any directory. `soc` picks the server from the change id. When the
-checkout fails, `co` keeps the current directory.
+checkout fails, `co` keeps the current directory. `soc checkout` and
+`soc co` change directory the same way, so a later `deletetree` removes
+the worktree you checked out, not the one you left.
 
 Keep instance URLs in `~/.gitconfig.local`:
 

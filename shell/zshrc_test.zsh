@@ -20,7 +20,10 @@ cat > "$tmp/bin/soc" <<'SH'
 #!/bin/sh
 printf '%s\n' soc "${SOCKEYE_URL:-}" "$@" > "$CALLS"
 [ "${FAIL_ACTION:-}" != "${1:-}" ] || exit 42
-[ "${1:-}" != checkout ] || printf '%s\n' "$CHECKOUT_DIR"
+case "${1:-}:${2:-}" in
+  *:-h) echo usage ;;
+  checkout:*|co:*) printf '%s\n' "$CHECKOUT_DIR" ;;
+esac
 SH
 cat > "$tmp/bin/git" <<'SH'
 #!/bin/sh
@@ -131,6 +134,27 @@ if co 2>/dev/null; then
   print -ru2 'co without a change id was accepted'
   exit 1
 fi
+
+for verb in co checkout; do
+  cd "$MAIN_DIR"
+  soc "$verb" CI-9
+  eq "$PWD" "$CHECKOUT_DIR" "soc $verb directory"
+  eq "$(<"$CALLS")" $'soc\nhttps://wrong.example.com\n'"$verb"$'\nCI-9' "soc $verb arguments"
+done
+
+cd "$MAIN_DIR"
+export FAIL_ACTION=co
+if soc co CI-10; then
+  print -ru2 'failed soc co reported success'
+  exit 1
+fi
+eq "$PWD" "$MAIN_DIR" 'soc co failure keeps directory'
+unset FAIL_ACTION
+eq "$(soc co -h)" usage 'soc co help prints'
+eq "$PWD" "$MAIN_DIR" 'soc co help keeps directory'
+soc show CI-11
+eq "$(<"$CALLS")" $'soc\nhttps://wrong.example.com\nshow\nCI-11' 'soc passes other verbs'
+eq "$PWD" "$MAIN_DIR" 'soc show keeps directory'
 
 git config remote.origin.url git@github.com:example/repo.git
 if mergetree topic 2>/dev/null; then
