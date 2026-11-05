@@ -135,26 +135,8 @@ if co 2>/dev/null; then
   exit 1
 fi
 
-for verb in co checkout; do
-  cd "$MAIN_DIR"
-  soc "$verb" CI-9
-  eq "$PWD" "$CHECKOUT_DIR" "soc $verb directory"
-  eq "$(<"$CALLS")" $'soc\nhttps://wrong.example.com\n'"$verb"$'\nCI-9' "soc $verb arguments"
-done
-
-cd "$MAIN_DIR"
-export FAIL_ACTION=co
-if soc co CI-10; then
-  print -ru2 'failed soc co reported success'
-  exit 1
-fi
-eq "$PWD" "$MAIN_DIR" 'soc co failure keeps directory'
-unset FAIL_ACTION
-eq "$(soc co -h)" usage 'soc co help prints'
-eq "$PWD" "$MAIN_DIR" 'soc co help keeps directory'
-soc show CI-11
-eq "$(<"$CALLS")" $'soc\nhttps://wrong.example.com\nshow\nCI-11' 'soc passes other verbs'
-eq "$PWD" "$MAIN_DIR" 'soc show keeps directory'
+# soc is the binary, not a function, so `cd $(soc co ID)` works.
+eq "$(whence -w soc)" 'soc: command' 'soc is not a function'
 
 git config remote.origin.url git@github.com:example/repo.git
 if mergetree topic 2>/dev/null; then

@@ -114,34 +114,16 @@ closetree() {
   _tree_change close "$@" || return
   deletetree
 }
-# `soc checkout` and `soc co` print a worktree path, and a process
-# cannot change its parent shell's directory, so this function runs the
-# cd. Without it the shell stays in the old worktree, and a later
-# `deletetree` removes that one. A failed checkout keeps the directory,
-# where `cd $(soc co ID)` gets an empty path and goes home. Output that
-# is not a directory, such as `soc co -h`, prints as it is.
-soc() {
-  local dir
-  case "${1:-}" in
-    checkout|co)
-      dir=$(command soc "$@") || return
-      if [[ -d "$dir" ]]; then
-        cd "$dir"
-      else
-        print -r -- "$dir"
-      fi
-      ;;
-    *) command soc "$@" ;;
-  esac
-}
 # Go to an existing change's worktree from any directory. soc picks
-# the server from the change id.
+# the server from the change id. A failed checkout keeps the directory.
 co() {
+  local dir
   (( $# == 1 )) || {
     print -ru2 -- "usage: co <change-id>"
     return 2
   }
-  soc checkout "$1"
+  dir=$(soc checkout "$1") || return
+  cd "$dir"
 }
 
 # Bat
