@@ -71,10 +71,12 @@ Keep instance URLs in `~/.gitconfig.local`:
   url = https://work.example.com
 ```
 
-`soc login` and `soc git setup` write the `credential` block for a
-server to `~/.gitconfig`, which this repo does not track. After you
-log in, move that block to `~/.gitconfig.local`. `git/gitconfig`
-includes that file.
+`~/.gitconfig` is a symlink to `git/gitconfig`, which this repo
+tracks. So `soc login`, `soc git setup`, and `git config --global`
+write into the tracked file. Move what they write to
+`~/.gitconfig.local`. `git/gitconfig` includes that file.
+
+After you log in, move the `credential` block for the server:
 
 ```gitconfig
 [credential "https://personal.example.com"]
@@ -87,6 +89,17 @@ The `credential` block sends git to `soc auth git-credential` for the
 token. The empty `helper` clears the `osxkeychain` helper in
 `git/gitconfig`. GitHub uses `gh` the same way. Other hosts use the
 Apple-signed `osxkeychain` helper.
+
+`soc checkout` cuts a worktree from a local clone of the change's
+repo. It finds a clone at `~/<slug>` or behind a worktree in
+`~/.worktrees`. For a clone in a different place, set the
+`sockeye.clone.<slug>` key in `~/.gitconfig.local`, not with the
+`--global` that the error from `soc` gives. Use an absolute path,
+because `soc` does not expand `~`:
+
+```bash
+git config --file ~/.gitconfig.local sockeye.clone.abc "$HOME/some-dir"
+```
 
 `soc-dc` and `soc-ivp` select an instance for one command, such as
 `soc-ivp login` or `soc-dc show SOC-1`. They do not change the saved
