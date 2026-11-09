@@ -8,6 +8,7 @@
 # - text editor (Neovim)
 # - programming language toolchains (Go, Rust)
 # - language servers (Bash, Go, HTML, Lua, TypeScript)
+# - macOS settings (hot corners off)
 # - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree, ubi)
 # - databases (Postgres dev and test clusters)
 # - local host names (`bin/hostctl` edits /etc/hosts)
@@ -50,6 +51,25 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
   mkdir -p "$HOME/.config/nvim"
   ln -sf "$DIR/vim/init.lua" "$HOME/.config/nvim/init.lua"
 )
+
+# macOS
+# A hot corner set to Mission Control opens when a drag crosses a
+# display corner. Mission Control then splits the windows, and a
+# dragged screenshot cannot reach its target window. Value 1 means no
+# action, so the corner ignores its modifier key. The F3 key still
+# opens Mission Control. The Dock reads the value when it starts.
+# killall fails when no Dock runs, such as over SSH, and set -e must
+# not stop the script for that.
+dock_changed=0
+for corner in tl tr bl br; do
+  if [ "$(defaults read com.apple.dock "wvous-$corner-corner" 2>/dev/null)" != 1 ]; then
+    defaults write com.apple.dock "wvous-$corner-corner" -int 1
+    dock_changed=1
+  fi
+done
+if [ "$dock_changed" -eq 1 ]; then
+  killall Dock 2>/dev/null || true
+fi
 
 # Homebrew
 # Homebrew packages follow Homebrew's current formulae, so they get

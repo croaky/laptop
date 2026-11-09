@@ -123,6 +123,17 @@ Run:
 The script can safely be run multiple times.
 It is tested on the latest version of macOS on an arm64 (Apple Silicon) chip.
 
+### Hot corners
+
+`laptop.sh` turns off all four hot corners.
+A hot corner set to Mission Control opens
+when a drag crosses a display corner,
+and a dragged screenshot then cannot reach its window.
+The F3 key still opens Mission Control.
+To use a hot corner, set it in
+"System Settings > Desktop & Dock > Hot Corners".
+The next run of `laptop.sh` turns it off again.
+
 Separate from the script, the following README sections
 are "one time setup" items.
 
