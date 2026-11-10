@@ -336,17 +336,25 @@ pg_tuning="-c shared_buffers=8GB \
 # than nothing.
 pg_durability="-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
 
+# CREATE DATABASE ... TEMPLATE ... STRATEGY FILE_COPY copies the
+# template's files byte for byte by default. With clone, Postgres 18
+# asks APFS for a copy-on-write clone instead, so the new database
+# shares the template's blocks until either one writes them. A copy
+# of a 5 GB template then takes no extra disk at first, and its time
+# no longer grows with the template's size.
+pg_clone="-c file_copy_method=clone"
+
 # dev databases
 start_postgres_cluster 5432 \
   "$HOME/.local/share/postgres/data_dev" \
   "$HOME/.local/share/postgres/log_dev.log" \
-  "$pg_tuning"
+  "$pg_tuning $pg_clone"
 
 # test databases
 start_postgres_cluster 5433 \
   "$HOME/.local/share/postgres/data_test" \
   "$HOME/.local/share/postgres/log_test.log" \
-  "$pg_tuning $pg_durability"
+  "$pg_tuning $pg_durability $pg_clone"
 
 # My commands
 # Each one tracks main, not a version tag. I write them, and the
