@@ -347,7 +347,7 @@ start_postgres_cluster 5433 \
   "$pg_tuning $pg_durability"
 
 # Headless browser screenshots
-go install github.com/croaky/browse@v0.2.0
+go install github.com/croaky/browse@v0.2.1
 
 # Tunnel a local server to the public internet
 go install github.com/croaky/tun/cmd/tun@v0.1.0
