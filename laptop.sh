@@ -10,6 +10,7 @@
 # - language servers (Bash, Go, HTML, Lua, TypeScript)
 # - macOS settings (hot corners off)
 # - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree, ubi)
+# - my commands (browse, calc, mdembed, procman, tun)
 # - databases (Postgres dev and test clusters)
 # - local host names (`bin/hostctl` edits /etc/hosts)
 
@@ -74,7 +75,8 @@ fi
 # Homebrew
 # Homebrew packages follow Homebrew's current formulae, so they get
 # security updates. Go tools and downloaded binaries are not here. Each
-# is installed below at a pinned version.
+# is installed below at a pinned version, except my own commands, which
+# track main (see "My commands").
 BREW="/opt/homebrew"
 
 if [ ! -d "$BREW" ]; then
@@ -346,11 +348,20 @@ start_postgres_cluster 5433 \
   "$HOME/.local/share/postgres/log_test.log" \
   "$pg_tuning $pg_durability"
 
-# Headless browser screenshots
-go install github.com/croaky/browse@v0.2.2
-
-# Tunnel a local server to the public internet
-go install github.com/croaky/tun/cmd/tun@v0.1.1
+# My commands
+# Each one tracks main, not a version tag. I write them, and the
+# sockeye checks pass before a merge reaches the GitHub mirror that go
+# install reads. A pin made each release a tag and a change to this
+# file, and a stale pin put back an older build on the next run. The
+# Go tools above stay pinned: other people write them, and CI runs the
+# same versions. https://dancroak.com/go/checks#my-commands
+# go install takes one module for each command, so each has its own
+# line.
+go install github.com/croaky/browse@main         # headless browser screenshots
+go install github.com/croaky/calc@main           # calculator
+go install github.com/croaky/mdembed@main        # embed code files in Markdown
+go install github.com/croaky/procman@main        # run a Procfile.dev
+go install github.com/croaky/tun/cmd/tun@main    # tunnel a local server
 
 # Local host names for dev servers (blog.localhost and others)
 "$DIR/bin/hostctl"

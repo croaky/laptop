@@ -36,6 +36,21 @@ that matches on words.
 Apply it to prose, not to code: an identifier, a command, and a quoted
 error message stay as they are.
 
+## Versions
+
+`laptop.sh` installs two kinds of tool, and each kind has its own
+rule:
+
+- Pin a tool that somebody else writes: a Go tool such as gopls, or a
+  downloaded binary such as dprint. Name the version that CI runs.
+  Give a SHA-256 for a downloaded archive. Change a version only in a
+  change to `laptop.sh`.
+- Install my own command (browse, calc, mdembed, procman, tun) from
+  `@main`. Do not pin a version tag. Those repos publish no tags.
+
+A new command of mine goes in the "My commands" block of `laptop.sh`.
+<https://dancroak.com/go/checks#my-commands> gives the reasons.
+
 ## Commits
 
 - Subject: `scope: imperative summary`, at most 72 characters, lowercase
