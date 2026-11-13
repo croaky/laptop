@@ -8,7 +8,8 @@
 # - text editor (Neovim)
 # - programming language toolchains (Go, Rust)
 # - language servers (Bash, Go, HTML, Lua, TypeScript)
-# - macOS settings (hot corners off, click wallpaper to reveal desktop off)
+# - macOS settings (hot corners off, click wallpaper to reveal desktop off,
+#   window shortcuts)
 # - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree, ubi)
 # - my commands (browse, calc, mdembed, procman, tun)
 # - databases (Postgres dev and test clusters)
@@ -80,6 +81,18 @@ fi
 if [ "$(defaults read com.apple.WindowManager EnableStandardClickToShowDesktop 2>/dev/null)" != 0 ]; then
   defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
 fi
+
+# Window shortcuts
+# Every app has Left, Right, and Fill in Window > Move & Resize. These
+# App Shortcuts give them Control-Option-Left, Control-Option-Right, and
+# Control-Option-Return, so no window manager app is necessary.
+# defaults reads \UF702 as the left arrow key, \UF703 as the right arrow
+# key, and \U21A9 as the return key. An app reads the shortcuts when it
+# starts.
+defaults write -g NSUserKeyEquivalents -dict-add \
+  "Left" '^~\UF702' \
+  "Right" '^~\UF703' \
+  "Fill" '^~\U21A9'
 
 # Homebrew
 # Homebrew packages follow Homebrew's current formulae, so they get

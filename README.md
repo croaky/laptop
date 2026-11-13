@@ -158,6 +158,22 @@ To turn it on, set it in
 "System Settings > Desktop & Dock".
 The next run of `laptop.sh` turns it off again.
 
+### Window shortcuts
+
+`laptop.sh` sets three shortcuts for the
+"Window > Move & Resize" menu in every app:
+
+- Control-Option-Left: "Left" (left half)
+- Control-Option-Right: "Right" (right half)
+- Control-Option-Return: "Fill" (full screen area)
+
+An app reads the shortcuts when it starts.
+Quit and reopen an app that runs, or log out and in.
+"Fill" does not go back to the old size.
+Use "Window > Move & Resize > Return to Previous Size" for that.
+To see or change the shortcuts, go to
+"System Settings > Keyboard > Keyboard Shortcuts > App Shortcuts".
+
 Separate from the script, the following README sections
 are "one time setup" items.
 
@@ -166,7 +182,6 @@ are "one time setup" items.
 Install macOS apps:
 
 - [Arc](https://arc.net/download)
-- [Magnet](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
 - [Warp](https://www.warp.dev/)
 
 ## Keyboard
