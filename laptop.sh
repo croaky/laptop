@@ -306,6 +306,18 @@ postgres_settings_differ() {
   [ "$wanted_count" -ne "$running_count" ]
 }
 
+# Report whether a running cluster runs a postgres program other than
+# the one pg_config names. A brew upgrade replaces the program and its
+# libraries, but a running server keeps the old program. The old server
+# then fails to load the new plpgsql.dylib. Homebrew deletes the old
+# Cellar directory, so the two paths differ until a restart.
+postgres_program_differs() {
+  local running
+
+  running="$(pg_ctl -D "$1" status 2>/dev/null | sed -n '2s/ .*//p')"
+  [ -n "$running" ] && [ "$running" != "$(pg_config --bindir)/postgres" ]
+}
+
 start_postgres_cluster() {
   local port="$1"
   local data_dir="$2"
@@ -323,12 +335,15 @@ start_postgres_cluster() {
   fi
 
   if pg_ctl -D "$data_dir" status >/dev/null 2>&1; then
-    if ! postgres_settings_differ "$data_dir" "-p $port $opts"; then
+    if postgres_program_differs "$data_dir"; then
+      echo "Restarting Postgres on the upgraded program for $data_dir"
+    elif postgres_settings_differ "$data_dir" "-p $port $opts"; then
+      echo "Restarting Postgres with changed settings for $data_dir"
+    else
       echo "Postgres is already running with these settings for $data_dir"
       return
     fi
 
-    echo "Restarting Postgres with changed settings for $data_dir"
     pg_ctl -D "$data_dir" stop
   elif lsof -i "tcp:$port" >/dev/null 2>&1; then
     echo "Postgres port $port is already in use"
