@@ -8,7 +8,7 @@
 # - text editor (Neovim)
 # - programming language toolchains (Go, Rust)
 # - language servers (Bash, Go, HTML, Lua, TypeScript)
-# - macOS settings (hot corners off)
+# - macOS settings (hot corners off, click wallpaper to reveal desktop off)
 # - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree, ubi)
 # - my commands (browse, calc, mdembed, procman, tun)
 # - databases (Postgres dev and test clusters)
@@ -70,6 +70,15 @@ for corner in tl tr bl br; do
 done
 if [ "$dock_changed" -eq 1 ]; then
   killall Dock 2>/dev/null || true
+fi
+
+# "Click wallpaper to reveal desktop" moves all windows to the screen
+# edges when a click lands on the wallpaper. A screenshot drag that
+# starts or crosses the wallpaper can do this, and the target window
+# moves away. The macOS default is on. Value false turns it off for all
+# spaces except Stage Manager.
+if [ "$(defaults read com.apple.WindowManager EnableStandardClickToShowDesktop 2>/dev/null)" != 0 ]; then
+  defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
 fi
 
 # Homebrew

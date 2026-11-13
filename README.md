@@ -147,6 +147,17 @@ To use a hot corner, set it in
 "System Settings > Desktop & Dock > Hot Corners".
 The next run of `laptop.sh` turns it off again.
 
+### Click wallpaper to reveal desktop
+
+`laptop.sh` turns off "Click wallpaper to reveal desktop".
+When this setting is on, a click on the wallpaper
+moves all windows to the screen edges.
+A screenshot drag that starts or crosses the wallpaper can do this,
+and the target window then moves away.
+To turn it on, set it in
+"System Settings > Desktop & Dock".
+The next run of `laptop.sh` turns it off again.
+
 Separate from the script, the following README sections
 are "one time setup" items.
 
