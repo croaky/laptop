@@ -136,6 +136,12 @@ Run:
 The script can safely be run multiple times.
 It is tested on the latest version of macOS on an arm64 (Apple Silicon) chip.
 
+The script links the dotfiles to the main clone, `~/laptop`,
+also when it runs from a change worktree.
+So a test run from a worktree is safe after `mergetree` deletes it.
+A change to a dotfile, such as `shell/zshrc`,
+takes effect after the merge and a `git pull` in `~/laptop`.
+
 ### Hot corners
 
 `laptop.sh` turns off all four hot corners.

@@ -22,36 +22,46 @@ set -eu
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
+# LINK_DIR is the main clone, also when the script runs from a worktree.
+# The dotfile links point into LINK_DIR. A link into a worktree breaks
+# when mergetree deletes the worktree, and then git loses ~/.gitconfig.
+# git prints the .git directory of the main clone as the common
+# directory. When git cannot answer, the links point into DIR.
+LINK_DIR="$DIR"
+if common="$(git -C "$DIR" rev-parse --path-format=absolute --git-common-dir 2>/dev/null)"; then
+  LINK_DIR="$(dirname "$common")"
+fi
+
 # Symlinks
 (
   # CLI
   mkdir -p "$HOME/.config/bat/themes"
-  ln -sf "$DIR/cli/bat.xml" "$HOME/.config/bat/themes/CatppuccinFrappe.tmTheme"
+  ln -sf "$LINK_DIR/cli/bat.xml" "$HOME/.config/bat/themes/CatppuccinFrappe.tmTheme"
   mkdir -p "$HOME/.config/dprint"
-  ln -sf "$DIR/cli/dprint.jsonc" "$HOME/.config/dprint/dprint.jsonc"
+  ln -sf "$LINK_DIR/cli/dprint.jsonc" "$HOME/.config/dprint/dprint.jsonc"
   mkdir -p "$HOME/.ssh"
-  ln -sf "$DIR/cli/ssh" "$HOME/.ssh/config"
+  ln -sf "$LINK_DIR/cli/ssh" "$HOME/.ssh/config"
 
   # Git
-  ln -sf "$DIR/git/gitconfig" "$HOME/.gitconfig"
-  ln -sf "$DIR/git/gitignore" "$HOME/.gitignore"
+  ln -sf "$LINK_DIR/git/gitconfig" "$HOME/.gitconfig"
+  ln -sf "$LINK_DIR/git/gitignore" "$HOME/.gitignore"
 
   # Postgres
-  ln -sf "$DIR/postgres/psqlrc" "$HOME/.psqlrc"
+  ln -sf "$LINK_DIR/postgres/psqlrc" "$HOME/.psqlrc"
 
   # Shells
-  ln -sf "$DIR/shell/hushlogin" "$HOME/.hushlogin"
-  ln -sf "$DIR/shell/zshrc" "$HOME/.zshrc"
+  ln -sf "$LINK_DIR/shell/hushlogin" "$HOME/.hushlogin"
+  ln -sf "$LINK_DIR/shell/zshrc" "$HOME/.zshrc"
 
   # Terminals
   mkdir -p "$HOME/.config/ghostty"
-  ln -sf "$DIR/term/ghostty" "$HOME/.config/ghostty/config"
+  ln -sf "$LINK_DIR/term/ghostty" "$HOME/.config/ghostty/config"
   mkdir -p "$HOME/.warp/themes"
-  ln -sf "$DIR/term/warp.yml" "$HOME/.warp/themes/catppuccin_frappe.yml"
+  ln -sf "$LINK_DIR/term/warp.yml" "$HOME/.warp/themes/catppuccin_frappe.yml"
 
   # Vim
   mkdir -p "$HOME/.config/nvim"
-  ln -sf "$DIR/vim/init.lua" "$HOME/.config/nvim/init.lua"
+  ln -sf "$LINK_DIR/vim/init.lua" "$HOME/.config/nvim/init.lua"
 )
 
 # macOS
@@ -219,8 +229,10 @@ fi
 # vim/lazy-lock.json pins every plugin, lazy.nvim included. restore
 # checks out the locked commits and never updates. To update plugins on
 # purpose: nvim --headless "+Lazy! update" +qa, then commit the lockfile.
+# nvim reads the lockfile beside the target of the init.lua link, so
+# the lockfile is in LINK_DIR.
 LAZY_DIR="$HOME/.local/share/nvim/lazy/lazy.nvim"
-LAZY_LOCK="$DIR/vim/lazy-lock.json"
+LAZY_LOCK="$LINK_DIR/vim/lazy-lock.json"
 if [ ! -d "$LAZY_DIR" ]; then
   git clone --filter=blob:none https://github.com/folke/lazy.nvim.git "$LAZY_DIR"
 fi
@@ -240,7 +252,7 @@ if [ -f "$LAZY_LOCK" ]; then
   cp "$LAZY_SAVED" "$LAZY_LOCK"
   rm -f "$LAZY_SAVED"
   nvim --headless "+Lazy! restore" +qa
-  git -C "$DIR" diff --quiet -- vim/lazy-lock.json ||
+  git -C "$LINK_DIR" diff --quiet -- vim/lazy-lock.json ||
     echo "warning: restore did not reach vim/lazy-lock.json" >&2
 else
   # First run: install missing plugins and record the commits installed
