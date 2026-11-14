@@ -10,7 +10,7 @@
 # - language servers (Bash, Go, HTML, Lua, TypeScript)
 # - macOS settings (hot corners off, click wallpaper to reveal desktop off,
 #   window shortcuts)
-# - CLIs (awscli, bat, cb, fd, fzf, gh, git, rg, tree, ubi)
+# - CLIs (awscli, bat, cb, fd, fzf, gh, git, op, rg, tree, ubi)
 # - my commands (browse, calc, mdembed, procman, tun)
 # - databases (Postgres dev and test clusters)
 # - local host names (`bin/hostctl` edits /etc/hosts)
@@ -125,6 +125,10 @@ brew bundle --file=- <<EOF
 tap "CrunchyData/brew", trusted: true
 tap "ubicloud/cli", trusted: true
 
+# The 1Password app unlocks op with Touch ID only when op is in
+# /opt/homebrew/bin or /usr/local/bin, so op is a cask, not a
+# downloaded binary in ~/.local/bin.
+cask "1password-cli"
 cask "ghostty@tip"
 
 brew "awscli"
