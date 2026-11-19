@@ -53,6 +53,17 @@ if [ "$(cat "$dir/g.txt")" != zq4 ]; then
   fail "bin/replace read the find string -zq3 as an option"
 fi
 
+# Behavior: bin/replace changes only the literal find string, as rg -F
+# finds it. sed must not read ".", "*", "[", "^", or "$" in the find
+# string as syntax, or "\" and "&" in the new text.
+printf '%s\n' 'a.c abc a*c [x] ^h$' >"$dir/lit.txt"
+for pair in 'a.c|n\1&' 'a*c|w' '[x]|y' '^h$|z'; do
+  (cd "$dir" && "$root/bin/replace" "${pair%%|*}" "${pair#*|}" lit.txt) >/dev/null 2>&1 || true
+done
+if [ "$(cat "$dir/lit.txt")" != 'n\1& abc w y z' ]; then
+  fail "bin/replace changed text that is not the literal find string: $(cat "$dir/lit.txt")"
+fi
+
 # Keep the real plugins and plugin caches, so that Neovim needs no
 # network.
 real=$HOME

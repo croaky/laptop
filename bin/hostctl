@@ -82,11 +82,18 @@ main() {
       echo "hostctl: cannot download $url; /etc/hosts did not change" >&2
       exit 1
     fi
+    # A list with no valid line, such as an error page served with HTTP
+    # 200, would stop all blocking with no message.
+    hostctl_filter "$tmp/download" >"$tmp/blocked"
+    if [ ! -s "$tmp/blocked" ]; then
+      echo "hostctl: $url has no valid line; /etc/hosts did not change" >&2
+      exit 1
+    fi
     {
       local_hosts_entries
       echo
       echo "# blocked names from $url"
-      hostctl_filter "$tmp/download"
+      cat "$tmp/blocked"
     } >"$tmp/hosts"
     # The user reads $tmp/hosts, and only tee runs as root.
     # shellcheck disable=SC2024

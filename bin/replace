@@ -11,8 +11,10 @@ shift
 replace_with="$1"
 shift
 
-# Escape the sed delimiter and "&" in both strings.
-sed_find=$(printf '%s' "$find_this" | sed 's/[\/&]/\\&/g')
+# rg -F reads the find string as plain text, so sed must too. Escape
+# each character that a sed basic regular expression reads as syntax:
+# ] \ / $ * . ^ [. In the new text, escape \, the delimiter, and &.
+sed_find=$(printf '%s' "$find_this" | sed 's/[]\/$*.^[]/\\&/g')
 sed_replace=$(printf '%s' "$replace_with" | sed 's/[\/&]/\\&/g')
 
 # rg -F finds the files that contain the fixed string.

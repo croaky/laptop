@@ -194,6 +194,19 @@ if grep -q '/etc/hosts' "$SUDO_LOG"; then
   fail "hostctl: wrote /etc/hosts after a failed download"
 fi
 
+# If the filter keeps no line, such as for an error page served with
+# HTTP 200, hostctl stops and /etc/hosts does not change.
+reset
+before=$(cat "$HOSTS")
+empty="$tmp/empty.txt"
+printf '<html>Moved</html>\n# no hosts here\n' >"$empty"
+if FIXTURE=$empty "$hostctl" >/dev/null 2>&1; then
+  fail "hostctl: exit 0 when the filter keeps no line"
+fi
+if [ "$(cat "$HOSTS")" != "$before" ]; then
+  fail "hostctl: /etc/hosts changed when the filter kept no line"
+fi
+
 # hostctl --unblock writes the localhost lines and the local app
 # entries, and downloads nothing.
 reset
