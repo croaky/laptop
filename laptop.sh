@@ -65,13 +65,14 @@ fi
 )
 
 # macOS
-# A hot corner set to Mission Control opens when a drag crosses a
-# display corner. Mission Control then splits the windows, and a
-# dragged screenshot cannot reach its target window. Value 1 means no
-# action, so the corner ignores its modifier key. The F3 key still
-# opens Mission Control. The Dock reads the value when it starts.
-# killall fails when no Dock runs, such as over SSH, and set -e must
-# not stop the script for that.
+# Each setting below applies again on each run. To keep a different
+# value, delete its block here.
+#
+# Hot corners off. A corner set to Mission Control opens when a drag
+# crosses it, and a dragged screenshot cannot reach its window. Value 1
+# means no action. F3 still opens Mission Control. The Dock reads the
+# value when it starts. killall fails when no Dock runs, such as over
+# SSH, and set -e must not stop the script for that.
 dock_changed=0
 for corner in tl tr bl br; do
   if [ "$(defaults read com.apple.dock "wvous-$corner-corner" 2>/dev/null)" != 1 ]; then
@@ -83,22 +84,18 @@ if [ "$dock_changed" -eq 1 ]; then
   killall Dock 2>/dev/null || true
 fi
 
-# "Click wallpaper to reveal desktop" moves all windows to the screen
-# edges when a click lands on the wallpaper. A screenshot drag that
-# starts or crosses the wallpaper can do this, and the target window
-# moves away. The macOS default is on. Value false turns it off for all
-# spaces except Stage Manager.
+# "Click wallpaper to reveal desktop" off. When it is on, a screenshot
+# drag across the wallpaper moves all windows to the screen edges. The
+# setting is in "System Settings > Desktop & Dock".
 if [ "$(defaults read com.apple.WindowManager EnableStandardClickToShowDesktop 2>/dev/null)" != 0 ]; then
   defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
 fi
 
-# Window shortcuts
-# Every app has Left, Right, and Fill in Window > Move & Resize. These
-# App Shortcuts give them Control-Option-Left, Control-Option-Right, and
-# Control-Option-Return, so no window manager app is necessary.
-# defaults reads \UF702 as the left arrow key, \UF703 as the right arrow
-# key, and \U21A9 as the return key. An app reads the shortcuts when it
-# starts.
+# Window shortcuts: Control-Option-Left, -Right, and -Return run Left,
+# Right, and Fill in "Window > Move & Resize" of every app. So no window
+# manager app is necessary. An app reads them when it starts. "Return
+# to Previous Size" in the same menu undoes Fill. \UF702 is the left
+# arrow key, \UF703 the right arrow key, and \U21A9 the return key.
 defaults write -g NSUserKeyEquivalents -dict-add \
   "Left" '^~\UF702' \
   "Right" '^~\UF703' \
@@ -130,6 +127,7 @@ tap "ubicloud/cli", trusted: true
 # downloaded binary in ~/.local/bin.
 cask "1password-cli"
 cask "ghostty@tip"
+cask "warp"
 
 brew "awscli"
 brew "bash"

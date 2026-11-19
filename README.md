@@ -103,52 +103,11 @@ So a test run from a worktree is safe after `mergetree` deletes it.
 A change to a dotfile, such as `shell/zshrc`,
 takes effect after the merge and a `git pull` in `~/laptop`.
 
-### Hot corners
-
-`laptop.sh` turns off all four hot corners.
-A hot corner set to Mission Control opens
-when a drag crosses a display corner,
-and a dragged screenshot then cannot reach its window.
-The F3 key still opens Mission Control.
-To use a hot corner, set it in
-"System Settings > Desktop & Dock > Hot Corners".
-The next run of `laptop.sh` turns it off again.
-
-### Click wallpaper to reveal desktop
-
-`laptop.sh` turns off "Click wallpaper to reveal desktop".
-When this setting is on, a click on the wallpaper
-moves all windows to the screen edges.
-A screenshot drag that starts or crosses the wallpaper can do this,
-and the target window then moves away.
-To turn it on, set it in
-"System Settings > Desktop & Dock".
-The next run of `laptop.sh` turns it off again.
-
-### Window shortcuts
-
-`laptop.sh` sets three shortcuts for the
-"Window > Move & Resize" menu in every app:
-
-- Control-Option-Left: "Left" (left half)
-- Control-Option-Right: "Right" (right half)
-- Control-Option-Return: "Fill" (full screen area)
-
-An app reads the shortcuts when it starts.
-Quit and reopen an app that runs, or log out and in.
-"Fill" does not go back to the old size.
-Use "Window > Move & Resize > Return to Previous Size" for that.
-To see or change the shortcuts, go to
-"System Settings > Keyboard > Keyboard Shortcuts > App Shortcuts".
+`laptop.sh` also sets some macOS settings.
+The comments in `laptop.sh` say why, and how to keep a different value.
 
 Separate from the script, the following README sections
 are "one time setup" items.
-
-## macOS apps
-
-Install macOS apps:
-
-- [Warp](https://www.warp.dev/)
 
 ## Keyboard
 
