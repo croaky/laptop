@@ -149,7 +149,6 @@ brew "ripgrep"
 brew "rust" # cargo/rustc for ~/warp
 brew "shellcheck"
 brew "shfmt"
-brew "stylua"
 brew "superhtml" # HTML language server and formatter
 brew "tree"
 brew "tree-sitter-cli" # parser compiler for nvim-treesitter
@@ -228,6 +227,22 @@ if [ "$("$HOME/.local/bin/dprint" --version 2>/dev/null)" != "dprint $DPRINT_VER
   unzip -oq "$DPRINT_TMP/dprint.zip" -d "$DPRINT_TMP"
   install "$DPRINT_TMP/dprint" "$HOME/.local/bin/dprint"
   rm -rf "$DPRINT_TMP"
+fi
+
+# stylua
+# Lua formatter for Neovim's format-on-save and the Checkfile's stylua
+# check. Keep equal to stylua_version in sockeye's
+# scripts/provision-vm-runners.sh, so the editor formats as CI checks.
+STYLUA_VERSION="2.6.0"
+STYLUA_SHA256="dab9b66d340ca5ffc8225211f1dcf89b84783e09b8cbec8c518497eba81f3c42"
+if [ "$("$HOME/.local/bin/stylua" --version 2>/dev/null)" != "stylua $STYLUA_VERSION" ]; then
+  mkdir -p "$HOME/.local/bin"
+  STYLUA_TMP="$(mktemp -d)"
+  curl -fsSL "https://github.com/JohnnyMorganz/StyLua/releases/download/v${STYLUA_VERSION}/stylua-macos-aarch64.zip" -o "$STYLUA_TMP/stylua.zip"
+  echo "$STYLUA_SHA256  $STYLUA_TMP/stylua.zip" | shasum -a 256 -c -
+  unzip -oq "$STYLUA_TMP/stylua.zip" -d "$STYLUA_TMP"
+  install "$STYLUA_TMP/stylua" "$HOME/.local/bin/stylua"
+  rm -rf "$STYLUA_TMP"
 fi
 
 # Neovim

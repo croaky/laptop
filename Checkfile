@@ -6,6 +6,11 @@
 # expanding them on the client side is how the values reach the box.
 shellcheck: git ls-files -z '*.sh' 'bin/*' | xargs -0 shellcheck -e SC2029
 
+# Neovim formats Lua with stylua on save, so a file that stylua would
+# change puts an unrelated hunk in the next change that saves it. The
+# runner and laptop.sh pin the same stylua version.
+stylua: git ls-files -z '*.lua' | xargs -0 stylua --check
+
 # The title a change needs to merge, and the body rules that come
 # with it. sockeye reads this from main at merge.
 merge: ^[a-z][a-z0-9_/-]*(?:, ?[a-z][a-z0-9_/-]*)*: [a-z](?:.{2,62})?(?:[^.\s]|\.\.\.)$

@@ -52,8 +52,7 @@ vim.opt.rtp:prepend(lazypath)
 -- The lockfile lives beside this file in the repo, not in ~/.config/nvim,
 -- which only holds a symlink to it. It records the commit of every
 -- plugin, lazy.nvim included. laptop.sh restores from it.
-local lockfile = vim.fn.fnamemodify(vim.fn.resolve(vim.fn.stdpath("config") .. "/init.lua"), ":h")
-	.. "/lazy-lock.json"
+local lockfile = vim.fn.fnamemodify(vim.fn.resolve(vim.fn.stdpath("config") .. "/init.lua"), ":h") .. "/lazy-lock.json"
 
 require("lazy").setup({
 	-- Defaults
