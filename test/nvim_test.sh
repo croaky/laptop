@@ -84,7 +84,7 @@ if [ -x "$root/bin/git-trust" ]; then
 fi
 
 # Start Neovim in the untrusted repo with a relative entry on PATH, as
-# the old shell/zshrc set it.
+# an old shell config set it.
 cd "$UNTRUSTED"
 PATH="./bin:$PATH" nvim --headless -u "$root/vim/init.lua" \
   -c "luafile $root/test/nvim_test.lua"

@@ -3,7 +3,7 @@
 # ./laptop.sh
 
 # - terminals (Ghostty, Warp)
-# - shell (zsh)
+# - shell (bash 5)
 # - symlinks for dotfiles to `$HOME`
 # - text editor (Neovim)
 # - programming language toolchains (Go, Rust)
@@ -54,7 +54,16 @@ fi
 
   # Shells
   ln -sf "$LINK_DIR/shell/hushlogin" "$HOME/.hushlogin"
-  ln -sf "$LINK_DIR/shell/zshrc" "$HOME/.zshrc"
+  # A login shell reads ~/.bash_profile, and another interactive
+  # shell reads ~/.bashrc. Both read the same file.
+  ln -sf "$LINK_DIR/shell/bashrc" "$HOME/.bashrc"
+  ln -sf "$LINK_DIR/shell/bashrc" "$HOME/.bash_profile"
+  # The login shell was zsh, with ~/.zshrc linked to shell/zshrc.
+  # That file is gone, so remove the link. Keep a ~/.zshrc of another
+  # kind.
+  if [ -L "$HOME/.zshrc" ] && [ "$(readlink "$HOME/.zshrc")" = "$LINK_DIR/shell/zshrc" ]; then
+    rm "$HOME/.zshrc"
+  fi
 
   # Terminals
   mkdir -p "$HOME/.config/ghostty"
@@ -134,6 +143,7 @@ cask "warp"
 
 brew "awscli"
 brew "bash"
+brew "bash-completion@2"
 brew "bat"
 brew "CrunchyData/brew/cb"
 brew "fd"
@@ -153,7 +163,6 @@ brew "superhtml" # HTML language server and formatter
 brew "tree"
 brew "tree-sitter-cli" # parser compiler for nvim-treesitter
 brew "ubicloud/cli/ubi"
-brew "zsh"
 EOF
 
 brew upgrade
@@ -161,22 +170,21 @@ brew autoremove
 brew cleanup
 
 # Shells
+# The login shell is Homebrew bash 5, not the bash 3.2 at /bin/bash.
+# shell/bashrc needs bash 4 or later. chsh accepts only a shell that
+# /etc/shells lists, and it asks for the user's password.
 add_to_shells() {
   local shell_path="$1"
 
-  if [ -x "$shell_path" ] && ! grep "$shell_path" /etc/shells >/dev/null 2>&1; then
-    sudo sh -c "echo $shell_path >> /etc/shells"
+  if [ -x "$shell_path" ] && ! grep -qxF "$shell_path" /etc/shells; then
+    echo "$shell_path" | sudo tee -a /etc/shells >/dev/null
   fi
 }
 
-zsh_path="$BREW/bin/zsh"
-add_to_shells "$zsh_path"
-
-if [[ -d "$BREW/share/zsh" && -d "$BREW/share/zsh/site-functions" ]]; then
-  if [[ "$(stat -f '%Su' "$BREW/share/zsh")" != "$(whoami)" ]]; then
-    sudo chown -R "$(whoami)" "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
-  fi
-  chmod u+w "$BREW/share/zsh" "$BREW/share/zsh/site-functions"
+bash_path="$BREW/bin/bash"
+add_to_shells "$bash_path"
+if [ "$(dscl . -read "/Users/$USER" UserShell | awk '{print $2}')" != "$bash_path" ]; then
+  chsh -s "$bash_path"
 fi
 
 # Bat

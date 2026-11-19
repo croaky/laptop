@@ -1,5 +1,5 @@
 # shell
-command = /opt/homebrew/bin/zsh
+command = /opt/homebrew/bin/bash
 
 # match vim/init.lua
 background = 1e2022

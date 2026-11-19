@@ -127,13 +127,13 @@ Work happens on a sockeye change. `createtree` allocates one and cuts a
 worktree, and `soc edit` sets its title and description. Write them
 before the work: a change with neither is a blank row on the
 dashboard. The `Checkfile` runs `shellcheck`, `stylua --check`, and
-the hostctl, ssh, and trust tests on every push. Before a push, run
-`shellcheck`, `stylua --check`, and `test/run.sh` on the workstation.
-The zsh and Neovim tests need the tools that `laptop.sh` installs, so
-the `Checkfile` does not run them. The runner is Linux with bash 5,
-so a green check does not prove that a script works with the bash
-3.2 at `/bin/bash` on macOS. Push with `soc push --wait`, then merge
-with `mergetree`.
+the bashrc, hostctl, ssh, and trust tests on every push. Before a
+push, run `shellcheck`, `stylua --check`, and `test/run.sh` on the
+workstation. The Neovim tests need the tools that `laptop.sh`
+installs, so the `Checkfile` does not run them. The runner is Linux
+with bash 5, so a green check does not prove that a script works with
+the bash 3.2 at `/bin/bash` on macOS. Push with `soc push --wait`,
+then merge with `mergetree`.
 
 ## Documentation
 

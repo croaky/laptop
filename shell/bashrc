@@ -1,0 +1,182 @@
+# shellcheck shell=bash
+
+# laptop.sh links ~/.bashrc and ~/.bash_profile to this file. A macOS
+# terminal starts a login shell, which reads ~/.bash_profile. Another
+# interactive shell reads ~/.bashrc. The login shell is Homebrew bash 5.
+
+# Editor
+export VISUAL=nvim
+export EDITOR=$VISUAL
+
+# Homebrew
+BREW="/opt/homebrew"
+unset HOMEBREW_NO_ANALYTICS # https://docs.brew.sh/Analytics
+
+# fzf and fd to find files
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#414559,bg:#303446,spinner:#F2D5CF,hl:#E78284 \
+--color=fg:#C6D0F5,header:#E78284,info:#CA9EE6,pointer:#F2D5CF \
+--color=marker:#BABBF1,fg+:#C6D0F5,prompt:#CA9EE6,hl+:#E78284 \
+--color=selected-bg:#51576D \
+--color=border:#737994,label:#C6D0F5"
+
+# Color
+export CLICOLOR=1
+
+# Bat
+export BAT_THEME="CatppuccinFrappe"
+
+# Postgres
+export PGUSER=postgres
+PG_VERSION="${PG_VERSION:-18}"
+# Homebrew builds libpq with GSSAPI, so psql defaults gssencmode to
+# `prefer` and pays a refused GSSENCRequest on each connect. Read by
+# libpq clients only; pgx ignores it.
+# https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-GSSENCMODE
+export PGGSSENCMODE=disable
+
+# Binaries
+PATH="$HOME/go/bin:$PATH"                         # Go
+PATH="$BREW/bin:$PATH"                            # Homebrew
+PATH="$BREW/opt/postgresql@$PG_VERSION/bin:$PATH" # Postgres
+PATH="$HOME/.local/bin:$PATH"                     # XDG
+PATH="$HOME/laptop/bin:$PATH"                     # ~/laptop
+
+# _absolute_path prints PATH with only its absolute directories. A
+# relative entry, such as ./bin, or an empty entry, which means the
+# current directory, runs a program from the current repo when the
+# prompt runs git. Run a project script by its path: ./bin/gotest.
+_absolute_path() {
+  local rest=$PATH: dir out=
+  while [[ -n $rest ]]; do
+    dir=${rest%%:*}
+    rest=${rest#*:}
+    if [[ $dir == /* ]]; then
+      out+=${out:+:}$dir
+    fi
+  done
+  printf '%s' "$out"
+}
+PATH=$(_absolute_path)
+unset -f _absolute_path
+export PATH
+
+# The rest is for an interactive shell only.
+[[ $- == *i* ]] || return 0
+
+# Dir
+alias mkdir="mkdir -p"
+
+# Editor
+alias vim="nvim"
+
+# History. histappend adds each shell's lines to the file, so a
+# second terminal does not overwrite the lines of the first.
+HISTFILE=~/.bash_history
+HISTSIZE=10000
+HISTFILESIZE=50000
+shopt -s histappend
+
+# fzf: Ctrl-T, Ctrl-R, Alt-C, and ** completion
+if [ -e "$BREW/opt/fzf/shell" ]; then
+  # shellcheck source=/dev/null
+  source "$BREW/opt/fzf/shell/completion.bash"
+  # shellcheck source=/dev/null
+  source "$BREW/opt/fzf/shell/key-bindings.bash"
+fi
+
+# Completion. bash-completion@2 also loads the completion for git and
+# for each other command that Homebrew installs.
+if [ -r "$BREW/etc/profile.d/bash_completion.sh" ]; then
+  # shellcheck source=/dev/null
+  source "$BREW/etc/profile.d/bash_completion.sh"
+fi
+
+# Prompt
+# git_prompt_info prints the current branch in bold green. \001 and
+# \002 mark the color codes, so bash does not count them in the
+# prompt width. The prompt gets this output through command
+# substitution, and bash does not expand that output again. So a
+# branch name such as $(cmd) stays text.
+git_prompt_info() {
+  local current_branch
+  current_branch=$(git current-branch 2>/dev/null)
+  if [[ -n $current_branch ]]; then
+    printf ' \001\033[1;32m\002%s\001\033[0m\002' "$current_branch"
+  fi
+}
+if ! env | grep -q '^PS1='; then
+  PS1='\[\033[1;34m\]\W\[\033[0m\]$(git_prompt_info) \$ '
+fi
+
+# Git
+# Match registered servers, not the global default alone.
+_tree_server() {
+  local origin url
+  origin=$(git config --get remote.origin.url 2>/dev/null) || return 1
+  while read -r _ url; do
+    if [[ -n "$url" && "$origin" == "${url%/}"/git/* ]]; then
+      return 0
+    fi
+  done < <(git config --get-regexp '^sockeye(\.[^.]+)?\.url$' 2>/dev/null)
+  return 1
+}
+
+# Pin tree commands to origin, even when a URL is exported.
+_tree_change() {
+  local origin
+  _tree_server || {
+    printf '%s\n' "Origin is not a configured sockeye server." >&2
+    return 1
+  }
+  origin=$(git config --get remote.origin.url) || return
+  SOCKEYE_URL="${origin%%/git/*}" command soc "$@"
+}
+createtree() {
+  local dir
+  if _tree_server; then
+    dir=$(_tree_change checkout "$@") || return
+  else
+    dir=$(git create-tree "$@") || return
+  fi
+  cd "$dir" || return
+}
+deletetree() {
+  local main
+  main=$(git delete-tree) || return
+  cd "$main" || return
+}
+mergetree() {
+  _tree_change merge --when-green "$@" || return
+  deletetree
+}
+closetree() {
+  _tree_change close "$@" || return
+  deletetree
+}
+# Go to an existing change's worktree from any directory. soc picks
+# the server from the change id. A failed checkout keeps the directory.
+co() {
+  local dir
+  (($# == 1)) || {
+    printf '%s\n' "usage: co <change-id>" >&2
+    return 2
+  }
+  dir=$(soc checkout "$1") || return
+  cd "$dir" || return
+}
+
+# Tailscale (CLI ships inside the macOS app bundle; symlinking it breaks
+# the app's bundle-identifier check, so alias the full path instead)
+TAILSCALE="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+if [ -x "$TAILSCALE" ]; then
+  # shellcheck disable=SC2139
+  alias tailscale="$TAILSCALE"
+fi
+
+# Sockeye
+if command -v soc >/dev/null 2>&1; then
+  # shellcheck source=/dev/null
+  source <(soc completion bash)
+fi
