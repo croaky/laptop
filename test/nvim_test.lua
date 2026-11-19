@@ -75,6 +75,16 @@ if not line:match("^        ") then
 	fail("dprint did not read the project config in a trusted repo")
 end
 
+-- Boundary: in a trusted repo with no dprint config, dprint reads the
+-- user's config, not the dprint.json of the untrusted repo where
+-- Neovim runs.
+buf = open(vim.env.BARE .. "/x.json")
+conform.format({ bufnr = buf, async = false, timeout_ms = 10000, formatters = { "dprint" } })
+line = vim.api.nvim_buf_get_lines(buf, 1, 2, false)[1] or ""
+if line ~= '  "a": {' then
+	fail("dprint did not format with the user config in a trusted repo with no config: " .. vim.inspect(line))
+end
+
 -- Boundary: in an untrusted repo, a go.mod that pins pgfmt selects no
 -- SQL formatter, so go tool builds no repo code.
 local function sql_formatters(dir)

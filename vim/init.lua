@@ -347,6 +347,32 @@ local function pinsPgfmt(path)
 	return false
 end
 
+-- dprint_config gives the dprint config for a file in dir. It is the
+-- nearest dprint config at or above dir, inside the repo that holds
+-- dir, when that repo is trusted. In all other cases it is the user's
+-- config. dprint always gets --config, so it never reads a config from
+-- its working directory, which can be an untrusted repo. The search
+-- starts from the physical path, so a symlink cannot move it into
+-- another repo.
+local function dprint_config(dir)
+	local user = vim.fn.expand("~/.config/dprint/dprint.jsonc")
+	local real = vim.uv.fs_realpath(dir)
+	local top = real and vim.fs.root(real, ".git")
+	if not top then
+		return user
+	end
+	local config = vim.fs.find({
+		"dprint.json",
+		".dprint.json",
+		"dprint.jsonc",
+		".dprint.jsonc",
+	}, { upward = true, path = real, stop = vim.fs.dirname(top) })[1]
+	if config and trusted(real) then
+		return config
+	end
+	return user
+end
+
 require("conform").setup({
 	format_on_save = {
 		lsp_format = "fallback",
@@ -376,17 +402,13 @@ require("conform").setup({
 	formatters = {
 		-- dprint runs from ~/.local/bin, where laptop.sh installs the
 		-- pinned binary. conform's stock definition prefers a
-		-- node_modules/.bin/dprint in the project. In an untrusted repo,
-		-- --config names the user's config, so a project dprint.json
-		-- cannot add a plugin.
+		-- node_modules/.bin/dprint in the project. --config names the
+		-- config that dprint_config gives, so a dprint.json outside a
+		-- trusted repo cannot add a plugin.
 		dprint = {
 			command = vim.fn.expand("~/.local/bin/dprint"),
 			args = function(_, ctx)
-				if trusted(ctx.dirname) then
-					return { "fmt", "--stdin", "$FILENAME" }
-				end
-				local config = vim.fn.expand("~/.config/dprint/dprint.jsonc")
-				return { "fmt", "--config", config, "--stdin", "$FILENAME" }
+				return { "fmt", "--config", dprint_config(ctx.dirname), "--stdin", "$FILENAME" }
 			end,
 			cwd = require("conform.util").root_file({
 				"dprint.json",

@@ -55,8 +55,16 @@ fixture() {
 export UNTRUSTED="$tmp/untrusted" TRUSTED="$tmp/trusted"
 fixture "$UNTRUSTED"
 fixture "$TRUSTED"
+
+# A trusted repo with no dprint config.
+export BARE="$tmp/bare"
+mkdir -p "$BARE"
+git -C "$BARE" init -q
+printf '{\n"a": {\n"b": 1\n}\n}\n' >"$BARE/x.json"
+
 if [ -x "$root/bin/git-trust" ]; then
   (cd "$TRUSTED" && "$root/bin/git-trust")
+  (cd "$BARE" && "$root/bin/git-trust")
 fi
 
 # Start Neovim in the untrusted repo with a relative entry on PATH, as
