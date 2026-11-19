@@ -6,8 +6,17 @@
 # Usage:
 #   hostctl            # Enable ad/tracker blocking
 #   hostctl --unblock  # Disable ad/tracker blocking
+#
+# The blocking list comes from a site that this repo does not control.
+# hostctl_filter is the only check on that list. The list has no
+# SHA-256 pin: it is data, not a tool, and a pin would need a change
+# to this repo for each upstream update. After the filter, the site
+# can only block a name. It cannot send a name to an address that it
+# chooses. To undo a block, run `hostctl --unblock`.
 
 set -euo pipefail
+
+url=https://winhelp2002.mvps.org/hosts.txt
 
 custom_hosts_entries() {
   cat <<EOF
@@ -22,8 +31,9 @@ custom_hosts_entries() {
 EOF
 }
 
-if [[ "${1:-}" == "--unblock" ]]; then
-  cat <<EOF | sudo tee /etc/hosts >/dev/null
+# local_hosts_entries: the lines that each /etc/hosts starts with.
+local_hosts_entries() {
+  cat <<EOF
 # IPv4
 127.0.0.1 localhost
 
@@ -32,13 +42,61 @@ if [[ "${1:-}" == "--unblock" ]]; then
 
 $(custom_hosts_entries)
 EOF
-else
-  # Block ads, trackers, and malicious websites at the DNS host level.
-  curl -s https://winhelp2002.mvps.org/hosts.txt | tr -d '\r' | sudo tee /etc/hosts >/dev/null
+}
 
-  # Append custom entries
-  (echo && custom_hosts_entries) | sudo tee -a /etc/hosts >/dev/null
+# hostctl_filter FILE: print each "0.0.0.0 <name>" line of FILE, where
+# <name> is a valid host name. A trailing comment is dropped. All other
+# lines are dropped, also localhost, broadcasthost, and *.localhost.
+hostctl_filter() {
+  LC_ALL=C awk '
+    {
+      sub(/\r$/, "")
+      sub(/[ \t]*#.*$/, "")
+    }
+    NF != 2 || $1 != "0.0.0.0" || $0 !~ /^0\.0\.0\.0[ \t]/ { next }
+    {
+      name = tolower($2)
+      if (length(name) > 253) next
+      n = split(name, label, ".")
+      for (i = 1; i <= n; i++) {
+        if (length(label[i]) > 63) next
+        if (label[i] !~ /^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/) next
+      }
+      if (name == "localhost" || name == "broadcasthost") next
+      if (name ~ /\.localhost$/) next
+      print "0.0.0.0 " name
+    }
+  ' "$1"
+}
+
+main() {
+  if [[ "${1:-}" == "--unblock" ]]; then
+    local_hosts_entries | sudo tee /etc/hosts >/dev/null
+  else
+    # Block ads, trackers, and malicious websites at the DNS host level.
+    # Make the whole file first. If a step fails, /etc/hosts does not
+    # change.
+    tmp=$(mktemp -d)
+    trap 'rm -rf -- "$tmp"' EXIT
+    if ! curl -fsS -o "$tmp/download" "$url"; then
+      echo "hostctl: cannot download $url; /etc/hosts did not change" >&2
+      exit 1
+    fi
+    {
+      local_hosts_entries
+      echo
+      echo "# blocked names from $url"
+      hostctl_filter "$tmp/download"
+    } >"$tmp/hosts"
+    # The user reads $tmp/hosts, and only tee runs as root.
+    # shellcheck disable=SC2024
+    sudo tee /etc/hosts <"$tmp/hosts" >/dev/null
+  fi
+
+  # Flush DNS cache
+  sudo killall -HUP mDNSResponder
+}
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  main "$@"
 fi
-
-# Flush DNS cache
-sudo killall -HUP mDNSResponder

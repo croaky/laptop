@@ -31,8 +31,6 @@ site or another local account comes last.
 2. `002-shell-argv.md`: pass untrusted text to a process as separate
    arguments, not as one shell string. It covers the `K` map, the SQL
    run map, and `bin/replace`.
-3. `003-laptop-sh-state.md`: validate what `laptop.sh` writes to
-   `/etc/hosts` and `~/.ssh`.
 
 Plans 002 and 003 share no file with each other, so they can run in
 parallel. The line numbers in each plan are from commit `ed65118`.

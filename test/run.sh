@@ -9,3 +9,5 @@ dir=$(cd "$(dirname "$0")" && pwd -P)
 "$dir/zshrc_test.zsh" </dev/null
 "$dir/trust_test.sh" </dev/null | grep -v '^trusted '
 "$dir/nvim_test.sh" </dev/null | grep -v '^trusted '
+"$dir/hostctl_test.sh" </dev/null
+"$dir/ssh_test.sh" </dev/null

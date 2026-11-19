@@ -39,7 +39,10 @@ fi
   ln -sf "$LINK_DIR/cli/bat.xml" "$HOME/.config/bat/themes/CatppuccinFrappe.tmTheme"
   mkdir -p "$HOME/.config/dprint"
   ln -sf "$LINK_DIR/cli/dprint.jsonc" "$HOME/.config/dprint/dprint.jsonc"
-  mkdir -p "$HOME/.ssh"
+  # ~/.ssh holds known_hosts and the private ssh config. Only the user
+  # reads it. chmod also fixes a ~/.ssh that exists with another mode.
+  install -d -m 700 "$HOME/.ssh"
+  chmod 700 "$HOME/.ssh"
   ln -sf "$LINK_DIR/cli/ssh" "$HOME/.ssh/config"
 
   # Git
@@ -422,5 +425,7 @@ go install github.com/croaky/mdembed@main        # embed code files in Markdown
 go install github.com/croaky/procman@main        # run a Procfile.dev
 go install github.com/croaky/tun/cmd/tun@main    # tunnel a local server
 
-# Local host names for dev servers (blog.localhost and others)
+# Local host names for dev servers (blog.localhost and others), and a
+# filtered list of ad and tracker names to block. bin/hostctl explains
+# the filter.
 "$DIR/bin/hostctl"
