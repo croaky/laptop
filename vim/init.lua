@@ -117,11 +117,15 @@ local function map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-local function run_file(key, cmd_template, split_cmd)
+-- Map key to run argv with the buffer path added as the last
+-- argument. jobstart starts the program with no shell, so a $(...) or
+-- a quote in a file name stays part of the name.
+local function run_file(key, argv, split_cmd)
 	map("n", key, function()
-		local cmd = cmd_template:gsub("%%", vim.fn.expand("%:p"))
+		local cmd = vim.list_extend(vim.deepcopy(argv), { vim.fn.expand("%:p") })
 		vim.cmd(split_cmd)
-		vim.cmd("terminal " .. cmd)
+		vim.cmd.enew()
+		vim.fn.jobstart(cmd, { term = true })
 	end, { buffer = 0 })
 end
 
@@ -164,8 +168,23 @@ vim.g.fzf_layout = { window = { width = 0.95, height = 0.9 } }
 map("n", "\\", ":Rg ", { nowait = true })
 
 -- Search word under cursor
+-- K gives the word to rg as one argument, and rg reads it as a fixed
+-- string. Some filetypes put quotes, $, and ` in 'iskeyword'. So :grep
+-- would give the word to a shell and to the Ex parser.
 vim.opt.grepprg = "rg --vimgrep"
-map("n", "K", ':silent grep! "\\b<C-R><C-W>\\b"<CR>:cw<CR>')
+map("n", "K", function()
+	local word = vim.fn.expand("<cword>")
+	if word == "" then
+		return
+	end
+	local result = vim.system({ "rg", "--vimgrep", "-F", "-w", "-e", word, "--", "." }, { text = true }):wait()
+	vim.fn.setqflist({}, " ", {
+		title = "rg " .. word,
+		lines = vim.split(result.stdout or "", "\n", { trimempty = true }),
+		efm = vim.o.grepformat,
+	})
+	vim.cmd.cwindow()
+end)
 
 -- Switch between last two files
 map("n", "<Leader><Leader>", "<C-^>")
@@ -436,7 +455,7 @@ vim.lsp.enable("gopls")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "go",
 	callback = function()
-		run_file("<Leader>r", "go run %", "split")
+		run_file("<Leader>r", { "go", "run" }, "split")
 
 		vim.opt_local.listchars = { tab = "  ", trail = "·", nbsp = "·" }
 		vim.opt_local.expandtab = false
@@ -552,14 +571,19 @@ vim.api.nvim_create_autocmd("FileType", {
 					print("Cannot read .db file")
 					return
 				end
-				local dbname = db_file:read("*l")
+				local dbname = db_file:read("*l") or ""
 				db_file:close()
 
-				-- Construct the psql command
-				local cmd = 'psql -d "' .. dbname .. '" -f "' .. path .. '"'
+				-- The repo writes .db, so accept only a database name. psql
+				-- reads a -d value with = or a URI as a connection string,
+				-- which can send the SQL file to another server.
+				if not dbname:match("^[%w_]+$") then
+					vim.notify(".db must hold a database name of letters, digits, and _", vim.log.levels.ERROR)
+					return
+				end
 
-				-- Capture the output of the psql command
-				local output = vim.fn.systemlist(cmd)
+				-- systemlist with a list starts psql with no shell.
+				local output = vim.fn.systemlist({ "psql", "-d", dbname, "-f", path })
 
 				-- Check for command execution errors
 				if output == nil then

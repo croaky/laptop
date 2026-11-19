@@ -28,12 +28,8 @@ opening a directory, comes first. A path that needs a key press or a
 command on a hostile input comes next. A path that needs the upstream
 site or another local account comes last.
 
-2. `002-shell-argv.md`: pass untrusted text to a process as separate
-   arguments, not as one shell string. It covers the `K` map, the SQL
-   run map, and `bin/replace`.
-
-Plans 002 and 003 share no file with each other, so they can run in
-parallel. The line numbers in each plan are from commit `ed65118`.
+No numbered plan is open. Plans 002 and 003 shipped. Their text is in
+`git log -- todo/002-shell-argv.md todo/003-laptop-sh-state.md`.
 
 Plan 001 shipped as the change that added `bin/git-trust`. Its text is
 in `git log -- todo/001-repo-trust.md`. A plan that starts a program

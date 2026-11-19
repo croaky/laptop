@@ -11,3 +11,4 @@ dir=$(cd "$(dirname "$0")" && pwd -P)
 "$dir/nvim_test.sh" </dev/null | grep -v '^trusted '
 "$dir/hostctl_test.sh" </dev/null
 "$dir/ssh_test.sh" </dev/null
+"$dir/argv_test.sh" </dev/null

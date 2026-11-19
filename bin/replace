@@ -17,5 +17,8 @@ sed_replace=$(printf '%s' "$replace_with" | sed 's/[\/&]/\\&/g')
 
 # rg -F finds the files that contain the fixed string.
 # One sed process then edits all of them.
-rg -F -l -0 "$find_this" "$@" |
-  xargs -0 sed -i '' "s/$sed_find/$sed_replace/g"
+# -e and -- make rg and sed read a find string or a file name that
+# starts with - as text. A file named --pre=sh would make rg run each
+# file in sh.
+rg -F -l -0 -e "$find_this" -- "$@" |
+  xargs -0 sed -i '' -e "s/$sed_find/$sed_replace/g" --
