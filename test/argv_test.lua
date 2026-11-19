@@ -11,6 +11,12 @@ local function fail(msg)
 	failures = failures + 1
 end
 
+-- These tests need no language server. gopls outlives Neovim, and it
+-- writes its caches and telemetry to HOME while test/argv_test.sh
+-- removes that temporary tree, so the rm fails. Turn it off before
+-- the Go file opens.
+vim.lsp.enable("gopls", false)
+
 local function exists(path)
 	return vim.uv.fs_stat(path) ~= nil
 end
@@ -119,15 +125,6 @@ end
 if exists(repo .. "/gomark") then
 	fail("the Go run map ran the buffer path in a shell")
 end
-
--- Stop gopls before the exit, so that it writes nothing to the
--- temporary HOME while test/argv_test.sh removes it.
-for _, client in ipairs(vim.lsp.get_clients()) do
-	client:stop(true)
-end
-vim.wait(5000, function()
-	return #vim.lsp.get_clients() == 0
-end, 50)
 
 if failures > 0 then
 	vim.cmd("cquit 1")

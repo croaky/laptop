@@ -71,16 +71,11 @@ export XDG_CONFIG_HOME="$real/.config" XDG_DATA_HOME="$real/.local/share"
 export XDG_CACHE_HOME="$real/.cache" XDG_STATE_HOME="$tmp/state"
 export HOME="$tmp/home" GIT_CONFIG_NOSYSTEM=1
 
-# go and gopls start a telemetry process that outlives Neovim and
-# writes to HOME while the trap removes it. Turn telemetry off, as
-# "go telemetry off" does.
-telemetry="$HOME/Library/Application Support/go/telemetry"
-mkdir -p "$telemetry"
-printf 'off' >"$telemetry/mode"
-
 # Stub psql and go write each argument on its own line, so the test
 # sees how Neovim split the command. The go stub runs the real go for
-# each subcommand other than run, such as the go env that gopls needs.
+# each subcommand other than run. test/argv_test.lua starts no gopls,
+# so no process outlives Neovim and writes to HOME while the trap
+# removes it.
 stubs="$tmp/stubs"
 mkdir -p "$stubs"
 printf '#!/bin/sh\nprintf "%%s\\n" "$@" >"%s/psql.args"\n' "$MARKERS" >"$stubs/psql"
