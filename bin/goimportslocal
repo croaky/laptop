@@ -26,9 +26,9 @@
 #
 #   "github.com/lib/pq"
 #
-#   "eds/errors"
-#   "eds/log"
-#   "eds/net"
+#   "example/errors"
+#   "example/log"
+#   "example/net"
 # )
 
 # Usage examples:

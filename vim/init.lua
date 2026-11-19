@@ -202,7 +202,7 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 
--- Jump target for the EDS sqlFile pattern: a line like
+-- Jump target for the sqlFile pattern: a line like
 -- `qName = sqlFile("some_query")` maps to ./queries/some_query.sql
 -- relative to the current file.
 local function sql_file_path()

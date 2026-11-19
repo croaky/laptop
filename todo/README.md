@@ -43,26 +43,30 @@ repo-chosen code only in a repo that `git trust --check` accepts.
   The user accepted this on 2026-11-19. Without it, each new change
   worktree needs its own trust step. `README.md` and `bin/git-trust`
   say this to each person who runs `git trust`.
+- The hosts list site can block any name, also one that the user
+  needs, such as `github.com` or the sockeye host. `bin/hostctl`
+  cannot tell a wanted name from an ad name. The user accepted this
+  on 2026-11-19, with no allow list until a block like that happens.
+  `hostctl --unblock` undoes a block at once.
 
-## Follow-up hypotheses
+## Checked paths
 
-No finding names these paths. Each one has no plan yet. Make it a
-numbered plan when its evidence proves a reachable path.
+No finding names these paths. On 2026-11-19 a direct test showed
+that none of them runs code that a repo chooses, so none needs a plan.
+Repeat a test when the named program changes.
 
-- The prompt runs the real `git` in each directory. `git` reads the
-  directory's own `.git/config`, and `core.fsmonitor` there runs a
-  command. A clone does not carry `.git/config`, but an extracted
-  archive with a real `.git` directory can. Decide it: extract a
-  scratch archive whose `.git/config` sets `core.fsmonitor` to a
-  marker script, `cd` into it, and draw a prompt.
-- In an untrusted module, `go env` and `go list -m` in
-  `bin/goimportslocal` can download the Go toolchain that a
-  `toolchain` line names. The Go checksum database verifies that
-  download, so it is not repo code. Decide it: set a `toolchain` line
-  that this machine does not have, save a `.go` file, and look in
-  `$(go env GOMODCACHE)/golang.org/toolchain`. `GOTOOLCHAIN=local` in
-  the script stops the download.
-- gopls runs `go list` in each repo that Neovim opens, also an
-  untrusted one. cgo directives in the repo can start tools such as
-  `pkg-config`. Decide it: open a scratch module whose cgo file names
-  a marker program in `#cgo pkg-config`, and look for the marker.
+- The prompt runs `git current-branch`, which runs only
+  `git rev-parse`. A repo whose `.git/config` sets `core.fsmonitor`
+  to a marker script did not start the script when the prompt ran.
+  `git status` did start it, but only when the user runs it.
+- In a module whose `go` line names a newer Go, `go list -m` in
+  `bin/goimportslocal` tries to download that Go release. Go gets it
+  only from the official `golang.org/toolchain` module, which the
+  checksum database verifies. With `GOTOOLCHAIN=auto`, Go never picks
+  a release older than the local one. So the download is not repo
+  code. `go env` does not download a release.
+- gopls runs `go list -compiled`, which reads cgo directives. Go
+  rejects `#cgo CFLAGS: -fplugin=...` as an invalid flag. Go puts the
+  names from `#cgo pkg-config` after `--`, so `pkg-config` reads them
+  as package names. `pkg-config` itself comes from the absolute
+  `PATH`, not from the repo.
