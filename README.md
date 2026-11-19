@@ -72,6 +72,33 @@ Then run `soc git setup` and `soc login`.
 Move what `soc` writes there, such as a `credential` block, to
 `~/.gitconfig.local`. `git/gitconfig` includes that file.
 
+### Trusted repos
+
+A cloned repo, or a change that somebody else pushed,
+can hold programs. The shell and Neovim do not run them by themselves:
+
+- `PATH` has only absolute directories, so the shell never looks in
+  `./bin`. Run a project script by its path, such as `./bin/gotest`.
+- Format-on-save runs dprint from `~/.local/bin` and goimports from
+  `~/go/bin`, the versions that `laptop.sh` pins.
+
+A trusted repo also gets the code that it chooses:
+the `goimports` and `pgfmt` versions that its `go.mod` or `tools.mod`
+pins as go tools, and its own `dprint.json`.
+To trust a repo and all its worktrees, run this in the repo:
+
+```
+git trust
+```
+
+Trust a repo only when you trust each person who can push to it.
+`git trust` adds the repo root to `laptop.trusted` in
+`~/.gitconfig.local`. To remove it:
+
+```
+git config --file ~/.gitconfig.local --unset laptop.trusted "$PWD"
+```
+
 ## Install
 
 Clone onto laptop:
@@ -102,6 +129,9 @@ also when it runs from a change worktree.
 So a test run from a worktree is safe after `mergetree` deletes it.
 A change to a dotfile, such as `shell/zshrc`,
 takes effect after the merge and a `git pull` in `~/laptop`.
+
+Run the tests with `test/run.sh`.
+They need the tools that `laptop.sh` installs.
 
 `laptop.sh` also sets some macOS settings.
 The comments in `laptop.sh` say why, and how to keep a different value.

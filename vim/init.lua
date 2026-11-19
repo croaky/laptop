@@ -1,4 +1,14 @@
 -- Paths
+-- Keep only absolute directories on PATH. A relative entry, such as
+-- ./bin, makes Neovim and each program it starts (git for the status
+-- line, formatters, language servers) run a file from the current
+-- repo. A shell or a terminal app can pass one on.
+vim.env.PATH = table.concat(
+	vim.tbl_filter(function(dir)
+		return dir:sub(1, 1) == "/"
+	end, vim.split(vim.env.PATH or "", ":", { plain = true })),
+	":"
+)
 vim.opt.runtimepath:prepend("~/.vim")
 vim.opt.packpath = vim.opt.runtimepath:get()
 
@@ -290,6 +300,18 @@ vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 
 -- Formatting
 
+-- The laptop checkout that holds this file. ~/.config/nvim/init.lua is
+-- a symlink to it.
+local laptop = vim.fn.fnamemodify(vim.fn.resolve(debug.getinfo(1, "S").source:sub(2)), ":h:h")
+
+-- trusted reports whether the repo that holds dir is trusted. Only a
+-- trusted repo may choose code that runs on save: the go tool versions
+-- that it pins and its own dprint config. `git trust` in a repo trusts
+-- it. See bin/git-trust.
+local function trusted(dir)
+	return vim.system({ laptop .. "/bin/git-trust", "--check", dir }):wait().code == 0
+end
+
 -- pinsPgfmt reports whether the go.mod above path pins pgfmt as a go
 -- tool. Such a repo runs that version in its sqlfmt check, and the
 -- editor runs the same one.
@@ -322,20 +344,43 @@ require("conform").setup({
 		markdown = { "dprint" },
 		scss = { "dprint" }, -- dprint (malva plugin)
 		sh = { "shfmt" },
-		-- An empty list in a repo that pins no pgfmt, so a save there
-		-- neither formats nor warns.
+		-- An empty list in a repo that pins no pgfmt, or in an untrusted
+		-- repo, so a save there neither formats nor warns. go tool builds
+		-- what the repo's go.mod names.
 		sql = function(bufnr)
 			local dir = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
-			return pinsPgfmt(dir) and { "pgfmt" } or {}
+			return pinsPgfmt(dir) and trusted(dir) and { "pgfmt" } or {}
 		end,
 		typescript = { "dprint" },
 		typescriptreact = { "dprint" },
 	},
 	formatters = {
+		-- dprint runs from ~/.local/bin, where laptop.sh installs the
+		-- pinned binary. conform's stock definition prefers a
+		-- node_modules/.bin/dprint in the project. In an untrusted repo,
+		-- --config names the user's config, so a project dprint.json
+		-- cannot add a plugin.
+		dprint = {
+			command = vim.fn.expand("~/.local/bin/dprint"),
+			args = function(_, ctx)
+				if trusted(ctx.dirname) then
+					return { "fmt", "--stdin", "$FILENAME" }
+				end
+				local config = vim.fn.expand("~/.config/dprint/dprint.jsonc")
+				return { "fmt", "--config", config, "--stdin", "$FILENAME" }
+			end,
+			cwd = require("conform.util").root_file({
+				"dprint.json",
+				".dprint.json",
+				"dprint.jsonc",
+				".dprint.jsonc",
+			}),
+		},
 		-- Both run in the directory of the file's go.mod, so go tool and
-		-- go list -m read the module of the file.
+		-- go list -m read the module of the file. goimportslocal decides
+		-- by trust whether to run go tool.
 		goimportslocal = {
-			command = "goimportslocal",
+			command = laptop .. "/bin/goimportslocal",
 			args = { "-srcdir", "$DIRNAME" },
 			cwd = require("conform.util").root_file({ "go.mod" }),
 		},

@@ -28,15 +28,16 @@ opening a directory, comes first. A path that needs a key press or a
 command on a hostile input comes next. A path that needs the upstream
 site or another local account comes last.
 
-1. `001-repo-trust.md`: one trust decision, owned by the user, for
-   code that a repo chooses. It covers the `./bin` entry on `PATH`,
-   the dprint formatter, and `go tool` on save.
 2. `002-shell-argv.md`: pass untrusted text to a process as separate
    arguments, not as one shell string. It covers the `K` map, the SQL
    run map, and `bin/replace`.
 3. `003-laptop-sh-state.md`: validate what `laptop.sh` writes to
    `/etc/hosts` and `~/.ssh`.
 
-Plans 002 and 003 share no file with each other. Each one can run in
-parallel with plan 001. Plans 001 and 002 both edit `vim/init.lua`, in
-different blocks, so merge them one after the other.
+Plans 002 and 003 share no file with each other, so they can run in
+parallel. The line numbers in each plan are from commit `ed65118`.
+
+Plan 001 shipped as the change that added `bin/git-trust`. Its text is
+in `git log -- todo/001-repo-trust.md`. A plan that starts a program
+from Neovim or the shell keeps its rule: no relative `PATH` entry, and
+repo-chosen code only in a repo that `git trust --check` accepts.

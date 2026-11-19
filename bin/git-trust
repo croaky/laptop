@@ -1,0 +1,91 @@
+#!/bin/bash
+#
+# git trust              trust the repo of the current directory
+# git trust --check DIR  exit 0 if DIR is in a trusted repo
+#
+# A trusted repo may choose code that runs on this machine: the go tool
+# versions that its go.mod or tools.mod pins, and its own dprint
+# config. vim/init.lua and bin/goimportslocal ask this script before
+# they use either. A new clone is not trusted.
+#
+# The trusted repo roots are the values of laptop.trusted in
+# ~/.gitconfig.local. No repo can write that file. Trust covers each
+# worktree that the repo lists, so `git trust` trusts every person who
+# can push a change to the repo.
+#
+# --check runs no git command in DIR, because DIR can be hostile. It
+# reads only the trust store and the trusted repo's own worktree list.
+
+set -euo pipefail
+
+store="$HOME/.gitconfig.local"
+
+# resolve DIR: the physical path of DIR, with no symlinks.
+resolve() {
+  (cd "$1" 2>/dev/null && pwd -P)
+}
+
+# toplevel DIR: the nearest directory at or above DIR that holds .git.
+toplevel() {
+  local dir
+  dir=$(resolve "$1") || return 1
+  while [ "$dir" != / ]; do
+    if [ -e "$dir/.git" ]; then
+      echo "$dir"
+      return 0
+    fi
+    dir=$(dirname "$dir")
+  done
+  return 1
+}
+
+# roots: the trusted repo roots. git runs in /, so no repo config is
+# read.
+roots() {
+  if [ -f "$store" ]; then
+    git -C / config --file "$store" --get-all laptop.trusted || true
+  fi
+}
+
+case "${1:-}" in
+  --check)
+    [ $# -eq 2 ] || {
+      echo "usage: git trust --check DIR" >&2
+      exit 2
+    }
+    top=$(toplevel "$2") || exit 1
+    while IFS= read -r root; do
+      [ -n "$root" ] || continue
+      if [ "$top" = "$root" ]; then
+        exit 0
+      fi
+      # git writes the path of each worktree's .git file here.
+      for gitdir in "$root"/.git/worktrees/*/gitdir; do
+        [ -f "$gitdir" ] || continue
+        worktree=$(resolve "$(dirname "$(cat "$gitdir")")") || continue
+        if [ "$top" = "$worktree" ]; then
+          exit 0
+        fi
+      done
+    done < <(roots)
+    exit 1
+    ;;
+  "")
+    # The main clone holds the common .git directory, also when the
+    # current directory is a worktree.
+    common=$(git rev-parse --path-format=absolute --git-common-dir)
+    if [ "$(basename "$common")" != .git ]; then
+      echo "git trust: $common is not the .git directory of a clone" >&2
+      exit 1
+    fi
+    root=$(resolve "$(dirname "$common")")
+    if ! roots | grep -qxF "$root"; then
+      git -C / config --file "$store" --add laptop.trusted "$root"
+    fi
+    echo "trusted $root"
+    ;;
+  *)
+    echo "usage: git trust [--check DIR]" >&2
+    exit 2
+    ;;
+esac

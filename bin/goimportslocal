@@ -1,9 +1,12 @@
 #!/bin/bash
 # Runs goimports on the files named on the input,
 # supplying options needed for the local module (go list -m).
-# It runs the goimports that the module pins as a go tool, in tools.mod
-# or in go.mod, so the editor formats as the repo's lint check does.
-# A module that pins none gets the goimports on PATH.
+# In a trusted repo, it runs the goimports that the module pins as a go
+# tool, in tools.mod or in go.mod, so the editor formats as the repo's
+# lint check does. go tool builds what the module's go.mod names, so an
+# untrusted repo, or a module that pins none, gets the goimports on
+# PATH, which laptop.sh pins. `git trust` trusts a repo; see
+# bin/git-trust.
 
 # The goimports program performs Go formatting on a file
 # (so it can be used as a drop-in replacement for `gofmt`)
@@ -37,16 +40,24 @@
 
 set -euo pipefail
 
+here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 gomod=$(go env GOMOD)
 root=$(dirname "$gomod")
 pin=golang.org/x/tools/cmd/goimports
-if grep -qs "$pin" "$root/tools.mod"; then
+trusted=false
+if "$here/git-trust" --check "$root"; then
+  trusted=true
+fi
+if $trusted && grep -qs "$pin" "$root/tools.mod"; then
   goimports=(go tool -modfile="$root/tools.mod" goimports)
-elif grep -qs "$pin" "$gomod"; then
+elif $trusted && grep -qs "$pin" "$gomod"; then
   goimports=(go tool goimports)
 else
+  # No go install here: inside a module, it builds what the module's
+  # replace lines name and puts it on PATH for every later repo.
   if ! command -v goimports >/dev/null; then
-    go install golang.org/x/tools/cmd/goimports
+    echo "goimportslocal: no goimports on PATH; run laptop.sh to install the pinned version" >&2
+    exit 1
   fi
   goimports=(goimports)
 fi

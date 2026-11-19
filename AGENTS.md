@@ -123,8 +123,10 @@ description short and clear:
 Work happens on a sockeye change. `createtree` allocates one and cuts a
 worktree, and `soc edit` sets its title and description. Write them
 before the work: a change with neither is a blank row on the
-dashboard. The `Checkfile` runs `shellcheck` on every push. Push with
-`soc push --wait`, then merge with `mergetree`.
+dashboard. The `Checkfile` runs `shellcheck` on every push. Before a
+push, run `shellcheck` and `test/run.sh` on the workstation. The tests
+need the tools that `laptop.sh` installs, so the `Checkfile` does not
+run them. Push with `soc push --wait`, then merge with `mergetree`.
 
 ## Documentation
 

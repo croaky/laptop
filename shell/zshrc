@@ -134,7 +134,10 @@ PATH="$BREW/bin:$PATH"                            # Homebrew
 PATH="$BREW/opt/postgresql@$PG_VERSION/bin:$PATH" # Postgres
 PATH="$HOME/.local/bin:$PATH"                     # XDG
 PATH="$HOME/laptop/bin:$PATH"                     # ~/laptop
-PATH="./bin:$PATH"                                # current project
+# Keep only absolute directories. A relative entry, such as ./bin,
+# runs a program from the current repo when the prompt runs git. Run
+# a project script by its path: ./bin/gotest.
+path=(${(M)path:#/*})
 export PATH
 
 # Sockeye
