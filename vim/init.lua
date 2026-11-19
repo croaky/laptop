@@ -130,8 +130,8 @@ local function run_file(key, argv, split_cmd)
 end
 
 function _G.get_user()
-	-- Try to get GitHub username
-	local github_user = vim.fn.systemlist("git config --get github.user")[1] or ""
+	-- Try to get GitHub username. A list starts git with no shell.
+	local github_user = vim.fn.systemlist({ "git", "config", "--get", "github.user" })[1] or ""
 	github_user = github_user:gsub("%s+", "")
 	if github_user ~= "" then
 		return "[" .. github_user .. "] "

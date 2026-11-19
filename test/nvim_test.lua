@@ -32,6 +32,19 @@ if marker("git") then
 	fail("the status line ran ./bin/git")
 end
 
+-- Boundary: vim/init.lua starts no process with a string literal,
+-- because Neovim gives a string to a shell. This check cannot see a
+-- command that a variable holds; test/argv_test.lua guards those.
+local root = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":p:h:h")
+for n, l in ipairs(vim.fn.readfile(root .. "/vim/init.lua")) do
+	local code = l:gsub("%-%-.*$", "")
+	for _, fn in ipairs({ "system", "systemlist", "jobstart", "termopen" }) do
+		if code:match(fn .. "%(%s*[\"']") then
+			fail(("vim/init.lua:%d passes a string command: %s"):format(n, vim.trim(l)))
+		end
+	end
+end
+
 local conform = require("conform")
 
 -- Behavior: the dprint formatter runs ~/.local/bin/dprint by path,
