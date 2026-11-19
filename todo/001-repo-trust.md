@@ -55,24 +55,29 @@ Sibling paths that no finding names:
   It does not run on a machine where `laptop.sh` has installed the
   pinned `goimports`.
 
-## Decision before the work
+## Decision
 
-The user decides one thing first: drop the project `bin` from `PATH`,
-or keep it for trusted repos only. Dropping it is less code. Keeping
-it needs the trust store below in zsh as well as in Lua.
+On 2026-11-19 the user decided to drop the project `bin` from `PATH`
+and not to keep it for trusted repos. The shell history calls a
+project script by its `./bin/` path 305 times and by a bare name 2
+times. The Checkfiles call `./bin/lint` and `./bin/gotest-traced` by
+path. No script in a project `bin/` calls a sibling script by bare
+name. A user now types `./bin/gotest` where `gotest` worked before.
+
+So zsh does not read the trust store. Its only reader is in
+`vim/init.lua`.
 
 ## Fix
 
-1. Remove `./bin` from `shell/zshrc:137`. If the user keeps project
-   `bin`, a `chpwd` hook adds the absolute `$PWD/bin` at the end of
-   `PATH` for a trusted repo root only.
+1. Remove `./bin` from `shell/zshrc:137`. Add no hook that puts a
+   project directory on `PATH`.
 2. Keep the trust store outside every repo: a multi-valued key, for
    example `laptop.trusted`, in `~/.gitconfig.local`. Each value is
    an absolute repo root. No repo can write that file. Add a short
    command in `bin/` that adds the current repo root.
 3. In `vim/init.lua`, add one Lua function that reads the trust store
    and answers for a buffer's repo root. Use it for each formatter
-   that a repo can change.
+   that a repo can change. It is the only reader of the trust store.
 4. Override the `dprint` formatter. Run `~/.local/bin/dprint` by
    absolute path. In an untrusted repo, pass
    `--config ~/.config/dprint/dprint.jsonc` and set `cwd` outside the
@@ -87,7 +92,8 @@ it needs the trust store below in zsh as well as in Lua.
    absolute path: `git` in `_G.get_user`, `goimportslocal`, `go`,
    and the LSP commands.
 8. Update `README.md` and the comments in `shell/zshrc` and
-   `vim/init.lua`. Say what trust means and how to trust a repo.
+   `vim/init.lua`. Say what trust means and how to trust a repo. Say
+   that a project script runs by its `./bin/` path.
 
 ## Proof
 
@@ -104,8 +110,9 @@ In that repo, untrusted:
 - Save a `.go`, a `.md`, and a `.sql` file.
 - No marker file appears.
 
-Trust the repo, and do the same steps. Only the `go tool`, the
-project dprint config, and (if kept) the project `bin` take effect.
+Trust the repo, and do the same steps. Only the `go tool` and the
+project dprint config take effect. The project `bin` files still do
+not run.
 
 ## Open questions
 

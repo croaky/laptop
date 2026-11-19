@@ -38,15 +38,25 @@ Sibling path that no finding names:
   `set -euo pipefail` (`bin/hostctl:10`) stops the script before
   lines 40 and 44, and `/etc/hosts` has no `localhost` line.
 
-## Decision before the work
+## Decision
 
-`AGENTS.md` asks for a pinned version and a SHA-256 for a downloaded
-archive. The hosts list changes upstream, so a digest needs a change
-to this repo for each update. The user decides one of these:
+On 2026-11-19 the user decided that the strict filter below is the
+only check on what `bin/hostctl` writes. The list has no digest pin.
 
-- Pin the list by digest, and update it in a change to the repo.
-- Make the strict filter below the only trust boundary, and say so
-  in a comment in `bin/hostctl`.
+After the filter, the upstream site can only block a name. It cannot
+send a name to an address that it chooses. The user sees a blocked
+site at once, and `hostctl --unblock` undoes it. A digest would
+freeze a list that nobody reads line by line, and each upstream
+update would need a change to this repo.
+
+The `AGENTS.md` rule for a pinned version and a SHA-256 applies to a
+tool that `laptop.sh` installs. The hosts list is data, not a tool,
+so the filter takes the place of the pin. A comment in `bin/hostctl`
+says so.
+
+The upstream site can still block a name that the user depends on,
+such as `github.com` or the sockeye host. Do not add a list of names
+that `hostctl` never blocks until a block like that happens.
 
 ## Fix
 
@@ -63,7 +73,9 @@ to this repo for each update. The user decides one of these:
 4. In `laptop.sh`, replace `mkdir -p "$HOME/.ssh"` with
    `install -d -m 700 "$HOME/.ssh"`, then run
    `chmod 700 "$HOME/.ssh"` to fix a directory that already exists.
-5. Update the comments in `bin/hostctl` and `laptop.sh`.
+5. Update the comments in `bin/hostctl` and `laptop.sh`. The
+   `bin/hostctl` comment says that the filter is the only check on
+   the download.
 
 ## Proof
 
