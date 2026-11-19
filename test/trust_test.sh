@@ -95,6 +95,48 @@ if "$trust" --check "$forged"; then
   fail "--check accepts a forged .git file"
 fi
 
+# Behavior: --check accepts a worktree that git records with a
+# relative path, from any directory.
+rel="$tmp/rel"
+mkdir -p "$rel"
+git -C "$rel" init -q
+git -C "$rel" commit -q --allow-empty -m init
+git -C "$rel" worktree add -q --relative-paths "$tmp/relwt" -b relwt
+(cd "$rel" && "$trust") || fail "git trust failed in the relative clone"
+(cd / && "$trust" --check "$tmp/relwt") || fail "--check rejects a relative worktree"
+
+# Boundary: git-trust reads a relative worktree path from the gitdir
+# file's directory, not from the caller's. The gitdir file holds
+# ../../../../relwt/.git. From four levels down in a hostile repo, the
+# same text names a symlink back to the hostile repo's root.
+lookalike="$tmp/lookalike"
+mkdir -p "$lookalike/a/b/c/d"
+git -C "$lookalike" init -q
+ln -s "$lookalike" "$lookalike/relwt"
+if (cd "$lookalike/a/b/c/d" && "$trust" --check .); then
+  fail "--check reads a relative worktree path from the current directory"
+fi
+
+# Boundary: a module root whose name ends in a newline is not trusted.
+# $(...) drops a trailing newline, and a symlink with the shorter name
+# points into the trusted repo. Go builds no package in a directory
+# with a newline, so the replaced tools copy sits outside it.
+nl="$tmp/nl"$'\n'
+hostile_module "$nl" pin
+mv "$nl/x" "$tmp/nlx"
+sed -i '' "s|=> ./x|=> $tmp/nlx|" "$nl/go.mod"
+ln -s "$main" "$tmp/nl"
+if "$trust" --check "$nl"; then
+  fail "--check accepts a directory whose name ends in a newline"
+fi
+if "$trust" --check "$nl/x/cmd"; then
+  fail "--check accepts a directory below a name that ends in a newline"
+fi
+rm -f "$MARKER"
+(cd "$nl" && "$root/bin/goimportslocal" -srcdir "$nl" "$nl/a.go" </dev/null >/dev/null) ||
+  fail "goimportslocal failed in a module whose name ends in a newline"
+[ ! -e "$MARKER" ] || fail "goimportslocal ran repo code in a module whose name ends in a newline"
+
 # Boundary: the repo's own config cannot mark the repo as trusted.
 git -C "$other" config laptop.trusted "$other"
 if "$trust" --check "$other"; then

@@ -18,14 +18,39 @@
 
 set -euo pipefail
 
+# A relative DIR must not move to a directory that CDPATH names.
+unset CDPATH
+
 store="$HOME/.gitconfig.local"
 
-# resolve DIR: the physical path of DIR, with no symlinks.
+# exact VAR FILE: set VAR to the contents of FILE less one trailing
+# newline. It fails when the rest holds a newline. $(...) drops every
+# trailing newline, so a plain $(cat FILE) can name another path.
+exact() {
+  local out
+  out=$(cat -- "$2" && echo .) || return 1
+  out=${out%.}
+  out=${out%$'\n'}
+  case $out in *$'\n'*) return 1 ;; esac
+  printf -v "$1" '%s' "$out"
+}
+
+# resolve DIR: the physical path of DIR, with no symlinks. It fails
+# for an empty DIR, because cd "" stays in the current directory. It
+# fails for a path with a newline, because $(...) cuts a trailing
+# newline from the result, so the caller would check another path.
 resolve() {
-  (cd "$1" 2>/dev/null && pwd -P)
+  local dir
+  case $1 in "" | *$'\n'*) return 1 ;; esac
+  dir=$(cd -- "$1" 2>/dev/null && pwd -P && echo .) || return 1
+  dir=${dir%.}
+  dir=${dir%$'\n'}
+  case $dir in *$'\n'*) return 1 ;; esac
+  printf '%s\n' "$dir"
 }
 
 # toplevel DIR: the nearest directory at or above DIR that holds .git.
+# resolve gives a path with no newline, so each parent is exact too.
 toplevel() {
   local dir
   dir=$(resolve "$1") || return 1
@@ -59,10 +84,17 @@ case "${1:-}" in
       if [ "$top" = "$root" ]; then
         exit 0
       fi
-      # git writes the path of each worktree's .git file here.
+      # git writes the path of each worktree's .git file here. With
+      # --relative-paths, the path is relative to the directory that
+      # holds the gitdir file, not to the current directory.
       for gitdir in "$root"/.git/worktrees/*/gitdir; do
         [ -f "$gitdir" ] || continue
-        worktree=$(resolve "$(dirname "$(cat "$gitdir")")") || continue
+        exact path "$gitdir" || continue
+        case $path in
+          /*) ;;
+          *) path=${gitdir%/*}/$path ;;
+        esac
+        worktree=$(resolve "${path%/*}") || continue
         if [ "$top" = "$worktree" ]; then
           exit 0
         fi

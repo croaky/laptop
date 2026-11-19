@@ -41,13 +41,24 @@
 set -euo pipefail
 
 here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
-gomod=$(go env GOMOD)
-root=$(dirname "$gomod")
+# $(...) drops every trailing newline, so read GOMOD with a sentinel.
+# Go accepts a newline in a module root, but then the trust check could
+# judge another path, such as a symlink into a trusted repo. So such a
+# module is not trusted. root comes from gomod with no $(...).
+gomod=$(go env GOMOD && echo .)
+gomod=${gomod%.}
+gomod=${gomod%$'\n'}
+root=${gomod%/*}
 pin=golang.org/x/tools/cmd/goimports
 trusted=false
-if "$here/git-trust" --check "$root"; then
-  trusted=true
-fi
+case $gomod in
+  *$'\n'*) ;;
+  /*/go.mod)
+    if [ -f "$gomod" ] && "$here/git-trust" --check "$root"; then
+      trusted=true
+    fi
+    ;;
+esac
 if $trusted && grep -qs "$pin" "$root/tools.mod"; then
   goimports=(go tool -modfile="$root/tools.mod" goimports)
 elif $trusted && grep -qs "$pin" "$gomod"; then
