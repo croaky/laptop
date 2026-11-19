@@ -41,3 +41,34 @@ Plan 001 shipped as the change that added `bin/git-trust`. Its text is
 in `git log -- todo/001-repo-trust.md`. A plan that starts a program
 from Neovim or the shell keeps its rule: no relative `PATH` entry, and
 repo-chosen code only in a repo that `git trust --check` accepts.
+
+## Accepted risks
+
+- `git trust` covers each worktree of the trusted repo. So it trusts
+  every person who can push a change to that repo, not only the user.
+  The user accepted this on 2026-11-19. Without it, each new change
+  worktree needs its own trust step. `README.md` and `bin/git-trust`
+  say this to each person who runs `git trust`.
+
+## Follow-up hypotheses
+
+No finding names these paths. Each one has no plan yet. Make it a
+numbered plan when its evidence proves a reachable path.
+
+- The prompt runs the real `git` in each directory. `git` reads the
+  directory's own `.git/config`, and `core.fsmonitor` there runs a
+  command. A clone does not carry `.git/config`, but an extracted
+  archive with a real `.git` directory can. Decide it: extract a
+  scratch archive whose `.git/config` sets `core.fsmonitor` to a
+  marker script, `cd` into it, and draw a prompt.
+- In an untrusted module, `go env` and `go list -m` in
+  `bin/goimportslocal` can download the Go toolchain that a
+  `toolchain` line names. The Go checksum database verifies that
+  download, so it is not repo code. Decide it: set a `toolchain` line
+  that this machine does not have, save a `.go` file, and look in
+  `$(go env GOMODCACHE)/golang.org/toolchain`. `GOTOOLCHAIN=local` in
+  the script stops the download.
+- gopls runs `go list` in each repo that Neovim opens, also an
+  untrusted one. cgo directives in the repo can start tools such as
+  `pkg-config`. Decide it: open a scratch module whose cgo file names
+  a marker program in `#cgo pkg-config`, and look for the marker.
