@@ -53,23 +53,6 @@ autoload -Uz compinit
 compinit -u
 
 # Git
-_soc_instance() {
-  local instance="$1" url
-  shift
-  url=$(git config --get "sockeye.$instance.url") || {
-    print -ru2 -- "Set sockeye.$instance.url in ~/.gitconfig.local."
-    return 1
-  }
-  [[ -n "$url" ]] || return 1
-  SOCKEYE_URL="${url%/}" command soc "$@"
-}
-soc-dc() {
-  _soc_instance dc "$@"
-}
-soc-ivp() {
-  _soc_instance ivp "$@"
-}
-
 # Match registered servers, not the global default alone.
 _tree_server() {
   local origin key url

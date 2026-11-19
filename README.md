@@ -48,68 +48,29 @@ to keep it out of version control:
 
 ### Change worktrees
 
-`createtree` uses `soc checkout` when origin matches a configured
-sockeye server, and `git create-tree` for other repos. `mergetree` and
-`closetree` use the same server selection.
+`createtree`, `mergetree`, and `closetree` use `soc` when origin
+matches a configured sockeye server. For other repos, they use
+`git create-tree`. `co <change-id>` changes directory to the worktree
+of a change.
 
-`co <change-id>` changes directory to an existing change's worktree,
-from any directory. `soc` picks the server from the change id. When the
-checkout fails, `co` keeps the current directory.
+Install `soc` with `go install ./cmd/soc` from a clone of sockeye.
+Run `soc help` for the commands. The sockeye source has the details.
 
-`soc` is the binary that `go install ./cmd/soc` installs from a clone of
-sockeye, not a shell function. `soc checkout` and `soc co` print the
-worktree path, so `cd $(soc co <change-id>)` changes directory.
-
-Keep instance URLs in `~/.gitconfig.local`:
+Name each server in `~/.gitconfig.local`:
 
 ```gitconfig
 [sockeye]
   url = https://personal.example.com
-[sockeye "dc"]
+[sockeye "personal"]
   url = https://personal.example.com
-[sockeye "ivp"]
+[sockeye "work"]
   url = https://work.example.com
 ```
 
-`~/.gitconfig` is a symlink to `git/gitconfig`, which this repo
-tracks. So `soc login`, `soc git setup`, and `git config --global`
-write into the tracked file. Move what they write to
+Then run `soc git setup` and `soc login`.
+`~/.gitconfig` is a symlink to `git/gitconfig`, which this repo tracks.
+Move what `soc` writes there, such as a `credential` block, to
 `~/.gitconfig.local`. `git/gitconfig` includes that file.
-
-After you log in, move the `credential` block for the server:
-
-```gitconfig
-[credential "https://personal.example.com"]
-  helper =
-  helper = !soc auth git-credential
-```
-
-The token is in `~/.config/sockeye/token`. The Keychain has no copy.
-The `credential` block sends git to `soc auth git-credential` for the
-token. The empty `helper` clears the `osxkeychain` helper in
-`git/gitconfig`. GitHub uses `gh` the same way. Other hosts use the
-Apple-signed `osxkeychain` helper.
-
-`soc checkout` cuts a worktree from a local clone of the change's
-repo. It finds a clone at `~/<slug>` or behind a worktree in
-`~/.worktrees`. For a clone in a different place, set the
-`sockeye.clone.<slug>` key in `~/.gitconfig.local`, not with the
-`--global` that the error from `soc` gives. Use an absolute path,
-because `soc` does not expand `~`:
-
-```bash
-git config --file ~/.gitconfig.local sockeye.clone.abc "$HOME/some-dir"
-```
-
-`soc-dc` and `soc-ivp` select an instance for one command, such as
-`soc-ivp login` or `soc-dc show SOC-1`. They do not change the saved
-default. An explicit checkout still needs a clone from that instance.
-
-Tree helpers select origin's server even when `SOCKEYE_URL` names
-another server. Register each server before using its tree helpers.
-
-Run the isolated helper tests with `zsh -f shell/zshrc_test.zsh`.
-The tests use local stub commands and do not contact a server.
 
 ## Install
 
@@ -187,7 +148,6 @@ are "one time setup" items.
 
 Install macOS apps:
 
-- [Arc](https://arc.net/download)
 - [Warp](https://www.warp.dev/)
 
 ## Keyboard
