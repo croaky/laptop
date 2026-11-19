@@ -125,6 +125,8 @@ can hold programs. The shell and Neovim do not run them by themselves:
 A trusted repo also gets the code that it chooses:
 the `goimports` and `pgfmt` versions that its `go.mod` or `tools.mod`
 pins as go tools, and its own `dprint.json`.
+The formatters turn off `go.work`, also in a trusted repo,
+because a symlink can put the `go.work` of another repo in effect.
 To trust a repo and all its worktrees, run this in the repo:
 
 ```

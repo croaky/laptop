@@ -159,6 +159,24 @@ rm -f "$MARKER"
   fail "goimportslocal failed in a trusted module"
 [ -e "$MARKER" ] || fail "goimportslocal did not run go tool in a trusted module"
 
+# Boundary: a go.work in an untrusted clone has no effect through a
+# symlink to a trusted module root. The go.work replaces the tools
+# module with clone code, which writes $MARKER.work. The shell enters
+# the symlink, so $PWD is the logical path through the clone.
+wclone="$tmp/wclone"
+mkdir -p "$wclone/x/cmd/goimports"
+git -C "$wclone" init -q
+ln -s "$main" "$wclone/link"
+printf 'go 1.24\nuse ./link\nreplace golang.org/x/tools => ./x\n' >"$wclone/go.work"
+printf 'module golang.org/x/tools\ngo 1.24\n' >"$wclone/x/go.mod"
+sed 's/Getenv("MARKER")/Getenv("MARKER")+".work"/' \
+  "$main/x/cmd/goimports/main.go" >"$wclone/x/cmd/goimports/main.go"
+rm -f "$MARKER" "$MARKER.work"
+(cd "$wclone/link" && "$root/bin/goimportslocal" -srcdir . a.go </dev/null >/dev/null) ||
+  fail "goimportslocal failed through a symlink beside a go.work"
+[ ! -e "$MARKER.work" ] || fail "goimportslocal ran code that an untrusted go.work names"
+[ -e "$MARKER" ] || fail "goimportslocal did not run the trusted module's go tool through a symlink"
+
 # Boundary: with no goimports on PATH, the formatter installs nothing
 # that the module resolves, and it fails.
 fallback="$tmp/fallback"

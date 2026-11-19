@@ -330,20 +330,29 @@ local function trusted(dir)
 	return vim.system({ laptop .. "/bin/git-trust", "--check", dir }):wait().code == 0
 end
 
--- pinsPgfmt reports whether the go.mod above path pins pgfmt as a go
--- tool. Such a repo runs that version in its sqlfmt check, and the
--- editor runs the same one.
-local function pinsPgfmt(path)
-	local gomod = vim.fs.find("go.mod", { upward = true, path = path })[1]
+-- pgfmt_root gives the directory of the go.mod that go tool pgfmt reads
+-- for a file in dir, or nil when the editor must not run it. Such a
+-- repo runs its pinned pgfmt in its sqlfmt check, and the editor runs
+-- the same one. The go.mod must pin pgfmt and be inside the trusted
+-- repo that holds dir. The search starts from the physical path and
+-- stops at the repo root, so the trust check and the go.mod that Go
+-- reads refer to one repo. A symlink cannot move either of them.
+local function pgfmt_root(dir)
+	local real = vim.uv.fs_realpath(dir)
+	local top = real and vim.fs.root(real, ".git")
+	if not top then
+		return nil
+	end
+	local gomod = vim.fs.find("go.mod", { upward = true, path = real, stop = vim.fs.dirname(top) })[1]
 	if not gomod then
-		return false
+		return nil
 	end
 	for line in io.lines(gomod) do
 		if line:find("github.com/croaky/pgfmt/cmd/pgfmt", 1, true) then
-			return true
+			return trusted(real) and vim.fs.dirname(gomod) or nil
 		end
 	end
-	return false
+	return nil
 end
 
 -- dprint_config gives the dprint config for a file in dir. It is the
@@ -393,7 +402,7 @@ require("conform").setup({
 		-- what the repo's go.mod names.
 		sql = function(bufnr)
 			local dir = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
-			return pinsPgfmt(dir) and trusted(dir) and { "pgfmt" } or {}
+			return pgfmt_root(dir) and { "pgfmt" } or {}
 		end,
 		typescript = { "dprint" },
 		typescriptreact = { "dprint" },
@@ -424,11 +433,20 @@ require("conform").setup({
 			args = { "-srcdir", "$DIRNAME" },
 			cwd = require("conform.util").root_file({ "go.mod" }),
 		},
+		-- pgfmt runs in the physical directory that pgfmt_root gives. Go
+		-- uses an inherited PWD that names the same directory, and
+		-- searches for go.work from it. So PWD names the physical path
+		-- too, and GOWORK=off turns off a go.work in an untrusted clone.
 		pgfmt = {
 			command = "go",
 			args = { "tool", "pgfmt" },
-			cwd = require("conform.util").root_file({ "go.mod" }),
+			cwd = function(_, ctx)
+				return pgfmt_root(ctx.dirname)
+			end,
 			require_cwd = true,
+			env = function(_, ctx)
+				return { GOWORK = "off", PWD = pgfmt_root(ctx.dirname) }
+			end,
 		},
 		shfmt = {
 			args = { "--indent", "2" },

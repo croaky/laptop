@@ -104,6 +104,40 @@ if not vim.deep_equal(got, { "pgfmt" }) then
 	fail("trusted SQL formatters are " .. vim.inspect(got) .. ', want { "pgfmt" }')
 end
 
+-- Boundary: through a symlink in an untrusted repo whose go.mod pins
+-- pgfmt, into a trusted repo with no go.mod, the SQL rule selects no
+-- formatter. The trust check and the go.mod search use one path. The
+-- buffer gets its name before the symlink exists, so the name keeps
+-- the symlink.
+buf = open(vim.env.LINKED .. "/q.sql")
+assert(vim.uv.fs_symlink(vim.env.BARE, vim.env.LINKED))
+got = vim.tbl_map(function(f)
+	return f.name
+end, conform.list_formatters(buf))
+if #got ~= 0 then
+	fail("SQL formatters through a symlink are " .. vim.inspect(got) .. ", want {}")
+end
+
+-- Boundary: in a trusted repo with no go.mod, a go.mod above the repo
+-- selects no SQL formatter.
+got = sql_formatters(vim.env.NESTED)
+if #got ~= 0 then
+	fail("SQL formatters with a go.mod above the repo are " .. vim.inspect(got) .. ", want {}")
+end
+
+-- Behavior: pgfmt runs in the trusted module root with go.work off,
+-- and PWD names that root, not the directory where Neovim runs.
+local pgfmt = conform.formatters.pgfmt
+local ctx = { dirname = vim.env.TRUSTED }
+local cwd = pgfmt.cwd(pgfmt, ctx)
+if cwd ~= vim.env.TRUSTED then
+	fail("pgfmt cwd is " .. vim.inspect(cwd) .. ", want " .. vim.env.TRUSTED)
+end
+local env = pgfmt.env(pgfmt, ctx)
+if env.GOWORK ~= "off" or env.PWD ~= vim.env.TRUSTED then
+	fail("pgfmt env is " .. vim.inspect(env))
+end
+
 if failures > 0 then
 	vim.cmd("cquit 1")
 end

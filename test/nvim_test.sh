@@ -61,10 +61,26 @@ export BARE="$tmp/bare"
 mkdir -p "$BARE"
 git -C "$BARE" init -q
 printf '{\n"a": {\n"b": 1\n}\n}\n' >"$BARE/x.json"
+printf 'select 1;\n' >"$BARE/q.sql"
+
+# The name of a symlink in the untrusted repo, whose go.mod pins
+# pgfmt, to the trusted repo with no go.mod. test/nvim_test.lua makes
+# it after it names the buffer, because Neovim resolves a symlink when
+# it opens a file.
+export LINKED="$UNTRUSTED/link"
+
+# A trusted repo with no go.mod, below a directory whose go.mod pins
+# pgfmt.
+export NESTED="$tmp/outer/inner"
+mkdir -p "$NESTED"
+cp "$TRUSTED/go.mod" "$tmp/outer/go.mod"
+git -C "$NESTED" init -q
+printf 'select 1;\n' >"$NESTED/q.sql"
 
 if [ -x "$root/bin/git-trust" ]; then
   (cd "$TRUSTED" && "$root/bin/git-trust")
   (cd "$BARE" && "$root/bin/git-trust")
+  (cd "$NESTED" && "$root/bin/git-trust")
 fi
 
 # Start Neovim in the untrusted repo with a relative entry on PATH, as

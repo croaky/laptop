@@ -40,6 +40,14 @@
 
 set -euo pipefail
 
+# git-trust judges a physical path. Go searches for go.mod and go.work
+# from $PWD, which can go through a symlink in an untrusted clone. So
+# set $PWD to the physical path of the same directory, and turn off
+# go.work. Then Go reads only the go.mod that git-trust judges. A
+# relative file name on the input still names the same file.
+cd -P .
+export GOWORK=off
+
 here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 # $(...) drops every trailing newline, so read GOMOD with a sentinel.
 # Go accepts a newline in a module root, but then the trust check could
