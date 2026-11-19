@@ -2,6 +2,46 @@
 
 Set up a macOS machine as a software development environment.
 
+## Install
+
+Clone onto laptop:
+
+```
+export LAPTOP="$HOME/laptop"
+git clone https://github.com/croaky/laptop.git $LAPTOP
+cd $LAPTOP
+```
+
+Review:
+
+```
+less laptop.sh
+```
+
+Run:
+
+```
+./laptop.sh
+```
+
+The script can safely be run multiple times.
+It is tested on the latest version of macOS on an arm64 (Apple Silicon) chip.
+
+The script links the dotfiles to the main clone, `~/laptop`,
+also when it runs from a change worktree.
+So a test run from a worktree is safe after `mergetree` deletes it.
+A change to a dotfile, such as `shell/zshrc`,
+takes effect after the merge and a `git pull` in `~/laptop`.
+
+Run the tests with `test/run.sh`.
+They need the tools that `laptop.sh` installs.
+
+`laptop.sh` also sets some macOS settings.
+The comments in `laptop.sh` say why, and how to keep a different value.
+
+The script does not do the sections that follow.
+They are one-time setup items.
+
 ## SSH key
 
 Ed25519 uses elliptic curve cryptography
@@ -98,46 +138,6 @@ Trust a repo only when you trust each person who can push to it.
 ```
 git config --file ~/.gitconfig.local --unset laptop.trusted "$PWD"
 ```
-
-## Install
-
-Clone onto laptop:
-
-```
-export LAPTOP="$HOME/laptop"
-git clone https://github.com/croaky/laptop.git $LAPTOP
-cd $LAPTOP
-```
-
-Review:
-
-```
-less laptop.sh
-```
-
-Run:
-
-```
-./laptop.sh
-```
-
-The script can safely be run multiple times.
-It is tested on the latest version of macOS on an arm64 (Apple Silicon) chip.
-
-The script links the dotfiles to the main clone, `~/laptop`,
-also when it runs from a change worktree.
-So a test run from a worktree is safe after `mergetree` deletes it.
-A change to a dotfile, such as `shell/zshrc`,
-takes effect after the merge and a `git pull` in `~/laptop`.
-
-Run the tests with `test/run.sh`.
-They need the tools that `laptop.sh` installs.
-
-`laptop.sh` also sets some macOS settings.
-The comments in `laptop.sh` say why, and how to keep a different value.
-
-Separate from the script, the following README sections
-are "one time setup" items.
 
 ## Keyboard
 
