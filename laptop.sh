@@ -413,6 +413,16 @@ pg_durability="-c fsync=off -c synchronous_commit=off -c full_page_writes=off"
 # no longer grows with the template's size.
 pg_clone="-c file_copy_method=clone"
 
+# go test ./... runs one test binary per CPU. An app that sizes the
+# pool of each binary to GOMAXPROCS can then open up to 256
+# connections on 16 CPUs. The initdb default of 100 refuses the rest
+# with "too many clients already", and those tests fail before they
+# run. 300 leaves room for connections that a test opens outside its
+# pool. An idle connection costs little, and only a sort spends
+# work_mem. The dev cluster serves few connections and keeps the
+# default.
+pg_test_connections="-c max_connections=300"
+
 # dev databases
 start_postgres_cluster 5432 \
   "$HOME/.local/share/postgres/data_dev" \
@@ -423,7 +433,7 @@ start_postgres_cluster 5432 \
 start_postgres_cluster 5433 \
   "$HOME/.local/share/postgres/data_test" \
   "$HOME/.local/share/postgres/log_test.log" \
-  "$pg_tuning $pg_durability $pg_clone"
+  "$pg_tuning $pg_durability $pg_clone $pg_test_connections"
 
 # My commands
 # Each one tracks main, not a version tag. I write them, and the
