@@ -11,6 +11,13 @@ shellcheck: git ls-files -z '*.sh' 'bin/*' | xargs -0 shellcheck -e SC2029
 # runner and laptop.sh pin the same stylua version.
 stylua: git ls-files -z '*.lua' | xargs -0 stylua --check
 
+# The tests that need no Neovim, no plugins, and no zsh. The runner is
+# Ubuntu with bash 5, and macOS runs /bin/bash 3.2. So run
+# test/run.sh on the workstation too.
+hostctl: test/hostctl_test.sh </dev/null
+ssh: test/ssh_test.sh </dev/null
+trust: test/trust_test.sh </dev/null
+
 # The title a change needs to merge, and the body rules that come
 # with it. sockeye reads this from main at merge.
 merge: ^[a-z][a-z0-9_/-]*(?:, ?[a-z][a-z0-9_/-]*)*: [a-z](?:.{2,62})?(?:[^.\s]|\.\.\.)$

@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# Run each test in test/. The tests need the tools that laptop.sh
-# installs: zsh, go, nvim with its plugins, dprint, and the pinned
-# goimports. So they run on the workstation, not in the Checkfile.
+# Run each test in test/. The zsh and Neovim tests need the tools that
+# laptop.sh installs: zsh, go, nvim with its plugins, and dprint. So
+# they run only on the workstation. The Checkfile also runs the
+# hostctl, ssh, and trust tests, but on Linux with bash 5, not on
+# macOS with /bin/bash 3.2.
 set -euo pipefail
 
 dir=$(cd "$(dirname "$0")" && pwd -P)

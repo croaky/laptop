@@ -23,6 +23,12 @@ fail() {
 # shellcheck disable=SC2016
 lines=$(grep -E '^[[:space:]]*(mkdir|install|chmod)[[:space:]].*"\$HOME/\.ssh"$' "$root/laptop.sh" || true)
 
+# mode700 DIR: exit 0 if the mode of DIR is exactly 700. BSD and GNU
+# find read -perm the same way. BSD and GNU stat take different flags.
+mode700() {
+  [ -n "$(find "$1" -prune -perm 700)" ]
+}
+
 # run_lines HOME: run the ~/.ssh lines with the default umask.
 run_lines() {
   HOME=$1 bash -euc "umask 022; $lines"
@@ -32,8 +38,8 @@ run_lines() {
 home="$tmp/new"
 mkdir -p "$home"
 run_lines "$home"
-if [ "$(stat -f %Lp "$home/.ssh" 2>/dev/null)" != 700 ]; then
-  fail "new ~/.ssh mode: $(stat -f %Lp "$home/.ssh" 2>/dev/null)"
+if ! mode700 "$home/.ssh"; then
+  fail "new ~/.ssh mode is not 700"
 fi
 
 # laptop.sh sets mode 700 on a ~/.ssh that exists with mode 755, and it
@@ -43,8 +49,8 @@ mkdir -p "$home/.ssh"
 chmod 755 "$home/.ssh"
 echo host >"$home/.ssh/known_hosts"
 run_lines "$home"
-if [ "$(stat -f %Lp "$home/.ssh")" != 700 ]; then
-  fail "existing ~/.ssh mode: $(stat -f %Lp "$home/.ssh")"
+if ! mode700 "$home/.ssh"; then
+  fail "existing ~/.ssh mode is not 700"
 fi
 if [ "$(cat "$home/.ssh/known_hosts")" != host ]; then
   fail "existing ~/.ssh lost known_hosts"

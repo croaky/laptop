@@ -26,7 +26,14 @@ export HOME="$tmp/home" GIT_CONFIG_NOSYSTEM=1
 export GIT_AUTHOR_NAME=t GIT_AUTHOR_EMAIL=t@example.com
 export GIT_COMMITTER_NAME=t GIT_COMMITTER_EMAIL=t@example.com
 export MARKER="$tmp/marker"
-mkdir -p "$HOME" "$GOBIN"
+mkdir -p "$HOME" "$GOBIN" "$tmp/stub"
+
+# A stub goimports stands in for the one that laptop.sh pins. The
+# tests check only that no repo code runs, and the sockeye runner
+# installs no goimports.
+printf '#!/bin/sh\nexit 0\n' >"$tmp/stub/goimports"
+chmod +x "$tmp/stub/goimports"
+PATH="$tmp/stub:$PATH"
 
 trust="$root/bin/git-trust"
 failures=0
@@ -124,7 +131,9 @@ fi
 nl="$tmp/nl"$'\n'
 hostile_module "$nl" pin
 mv "$nl/x" "$tmp/nlx"
-sed -i '' "s|=> ./x|=> $tmp/nlx|" "$nl/go.mod"
+# sed and mv, not sed -i: BSD and GNU sed take -i in different forms.
+sed "s|=> ./x|=> $tmp/nlx|" "$nl/go.mod" >"$tmp/nl.go.mod"
+mv "$tmp/nl.go.mod" "$nl/go.mod"
 ln -s "$main" "$tmp/nl"
 if "$trust" --check "$nl"; then
   fail "--check accepts a directory whose name ends in a newline"
