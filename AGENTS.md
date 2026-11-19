@@ -46,7 +46,10 @@ rule:
   Give a SHA-256 for a downloaded archive. Change a version only in a
   change to `laptop.sh`.
 - Install my own command (browse, calc, mdembed, procman, tun) from
-  `@main`. Do not pin a version tag. Those repos publish no tags.
+  `@main` with `GOPROXY=direct`. Do not pin a version tag. Those repos
+  publish no tags. The Go module proxy caches what `@main` names, so
+  without `GOPROXY=direct` a run soon after a merge installs the
+  previous build.
 
 A new command of mine goes in the "My commands" block of `laptop.sh`.
 <https://dancroak.com/go/checks#my-commands> gives the reasons.

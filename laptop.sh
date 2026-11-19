@@ -418,12 +418,15 @@ start_postgres_cluster 5433 \
 # Go tools above stay pinned: other people write them, and CI runs the
 # same versions. https://dancroak.com/go/checks#my-commands
 # go install takes one module for each command, so each has its own
-# line.
-go install github.com/croaky/browse@main         # headless browser screenshots
-go install github.com/croaky/calc@main           # calculator
-go install github.com/croaky/mdembed@main        # embed code files in Markdown
-go install github.com/croaky/procman@main        # run a Procfile.dev
-go install github.com/croaky/tun/cmd/tun@main    # tunnel a local server
+# line. GOPROXY=direct makes go install ask GitHub what main names.
+# The Go module proxy caches that answer, so through the proxy a run
+# soon after a merge installs the previous build. The checksum
+# database still verifies each download.
+GOPROXY=direct go install github.com/croaky/browse@main         # headless browser screenshots
+GOPROXY=direct go install github.com/croaky/calc@main           # calculator
+GOPROXY=direct go install github.com/croaky/mdembed@main        # embed code files in Markdown
+GOPROXY=direct go install github.com/croaky/procman@main        # run a Procfile.dev
+GOPROXY=direct go install github.com/croaky/tun/cmd/tun@main    # tunnel a local server
 
 # Local host names for dev servers (blog.localhost and others), and a
 # filtered list of ad and tracker names to block. bin/hostctl explains
