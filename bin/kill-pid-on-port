@@ -6,4 +6,7 @@
 
 set -euo pipefail
 
-lsof -n -i :"$1" | grep LISTEN | awk '{ print $2 }' | xargs kill
+pids=$(lsof -nP -iTCP:"$1" -sTCP:LISTEN -t || true)
+if [ -n "$pids" ]; then
+  printf '%s\n' "$pids" | xargs kill
+fi

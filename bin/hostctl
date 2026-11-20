@@ -16,7 +16,7 @@
 
 set -euo pipefail
 
-url=https://winhelp2002.mvps.org/hosts.txt
+url=https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 
 custom_hosts_entries() {
   cat <<EOF

@@ -18,7 +18,7 @@ trap 'rm -rf -- "$tmp"' EXIT
 tmp=$(cd "$tmp" && pwd -P)
 
 hostctl="$root/bin/hostctl"
-url=https://winhelp2002.mvps.org/hosts.txt
+url=https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 export HOME="$tmp/home"
 export HOSTS="$tmp/hosts" SUDO_LOG="$tmp/sudo.log" CURL_LOG="$tmp/curl.log"
 export FIXTURE="$tmp/download.txt" CURL_MODE=ok
@@ -173,7 +173,7 @@ fi
 if [ "$(grep '^0\.0\.0\.0 ' "$HOSTS")" != "$want_filtered" ]; then
   fail "hostctl: /etc/hosts has unfiltered lines"
 fi
-if grep -q -e github -e evil -e $'\r' "$HOSTS"; then
+if grep -q -e 'github\.com' -e evil -e $'\r' "$HOSTS"; then
   fail "hostctl: /etc/hosts has a line from the download that maps a name"
 fi
 if ! grep -q '^127.0.0.1 blog.localhost' "$HOSTS"; then
